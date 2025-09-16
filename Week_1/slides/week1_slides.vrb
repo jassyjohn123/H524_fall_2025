@@ -1,0 +1,21 @@
+\frametitle{R Example: Rates Calculation}
+\small
+\begin{verbatim}
+# Disease surveillance data
+population_size <- 50000
+new_cases <- 125
+deaths <- 15
+
+# Calculate incidence rate
+incidence_rate <- (new_cases / population_size) * 100000
+# Result: 250 per 100,000 population
+
+# Calculate case fatality rate
+case_fatality_rate <- (deaths / new_cases) * 100
+# Result: 12%
+
+# Age-specific rates
+population_by_age <- c(12000, 15000, 18000, 5000)
+cases_by_age <- c(5, 25, 65, 30)
+age_specific_rates <- (cases_by_age / population_by_age) * 100000
+\end{verbatim}
