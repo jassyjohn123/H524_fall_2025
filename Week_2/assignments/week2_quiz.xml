@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questestinterop xmlns="http://www.imsglobal.org/xsd/ims_qtiasiv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/ims_qtiasiv1p2 http://www.imsglobal.org/xsd/ims_qtiasiv1p2p1.xsd">
+  <assessment ident="week2_probability" title="Week 2: Probability Concepts">
+
+    <!-- Question 1: Basic Probability -->
+    <section ident="part1" title="Part 1: Basic Probability">
+      <item ident="q1a" title="Emergency Department - Injury Probability">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>numerical_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>2</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">A hospital emergency department sees 120 patients on a typical Saturday. 45% come for injuries. What is the probability that the next patient comes for an injury? (Enter as a decimal)</mattext>
+          </material>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="2" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">0.45</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">2</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <item ident="q1b" title="Emergency Department - NOT Illness">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>numerical_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">If 30% of patients come for illnesses, what is the probability that the next patient does NOT come for an illness? (Enter as a decimal)</mattext>
+          </material>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="3" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">0.70</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">3</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <item ident="q2" title="Clinical Trial Probabilities">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">In a clinical trial with 200 participants, 80 received Drug A and 120 received Drug B. If 25 participants on Drug A and 18 on Drug B had side effects, what is the total probability of side effects?</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext>0.215</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext>0.150</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext>0.313</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext>0.430</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="5" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">5</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+    </section>
+
+    <!-- Question 5: Conditional Probability -->
+    <section ident="part2" title="Part 2: Conditional Probability">
+      <item ident="q5" title="Hypertension and Obesity">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>numerical_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">In a study of 500 adults, 200 have hypertension, 150 are obese, and 75 have both. What is P(Hypertension | Obesity)? (Enter as decimal to 3 places)</mattext>
+          </material>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="5" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">0.500</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">5</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <item ident="q7" title="Test Independence">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>true_false_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">Two diagnostic tests: Test A has 90% positive rate, Test B has 85% positive rate. If both tests are positive 77% of the time, are the tests independent? (0.90 × 0.85 = 0.765)</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="true">
+                <material>
+                  <mattext>True - Tests are independent</mattext>
+                </material>
+              </response_label>
+              <response_label ident="false">
+                <material>
+                  <mattext>False - Tests are not independent</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="5" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">false</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">5</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+    </section>
+
+    <!-- Question 9: Diagnostic Tests -->
+    <section ident="part3" title="Part 3: Diagnostic Tests">
+      <item ident="q9" title="Strep Test Characteristics">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>10</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">A strep test has 92% sensitivity and 96% specificity. What is the probability of a false positive?</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext>0.08</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext>0.04</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext>0.92</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext>0.96</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="10" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">10</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+    </section>
+
+    <!-- Question 11: Risk Measures -->
+    <section ident="part4" title="Part 4: Risk Measures">
+      <item ident="q11" title="Relative Risk Calculation">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>numerical_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>7</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">In a cohort study: 800 smokers with 120 developing disease, 1200 non-smokers with 24 developing disease. What is the Relative Risk? (Enter to 1 decimal place)</mattext>
+          </material>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="7" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">7.5</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">7</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+    </section>
+
+    <!-- Question 14: Binomial Distribution -->
+    <section ident="part5" title="Part 5: Distributions">
+      <item ident="q14" title="Binomial Probability">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>7</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">A treatment has 70% success rate. In 15 patients, what is the probability exactly 10 improve? Use: dbinom(10, 15, 0.7)</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext>0.206</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext>0.156</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext>0.092</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext>0.278</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="7" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">7</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <item ident="q15" title="Normal Distribution">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>numerical_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>8</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">Blood glucose: mean=90, SD=10 mg/dL. What proportion have glucose above 100 mg/dL? (Use pnorm(100, 90, 10, lower.tail=FALSE), enter as decimal)</mattext>
+          </material>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="8" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">0.159</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">8</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+    </section>
+  </assessment>
+</questestinterop>

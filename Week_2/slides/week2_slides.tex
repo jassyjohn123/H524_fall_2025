@@ -1,0 +1,823 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Define custom colors for AI slides
+\definecolor{AIBlue}{RGB}{30, 144, 255}
+\definecolor{AILightBlue}{RGB}{173, 216, 230}
+\definecolor{AINavy}{RGB}{25, 25, 112}
+
+% Commands to switch to AI color scheme
+\newcommand{\AIcolors}{%
+  \setbeamercolor{frametitle}{bg=AIBlue,fg=white}%
+  \setbeamercolor{title}{bg=AINavy,fg=white}%
+  \setbeamercolor{structure}{fg=AIBlue}%
+  \setbeamercolor{item}{fg=AINavy}%
+  \setbeamercolor{normal text}{fg=black}%
+}
+
+% Command to restore default colors
+\newcommand{\defaultcolors}{%
+  \setbeamercolor{frametitle}{bg=osaorange,fg=white}%
+  \setbeamercolor{title}{bg=osaorange,fg=white}%
+  \setbeamercolor{structure}{fg=osaorange}%
+  \setbeamercolor{item}{fg=black}%
+  \setbeamercolor{normal text}{fg=black}%
+}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Set colors
+\setbeamercolor{structure}{fg=osaorange}
+\setbeamercolor{title}{fg=white,bg=osaorange}
+\setbeamercolor{frametitle}{fg=white,bg=osaorange}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\title{H524 Introduction to Biostatistics}
+\subtitle{Week 2: Probability Concepts and Applications}
+\author{Dr. John Molitor}
+\institute{Oregon State University\\College of Health}
+\date{Fall 2025}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Review from Week 1}
+
+\begin{frame}
+\frametitle{Quick Review: Key Concepts}
+\begin{itemize}
+\item \textbf{Data Types:} Quantitative vs Qualitative
+\item \textbf{Data Presentation:} Histograms, box plots, bar charts
+\item \textbf{Summary Measures:} Central tendency and variability
+\item \textbf{Rates and Standardization:} Age-specific rates, direct/indirect methods
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{This Week:} Chapter 6 - Probability foundations for statistical inference
+
+\vspace{0.3cm}
+\textbf{Reading:} Pagano \& Gauvreau Chapter 6 (6.1-6.4.2, 6.5)
+\end{frame}
+
+\section{Basic Probability Concepts (Ch 6.1)}
+
+\begin{frame}
+\frametitle{Why Probability in Biostatistics?}
+\begin{itemize}
+\item \textbf{Foundation for Statistical Inference}
+  \begin{itemize}
+  \item Understanding uncertainty in medical research
+  \item Bridge between sample data and population conclusions
+  \end{itemize}
+\item \textbf{Clinical Applications}
+  \begin{itemize}
+  \item Diagnostic test interpretation
+  \item Treatment efficacy assessment
+  \item Risk communication to patients
+  \end{itemize}
+\item \textbf{Research Design}
+  \begin{itemize}
+  \item Power calculations
+  \item Sample size determination
+  \item Study planning and interpretation
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Basic Probability Concepts}
+\begin{itemize}
+\item \textbf{Experiment:} Any process that generates observations
+  \begin{itemize}
+  \item Example: Testing a patient for COVID-19
+  \end{itemize}
+\item \textbf{Sample Space ($S$):} Set of all possible outcomes
+  \begin{itemize}
+  \item Example: $S = \{\text{Positive}, \text{Negative}\}$
+  \end{itemize}
+\item \textbf{Event:} Subset of the sample space
+  \begin{itemize}
+  \item Example: Patient tests positive
+  \end{itemize}
+\item \textbf{Probability:} Measure of likelihood (0 to 1)
+  \begin{itemize}
+  \item $P(\text{Event}) = \frac{\text{Number of favorable outcomes}}{\text{Total number of possible outcomes}}$
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Probability Rules}
+\begin{enumerate}
+\item \textbf{Range:} $0 \leq P(A) \leq 1$ for any event $A$
+\item \textbf{Certainty:} $P(S) = 1$ (something must happen)
+\item \textbf{Complement:} $P(A^c) = 1 - P(A)$
+\item \textbf{Addition Rule:}
+  $$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
+\item \textbf{Multiplication Rule:}
+  $$P(A \cap B) = P(A) \times P(B|A)$$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Medical Example: Diagnostic Testing}
+\textbf{COVID-19 Rapid Test Performance:}
+\begin{itemize}
+\item Sensitivity = 85\% (probability of positive test given disease)
+\item Specificity = 97\% (probability of negative test given no disease)
+\item Disease prevalence = 5\%
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Questions:}
+\begin{itemize}
+\item What's the probability of a false positive?
+\item What's the probability someone with a positive test has COVID?
+\item How does prevalence affect test interpretation?
+\end{itemize}
+
+\vspace{0.5cm}
+These questions require understanding conditional probability!
+\end{frame}
+
+\section{Conditional Probability (Ch 6.2)}
+
+\begin{frame}
+\frametitle{Conditional Probability}
+\textbf{Definition:} Probability of event $A$ given that event $B$ has occurred
+
+$$P(A|B) = \frac{P(A \cap B)}{P(B)}, \text{ where } P(B) > 0$$
+
+\vspace{0.5cm}
+\textbf{Medical Example:}
+\begin{itemize}
+\item $A$ = Patient has diabetes
+\item $B$ = Patient is overweight
+\item $P(A|B)$ = Probability of diabetes given patient is overweight
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Key Insight:} Conditional probability updates our beliefs based on new information
+\end{frame}
+
+\begin{frame}
+\frametitle{Independence}
+\textbf{Definition:} Events $A$ and $B$ are independent if:
+$$P(A|B) = P(A) \text{ or equivalently } P(A \cap B) = P(A) \times P(B)$$
+
+\vspace{0.5cm}
+\textbf{Examples in Healthcare:}
+\begin{itemize}
+\item \textbf{Independent:}
+  \begin{itemize}
+  \item Blood type and eye color
+  \item Two different patients' test results
+  \end{itemize}
+\item \textbf{Dependent:}
+  \begin{itemize}
+  \item Smoking status and lung cancer
+  \item Age and cardiovascular disease
+  \item Family history and genetic disorders
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Caution:} Independence is often assumed but should be verified!
+\end{frame}
+
+\begin{frame}
+\frametitle{Diagnostic Test Performance}
+\textbf{Key Metrics for Medical Tests:}
+\begin{itemize}
+\item \textbf{Sensitivity:} P(Positive Test | Disease Present)
+  \begin{itemize}
+  \item Ability to correctly identify disease
+  \item True positive rate
+  \end{itemize}
+\item \textbf{Specificity:} P(Negative Test | Disease Absent)
+  \begin{itemize}
+  \item Ability to correctly identify no disease
+  \item True negative rate
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Example - COVID-19 Rapid Test:}
+\begin{itemize}
+\item Sensitivity = 85\% (detects 85\% of infected people)
+\item Specificity = 97\% (correctly identifies 97\% of non-infected)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Predictive Values}
+\textbf{Clinical Interpretation Measures:}
+\begin{itemize}
+\item \textbf{Positive Predictive Value (PPV):} P(Disease | Positive Test)
+  \begin{itemize}
+  \item Probability patient has disease given positive test
+  \item Depends on disease prevalence
+  \end{itemize}
+\item \textbf{Negative Predictive Value (NPV):} P(No Disease | Negative Test)
+  \begin{itemize}
+  \item Probability patient is healthy given negative test
+  \item Also depends on disease prevalence
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Key Insight:} PPV and NPV change with disease prevalence in the population, while sensitivity and specificity are test characteristics.
+\end{frame}
+
+\section{Diagnostic Tests (Ch 6.3)}
+
+\begin{frame}
+\frametitle{2x2 Contingency Tables}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+& \textbf{Disease +} & \textbf{Disease -} & \textbf{Total} \\
+\hline
+\textbf{Exposed} & a & b & a + b \\
+\hline
+\textbf{Not Exposed} & c & d & c + d \\
+\hline
+\textbf{Total} & a + c & b + d & n \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Key Measures:}
+\begin{itemize}
+\item \textbf{Risk in Exposed:} $R_E = \frac{a}{a+b}$
+\item \textbf{Risk in Unexposed:} $R_U = \frac{c}{c+d}$
+\item \textbf{Relative Risk (RR):} $\frac{R_E}{R_U} = \frac{a/(a+b)}{c/(c+d)}$
+\item \textbf{Odds Ratio (OR):} $\frac{ad}{bc}$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Relative Risk vs Odds Ratio}
+\begin{itemize}
+\item \textbf{Relative Risk (RR):}
+  \begin{itemize}
+  \item Direct measure of risk comparison
+  \item Used in cohort studies
+  \item RR = 2 means exposed have twice the risk
+  \item Cannot be calculated in case-control studies
+  \end{itemize}
+\item \textbf{Odds Ratio (OR):}
+  \begin{itemize}
+  \item Approximates RR when disease is rare
+  \item Can be calculated in all study designs
+  \item More difficult to interpret directly
+  \item OR > RR when outcome is common
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Rule of thumb:} When disease prevalence < 10\%, OR $\approx$ RR
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Smoking and Lung Cancer}
+\textbf{Study of 1000 individuals over 20 years:}
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+& \textbf{Lung Cancer} & \textbf{No Cancer} & \textbf{Total} \\
+\hline
+\textbf{Smokers} & 60 & 440 & 500 \\
+\hline
+\textbf{Non-smokers} & 10 & 490 & 500 \\
+\hline
+\textbf{Total} & 70 & 930 & 1000 \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Calculations:}
+\begin{itemize}
+\item Risk in smokers: $60/500 = 0.12$ (12\%)
+\item Risk in non-smokers: $10/500 = 0.02$ (2\%)
+\item Relative Risk: $0.12/0.02 = 6.0$
+\item Odds Ratio: $(60 \times 490)/(10 \times 440) = 6.68$
+\end{itemize}
+
+\textbf{Interpretation:} Smokers have 6 times the risk of lung cancer
+\end{frame}
+
+\section{Random Variables and Expected Value (Ch 6.4)}
+
+\begin{frame}
+\frametitle{Expected Value}
+\textbf{Definition:} Long-run average value of a random variable
+
+\vspace{0.5cm}
+\textbf{Discrete Random Variable:}
+$$E(X) = \mu = \sum_{i} x_i \cdot P(X = x_i)$$
+
+\vspace{0.5cm}
+\textbf{Medical Example:} Number of adverse events in clinical trial
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Events ($x$) & 0 & 1 & 2 & 3 \\
+\hline
+Probability & 0.70 & 0.20 & 0.08 & 0.02 \\
+\hline
+\end{tabular}
+\end{center}
+
+$$E(X) = 0(0.70) + 1(0.20) + 2(0.08) + 3(0.02) = 0.42$$
+
+\textbf{Interpretation:} On average, expect 0.42 adverse events per patient
+\end{frame}
+
+\begin{frame}
+\frametitle{Variance and Standard Deviation}
+\textbf{Variance:} Measure of spread around the expected value
+$$\text{Var}(X) = \sigma^2 = E[(X - \mu)^2] = E(X^2) - [E(X)]^2$$
+
+\textbf{Standard Deviation:} Square root of variance
+$$SD(X) = \sigma = \sqrt{\text{Var}(X)}$$
+
+\vspace{0.5cm}
+\textbf{Properties:}
+\begin{itemize}
+\item $\text{Var}(aX) = a^2 \text{Var}(X)$
+\item $\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y)$ if $X$ and $Y$ are independent
+\item Standard deviation has same units as original data
+\end{itemize}
+\end{frame}
+
+\section{Discrete Distributions (Ch 6.5)}
+
+\begin{frame}
+\frametitle{Binomial Distribution}
+\textbf{Conditions:}
+\begin{itemize}
+\item Fixed number of trials ($n$)
+\item Two possible outcomes (success/failure)
+\item Constant probability of success ($p$)
+\item Independent trials
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Probability Mass Function:}
+$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
+
+\vspace{0.5cm}
+\textbf{Parameters:}
+\begin{itemize}
+\item Mean: $\mu = np$
+\item Variance: $\sigma^2 = np(1-p)$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Binomial Example: Vaccine Efficacy}
+\textbf{Clinical Trial:} 20 vaccinated individuals exposed to virus
+\begin{itemize}
+\item Vaccine efficacy = 90\% (probability of protection)
+\item What's the probability exactly 18 are protected?
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Solution:}
+\begin{itemize}
+\item $n = 20$, $p = 0.90$, $k = 18$
+\item $P(X = 18) = \binom{20}{18} (0.90)^{18} (0.10)^2$
+\item $P(X = 18) = 190 \times 0.1501 \times 0.01 = 0.285$
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Expected number protected:} $\mu = 20 \times 0.90 = 18$\\
+\textbf{Standard deviation:} $\sigma = \sqrt{20 \times 0.90 \times 0.10} = 1.34$
+\end{frame}
+
+\begin{frame}
+\frametitle{Normal Distribution}
+\textbf{Properties:}
+\begin{itemize}
+\item Bell-shaped, symmetric curve
+\item Characterized by mean ($\mu$) and standard deviation ($\sigma$)
+\item Area under curve = 1
+\item Approximately 68\% within $\pm 1\sigma$
+\item Approximately 95\% within $\pm 2\sigma$
+\item Approximately 99.7\% within $\pm 3\sigma$
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Standard Normal:} $Z = \frac{X - \mu}{\sigma}$ has mean 0, SD 1
+
+\vspace{0.5cm}
+\textbf{Medical Applications:}
+\begin{itemize}
+\item Blood pressure measurements
+\item Cholesterol levels
+\item Height and weight
+\item Many lab values
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Normal Distribution Example}
+\textbf{Systolic Blood Pressure in Adults:}
+\begin{itemize}
+\item Mean = 120 mmHg
+\item Standard deviation = 15 mmHg
+\item What proportion have BP > 140 mmHg (hypertension)?
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Solution:}
+\begin{enumerate}
+\item Standardize: $Z = \frac{140 - 120}{15} = 1.33$
+\item Look up in Z-table: $P(Z < 1.33) = 0.9082$
+\item Therefore: $P(BP > 140) = 1 - 0.9082 = 0.0918$
+\end{enumerate}
+
+\vspace{0.5cm}
+\textbf{Interpretation:} About 9.2\% of adults have hypertension by this criterion
+\end{frame}
+
+\section{Applications and Examples}
+
+\begin{frame}
+\frametitle{Probability in Public Health}
+\textbf{Disease Surveillance Example:}
+\begin{itemize}
+\item Population: 50,000 individuals
+\item New disease cases: 125 per year
+\item Deaths from disease: 15 per year
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Calculate probabilities:}
+\begin{itemize}
+\item P(disease) = 125/50,000 = 0.0025 (0.25\%)
+\item P(death | disease) = 15/125 = 0.12 (12\%)
+\item P(death and disease) = 15/50,000 = 0.0003 (0.03\%)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Clinical interpretation:}
+\begin{itemize}
+\item Incidence rate: 250 per 100,000 per year
+\item Case fatality rate: 12\%
+\item Overall mortality rate: 30 per 100,000 per year
+\end{itemize}
+\end{frame}
+
+\section{AI as a Learning Tool for Probability}
+
+\AIcolors
+\begin{frame}
+\frametitle{AI for Probability Calculations}
+\textbf{How AI can help with probability:}
+\begin{itemize}
+\item \textbf{Complex calculations:} Conditional probabilities, combinatorics
+\item \textbf{Simulation:} Generate random data, bootstrap samples
+\item \textbf{Visualization:} Create probability distributions
+\item \textbf{Problem solving:} Step-by-step solutions
+\item \textbf{Code generation:} R scripts for probability problems
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Example prompts:}
+\begin{itemize}
+\item "Calculate the positive predictive value for a test with 95\% sensitivity, 90\% specificity, and 5\% prevalence"
+\item "Simulate 10,000 binomial trials with n=20, p=0.3 in R"
+\item "Explain the difference between relative risk and odds ratio with a medical example"
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Diagnostic Test Calculations}
+\textbf{Prompt:} "Create R code to calculate diagnostic test metrics"
+
+\footnotesize
+\begin{verbatim}
+# Diagnostic Test Calculator
+diagnostic_metrics <- function(sens, spec, prev) {
+  # Calculate PPV and NPV
+  ppv <- (sens * prev) /
+         (sens * prev + (1-spec) * (1-prev))
+  npv <- (spec * (1-prev)) /
+         ((1-sens) * prev + spec * (1-prev))
+
+  # Display results
+  cat("PPV:", round(ppv*100, 1), "%\n")
+  cat("NPV:", round(npv*100, 1), "%\n")
+
+  return(list(PPV=ppv, NPV=npv))
+}
+
+# Example: COVID test
+diagnostic_metrics(sens=0.85, spec=0.97, prev=0.05)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Probability Simulations}
+\textbf{Prompt:} "Simulate coin flips to estimate probability"
+
+\footnotesize
+\begin{verbatim}
+# Simulate binomial trials
+simulate_treatment <- function(n_patients=100,
+                              p_success=0.7) {
+  outcomes <- rbinom(n_patients, 1, p_success)
+  success_rate <- mean(outcomes)
+
+  cat("Simulated success rate:",
+      round(success_rate*100, 1), "%\n")
+  cat("Expected success rate:", p_success*100, "%\n")
+
+  # Create visualization
+  barplot(table(outcomes),
+          names.arg=c("Failure", "Success"),
+          col=c("red", "green"),
+          main="Treatment Outcomes")
+}
+
+simulate_treatment()
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Visualizing Distributions}
+\textbf{Prompt:} "Compare binomial and normal distributions in R"
+
+\footnotesize
+\begin{verbatim}
+# Compare Binomial to Normal
+n <- 100; p <- 0.3
+x <- 0:n
+
+# Binomial probabilities
+binom_probs <- dbinom(x, n, p)
+
+# Normal approximation
+mu <- n * p
+sigma <- sqrt(n * p * (1-p))
+
+# Plot comparison
+plot(x, binom_probs, type="h", col="blue",
+     main="Binomial vs Normal",
+     xlab="x", ylab="Probability")
+curve(dnorm(x, mu, sigma), add=TRUE, col="red")
+legend("topright", c("Binomial", "Normal"),
+       col=c("blue", "red"), lty=1)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{AI Best Practices for Probability}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{DO:}
+\begin{itemize}
+\item Verify calculations manually
+\item Check assumptions are met
+\item Request step-by-step solutions
+\item Ask for multiple approaches
+\item Validate with simulations
+\item Cross-reference formulas
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\textbf{DON'T:}
+\begin{itemize}
+\item Accept complex calculations blindly
+\item Skip understanding the logic
+\item Ignore edge cases
+\item Misinterpret conditional probability
+\item Confuse probability types
+\item Trust without verification
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5cm}
+\textbf{Remember:} AI can calculate quickly, but you need to understand the concepts!
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Assignment: Probability Problem Solving}
+\textbf{This week's AI-integrated homework:}
+\begin{enumerate}
+\item Use AI to solve a diagnostic test problem, then verify manually
+\item Generate R code for simulating coin flips, then modify for medical scenario
+\item Ask AI to explain conditional probability three different ways
+\item Create visualizations of different probability distributions
+\item Identify and correct an AI error in probability calculation
+\end{enumerate}
+
+\vspace{0.5cm}
+\textbf{Sample Problem:}
+\small
+\begin{verbatim}
+"A new diagnostic test for Disease X has 92% sensitivity
+and 88% specificity. In a population where 3% have the
+disease, what is the probability that someone with a
+positive test actually has the disease? Create R code
+to calculate this and visualize how the answer changes
+as prevalence varies from 1% to 10%."
+\end{verbatim}
+\end{frame}
+
+\defaultcolors
+
+\section{R Examples and Exercises}
+
+\begin{frame}[fragile]
+\frametitle{R Example: Basic Probability}
+\small
+\begin{verbatim}
+# Probability calculations in R
+# Sample space for rolling two dice
+dice1 <- 1:6
+dice2 <- 1:6
+sample_space <- expand.grid(dice1, dice2)
+sample_space$sum <- sample_space$Var1 + sample_space$Var2
+
+# Probability of sum = 7
+p_seven <- sum(sample_space$sum == 7) / nrow(sample_space)
+cat("P(sum = 7) =", p_seven, "\n")  # 6/36 = 1/6
+
+# Conditional probability example
+# P(sum > 8 | first die = 4)
+subset_data <- sample_space[sample_space$Var1 == 4, ]
+p_conditional <- sum(subset_data$sum > 8) / nrow(subset_data)
+cat("P(sum > 8 | first = 4) =", p_conditional, "\n")  # 3/6 = 1/2
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{R Example: Medical Testing}
+\footnotesize
+\begin{verbatim}
+# Breast cancer screening example
+sens <- 0.90  # Sensitivity
+spec <- 0.95  # Specificity
+prev <- 0.008 # Prevalence
+
+# Calculate PPV and NPV
+ppv <- (sens * prev) /
+       (sens * prev + (1-spec) * (1-prev))
+npv <- (spec * (1-prev)) /
+       ((1-sens) * prev + spec * (1-prev))
+
+cat("PPV:", round(ppv * 100, 1), "%\n")
+cat("NPV:", round(npv * 100, 1), "%\n")
+
+# Simulate population
+n <- 10000
+n_disease <- round(n * prev)
+n_healthy <- n - n_disease
+
+# Test outcomes
+TP <- round(n_disease * sens)
+FP <- round(n_healthy * (1-spec))
+
+cat("\nIn 10,000 women screened:\n")
+cat("True positives:", TP, "\n")
+cat("False positives:", FP, "\n")
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{R Example: Binomial Distribution}
+\small
+\begin{verbatim}
+# Clinical trial with 20 patients, treatment success rate 70%
+n <- 20
+p <- 0.7
+
+# Probability of exactly 15 successes
+p_15 <- dbinom(15, n, p)
+cat("P(X = 15) =", round(p_15, 4), "\n")
+
+# Probability of at least 15 successes
+p_atleast_15 <- pbinom(14, n, p, lower.tail = FALSE)
+cat("P(X >= 15) =", round(p_atleast_15, 4), "\n")
+
+# Expected value and standard deviation
+expected <- n * p
+std_dev <- sqrt(n * p * (1-p))
+cat("Expected successes:", expected, "\n")
+cat("Standard deviation:", round(std_dev, 2), "\n")
+
+# Visualize distribution
+x <- 0:n
+probs <- dbinom(x, n, p)
+barplot(probs, names.arg = x, col = "lightblue",
+        main = "Binomial Distribution (n=20, p=0.7)",
+        xlab = "Number of Successes", ylab = "Probability")
+abline(v = expected + 0.5, col = "red", lwd = 2, lty = 2)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{R Example: Normal Distribution}
+\footnotesize
+\begin{verbatim}
+# Blood pressure in adults
+mu <- 120      # Mean SBP
+sigma <- 15    # Standard deviation
+
+# Proportion with hypertension (SBP > 140)
+p_hyper <- pnorm(140, mu, sigma, lower.tail = FALSE)
+cat("P(BP > 140):", round(p_hyper * 100, 1), "%\n")
+
+# Find percentiles
+bp_90 <- qnorm(0.90, mu, sigma)
+bp_95 <- qnorm(0.95, mu, sigma)
+cat("90th percentile:", round(bp_90, 1), "mmHg\n")
+cat("95th percentile:", round(bp_95, 1), "mmHg\n")
+
+# Visualize distribution
+x <- seq(70, 170, length = 100)
+plot(x, dnorm(x, mu, sigma), type = "l",
+     main = "Systolic Blood Pressure",
+     xlab = "SBP (mmHg)", ylab = "Density")
+abline(v = c(mu, 140), col = c("blue", "red"))
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{Practice Problems}
+\begin{enumerate}
+\item \textbf{Diagnostic Test:} A rapid strep test has 85\% sensitivity and 95\% specificity. If 15\% of patients with sore throat have strep, what's the NPV?
+
+\item \textbf{Risk Calculation:} In a study of 1000 people, 200 smokers and 800 non-smokers, 30 smokers and 20 non-smokers developed heart disease. Calculate the relative risk.
+
+\item \textbf{Binomial:} If a treatment works in 60\% of patients, what's the probability that it works in at least 8 out of 10 patients?
+
+\item \textbf{Normal:} If cholesterol levels are normally distributed with mean 200 mg/dL and SD 40 mg/dL, what proportion of people have levels between 180 and 220?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Summary: Chapter 6 - Probability}
+\textbf{Today we covered:}
+\begin{itemize}
+\item \textbf{Section 6.1:} Basic probability concepts, rules, and definitions
+\item \textbf{Section 6.2:} Conditional probability and independence
+\item \textbf{Section 6.3:} Diagnostic test applications (sensitivity, specificity)
+\item \textbf{Section 6.4:} Random variables and expected value
+\item \textbf{Section 6.5:} Discrete distributions (binomial)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Key Learning Objectives:}
+\begin{itemize}
+\item Calculate and interpret basic probabilities
+\item Understand conditional probability and independence
+\item Apply probability concepts to diagnostic testing
+\item Use probability distributions for modeling
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Next Week:} Chapter 7 \& 8 - Theoretical distributions and sampling
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions?}
+\begin{center}
+\Large{Thank you!}
+
+\vspace{1cm}
+
+\textbf{Office Hours:} Wednesday, 10:00 am -- 11:30 am\\
+\textbf{Email:} john.molitor@oregonstate.edu\\
+\textbf{Office:} 153 Milam
+
+\vspace{1cm}
+
+\textbf{Reading for next week:}\\
+Pagano \& Gauvreau, Chapter 7 (7.1, 7.2, 7.4) and Chapter 8
+\end{center}
+\end{frame}
+
+\end{document}

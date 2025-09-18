@@ -1,0 +1,24 @@
+\frametitle{R Example: Normal Distribution}
+\footnotesize
+\begin{verbatim}
+# Blood pressure in adults
+mu <- 120      # Mean SBP
+sigma <- 15    # Standard deviation
+
+# Proportion with hypertension (SBP > 140)
+p_hyper <- pnorm(140, mu, sigma, lower.tail = FALSE)
+cat("P(BP > 140):", round(p_hyper * 100, 1), "%\n")
+
+# Find percentiles
+bp_90 <- qnorm(0.90, mu, sigma)
+bp_95 <- qnorm(0.95, mu, sigma)
+cat("90th percentile:", round(bp_90, 1), "mmHg\n")
+cat("95th percentile:", round(bp_95, 1), "mmHg\n")
+
+# Visualize distribution
+x <- seq(70, 170, length = 100)
+plot(x, dnorm(x, mu, sigma), type = "l",
+     main = "Systolic Blood Pressure",
+     xlab = "SBP (mmHg)", ylab = "Density")
+abline(v = c(mu, 140), col = c("blue", "red"))
+\end{verbatim}
