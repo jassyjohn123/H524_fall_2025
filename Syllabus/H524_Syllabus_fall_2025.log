@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  14 SEP 2025 13:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  23 SEP 2025 18:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -560,34 +560,53 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@lastruleclass=\count314
 \@thisrulewidth=\dimen276
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 18.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2024-10-27 v4.22 Multi-page Table package (DPC)
+\LTleft=\skip53
+\LTright=\skip54
+\LTpre=\skip55
+\LTpost=\skip56
+\LTchunksize=\count315
+\LTcapwidth=\dimen277
+\LT@head=\box73
+\LT@firsthead=\box74
+\LT@foot=\box75
+\LT@lastfoot=\box76
+\LT@gbox=\box77
+\LT@cols=\count316
+\LT@rows=\count317
+\c@LT@tables=\count318
+\c@LT@chunks=\count319
+\LT@p@ftn=\toks35
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 21.
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count315
-\l__pdf_internal_box=\box73
+\l__color_backend_stack_int=\count320
+\l__pdf_internal_box=\box78
 )
 (./H524_Syllabus_fall_2025.aux)
 \openout1 = `H524_Syllabus_fall_2025.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -625,17 +644,17 @@ LaTeX Font Info:    ... okay on input line 25.
 
 (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count316
-\scratchdimen=\dimen277
-\scratchbox=\box74
-\nofMPsegments=\count317
-\nofMParguments=\count318
-\everyMPshowfont=\toks35
-\MPscratchCnt=\count319
-\MPscratchDim=\dimen278
-\MPnumerator=\count320
-\makeMPintoPDFobject=\count321
-\everyMPtoPDFconversion=\toks36
+\scratchcounter=\count321
+\scratchdimen=\dimen278
+\scratchbox=\box79
+\nofMPsegments=\count322
+\nofMParguments=\count323
+\everyMPshowfont=\toks36
+\MPscratchCnt=\count324
+\MPscratchDim=\dimen279
+\MPnumerator=\count325
+\makeMPintoPDFobject=\count326
+\everyMPtoPDFconversion=\toks37
 ) (/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -645,31 +664,31 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring ON on input line 25.
+Package hyperref Info: Link coloring ON on input line 28.
 
 (./H524_Syllabus_fall_2025.out) (./H524_Syllabus_fall_2025.out)
 \@outlinefile=\write4
 \openout4 = `H524_Syllabus_fall_2025.out'.
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 44.
+(Font)              <10.95> on input line 46.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 44.
+(Font)              <8> on input line 46.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 44.
+(Font)              <6> on input line 46.
 
 
 [1
 
 {/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-Underfull \hbox (badness 4013) in paragraph at lines 182--182
+
+[2]
+Underfull \hbox (badness 4013) in paragraph at lines 230--230
 []\OT1/cmr/m/n/10.95 Sampling Dis-tri-bu-tion of the
  []
 
 
-
-[2]
 
 [3]
 
@@ -683,10 +702,10 @@ Package rerunfilecheck Info: File `H524_Syllabus_fall_2025.out' has not changed
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 21829 strings out of 473190
- 426448 string characters out of 5715801
- 813006 words of memory out of 5000000
- 44768 multiletter control sequences out of 15000+600000
+ 21940 strings out of 473190
+ 428145 string characters out of 5715801
+ 814571 words of memory out of 5000000
+ 44877 multiletter control sequences out of 15000+600000
  562700 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  116i,8n,121p,620b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -695,7 +714,7 @@ Here is how much of TeX's memory you used:
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
 usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></u
 sr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on H524_Syllabus_fall_2025.pdf (4 pages, 86834 bytes).
+Output written on H524_Syllabus_fall_2025.pdf (4 pages, 90042 bytes).
 PDF statistics:
  62 PDF objects out of 1000 (max. 8388607)
  45 compressed objects within 1 object stream

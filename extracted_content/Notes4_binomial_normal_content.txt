@@ -1,0 +1,111 @@
+Extracted from: /Users/molitorj/ms/OSU/classes/AI_H524/introduction-to-biostatistics-h-524-101-f2024-export/web_resources/Uploaded Media/Notes4_binomial_normal.pptx
+==================================================
+
+
+=== SLIDE 1 ===
+Binomial Distribution
+A binomial experiment has the following properties:
+
+The experiment consists of n identical trials. 
+Each trial result in one of two outcomes. Call one outcome success and the other outcome failure. 
+The probability of success on a single trial is p, and this remains constant for all trials. 
+Denote the probability of failure as q = 1 − p. 
+The trials are independent. 
+The random variable of interest, X , is the number of successes occurring in n trials. X takes values in {0, 1, . . . , n}. 
+The probability distribution of X is given by:
+
+=== SLIDE 2 ===
+Binomial Distribution
+
+=== SLIDE 3 ===
+Binomial Distribution
+It is found that 25% of people exposed to a particular carcinogen become ill with cancer. Among four people with equal exposure to the carcinogen, 
+Show that the probabilities that 0, 1, 2, 3 and 4 people become ill are 81/256, 108/256, 54/256, 12/256 and 1/256 respectively.
+What is the probability that at least one person becomes ill?
+
+=== SLIDE 4 ===
+Continuous Distributions
+For any random variable X and any numbers a and b such that a ≤ b, Pr[a ≤ X ≤ b] = Area under the density curve between a and b.
+
+=== SLIDE 5 ===
+Continuous Distribution
+Density curves do not go below the x-axis
+The area under the entire density curve equals 1 
+The probability of a single point, e.g. P (X = 1), is equal to 0. This follows from the key point above since when a = b we have 
+P(X=a) = P(a≤X≤a)= Area under the density curve between a and a =0
+
+=== SLIDE 6 ===
+Normal Distribution
+Bell shaped curve, though not all bell-shape curves are normal, e.g. t distribution.
+
+Notation: If random variable X is normally distributed with mean μ and standard deviation σ.
+
+=== SLIDE 7 ===
+The Empirical rule
+The empirical rule states that for any normal curve:
+68% of the observations lie within 1 SD of the mean. The interval (μ − σ, μ + σ)contains 68% of the data.
+95% of the observations lie within 2 SDs of the mean. The interval (μ − 2σ, μ + 2σ) contains 95% of the data. 
+99.7% of the observations lie within 3 SDs of the mean. The interval (μ − 3σ, μ + 3σ) contains 99.7% of the data.
+
+=== SLIDE 8 ===
+The standard normal distribution
+The standard normal distribution is the normal distribution with mean 0 and standard deviation 1. 
+So the N (0, 1) is called the standard normal distribution. We typically use Z to denote a random variable that has a standard normal distribution.
+It is centered at 0 and places most of its area between -2 and 2 (note empirical rule)
+
+=== SLIDE 9 ===
+The standard normal distribution
+If Z ∼ N (0, 1), then using Table A.3 of the text:
+
+P(Z ≤ 0) = 0.5
+P(Z < 0) = 0.5
+P(Z < 1) = 0.8413
+
+=== SLIDE 10 ===
+The standard normal distribution
+
+=== SLIDE 11 ===
+Calculating probs using N (μ, σ)
+We have seen how to calculate probabilities for the N (0, 1) distribution
+But most populations don’t give rise to data that can be adequately modeled using the N (0, 1) distributionFor instance the heights data was centered at 64.5 with SD=2.5 
+So we need to know how to calculate probabilities for any normal distribution 
+It turns out that all we need is the table for the N (0, 1)
+
+=== SLIDE 12 ===
+Convert Normal to Z scores
+If
+
+
+
+Then,
+
+=== SLIDE 13 ===
+Example
+Suppose scores on Intro Biostat final exam are normally distributed with mean 70 and standard deviation 10.
+So, S ∼ N (70, 102) (Using estimates)
+For a randomly selected student calculate
+ (i) P (S > 85)(ii) P (60 < S < 85)
+
+=== SLIDE 14 ===
+Solution
+Here we need to standardizeFor (i), we have the following picture
+
+=== SLIDE 15 ===
+Solution
+S is normally distributed with mean 70 and std dev 10
+P(S>85) = P[Z>(85-70)/10] = P(Z>1.5) 
+Ans: P(Z>1.5) = 1 – P(Z <= 1.5) = 1 – 0.933 =  0.067
+
+=== SLIDE 16 ===
+Solution
+P(60 < S < 85) = P[(60-70)/10 < Z < (85-70)/10] = P(-1 < Z < 1.5) = P(Z < 1.5) – P(Z < -1)
+We find: P(Z < 1.5) = 0.933, P(Z < -1) = 0.159.
+So P(60 < S < 85) = 0.933 – 0.159 = 0.774.
+
+=== SLIDE 17 ===
+Percentiles of N (μ, σ2)
+To compute S90, note that P(S<S90)=0.90
+So, P[Z < (x – μ)/σ] = 0.90
+But, P(Z<1.28) = 0.90. 
+So, 1.28 = (S90 – 70) / 10
+S90 = 82.8

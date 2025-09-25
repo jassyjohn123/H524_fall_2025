@@ -1,4 +1,4 @@
-# H524 Week 1 Homework Assignment: Introduction to Biostatistics and Data Visualization
+# H524 Assignment 1: Data Visualization and Descriptive Statistics
 
 **Due Date:** [Insert due date]
 **Points:** 100 points
@@ -7,7 +7,7 @@
 
 ## Instructions
 
-This assignment covers material from Week 1 lectures on introduction to biostatistics, data types, descriptive statistics, and data visualization. The assignment includes multiple choice questions, short answer questions, and practical R exercises.
+This assignment covers material from Week 1 Monday and Wednesday lectures on data visualization, descriptive statistics, and rates/standardization. The assignment includes multiple choice questions, short answer questions, and practical R exercises.
 
 **Important Notes:**
 - Show all R code where requested
@@ -98,35 +98,36 @@ c) Cause of injury (motor vehicle, drowning, fire, etc.)
 d) Pain severity rating (1=mild, 5=severe)
 e) Patient's primary language (English, Spanish, French, etc.)
 
-**Question 12 (10 points):** Descriptive Statistics Analysis
-Using the actual FEV1 dataset from class (n=13), examine the histogram below and the descriptive statistics:
+**Question 12 (10 points):** Geographic Health Data Analysis
+Examine the choropleth map below showing diabetes prevalence rates across Pacific Northwest states:
 
-*(FEV1 Histogram will be provided in Canvas - refer to class materials)*
+*(Diabetes Prevalence Map will be provided in Canvas showing color-coded states)*
 
-**Descriptive Statistics:**
-- Mean: 2.88 liters
-- Median: 2.80 liters
-- Range: 1.90 liters (4.05 - 2.15)
-- Standard deviation: 0.58 liters
+**Map Data:**
+- Oregon: 8.2% diabetes rate
+- Washington: 9.1% diabetes rate
+- California: 9.7% diabetes rate
+- Nevada: 10.8% diabetes rate
+- Idaho: 8.9% diabetes rate
 
-a) Looking at both the histogram and the mean vs. median values, what does this suggest about the distribution's shape? (3 points)
-b) Given that this data represents adolescents with asthma, explain why we might expect this type of distribution. (4 points)
-c) Which measure (mean or median) would be more appropriate to report for this dataset and why? (3 points)
+a) Based on the visual pattern in the map, which state shows the highest diabetes prevalence and what might geographic factors contribute to this pattern? (3 points)
+b) If you were a public health official planning intervention programs, explain how this type of geographic visualization helps prioritize resource allocation. (4 points)
+c) What additional demographic or environmental data layers would enhance this map for policy decisions? (3 points)
 
-**Question 13 (10 points):** Choosing Appropriate Visualizations
-Refer to the childhood injury bar chart below, then consider the researcher's different datasets:
+**Question 13 (10 points):** Multi-Panel Health Visualization Analysis
+Examine the four-panel BMI analysis figure below showing comprehensive health data:
 
-*(Childhood Injury Deaths by Cause bar chart will be provided in Canvas - refer to class materials)*
+*(Four-panel BMI analysis will be provided in Canvas showing: histogram, box plots, bar chart, and scatter plot)*
 
-A researcher wants to present injury data to a public health conference. She has these datasets:
+**Panel Description:**
+- Panel 1: BMI distribution histogram with normal curve overlay
+- Panel 2: BMI comparison by gender using box plots
+- Panel 3: BMI category frequencies (Underweight, Normal, Overweight, Obese)
+- Panel 4: BMI vs systolic blood pressure scatter plot with regression line
 
-- Dataset 1: Number of injury deaths by cause (like the chart above)
-- Dataset 2: Age at time of injury for 150 fatal accidents (continuous variable)
-- Dataset 3: Injury severity ratings (mild, moderate, severe, fatal) for 500 cases
-
-a) Explain why the bar chart above is appropriate for Dataset 1 and identify one strength of this visualization. (3 points)
-b) For Dataset 2, recommend a different visualization that shows the distribution shape and explain why. (3 points)
-c) For Dataset 3, explain why a pie chart might NOT be the best choice despite having categories. (4 points)
+a) Compare Panel 1 and Panel 2 - what different insights about BMI patterns does each visualization provide? (3 points)
+b) Based on Panel 4's scatter plot, describe the relationship between BMI and blood pressure and explain its public health significance. (4 points)
+c) If you could add a fifth panel to this analysis, what type of visualization would you choose and what health question would it address? (3 points)
 
 ---
 
@@ -145,17 +146,18 @@ c) Create a frequency table for gender and calculate what percentage of subjects
 - Provide brief interpretations as requested
 - Use monospace font (Courier) if pasting into Canvas
 
-**Question 15 (15 points):** Creating Professional Visualizations
-Using the childhood injury dataset from class, create a chart similar to the one shown in Question 13:
+**Question 15 (15 points):** Creating Geographic Health Visualizations
+Using the state-level health dataset from class, create visualizations that incorporate geographic mapping:
 
-a) Write R code to create a well-formatted bar chart of injury causes. Your chart should include:
-   - Proper title and axis labels
-   - Readable text (consider text size/rotation if needed)
-   - Professional appearance (8 points)
+a) Write R code to create a choropleth map showing diabetes prevalence by state. Your code should include:
+   - Proper map data merging and coordinate handling
+   - Color gradient mapping to health outcomes
+   - Professional titles and legends
+   - Use of ggplot2 and mapping packages (8 points)
 
-b) Based on your chart, identify the leading cause of childhood injury deaths and calculate its percentage of total deaths. (4 points)
+b) Create a secondary visualization (scatter plot, bar chart, or dot plot) that complements your map by showing the same diabetes data in a different format. Explain why your chosen visualization adds value beyond the map. (4 points)
 
-c) Explain one limitation of using a bar chart for this data and suggest an alternative visualization that might address this limitation. (3 points)
+c) Compare the strengths and limitations of geographic vs. non-geographic representations of the same health data. When would each approach be most appropriate? (3 points)
 
 **Code and Chart Submission:**
 - Submit your complete R code
@@ -219,15 +221,15 @@ For automated grading assistance, use these prompts with student responses:
 
 *Question 11 (Data Types):* "Evaluate this response on data type classification (10 points total). Award 2 points per variable for: (1) Correct classification (quantitative/qualitative, discrete/continuous, nominal/ordinal), (2) Sound justification. Look for understanding of the distinctions between data types."
 
-*Question 12 (Descriptive Statistics):* "Grade this interpretation of FEV1 statistics using both histogram and numerical summaries (10 points). Award points for: (1) Correct interpretation of mean vs median AND histogram shape (3 pts), (2) Reasonable explanation for distribution pattern in asthma patients (4 pts), (3) Appropriate choice of central tendency measure with justification (3 pts). Look for integration of visual and numerical evidence."
+*Question 12 (Geographic Analysis):* "Grade this geographic health data interpretation (10 points). Award points for: (1) Correct identification of highest prevalence state with valid geographic factors (3 pts), (2) Sound reasoning about visualization's role in resource allocation decisions (4 pts), (3) Appropriate suggestions for additional data layers with policy relevance (3 pts). Look for understanding of spatial health patterns and public health applications."
 
-*Question 13 (Visualizations):* "Assess this visualization analysis response (10 points). Look for: (1) Understanding of why bar chart works for injury data with specific strength identified (3 pts), (2) Suitable choice for continuous age distribution with rationale (3 pts), (3) Valid critique of pie chart limitations for ordinal severity data (4 pts). Student should reference the provided chart and demonstrate understanding of visualization principles."
+*Question 13 (Multi-Panel Analysis):* "Assess this multi-panel visualization analysis (10 points). Look for: (1) Clear comparison of histogram vs box plot insights with specific differences identified (3 pts), (2) Accurate description of BMI-blood pressure relationship with public health implications (4 pts), (3) Creative and justified suggestion for fifth panel addressing relevant health question (3 pts). Student should demonstrate understanding of how different visualization types complement each other."
 
 **R Code Grading Prompts:**
 
 *Question 14 (R Analysis):* "Evaluate this R code submission (15 points) for: (1) Correct code that loads data and produces accurate results (8 pts), (2) Proper interpretation of summary statistics, especially quartiles (4 pts), (3) Complete calculations with clear presentation (3 pts). Code should be readable and output should be included."
 
-*Question 15 (R Visualization):* "Grade this visualization assignment (15 points) for: (1) Functional R code that creates appropriate bar chart with professional formatting (8 pts), (2) Correct identification and calculation of leading cause percentage (4 pts), (3) Thoughtful analysis of bar chart limitations with reasonable alternative suggestion (3 pts). Chart image/output should be included."
+*Question 15 (Geographic Visualization):* "Grade this geographic visualization assignment (15 points) for: (1) Functional R code creating choropleth map with proper data merging, color mapping, and professional formatting (8 pts), (2) Appropriate complementary visualization with clear value-added explanation (4 pts), (3) Thoughtful comparison of geographic vs non-geographic approaches with appropriate use cases (3 pts). Both map and secondary visualization should be included."
 
 ### Expected R Code Solutions:
 
@@ -253,21 +255,32 @@ prop.table(gender_table) * 100
 
 **Question 15:**
 ```r
-# Create professional bar chart
-injury_counts <- c("Motor Vehicle" = 48, "Drowning" = 14, "Fire" = 12,
-                   "Homicide" = 7, "Other" = 19)
+# Geographic visualization with health data
+library(ggplot2)
+library(maps)
+library(mapdata)
 
-# a) Professional bar chart
-barplot(injury_counts,
-        main = "Leading Causes of Childhood Injury Deaths",
-        ylab = "Percentage of Deaths",
-        xlab = "Cause of Injury",
-        col = "lightblue",
-        las = 2)  # Rotate labels if needed
+# a) Choropleth map of diabetes prevalence
+state_health <- data.frame(
+  state = c("oregon", "washington", "california", "nevada", "idaho"),
+  diabetes_rate = c(8.2, 9.1, 9.7, 10.8, 8.9)
+)
 
-# b) Leading cause analysis
-max(injury_counts)  # Motor Vehicle: 48%
+states_map <- map_data("state")
+map_data <- merge(states_map, state_health, by.x = "region", by.y = "state")
 
-# c) Limitation: Bar chart doesn't show relationships between causes
-# Alternative: Pie chart shows proportions better, or stacked bar by age group
+ggplot(map_data, aes(x = long, y = lat, group = group, fill = diabetes_rate)) +
+  geom_polygon(color = "white") +
+  scale_fill_gradient(low = "lightblue", high = "darkred",
+                      name = "Diabetes Rate (%)") +
+  coord_quickmap() +
+  theme_void() +
+  labs(title = "Diabetes Prevalence by State")
+
+# b) Complementary dot plot
+ggplot(state_health, aes(x = diabetes_rate, y = reorder(state, diabetes_rate))) +
+  geom_point(size = 4, color = "darkred") +
+  labs(title = "State Diabetes Rates", x = "Diabetes Rate (%)", y = "State")
+
+# c) Geographic shows spatial patterns; dot plot shows precise ranking
 ```

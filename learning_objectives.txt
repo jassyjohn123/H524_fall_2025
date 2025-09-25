@@ -1,0 +1,1 @@
+Quantitative analysis and interpretation of health data including probability distributions, estimation of effects, and hypothesis-tests such as Chi-square, one-way ANOVA, and simple linear regression.

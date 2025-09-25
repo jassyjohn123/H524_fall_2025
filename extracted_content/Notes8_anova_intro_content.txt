@@ -1,0 +1,91 @@
+Extracted from: /Users/molitorj/ms/OSU/classes/AI_H524/introduction-to-biostatistics-h-524-101-f2024-export/web_resources/Notes8_anova_intro.pptx
+==================================================
+
+
+=== SLIDE 1 ===
+Comparing Two Means and ANOVA
+
+=== SLIDE 2 ===
+Assume Paired Observations
+Ho: δ = 0H1: δ ≠ 0
+
+=== SLIDE 3 ===
+Independent SamplesEqual Variances
+Ho: μ1 = μ2
+	Ha: μ1 ≠ μ2
+
+=== SLIDE 4 ===
+Independent SamplesUnequal Variances
+Ho: μ1 = μ2
+    Ha: μ1 ≠ μ2
+
+=== SLIDE 5 ===
+Different Ways of Comparing Samples
+We want to study the effect of a particular drug on the growth of tumors. 20 patients with tumors are randomly assigned to a treatment group (T ) and a control group (C ). The tumor growth over a month is measured for each patient. The table gives the growth of their tumors (in mm). Assume that the growth in each group is normally distributed.
+
+=== SLIDE 6 ===
+Example (Cont.)
+Control | Treatment
+7 | 4
+12 | 6
+9 | 10
+8 | 8
+7 | 5
+5 | 3
+8 | 12
+9 | 8
+12 | 8
+13 | 10
+
+=== SLIDE 7 ===
+ANALYSIS OF VARIANCE
+The t-test compares the means of two independent (or dependent) samples and provides a test. The p-value is basically an index of how likely (or unlikely) a result is if the null hypothesis is true. 
+A natural extension arises when there are more than two treatments. For example, one may wish to compare a control, a low dose, a medium dose and a high dose of a treatment.
+
+=== SLIDE 8 ===
+ANALYSIS OF VARIANCE
+The way that we approach this problem is to a) obtain appropriate consent from a group of potential subjects; b) randomly allocate them to one of the four treatment categories; c) give them the treatment; d) measure their response.
+
+=== SLIDE 9 ===
+ANALYSIS OF VARIANCE
+Anova Table
+Address question:Ho: μ1=μ2=…=μk
+    Ha: At least one mean in not equal
+
+If you reject the null hypothesis, which means are unequal?
+
+=== SLIDE 10 ===
+ANALYSIS OF VARIANCE
+Note that we are testing a shift in means
+We assume that the variances are equal
+
+=== SLIDE 11 ===
+Anova Statistical Model
+Specify that that data are conditionally independent.
+Data are normally distributed.
+Populations have the same variance.
+
+=== SLIDE 12 ===
+ANOVA – Testing against the Null
+Must compare between-group variation with within group variation
+
+=== SLIDE 13 ===
+ANOVA – F Statistic
+Distribution is derived using mathematical principles – called F distribution.
+Degrees of freedom are df1=k-1, df2=n-k, where n is the total sample size.
+Larger values of test statistic are contradict the null distribution.
+
+=== SLIDE 14 ===
+Air Pollution Example
+
+=== SLIDE 15 ===
+ANOVA Table
+
+=== SLIDE 16 ===
+So, what are the differences
+Multiple testing problem.  The more tests we conduct, the greater the chance of a Type I error.
+To set overall probability of making a type I error at 0.05, we use:
+
+=== SLIDE 17 ===
+Comparing two samples
+Ho: μi=μj

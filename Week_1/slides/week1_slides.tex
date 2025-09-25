@@ -60,7 +60,6 @@
 \begin{itemize}
 \item \textbf{Course:} H524 Introduction to Biostatistics
 \item \textbf{Credits:} 4 credit hours
-\item \textbf{Format:} Online
 \item \textbf{Schedule:}
   \begin{itemize}
   \item Lecture: Monday, Wednesday 12:00-1:20pm
@@ -68,6 +67,45 @@
   \end{itemize}
 \item \textbf{Textbook:} Principles of Biostatistics, 2nd edition (Pagano \& Gauvreau)
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{What is Statistics?}
+\textbf{Statistics} provides methods and tools for collecting, analyzing, interpreting, and drawing inferences from sample data.
+
+\vspace{0.5cm}
+\textbf{Two main branches:}
+\begin{itemize}
+\item \textbf{Descriptive Statistics} -- describe and summarize data
+\item \textbf{Inferential Statistics} -- make inferences about populations from samples
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Biostatistics:} Application of statistics to biomedical and health data
+\begin{itemize}
+\item Broad interpretation of "Bio"
+\item Applied to drug testing, air pollution studies, nutrition, etc.
+\item \textit{Example questions:} Is elevated air pollution associated with decreased lung function? Does a new treatment significantly lower risk compared to standard treatment?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Population vs. Sample}
+\textbf{Population:} The totality of subjects under study
+\begin{itemize}
+\item Often impossible or impractical to study entire population
+\item Contains the true \textit{parameters} we want to learn about
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Sample:} The subset of the population actually studied
+\begin{itemize}
+\item Must be representative of the population
+\item Provides \textit{statistics} that estimate population parameters
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Key Concept:} Statistical inference involves making assertions about population \textit{parameters} based on sample \textit{statistics}, subject to sampling error.
 \end{frame}
 
 \begin{frame}
@@ -88,10 +126,9 @@ By the end of this course, you will be able to:
 \toprule
 \textbf{Component} & \textbf{Weight} \\
 \midrule
-Homework & 30\% \\
-Midterm Exam & 30\% \\
-Final Exam & 30\% \\
-Class Participation & 10\% \\
+Weekly Assignments & 60\% \\
+Group Project & 25\% \\
+Class Participation & 15\% \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -409,6 +446,28 @@ boxplot(health_data$systolic_bp, main = "BP Distribution")
 \end{frame}
 
 \begin{frame}
+\frametitle{Empirical Rule (68-95-99.7 Rule)}
+\textbf{When data are symmetric and unimodal (bell-shaped):}
+
+\vspace{0.3cm}
+\begin{itemize}
+\item Approximately \textbf{68\%} of observations fall within \textbf{1 standard deviation} of the mean
+\item Approximately \textbf{95\%} fall within \textbf{2 standard deviations} of the mean
+\item Approximately \textbf{99.7\%} fall within \textbf{3 standard deviations} of the mean
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Application:} Helps identify unusual observations and understand data distribution patterns
+
+\vspace{0.3cm}
+\textbf{Example:} If blood pressure has mean = 120 mmHg and SD = 15 mmHg:
+\begin{itemize}
+\item 68\% of people have BP between 105-135 mmHg
+\item 95\% have BP between 90-150 mmHg
+\end{itemize}
+\end{frame}
+
+\begin{frame}
 \frametitle{Percentiles and Quartiles}
 \begin{itemize}
 \item \textbf{Percentiles:} Value below which a certain percentage of data falls
@@ -423,7 +482,25 @@ boxplot(health_data$systolic_bp, main = "BP Distribution")
   \item Contains middle 50\% of data
   \item Resistant to outliers
   \end{itemize}
+\item \textbf{Five-Number Summary:} Min, Q1, Median, Q3, Max
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Data Collection and Sampling}
+\textbf{Representative Sample:} Distribution of values in sample mimics population distribution
+
+\vspace{0.3cm}
+\textbf{Common Sampling Methods:}
+\begin{itemize}
+\item \textbf{Simple Random Sample (SRS):} Every group of size n has same chance of selection
+\item \textbf{Stratified Random Sample:} Divide population into strata, then SRS from each stratum
+\item \textbf{Cluster Sampling:} Divide into clusters, select random clusters, study everyone in selected clusters
+\item \textbf{Sample of Convenience:} Easy to obtain but may not be representative
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Key Point:} Non-representative samples can be very misleading due to sampling bias
 \end{frame}
 
 \section{Rates and Standardization}

@@ -1,0 +1,52 @@
+# Course Design Principles for 2025
+
+Weekly content (notes, Labs, and assignments) should:
+
+1) Mirror content from 2024 material (export directory)
+2) Reflect topics listed in the syllabus (Syllabus directory)
+3) Reflect new AI features
+4) Reflect relevant book material (book directory)
+
+The new material for 2025 should be roughly the same level as 2024.
+
+## Assessment Structure (2025)
+- 30% homework (weekly assignments, same weight as 2024)
+- 30% midterm assignment (replaces 2024 midterm exam)
+- 30% group project (replaces 2024 final exam)
+- 10% class participation (same as 2024)
+
+## Design Approach for 2025:
+
+**Foundation = 2024 Content**
+- Use 2024 notes (Notes1-Notes12) as the core structure
+- Keep the same weekly progression and topic flow
+- Maintain the same depth and rigor that worked in 2024
+- Preserve proven pedagogical approaches
+
+**Syllabus Alignment**
+- Each week's content must exactly match syllabus expectations
+- Reading assignments fully integrated
+
+**AI Enhancement (Not Replacement)**
+- Add AI sections to supplement traditional content
+- AI as a learning tool for the same statistical concepts
+- AI demos using the same datasets and examples from 2024
+- AI assignments that parallel traditional homework problems
+
+**Book Integration**
+- Use book_breakup materials to enrich 2024 content
+- Add examples and exercises from relevant chapters
+- Ensure theoretical foundations are solid before AI applications
+
+**Result:** 2025 students get the same statistical education as 2024 students, but with modern AI tools that help them learn and apply those concepts more effectively. The course becomes enhanced, not simplified or different.
+
+## Directory Structure Reference:
+
+- **export directory**: Contains 2024 Canvas course materials (notes, assignments, web resources)
+- **Syllabus directory**: Contains current syllabus and course requirements
+- **book directory**: Contains textbook materials (Pagano & Gauvreau "Principles of Biostatistics")
+  - Student Solutions Manual (readable)
+  - Instructor Solutions Manual (readable)
+  - Main textbook split into parts (large files)
+- **extracted_content directory**: Contains text extracted from 2024 PowerPoint presentations
+- **Python script**: Use `extract_pptx_content.py` to analyze PowerPoint files from 2024 export when direct reading isn't possible

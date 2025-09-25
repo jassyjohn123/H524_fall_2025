@@ -1,0 +1,51 @@
+Extracted from: /Users/molitorj/ms/OSU/classes/AI_H524/introduction-to-biostatistics-h-524-101-f2024-export/web_resources/Notes9_non_parametric.pptx
+==================================================
+
+
+=== SLIDE 1 ===
+Non-Parametric Methods
+
+=== SLIDE 2 ===
+We know that t-tests are robust to departures from Normality.
+But how robust?
+What do we do when normality cannot be assumed, and sample size is too small for CLT to hold?
+Here we employ “nonparametric” methods
+No specific distribution is assumed for the data
+Less power and wider C.I.’s
+Less flexible
+One or two paired samples: Sign test or Wilcoxon signed-rank test
+Two independent samples: Wilcoxon-Mann-Whitney test
+
+=== SLIDE 3 ===
+Sign Test
+
+=== SLIDE 4 ===
+Wilcoxon Signed-Rank Test
+Close to the same power as paired t-test – often used as default.
+Replace differences with ranks
+Get differences for all pairs, D=X-Y
+Ho: Distribution of D has median of 0
+If no effect: observed d’s (observed differences) should be equally spread above and below 0
+If y-group tends to give higher responses, majority of d’s should be < 0
+If x-group tends to give higher responses, majority of d’s should be > 0
+
+=== SLIDE 5 ===
+Wilcoxon Signed-Rank Test (cont.)
+Calculate the magnitude of the differences |Di| and the ranks of these. The smallest value gets a rank of 1; the next smallest 2, and so on up to the max, which gets a rank of n.
+ Get the “signed-ranks” by putting the signs of the Di’s (+ or -) onto the ranked list of the |Di|’s.
+Test statistics: T is the sum of the ranks that have positive signs.
+
+=== SLIDE 6 ===
+Wilcoxon Signed-Rank Test (cont.)
+
+=== SLIDE 7 ===
+Independent Samples – Wilcoxon-Mann-Whitney Test
+
+=== SLIDE 8 ===
+Wilcoxon-Mann-Whitney Test (cont.)
+
+=== SLIDE 9 ===
+Some Non-parametric Tests in R
+For two samples, use “wilcox.test”
+For more than two, use Kruskal Wallis Test (“kruskal.test”) or for Randomized Block Design, Friedman’s Test (“friedman.test”)
+See: https://www.statmethods.net/stats/nonparametric.html

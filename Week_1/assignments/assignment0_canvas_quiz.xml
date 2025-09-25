@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questestinterop xmlns="http://www.imsglobal.org/xsd/ims_qtiasiv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/ims_qtiasiv1p2 http://www.imsglobal.org/xsd/ims_qtiasiv1p2p1.xsd">
+  <assessment ident="assignment0_homework" title="H524 Assignment 0: Introduction to R and Data Basics">
+    <qtimetadata>
+      <qtimetadatafield>
+        <fieldlabel>cc_maxattempts</fieldlabel>
+        <fieldentry>1</fieldentry>
+      </qtimetadatafield>
+      <qtimetadatafield>
+        <fieldlabel>qmd_timelimit</fieldlabel>
+        <fieldentry>90</fieldentry>
+      </qtimetadatafield>
+    </qtimetadata>
+    <section ident="root_section">
+
+      <!-- Question 1 -->
+      <item ident="q1" title="Question 1">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">What type of data is "blood type" (A, B, AB, O)?</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/html">Continuous numerical</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/html">Discrete numerical</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/html">Ordinal categorical</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/html">Nominal categorical</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">d</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 2 -->
+      <item ident="q2" title="Question 2">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">Which of the following is an example of a population?</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/html">A sample of 100 patients from a hospital</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/html">All patients with diabetes in Oregon</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/html">50 randomly selected medical records</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/html">A clinical trial with 200 participants</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 3 -->
+      <item ident="q3" title="Question 3">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">In R, which function is used to read a CSV file?</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/html">load.csv()</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/html">read.csv()</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/html">import.csv()</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/html">get.csv()</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 4 -->
+      <item ident="q4" title="Question 4">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">What does the summary() function provide in R?</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/html">Only the mean of variables</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/html">Basic descriptive statistics for each variable</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/html">Only the number of observations</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/html">A plot of the data</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 5 -->
+      <item ident="q5" title="Question 5">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">Which is the correct way to access the first column of a data frame called 'data'?</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/html">data[1]</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/html">data$1</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/html">data[,1]</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/html">Both a and c are correct</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">d</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 6 -->
+      <item ident="q6" title="Question 6">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">What type of variable is "number of children in a family"?</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/html">Continuous numerical</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/html">Discrete numerical</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/html">Ordinal categorical</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/html">Nominal categorical</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 7 - Short Answer -->
+      <item ident="q7" title="Question 7">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>10</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">Explain the difference between a population and a sample in your own words. Give a specific example from public health research.</mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 8 - Short Answer -->
+      <item ident="q8" title="Question 8">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>10</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">List and briefly describe the four main types of data (variables) we discussed in class. Give an example of each type from a healthcare setting.</mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 9 - R Exercise -->
+      <item ident="q9" title="Question 9">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>20</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+              <p><strong>R Exercise (20 points total)</strong></p>
+              <p>Use R to complete the following tasks. Show both your R code and the output for each part.</p>
+              <p><strong>Part a)</strong> (5 points) Create a vector called 'ages' containing the following values: 25, 34, 45, 28, 39, 52, 31</p>
+              <p><strong>Part b)</strong> (5 points) Calculate the mean and standard deviation of the 'ages' vector.</p>
+              <p><strong>Part c)</strong> (5 points) Create a simple data frame called 'patients' with two columns:<br/>
+              - id: numbers 1 through 5<br/>
+              - treatment: the values "A", "B", "A", "C", "B"</p>
+              <p><strong>Part d)</strong> (5 points) Display the structure of your 'patients' data frame using the appropriate R function.</p>
+              <p><strong>AI Documentation:</strong> If you used AI tools for any part of this assignment, list which AI tool(s) you used and briefly describe how you used AI.</p>
+            ]]></mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+    </section>
+  </assessment>
+</questestinterop>

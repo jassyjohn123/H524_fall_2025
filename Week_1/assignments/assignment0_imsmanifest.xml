@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="assignment0_homework" version="1.1"
+         xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
+         xmlns:imsmd="http://www.imsglobal.org/xsd/imsmd_v1p2"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 imscp_v1p1.xsd http://www.imsglobal.org/xsd/imsmd_v1p2 imsmd_v1p2p2.xsd">
+  <metadata>
+    <schema>IMS Content</schema>
+    <schemaversion>1.1</schemaversion>
+    <imsmd:lom>
+      <imsmd:general>
+        <imsmd:identifier>assignment0_homework</imsmd:identifier>
+        <imsmd:title>
+          <imsmd:langstring xml:lang="en">H524 Assignment 0: Introduction to R and Data Basics</imsmd:langstring>
+        </imsmd:title>
+        <imsmd:description>
+          <imsmd:langstring xml:lang="en">Assignment 0 covering Week 0 Wednesday material: introduction to R, basic data concepts, and fundamental statistical concepts.</imsmd:langstring>
+        </imsmd:description>
+      </imsmd:general>
+    </imsmd:lom>
+  </metadata>
+  <organizations default="toc">
+    <organization identifier="toc">
+      <title>H524 Assignment 0</title>
+      <item identifier="assessment" identifierref="quiz">
+        <title>Assignment 0: Introduction to R and Data Basics</title>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="quiz" type="imsqti_xmlv1p2" href="assignment0_canvas_quiz.xml">
+      <file href="assignment0_canvas_quiz.xml"/>
+    </resource>
+  </resources>
+</manifest>

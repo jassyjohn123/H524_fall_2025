@@ -1,0 +1,348 @@
+Extracted from: /Users/molitorj/ms/OSU/classes/AI_H524/introduction-to-biostatistics-h-524-101-f2024-export/web_resources/Uploaded Media/chapter7_character_manipulations.pptx
+==================================================
+
+
+=== SLIDE 1 ===
+Chapter 7
+Character Manipulations
+
+=== SLIDE 2 ===
+Basic Character FunctionsCharacter Length
+Character values can be stored in a vector, a matrix, a list, or in a column of a data frame
+length: obtain the “length” of an object
+nchar: obtain the number of characters in each string
+> char1 <- c("This", "is", "Chapter 9")
+> length(char1)
+
+[1] 3
+
+> nchar(char1)
+
+[1] 4 2 9
+
+=== SLIDE 3 ===
+Character Length
+A character vector of length zero
+> (c1 <- "")
+
+[1] ""
+
+> length(c1)
+
+[1] 1
+
+> nchar(c1)
+
+[1] 0
+
+=== SLIDE 4 ===
+Character Length
+A character string of length zero.
+> (c2 <- character(0))
+
+character(0)
+
+> length(c2)
+
+[1] 0
+
+> nchar(c2)
+
+integer(0)
+
+=== SLIDE 5 ===
+Character Translation and Casefolding
+chartr: translates each character in x that is specified in old to the corresponding character specified in new
+chartr(old, new, x)
+> x <- c("How are you doing")
+> chartr("ado", "uhi", x)
+
+[1] "Hiw ure yiu hiing"
+
+=== SLIDE 6 ===
+Character Translation and Casefolding
+toupper: changes character vectors from lower to upper case
+> toupper(c("AB", "Ab", "ab"))
+
+[1] "AB" "AB" "AB„
+
+> tolower(c("AB", "Ab", "ab"))
+
+[1] "ab" "ab" "ab"
+tolower: changes character vectors from upper to lower case
+
+=== SLIDE 7 ===
+Concatenate Strings: the paste Function
+paste: takes any number of arguments through ... and concatenates them together
+> paste("The p value is: ", 0.001, sep = "")
+
+[1] "The p value is: 0.001"
+By default, each argument that is being concatenated is separated by a single space
+> paste0("The p value is: ", 0.001)
+
+[1] "The p value is: 0.001"
+
+=== SLIDE 8 ===
+Concatenate Strings: the paste Function
+When arguments with length > 1 are passed to the paste function, the operation will be vectorized.
+> paste(c("X", "Y"), 1:5, sep = ":")
+
+[1] "X:1" "Y:2" "X:3" "Y:4" "X:5"
+
+=== SLIDE 9 ===
+Concatenate Strings: the paste Function
+collapse: concatenate the arguments into one single string
+> paste(letters[1:4], collapse = " + ")
+
+[1] "a + b + c + d"
+
+> paste(c("X", "Y"), 1:5, sep = "", collapse = " + ")
+
+[1] "X1 + Y2 + X3 + Y4 + X5"
+
+=== SLIDE 10 ===
+Getting Substrings of a Character Vector
+substr, substring: extract or replace substrings in a character vector
+Both functions have 3 arguments:
+a character vector
+a vector of starting indices
+a vector of ending indices
+> greetings = c("hello", "hola", "bonjour", "konnichiwa", "ni-hao",
++ "ciao")
+> substr(greetings, 3, 5)
+[1] "llo" "la" "njo" "nni" "-ha" "ao"
+When strings have fewer characters than are specified in the ending index, substr returns as many character as it locates
+
+=== SLIDE 11 ===
+Getting Substrings of a Character Vector
+The starting/ending indices can have lengths greater than one
+> greetings
+
+[1] "hello"      "hola"       "bonjour"    "konnichiwa"
+[5] "ni-hao"     "ciao"
+
+> substr(greetings, 1:3, 3:5)
+[1] "hel" "ola" "njo" "kon" "i-h" "ao"
+In examples above, instead of using the substr function, you can use the substring function to obtain the same result
+
+=== SLIDE 12 ===
+Getting Substrings of a Character Vector
+The difference between substr and substring functions:
+substr: the length of the returned value is always the length of its first argument
+substring: the length of the returned value is longest of its three arguments
+> substr(c("abcde", "bcdef"), c(1, 2), 2:4)
+
+[1] "ab" "cd"
+Target | Starting Index | Ending Index | Result
+abcde | 1 | 2 | ab
+bcdef | 2 | 3 | cd
+- | - | 4 | -
+Stop!
+
+=== SLIDE 13 ===
+Getting Substrings of a Character Vector
+The difference between substr and substring functions:
+substr: the length of the returned value is always the length of its first argument
+substring: the length of the returned value is longest of its three arguments
+> substring(c("abcde", "bcdef"), c(1, 2), 2:4)
+
+[1] "ab" "cd" "abcd"
+Target | Starting Index | Ending Index | Result
+abcde | 1 | 2 | ab
+bcdef | 2 | 3 | cd
+abcde | 1 | 4 | abcd
+Stop!
+
+=== SLIDE 14 ===
+Getting Substrings of a Character Vector
+Find the location of i in konnichiwa:
+> greetJapan <- "konnichiwa"
+> (greetJapanSplit <- substring(greetJapan, 1:nchar(greetJapan),
++ 1:nchar(greetJapan)))
+
+[1] "k" "o" "n" "n" "i" "c" "h" "i" "w" "a"
+
+> (loc <- which(greetJapanSplit == "i"))
+
+[1] 5 8
+
+=== SLIDE 15 ===
+Using Regular Expressions in RThe Rules of Regular Expressions
+regular expression: a method of describing a string of text which can be used to extract, match, or search parts of strings
+Regular expressions are used in many R functions, such as strsplit, grep, sub, gsub, regexpr, and gregexpr
+2 types of regular expressions: 
+extended regular expressions, the default
+Perl-like regular expressions (perl = TRUE)
+
+=== SLIDE 16 ===
+The Rules of Regular Expressions
+Regular expressions consist of the following components:
+
+literal characters: they are matched by a single character
+character class: they are matched by a number of characters
+anchors and quantifiers: they are used to operate on literal characters or character classes
+
+=== SLIDE 17 ===
+The Rules of Regular Expressions
+Literal characters matching:
+Most characters (all letters and digits) are regular expressions that match themselves
+The period (.) matches any single character
+Many punctuation marks are regular expression anchors or quantifiers, such as . ^ $ + ? * ( ) [ ] { } | \. These symbols are also called metacharacter 
+Any metacharacter must always be preceded by a backslash to retain their literal meaning in regular expressions
+When a regular expression is used in R , two backslash characters are needed to precede the modifiers in order to retain their normal meaning
+
+=== SLIDE 18 ===
+The Rules of Regular Expressions
+A character class is a list of characters enclosed between []
+A character class matches any single character in that list. For example, [ad1] matches letters a, or d, or digit 1
+If the first character of the list is the caret (^), it matches any character not in the list. For example, [^abc] matches anything except the characters a, b, or c
+A range of characters may be specified by giving the first and last characters, separated by a hyphen. For example, [a-d]
+A range of digits may be specified by giving the first and last digits, separated by a hyphen. For example, [2-5] 
+Special characters (metacharacters) do not need a backslash when used in a character class
+
+=== SLIDE 19 ===
+The Rules of Regular Expressions
+An anchor does not match any specific character, but only matches a position within a text string, such as word boundary, a place between characters
+The caret (^) and the dollar sign ($) match the empty string at the beginning and end of a line
+The symbols \< and \> match the empty string at the beginning and end of a word
+
+=== SLIDE 20 ===
+The Rules of Regular Expressions
+A regular expression may be followed by one of several repetition quantifiers
+?:  matches 0 or 1 occurrences of preceding item
+*: matches 0 or more occurrences of preceding item
++: matches 1 or more occurrences of preceding item
+{n}: matches exactly n occurrences of preceding item
+{n,}: matches at least n occurrences of preceding item
+{n,m}: matches between n and m occurrences of preceding item
+
+=== SLIDE 21 ===
+The Rules of Regular Expressions
+Two regular expressions may be joined by the infix operator |. This is referred to as alternation
+The resulting regular expression from the alternation matches any string matching either sub-expression. For example, 123|789 matches either the string 123 or 789
+Alternation does not work inside character classes, where | has its literal meaning
+
+=== SLIDE 22 ===
+The Rules of Regular Expressions
+Here are some examples of using regular expressions:
+a string with one letter, one digit, and followed by 3 or more letters: [a-zA-Z][0-9][a-zA-Z]{3,}
+three consecutive occurrences of the string abc or def and repeated twice: (abc|def){2}
+a pdf file with all letters as its file name: 
+	^[a-zA-Z]+\\.pdf$
+
+=== SLIDE 23 ===
+Splitting the Elements of a Character Vector
+strsplit: split the elements of a character vector into substrings according to the matches to substring within them
+x: A character vector, each element of which is to be split
+split: A character vector containing regular expression (s) (unless fixed = TRUE) to use for splitting
+fixed: A logical value. If it is TRUE and the function will match the split argument exactly
+The result returned from the strsplit function is a list with the same length as argument x. The i_th element of the result contains the vector of splits of x[i]
+
+=== SLIDE 24 ===
+Splitting the Elements of a Character Vector
+> strsplit("Programming in  R", " ")
+[[1]]
+[1] "Programming" "in"          ""            "R"
+> strsplit("Programming in  R", " +")
+[[1]]
+[1] "Programming" "in"          "R"
+
+=== SLIDE 25 ===
+Splitting the Elements of a Character Vector
+> phone <- c("323.345.1800", "714.111.2876")
+> strsplit(phone, ".")
+[[1]]
+ [1] "" "" "" "" "" "" "" "" "" "" "" ""
+
+[[2]]
+ [1] "" "" "" "" "" "" "" "" "" "" "" ""
+> strsplit(phone, "\\.")
+[[1]]
+[1] "323"  "345"  "1800"
+
+[[2]]
+[1] "714"  "111"  "2876"
+> strsplit(phone, ".", fixed = TRUE)
+[[1]]
+[1] "323"  "345"  "1800"
+
+[[2]]
+[1] "714"  "111"  "2876"
+
+=== SLIDE 26 ===
+Splitting the Elements of a Character Vector
+> sapply(strsplit(phone, "\\."), function(x) x[1])
+[1] "323" "714"
+To obtain the area code, …
+> strsplit("abc def", "")
+[[1]]
+[1] "a" "b" "c" " " "d" "e" "f"
+If the split argument is an empty string, …
+
+=== SLIDE 27 ===
+Search a Pattern: grep and grepl
+grep, grepl: search for matches of a given regular expression within a character vector
+Here are the common arguments of these two functions:
+pattern: a character string containing a regular expression to be matched in the given character
+x: A character vector where matches are sought
+ignore.case: A logical value. The default value is FALSE
+fixed: A logical value. The default value is FALSE. If it is set to TRUE, the pattern is a string to be matched “as is”
+
+=== SLIDE 28 ===
+Search a Pattern: grep and grepl
+> grep("\\.tex$", dir())
+[1] 13 16
+
+> grep("\\.tex$", dir(), value = T)
+[1] "chapter9.tex" "preamble.tex“
+
+> grepl("\\.tex$", dir())
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[10] FALSE FALSE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE
+Locates files in the current working directory that end with .tex:
+
+=== SLIDE 29 ===
+Searching and Replacing Patterns: regexpr and sub
+regexpr: give more detailed information about a searched regular expression
+It has similar arguments to grep function
+regexpr: returns the starting position of the first match and the length of the matched text
+
+=== SLIDE 30 ===
+Searching and Replacing Patterns: regexpr and sub
+> id <- c("1M931LA", "0F1472SB", "1M238LA", "1M32La")
+FIELD | CONTENTS
+1 | CONSENT: 1 or 0
+2 | GENDER: M or F
+Varies: 2 or more | ID
+Last | COUNTY: LA, SB or OC (Case varies)
+You can get the CONSENT field by using the regexpr function
+> (consentLoc <- regexpr("1|0", id))
+[1] 1 1 1 1
+attr(,"match.length")
+[1] 1 1 1 1
+> substr(id, consentLoc, consentLoc)
+[1] "1" "0" "1" "1"
+
+=== SLIDE 31 ===
+Searching and Replacing Patterns: regexpr and sub
+FIELD | CONTENTS
+1 | CONSENT: 1 or 0
+2 | GENDER: M or F
+Varies: 2 or more | ID
+Last | COUNTY: LA, SB or OC (Case varies)
+> (idLoc <- regexpr("[0-9][0-9]+", id))
+[1] 3 3 3 3
+attr(,"match.length")
+[1] 3 4 3 2
+> (newid <- substr(id, idLoc, idLoc + attributes(idLoc)$match.length - 1))
+[1] "931"  "1472" "238"  "32"
+
+=== SLIDE 32 ===
+Searching and Replacing Patterns: regexpr and sub
+sub: performs replacement of the first matched regular expression
+pattern: A character string containing a regular expression to be matched in the given character 
+replacement: A replacement for matched pattern
+x: A character vector where matches are sought
+Suppose that you would like to eliminate the first character (CONSENT) from the id vector
+> sub("0|1", "", id)
+[1] "M931LA"  "F1472SB" "M238LA"  "M32La"

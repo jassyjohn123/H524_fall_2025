@@ -1,0 +1,87 @@
+Extracted from: /Users/molitorj/ms/OSU/classes/AI_H524/introduction-to-biostatistics-h-524-101-f2024-export/web_resources/Uploaded Media/Notes10_tables_short.pptx
+==================================================
+
+
+=== SLIDE 1 ===
+2x2 Tables
+
+=== SLIDE 2 ===
+2x2 Tables
+
+=== SLIDE 3 ===
+Chi-squared Test
+The χ2 test for independence evaluates whether or not there is an association between two categorical variables 
+For example smoking status (nonsmoker, smoker, heavy smoker) and lung disease status (no disease, clinical signs of disease, disease) 
+The Chi-Squared test for independence is a formal statistical procedure for determining whether or not an association suggested by an observed pattern in the data can be attributable to sampling variation alone.
+
+=== SLIDE 4 ===
+Properties of χ2 Distributions
+Unlike t and Z distributions, but like F distributions, χ2 density curves are defined only on the positive real line 
+Chi-squared distributions are not symmetric, they are right skewed.
+Like all density curves, chi-squared curves never cross the x-axis and the total area under the curve is 1 
+There are many chi-squared distributions. Each one is indexed by a single positive integer called degrees of freedom (df). Denoted either by df or m.
+
+=== SLIDE 5 ===
+Chi-squared Test for Independence
+We denote the observed count in cell ij by oij 
+
+
+
+
+
+o11 is the number out of the n sampled individuals that were nonsmokers and did not have lung disease.
+The others cells are defined similarly.
+
+=== SLIDE 6 ===
+Chi-squared Test for Independence
+This is an example of a 3 × 3 contingency table 
+In general, for categorical variables A and B where A has r categories and B has c categories, the sample data can be depicted in an r × c contingency table of cross-classified counts 
+An r × c contingency table has r · c cells 
+r stands for row and c stands for column
+
+=== SLIDE 7 ===
+χ2 Test for r × c Tables
+The simplest contingency table is the 2 × 2 table and so we focus on it (ideas and methods apply to general tables) 
+Want to determine whether or not an association exists between disease and exposure.
+
+=== SLIDE 8 ===
+χ2 Test for r × c Tables
+To test:
+Ho : disease and exposure are not associatedHa : disease and exposure are associated 
+We compare oij to an expected number that should be seen if in fact the two categorical variables are not associated. 
+Test statistic
+
+=== SLIDE 9 ===
+Reference Distribution
+We need the expected counts and the reference distribution. 
+The reference distribution is the distribution of chi-square statistic assuming that no association exists 
+If in fact the two categorical variables are not associated, then χ2 comes from a distribution that for large sample size can be well-approximated by the χ2(r-1)(c-1) distribution 
+So for 2 × 2 tables, the reference distribution is the χ2(2-1)(2-1)= χ21
+
+=== SLIDE 10 ===
+Expected Counts Under Ho
+
+=== SLIDE 11 ===
+Expected Counts Under Ho
+So if Ho were in fact true, then the risk of disease (regardless of exposure status) should be
+	Pr(disease) = 244/307 = 0.7948     and the risk of non-disease should be	Pr(not diseased) = 63/307 = 0.2052 
+So of the 147 exposed individuals we would expect 79.48% of them to be diseased, if Ho were true. 
+This expected count is 
+e11 = 147 × 0.7948 = 116.83
+
+=== SLIDE 12 ===
+Expected Counts Under Ho
+Therefore, the remaining 147 − 116.83 are expected to be non-diseased. So e21 = 30.17 
+We could have alternatively gotten e21 by arguing that among the 147 exposed individuals, we expect 147 × 0.2052 or 30.17 to not be diseased.
+Similarly, of the 160 unexposed individuals, we expect 160 × 0.7948 of them to be diseased and 160 × 0.2052 not to be diseased. Thus, e12 = 127.17 and e22 = 32.83
+
+=== SLIDE 13 ===
+Expected Counts Under Ho
+
+=== SLIDE 14 ===
+Shortcuts for 2 × 2 Tables
+Computing formula for the chi-squared statistic
+
+
+
+For a 2 × 2 table only:p-value < 0.05 if X2 > 3.84.So statistically significant relationship if chi-square statistics is  > 3.84

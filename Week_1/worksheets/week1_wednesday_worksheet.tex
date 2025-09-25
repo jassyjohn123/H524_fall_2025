@@ -1,0 +1,415 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{longtable}
+
+% Define OSU orange and AI blue colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+% Configure R code listings
+\lstset{
+    language=R,
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    numbers=left,
+    numberstyle=\tiny,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red}
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large In-Class Worksheet}}\\
+\textcolor{white}{\textbf{\large Rates, Standardization, and Advanced R Programming}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Name:} \rule{8cm}{0.4pt} \hfill \textbf{Date:} \rule{4cm}{0.4pt}\\[0.5ex]
+\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Rates and Standardization, Advanced R Programming, AI Integration
+
+\vspace{8pt}
+
+\section{Part 1: Review and Warm-up}
+
+\subsection{Exercise 1.1: Quick Visualization Review}
+Using the guinea pig data, work with a partner to create one boxplot comparing all three groups:
+
+\begin{lstlisting}
+# Recreate the data
+control <- c(312, 345, 287, 398, 421, 356, 389, 334, 367, 401)
+low_dose <- c(289, 267, 301, 234, 198, 245, 278, 213, 256, 298)
+high_dose <- c(156, 189, 134, 167, 123, 145, 178, 201, 143, 134)
+
+# Your code here:
+
+\end{lstlisting}
+
+\textbf{Quick Questions:}
+\begin{itemize}
+\item Which group has the most consistent survival times?
+\item How do the medians compare across groups?
+\end{itemize}
+
+\section{Part 2: Introduction to Rates}
+
+\subsection{Exercise 2.1: Understanding Rates in Public Health}
+
+\textbf{Scenario:} You're analyzing COVID-19 data from two counties:
+
+\textbf{County A:} 150 cases out of 10,000 residents\\
+\textbf{County B:} 300 cases out of 25,000 residents
+
+Calculate and compare:
+
+\begin{lstlisting}
+# County A
+cases_A <- 150
+population_A <- 10000
+rate_A <- (cases_A / population_A) * 1000  # Rate per 1,000
+
+# County B
+cases_B <- 300
+population_B <- 25000
+rate_B <- (cases_B / population_B) * 1000  # Rate per 1,000
+
+print(paste("County A rate per 1,000:", rate_A))
+print(paste("County B rate per 1,000:", rate_B))
+\end{lstlisting}
+
+\textbf{Fill in your results:}
+\begin{itemize}
+\item County A raw cases: \rule{2cm}{0.4pt} out of \rule{2cm}{0.4pt}
+\item County B raw cases: \rule{2cm}{0.4pt} out of \rule{2cm}{0.4pt}
+\item County A rate per 1,000: \rule{2cm}{0.4pt}
+\item County B rate per 1,000: \rule{2cm}{0.4pt}
+\item Which county has the higher infection rate? \rule{3cm}{0.4pt}
+\end{itemize}
+
+\subsection{Exercise 2.2: Age-Standardized Rates}
+
+\textbf{Extended Scenario:} Now consider age breakdown:
+
+\textbf{County A:}
+\begin{itemize}
+\item Ages 0-50: 80 cases out of 7,000 residents
+\item Ages 50+: 70 cases out of 3,000 residents
+\end{itemize}
+
+\textbf{County B:}
+\begin{itemize}
+\item Ages 0-50: 120 cases out of 15,000 residents
+\item Ages 50+: 180 cases out of 10,000 residents
+\end{itemize}
+
+\begin{lstlisting}
+# County A age-specific rates
+county_A_young <- (80/7000) * 1000
+county_A_old <- (70/3000) * 1000
+
+# County B age-specific rates
+county_B_young <- (120/15000) * 1000
+county_B_old <- (180/10000) * 1000
+
+print("Age-specific rates per 1,000:")
+print(paste("County A (0-50):", round(county_A_young, 2)))
+print(paste("County A (50+):", round(county_A_old, 2)))
+print(paste("County B (0-50):", round(county_B_young, 2)))
+print(paste("County B (50+):", round(county_B_old, 2)))
+\end{lstlisting}
+
+\textbf{Analysis Questions:}
+\begin{enumerate}
+\item Which age group has higher infection rates in both counties?
+\item How does age structure affect the overall county comparison?
+\item Why might age-standardization be important for fair comparisons?
+\end{enumerate}
+
+\section{Part 3: AI-Enhanced Rate Calculations}
+
+\subsection{Exercise 3.1: Automating Rate Calculations with AI}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\textbf{\textcolor{aiblue}{AI Challenge:}} Use AI to help create a function that calculates and compares rates between populations.
+
+\textbf{Your AI Prompt:} ``Help me create an R function that calculates rates per specified population size (like per 1,000 or per 100,000) and compares multiple groups. Include error checking and clear output formatting.''
+\end{tcolorbox}
+
+\textbf{AI Response:}
+\begin{lstlisting}
+# Paste AI-generated function here:
+
+
+
+
+\end{lstlisting}
+
+\textbf{Test the Function:}
+\begin{lstlisting}
+# Test with our county data
+# Your test code here:
+
+
+\end{lstlisting}
+
+\textbf{Verification Steps:}
+\begin{itemize}
+\item[$\square$] Does the function calculate rates correctly?
+\item[$\square$] Does it handle different population bases (per 1,000, per 100,000)?
+\item[$\square$] Are there appropriate error checks?
+\item[$\square$] Is the output clear and interpretable?
+\end{itemize}
+
+\subsection{Exercise 3.2: Advanced AI Prompt for Epidemiological Analysis}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\textbf{\textcolor{aiblue}{Advanced AI Prompt:}} ``I need to perform a comprehensive epidemiological analysis comparing disease rates across different populations with age standardization. Create R code that handles multiple age groups, calculates both crude and age-adjusted rates, and provides appropriate visualizations.''
+\end{tcolorbox}
+
+\textbf{Document AI Response:}
+\begin{enumerate}
+\item \textbf{Key functions suggested:}
+
+\vspace{2cm}
+
+\item \textbf{New concepts learned:}
+
+\vspace{2cm}
+
+\item \textbf{Code that needed modification:}
+
+\vspace{2cm}
+
+\end{enumerate}
+
+\section{Part 4: Advanced R Programming}
+
+\subsection{Exercise 4.1: Creating Functions}
+
+Based on our rate calculations, create a reusable function:
+
+\begin{lstlisting}
+# Template function - complete the missing parts
+calculate_rate <- function(cases, population, per = 1000) {
+  # Your code here
+  # 1. Calculate the rate
+  # 2. Add error checking for negative values
+  # 3. Return formatted result
+
+}
+
+# Test your function
+calculate_rate(150, 10000, 1000)
+calculate_rate(300, 25000, 1000)
+\end{lstlisting}
+
+\subsection{Exercise 4.2: Working with Real Data Structures}
+
+\begin{lstlisting}
+# Create a more complex dataset
+health_data <- data.frame(
+  county = c("A", "A", "B", "B"),
+  age_group = c("0-50", "50+", "0-50", "50+"),
+  cases = c(80, 70, 120, 180),
+  population = c(7000, 3000, 15000, 10000)
+)
+
+# Calculate rates for each row
+health_data$rate_per_1000 <- (health_data$cases / health_data$population) * 1000
+
+# Group calculations
+library(dplyr)  # Load dplyr for data manipulation
+
+# Calculate summary statistics by county
+county_summary <- health_data %>%
+  group_by(county) %>%
+  summarise(
+    total_cases = sum(cases),
+    total_population = sum(population),
+    crude_rate = (total_cases / total_population) * 1000
+  )
+
+print(county_summary)
+\end{lstlisting}
+
+\textbf{Interpretation Questions:}
+\begin{enumerate}
+\item What is the crude rate for each county?
+\item How do these compare to your earlier calculations?
+\item What additional information would help interpret these rates?
+\end{enumerate}
+
+\section{Part 5: Statistical Thinking and Study Design}
+
+\subsection{Exercise 5.1: Connecting Rates to Biostatistics}
+
+\textbf{Case Study Discussion:} A pharmaceutical company reports their new drug reduces heart attack rates from 4 per 1,000 patients to 2 per 1,000 patients.
+
+\textbf{Questions for Discussion:}
+\begin{enumerate}
+\item What does this represent in terms of:
+\begin{itemize}
+\item Absolute risk reduction?
+\item Relative risk reduction?
+\end{itemize}
+\end{enumerate}
+
+\begin{lstlisting}
+# Calculate the reductions
+baseline_rate <- 4/1000
+treatment_rate <- 2/1000
+
+absolute_reduction <- baseline_rate - treatment_rate
+relative_reduction <- (baseline_rate - treatment_rate) / baseline_rate
+
+print(paste("Absolute risk reduction:", absolute_reduction))
+print(paste("Relative risk reduction:", relative_reduction))
+\end{lstlisting}
+
+\begin{enumerate}
+\setcounter{enumi}{1}
+\item If you had 10,000 patients, how many heart attacks would be prevented?
+\item What additional information would you want before recommending this drug?
+\end{enumerate}
+
+\subsection{Exercise 5.2: Bias and Confounding Preview}
+
+Looking back at our county COVID comparison:
+\begin{enumerate}
+\item What factors besides county might affect infection rates?
+\item How might differences in testing rates affect our rate calculations?
+\item What is the population we can generalize these results to?
+\end{enumerate}
+
+\section{Part 6: AI Integration and Documentation Practice}
+
+\subsection{Exercise 6.1: Comprehensive AI Workflow}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\textbf{\textcolor{aiblue}{Task:}} Use AI to help analyze a complete epidemiological dataset and document your entire workflow.
+
+\textbf{Your Comprehensive AI Prompt:}
+``I have epidemiological data with counties, age groups, cases, and populations. Help me create a complete analysis workflow that includes: 1) data validation, 2) crude rate calculations, 3) age-standardized rates, 4) appropriate visualizations, 5) statistical interpretation, and 6) recommendations for further analysis.''
+\end{tcolorbox}
+
+\textbf{Document Your AI Interaction:}
+
+\begin{enumerate}
+\item \textbf{Initial AI suggestions:}
+
+\vspace{2cm}
+
+\item \textbf{Code you tested:}
+\begin{lstlisting}
+# Paste and test AI code here:
+
+
+\end{lstlisting}
+
+\item \textbf{Modifications needed:}
+
+\vspace{2cm}
+
+\item \textbf{Final verified analysis:}
+
+\vspace{2cm}
+
+\item \textbf{What you learned about AI capabilities and limitations:}
+
+\vspace{2cm}
+
+\end{enumerate}
+
+\section{Part 7: Preparation for Future Topics}
+
+\subsection{Exercise 7.1: Probability Preview}
+
+When we cover probability theory, Based on today's work:
+
+\begin{enumerate}
+\item If County A's infection rate is 15 per 1,000, what's the probability that a randomly selected resident is infected?
+
+\item How does this connect to what we've learned about populations and samples?
+\end{enumerate}
+
+\textbf{Bridge to Probability:}
+\begin{itemize}
+\item Rates can be thought of as probabilities
+\item Population parameters vs. sample statistics
+\item Uncertainty in our estimates
+\end{itemize}
+
+\section{Wrap-up Discussion}
+
+\textbf{Key Concepts from Today:}
+\begin{itemize}
+\item Rates allow fair comparison between different-sized populations
+\item Age standardization helps control for demographic differences
+\item Functions in R make calculations reusable and less error-prone
+\item AI can accelerate complex analyses but requires careful verification
+\end{itemize}
+
+\textbf{Next Class Preview:} We'll begin with probability concepts - the foundation for all statistical inference.
+
+\section{AI Usage Documentation}
+\begin{tcolorbox}[colback=gray!10,colframe=gray,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\textbf{Complete Documentation Required:}
+
+\textbf{Tools Used:} \rule{8cm}{0.4pt}
+
+\textbf{Key Prompts:}
+\begin{enumerate}
+\item \rule{12cm}{0.4pt}
+\item \rule{12cm}{0.4pt}
+\item \rule{12cm}{0.4pt}
+\end{enumerate}
+
+\textbf{AI-Generated Code Verification:}
+\begin{itemize}
+\item Code tested and working: $\square$ Yes $\square$ No
+\item Modifications made: \rule{8cm}{0.4pt}
+\item Errors found: \rule{8cm}{0.4pt}
+\end{itemize}
+
+\textbf{Learning Assessment:}
+\begin{itemize}
+\item Most useful AI contribution: \rule{8cm}{0.4pt}
+\item Biggest AI limitation encountered: \rule{8cm}{0.4pt}
+\item Confidence in AI-assisted results (1-10): \rule{2cm}{0.4pt}
+\item Independent verification methods used: \rule{8cm}{0.4pt}
+\end{itemize}
+
+\textbf{Next Steps for AI Integration:}
+
+\rule{12cm}{0.4pt}
+\end{tcolorbox}
+
+\end{document}

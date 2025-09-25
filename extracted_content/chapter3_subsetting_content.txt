@@ -1,0 +1,516 @@
+Extracted from: /Users/molitorj/ms/OSU/classes/AI_H524/introduction-to-biostatistics-h-524-101-f2024-export/web_resources/chapter3_subsetting.pptx
+==================================================
+
+
+=== SLIDE 1 ===
+Chapter 3
+Subsetting Objects
+
+=== SLIDE 2 ===
+Subsetting Vectors
+Subsetting vectors, matrices, or arrays can be referred to as indexing
+5 types of index vectors
+subsetting vector x can be done by x[index.vector]
+
+=== SLIDE 3 ===
+Type 1: A logical vector
+Let X = the “target” vector, L = logical index vector
+length (X) = length(L)
+The resulting vector = values from X corresponding to TRUE
+> a <- c(1, 3, 5, NA, 7)
+> is.na(a)
+[1] FALSE FALSE FALSE  TRUE FALSE
+> !is.na(a)
+[1]  TRUE  TRUE  TRUE FALSE  TRUE
+> a[!is.na(a)]
+[1] 1 3 5 7
+
+> a > 3
+[1] FALSE FALSE TRUE NA TRUE
+> a[a > 3]
+[1] 5 NA 7
+Values corresponding to NA returns NA
+
+=== SLIDE 4 ===
+Type 1: A logical vector
+If length(L) < length(X)  the element of L will be recycled
+If length(X) is not a multiple of the length(L), no warning message is generated
+Let X = the “target” vector, L = logical index vector
+> a
+[1]  1  3  5 NA  7
+> a[c(T, F, T)]
+[1] 1 5 NA
+
+=== SLIDE 5 ===
+Type 1: A logical vector
+If length(L) > length(X)  the selected value will be extended to NA
+Let X = the “target” vector, L = logical index vector
+> a
+[1]  1  3  5 NA  7
+> a[c(rep(T, 7), NA)]
+[1] 1 3 5 NA 7 NA NA NA
+
+=== SLIDE 6 ===
+Type 2: A vector of positive integer
+Let X = the “target” vector, P= index vector w/ positive integer
+P[i]:  1, 2, …length(X)
+> a
+[1]  1  3  5 NA  7
+
+> a[c(1:3, 2)]
+[1] 1 3 5 3
+
+=== SLIDE 7 ===
+Type 2: A vector of positive integer
+Let X = the “target” vector, P= index vector w/ positive integer
+Using the which function to generate a vector of integer
+> a
+[1]  1  3  5 NA  7
+
+> a[a > 3]
+[1] 5 NA 7
+
+> a[which(a>3)]
+[1] 5 7
+
+=== SLIDE 8 ===
+Type 2: A vector of positive integer
+If P[i] > length(X)  selection = NA
+> a
+[1]  1  3  5 NA  7
+> a[6]
+[1] NA
+
+=== SLIDE 9 ===
+Type 2: A vector of positive integer
+If P[i] > length(X)  selection = NA
+> a
+[1]  1  3  5 NA  7
+> a[6]
+[1] NA
+> a[c(0, 3)]
+[1] 5
+If the elements of P are 0  no corresponding result
+
+=== SLIDE 10 ===
+Type 2: A vector of positive integer
+If P[i] > length(X)  selection = NA
+> a
+[1]  1  3  5 NA  7
+> a[6]
+[1] NA
+> a[c(0, 3)]
+[1] 5
+If the elements of P are 0  no corresponding result
+> a[3.8]
+[1] 5
+A non-integer value will be
+truncated towards 0
+
+=== SLIDE 11 ===
+Type 2: A vector of positive integer
+If P[i] > length(X)  selection = NA
+> a
+[1]  1  3  5 NA  7
+> a[6]
+[1] NA
+> a[c(0, 3)]
+[1] 5
+If the elements of P are 0  no corresponding result
+> a[3.8]
+[1] 5
+A non-integer value will be
+truncated towards 0
+> a[c(1, NA)]
+[1] 1 NA
+Elements of the P that are NA  generate a NA
+
+=== SLIDE 12 ===
+Type 3: A vector of negative integer
+The index vector specifies the value to be excluded
+> a
+[1]  1  3  5 NA  7
+> a[-c(1, 4)]
+[1] 3 5 7
+Elements of the index vector that are 0 generate no corresponding values
+NA is not allowed to be included in the index vector
+You can not mix positive and negative index together
+
+=== SLIDE 13 ===
+Type 4: A vector of character strings
+Only applies to an object that has names
+> a
+[1]  1  3  5 NA  7
+> a[c("a", "c")]
+[1] NA NA
+> names(a) <- c(letters[1:4], "d")
+> a
+a b c  d d
+1 3 5 NA 7
+> a[c("a", "c")]
+a c
+1 5
+> a["d"]
+d
+NA
+If the target vector has no names, it will result in an NA
+only the value with the lowest index is returned
+
+=== SLIDE 14 ===
+Type 4: A vector of character strings
+Use is.element or %in% to find all occurrences of duplicated names
+> is.element(names(a), "d")
+[1] FALSE FALSE FALSE TRUE TRUE
+
+> names(a) %in% "d"
+[1] FALSE FALSE FALSE TRUE TRUE
+
+> a[is.element(names(a), "d")]
+d d
+NA 7
+
+> a[names(a) %in% "d"]
+d d
+NA 7
+
+=== SLIDE 15 ===
+Type 4: A vector of character strings
+If one of the elements in the vector has no name (NA); including NA in the index vector will only return NA
+> names(a)[3] <- NA
+> a
+a b <NA>  d d
+1 3    5 NA 7
+> a[c(NA, "b")]
+<NA> b
+  NA 3
+> a[is.na(names(a)) | names(a) == "b"]
+b <NA>
+3    5
+
+=== SLIDE 16 ===
+Type 4: A vector of character strings
+If the target vector doesn't contain the names that match the values in the index vector, NA will be returned. Warning and Error Messages will not be produced
+> a[c("e", "f")]
+<NA> <NA>
+  NA   NA
+
+=== SLIDE 17 ===
+Type 5: The index position may be empty
+When the index vector is left empty, all the components of the vector are selected
+> a[]
+  a  b <NA>  d  d
+  1  3    5 NA  7
+
+=== SLIDE 18 ===
+Index Vector: Replacement
+Replacement: A index vector is on the LH side of an assignment
+> x <- c(3, 6, NA, -1)
+> x
+[1] 3 6 NA -1
+> x[is.na(x)] <- 0
+> x
+[1] 3 6 0 -1
+> x[1:3] <- 1:3
+> x
+[1] 1 2 3 -1
+> x[7] <- 8
+> x
+[1] 1 2 3 -1 NA NA 8
+an index outside the range of 1, ..., length(x)
+
+=== SLIDE 19 ===
+Index Vector: Replacement
+> x[-c(2, 5)] <- 10
+> x
+[1] 10 2 10 10 NA 10 10
+> names(x) <- c(NA, letters[1:6])
+> x
+<NA> a  b  c  d  e  f
+  10 2 10 10 NA 10 10
+> x[c(NA, "a")] <- 3
+> x
+<NA> a  b  c  d  e f <NA>
+  10 3 10 10 NA 10 10   3
+Missing values create a new element of the vector
+
+=== SLIDE 20 ===
+Index Vector: Replacement
+Blank subsetting can be used on the LH side of an assignment; it will preserve the original object class and structure.
+> ex <- 1:5
+> names(ex) <- letters[1:5]
+> ex[] <- 0
+> ex
+a b c d e
+0 0 0 0 0
+
+=== SLIDE 21 ===
+Subsetting Matrices and ArraysArray Indexing
+You can subset an array by giving one index vector
+> x <- array(c(1:20, rep(NA,4)), dim = c(2,3,4))
+> dimnames(x) <-  list(d1 = c("i", "ii"), d2 = c("I", "II", "III"), d3 =  + letters[1:4])
+> x
+, , d3 = a
+
+    d2
+d1   I II III
+  i  1  3   5
+  ii 2  4   6
+
+, , d3 = b
+
+    d2
+d1   I II III
+  i  7  9  11
+  ii 8 10  12
+...
+...
+
+=== SLIDE 22 ===
+Array indexing
+> x[3:6]
+[1] 3 4 5 6
+> x[!is.na(x)]
+ [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+Or we can use separate indices, separated by commas
+> x[1,2,3]
+[1] 15
+> x[2,1, 2:3]
+ b  c 
+ 8 14
+
+=== SLIDE 23 ===
+Array indexing
+For a k-fold indexed array, any of the 5 forms of indexing is allowed in each index position
+For empty index, the range = full range for the index position
+> x[, c("I", "III"), -c(2, 4)]
+, , d3 = a
+     d2
+d1    I III
+   i  1   5
+  ii  2   6
+
+, , d3 = c
+     d2
+d1    I III
+   i 13 17
+  ii 14 18
+x is 2 X 3 X 4  
+     x[, c("I", "III"), -c(2, 4)]is 2 X 2 X 2
+If character values in a character index do not match with any of the values in the dimname attributes, an “subscript out of bounds" error message will be produced
+
+=== SLIDE 24 ===
+Subsetting Data Frame
+If you subset with two vectors at both positions, it behaves like subsetting a matrix
+> d <- data.frame(L = c("A", "B", "C"), M = 1:3, N = c(T, F, NA))
+
+> d[c(2,3), ]
+  L M     N
+2 B 2 FALSE
+3 C 3    NA
+
+> d[,c(1,3)]
+  L     N
+1 A  TRUE
+2 B FALSE
+3 C    NA
+
+=== SLIDE 25 ===
+Subsetting Data Frame
+If you subset with two vectors at both positions, it behaves like subsetting a matrix
+> d[d$L == "A", ]
+  L M    N
+1 A 1 TRUE
+
+> d[, c("M", "N")]
+  M     N
+1 1  TRUE
+2 2 FALSE
+3 3    NA
+
+> d[d$L == "A", c("M", "N")]
+  M    N
+1 1 TRUE
+
+=== SLIDE 26 ===
+Subsetting Data Frame
+If you subset with a single vector, it behaves like subsetting a list
+> d[c(2,3)]
+  M     N
+1 1  TRUE
+2 2 FALSE
+3 3    NA
+
+> d[c("M", "N")]
+  M     N
+1 1  TRUE
+2 2 FALSE
+3 3    NA
+
+=== SLIDE 27 ===
+Subsetting Data Frame
+When selecting a single column, matrix subsetting will simplify to result to a vector; list subsetting will not
+> d[,3]
+[1] TRUE FALSE NA
+
+> d[3]
+      N
+1  TRUE
+2 FALSE
+3    NA
+
+=== SLIDE 28 ===
+The Subsetting OperatorsThe Differences Between [, [[, and $
+The subsetting operators: [, [[, and $
+Deciding which operator to use depends on the object
+The main behavior difference across these three objects:
+Using the [ operator returns the same data type
+[ can extract any numbers of elements of an object,
+you can only use [[ and $ to extract one element
+$ does not evaluate its argument, while [[ and [ do
+$ uses partial matching to extract elements, while [[ and [ do not
+
+=== SLIDE 29 ===
+The Subsetting Operators
+> alist <- list(name1 = c("john", "ken"), station = 
++ "AM640", time = "M-F: 3:00pm")
+> alist[c(1, 2)]
+$name1
+[1] "john" "ken"
+$station
+[1] "AM640"
+Using the [ operator returns a list
+> alist["name"]
+$<NA>
+NULL
+> alist[["name"]]
+NULL
+> alist$name
+[1] "john" "ken"
+$ uses partial matching to extract elements
+
+=== SLIDE 30 ===
+The Subsetting Operators
+> foo <- "station"
+> alist[foo]
+$station
+[1] "AM640"
+> alist[[foo]]
+[1] "AM640"
+> alist$foo
+NULL
+$ does not evaluate its argument
+
+=== SLIDE 31 ===
+Simplifying and Preserving
+Simplifying subsets: the result has the simplest data structure
+Preserving subsets: the result has the same data structure of input data
+> vec <- 1:5
+> names(vec) <- letters[1:5]
+
+> vec[[1]]
+[1] 1
+> vec[1]
+a
+1
+Vector:
+Simplifying: using the [[ operator. The names attribute will be removed
+Preserving : using the [ operator
+
+=== SLIDE 32 ===
+Simplifying and Preserving
+> fact <- factor(c("A", "B", "C"))
+
+> fact[1:2, drop=T]
+[1] A B
+Levels: A B
+
+> fact[1:2]
+[1] A B
+Levels: A B C
+Factor:
+Simplifying : using the [ operator and setting the drop option to TRUE will drop unused level
+Preserving : using the [ operator
+
+=== SLIDE 33 ===
+Simplifying and Preserving
+> mat <- matrix(1:4, 2)
+> mat
+    [,1] [,2]
+[1,]   1   3
+[2,]   2   4
+
+> mat[, 1]
+[1] 1 2
+> mat[, 1, drop = FALSE]
+[,1]
+[1,] 1
+[2,] 2
+Matrix or array:
+Simplifying : using the [ operator. If the result's dimension has length of 1, the dim attribute will be dropped
+Preserving : using the [ operator and setting the drop option to FALSE will preserve the dim attribute
+
+=== SLIDE 34 ===
+Simplifying and Preserving
+> mat[1, ]
+[1] 1 3
+
+> mat[1, , drop = FALSE]
+    [,1] [,2]
+[1,]   1    3
+Matrix or array:
+Simplifying : using the [ operator. If the result's dimension has length of 1, the dim attribute will be dropped
+Preserving : using the [ operator and setting the drop option to FALSE will preserve the dim attribute
+
+=== SLIDE 35 ===
+Simplifying and Preserving
+> lis <- list(a = 1:3, b = "A")
+> lis[[1]]
+[1] 1 2 3
+
+> lis[1]
+$a
+[1] 1 2 3
+List:
+Simplifying : using the [[ operator. It will return the list content
+Preserving : using the [ operator. It will return a list
+
+=== SLIDE 36 ===
+Simplifying and Preserving
+> dat <-data.frame(V1=1:3, V2=c("a", "b", "c"), V3=c(T, T, F))
+> dat
+   V1 V2    V3
+1   1  a  TRUE
+2   2  b  TRUE
+3   3  c FALSE
+Data frame:
+Simplifying : using the index vector with [ operator at the second index position or using the [[ operator when selecting a column
+Preserving : using the index vector the [ operator at the second index position and setting the drop option to FALSE or using the [ operator when selecting a column
+
+=== SLIDE 37 ===
+Simplifying and Preserving
+> dat[, 2]
+[1] a b c
+Levels: a b c
+
+> dat[[2]]
+[1] a b c
+Levels: a b c
+Data frame:
+Simplifying : using the index vector with [ operator at the second index position or using the [[ operator when selecting a column
+Preserving : using the index vector the [ operator at the second index position and setting the drop option to FALSE or using the [ operator when selecting a column
+
+=== SLIDE 38 ===
+Simplifying and Preserving
+> dat[, 2, drop = F]
+  V2
+1  a
+2  b
+3  c
+> dat[2]
+  V2
+1  a
+2  b
+3  c
+Data frame:
+Simplifying : using the index vector with [ operator at the second index position or using the [[ operator when selecting a column
+Preserving : using the index vector the [ operator at the second index position and setting the drop option to FALSE or using the [ operator when selecting a column

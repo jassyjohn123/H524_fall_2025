@@ -1,7 +1,7 @@
 \beamer@sectionintoc {1}{Course Introduction}{3}{0}{1}
-\beamer@sectionintoc {2}{Introduction to R}{6}{0}{2}
-\beamer@sectionintoc {3}{Data Presentation}{9}{0}{3}
-\beamer@sectionintoc {4}{Numerical Summary Measures}{21}{0}{4}
-\beamer@sectionintoc {5}{Rates and Standardization}{24}{0}{5}
-\beamer@sectionintoc {6}{AI as a Learning Tool}{29}{0}{6}
-\beamer@sectionintoc {7}{R Examples}{38}{0}{7}
+\beamer@sectionintoc {2}{Introduction to R}{8}{0}{2}
+\beamer@sectionintoc {3}{Data Presentation}{11}{0}{3}
+\beamer@sectionintoc {4}{Numerical Summary Measures}{23}{0}{4}
+\beamer@sectionintoc {5}{Rates and Standardization}{28}{0}{5}
+\beamer@sectionintoc {6}{AI as a Learning Tool}{33}{0}{6}
+\beamer@sectionintoc {7}{R Examples}{42}{0}{7}

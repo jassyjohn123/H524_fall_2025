@@ -1,0 +1,101 @@
+Extracted from: /Users/molitorj/ms/OSU/classes/AI_H524/introduction-to-biostatistics-h-524-101-f2024-export/web_resources/Uploaded Media/Notes12_more_regression.pptx
+==================================================
+
+
+=== SLIDE 1 ===
+Linear Regression
+
+=== SLIDE 2 ===
+Linear RegressionLines versus Fuzzy Lines
+Simple Linear Regression Model:
+
+=== SLIDE 3 ===
+Regression Line
+
+=== SLIDE 4 ===
+Estimation – Least Squares
+Residual
+
+
+Residuals sum to zero 
+Find values for beta’s that minimize sum of squared residuals.
+
+=== SLIDE 5 ===
+Least Squares
+
+=== SLIDE 6 ===
+Assumptions of Normality and Homoscedasticity
+
+=== SLIDE 7 ===
+Linear Regression
+
+=== SLIDE 8 ===
+C.I. Intervals for β0 and β1
+
+=== SLIDE 9 ===
+Estimation of σ2
+Variance σ2 quantifies how spread out the y values are from the regression line.
+
+=== SLIDE 10 ===
+Hypothesis Test for β
+Test Ho: β=0
+
+=== SLIDE 11 ===
+Inference for
+
+=== SLIDE 12 ===
+MPH/Stopping Distance Example
+
+=== SLIDE 13 ===
+MPH and Stopping Distance ExampleStata Results
+. regress StopD MPH
+
+      Source |       SS       df       MS              Number of obs =       7
+-------------+------------------------------           F(  1,     5) =  626.53
+       Model |  14674.3214     1  14674.3214           Prob > F      =  0.0000
+    Residual |  117.107143     5  23.4214286           R-squared     =  0.9921
+-------------+------------------------------           Adj R-squared =  0.9905
+       Total |  14791.4286     6   2465.2381           Root MSE      =  4.8396
+
+------------------------------------------------------------------------------
+       StopD |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         MPH |   4.578571   .1829185    25.03   0.000     4.108364    5.048778
+       _cons |     -24.75   4.925232    -5.03   0.004    -37.41071   -12.08929
+------------------------------------------------------------------------------
+
+=== SLIDE 15 ===
+MPH and Stopping Distance ExampleR Results
+Call:
+glm(formula = StopD ~ mph)
+
+Deviance Residuals: 
+       1         2         3         4         5         6         7  
+ 5.96429   0.07143  -3.82143  -4.71429  -3.60714   0.50000   5.60714  
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -24.7500     4.9252  -5.025  0.00402 ** 
+mph           4.5786     0.1829  25.031  1.9e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+
+(Dispersion parameter for gaussian family taken to be 23.42143)
+
+    Null deviance: 14791.43  on 6  degrees of freedom
+Residual deviance:   117.11  on 5  degrees of freedom
+AIC: 45.585
+
+Number of Fisher Scoring iterations: 2
+
+=== SLIDE 16 ===
+Interpret Coefficients
+
+=== SLIDE 17 ===
+Assumptions
+
+=== SLIDE 18 ===
+Assumptions
+
+=== SLIDE 19 ===
+Assumptions

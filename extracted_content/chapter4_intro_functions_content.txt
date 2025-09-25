@@ -1,0 +1,509 @@
+Extracted from: /Users/molitorj/ms/OSU/classes/AI_H524/introduction-to-biostatistics-h-524-101-f2024-export/web_resources/Uploaded Media/chapter4_intro_functions.pptx
+==================================================
+
+
+=== SLIDE 1 ===
+Chapter 4
+Introduction to R Functions
+
+=== SLIDE 2 ===
+R FunctionsR Built-in Functions
+Functions in R are themselves R objects
+Many things in R are done using function calls
+plot(height, weight)
+Function name: plot
+Actual argument: height, weight
+
+=== SLIDE 3 ===
+R Built-in Functions
+Functions in R are themselves R objects
+Many things in R are done using function calls
+plot(height, weight)
+> plot
+function (x, y, ...) 
+{
+    if (is.function(x) && is.null(attr(x, "class"))) {
+        if (missing(y)) 
+            y <- NULL
+        hasylab <- function(...) !all(is.na(pmatch(names(list(...)), 
+            "ylab")))
+        if (hasylab(...)) 
+            plot.function(x, y, ...)
+        else plot.function(x, y, ylab = paste(deparse(substitute(x)), 
+            "(x)"), ...)
+    }
+    else UseMethod("plot")
+}
+<environment: namespace:graphics>
+Formal argument
+height  x
+weight  y
+Positional matching
+
+=== SLIDE 4 ===
+R Built-in Functions
+plot(x=height, y=weight)
+> plot
+function (x, y, ...) 
+{
+    if (is.function(x) && is.null(attr(x, "class"))) {
+        if (missing(y)) 
+            y <- NULL
+        hasylab <- function(...) !all(is.na(pmatch(names(list(...)), 
+            "ylab")))
+        if (hasylab(...)) 
+            plot.function(x, y, ...)
+        else plot.function(x, y, ylab = paste(deparse(substitute(x)), 
+            "(x)"), ...)
+    }
+    else UseMethod("plot")
+}
+<environment: namespace:graphics>
+plot(y=weight, x=height)
+keyword matching
+
+=== SLIDE 5 ===
+Creating Your Own Functions
+fname <- function (arg1 <, arg2, ...>) function body
+fname <- function (arg1 <, arg2, ...>) {
+    function body
+}
+fname: is the name of the function
+function: keyword
+arg1, arg2,...: formal arguments
+Function body: usually a group of statements
+
+=== SLIDE 6 ===
+Creating Your Own Functions
+fname(val1 <, y=val2, ... >)
+A function call is called by giving its name with argument sequence in parentheses
+
+=== SLIDE 7 ===
+Creating Your Own Functions
+Detect the # of extreme values from a numeric vector
+The extreme values are the ones that are greater than or less than two times standard deviation from the mean
+> set.seed(91786)
+> vec1 <- rnorm(100)
+> sum(abs(vec1-mean(vec1))>2*sd(vec1))
+[1] 4
+> set.seed(12345)
+> vec2 <- rnorm(100, 2, 4)
+> sum(abs(vec2-mean(vec2))>2*sd(vec2))
+[1] 3
+> set.seed(54321)
+> vec3 <- rpois(100, 2)
+> sum(abs(vec3-mean(vec3))>2*sd(vec3))
+[1] 5
+
+=== SLIDE 8 ===
+Creating Your Own Functions
+Create a function to detect extreme values
+> extreme <- function (vec){
++     extreme_n <- sum(abs(vec-mean(vec))>2*sd(vec))
++     extreme_n
++ }
+
+> extreme(vec1)
+[1] 4
+
+> extreme(vec2)
+[1] 3
+
+> extreme(vec3)
+[1] 5
+
+=== SLIDE 9 ===
+Creating Your Own Functions
+Create a function to detect extreme values
+> extreme <- function (vec){
++     extreme_n <- sum(abs(vec-mean(vec))>2*sd(vec))
++     extreme_n
++ }
+
+> extreme(vec1)
+[1] 4
+
+> extreme(vec2)
+[1] 3
+
+> extreme(vec3)
+[1] 5
+return(extreme_n)
+
+=== SLIDE 10 ===
+Creating Your Own Functions
+Return several values:
+> extreme1 <- function (vec){
++     extreme_n <- sum(abs(vec-mean(vec))>2*sd(vec))
++     list(extreme_num = extreme_n, average=mean(vec),  +         SD=sd(vec))
++ }
+
+> extreme1(vec1)
+$extreme_num
+[1] 4
+
+$average
+[1] -0.07776652
+
+$SD
+[1] 0.8738415
+
+=== SLIDE 11 ===
+Creating Your Own Functions
+Return several values:
+> extreme2 <- function (vec){
++     extreme_n <- sum(abs(vec-mean(vec))>2*sd(vec))
++     c(extreme_num = extreme_n, average=mean(vec),     +         SD=sd(vec))
++ }
+
+> extreme2(vec1)
+extreme_num      average         SD
+4.00000000   -0.07776652 0.87384147
+
+=== SLIDE 12 ===
+Creating Your Own Functions
+Return several values:
+> extreme3 <- function (vec){
++     extreme_n <- sum(abs(vec-mean(vec))>2*sd(vec))
++     structure(extreme_n, average=mean(vec),           +         SD=sd(vec))
++ }
+
+> extreme3(vec1)
+[1] 4
+attr(,"average")
+[1] -0.07776652
+attr(,"SD")
+[1] 0.8738415
+
+=== SLIDE 13 ===
+Conditional Execution: The if  Statement
+The if statement has the following form
+if (condition) true.branch else false.branch
+condition
+true.branch
+TRUE
+
+=== SLIDE 14 ===
+The if  Statement
+The if statement has the following form
+if (condition) true.branch else false.branch
+condition
+false.branch
+FALSE
+
+=== SLIDE 15 ===
+The if  Statement
+The if statement has the following form
+if (condition) true.branch else false.branch
+If it is a vector, only the first component is used
+
+=== SLIDE 16 ===
+The if  Statement
+> x <- rnorm(10)
+> x
+ [1]  1.83549568 -1.51726496  1.36570069 -0.04439632  1.06512840
+ [6] -0.96186290 -1.83487466  0.48290005 -2.84671068 -0.42084838
+
+> if (mean(x) > median(x)) print ("Mean > Median") else print    + ("Mean < Median")
+
+[1] "Mean < Median"
+
+=== SLIDE 17 ===
+The if  Statement
+The if statement can be extended to several lines…
+if (condition) {
+    true.branch.1 
+    true.branch.2
+    ...
+} else {
+    false.branch.1
+    false.branch.2
+    ...
+}
+
+=== SLIDE 18 ===
+The if  Statement
+When the if statement is not in a block …
+if (condition) 
+    true.branch else {
+    false.branch.1
+    false.branch.2
+    ...
+}
+else must appear on the same line of the true.branch
+
+=== SLIDE 19 ===
+The if  Statement
+When the if statement is in a block …
+if (condition) {
+    true.branch.1 
+    true.branch.2
+    ...
+} else {
+    false.branch.1
+    false.branch.2
+    ...
+}
+else must appear on the same line of the closing bracket }
+
+=== SLIDE 20 ===
+The if  Statement
+If if statement is in a function  else can be placed in a new line
+Multiple cases: use the if ... else if... structure
+if (condition) {
+  ...
+    ...
+} else if (condition){
+  ...
+} else if (condition){
+  ...
+} else{
+  ...
+}
+
+=== SLIDE 21 ===
+The if  Statement
+You can assign the value of is/else statements to a variable
+> if (any (x <= 0)) y <- log(10+x) else y <- log(x)
+> y
+ [1] 2.471103 2.138033 2.430600 2.298136 2.403799 2.201453
+ [7] 2.099872 2.349745 1.967572 2.259589
+
+> y <- if (any (x <= 0)) log(10+x) else log(x)
+> y
+ [1] 2.471103 2.138033 2.430600 2.298136 2.403799 2.201453
+ [7] 2.099872 2.349745 1.967572 2.259589
+The following two statements are equivalent
+
+=== SLIDE 22 ===
+The Difference Between &, | and &&, ||
+&, &&: logical AND;  |, ||: logical OR
+& and | perform element-wise comparisons, while && and || do not
+&& and || evaluate left to right examining only the first element of each vector
+With &&, the RH expression is only evaluated if the LH one is true, and with ||, only if it is false
+Two additional logical operators, && and ||, are useful with the if statement
+
+=== SLIDE 23 ===
+The Difference Between &, | and &&, ||
+> a <- 3
+> b <- 3
+> a == 3 & b == 3
+[1] TRUE
+> a == 3 && b == 3
+[1] TRUE
+Both a == 3 and b == 3 return TRUE, which is a logical vector with length equaling 1
+Situations when either & or && generates the same results:
+
+=== SLIDE 24 ===
+The Difference Between &, | and &&, ||
+> x <- c(T, F, T)
+> y <- c(T, T, T)
+> x & y
+[1] TRUE FALSE TRUE
+> x && y
+[1] TRUE
+> y1 <- c(F, T, T)
+> x && y1
+[1] FALSE
+Situations when using &: the goal of the calculation is for the element-wise comparison
+
+=== SLIDE 25 ===
+The Difference Between &, | and &&, ||
+> y <- matrix(1:2, 1)
+> y
+    [,1] [,2]
+[1,]   1    2
+> nrow(y) > 1 && y[2, 1] == 2
+[1] FALSE
+Suppose that you would like to test matrix y to see 
+if the nrow(y) > 1, and
+if it does, you would like to check if y[2, 1] == 2
+> nrow(y) > 1 & y[2, 1] == 2
+Error: subscript out of bounds
+Situations when using &&:
+
+=== SLIDE 26 ===
+Calculate the Square Root and Log of a Vector
+sqrtAndLog <- function(x){
+    if (is.numeric(x) && min(x) > 0){
+        x.sqrt <- sqrt(x)
+        x.log <- log(x)
+    } else stop ("x must be numeric and all components positive")
+    return (list(x.sqrt, x.log))
+}
+> sqrtAndLog(c(2,4,3))
+[[1]]
+[1] 1.414214 2.000000 1.732051
+
+[[2]]
+[1] 0.6931472 1.3862944 1.0986123
+> sqrtAndLog(c(2,4,-33))
+Error in sqrtAndLog(c(2, 4, -33)) : 
+  x must be numeric and all components positive
+
+=== SLIDE 27 ===
+Calculate the Central Tendency
+Example: calculate the central tendency with choices of arithmetic average, harmonic mean, or median
+central <- function (y, measure){
+    if (measure == "mean") return (mean(y)) 
+    else if (measure == "harmonic") return (1/mean(1/y))
+    else if (measure == "median") return (median(y))
+    else stop ("Your measure is not supported")
+}
+> z <- rnorm(10, mean=2, sd=3)
+> central (z, "mean")
+[1] 1.560157
+> central (z, "harmonic")
+[1] -1.634218
+> central (z, "median")
+[1] 0.73387
+
+=== SLIDE 28 ===
+Looping
+Three types of loops: for, while, and repeat
+break, and next can be used explicitly to control looping
+break causes an exit from the innermost loop
+next causes control to return the start of the loop
+
+=== SLIDE 29 ===
+The for statement
+for loop has the following form:
+for (variable in sequence) statement
+keyword
+
+=== SLIDE 30 ===
+The for statement
+for loop has the following form:
+for (variable in sequence) statement
+Loop variable
+
+=== SLIDE 31 ===
+The for statement
+for loop has the following form:
+for (variable in sequence) statement
+vector of values
+
+=== SLIDE 32 ===
+The for statement
+for (variable in sequence) statement
+For a grouped statement, enclosed within { }
+for loop has the following form:
+
+=== SLIDE 33 ===
+The for statement
+for (variable in sequence) statement
+> ss <- 0
+> total <- 0
+> for (i in c(20, 30, 25, 40)){
++     total <- total + i
++     ss <- ss + i^2
++ }
+> total 
+[1] 115
+> ss
+[1] 3525
+for loop has the following form:
+
+=== SLIDE 34 ===
+The for statement
+Previous example is equivalent to …
+> i <- c(20, 30, 25, 40)
+> total.1 <- sum(i)
+> ss.1 <- sum(i^2)
+> total.1
+[1] 115
+> ss.1
+[1] 3525
+
+=== SLIDE 35 ===
+The while statement
+The while loop has the following form
+while (condition) statement
+If condition is TRUE, statement is evaluated
+This process continues until statement is evaluates to FALSE
+> x <- 0
+> test <- 1
+> while (test > 0) {
++     x <- x + 1
++     print (x^2)
++     test <- x < 6
++ }
+[1] 1
+[1] 4
+[1] 9
+[1] 16
+[1] 25
+[1] 36
+
+=== SLIDE 36 ===
+The repeat statement
+The repeat loop has the following form
+repeat {statement}
+statement must be a block statement
+> x <- 0
+> repeat {
++     x <- x + 1
++     print (x^2)
++     if (x == 6) break
++ }
+[1] 1
+[1] 4
+[1] 9
+[1] 16
+[1] 25
+[1] 36
+
+=== SLIDE 37 ===
+An Example of Using a Loop in a Function
+Write a functions
+only takes one argument, alist, a list of data.frame. The number of elements in the list varies. 
+In this function, we need to stack the data frames on top of each other and return one single data frame.
+> load("datList.RData")
+> datList
+
+[[1]]
+ ID     value
+1 a 0.9101742
+2 b 0.3841854
+3 c 1.6821761
+
+[[2]]
+ ID      value
+1 d -0.6357365
+2 e -0.4616447
+
+...
+
+=== SLIDE 38 ===
+An Example of Using a Loop in a Function
+Write a functions
+only takes one argument, alist, a list of data.frame. The number of elements in the list varies. 
+In this function, we need to stack the data frames on top of each other and return one single data frame.
+> stackDataInList = function(alist){
++     result = data.frame()
++     for (i in 1:length(alist)){
++         result = rbind(result, alist[[i]])
++     }
++     return(result)
++ }
+
+=== SLIDE 39 ===
+An Example of Using a Loop in a Function
+> stackDataInList(datList[1])
+ ID     value
+1 a 0.9101742
+2 b 0.3841854
+3 c 1.6821761
+
+> stackDataInList(datList[c(1,3,4)])
+  ID     value
+1  a  0.9101742
+2  b  0.3841854
+3  c  1.6821761
+4  f  1.4322822
+5  g -0.6506964
+6  h -0.2073807
+7  i -0.3928079
+8  j -0.3199929
+9  k -0.2791133
+10 l  0.4941883

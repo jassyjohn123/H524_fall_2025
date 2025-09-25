@@ -1,0 +1,305 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Define OSU orange and AI blue colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+% Configure R code listings
+\lstset{
+    language=R,
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    numbers=left,
+    numberstyle=\tiny,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red}
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large In-Class Worksheet}}\\
+\textcolor{white}{\textbf{\large Data Visualization and R Programming}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Name:} \rule{8cm}{0.4pt} \hfill \textbf{Date:} \rule{4cm}{0.4pt}\\[0.5ex]
+\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Data Presentation, Histograms, Boxplots, Introduction to R Programming
+
+\vspace{8pt}
+
+\section{Part 1: Review and Setup}
+
+\subsection{Exercise 1.1: Quick Review}
+From previous material, what were the three measures of central tendency for our blood pressure data \texttt{c(170, 193, 110, 135, 135, 115)}?
+
+\begin{itemize}
+\item Mean: \rule{2cm}{0.4pt} mmHg
+\item Median: \rule{2cm}{0.4pt} mmHg
+\item Mode: \rule{2cm}{0.4pt} mmHg
+\end{itemize}
+
+\begin{lstlisting}
+# Load the data again
+blood_pressure <- c(170, 193, 110, 135, 135, 115)
+
+# Verify your answers
+mean(blood_pressure)
+median(blood_pressure)
+\end{lstlisting}
+
+\section{Part 2: Introduction to Data Visualization}
+
+\subsection{Exercise 2.1: Creating Histograms}
+
+We'll work with simulated guinea pig survival data from three groups:
+
+\begin{lstlisting}
+# Guinea pig survival data (tuberculosis study)
+control <- c(312, 345, 287, 398, 421, 356, 389, 334, 367, 401)
+low_dose <- c(289, 267, 301, 234, 198, 245, 278, 213, 256, 298)
+high_dose <- c(156, 189, 134, 167, 123, 145, 178, 201, 143, 134)
+
+# Create histograms
+hist(control, main="Control Group Survival", xlab="Days", col="lightblue")
+hist(low_dose, main="Low Dose Group Survival", xlab="Days", col="lightgreen")
+hist(high_dose, main="High Dose Group Survival", xlab="Days", col="lightcoral")
+\end{lstlisting}
+
+\textbf{Key Questions:}
+\begin{enumerate}
+\item What do you notice about the shape of each distribution?
+\item Which group appears to have the best survival prospects?
+\item Why is it important to use the same x-axis scale when comparing groups?
+\end{enumerate}
+
+\subsection{Exercise 2.2: AI-Enhanced Histogram Creation}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\textbf{\textcolor{aiblue}{AI Prompt:}} ``Help me create side-by-side histograms for comparing three groups of guinea pig survival data. The data should use the same scales and bin widths for fair comparison.''
+\end{tcolorbox}
+
+\textbf{AI Response (fill in):}
+\begin{lstlisting}
+# Paste AI-generated code here:
+
+
+\end{lstlisting}
+
+\textbf{Verification Checklist:}
+\begin{itemize}
+\item[$\square$] Same x-axis scale across all histograms?
+\item[$\square$] Same number of bins?
+\item[$\square$] Clear labels and titles?
+\item[$\square$] Different colors for each group?
+\end{itemize}
+
+\section{Part 3: Boxplots for Group Comparison}
+
+\subsection{Exercise 3.1: Understanding the Five-Number Summary}
+
+For the control group data, calculate the five-number summary:
+
+\begin{lstlisting}
+control <- c(312, 345, 287, 398, 421, 356, 389, 334, 367, 401)
+
+# Calculate five-number summary
+summary(control)
+
+# Individual components
+min(control)
+quantile(control, 0.25)  # Q1
+median(control)          # Q2
+quantile(control, 0.75)  # Q3
+max(control)
+\end{lstlisting}
+
+\textbf{Fill in the five-number summary:}
+\begin{itemize}
+\item Minimum: \rule{2cm}{0.4pt}
+\item Q1 (25th percentile): \rule{2cm}{0.4pt}
+\item Q2 (Median): \rule{2cm}{0.4pt}
+\item Q3 (75th percentile): \rule{2cm}{0.4pt}
+\item Maximum: \rule{2cm}{0.4pt}
+\end{itemize}
+
+\subsection{Exercise 3.2: Creating Boxplots}
+
+\begin{lstlisting}
+# Create individual boxplots
+boxplot(control, main="Control Group", ylab="Survival Days")
+boxplot(low_dose, main="Low Dose Group", ylab="Survival Days")
+boxplot(high_dose, main="High Dose Group", ylab="Survival Days")
+
+# Side-by-side comparison
+boxplot(control, low_dose, high_dose,
+        names=c("Control", "Low Dose", "High Dose"),
+        main="Guinea Pig Survival by Treatment Group",
+        ylab="Survival Days",
+        col=c("lightblue", "lightgreen", "lightcoral"))
+\end{lstlisting}
+
+\textbf{Analysis Questions:}
+\begin{enumerate}
+\item Which group has the highest median survival?
+\item Which group shows the most variability (largest IQR)?
+\item Are there any potential outliers visible?
+\end{enumerate}
+
+\section{Part 4: R Programming Fundamentals}
+
+\subsection{Exercise 4.1: Working with Vectors and Data Frames}
+
+\begin{lstlisting}
+# Create a data frame combining all groups
+survival_data <- data.frame(
+  days = c(control, low_dose, high_dose),
+  group = c(rep("Control", length(control)),
+            rep("Low Dose", length(low_dose)),
+            rep("High Dose", length(high_dose)))
+)
+
+# Explore the data frame
+str(survival_data)
+head(survival_data)
+summary(survival_data)
+\end{lstlisting}
+
+\subsection{Exercise 4.2: Basic Data Manipulation}
+
+\begin{lstlisting}
+# Calculate group means
+aggregate(days ~ group, data = survival_data, FUN = mean)
+
+# Calculate group standard deviations
+aggregate(days ~ group, data = survival_data, FUN = sd)
+
+# Create a subset for just the control group
+control_subset <- subset(survival_data, group == "Control")
+\end{lstlisting}
+
+\textbf{Fill in the results:}
+\begin{itemize}
+\item Control group mean: \rule{3cm}{0.4pt}
+\item Low dose group mean: \rule{3cm}{0.4pt}
+\item High dose group mean: \rule{3cm}{0.4pt}
+\end{itemize}
+
+\section{Part 5: AI-Enhanced Analysis Challenge}
+
+\subsection{Exercise 5.1: Complete Statistical Summary}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\textbf{\textcolor{aiblue}{AI Challenge:}} Use AI to help create a comprehensive analysis comparing the three treatment groups.
+
+\textbf{Your AI Prompt:}
+``I have guinea pig survival data for three groups: control, low dose, and high dose. Help me create a complete statistical comparison including descriptive statistics, appropriate visualizations, and interpretation of the results.''
+\end{tcolorbox}
+
+\textbf{AI Response Documentation:}
+\begin{enumerate}
+\item \textbf{Descriptive Statistics Code:}
+\begin{lstlisting}
+# Paste AI code here:
+
+
+\end{lstlisting}
+
+\item \textbf{Visualization Code:}
+\begin{lstlisting}
+# Paste AI code here:
+
+
+\end{lstlisting}
+
+\item \textbf{AI Interpretation:}
+(Write the AI's interpretation of the results)
+
+\vspace{3cm}
+
+\end{enumerate}
+
+\textbf{Your Verification:}
+\begin{itemize}
+\item[$\square$] Are the statistical calculations correct?
+\item[$\square$] Do the visualizations effectively show group differences?
+\item[$\square$] Is the interpretation scientifically sound?
+\item[$\square$] What would you add or modify?
+\end{itemize}
+
+\section{Part 6: Connecting to Biostatistics Concepts}
+
+\subsection{Exercise 6.1: Population vs. Sample Discussion}
+
+\textbf{Questions for Discussion:}
+\begin{enumerate}
+\item In this guinea pig study, what is the population of interest?
+\item What is our sample?
+\item How might these results generalize to the broader population?
+\item What are potential limitations of this study design?
+\end{enumerate}
+
+\subsection{Exercise 6.2: Setting Up for Statistical Inference}
+
+In upcoming classes we'll learn about probability. Based on today's data:
+
+\begin{enumerate}
+\item If we randomly selected one guinea pig from the control group, would you expect its survival to be exactly the mean survival time? Why or why not?
+
+\item How confident are you that the control group truly has better survival than the high dose group? What additional information would help you be more certain?
+\end{enumerate}
+
+\section{Wrap-up and Preview}
+
+\textbf{Key Takeaways:}
+\begin{itemize}
+\item Histograms show the shape and distribution of data
+\item Boxplots efficiently compare groups using five-number summaries
+\item R data frames organize different types of data together
+\item AI can accelerate analysis but requires human verification
+\end{itemize}
+
+\textbf{Next Class:} We'll dive deeper into numerical summary measures, rates and standardization, and advanced R programming techniques.
+
+\section{AI Usage Documentation}
+\begin{tcolorbox}[colback=gray!10,colframe=gray,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\textbf{Document your AI interaction:}
+\begin{itemize}
+\item AI tools used: \rule{8cm}{0.4pt}
+\item Most helpful AI suggestion: \rule{8cm}{0.4pt}
+\item Code that needed correction: \rule{8cm}{0.4pt}
+\item Verification methods used: \rule{8cm}{0.4pt}
+\item Overall AI effectiveness (1-10): \rule{2cm}{0.4pt}
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}

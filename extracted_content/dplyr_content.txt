@@ -1,0 +1,349 @@
+Extracted from: /Users/molitorj/ms/OSU/classes/AI_H524/introduction-to-biostatistics-h-524-101-f2024-export/web_resources/Uploaded Media/dplyr.pptx
+==================================================
+
+
+=== SLIDE 1 ===
+Tidyverse
+Here we will learn about packages developed largely by Hadley Wickham 
+The tidyverse packages include ggplot2, tibble, tidyr, readr, purrr, and dplyr packages. 
+Packages can be installed with install.packages(“tidyverse”) and loaded with require(“tidyverse”)
+
+=== SLIDE 2 ===
+Tidyverse
+These packages represent a relatively unified way of managing and visualizing data.
+The packages can be seen as enhancements to “base” R functionality.
+Overall, these packages allow one to use R typically without having to revert to using other packages such as SAS, Excel and others for data management, visualization, etc.
+
+=== SLIDE 3 ===
+Data.table
+A “competitor” to tidyverse packages is data.table, which is (arguably) faster and more efficient, but is more cumbersome to use.
+Tidyverse is already super fast (based on underlying C++ code) and very extensible and flexible.
+
+=== SLIDE 4 ===
+dplyr
+The dplyr package is an extremely useful package for data management. 
+It’s faster than base R, and more intuitive (arguably).
+In the past, many would use an alternative package such as SAS to do data management and then R to do analysis.
+With dplyr one can efficiently do the data management in R.
+
+=== SLIDE 5 ===
+Tidy datasets
+The Tidyverse packages use a “tibble” as a common object to store data.
+See for example “table1”
+> table1
+# A tibble: 6 x 4
+  country      year  cases population
+  <chr>       <int>  <int>      <int>
+1 Afghanistan  1999    745   19987071
+2 Afghanistan  2000   2666   20595360
+3 Brazil       1999  37737  172006362
+4 Brazil       2000  80488  174504898
+5 China        1999 212258 1272915272
+6 China        2000 213766 1280428583
+
+=== SLIDE 6 ===
+Tibbles
+Each variable must have its own column.
+Each observation must have its own row.
+Each value must have its own cell.
+Example load “library(nycflights13)”
+
+=== SLIDE 7 ===
+Tibbles
+Note the following:
+int stands for integers
+dbl stands for doubles, or real numbers
+dttm stands for date-times
+lgl stands for logical
+fctr stands for factors
+date stands for dates
+
+=== SLIDE 8 ===
+Tibbles
+Using “as_tibble” one can create a tibble from a data frame.
+Ex, from course notes:
+require(MASS)
+require(tidyverse)
+
+
+pt <- as_tibble(rownames_to_column(painters)) %>%
+	select(painter=rowname,everything())
+
+=== SLIDE 9 ===
+dplyr basics
+filter: Pick observations by their values
+arrange: reorder rows
+select: pick variables by their names
+mutate: create new variables with functions of existing variables
+summarize: collapse many values down to a single summary
+
+=== SLIDE 10 ===
+Examples – flights dataset
+Select all flights on January 1st
+> filter(flights,month == 1, day == 1)
+# A tibble: 842 x 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+ 1  2013     1     1      517            515      2.00      830            819
+ 2  2013     1     1      533            529      4.00      850            830
+ 3  2013     1     1      542            540      2.00      923            850
+ 4  2013     1     1      544            545     -1.00     1004           1022
+ 5  2013     1     1      554            600     -6.00      812            837
+ 6  2013     1     1      554            558     -4.00      740            728
+ 7  2013     1     1      555            600     -5.00      913            854
+ 8  2013     1     1      557            600     -3.00      709            723
+ 9  2013     1     1      557            600     -3.00      838            846
+10  2013     1     1      558            600     -2.00      753            745
+# ... with 832 more rows, and 11 more variables: arr_delay <dbl>,
+#   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
+#   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
+>
+
+=== SLIDE 11 ===
+Piping – See class notes
+flights %>%
+    filter(month==1,day==1)
+
+m1d1 <- flights %>%
+    filter(month==1,day==1)
+
+=== SLIDE 12 ===
+Floating point oddities
+Note the weirdness:
+
+sqrt(2)^2==2 
+near(sqrt(2)^2,2)
+
+=== SLIDE 13 ===
+Using Base R constructs with tidyverse packages
+> nov_dec <- filter(flights, month %in% c(11, 12))
+> filter(flights, !(arr_delay > 120 | dep_delay > 120))
+> filter(flights, arr_delay <= 120, dep_delay <= 120)
+
+=== SLIDE 14 ===
+Arrange Rows
+> arrange(flights, year, month, day)
+# A tibble: 336,776 x 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+ 1  2013     1     1      517            515      2.00      830            819
+ 2  2013     1     1      533            529      4.00      850            830
+ 3  2013     1     1      542            540      2.00      923            850
+ 4  2013     1     1      544            545     -1.00     1004           1022
+ 5  2013     1     1      554            600     -6.00      812            837
+ 6  2013     1     1      554            558     -4.00      740            728
+ 7  2013     1     1      555            600     -5.00      913            854
+ 8  2013     1     1      557            600     -3.00      709            723
+ 9  2013     1     1      557            600     -3.00      838            846
+10  2013     1     1      558            600     -2.00      753            745
+# ... with 336,766 more rows, and 11 more variables: arr_delay <dbl>,
+#   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
+#   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
+>
+
+=== SLIDE 15 ===
+Arrange
+Use desc() to reorder by a column.
+
+> arrange(flights, desc(arr_delay))
+# A tibble: 336,776 x 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>
+ 1  2013     1     9      641            900      1301     1242           1530
+ 2  2013     6    15     1432           1935      1137     1607           2120
+ 3  2013     1    10     1121           1635      1126     1239           1810
+ 4  2013     9    20     1139           1845      1014     1457           2210
+ 5  2013     7    22      845           1600      1005     1044           1815
+ 6  2013     4    10     1100           1900       960     1342           2211
+ 7  2013     3    17     2321            810       911      135           1020
+ 8  2013     7    22     2257            759       898      121           1026
+ 9  2013    12     5      756           1700       896     1058           2020
+10  2013     5     3     1133           2055       878     1250           2215
+# ... with 336,766 more rows, and 11 more variables: arr_delay <dbl>,
+#   carrier <chr>, flight <int>, tailnum <chr>, origin <chr>, dest <chr>,
+#   air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>, time_hour <dttm>
+>
+
+=== SLIDE 16 ===
+Select columns with select()
+> flights %>%
++     select(year, month, day)
+# A tibble: 336,776 x 3
+    year month   day
+   <int> <int> <int>
+ 1  2013     1     1
+ 2  2013     1     1
+ 3  2013     1     1
+ 4  2013     1     1
+ 5  2013     1     1
+ 6  2013     1     1
+ 7  2013     1     1
+ 8  2013     1     1
+ 9  2013     1     1
+10  2013     1     1
+# ... with 336,766 more rows
+>
+
+=== SLIDE 17 ===
+select and rename
+Can use select to rename, or use rename function
+See class notes for the following:
+
+> rename(flights,tail_num=tailnum)
+> select(flights,tail_num=tailnum)
+> select(flights,tail_num=tailnum,everything())
+
+=== SLIDE 18 ===
+Add New Variables with mutate()
+See class notes for:
+
+flights_sml <- select(flights,
+      year:day,
+      ends_with("delay"),
+      distance,
+      air_time
+      )
+
+Note use of “:” and “ends_with(“delay”)
+See ?ends_with
+
+=== SLIDE 19 ===
+mutate()
+> mutate(flights_sml,
++       gain = arr_delay - dep_delay,
++       hours = air_time / 60,
++       gain_per_hour = gain / hours
++ )
+# A tibble: 336,776 x 10
+    year month   day dep_delay arr_delay distance air_time   gain hours
+   <int> <int> <int>     <dbl>     <dbl>    <dbl>    <dbl>  <dbl> <dbl>
+ 1  2013     1     1      2.00     11.0      1400    227     9.00 3.78 
+ 2  2013     1     1      4.00     20.0      1416    227    16.0  3.78 
+ 3  2013     1     1      2.00     33.0      1089    160    31.0  2.67 
+ 4  2013     1     1     -1.00    -18.0      1576    183   -17.0  3.05 
+ 5  2013     1     1     -6.00    -25.0       762    116   -19.0  1.93 
+ 6  2013     1     1     -4.00     12.0       719    150    16.0  2.50 
+ 7  2013     1     1     -5.00     19.0      1065    158    24.0  2.63 
+ 8  2013     1     1     -3.00    -14.0       229     53.0 -11.0  0.883
+ 9  2013     1     1     -3.00    - 8.00      944    140   - 5.00 2.33 
+10  2013     1     1     -2.00      8.00      733    138    10.0  2.30 
+# ... with 336,766 more rows, and 1 more variable: gain_per_hour <dbl>
+>
+
+=== SLIDE 20 ===
+Use transmute to only keep modified variables
+> transmute(flights,
++           gain = arr_delay - dep_delay,
++           hours = air_time / 60,
++           gain_per_hour = gain / hours
++           )
+# A tibble: 336,776 x 3
+     gain hours gain_per_hour
+    <dbl> <dbl>         <dbl>
+ 1   9.00 3.78           2.38
+ 2  16.0  3.78           4.23
+ 3  31.0  2.67          11.6 
+ 4 -17.0  3.05         - 5.57
+ 5 -19.0  1.93         - 9.83
+ 6  16.0  2.50           6.40
+ 7  24.0  2.63           9.11
+ 8 -11.0  0.883        -12.5 
+ 9 - 5.00 2.33         - 2.14
+10  10.0  2.30           4.35
+# ... with 336,766 more rows
+>
+
+=== SLIDE 21 ===
+Alternative: double piping
+a <- transmute(flights,
+          gain = arr_delay - dep_delay,
+          hours = air_time / 60,
+          gain_per_hour = gain / hours
+          )
+
+b <- flights %>% mutate(
+      gain = arr_delay - dep_delay,
+      hours = air_time / 60,
+      gain_per_hour = gain / hours
+      ) %>%
+    select(gain,hours,gain_per_hour)
+
+identical(a,b)
+
+=== SLIDE 22 ===
+Can still use base R constructs
+Arithmetic operators: +,-,*,/,^
+Modular arithmetic (%/% and %%)
+X == y * (x %/% y) + (x %% y)
+Ex: transmute(flights,
+          dep_time,
+          hour = dep_time %/% 100,
+          minute = dep_time %% 100
+          )
+log, offset (lag, lead), min_rank etc.
+
+=== SLIDE 23 ===
+Group summaries
+summarize() collapses data object into single row.
+
+
+‘
+> summarize(flights, delay = mean(dep_delay, na.rm = TRUE))
+# A tibble: 1 x 1
+  delay
+  <dbl>
+1  12.6
+>
+
+=== SLIDE 24 ===
+Group Summaries
+summarize() is often used with “group_by”
+
+> by_day <- flights %>%
++     group_by(year, month, day) %>%
++     summarize(delay = mean(dep_delay, na.rm = TRUE))
+> by_day
+# A tibble: 365 x 4
+# Groups:   year, month [?]
+    year month   day delay
+   <int> <int> <int> <dbl>
+ 1  2013     1     1 11.5 
+ 2  2013     1     2 13.9 
+ 3  2013     1     3 11.0 
+ 4  2013     1     4  8.95
+ 5  2013     1     5  5.73
+ 6  2013     1     6  7.15
+ 7  2013     1     7  5.42
+ 8  2013     1     8  2.55
+ 9  2013     1     9  2.28
+10  2013     1    10  2.84
+# ... with 355 more rows
+
+=== SLIDE 25 ===
+Deal with missing values (counts)See class notes
+flights %>%
+    group_by(year, month, day) %>%
+    summarize(mean = mean(dep_delay, na.rm = TRUE))
+
+
+flights %>%
+    count(is.na(dep_delay))
+
+table(flights$dep_delay,useNA="ifany")
+
+=== SLIDE 26 ===
+Reexamine painters dataset
+require(MASS)
+pt <- as.tibble(rownames_to_column(painters)) %>%
+    select(painter=rowname,everything())
+
+
+pt %>%
+    group_by(School) %>%
+    filter(Composition >= 10) %>%
+    summarize(mean=mean(Drawing))
+
+## just do A
+painters.A <- painters[painters$School == "A",]
+pa.10 <- painters.A[painters.A$Composition >= 10,]
+mean(pa.10$Drawing)

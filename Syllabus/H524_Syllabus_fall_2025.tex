@@ -4,10 +4,13 @@
 \usepackage{tcolorbox}
 \usepackage{hyperref}
 \usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
 \usepackage{booktabs}
+\usepackage{longtable}
 
-% Define OSU orange color
+% Define OSU orange and AI blue colors
 \definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
 
 % Configure hyperref colors
 \hypersetup{
@@ -33,78 +36,77 @@
 \textcolor{white}{\textbf{\large Fall 2025}}
 \end{tcolorbox}
 
-\vspace{12pt}
+\vspace{8pt}
 
 \noindent\textbf{Credit Hours:} 04\\
-\textbf{Room:} Online\\
 \textbf{Schedule:}
 
-\vspace{6pt}
+\vspace{4pt}
 
 \begin{tabular}{@{}ll@{}}
-Lecture: & Monday, Wednesday 12:00-1:20pm\\
-Lab: & Wednesday: 8:00 am -- 9:50 am
+Lecture: & Monday, Wednesday 12:00-1:20pm (CORD 1424)\\
+Lab: & Wednesday: 8:00 am -- 9:50 am (BEXL 323)
 \end{tabular}
 
-\vspace{12pt}
+\vspace{8pt}
 
 \noindent\textbf{Course Instructor:} Dr. John Molitor\\
 \textbf{Office Location:} 153 Milam\\
 \textbf{Office Phone:} 541-737-3834\\
 \textbf{E-Mail:} \href{mailto:john.molitor@oregonstate.edu}{john.molitor@oregonstate.edu}\\
-\textbf{Office Hours:} Wednesday, 10:00 am -- 11:30 am
+\textbf{Instructor Communication:} Available via Canvas messaging and via Zoom.
 
-\vspace{12pt}
+\vspace{8pt}
 
 \noindent\textbf{Course Description:}
 
 Quantitative analysis and interpretation of health data including probability distributions, estimation of associations, and significance tests such as chi-squared, one-way ANOVA, and linear regression.
 
-\vspace{12pt}
+\textbf{\textcolor{aiblue}{AI-Enhanced Component:}} This course integrates generative AI tools as learning partners for statistical analysis. Students will learn to leverage AI for code generation, concept explanation, and problem-solving while developing critical skills in output verification and responsible AI use.
+
+\vspace{8pt}
 
 \noindent\textbf{Academic Calendar}
 
 All students are subject to the registration and refund deadlines as stated in the Academic Calendar: \url{https://registrar.oregonstate.edu/osu-academic-calendar}
 
-\vspace{12pt}
-
-\noindent\textbf{Instructor Communication}
-
-Please contact me privately Canvas inbox for matters of a personal nature.
-
-\vspace{12pt}
+\vspace{8pt}
 
 \noindent\textbf{Expectations for Time and Participation}
 
 This course combines approximately 120 total hours of instruction, online activities, and assignments for 4 credits.
 
-\vspace{12pt}
+\vspace{8pt}
 
 \noindent\textbf{Prerequisites}
 
 H 524 assumes basic knowledge of statistical concepts and procedures equivalent to that of an undergraduate statistics course, and MTH 105 (Introduction to Contemporary Mathematics) or MTH 111 (College Algebra) or a higher mathematics course.
 
-\vspace{12pt}
+\vspace{8pt}
 
 \noindent\textbf{Learning Resources}
 
-Resources include, but are not limited to:
+\noindent Resources include, but are not limited to:
 \begin{itemize}[leftmargin=20pt]
 \item Lecture Notes
 \item Reading Assignments
 \item Discussions in class and on Canvas
 \item Problem Sets
-\item In-office help during office hours from both course instructor and lab instructors.
+\item In-office help during office hours from both course instructor and lab instructors
+\item \textcolor{aiblue}{\textbf{AI Tools:}} Microsoft Copilot (required); GitHub Copilot with RStudio (optional but recommended)
+\item \textcolor{aiblue}{\textbf{AI Prompt Templates:}} Curated prompts for statistical analysis tasks
 \end{itemize}
 
-\vspace{12pt}
+\vspace{8pt}
+
+\newpage
 
 \noindent\textbf{Textbook}
 
-Principles of Biostatistics, 2nd edition, 2022\\
+\noindent Principles of Biostatistics, 2nd edition, 2022\\
 Marcello Pagano and Kimberlee Gauvreau
 
-\vspace{12pt}
+\vspace{8pt}
 
 \noindent\textbf{Measurable Student Learning Outcomes}
 
@@ -113,15 +115,17 @@ Marcello Pagano and Kimberlee Gauvreau
 \item Use principles of statistical inference to make conclusions about populations from samples.
 \item Communicate statistical findings to others.
 \item Use computer software to conduct statistical analysis.
+\item \textcolor{aiblue}{\textbf{AI Integration:} Effectively prompt AI tools for statistical tasks and critically evaluate their outputs.}
+\item \textcolor{aiblue}{\textbf{Verification Skills:} Validate AI-generated code and results through independent checking.}
 \end{itemize}
 
-\vspace{12pt}
+\vspace{8pt}
 
 \noindent\textbf{Evaluation of Student Performance}
 
 \textbf{Grading:} Tests will be graded according to the following scale. It is possible, however, that adjustments will be made to this scale based on class performance.
 
-\vspace{6pt}
+\vspace{4pt}
 
 \begin{center}
 \begin{tabular}{cc}
@@ -144,24 +148,68 @@ Less than 44 & F \\
 \end{tabular}
 \end{center}
 
+\vspace{8pt}
+
+\noindent\textbf{Evaluation of Student Performance}
+
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+Component & Weight \\
+\midrule
+Weekly Assignments & 60\% \\
+Group Project & 25\% \\
+Class Participation & 15\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{8pt}
+
+\noindent\textbf{Assignments}
+
+Weekly assignments will be given throughout the semester and will include \textcolor{aiblue}{AI-enhanced components}.
+
+\vspace{8pt}
+
+\noindent\textbf{Group Project}
+
+A final group project will serve as the culminating assessment for the course.
+
 \vspace{12pt}
 
-\noindent\textbf{Evaluation:} 30\% homework, 30\% midterm exam, 30\% final exam, 10\% class participation.
+\newpage
 
-\vspace{12pt}
+\noindent\textbf{AI Use Policy}
 
-\noindent\textbf{Homework}
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\textbf{Permitted AI Use:}
+\begin{itemize}[leftmargin=10pt]
+\item Microsoft Copilot is required for concept exploration; GitHub Copilot (with RStudio) is recommended for code generation
+\item All AI-generated content must be verified
+\item Students must demonstrate understanding independent of AI assistance
+\end{itemize}
 
-Homework will be assigned regularly in class, approximately once a week.
+%% \textbf{Required Documentation:}
+%% \begin{itemize}[leftmargin=10pt]
+%% \item Cite AI tools used (name, version, date)
+%% \item Include key prompts for significant AI contributions
+%% \item Document verification steps taken
+%% \end{itemize}
 
-\vspace{12pt}
+%% \textbf{Academic Integrity:}
+%% \begin{itemize}[leftmargin=10pt]
+%% \item Submitting unverified AI output as your own work is academic dishonesty
+%% \item You are responsible for all errors in AI-generated content
+%% \item Exams will test your understanding with and without AI assistance
+%% \end{itemize}
+\end{tcolorbox}
+
+\vspace{8pt}
 
 \noindent\textbf{Course Schedule}
 
 The proposed schedule is subject to change by the instructor. What follows is a general outline of the proposed topics for discussion as well as the proposed dates. However, if we run out of time, get in a particularly lengthy discussion, or cover a topic more quickly than expected, there will likely be changes to the syllabus.
-
-\vspace{12pt}
-
 \begin{center}
 \begin{tabular}{p{1.5cm}p{5.5cm}p{5cm}}
 \toprule
@@ -183,8 +231,7 @@ Week 3: & Theoretical Probability Distributions\\
 \midrule
 Week 4: & Confidence Intervals & Pagano: Chapter 9 \\
 \midrule
-Week 5: & Hypothesis Testing\\
-& Midterm exam & Pagano: Chapter 10 \\
+Week 5: & Hypothesis Testing & Pagano: Chapter 10 \\
 \midrule
 Week 6: & Power\\
 & Comparison of Two Means\\
@@ -199,20 +246,42 @@ Week 8: & Catch-up from Weeks 6 \& 7\\
 Week 9: & Correlation\\
 & Simple Linear Regression & Pagano: Chapters 17, 18 \\
 \midrule
-Week 10: & Simple Linear Regression & Pagano: Chapter 18 \\
+Week 10: & Group Project Final Presentations\\
+& Simple Linear Regression & Pagano: Chapter 18 \\
 \midrule
 \end{tabular}
 \end{center}
 
-\textbf{Final Exam:} Available during finals week.
 
-\vspace{12pt}
+\vspace{8pt}
+
+\noindent\textbf{Lab Sessions - AI Integration}
+
+Wednesday labs will include:
+\begin{itemize}[leftmargin=20pt]
+\item Traditional R programming exercises
+\item \textcolor{aiblue}{\textbf{AI-Enhanced Activities}}
+\end{itemize}
+
+\vspace{8pt}
+
+\noindent\textbf{Assessment Philosophy}
+
+This course emphasizes continuous learning and practical application over high-stakes testing. Assessment focuses on:
+\begin{itemize}[leftmargin=20pt]
+\item Regular homework assignments that build statistical competency
+\item Collaborative learning through group projects
+\item AI tool integration and documentation skills
+\item Professional communication and presentation abilities
+\end{itemize}
+
+\vspace{8pt}
 
 \noindent\textbf{Diversity Statement}
 
 The College of Public Health and Human Sciences strives to create an affirming climate for all students including underrepresented and marginalized individuals and groups. Diversity encompasses differences in age, color, ethnicity, national origin, gender, physical or mental ability, religion, socioeconomic background, veteran status, sexual orientation, and marginalized groups. We believe diversity is the synergy, connection, acceptance, and mutual learning fostered by the interaction of different human characteristics.
 
-\vspace{12pt}
+\vspace{8pt}
 
 \noindent\textbf{Expectations for Student Conduct}
 
@@ -220,13 +289,15 @@ The Student Conduct Code establishes community standards and procedures necessar
 
 Academic or Scholarly Dishonesty is prohibited and considered a serious violation of the Student Conduct Code. It is defined as an act of deception in which a Student seeks to claim credit for the work or effort of another person, or uses unauthorized materials or fabricated information in any academic work or research, either through the Student's own efforts or the efforts of another. For specifics related to offenses proscribed by the University see: \url{http://oregonstate.edu/studentconduct/offenses-0}
 
-\vspace{12pt}
+%% \textcolor{aiblue}{\textbf{AI-Specific Academic Integrity:} Using AI tools without proper attribution, submitting unverified AI output as original work, or using AI to fabricate data or references constitutes academic dishonesty.}
+
+\vspace{8pt}
 
 \noindent\textbf{Religious Holiday Statement}
 
 Oregon State University strives to respect all religious practices. If you have religious holidays that are in conflict with any of the requirements of this class, please see me immediately so that we can make alternative arrangements.
 
-\vspace{12pt}
+\vspace{8pt}
 
 \noindent\textbf{Students with Documented Disabilities}
 

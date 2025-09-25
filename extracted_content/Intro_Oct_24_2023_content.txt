@@ -1,0 +1,19 @@
+Extracted from: /Users/molitorj/ms/OSU/classes/AI_H524/introduction-to-biostatistics-h-524-101-f2024-export/web_resources/Uploaded Media/Intro_Oct_24_2023.pptx
+==================================================
+
+
+=== SLIDE 1 ===
+H524Tuesda, October 24th, 2023
+John Molitor
+Oregon State University
+
+=== SLIDE 2 ===
+During this class we plan to cover
+Sampling distributions (including CLT)
+Introduction to hypothesis testing
+
+=== SLIDE 3 ===
+After this class you
+Upstand concepts of the Central Limit Theorem.
+Understand basic concepts of hypothesis testing.
+Understand and be able to implement basic t-tests.

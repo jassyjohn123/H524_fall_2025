@@ -1,0 +1,160 @@
+Extracted from: /Users/molitorj/ms/OSU/classes/AI_H524/introduction-to-biostatistics-h-524-101-f2024-export/web_resources/Uploaded Media/Extra.pptx
+==================================================
+
+
+=== SLIDE 1 ===
+Health Data Analysis
+Common Statistical Tests
+
+=== SLIDE 2 ===
+Multiple Statistical Tests
+Chi-square 
+Testing
+Other Statistical 
+Classes
+Simple Linear 
+Regression
+
+=== SLIDE 3 ===
+Chi-squareTesting
+
+=== SLIDE 4 ===
+Hypothesis Testing for Categorical and Ordinal Outcomes
+2 or more sample: χ2 test for independence
+Compare observed distribution of outcome response categories between treatment groups
+One sample: χ2 goodness-of-fit test
+Compare observed frequencies for each outcome category to expected outcomes for each category
+χ2 tests are based on the agreement between expected (under H0) and observed (sample) frequencies
+
+=== SLIDE 5 ===
+Chi-square Distribution
+•Test Statistic: 
+
+•Reject H0 if Chi-square value > Critical Value
+
+=== SLIDE 6 ===
+Chi-square: Hypothesis Set-up
+•One sample:
+o H0:  p1 = p10, p=20, …, pk = pk0o Ha : H0 is false
+
+•Two sample
+o Treatment and outcome (distributions) are Independent
+
+=== SLIDE 7 ===
+Chi-square Hypothesis Testing
+Checking sample size
+One sample:  min( np10, np20, …, npk0  ) > 5
+Two sample: expected frequencies (E) > 5 per cell
+
+Decision Rule
+One sample:  df = k - 1
+Two sample: df = (r-1)(c-1)
+Reject H0 if Chi-square value > critical value
+
+=== SLIDE 8 ===
+Expected Frequencies
+One sample: given probabilities (null probabilities) for each possible outcome that we want to compare our sample to
+Two or more samples: need to be calculated where:
+
+E = row total x column total / N
+
+=== SLIDE 9 ===
+Final Steps
+•Compute Test Statistic: 
+
+•Find p-value using test statistic (computer program) 
+
+• Make conclusion: compare test statistic to decision    
+  rule and interpret the p-value
+
+=== SLIDE 10 ===
+Chi-Square Example and Interpretation
+• Question of Interest: Is there a significant difference in the number of ACL tears between genders of 100 soccer players from a local university
+• H0: ACL Tearsmales = ACL Tearsfemales
+• Ha: ACL Tearsmales ≠ ACL Tearsfemales
+• Chi-square value = 24.63
+• Fail to reject if there is a difference in ACL tears between male and female soccer athletes (p = 0.620)
+
+=== SLIDE 11 ===
+Simple Linear Regression
+
+=== SLIDE 12 ===
+Linear Regression: An Introduction
+Goal:  relate a response (“outcome”, “dependent variable”) to one or more predictors (“covariates”, “independent variables”); 
+In public health research, we are interested in looking at associations between variables
+Statistically, we are trying to determine whether two variables are independent or dependent
+A model of the relationship is hypothesized, and estimates of the parameter values are used to develop an estimated regression equation. 
+If the model is deemed satisfactory, the estimated regression equation can be used to predict the value of the dependent variable given values for the independent variables
+
+=== SLIDE 13 ===
+Linear Regression: An Introduction (cont.)
+Goal:  relate a response (“outcome”) to one or more predictors (“covariates”,); 
+In public health research, we are interested in looking at associations between variables
+A model of the relationship is hypothesized, and estimates of the parameter values are used to develop an estimated regression equation. 
+If the model is deemed satisfactory, the estimated regression equation can be used to predict the value of the dependent variable given values for the independent variables
+
+=== SLIDE 14 ===
+Linear Regression: Model
+y = dependent variable (outcome)
+x = independent variable (covariate)
+β0 = y-intercept
+β1 = slope of the line
+ε= error variable
+
+=== SLIDE 15 ===
+Linear Regression: Assumptions
+Validity: 
+Linearity: 
+Normality
+Independence of errors
+Equal variance of errors (homoscedasticity)
+
+=== SLIDE 16 ===
+Linear Regression: Linearity & Normality
+Validity: 
+Linearity: 
+Normality
+Independence of errors
+Equal variance of errors (homoscedasticity)
+
+=== SLIDE 17 ===
+Linear Regression: Coefficient Estimate
+The estimates are determined by 
+drawing a sample from the population of interest
+calculating sample statistics
+producing a straight line that cuts into the data
+Interested in predicting the mean response value at each value of an explanatory variable with a straight line
+The question is:
+Which straight line fits best?
+Line A
+Line B
+Line C
+
+=== SLIDE 18 ===
+Residuals and Least Sum of Squares
+A residual is the difference between an observed value and the fitted value provided by a model. 
+Ordinary least squares is a method for estimating the unknown parameters in a linear regression model. This method minimizes the sum of squared vertical distances between the observed responses and the predicted responses from the regression equation.
+
+=== SLIDE 19 ===
+Simple Linear Regression: Example
+Question of Interest: In a population of 100 individuals with cardiovascular disease: do individuals with a high BMI (predictor) have higher heart rates?
+
+
+
+
+
+Model: yheartrate = β0 + β1(BMI) + e
+On average, for every one unit increase in BMI, the average heart rate of individuals with CVD decreased by 0.01 beats per minute (p = 0.76)
+
+=== SLIDE 20 ===
+THANK YOU
+
+=== SLIDE 21 ===
+Citations
+Essentials of Biostatistics for Public Health, Third Edition, by LM Sullivan. Jones and Bartlett Publishers, Inc. 2012.  ISBN/SKU 978-1-284-10819-4
+
+Haslwanter, T. (2013). Residuals for Linear Regression Fit. Retrieved from https://commons.wikimedia.org/wiki/File:Residuals_for_Linear_Regression_Fit.png
+
+Linear Regression Essentials in R - Articles - STHDA. (n.d.). Retrieved August 14, 2019, from http://www.sthda.com/english/articles/40-regression-analysis/165-linear-regression-essentials-in-r/
+
+Somethingforstats. (2017). Heteroscedascity vs Homoscedascity. Retrieved from https://commons.wikimedia.org/wiki/File:Heteroscedascity_vs_Homoscedascity.png

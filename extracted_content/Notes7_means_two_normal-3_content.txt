@@ -1,0 +1,82 @@
+Extracted from: /Users/molitorj/ms/OSU/classes/AI_H524/introduction-to-biostatistics-h-524-101-f2024-export/web_resources/Uploaded Media/Notes7_means_two_normal-3.pptx
+==================================================
+
+
+=== SLIDE 1 ===
+Hypothesis TestingMeans of Two Normal Populations
+
+=== SLIDE 2 ===
+Calcium and Blood Pressure
+Scientific Hypothesis: calcium may have an effect on blood pressure
+
+Null Hypothesis: ‘There is no effect of calcium on blood pressure’
+
+Formulate the null hypothesis in terms of the study:
+	‘There is no difference between the mean blood pressure of men who took calcium supplements and the mean blood pressure of the men who took placebo’
+
+=== SLIDE 3 ===
+Calcium and Blood Pressure
+Data: 
+x1 = mean blood pressure of men who took calcium
+x2 = mean blood pressure of men who took placebo
+
+s1 = sample s.d of blood pressure of men who took calcium
+s2 = sample s.d. of blood pressure of men who took placebo
+
+Assume blood pressure follows a Normal distribution.
+_
+_
+
+=== SLIDE 4 ===
+Normal Distribution
+Normal parameters
+μ1 = expectation of blood pressure level (for calcium group)
+σ = standard deviation of blood pressure (for calcium group)
+
+μ 2 = expectation of blood pressure level (for placebo group)
+σ = standard deviation of blood pressure (for placebo group)
+
+Null hypothesis
+μ1 = μ2
+
+Alternative hypothesis
+μ1 ≠ μ2    (2-sided test)
+
+=== SLIDE 5 ===
+Test Statistic for Comparing Normal Means (Equal Variances)
+
+=== SLIDE 6 ===
+Test Statistic for Comparing Normal Means (Equal Variances)
+Test Statistic
+
+
+TS ~ Standard t-distribution with (n1 + n2 - 2) degrees freedom
+
+Testing
+Calculate observed TS, compare to Standard t-distribution.
+_
+_
+
+=== SLIDE 7 ===
+Calcium and Blood Pressure
+= mean blood pressure of men who took calcium
+    = 5.0
+     = mean blood pressure of men who took placebo
+    = 0.3
+TS  =  (5-0.3)/3.2  =  1.5
+
+P-value
+p-value = 2 * Pr(t19 > 1.5)
+ = 0.15
+_
+1.5
+-1.5
+
+=== SLIDE 8 ===
+Calcium and Blood Pressure
+p-value = 0.15    NOT SIGNIFICANT
+
+Therefore, we cannot say that calcium has an effect on blood pressure from this experiment at alpha=0.05 level.
+
+=== SLIDE 9 ===
+Compare Two ProportionsLarge Samples

@@ -1,0 +1,384 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{graphicx}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{\textbf{H524 Introduction to Biostatistics\\
+\Large AI-Enhanced Public Health Data Analysis Project\\
+Fall 2025}}
+\author{Dr. John Molitor}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,boxrule=2pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\centering
+\textbf{\large Final Assessment Project Overview}\\[0.3em]
+Teams of 7 students will conduct a comprehensive biostatistical analysis of a real public health dataset as the culminating course assessment (25\% of final grade). This project replaces traditional final exams and demonstrates effective integration of AI tools throughout the research process while maintaining scientific rigor and reproducibility.
+\end{tcolorbox}
+
+\section{Project Timeline}
+\begin{itemize}[leftmargin=20pt]
+\item \textbf{Week 3:} Project introduction and team formation
+\item \textbf{Week 4:} Dataset selection and research question formulation
+\item \textbf{Week 5:} Project proposal due (1 page)
+\item \textbf{Week 7:} Mid-project check-in and feedback
+\item \textbf{Week 9:} Draft analysis due for peer review
+\item \textbf{Week 10:} Final project submission
+\item \textbf{Finals Week:} Final assessment presentations (20 minutes + 5 minutes Q\&A per team)
+\end{itemize}
+
+\section{Available Datasets}
+
+Each team must select one of the following real public health datasets:
+
+\subsection{Option 1: CDC PLACES Health Data (County-Level)}
+\begin{itemize}
+\item \textbf{Source:} CDC PLACES Project 2022
+\item \textbf{Focus Areas:} Chronic disease prevalence, health behaviors, prevention measures
+\item \textbf{Sample Size:} ~3,100 counties/county equivalents
+\item \textbf{Access:} \url{https://chronicdata.cdc.gov/browse?category=500+Cities+%26+Places}
+\item \textbf{Data Type:} Aggregated county-level estimates (no survey weights needed)
+\item \textbf{Suggested Research Questions:}
+    \begin{itemize}
+    \item Geographic patterns in diabetes prevalence across US counties
+    \item Association between preventive care access and health outcomes
+    \item Rural vs urban differences in chronic disease burden
+    \end{itemize}
+\end{itemize}
+
+\subsection{Option 2: COVID-19 Case Surveillance Public Use Data}
+\begin{itemize}
+\item \textbf{Source:} CDC COVID-19 Case Surveillance
+\item \textbf{Focus Areas:} COVID-19 outcomes, risk factors, demographics
+\item \textbf{Sample Size:} ~1 million de-identified cases
+\item \textbf{Access:} \url{https://data.cdc.gov/Case-Surveillance/}
+\item \textbf{Suggested Research Questions:}
+    \begin{itemize}
+    \item Risk factors for severe COVID-19 outcomes
+    \item Geographic and temporal patterns in case fatality rates
+    \item Age-stratified analysis of hospitalization predictors
+    \end{itemize}
+\end{itemize}
+
+\subsection{Option 3: Heart Disease Mortality Data (County-Level)}
+\begin{itemize}
+\item \textbf{Source:} CDC WONDER Underlying Cause of Death
+\item \textbf{Focus Areas:} Heart disease mortality rates, demographic patterns
+\item \textbf{Sample Size:} ~3,100 counties with 5+ years of data
+\item \textbf{Access:} \url{https://wonder.cdc.gov/controller/datarequest/D77}
+\item \textbf{Data Type:} Aggregated mortality rates (no survey weights needed)
+\item \textbf{Suggested Research Questions:}
+    \begin{itemize}
+    \item Geographic disparities in heart disease mortality
+    \item Age and gender patterns in cardiovascular death rates
+    \item Trends in heart disease mortality over time
+    \end{itemize}
+\end{itemize}
+
+\subsection{Option 4: Global Burden of Disease (GBD) Study}
+\begin{itemize}
+\item \textbf{Source:} IHME GBD 2019
+\item \textbf{Focus Areas:} Disease burden, mortality, risk factors globally
+\item \textbf{Sample Size:} 204 countries and territories
+\item \textbf{Access:} \url{http://ghdx.healthdata.org/gbd-results-tool}
+\item \textbf{Suggested Research Questions:}
+    \begin{itemize}
+    \item Trends in disease burden across income levels
+    \item Environmental risk factors and respiratory disease mortality
+    \item Progress toward health-related SDG targets
+    \end{itemize}
+\end{itemize}
+
+\subsection{Option 5: Youth Tobacco Use Data}
+\begin{itemize}
+\item \textbf{Source:} CDC Youth Risk Behavior Surveillance System (State-Level)
+\item \textbf{Focus Areas:} Tobacco use patterns, demographics, risk behaviors
+\item \textbf{Sample Size:} 50 states + DC, multiple years
+\item \textbf{Access:} \url{https://www.cdc.gov/healthyyouth/data/yrbs/}
+\item \textbf{Data Type:} State-level aggregated percentages (no survey weights needed)
+\item \textbf{Suggested Research Questions:}
+    \begin{itemize}
+    \item State-level variations in youth tobacco use
+    \item Trends in e-cigarette vs traditional cigarette use
+    \item Association between tobacco policies and use rates
+    \end{itemize}
+\end{itemize}
+
+\subsection{Option 6: OpenFDA Adverse Events Database}
+\begin{itemize}
+\item \textbf{Source:} FDA Adverse Event Reporting System (FAERS)
+\item \textbf{Focus Areas:} Drug safety, adverse events, pharmacovigilance
+\item \textbf{Sample Size:} Millions of reports
+\item \textbf{Access:} \url{https://open.fda.gov/data/faers/}
+\item \textbf{Suggested Research Questions:}
+    \begin{itemize}
+    \item Patterns in adverse events for specific drug classes
+    \item Age and gender differences in drug safety profiles
+    \item Time trends in reporting of serious adverse events
+    \end{itemize}
+\end{itemize}
+
+\section{Project Components}
+
+\subsection{Part 1: Research Question and Literature Review (15\%)}
+\begin{itemize}
+\item Formulate a clear, answerable research question
+\item Conduct literature review using AI-assisted search strategies
+\item Document AI tool usage for literature synthesis
+\item Identify gaps your analysis will address
+\end{itemize}
+
+\subsection{Part 2: Data Management and Exploration (20\%)}
+\begin{itemize}
+\item Data cleaning and preprocessing with AI assistance
+\item Exploratory data analysis with appropriate visualizations
+\item Missing data assessment and handling strategy
+\item Document all AI-generated code with verification steps
+\end{itemize}
+
+\subsection{Part 3: Statistical Analysis (30\%)}
+\begin{itemize}
+\item Apply appropriate statistical methods from H524 curriculum:
+    \begin{itemize}
+    \item Descriptive statistics and data visualization
+    \item Hypothesis testing (t-tests, chi-square, ANOVA)
+    \item Correlation and regression analysis
+    \item Appropriate adjustments for multiple comparisons
+    \end{itemize}
+\item Use AI to explore alternative analytical approaches
+\item Validate all AI-suggested methods against course materials
+\item Conduct sensitivity analyses where appropriate
+\end{itemize}
+
+\subsection{Part 4: AI Integration and Documentation (20\%)}
+\begin{itemize}
+\item Maintain an AI usage log throughout the project
+\item Document all prompts used for substantial tasks
+\item Include verification steps for AI-generated results
+\item Reflect on AI benefits and limitations encountered
+\item Create a "lessons learned" section on AI use
+\end{itemize}
+
+\subsection{Part 5: Final Presentation and Communication (25\%)}
+\begin{itemize}
+\item 20-minute team presentation + 5 minutes Q\&A
+\item Clear visual aids and professional data visualizations
+\item Effective storytelling with data and public health implications
+\item Demonstration of team collaboration and individual contributions
+\item Professional delivery, time management, and audience engagement
+\end{itemize}
+
+\section{Deliverables}
+
+\subsection{Project Proposal (Week 5)}
+One-page proposal including:
+\begin{itemize}
+\item Research question and hypothesis
+\item Selected dataset and justification
+\item Planned statistical approaches
+\item Team member roles and responsibilities
+\item Anticipated AI tools and usage
+\end{itemize}
+
+\subsection{Final Report (Week 10)}
+Comprehensive report (12-15 pages) including:
+\begin{itemize}
+\item Executive summary (1 page)
+\item Introduction and literature review
+\item Methods section with data description
+\item Results with tables and figures
+\item Discussion and limitations
+\item AI usage documentation appendix
+\item Reproducible R code with comments
+\item Team contribution statement
+\end{itemize}
+
+\subsection{Final Assessment Presentation Materials (Finals Week)}
+\begin{itemize}
+\item PowerPoint/PDF slides (20-25 slides for 20-minute presentation)
+\item Live demonstration of key findings and statistical methods
+\item Prepared responses for anticipated questions and statistical challenges
+\item One-page executive summary handout for audience
+\item Individual reflection on learning and AI tool usage (1 page per student)
+\end{itemize}
+
+\section{AI Usage Requirements}
+
+\begin{tcolorbox}[colback=aiblue!5,colframe=aiblue,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\textbf{Required AI Integration:}
+\begin{enumerate}
+\item \textbf{GitHub Copilot:} Use for R code generation and debugging
+\item \textbf{Literature Review:} Use AI to identify relevant papers and synthesize findings
+\item \textbf{Statistical Methods:} Consult AI for method selection and interpretation
+\item \textbf{Data Visualization:} Generate initial visualization code with AI assistance
+\item \textbf{Writing Support:} Use AI for editing and clarity (with attribution)
+\end{enumerate}
+
+\textbf{AI Documentation Template:}
+\begin{verbatim}
+## AI Usage Log Entry
+Date: [Date]
+Tool: [GitHub Copilot/ChatGPT/Claude/etc.]
+Task: [Specific task]
+Prompt: [Exact prompt used]
+Output: [Summary of AI response]
+Verification: [How you verified the output]
+Modifications: [Changes made to AI output]
+\end{verbatim}
+\end{tcolorbox}
+
+\section{Grading Rubric}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Component} & \textbf{Weight} & \textbf{Points} \\
+\midrule
+Research Question \& Literature Review & 15\% & 15 \\
+Data Management \& Exploration & 20\% & 20 \\
+Statistical Analysis & 25\% & 25 \\
+AI Integration \& Documentation & 15\% & 15 \\
+Final Presentation \& Communication & 25\% & 25 \\
+\midrule
+\textbf{Total} & \textbf{100\%} & \textbf{100} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Detailed Grading Criteria}
+
+\subsubsection{Excellent (90-100\%)}
+\begin{itemize}
+\item Clear, innovative research question with public health relevance
+\item Comprehensive statistical analysis with appropriate methods
+\item Exceptional AI integration with thorough documentation
+\item Professional presentation with compelling data story
+\item All team members contributed meaningfully
+\end{itemize}
+
+\subsubsection{Good (80-89\%)}
+\begin{itemize}
+\item Well-defined research question with clear objectives
+\item Appropriate statistical methods correctly applied
+\item Good AI usage with adequate documentation
+\item Clear presentation with good visualizations
+\item Most team members actively participated
+\end{itemize}
+
+\subsubsection{Satisfactory (70-79\%)}
+\begin{itemize}
+\item Basic research question addressed
+\item Statistical methods mostly correct with minor errors
+\item AI used but documentation incomplete
+\item Adequate presentation meeting time requirements
+\item Uneven team contribution evident
+\end{itemize}
+
+\subsubsection{Needs Improvement (<70\%)}
+\begin{itemize}
+\item Unclear research question or objectives
+\item Inappropriate statistical methods or major errors
+\item Minimal AI usage or poor documentation
+\item Presentation lacks clarity or professionalism
+\item Limited team collaboration
+\end{itemize}
+
+\section{Team Formation and Roles}
+
+Each team of 7 students should designate:
+\begin{itemize}
+\item \textbf{Project Manager:} Coordinate meetings, deadlines, and submissions
+\item \textbf{Data Manager:} Lead data cleaning and preprocessing
+\item \textbf{Statistical Lead:} Guide analytical approach and methods
+\item \textbf{AI Integration Lead:} Coordinate AI tool usage and documentation
+\item \textbf{Visualization Lead:} Create figures and presentation materials
+\item \textbf{Writing Lead:} Coordinate report writing and editing
+\item \textbf{Presentation Lead:} Coordinate final presentation and Q\&A preparation
+\end{itemize}
+
+Note: All team members are expected to contribute to all aspects; roles are for coordination.
+
+\section{Resources and Support}
+
+\subsection{Technical Resources}
+\begin{itemize}
+\item RStudio with GitHub Copilot enabled
+\item Access to OSU library databases
+\item Canvas discussion board for project Q\&A
+\item Sample analysis templates on Canvas
+\end{itemize}
+
+\subsection{Office Hours Support}
+\begin{itemize}
+\item Regular office hours: Wednesday 10:00-11:30 AM
+\item Special project office hours: Weeks 5, 7, 9
+\item Schedule team consultations via Canvas
+\end{itemize}
+
+\subsection{Recommended R Packages}
+\begin{verbatim}
+# Data manipulation
+library(tidyverse)
+library(data.table)
+
+# Statistical analysis
+library(stats)
+library(car)
+library(lmtest)
+library(tableone)
+
+# Visualization
+library(ggplot2)
+library(plotly)
+library(corrplot)
+
+# Reporting
+library(knitr)
+library(rmarkdown)
+library(stargazer)
+\end{verbatim}
+
+\section{Academic Integrity}
+
+\begin{tcolorbox}[colback=red!5,colframe=red,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\textbf{Important Reminders:}
+\begin{itemize}
+\item All AI-generated content must be verified and attributed
+\item Each team member must contribute substantively
+\item Plagiarism or fabrication of data will result in project failure
+\item Inter-team collaboration is encouraged, but each team's work must be unique
+\item Citation of all sources (including AI tools) is required
+\end{itemize}
+\end{tcolorbox}
+
+\section{Tips for Success}
+
+\begin{enumerate}
+\item \textbf{Start Early:} Data cleaning always takes longer than expected
+\item \textbf{Communicate Regularly:} Schedule weekly team meetings
+\item \textbf{Document Everything:} Keep detailed notes of decisions and methods
+\item \textbf{Verify AI Output:} Always double-check AI-generated code and interpretations
+\item \textbf{Practice Presentation:} Rehearse timing and transitions
+\item \textbf{Seek Feedback:} Use office hours and peer review opportunities
+\item \textbf{Focus on Story:} Ensure your analysis tells a coherent public health story
+\end{enumerate}
+
+\end{document}
