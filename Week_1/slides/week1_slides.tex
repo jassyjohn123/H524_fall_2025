@@ -322,14 +322,14 @@ pie(insurance_counts, main = "Insurance Distribution")
 \begin{frame}
 \frametitle{Bar Chart Example}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/barplot_injuries.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/barplot_injuries.pdf}
 \end{center}
 \end{frame}
 
 \begin{frame}
 \frametitle{Pie Chart Example}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/piechart_injuries.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/piechart_injuries.pdf}
 \end{center}
 \end{frame}
 
@@ -373,28 +373,28 @@ boxplot(health_data$systolic_bp, main = "BP Distribution")
 \begin{frame}
 \frametitle{Histogram Example}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/histogram_fev1.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/histogram_fev1.pdf}
 \end{center}
 \end{frame}
 
 \begin{frame}
 \frametitle{Box Plot Example}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/boxplot_fev1_gender.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/boxplot_fev1_gender.pdf}
 \end{center}
 \end{frame}
 
 \begin{frame}
 \frametitle{Dot Plot Example}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/dotplot_fev1.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/dotplot_fev1.pdf}
 \end{center}
 \end{frame}
 
 \begin{frame}
 \frametitle{Scatter Plot Example}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/scatter_fev1.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/scatter_fev1.pdf}
 \end{center}
 \end{frame}
 
@@ -588,13 +588,13 @@ where:
 \end{enumerate}
 
 \vspace{0.5cm}
-$$\text{SMR} = \frac{\text{Observed events}}{\text{Expected events}} \times 100$$
+$$\text{SMR} = \frac{\text{Observed events}}{\text{Expected events}}$$
 
 \textbf{SMR} = Standardized Mortality Ratio
 \begin{itemize}
-\item SMR $>$ 100: Higher than expected
-\item SMR $<$ 100: Lower than expected
-\item SMR $=$ 100: Same as expected
+\item SMR $>$ 1: Higher than expected
+\item SMR $<$ 1: Lower than expected
+\item SMR $=$ 1: Same as expected
 \end{itemize}
 \end{frame}
 
@@ -877,7 +877,7 @@ summary(bp_data$systolic_bp)  # Five-number summary
 \frametitle{Data Visualization: Histogram}
 \vspace{-0.2cm}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/histogram_fev1.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/histogram_fev1.pdf}
 \end{center}
 \vspace{-0.1cm}
 \begin{itemize}
@@ -891,7 +891,7 @@ summary(bp_data$systolic_bp)  # Five-number summary
 \frametitle{Data Visualization: Box Plots}
 \vspace{-0.2cm}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/boxplot_fev1_gender.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/boxplot_fev1_gender.pdf}
 \end{center}
 \vspace{-0.1cm}
 \begin{itemize}
@@ -905,7 +905,7 @@ summary(bp_data$systolic_bp)  # Five-number summary
 \frametitle{Data Visualization: Bar Charts}
 \vspace{-0.2cm}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/barplot_gender_fev1.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/barplot_gender_fev1.pdf}
 \end{center}
 \vspace{-0.1cm}
 \begin{itemize}
@@ -919,7 +919,7 @@ summary(bp_data$systolic_bp)  # Five-number summary
 \frametitle{Data Visualization: Scatter Plots}
 \vspace{-0.2cm}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/scatter_fev1.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/scatter_fev1.pdf}
 \end{center}
 \vspace{-0.1cm}
 \begin{itemize}
@@ -978,7 +978,7 @@ age_specific_rates <- (cases_by_age / population_by_age) * 100000
 \frametitle{Age-Specific Rates Visualization}
 \vspace{-0.2cm}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/age_specific_rates.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/age_specific_rates.pdf}
 \end{center}
 \vspace{-0.1cm}
 \begin{itemize}
@@ -1013,7 +1013,6 @@ age_specific_rates <- (cases_by_age / population_by_age) * 100000
 
 \vspace{1cm}
 
-\textbf{Office Hours:} Wednesday, 10:00 am -- 11:30 am\\
 \textbf{Email:} john.molitor@oregonstate.edu\\
 \textbf{Office:} 153 Milam
 \end{center}

@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questestinterop xmlns="http://www.imsglobal.org/xsd/ims_qtiasiv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/ims_qtiasiv1p2 http://www.imsglobal.org/xsd/ims_qtiasiv1p2p1.xsd">
+  <assessment ident="week2_assignment" title="H524 Assignment 2: Introduction to Probability">
+    <qtimetadata>
+      <qtimetadatafield>
+        <fieldlabel>cc_maxattempts</fieldlabel>
+        <fieldentry>1</fieldentry>
+      </qtimetadatafield>
+      <qtimetadatafield>
+        <fieldlabel>qmd_timelimit</fieldlabel>
+        <fieldentry>180</fieldentry>
+      </qtimetadatafield>
+    </qtimetadata>
+    <section ident="root_section">
+
+      <!-- Question 1: R Code (Essay) -->
+      <item ident="q1" title="Question 1: Basic R Operations">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 1: Basic R Operations (5 points)</strong></p>
+<p>Write R code to:</p>
+<ol type="a">
+<li>Create a vector with the following systolic blood pressures: 118, 132, 145, 128, 155, 122, 138 (1 point)</li>
+<li>Calculate the mean and standard deviation (2 points)</li>
+<li>Determine how many patients have high blood pressure (≥140 mmHg) (2 points)</li>
+</ol>
+<p>Paste your R code in the text box below.</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 2: Simple Probability (Multiple Choice) -->
+      <item ident="q2a" title="Question 2a: Complement Probability">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>2</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 2a:</strong> In a hospital emergency department, 40% of patients come for injuries, 35% come for illnesses, and 25% come for other reasons.</p>
+<p>What is the probability the next patient does NOT come for an injury?</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material><mattext texttype="text/html">0.40</mattext></material>
+              </response_label>
+              <response_label ident="b">
+                <material><mattext texttype="text/html">0.60</mattext></material>
+              </response_label>
+              <response_label ident="c">
+                <material><mattext texttype="text/html">0.35</mattext></material>
+              </response_label>
+              <response_label ident="d">
+                <material><mattext texttype="text/html">0.25</mattext></material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+            <displayfeedback feedbacktype="Response" linkrefid="correct2a"/>
+          </respcondition>
+          <respcondition continue="Yes">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+            <displayfeedback feedbacktype="Response" linkrefid="incorrect2a"/>
+          </respcondition>
+        </resprocessing>
+        <itemfeedback ident="correct2a">
+          <flow_mat>
+            <material>
+              <mattext texttype="text/html">Correct! P(NOT injury) = 1 - P(injury) = 1 - 0.40 = 0.60</mattext>
+            </material>
+          </flow_mat>
+        </itemfeedback>
+        <itemfeedback ident="incorrect2a">
+          <flow_mat>
+            <material>
+              <mattext texttype="text/html">Incorrect. Use the complement rule: P(NOT injury) = 1 - P(injury) = 1 - 0.40 = 0.60</mattext>
+            </material>
+          </flow_mat>
+        </itemfeedback>
+      </item>
+
+      <!-- Question 2b: Expected value (Numeric) -->
+      <item ident="q2b" title="Question 2b: Expected Value">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>numerical_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 2b:</strong> If 200 patients visit the ED this week, how many would you expect to come for illnesses?</p>
+<p>Enter your answer as a whole number.</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">70</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+            <displayfeedback feedbacktype="Response" linkrefid="correct2b"/>
+          </respcondition>
+          <respcondition continue="Yes">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+            <displayfeedback feedbacktype="Response" linkrefid="incorrect2b"/>
+          </respcondition>
+        </resprocessing>
+        <itemfeedback ident="correct2b">
+          <flow_mat>
+            <material>
+              <mattext texttype="text/html">Correct! Expected value = 200 × 0.35 = 70 patients</mattext>
+            </material>
+          </flow_mat>
+        </itemfeedback>
+        <itemfeedback ident="incorrect2b">
+          <flow_mat>
+            <material>
+              <mattext texttype="text/html">Incorrect. Expected value = 200 × 0.35 = 70 patients</mattext>
+            </material>
+          </flow_mat>
+        </itemfeedback>
+      </item>
+
+      <!-- Question 3: Sample Space (Essay) -->
+      <item ident="q3" title="Question 3: Sample Space and Events">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 3: Sample Space and Events (5 points)</strong></p>
+<p>A clinical trial randomly assigns patients to three treatment groups:</p>
+<ul>
+<li>50 patients receive Drug A</li>
+<li>75 patients receive Drug B</li>
+<li>75 patients receive Placebo</li>
+</ul>
+<p>a) What is the probability a randomly selected patient received Drug A? (2 points)<br/>
+b) What is the probability a randomly selected patient did NOT receive placebo? (3 points)</p>
+<p>Show your work.</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 4: Complement Rule (Multiple Choice) -->
+      <item ident="q4a" title="Question 4a: False Positive Probability">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 4a:</strong> A screening test for diabetes has a 95% specificity (true negative rate).</p>
+<p>What is the probability of a false positive?</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material><mattext texttype="text/html">0.95</mattext></material>
+              </response_label>
+              <response_label ident="b">
+                <material><mattext texttype="text/html">0.05</mattext></material>
+              </response_label>
+              <response_label ident="c">
+                <material><mattext texttype="text/html">0.50</mattext></material>
+              </response_label>
+              <response_label ident="d">
+                <material><mattext texttype="text/html">1.00</mattext></material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+            <displayfeedback feedbacktype="Response" linkrefid="correct4a"/>
+          </respcondition>
+          <respcondition continue="Yes">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+            <displayfeedback feedbacktype="Response" linkrefid="incorrect4a"/>
+          </respcondition>
+        </resprocessing>
+        <itemfeedback ident="correct4a">
+          <flow_mat>
+            <material>
+              <mattext texttype="text/html">Correct! P(false positive) = 1 - P(specificity) = 1 - 0.95 = 0.05</mattext>
+            </material>
+          </flow_mat>
+        </itemfeedback>
+        <itemfeedback ident="incorrect4a">
+          <flow_mat>
+            <material>
+              <mattext texttype="text/html">Incorrect. Specificity = P(test negative | no disease). False positive = 1 - specificity = 0.05</mattext>
+            </material>
+          </flow_mat>
+        </itemfeedback>
+      </item>
+
+      <!-- Question 4b: Interpretation (Essay) -->
+      <item ident="q4b" title="Question 4b: Interpretation">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>2</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 4b:</strong> Explain in plain language what the false positive probability of 0.05 means.</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 5: Addition Rule (Essay) -->
+      <item ident="q5" title="Question 5: Addition Rule">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 5: Addition Rule (5 points)</strong></p>
+<p>In a study of 300 adults:</p>
+<ul>
+<li>120 have high blood pressure</li>
+<li>90 have high cholesterol</li>
+<li>30 have both conditions</li>
+</ul>
+<p>a) Calculate P(high BP OR high cholesterol) using the addition rule. Show your work. (4 points)<br/>
+b) Are these events mutually exclusive? Explain. (1 point)</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 6: Conditional Probability (Essay) -->
+      <item ident="q6" title="Question 6: Basic Conditional Probability">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>6</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 6: Basic Conditional Probability (6 points)</strong></p>
+<p>In a group of 500 hospital patients:</p>
+<ul>
+<li>200 are smokers</li>
+<li>150 have respiratory complications</li>
+<li>100 are smokers with respiratory complications</li>
+</ul>
+<p>a) Calculate P(respiratory complications | smoker). Show your work. (3 points)<br/>
+b) Calculate P(smoker | respiratory complications). Show your work. (3 points)</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 7: Law of Total Probability (Essay) -->
+      <item ident="q7" title="Question 7: Law of Total Probability">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>7</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 7: Law of Total Probability (7 points)</strong></p>
+<p>A clinic's patient population:</p>
+<ul>
+<li>60% are adults, 40% are children</li>
+<li>Among adults, 20% have allergies</li>
+<li>Among children, 35% have allergies</li>
+</ul>
+<p>a) What is the overall probability that a randomly selected patient has allergies? Show your work using the law of total probability. (5 points)<br/>
+b) If a patient has allergies, what is the probability they are a child? (2 points)</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 8: Independence (Essay) -->
+      <item ident="q8" title="Question 8: Independence">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>7</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 8: Independence (7 points)</strong></p>
+<p>Two screening tests are given:</p>
+<ul>
+<li>P(Test A positive) = 0.10</li>
+<li>P(Test B positive) = 0.15</li>
+<li>P(both positive) = 0.015</li>
+</ul>
+<p>a) Are Test A and Test B independent? Show your work. (5 points)<br/>
+b) Explain what independence would mean in this clinical context. (2 points)</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 9: Sensitivity/Specificity Definitions (Essay) -->
+      <item ident="q9" title="Question 9: Sensitivity and Specificity Definitions">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>6</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 9: Sensitivity and Specificity Definitions (6 points)</strong></p>
+<p>A rapid flu test is being evaluated.</p>
+<p>a) Define sensitivity in terms of conditional probability using proper notation [Pr(· | ·)]. (2 points)<br/>
+b) Define specificity in terms of conditional probability using proper notation. (2 points)<br/>
+c) Explain in plain language what a 90% sensitivity means for patients who actually have the flu. (2 points)</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 10: Creating 2x2 Table (Essay) -->
+      <item ident="q10" title="Question 10: Creating a 2×2 Table">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>10</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 10: Creating a 2×2 Table (10 points)</strong></p>
+<p>A COVID-19 rapid antigen test has:</p>
+<ul>
+<li>Sensitivity = 85%</li>
+<li>Specificity = 95%</li>
+</ul>
+<p>In a community where 2% of people currently have COVID-19, 10,000 people are tested.</p>
+<p>a) Create a complete 2×2 table showing disease status (Has COVID / No COVID) in rows and test result (Positive / Negative) in columns. Fill in all four cells with actual counts. (6 points)<br/>
+b) Add row and column totals to your table. (2 points)<br/>
+c) Verify your sensitivity and specificity calculations match the given values. (2 points)</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 11: PPV and NPV (Essay) -->
+      <item ident="q11" title="Question 11: PPV and NPV Calculation">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>8</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 11: PPV and NPV Calculation (8 points)</strong></p>
+<p>Using the 2×2 table from Question 10:</p>
+<p>a) Calculate the Positive Predictive Value (PPV). Show your work. (3 points)<br/>
+b) Calculate the Negative Predictive Value (NPV). Show your work. (3 points)<br/>
+c) Explain in one sentence what the PPV means for someone who tests positive. (2 points)</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 12: Counterintuitive Case (Essay) -->
+      <item ident="q12" title="Question 12: The Counterintuitive Case">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>6</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 12: The Counterintuitive Case (6 points)</strong></p>
+<p>Consider an HIV screening test with excellent performance:</p>
+<ul>
+<li>Sensitivity = 99.5%</li>
+<li>Specificity = 98.5%</li>
+<li>Population prevalence = 0.1% (1 in 1,000)</li>
+</ul>
+<p>Imagine screening 100,000 people.</p>
+<p>a) Without doing calculations, would you expect the PPV to be high or low? Why? (2 points)<br/>
+b) Create the 2×2 table with actual counts for 100,000 people screened. (3 points)<br/>
+c) Calculate the PPV and explain why it might surprise people despite the excellent sensitivity and specificity. (1 point)</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 13: Relative Risk (Essay) -->
+      <item ident="q13" title="Question 13: Relative Risk">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>8</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 13: Relative Risk (8 points)</strong></p>
+<p>A 5-year cohort study of 1,000 people examined coffee consumption and heart disease:</p>
+<ul>
+<li>400 heavy coffee drinkers: 60 developed heart disease</li>
+<li>600 light/non coffee drinkers: 48 developed heart disease</li>
+</ul>
+<p>a) Calculate the risk of heart disease in heavy coffee drinkers. (2 points)<br/>
+b) Calculate the risk of heart disease in light/non coffee drinkers. (2 points)<br/>
+c) Calculate the Relative Risk (RR). (2 points)<br/>
+d) Interpret the RR in one complete sentence. (2 points)</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 14: Understanding Risk Ratios (Multiple Response) -->
+      <item ident="q14" title="Question 14: Understanding Risk Ratios">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>7</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 14: Understanding Risk Ratios (7 points)</strong></p>
+<p>For each Relative Risk value below, explain what it means:</p>
+<p>a) RR = 1.0 (2 points)<br/>
+b) RR = 2.5 (2 points)<br/>
+c) RR = 0.6 (2 points)<br/>
+d) When RR &gt; OR, is the disease common or rare? (1 point)</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 15: Binomial Distribution (Essay) -->
+      <item ident="q15" title="Question 15: Binomial Distribution">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 15: Binomial Distribution (5 points)</strong></p>
+<p>A new medication has a 75% success rate. A hospital treats 20 patients with this medication.</p>
+<p>a) What is the probability that exactly 15 patients respond successfully? Write the R code and provide the answer. (2 points)<br/>
+b) What is the probability that at least 16 patients respond successfully? Write the R code and provide the answer. (3 points)</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 16: Normal Distribution (Essay) -->
+      <item ident="q16" title="Question 16: Normal Distribution">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Question 16: Normal Distribution (5 points)</strong></p>
+<p>Adult cholesterol levels are normally distributed with mean = 200 mg/dL and SD = 40 mg/dL.</p>
+<p>a) What proportion of adults have cholesterol levels above 240 mg/dL (high risk)? Write the R code and provide the answer. (2 points)<br/>
+b) What cholesterol level represents the 90th percentile? Write the R code and provide the answer. (3 points)</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Bonus Question 17: AI Verification (Essay) -->
+      <item ident="q17" title="Bonus Question 17: AI Verification">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <![CDATA[
+<p><strong>Bonus Question 17: AI Verification (5 bonus points)</strong></p>
+<p>Choose ONE problem from Part 3 (Diagnostic Testing).</p>
+<p>a) Ask an AI tool (like Claude, ChatGPT) to solve it. Include your exact prompt. (1 point)<br/>
+b) Verify the AI's answer by working through it yourself. Did the AI get it right? (2 points)<br/>
+c) Identify one strength and one potential limitation of using AI for this type of problem. (2 points)</p>
+              ]]>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+    </section>
+  </assessment>
+</questestinterop>

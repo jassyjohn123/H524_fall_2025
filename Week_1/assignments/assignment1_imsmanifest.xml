@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="assignment1_homework" version="1.1"
+         xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
+         xmlns:imsmd="http://www.imsglobal.org/xsd/imsmd_v1p2"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 imscp_v1p1.xsd http://www.imsglobal.org/xsd/imsmd_v1p2 imsmd_v1p2p2.xsd">
+  <metadata>
+    <schema>IMS Content</schema>
+    <schemaversion>1.1</schemaversion>
+    <imsmd:lom>
+      <imsmd:general>
+        <imsmd:identifier>assignment1_homework</imsmd:identifier>
+        <imsmd:title>
+          <imsmd:langstring xml:lang="en">H524 Assignment 1: Introduction to Biostatistics and Data Visualization</imsmd:langstring>
+        </imsmd:title>
+        <imsmd:description>
+          <imsmd:langstring xml:lang="en">Assignment 1 covering Week 1 material: introduction to biostatistics, data types, descriptive statistics, data visualization, and AI applications in biostatistics.</imsmd:langstring>
+        </imsmd:description>
+      </imsmd:general>
+    </imsmd:lom>
+  </metadata>
+  <organizations default="toc">
+    <organization identifier="toc">
+      <title>H524 Assignment 1</title>
+      <item identifier="assessment" identifierref="quiz">
+        <title>Assignment 1: Introduction to Biostatistics and Data Visualization</title>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="quiz" type="imsqti_xmlv1p2" href="assignment1_canvas_quiz.xml">
+      <file href="assignment1_canvas_quiz.xml"/>
+    </resource>
+  </resources>
+</manifest>

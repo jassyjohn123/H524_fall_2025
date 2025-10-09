@@ -20,10 +20,24 @@
 - Verify compilation was successful and PDF exists in source directory before marking task complete
 - When creating new LaTeX files, always compile them immediately after creation
 
+### Math Notation for Slides
+- **CRITICAL**: Always use math mode for probability notation to ensure proper rendering
+- **Conditional probability**: Use `$\mid$` (in math mode) instead of `|` (pipe in text mode)
+  - ✓ Correct: `Pr(A $\mid$ B)` or `$\Pr(A \mid B)$`
+  - ✗ Wrong: `Pr(A | B)` (renders as em dash in Beamer)
+- **Issue discovered**: In Beamer slides, the pipe symbol `|` in text mode can render as an em dash (—) instead of a vertical bar
+- **Solution**: Wrap conditional probability notation in math delimiters and use `\mid` command
+- This applies to all mathematical notation: sensitivity, specificity, PPV, NPV, conditional probabilities
+- Example fixes from Week 2:
+  - `Pr(death | disease)` → `Pr(death $\mid$ disease)`
+  - `Pr(Positive Test | Disease Present)` → `Pr(Positive Test $\mid$ Disease Present)`
+
 ## Homework Assignment Workflow
 - When homework assignments are updated, always regenerate the Canvas QTI zip file
 - The QTI zip file must reflect the current version of the homework questions
 - Update both the markdown assignment and the Canvas import formats
+- **IMPORTANT**: Every time a QTI file is updated, the corresponding zip file must be updated as well
+- Always replace the QTI file in the zip and regenerate the zip file for Canvas import
 
 ## Course Materials Format
 - All course materials should be in LaTeX format, not markdown

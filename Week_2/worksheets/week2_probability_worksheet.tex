@@ -1,0 +1,203 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+
+% Define OSU orange and AI blue colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large In-Class Worksheet}}\\
+\textcolor{white}{\textbf{\large Probability and Conditional Probability}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Name:} \rule{8cm}{0.4pt} \hfill \textbf{Date:} \rule{4cm}{0.4pt}\\[0.5ex]
+\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Probability, Conditional Probability, and Diagnostic Testing
+
+\vspace{8pt}
+
+\section*{Instructions}
+Work with a partner to solve the following problems. Use the 2x2 table approach with natural frequencies (concrete counts) rather than formulas whenever possible. Show all your work.
+
+\vspace{12pt}
+
+\section{Problem 1: Mammogram Screening (Based on Gigerenzer's Study)}
+
+A 45-year-old woman with no symptoms or family history of breast cancer has a positive mammogram. What is the probability that she actually has breast cancer?
+
+\vspace{6pt}
+
+\textbf{Given information:}
+\begin{itemize}
+\item The prevalence of breast cancer in this age group is 1.2\%
+\item If a woman has breast cancer, the probability is 85\% that she will have a positive mammogram (sensitivity)
+\item If a woman does not have breast cancer, the probability is 9\% that she will still have a positive mammogram (false positive rate)
+\end{itemize}
+
+\vspace{12pt}
+
+\textbf{Part A:} Set up a 2x2 table assuming 10,000 women are screened. Fill in all cells:
+
+\vspace{12pt}
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+& \textbf{Cancer +} & \textbf{Cancer -} & \textbf{Total} \\
+\hline
+\textbf{Test +} & & & \\[2ex]
+\hline
+\textbf{Test -} & & & \\[2ex]
+\hline
+\textbf{Total} & & & 10,000 \\[2ex]
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{12pt}
+
+\textbf{Work space for calculations:}
+
+\vspace{4cm}
+
+\textbf{Part B:} Calculate the Positive Predictive Value (PPV): $\Pr(\text{Cancer} \mid \text{Test+})$
+
+\vspace{2cm}
+
+\textbf{Part C:} Interpret your result. Why is the PPV so much lower than the sensitivity?
+
+\vspace{2.5cm}
+
+\newpage
+
+\section{Problem 2: Strep Throat Testing}
+
+A rapid strep test has 85\% sensitivity and 95\% specificity. Among patients presenting with sore throat, 15\% actually have strep throat.
+
+\vspace{12pt}
+
+\textbf{Part A:} Create a 2x2 table for 1,000 patients with sore throat:
+
+\vspace{12pt}
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+& \textbf{Strep +} & \textbf{Strep -} & \textbf{Total} \\
+\hline
+\textbf{Test +} & & & \\[2ex]
+\hline
+\textbf{Test -} & & & \\[2ex]
+\hline
+\textbf{Total} & & & 1,000 \\[2ex]
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{12pt}
+
+\textbf{Part B:} Calculate the Negative Predictive Value (NPV): $\Pr(\text{No Strep} \mid \text{Test-})$
+
+\vspace{2.5cm}
+
+\textbf{Part C:} What is the probability that a patient with a negative test actually has strep (false negative)?
+
+\vspace{2cm}
+
+\section{Problem 3: Smoking and Heart Disease}
+
+In a study of 1,000 people, there were 200 smokers and 800 non-smokers. During the 10-year follow-up, 30 smokers and 20 non-smokers developed heart disease.
+
+\vspace{12pt}
+
+\textbf{Part A:} Create a 2x2 table:
+
+\vspace{12pt}
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+& \textbf{Heart Disease} & \textbf{No Disease} & \textbf{Total} \\
+\hline
+\textbf{Smokers} & & & \\[2ex]
+\hline
+\textbf{Non-smokers} & & & \\[2ex]
+\hline
+\textbf{Total} & & & 1,000 \\[2ex]
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{12pt}
+
+\textbf{Part B:} Calculate the risk of heart disease in smokers:
+
+\vspace{1.5cm}
+
+\textbf{Part C:} Calculate the risk of heart disease in non-smokers:
+
+\vspace{1.5cm}
+
+\textbf{Part D:} Calculate the Relative Risk (RR):
+
+\vspace{1.5cm}
+
+\textbf{Part E:} Interpret the relative risk in plain language:
+
+\vspace{2cm}
+
+\section{Problem 4: Binomial Probability}
+
+A new treatment has a 60\% success rate.
+
+\vspace{12pt}
+
+\textbf{Part A:} If 10 patients receive the treatment, what is the probability that at least 8 of them respond successfully? Use R or a binomial probability table.
+
+\vspace{3cm}
+
+\textbf{Part B:} What is the expected number of successful responses out of 10 patients?
+
+\vspace{1.5cm}
+
+\section{Problem 5: Normal Distribution}
+
+Cholesterol levels in adults are normally distributed with mean 200 mg/dL and standard deviation 40 mg/dL.
+
+\vspace{12pt}
+
+\textbf{Part A:} What proportion of adults have cholesterol levels between 180 and 220 mg/dL?
+
+\vspace{3cm}
+
+\textbf{Part B:} What cholesterol level corresponds to the 90th percentile?
+
+\vspace{3cm}
+
+\end{document}

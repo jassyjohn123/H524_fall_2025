@@ -1,0 +1,22 @@
+<svg width="500" height="350" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bar chart of childhood injury deaths -->
+  <rect x="80" y="300" width="350" height="2" fill="black"/>
+  <rect x="80" y="50" width="2" height="250" fill="black"/>
+  <!-- Bars -->
+  <rect x="100" y="180" width="60" height="120" fill="#ff6b6b" stroke="black"/>
+  <rect x="180" y="250" width="60" height="50" fill="#4ecdc4" stroke="black"/>
+  <rect x="260" y="270" width="60" height="30" fill="#ffcd56" stroke="black"/>
+  <rect x="340" y="285" width="60" height="15" fill="#ff9f40" stroke="black"/>
+  <!-- Axis labels -->
+  <text x="130" y="325" font-family="Arial" font-size="10" text-anchor="middle" transform="rotate(-45 130 325)">Motor Vehicle</text>
+  <text x="210" y="325" font-family="Arial" font-size="10" text-anchor="middle" transform="rotate(-45 210 325)">Drowning</text>
+  <text x="290" y="325" font-family="Arial" font-size="10" text-anchor="middle" transform="rotate(-45 290 325)">Fire</text>
+  <text x="370" y="325" font-family="Arial" font-size="10" text-anchor="middle" transform="rotate(-45 370 325)">Other</text>
+  <!-- Value labels -->
+  <text x="130" y="170" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">48%</text>
+  <text x="210" y="240" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">20%</text>
+  <text x="290" y="260" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">12%</text>
+  <text x="370" y="275" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">20%</text>
+  <text x="250" y="40" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Childhood Injury Deaths by Cause</text>
+  <text x="30" y="175" font-family="Arial" font-size="14" text-anchor="middle" transform="rotate(-90 30 175)">Percentage</text>
+</svg>

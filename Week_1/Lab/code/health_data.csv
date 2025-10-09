@@ -1,0 +1,8 @@
+"patient_id","gender","systolic_bp","diastolic_bp","treatment_group","hypertensive","age","weight_kg","height_cm","bmi","bmi_category"
+"P001","Male",120,80,"Control",FALSE,45,75,170,25.9515570934256,"Overweight"
+"P002","Female",135,85,"Treatment",FALSE,52,68,165,24.9770431588613,"Normal"
+"P003","Female",142,92,"Treatment",TRUE,38,82,178,25.8805706350208,"Overweight"
+"P004","Male",118,75,"Control",FALSE,61,71,172,23.9994591671174,"Normal"
+"P005","Male",160,95,"Treatment",TRUE,47,88,180,27.1604938271605,"Overweight"
+"P006","Female",125,82,"Control",FALSE,34,63,160,24.609375,"Normal"
+"P007","Male",138,88,"Treatment",FALSE,55,79,175,25.7959183673469,"Overweight"

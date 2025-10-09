@@ -1,0 +1,879 @@
+# ==============================================================================
+# H524 Introduction to Biostatistics - Week 1 Lab
+# Complete R Script: Introduction to R and Data Visualization
+# Fall 2025
+# ==============================================================================
+
+# Lab Duration: 110 minutes (8:00am -- 9:50am)
+# Format: Online
+# Tools Required: R, RStudio, GitHub account, GitHub Copilot (optional)
+
+# ==============================================================================
+# LAB SETUP - Verify Installation
+# ==============================================================================
+
+# Check R version
+cat("=== SYSTEM VERIFICATION ===\n")
+cat("R Version:", R.version.string, "\n")
+
+# Check working directory
+cat("Working Directory:", getwd(), "\n")
+
+# Test basic functionality
+x <- c(1, 2, 3, 4, 5)
+cat("Basic functionality test - mean of c(1,2,3,4,5):", mean(x), "\n")
+
+# Load required libraries
+required_packages <- c("ggplot2", "maps", "mapdata")
+for (pkg in required_packages) {
+  if (!require(pkg, character.only = TRUE, quietly = TRUE)) {
+    cat("Installing package:", pkg, "\n")
+    install.packages(pkg)
+    library(pkg, character.only = TRUE)
+  }
+}
+
+# ==============================================================================
+# PART 1: R FUNDAMENTALS (30 minutes)
+# ==============================================================================
+
+cat("\n=== PART 1: R FUNDAMENTALS ===\n")
+
+# ------------------------------------------------------------------------------
+# Exercise 1.1: Data Types and Structures
+# ------------------------------------------------------------------------------
+
+cat("\n--- Exercise 1.1: Data Types and Structures ---\n")
+
+# Numeric data (simulated systolic/diastolic blood pressure values)
+systolic_bp <- c(120, 135, 142, 118, 160, 125, 138)
+diastolic_bp <- c(80, 85, 92, 75, 95, 82, 88)
+
+# Character data
+patient_id <- c("P001", "P002", "P003", "P004", "P005", "P006", "P007")
+gender <- c("Male", "Female", "Female", "Male", "Male", "Female", "Male")
+
+# Factor data (categorical)
+treatment_group <- factor(
+    c("Control", "Treatment", "Treatment",
+      "Control", "Treatment", "Control", "Treatment")
+)
+
+# Logical data
+hypertensive <- systolic_bp >= 140 | diastolic_bp >= 90
+
+# Display the data types
+cat("Data types:\n")
+cat("systolic_bp:", class(systolic_bp), "\n")
+cat("gender:", class(gender), "\n")
+cat("treatment_group:", class(treatment_group), "\n")
+cat("hypertensive:", class(hypertensive), "\n")
+
+# ------------------------------------------------------------------------------
+# Exercise 1.2: Create a data frame
+# ------------------------------------------------------------------------------
+
+cat("\n--- Exercise 1.2: Create a Data Frame ---\n")
+
+# Create a comprehensive health dataset (enhanced with additional variables)
+health_data <- data.frame(
+  patient_id = patient_id,
+  gender = gender,
+  systolic_bp = systolic_bp,
+  diastolic_bp = diastolic_bp,
+  treatment_group = treatment_group,
+  hypertensive = hypertensive,
+  age = c(45, 52, 38, 61, 47, 34, 55),
+  weight_kg = c(75, 68, 82, 71, 88, 63, 79),
+  height_cm = c(170, 165, 178, 172, 180, 160, 175)
+)
+
+# View the data structure
+cat("Data structure:\n")
+str(health_data)
+cat("\nFirst few rows:\n")
+print(head(health_data))
+cat("\nData summary:\n")
+print(summary(health_data))
+
+# ==============================================================================
+# PART 2: DESCRIPTIVE STATISTICS (25 minutes)
+# ==============================================================================
+
+cat("\n=== PART 2: DESCRIPTIVE STATISTICS ===\n")
+
+# ------------------------------------------------------------------------------
+# Exercise 2.1: Calculate measures of central tendency and variability
+# ------------------------------------------------------------------------------
+
+cat("\n--- Exercise 2.1: Central Tendency and Variability ---\n")
+
+# Measures of central tendency
+mean_systolic <- mean(health_data$systolic_bp)
+median_systolic <- median(health_data$systolic_bp)
+
+# Measures of variability
+sd_systolic <- sd(health_data$systolic_bp)
+var_systolic <- var(health_data$systolic_bp)
+range_systolic <- range(health_data$systolic_bp)
+iqr_systolic <- IQR(health_data$systolic_bp)
+
+# Display results
+cat("Systolic Blood Pressure Statistics:\n")
+cat("Mean:", round(mean_systolic, 2), "mmHg\n")
+cat("Median:", median_systolic, "mmHg\n")
+cat("Standard deviation:", round(sd_systolic, 2), "mmHg\n")
+cat("Variance:", round(var_systolic, 2), "mmHg²\n")
+cat("Range:", range_systolic[1], "-", range_systolic[2], "mmHg\n")
+cat("IQR:", round(iqr_systolic, 2), "mmHg\n")
+
+# ------------------------------------------------------------------------------
+# Exercise 2.2: Generate descriptive statistics by group
+# ------------------------------------------------------------------------------
+
+cat("\n--- Exercise 2.2: Statistics by Group ---\n")
+
+# Statistics by gender
+cat("Mean systolic BP by gender:\n")
+print(aggregate(systolic_bp ~ gender, data = health_data, FUN = mean))
+
+cat("\nStandard deviation by gender:\n")
+print(aggregate(systolic_bp ~ gender, data = health_data, FUN = sd))
+
+# Statistics by treatment group
+cat("\nSummary statistics by treatment group:\n")
+print(aggregate(systolic_bp ~ treatment_group, data = health_data, FUN = summary))
+
+# Frequency tables for categorical data
+cat("\nGender distribution:\n")
+print(table(health_data$gender))
+
+cat("\nTreatment group distribution:\n")
+print(table(health_data$treatment_group))
+
+cat("\nHypertension prevalence:\n")
+print(prop.table(table(health_data$hypertensive)))
+
+# ==============================================================================
+# PART 3: DATA VISUALIZATION (35 minutes)
+# ==============================================================================
+
+cat("\n=== PART 3: DATA VISUALIZATION ===\n")
+
+# ------------------------------------------------------------------------------
+# Exercise 3.1: Geographic Health Mapping
+# ------------------------------------------------------------------------------
+
+cat("\n--- Exercise 3.1: Geographic Health Mapping ---\n")
+
+# Create simulated state-level health data
+state_health <- data.frame(
+  state = c("oregon", "washington", "california", "nevada", "idaho"),
+  diabetes_rate = c(8.2, 9.1, 9.7, 10.8, 8.9),
+  obesity_rate = c(28.7, 27.9, 25.1, 26.8, 29.2)
+)
+
+# Get US state map data
+states_map <- map_data("state")
+
+# Merge health data with map coordinates
+map_data <- merge(states_map, state_health, by.x = "region", by.y = "state")
+
+# Create diabetes prevalence map
+diabetes_map <- ggplot(
+    map_data,
+    aes(
+        x = long,
+        y = lat,
+        group = group,
+        fill = diabetes_rate
+    )) +
+    geom_polygon(color = "white") +
+    scale_fill_gradient(
+        low = "lightblue",
+        high = "darkred",
+        name = "Diabetes Rate (%)"
+    ) +
+    coord_quickmap() +
+    theme_void() +
+    labs(
+        title = "Diabetes Prevalence by State",
+        subtitle = "Simulated data for demonstration"
+    )
+
+print(diabetes_map)
+
+# ------------------------------------------------------------------------------
+# Exercise 3.2: Visualizations for Continuous Data
+# ------------------------------------------------------------------------------
+
+cat("\n--- Exercise 3.2: Continuous Data Visualizations ---\n")
+
+# Set up plotting parameters
+par(mfrow = c(2, 2))  # 2x2 layout
+
+# Histogram of systolic blood pressure
+hist(
+    health_data$systolic_bp,
+    main = "Distribution of Systolic Blood Pressure",
+    xlab = "Systolic BP (mmHg)",
+    ylab = "Frequency",
+    col = "lightblue",
+    border = "white",
+    breaks = 5
+)
+
+# Add vertical line for mean
+abline(v = mean_systolic, col = "red", lwd = 2, lty = 2)
+legend("topright", "Mean", col = "red", lwd = 2, lty = 2)
+
+# Box plot by gender
+boxplot(
+    systolic_bp ~ gender,
+    data = health_data,
+    main = "Systolic BP by Gender",
+    ylab = "Systolic BP (mmHg)",
+    col = c("pink", "lightblue")
+)
+
+# Histogram of diastolic BP
+hist(
+    health_data$diastolic_bp,
+    main = "Distribution of Diastolic Blood Pressure",
+    xlab = "Diastolic BP (mmHg)",
+    ylab = "Frequency",
+    col = "lightgreen",
+    border = "white",
+    breaks = 5
+)
+
+# Box plot by treatment group
+boxplot(systolic_bp ~ treatment_group,
+        data = health_data,
+        main = "Systolic BP by Treatment",
+        ylab = "Systolic BP (mmHg)",
+        col = c("#FF6B35", "#F7931E"))
+
+# Reset plotting parameters
+par(mfrow = c(1, 1))
+
+# ------------------------------------------------------------------------------
+# Exercise 3.3: Advanced Health Visualizations (BMI Analysis)
+# ------------------------------------------------------------------------------
+
+cat("\n--- Exercise 3.3: Advanced Health Visualizations ---\n")
+
+# Calculate BMI and categorize
+health_data$bmi <- health_data$weight_kg / (health_data$height_cm/100)^2
+health_data$bmi_category <- cut(
+    health_data$bmi,
+    breaks = c(0, 18.5, 25, 30, Inf),
+    labels = c("Underweight", "Normal", "Overweight", "Obese")
+)
+
+# Create comprehensive BMI visualization
+par(mfrow = c(2, 2)) # 2x2 plot layout
+
+# 1. BMI histogram with normal curve overlay
+hist(health_data$bmi, probability = TRUE,
+     main = "BMI Distribution", xlab = "BMI", col = "lightblue",
+     border = "white")
+curve(dnorm(x, mean = mean(health_data$bmi), sd = sd(health_data$bmi)),
+      add = TRUE, col = "red", lwd = 2)
+
+# 2. BMI by gender boxplot
+boxplot(bmi ~ gender, data = health_data,
+        main = "BMI by Gender", ylab = "BMI", col = c("pink", "lightblue"))
+
+# 3. BMI categories bar chart
+bmi_table <- table(health_data$bmi_category)
+barplot(bmi_table, main = "BMI Categories",
+        col = c("lightgreen", "yellow", "orange", "red"),
+        ylab = "Frequency")
+
+# 4. Scatter plot: BMI vs Systolic BP
+plot(health_data$bmi, health_data$systolic_bp,
+     pch = 19, col = as.numeric(health_data$gender),
+     main = "BMI vs Systolic BP",
+     xlab = "BMI", ylab = "Systolic BP (mmHg)")
+legend("topright", levels(health_data$gender),
+       col = 1:2, pch = 19)
+abline(lm(systolic_bp ~ bmi, data = health_data), col = "red", lwd = 2)
+
+# Reset plotting parameters
+par(mfrow = c(1, 1))
+
+# ------------------------------------------------------------------------------
+# Exercise 3.4: Visualizations for Categorical Data
+# ------------------------------------------------------------------------------
+
+cat("\n--- Exercise 3.4: Categorical Data Visualizations ---\n")
+
+# Set up for multiple plots
+par(mfrow = c(1, 2))
+
+# Bar chart for treatment groups
+treatment_counts <- table(health_data$treatment_group)
+barplot(treatment_counts,
+        main = "Distribution of Treatment Groups",
+        ylab = "Frequency",
+        col = c("#FF6B35", "#F7931E"),
+        border = "white")
+
+# Pie chart for gender distribution
+gender_counts <- table(health_data$gender)
+pie(gender_counts,
+    main = "Gender Distribution",
+    col = c("pink", "lightblue"))
+
+# Reset plotting parameters
+par(mfrow = c(1, 1))
+
+# ------------------------------------------------------------------------------
+# Exercise 3.5: Advanced Visualizations (Scatter plots)
+# ------------------------------------------------------------------------------
+
+cat("\n--- Exercise 3.5: Advanced Scatter Plots ---\n")
+
+# Scatter plot of systolic vs diastolic BP
+plot(
+    health_data$diastolic_bp,
+    health_data$systolic_bp,
+    xlab = "Diastolic BP (mmHg)",
+    ylab = "Systolic BP (mmHg)",
+    main = "Systolic vs Diastolic Blood Pressure",
+    pch = 19,
+    col = as.numeric(health_data$gender),
+    cex = 1.2
+)
+
+# Add legend
+legend("topleft", levels(health_data$gender),
+       col = 1:2, pch = 19, title = "Gender")
+
+# Add regression line
+abline(lm(systolic_bp ~ diastolic_bp, data = health_data),
+       col = "red", lwd = 2)
+
+# Add correlation coefficient
+correlation <- cor(health_data$systolic_bp, health_data$diastolic_bp)
+text(75, 155, paste("r =", round(correlation, 3)), cex = 1.2)
+
+# ==============================================================================
+# PART 4: AI-ENHANCED CODING WITH GITHUB COPILOT (20 minutes)
+# ==============================================================================
+
+cat("\n=== PART 4: AI-ENHANCED CODING ===\n")
+
+# ------------------------------------------------------------------------------
+# Exercise 4.1: AI-Generated Function for Age-Specific Rates
+# ------------------------------------------------------------------------------
+
+cat("\n--- Exercise 4.1: AI-Generated Code ---\n")
+
+# AI-GENERATED FUNCTION: Calculate age-adjusted rates for three age groups
+# Age groups: 0-30, 31-60, 61+
+# Input: cases vector, population vector, age_groups vector
+# Output: age-specific rates per 100,000
+
+calculate_age_specific_rates <- function(cases, population, age_groups) {
+  # Input validation
+  if (length(cases) != length(population) || length(cases) != length(age_groups)) {
+    stop("All input vectors must have the same length")
+  }
+
+  if (any(population <= 0)) {
+    stop("Population values must be positive")
+  }
+
+  if (any(cases < 0)) {
+    stop("Case values must be non-negative")
+  }
+
+  # Calculate rates per 100,000
+  rates <- (cases / population) * 100000
+  names(rates) <- age_groups
+  return(rates)
+}
+
+# ------------------------------------------------------------------------------
+# Exercise 4.2: Verify and test AI-generated code
+# ------------------------------------------------------------------------------
+
+cat("\n--- Exercise 4.2: Verify AI-Generated Code ---\n")
+
+# Test the AI-generated function with sample data
+test_cases <- c(10, 25, 40)
+test_population <- c(20000, 30000, 15000)
+test_ages <- c("0-30", "31-60", "61+")
+
+# Run the function and verify results manually
+cat("AI-generated function results:\n")
+ai_result <- calculate_age_specific_rates(test_cases, test_population, test_ages)
+print(ai_result)
+
+# Calculate manually to verify: (cases/population) * 100000
+cat("\nManual verification:\n")
+manual_check <- (test_cases / test_population) * 100000
+names(manual_check) <- test_ages
+print(manual_check)
+
+# Compare results
+cat("\nResults match:", identical(ai_result, manual_check), "\n")
+
+# ------------------------------------------------------------------------------
+# Exercise 4.3: Advanced AI-Generated Functions
+# ------------------------------------------------------------------------------
+
+cat("\n--- Exercise 4.3: Advanced AI Functions ---\n")
+
+# AI-GENERATED FUNCTION: Categorize FEV1 values
+# Categories: "Low" (<2.5), "Normal" (2.5-3.2), "High" (>3.2)
+categorize_fev1 <- function(fev1_values) {
+  categories <- ifelse(fev1_values < 2.5, "Low",
+                      ifelse(fev1_values <= 3.2, "Normal", "High"))
+  return(factor(categories, levels = c("Low", "Normal", "High")))
+}
+
+# AI-GENERATED FUNCTION: Calculate comprehensive descriptive statistics
+comprehensive_stats <- function(x, group = NULL) {
+  if (is.null(group)) {
+    # Overall statistics
+    stats <- list(
+      n = length(x),
+      mean = mean(x, na.rm = TRUE),
+      median = median(x, na.rm = TRUE),
+      sd = sd(x, na.rm = TRUE),
+      var = var(x, na.rm = TRUE),
+      min = min(x, na.rm = TRUE),
+      max = max(x, na.rm = TRUE),
+      q1 = quantile(x, 0.25, na.rm = TRUE),
+      q3 = quantile(x, 0.75, na.rm = TRUE),
+      iqr = IQR(x, na.rm = TRUE)
+    )
+  } else {
+    # Grouped statistics
+    stats <- aggregate(x, by = list(group),
+                      FUN = function(y) c(
+                        n = length(y),
+                        mean = mean(y, na.rm = TRUE),
+                        median = median(y, na.rm = TRUE),
+                        sd = sd(y, na.rm = TRUE)
+                      ))
+  }
+  return(stats)
+}
+
+# ==============================================================================
+# LAB ASSIGNMENT: FEV1 DATA ANALYSIS
+# ==============================================================================
+
+cat("\n=== LAB ASSIGNMENT: FEV1 DATA ANALYSIS ===\n")
+
+# FEV1 data from Pagano & Gauvreau study
+fev1_data <- data.frame(
+    subject_id = 1:13,
+    gender = c("F", "F", "F", "F", "F", "F", "M", "M", "M", "M", "M", "M", "M"),
+    fev1_liters = c(
+        2.46, 2.65, 2.69, 2.76, 2.85, 3.15,
+        2.47, 2.77, 2.78, 2.81, 3.09, 3.18, 3.46
+    )
+)
+
+# Convert gender to full names for better readability
+fev1_data$gender_full <- ifelse(fev1_data$gender == "F", "Female", "Male")
+fev1_data$gender_full <- factor(fev1_data$gender_full)
+
+# ------------------------------------------------------------------------------
+# Assignment Task 1: Calculate descriptive statistics by gender
+# ------------------------------------------------------------------------------
+
+cat("\n--- Task 1: Descriptive Statistics by Gender ---\n")
+
+# Comprehensive statistics by gender
+fev1_stats_by_gender <- aggregate(
+    fev1_liters ~ gender_full,
+    data = fev1_data,
+    FUN = function(x) c(
+        mean = mean(x),
+        median = median(x),
+        sd = sd(x),
+        min = min(x),
+        max = max(x),
+        n = length(x)
+    )
+)
+
+cat("FEV1 Statistics by Gender:\n")
+print(fev1_stats_by_gender)
+
+# Overall statistics
+cat("\nOverall FEV1 Statistics:\n")
+overall_stats <- comprehensive_stats(fev1_data$fev1_liters)
+print(data.frame(Statistic = names(overall_stats), Value = unlist(overall_stats)))
+
+# ------------------------------------------------------------------------------
+# Assignment Task 2: Create visualizations
+# ------------------------------------------------------------------------------
+
+cat("\n--- Task 2: Comprehensive Visualizations ---\n")
+
+# Set up for multiple plots
+par(mfrow = c(2, 2))
+
+# 1. Histogram of all FEV1 values
+hist(fev1_data$fev1_liters,
+     main = "Distribution of FEV1 Values",
+     xlab = "FEV1 (liters)",
+     ylab = "Frequency",
+     col = "lightgreen",
+     border = "white",
+     breaks = 6)
+
+# Add vertical line for mean
+mean_fev1 <- mean(fev1_data$fev1_liters)
+abline(v = mean_fev1, col = "red", lwd = 2, lty = 2)
+legend("topright", paste("Mean =", round(mean_fev1, 2)),
+       col = "red", lwd = 2, lty = 2)
+
+# 2. Box plot comparing FEV1 by gender
+boxplot(fev1_liters ~ gender_full, data = fev1_data,
+        main = "FEV1 by Gender",
+        xlab = "Gender",
+        ylab = "FEV1 (liters)",
+        col = c("pink", "lightblue"))
+
+# 3. Dot plot showing individual values
+stripchart(fev1_data$fev1_liters,
+           method = "stack",
+           main = "Dot Plot of FEV1 Values",
+           xlab = "FEV1 (liters)",
+           col = "blue",
+           pch = 19)
+
+# 4. Enhanced scatter plot with categories
+plot(fev1_data$subject_id, fev1_data$fev1_liters,
+     main = "FEV1 Values by Subject and Gender",
+     xlab = "Subject ID",
+     ylab = "FEV1 (liters)",
+     pch = 19,
+     cex = 1.5,
+     col = ifelse(fev1_data$gender == "M", "blue", "red"))
+
+# Add horizontal lines for category boundaries
+abline(h = 2.5, col = "gray", lty = 2)
+abline(h = 3.2, col = "gray", lty = 2)
+
+# Add text labels for categories
+text(2, 2.3, "Low", col = "gray")
+text(2, 2.85, "Normal", col = "gray")
+text(2, 3.4, "High", col = "gray")
+
+# Add legend
+legend("bottomright",
+       legend = c("Male", "Female"),
+       col = c("blue", "red"),
+       pch = 19,
+       title = "Gender")
+
+# Reset plotting parameters
+par(mfrow = c(1, 1))
+
+# ------------------------------------------------------------------------------
+# Assignment Task 3: AI Component - Categorize FEV1 values
+# ------------------------------------------------------------------------------
+
+cat("\n--- Task 3: AI-Enhanced FEV1 Categorization ---\n")
+
+# Apply the AI-generated function
+fev1_data$fev1_category <- categorize_fev1(fev1_data$fev1_liters)
+
+# Display categorized data
+cat("FEV1 Data with Categories:\n")
+print(fev1_data)
+
+# Create frequency table of categories
+cat("\nFEV1 Category Distribution:\n")
+category_table <- table(fev1_data$fev1_category)
+print(category_table)
+
+cat("\nFEV1 Category Proportions:\n")
+print(prop.table(category_table))
+
+# Cross-tabulation by gender
+cat("\nFEV1 Categories by Gender:\n")
+print(table(fev1_data$gender_full, fev1_data$fev1_category))
+
+# ==============================================================================
+# ADDITIONAL EXERCISES AND EXAMPLES
+# ==============================================================================
+
+cat("\n=== ADDITIONAL EXERCISES ===\n")
+
+# ------------------------------------------------------------------------------
+# Rates Calculation Example
+# ------------------------------------------------------------------------------
+
+cat("\n--- Epidemiological Rates Example ---\n")
+
+# Disease surveillance data
+population_size <- 50000
+new_cases <- 125
+deaths <- 15
+
+# Calculate incidence rate
+incidence_rate <- (new_cases / population_size) * 100000
+cat("Incidence rate:", round(incidence_rate, 1), "per 100,000 population\n")
+
+# Calculate case fatality rate
+case_fatality_rate <- (deaths / new_cases) * 100
+cat("Case fatality rate:", round(case_fatality_rate, 1), "%\n")
+
+# Age-specific rates example
+population_by_age <- c(12000, 15000, 18000, 5000)
+cases_by_age <- c(5, 25, 65, 30)
+age_groups <- c("0-20", "21-40", "41-60", "61+")
+
+age_specific_rates <- calculate_age_specific_rates(cases_by_age,
+                                                  population_by_age,
+                                                  age_groups)
+cat("\nAge-specific rates:\n")
+print(age_specific_rates)
+
+# Visualize age-specific rates
+barplot(age_specific_rates,
+        main = "Disease Incidence by Age Group",
+        xlab = "Age Group",
+        ylab = "Rate per 100,000",
+        col = "orange",
+        border = "white",
+        las = 2)  # Rotate labels
+
+# ------------------------------------------------------------------------------
+# Advanced Geographic Visualization
+# ------------------------------------------------------------------------------
+
+cat("\n--- Advanced Geographic Analysis ---\n")
+
+# Create obesity prevalence map
+obesity_map <- ggplot(map_data, aes(x = long, y = lat, group = group, fill = obesity_rate)) +
+  geom_polygon(color = "white") +
+  scale_fill_gradient(low = "lightyellow", high = "darkred",
+                     name = "Obesity Rate (%)") +
+  coord_quickmap() +
+  theme_void() +
+  labs(title = "Obesity Prevalence by State",
+       subtitle = "Simulated data for demonstration")
+
+print(obesity_map)
+
+# Correlation between diabetes and obesity rates
+cat("\nCorrelation between diabetes and obesity rates:\n")
+health_correlation <- cor(state_health$diabetes_rate, state_health$obesity_rate)
+cat("Correlation coefficient:", round(health_correlation, 3), "\n")
+
+# Scatter plot of the relationship
+plot(state_health$obesity_rate, state_health$diabetes_rate,
+     xlab = "Obesity Rate (%)",
+     ylab = "Diabetes Rate (%)",
+     main = "Relationship between Obesity and Diabetes Rates",
+     pch = 19,
+     col = "darkred",
+     cex = 1.5)
+
+# Add state labels
+text(state_health$obesity_rate, state_health$diabetes_rate,
+     labels = toupper(state_health$state),
+     pos = 3, cex = 0.8)
+
+# Add regression line
+abline(lm(diabetes_rate ~ obesity_rate, data = state_health),
+       col = "blue", lwd = 2)
+
+# ==============================================================================
+# AI USAGE DOCUMENTATION TEMPLATE
+# ==============================================================================
+
+cat("\n=== AI USAGE DOCUMENTATION ===\n")
+
+# Create a template for documenting AI usage
+ai_documentation <- list(
+  tool_used = "GitHub Copilot / ChatGPT / Claude",
+  date_used = Sys.Date(),
+  prompts_used = c(
+    "Create a function to calculate age-adjusted rates for three age groups",
+    "Generate code to categorize FEV1 values into low, normal, high",
+    "Create comprehensive descriptive statistics function"
+  ),
+  code_generated = c(
+    "calculate_age_specific_rates()",
+    "categorize_fev1()",
+    "comprehensive_stats()"
+  ),
+  verification_steps = c(
+    "Manual calculation verification",
+    "Testing with known data",
+    "Cross-checking with expected outputs"
+  ),
+  corrections_made = "None - all AI-generated code was correct",
+  final_assessment = "AI significantly improved coding efficiency while maintaining accuracy"
+)
+
+cat("AI Documentation Template Created\n")
+cat("Functions successfully generated and verified:\n")
+cat("- Age-specific rates calculation\n")
+cat("- FEV1 categorization\n")
+cat("- Comprehensive statistics\n")
+
+# ==============================================================================
+# PROFESSIONAL PUBLICATION-READY PLOTS
+# ==============================================================================
+
+cat("\n=== PUBLICATION-READY VISUALIZATIONS ===\n")
+
+# Enhanced FEV1 analysis plot using ggplot2
+if(require(ggplot2, quietly = TRUE)) {
+
+  # Multi-panel FEV1 analysis
+  p1 <- ggplot(fev1_data, aes(x = fev1_liters)) +
+    geom_histogram(aes(y = ..density..), bins = 6, fill = "lightblue",
+                   color = "white", alpha = 0.7) +
+    geom_density(color = "red", linewidth = 1) +
+    labs(title = "FEV1 Distribution", x = "FEV1 (liters)", y = "Density") +
+    theme_minimal()
+
+  p2 <- ggplot(fev1_data, aes(x = gender_full, y = fev1_liters, fill = gender_full)) +
+    geom_boxplot(alpha = 0.7) +
+    geom_jitter(width = 0.2, alpha = 0.6) +
+    scale_fill_manual(values = c("pink", "lightblue")) +
+    labs(title = "FEV1 by Gender", x = "Gender", y = "FEV1 (liters)") +
+    theme_minimal() +
+    theme(legend.position = "none")
+
+  p3 <- ggplot(fev1_data, aes(x = fev1_category, fill = fev1_category)) +
+    geom_bar(alpha = 0.7) +
+    scale_fill_manual(values = c("lightcoral", "lightgreen", "gold")) +
+    labs(title = "FEV1 Categories", x = "Category", y = "Count") +
+    theme_minimal() +
+    theme(legend.position = "none")
+
+  p4 <- ggplot(fev1_data, aes(x = subject_id, y = fev1_liters, color = gender_full)) +
+    geom_point(size = 3, alpha = 0.8) +
+    geom_hline(yintercept = c(2.5, 3.2), linetype = "dashed", color = "gray") +
+    scale_color_manual(values = c("red", "blue")) +
+    labs(title = "FEV1 by Subject", x = "Subject ID", y = "FEV1 (liters)",
+         color = "Gender") +
+    theme_minimal()
+
+  # Print individual plots
+  print(p1)
+  print(p2)
+  print(p3)
+  print(p4)
+}
+
+# ==============================================================================
+# SAVE YOUR WORK
+# ==============================================================================
+
+cat("\n=== SAVING WORK ===\n")
+
+# Save workspace
+save.image("week1_lab_workspace.RData")
+cat("Workspace saved to: week1_lab_workspace.RData\n")
+
+# Save specific objects
+save(health_data, fev1_data, state_health,
+     file = "week1_lab_data.RData")
+cat("Data objects saved to: week1_lab_data.RData\n")
+
+# Export data to CSV
+write.csv(health_data, "health_data.csv", row.names = FALSE)
+write.csv(fev1_data, "fev1_data.csv", row.names = FALSE)
+write.csv(state_health, "state_health_data.csv", row.names = FALSE)
+cat("CSV files exported: health_data.csv, fev1_data.csv, state_health_data.csv\n")
+
+# Create summary report
+summary_stats <- list(
+  health_data_summary = summary(health_data),
+  fev1_data_summary = summary(fev1_data),
+  state_health_summary = summary(state_health)
+)
+
+# Save summary
+capture.output(
+  {
+    cat("=== H524 WEEK 1 LAB SUMMARY REPORT ===\n")
+    cat("Generated on:", as.character(Sys.time()), "\n\n")
+
+    cat("HEALTH DATA SUMMARY:\n")
+    print(summary_stats$health_data_summary)
+
+    cat("\n\nFEV1 DATA SUMMARY:\n")
+    print(summary_stats$fev1_data_summary)
+
+    cat("\n\nSTATE HEALTH DATA SUMMARY:\n")
+    print(summary_stats$state_health_summary)
+
+    cat("\n\nKEY FINDINGS:\n")
+    cat("- Mean FEV1:", round(mean(fev1_data$fev1_liters), 2), "liters\n")
+    cat("- Mean systolic BP:", round(mean(health_data$systolic_bp), 2), "mmHg\n")
+    cat("- Diabetes-obesity correlation:", round(health_correlation, 3), "\n")
+
+    cat("\n\nAI FUNCTIONS CREATED:\n")
+    cat("- calculate_age_specific_rates()\n")
+    cat("- categorize_fev1()\n")
+    cat("- comprehensive_stats()\n")
+  },
+  file = "week1_lab_summary_report.txt"
+)
+
+cat("Summary report saved to: week1_lab_summary_report.txt\n")
+
+# ==============================================================================
+# LAB REFLECTION QUESTIONS
+# ==============================================================================
+
+cat("\n=== LAB REFLECTION QUESTIONS ===\n")
+
+reflection_questions <- c(
+  "1. How did using AI tools change your approach to coding in R?",
+  "2. What were the main challenges in verifying AI-generated statistical code?",
+  "3. When would you prefer to write code manually vs. using AI assistance?",
+  "4. How can AI tools best support learning biostatistics concepts?"
+)
+
+cat("Please consider these questions for your lab report:\n")
+for(i in 1:length(reflection_questions)) {
+  cat(reflection_questions[i], "\n")
+}
+
+# ==============================================================================
+# END OF LAB
+# ==============================================================================
+
+cat("\n=== WEEK 1 LAB COMPLETE! ===\n")
+cat("Remember to:\n")
+cat("1. Save your R script\n")
+cat("2. Document any AI tool usage\n")
+cat("3. Verify all results\n")
+cat("4. Submit required deliverables:\n")
+cat("   - week1_lab_[lastname].R\n")
+cat("   - week1_lab_report_[lastname].pdf\n")
+
+cat("\nFiles created during this lab:\n")
+created_files <- c(
+  "week1_lab_workspace.RData",
+  "week1_lab_data.RData",
+  "health_data.csv",
+  "fev1_data.csv",
+  "state_health_data.csv",
+  "week1_lab_summary_report.txt"
+)
+
+for(file in created_files) {
+  cat("-", file, "\n")
+}
+
+cat("\nLab completed successfully at:", as.character(Sys.time()), "\n")
+cat("Total runtime:", round(proc.time()[3], 2), "seconds\n")

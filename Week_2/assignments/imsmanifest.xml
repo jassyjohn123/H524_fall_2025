@@ -10,12 +10,12 @@
     <schemaversion>1.1</schemaversion>
     <imsmd:lom>
       <imsmd:general>
-        <imsmd:identifier>week2_probability_quiz</imsmd:identifier>
+        <imsmd:identifier>week2_probability_assignment</imsmd:identifier>
         <imsmd:title>
-          <imsmd:langstring xml:lang="en">Week 2: Probability Concepts Quiz</imsmd:langstring>
+          <imsmd:langstring xml:lang="en">Week 2: Introduction to Probability - Assignment</imsmd:langstring>
         </imsmd:title>
         <imsmd:description>
-          <imsmd:langstring xml:lang="en">H524 Introduction to Biostatistics - Week 2 Quiz covering basic probability, conditional probability, diagnostic tests, risk measures, and distributions</imsmd:langstring>
+          <imsmd:langstring xml:lang="en">H524 Introduction to Biostatistics - Week 2 Assignment covering basic probability, conditional probability, diagnostic tests, risk measures, and distributions</imsmd:langstring>
         </imsmd:description>
       </imsmd:general>
     </imsmd:lom>
@@ -31,8 +31,8 @@
   </organizations>
 
   <resources>
-    <resource identifier="week2_quiz_resource" type="imsqti_xmlv1p2" href="week2_quiz.xml">
-      <file href="week2_quiz.xml"/>
+    <resource identifier="week2_quiz_resource" type="imsqti_xmlv1p2" href="week2_assignment_quiz.xml">
+      <file href="week2_assignment_quiz.xml"/>
     </resource>
   </resources>
 </manifest>

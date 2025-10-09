@@ -7,7 +7,7 @@ sigma <- 15    # Standard deviation
 
 # Proportion with hypertension (SBP > 140)
 p_hyper <- pnorm(140, mu, sigma, lower.tail = FALSE)
-cat("P(BP > 140):", round(p_hyper * 100, 1), "%\n")
+cat("Pr(BP > 140):", round(p_hyper * 100, 1), "%\n")
 
 # Find percentiles
 bp_90 <- qnorm(0.90, mu, sigma)

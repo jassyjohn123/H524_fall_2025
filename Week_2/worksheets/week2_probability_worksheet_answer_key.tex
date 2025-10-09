@@ -1,0 +1,254 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+
+% Define OSU orange and AI blue colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large In-Class Worksheet - ANSWER KEY}}\\
+\textcolor{white}{\textbf{\large Probability and Conditional Probability}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Probability, Conditional Probability, and Diagnostic Testing
+
+\vspace{8pt}
+
+\section{Problem 1: Mammogram Screening (Based on Gigerenzer's Study)}
+
+A 45-year-old woman with no symptoms or family history of breast cancer has a positive mammogram. What is the probability that she actually has breast cancer?
+
+\vspace{6pt}
+
+\textbf{Given information:}
+\begin{itemize}
+\item The prevalence of breast cancer in this age group is 1.2\%
+\item If a woman has breast cancer, the probability is 85\% that she will have a positive mammogram (sensitivity)
+\item If a woman does not have breast cancer, the probability is 9\% that she will still have a positive mammogram (false positive rate)
+\end{itemize}
+
+\vspace{12pt}
+
+\textbf{Part A:} Set up a 2x2 table assuming 10,000 women are screened. Fill in all cells:
+
+\vspace{12pt}
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+& \textbf{Cancer +} & \textbf{Cancer -} & \textbf{Total} \\
+\hline
+\textbf{Test +} & 102 & 889 & 991 \\[2ex]
+\hline
+\textbf{Test -} & 18 & 8,991 & 9,009 \\[2ex]
+\hline
+\textbf{Total} & 120 & 9,880 & 10,000 \\[2ex]
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{12pt}
+
+\textbf{Work space for calculations:}
+
+\begin{itemize}
+\item Total with cancer: $10,000 \times 0.012 = 120$
+\item Total without cancer: $10,000 - 120 = 9,880$
+\item True positives: $120 \times 0.85 = 102$
+\item False negatives: $120 - 102 = 18$
+\item False positives: $9,880 \times 0.09 = 889$
+\item True negatives: $9,880 - 889 = 8,991$
+\end{itemize}
+
+\vspace{12pt}
+
+\textbf{Part B:} Calculate the Positive Predictive Value (PPV): $\Pr(\text{Cancer} \mid \text{Test+})$
+
+$$\text{PPV} = \frac{102}{991} = 0.103 = \textbf{10.3\%}$$
+
+\vspace{6pt}
+
+\textbf{Part C:} Interpret your result. Why is the PPV so much lower than the sensitivity?
+
+\textbf{Answer:} Even though the test has 85\% sensitivity, only 10.3\% of positive tests indicate actual cancer. This is because the prevalence is low (1.2\%), so false positives (889) vastly outnumber true positives (102). In a low-prevalence population, even a small false positive rate (9\%) generates many false positives.
+
+\newpage
+
+\section{Problem 2: Strep Throat Testing}
+
+A rapid strep test has 85\% sensitivity and 95\% specificity. Among patients presenting with sore throat, 15\% actually have strep throat.
+
+\vspace{12pt}
+
+\textbf{Part A:} Create a 2x2 table for 1,000 patients with sore throat:
+
+\vspace{12pt}
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+& \textbf{Strep +} & \textbf{Strep -} & \textbf{Total} \\
+\hline
+\textbf{Test +} & 128 & 43 & 171 \\[2ex]
+\hline
+\textbf{Test -} & 22 & 807 & 829 \\[2ex]
+\hline
+\textbf{Total} & 150 & 850 & 1,000 \\[2ex]
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Calculations:}
+\begin{itemize}
+\item Strep positive: $1,000 \times 0.15 = 150$
+\item Strep negative: $1,000 - 150 = 850$
+\item True positives: $150 \times 0.85 = 128$ (rounded)
+\item False negatives: $150 - 128 = 22$
+\item True negatives: $850 \times 0.95 = 808$ (rounded to 807 for total)
+\item False positives: $850 - 807 = 43$
+\end{itemize}
+
+\vspace{12pt}
+
+\textbf{Part B:} Calculate the Negative Predictive Value (NPV): $\Pr(\text{No Strep} \mid \text{Test-})$
+
+$$\text{NPV} = \frac{807}{829} = 0.973 = \textbf{97.3\%}$$
+
+\vspace{12pt}
+
+\textbf{Part C:} What is the probability that a patient with a negative test actually has strep (false negative)?
+
+$$\Pr(\text{Strep} \mid \text{Test-}) = \frac{22}{829} = 0.027 = \textbf{2.7\%}$$
+
+\section{Problem 3: Smoking and Heart Disease}
+
+In a study of 1,000 people, there were 200 smokers and 800 non-smokers. During the 10-year follow-up, 30 smokers and 20 non-smokers developed heart disease.
+
+\vspace{12pt}
+
+\textbf{Part A:} Create a 2x2 table:
+
+\vspace{12pt}
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+& \textbf{Heart Disease} & \textbf{No Disease} & \textbf{Total} \\
+\hline
+\textbf{Smokers} & 30 & 170 & 200 \\[2ex]
+\hline
+\textbf{Non-smokers} & 20 & 780 & 800 \\[2ex]
+\hline
+\textbf{Total} & 50 & 950 & 1,000 \\[2ex]
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{12pt}
+
+\textbf{Part B:} Calculate the risk of heart disease in smokers:
+
+$$\text{Risk}_{\text{smokers}} = \frac{30}{200} = 0.15 = \textbf{15\%}$$
+
+\vspace{6pt}
+
+\textbf{Part C:} Calculate the risk of heart disease in non-smokers:
+
+$$\text{Risk}_{\text{non-smokers}} = \frac{20}{800} = 0.025 = \textbf{2.5\%}$$
+
+\vspace{6pt}
+
+\textbf{Part D:} Calculate the Relative Risk (RR):
+
+$$\text{RR} = \frac{\text{Risk}_{\text{smokers}}}{\text{Risk}_{\text{non-smokers}}} = \frac{0.15}{0.025} = \textbf{6.0}$$
+
+\vspace{6pt}
+
+\textbf{Part E:} Interpret the relative risk in plain language:
+
+\textbf{Answer:} Smokers have 6 times the risk of developing heart disease compared to non-smokers over the 10-year period. Smoking is strongly associated with increased heart disease risk.
+
+\section{Problem 4: Binomial Probability}
+
+A new treatment has a 60\% success rate.
+
+\vspace{12pt}
+
+\textbf{Part A:} If 10 patients receive the treatment, what is the probability that at least 8 of them respond successfully? Use R or a binomial probability table.
+
+\textbf{Using R:}
+\begin{verbatim}
+pbinom(7, size = 10, prob = 0.6, lower.tail = FALSE)
+\end{verbatim}
+
+$$\Pr(X \geq 8) = \Pr(X = 8) + \Pr(X = 9) + \Pr(X = 10) = \textbf{0.167 or 16.7\%}$$
+
+\vspace{12pt}
+
+\textbf{Part B:} What is the expected number of successful responses out of 10 patients?
+
+$$E(X) = n \times p = 10 \times 0.6 = \textbf{6 patients}$$
+
+\section{Problem 5: Normal Distribution}
+
+Cholesterol levels in adults are normally distributed with mean 200 mg/dL and standard deviation 40 mg/dL.
+
+\vspace{12pt}
+
+\textbf{Part A:} What proportion of adults have cholesterol levels between 180 and 220 mg/dL?
+
+\textbf{Solution:}
+\begin{itemize}
+\item $Z_1 = \frac{180 - 200}{40} = -0.5$
+\item $Z_2 = \frac{220 - 200}{40} = 0.5$
+\item $\Pr(-0.5 < Z < 0.5) = \Pr(Z < 0.5) - \Pr(Z < -0.5) = 0.6915 - 0.3085 = \textbf{0.383 or 38.3\%}$
+\end{itemize}
+
+\textbf{Using R:}
+\begin{verbatim}
+pnorm(220, mean = 200, sd = 40) - pnorm(180, mean = 200, sd = 40)
+\end{verbatim}
+
+\vspace{12pt}
+
+\textbf{Part B:} What cholesterol level corresponds to the 90th percentile?
+
+\textbf{Solution:}
+\begin{itemize}
+\item The 90th percentile has $Z = 1.28$ (from Z-table)
+\item $X = \mu + Z\sigma = 200 + 1.28(40) = 200 + 51.2 = \textbf{251.2 mg/dL}$
+\end{itemize}
+
+\textbf{Using R:}
+\begin{verbatim}
+qnorm(0.90, mean = 200, sd = 40)
+\end{verbatim}
+
+\end{document}

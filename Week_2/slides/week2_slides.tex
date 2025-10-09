@@ -43,7 +43,7 @@
 \title{H524 Introduction to Biostatistics}
 \subtitle{Week 2: Probability Concepts and Applications}
 \author{Dr. John Molitor}
-\institute{Oregon State University\\College of Health}
+\institute{}
 \date{Fall 2025}
 
 \begin{document}
@@ -113,9 +113,9 @@
   \begin{itemize}
   \item Example: Patient tests positive
   \end{itemize}
-\item \textbf{Probability:} Measure of likelihood (0 to 1)
+\item \textbf{Probability:} Measure of likelihood [0, 1]
   \begin{itemize}
-  \item $P(\text{Event}) = \frac{\text{Number of favorable outcomes}}{\text{Total number of possible outcomes}}$
+  \item $\Pr(\text{Event}) = \frac{\text{Number of favorable outcomes}}{\text{Total number of possible outcomes}}$
   \end{itemize}
 \end{itemize}
 \end{frame}
@@ -123,13 +123,13 @@
 \begin{frame}
 \frametitle{Probability Rules}
 \begin{enumerate}
-\item \textbf{Range:} $0 \leq P(A) \leq 1$ for any event $A$
-\item \textbf{Certainty:} $P(S) = 1$ (something must happen)
-\item \textbf{Complement:} $P(A^c) = 1 - P(A)$
+\item \textbf{Range:} $0 \leq \Pr(A) \leq 1$ for any event $A$
+\item \textbf{Certainty:} $\Pr(S) = 1$ (something must happen)
+\item \textbf{Complement:} $\Pr(A^c) = 1 - \Pr(A)$
 \item \textbf{Addition Rule:}
-  $$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
+  $$\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B)$$
 \item \textbf{Multiplication Rule:}
-  $$P(A \cap B) = P(A) \times P(B|A)$$
+  $$\Pr(A \cap B) = \Pr(A) \times \Pr(B|A)$$
 \end{enumerate}
 \end{frame}
 
@@ -160,14 +160,14 @@ These questions require understanding conditional probability!
 \frametitle{Conditional Probability}
 \textbf{Definition:} Probability of event $A$ given that event $B$ has occurred
 
-$$P(A|B) = \frac{P(A \cap B)}{P(B)}, \text{ where } P(B) > 0$$
+$$\Pr(A|B) = \frac{\Pr(A \cap B)}{\Pr(B)}, \text{ where } \Pr(B) > 0$$
 
 \vspace{0.5cm}
 \textbf{Medical Example:}
 \begin{itemize}
 \item $A$ = Patient has diabetes
 \item $B$ = Patient is overweight
-\item $P(A|B)$ = Probability of diabetes given patient is overweight
+\item $\Pr(A|B)$ = Probability of diabetes given patient is overweight
 \end{itemize}
 
 \vspace{0.5cm}
@@ -177,7 +177,7 @@ $$P(A|B) = \frac{P(A \cap B)}{P(B)}, \text{ where } P(B) > 0$$
 \begin{frame}
 \frametitle{Independence}
 \textbf{Definition:} Events $A$ and $B$ are independent if:
-$$P(A|B) = P(A) \text{ or equivalently } P(A \cap B) = P(A) \times P(B)$$
+$$\Pr(A|B) = \Pr(A) \text{ or equivalently } \Pr(A \cap B) = \Pr(A) \times \Pr(B)$$
 
 \vspace{0.5cm}
 \textbf{Examples in Healthcare:}
@@ -203,12 +203,12 @@ $$P(A|B) = P(A) \text{ or equivalently } P(A \cap B) = P(A) \times P(B)$$
 \frametitle{Diagnostic Test Performance}
 \textbf{Key Metrics for Medical Tests:}
 \begin{itemize}
-\item \textbf{Sensitivity:} P(Positive Test | Disease Present)
+\item \textbf{Sensitivity:} Pr(Positive Test $\mid$ Disease Present)
   \begin{itemize}
   \item Ability to correctly identify disease
   \item True positive rate
   \end{itemize}
-\item \textbf{Specificity:} P(Negative Test | Disease Absent)
+\item \textbf{Specificity:} Pr(Negative Test $\mid$ Disease Absent)
   \begin{itemize}
   \item Ability to correctly identify no disease
   \item True negative rate
@@ -227,12 +227,12 @@ $$P(A|B) = P(A) \text{ or equivalently } P(A \cap B) = P(A) \times P(B)$$
 \frametitle{Predictive Values}
 \textbf{Clinical Interpretation Measures:}
 \begin{itemize}
-\item \textbf{Positive Predictive Value (PPV):} P(Disease | Positive Test)
+\item \textbf{Positive Predictive Value (PPV):} $\Pr(\text{Disease} \mid \text{Positive Test})$
   \begin{itemize}
   \item Probability patient has disease given positive test
   \item Depends on disease prevalence
   \end{itemize}
-\item \textbf{Negative Predictive Value (NPV):} P(No Disease | Negative Test)
+\item \textbf{Negative Predictive Value (NPV):} $\Pr(\text{No Disease} \mid \text{Negative Test})$
   \begin{itemize}
   \item Probability patient is healthy given negative test
   \item Also depends on disease prevalence
@@ -243,32 +243,68 @@ $$P(A|B) = P(A) \text{ or equivalently } P(A \cap B) = P(A) \times P(B)$$
 \textbf{Key Insight:} PPV and NPV change with disease prevalence in the population, while sensitivity and specificity are test characteristics.
 \end{frame}
 
-\section{Diagnostic Tests (Ch 6.3)}
-
 \begin{frame}
-\frametitle{2x2 Contingency Tables}
+\frametitle{A Counterintuitive Example}
+\textbf{HIV Screening Test with Excellent Performance:}
+\begin{itemize}
+\item Sensitivity = 99.5\% (detects 995 of 1000 infected people)
+\item Specificity = 98.5\% (correctly identifies 985 of 1000 uninfected)
+\item Population prevalence = 0.1\% (1 in 1000 people)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Question:} If you test positive, what's the probability you have HIV?
+
+\pause
+\vspace{0.3cm}
+\textbf{Approach: Consider 100,000 people tested}
+
 \begin{center}
-\begin{tabular}{|c|c|c|c|}
+\small
+\begin{tabular}{|l|c|c|c|}
 \hline
-& \textbf{Disease +} & \textbf{Disease -} & \textbf{Total} \\
+& \textbf{HIV +} & \textbf{HIV -} & \textbf{Total} \\
 \hline
-\textbf{Exposed} & a & b & a + b \\
+\textbf{Test +} & 100 & 1,498 & 1,598 \\
 \hline
-\textbf{Not Exposed} & c & d & c + d \\
+\textbf{Test -} & 0 & 98,402 & 98,402 \\
 \hline
-\textbf{Total} & a + c & b + d & n \\
+\textbf{Total} & 100 & 99,900 & 100,000 \\
 \hline
 \end{tabular}
 \end{center}
 
-\vspace{0.5cm}
-\textbf{Key Measures:}
+\vspace{0.3cm}
+\textbf{PPV} = $\frac{100}{1,598} = 0.063$ or \textbf{6.3\%}
+
+\vspace{0.2cm}
+\textbf{Surprising Result:} Only 6.3\% of positive tests indicate actual infection!\\
+\textbf{Why?} With low prevalence, false positives (1,498) vastly outnumber true positives (100).
+\end{frame}
+
+\section{Diagnostic Tests (Ch 6.3)}
+
+\begin{frame}
+\frametitle{Understanding Odds}
+\textbf{Probability vs Odds:}
 \begin{itemize}
-\item \textbf{Risk in Exposed:} $R_E = \frac{a}{a+b}$
-\item \textbf{Risk in Unexposed:} $R_U = \frac{c}{c+d}$
-\item \textbf{Relative Risk (RR):} $\frac{R_E}{R_U} = \frac{a/(a+b)}{c/(c+d)}$
-\item \textbf{Odds Ratio (OR):} $\frac{ad}{bc}$
+\item \textbf{Probability:} $\Pr(\text{Event}) = \frac{\text{Number with event}}{\text{Total number}}$
+\item \textbf{Odds:} $\text{Odds}(\text{Event}) = \frac{\text{Number with event}}{\text{Number without event}}$
 \end{itemize}
+
+\vspace{0.5cm}
+\textbf{Relationship:} $\text{Odds} = \frac{p}{1-p}$ where $p$ is the probability
+
+\vspace{0.5cm}
+\textbf{Example: Risk of lung cancer in smokers}
+\begin{itemize}
+\item 60 smokers develop lung cancer, 440 don't
+\item \textbf{Risk (probability):} $\frac{60}{500} = 0.12$ (12\%)
+\item \textbf{Odds:} $\frac{60}{440} = 0.136$ (or ``60 to 440'' or ``3 to 22'')
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Key insight:} When probability is small ($< 0.10$), odds $\approx$ probability
 \end{frame}
 
 \begin{frame}
@@ -286,12 +322,12 @@ $$P(A|B) = P(A) \text{ or equivalently } P(A \cap B) = P(A) \times P(B)$$
   \item Approximates RR when disease is rare
   \item Can be calculated in all study designs
   \item More difficult to interpret directly
-  \item OR > RR when outcome is common
+  \item OR $>$ RR when outcome is common
   \end{itemize}
 \end{itemize}
 
 \vspace{0.5cm}
-\textbf{Rule of thumb:} When disease prevalence < 10\%, OR $\approx$ RR
+\textbf{Rule of thumb:} When disease prevalence $< 10\%$, OR $\approx$ RR
 \end{frame}
 
 \begin{frame}
@@ -332,7 +368,7 @@ $$P(A|B) = P(A) \text{ or equivalently } P(A \cap B) = P(A) \times P(B)$$
 
 \vspace{0.5cm}
 \textbf{Discrete Random Variable:}
-$$E(X) = \mu = \sum_{i} x_i \cdot P(X = x_i)$$
+$$E(X) = \mu = \sum_{i} x_i \cdot \Pr(X = x_i)$$
 
 \vspace{0.5cm}
 \textbf{Medical Example:} Number of adverse events in clinical trial
@@ -382,7 +418,7 @@ $$SD(X) = \sigma = \sqrt{\text{Var}(X)}$$
 
 \vspace{0.5cm}
 \textbf{Probability Mass Function:}
-$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
+$$\Pr(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
 
 \vspace{0.5cm}
 \textbf{Parameters:}
@@ -404,8 +440,8 @@ $$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
 \textbf{Solution:}
 \begin{itemize}
 \item $n = 20$, $p = 0.90$, $k = 18$
-\item $P(X = 18) = \binom{20}{18} (0.90)^{18} (0.10)^2$
-\item $P(X = 18) = 190 \times 0.1501 \times 0.01 = 0.285$
+\item $\Pr(X = 18) = \binom{20}{18} (0.90)^{18} (0.10)^2$
+\item $\Pr(X = 18) = 190 \times 0.1501 \times 0.01 = 0.285$
 \end{itemize}
 
 \vspace{0.5cm}
@@ -444,15 +480,15 @@ $$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
 \begin{itemize}
 \item Mean = 120 mmHg
 \item Standard deviation = 15 mmHg
-\item What proportion have BP > 140 mmHg (hypertension)?
+\item What proportion have BP $>$ 140 mmHg (hypertension)?
 \end{itemize}
 
 \vspace{0.5cm}
 \textbf{Solution:}
 \begin{enumerate}
 \item Standardize: $Z = \frac{140 - 120}{15} = 1.33$
-\item Look up in Z-table: $P(Z < 1.33) = 0.9082$
-\item Therefore: $P(BP > 140) = 1 - 0.9082 = 0.0918$
+\item Look up in Z-table: $\Pr(Z < 1.33) = 0.9082$
+\item Therefore: $\Pr(BP > 140) = 1 - 0.9082 = 0.0918$
 \end{enumerate}
 
 \vspace{0.5cm}
@@ -473,9 +509,9 @@ $$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
 \vspace{0.5cm}
 \textbf{Calculate probabilities:}
 \begin{itemize}
-\item P(disease) = 125/50,000 = 0.0025 (0.25\%)
-\item P(death | disease) = 15/125 = 0.12 (12\%)
-\item P(death and disease) = 15/50,000 = 0.0003 (0.03\%)
+\item Pr(disease) = 125/50,000 = 0.0025 (0.25\%)
+\item Pr(death $\mid$ disease) = 15/125 = 0.12 (12\%)
+\item Pr(death and disease) = 15/50,000 = 0.0003 (0.03\%)
 \end{itemize}
 
 \vspace{0.5cm}
@@ -504,15 +540,15 @@ $$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
 \vspace{0.5cm}
 \textbf{Example prompts:}
 \begin{itemize}
-\item "Calculate the positive predictive value for a test with 95\% sensitivity, 90\% specificity, and 5\% prevalence"
-\item "Simulate 10,000 binomial trials with n=20, p=0.3 in R"
-\item "Explain the difference between relative risk and odds ratio with a medical example"
+\item ``Calculate the positive predictive value for a test with 95\% sensitivity, 90\% specificity, and 5\% prevalence''
+\item ``Simulate 10,000 binomial trials with n=20, p=0.3 in R''
+\item ``Explain the difference between relative risk and odds ratio with a medical example''
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{AI Demo: Diagnostic Test Calculations}
-\textbf{Prompt:} "Create R code to calculate diagnostic test metrics"
+\textbf{Prompt:} ``Create R code to calculate diagnostic test metrics''
 
 \footnotesize
 \begin{verbatim}
@@ -538,7 +574,7 @@ diagnostic_metrics(sens=0.85, spec=0.97, prev=0.05)
 
 \begin{frame}[fragile]
 \frametitle{AI Demo: Probability Simulations}
-\textbf{Prompt:} "Simulate coin flips to estimate probability"
+\textbf{Prompt:} ``Simulate coin flips to estimate probability''
 
 \footnotesize
 \begin{verbatim}
@@ -565,7 +601,7 @@ simulate_treatment()
 
 \begin{frame}[fragile]
 \frametitle{AI Demo: Visualizing Distributions}
-\textbf{Prompt:} "Compare binomial and normal distributions in R"
+\textbf{Prompt:} ``Compare binomial and normal distributions in R''
 
 \footnotesize
 \begin{verbatim}
@@ -623,8 +659,8 @@ legend("topright", c("Binomial", "Normal"),
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{AI Assignment: Probability Problem Solving}
-\textbf{This week's AI-integrated homework:}
+\frametitle{AI Task: Probability Problem Solving}
+\textbf{This week's AI-integrated tasks:}
 \begin{enumerate}
 \item Use AI to solve a diagnostic test problem, then verify manually
 \item Generate R code for simulating coin flips, then modify for medical scenario
@@ -637,12 +673,12 @@ legend("topright", c("Binomial", "Normal"),
 \textbf{Sample Problem:}
 \small
 \begin{verbatim}
-"A new diagnostic test for Disease X has 92% sensitivity
+``A new diagnostic test for Disease X has 92% sensitivity
 and 88% specificity. In a population where 3% have the
 disease, what is the probability that someone with a
 positive test actually has the disease? Create R code
 to calculate this and visualize how the answer changes
-as prevalence varies from 1% to 10%."
+as prevalence varies from 1% to 10%.''
 \end{verbatim}
 \end{frame}
 
@@ -663,13 +699,13 @@ sample_space$sum <- sample_space$Var1 + sample_space$Var2
 
 # Probability of sum = 7
 p_seven <- sum(sample_space$sum == 7) / nrow(sample_space)
-cat("P(sum = 7) =", p_seven, "\n")  # 6/36 = 1/6
+cat("Pr(sum = 7) =", p_seven, "\n")  # 6/36 = 1/6
 
 # Conditional probability example
-# P(sum > 8 | first die = 4)
+# Pr(sum > 8 | first die = 4)
 subset_data <- sample_space[sample_space$Var1 == 4, ]
 p_conditional <- sum(subset_data$sum > 8) / nrow(subset_data)
-cat("P(sum > 8 | first = 4) =", p_conditional, "\n")  # 3/6 = 1/2
+cat("Pr(sum > 8 | first = 4) =", p_conditional, "\n")  # 3/6 = 1/2
 \end{verbatim}
 \end{frame}
 
@@ -708,7 +744,7 @@ cat("False positives:", FP, "\n")
 
 \begin{frame}[fragile]
 \frametitle{R Example: Binomial Distribution}
-\small
+\footnotesize
 \begin{verbatim}
 # Clinical trial with 20 patients, treatment success rate 70%
 n <- 20
@@ -716,11 +752,11 @@ p <- 0.7
 
 # Probability of exactly 15 successes
 p_15 <- dbinom(15, n, p)
-cat("P(X = 15) =", round(p_15, 4), "\n")
+cat("Pr(X = 15) =", round(p_15, 4), "\n")
 
 # Probability of at least 15 successes
 p_atleast_15 <- pbinom(14, n, p, lower.tail = FALSE)
-cat("P(X >= 15) =", round(p_atleast_15, 4), "\n")
+cat("Pr(X >= 15) =", round(p_atleast_15, 4), "\n")
 
 # Expected value and standard deviation
 expected <- n * p
@@ -748,7 +784,7 @@ sigma <- 15    # Standard deviation
 
 # Proportion with hypertension (SBP > 140)
 p_hyper <- pnorm(140, mu, sigma, lower.tail = FALSE)
-cat("P(BP > 140):", round(p_hyper * 100, 1), "%\n")
+cat("Pr(BP > 140):", round(p_hyper * 100, 1), "%\n")
 
 # Find percentiles
 bp_90 <- qnorm(0.90, mu, sigma)
@@ -763,19 +799,6 @@ plot(x, dnorm(x, mu, sigma), type = "l",
      xlab = "SBP (mmHg)", ylab = "Density")
 abline(v = c(mu, 140), col = c("blue", "red"))
 \end{verbatim}
-\end{frame}
-
-\begin{frame}
-\frametitle{Practice Problems}
-\begin{enumerate}
-\item \textbf{Diagnostic Test:} A rapid strep test has 85\% sensitivity and 95\% specificity. If 15\% of patients with sore throat have strep, what's the NPV?
-
-\item \textbf{Risk Calculation:} In a study of 1000 people, 200 smokers and 800 non-smokers, 30 smokers and 20 non-smokers developed heart disease. Calculate the relative risk.
-
-\item \textbf{Binomial:} If a treatment works in 60\% of patients, what's the probability that it works in at least 8 out of 10 patients?
-
-\item \textbf{Normal:} If cholesterol levels are normally distributed with mean 200 mg/dL and SD 40 mg/dL, what proportion of people have levels between 180 and 220?
-\end{enumerate}
 \end{frame}
 
 \begin{frame}
@@ -809,7 +832,6 @@ abline(v = c(mu, 140), col = c("blue", "red"))
 
 \vspace{1cm}
 
-\textbf{Office Hours:} Wednesday, 10:00 am -- 11:30 am\\
 \textbf{Email:} john.molitor@oregonstate.edu\\
 \textbf{Office:} 153 Milam
 

@@ -1,0 +1,399 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{array}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+% Code environment
+\newtcblisting{rcode}{
+  colback=white,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=0pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  width=\textwidth,
+  breakable,
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false
+  }
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 2: Introduction to Probability}}\\
+\textcolor{white}{\textbf{\Large Homework Assignment}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Due Date:} End of Week 3\\
+\textbf{Total Points:} 100 (+ 5 bonus)\\
+\textbf{Format:} Submit through Canvas
+
+\section*{Instructions}
+
+\begin{itemize}
+\item Show all work for full credit
+\item Round probabilities to 4 decimal places unless otherwise specified
+\item Round percentages to 1 decimal place
+\item Include R code where specified
+\item You may use R to check your work
+\end{itemize}
+
+\section{Part 1: Basic R and Probability Fundamentals (25 points)}
+
+\subsection*{Question 1: Basic R Operations (5 points)}
+
+Write R code to:
+
+\begin{enumerate}[label=\alph*)]
+\item Create a vector with the following systolic blood pressures: 118, 132, 145, 128, 155, 122, 138 (1 point)
+\item Calculate the mean and standard deviation (2 points)
+\item Determine how many patients have high blood pressure ($\geq$ 140 mmHg) (2 points)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\subsection*{Question 2: Simple Probability (5 points)}
+
+In a hospital emergency department, records show:
+\begin{itemize}
+\item 40\% of patients come for injuries
+\item 35\% come for illnesses
+\item 25\% come for other reasons
+\end{itemize}
+
+\begin{enumerate}[label=\alph*)]
+\item What is the probability the next patient does NOT come for an injury? (2 points)
+\item If 200 patients visit the ED this week, how many would you expect to come for illnesses? (3 points)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\subsection*{Question 3: Sample Space and Events (5 points)}
+
+A clinical trial randomly assigns patients to three treatment groups: Drug A, Drug B, or Placebo.
+\begin{itemize}
+\item 50 patients receive Drug A
+\item 75 patients receive Drug B
+\item 75 patients receive Placebo
+\end{itemize}
+
+\begin{enumerate}[label=\alph*)]
+\item What is the probability a randomly selected patient received Drug A? (2 points)
+\item What is the probability a randomly selected patient did NOT receive placebo? (3 points)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\subsection*{Question 4: Complement Rule (5 points)}
+
+A screening test for diabetes has a 95\% specificity (true negative rate).
+
+\begin{enumerate}[label=\alph*)]
+\item What is the probability of a false positive? Show your work using the complement rule. (3 points)
+\item Explain in plain language what this false positive probability means. (2 points)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\subsection*{Question 5: Addition Rule (5 points)}
+
+In a study of 300 adults:
+\begin{itemize}
+\item 120 have high blood pressure
+\item 90 have high cholesterol
+\item 30 have both conditions
+\end{itemize}
+
+\begin{enumerate}[label=\alph*)]
+\item Calculate $\Pr(\text{high BP OR high cholesterol})$ using the addition rule. Show your work. (4 points)
+\item Are these events mutually exclusive? Explain. (1 point)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\section{Part 2: Conditional Probability (20 points)}
+
+\subsection*{Question 6: Basic Conditional Probability (6 points)}
+
+In a group of 500 hospital patients:
+\begin{itemize}
+\item 200 are smokers
+\item 150 have respiratory complications
+\item 100 are smokers with respiratory complications
+\end{itemize}
+
+\begin{enumerate}[label=\alph*)]
+\item Calculate $\Pr(\text{respiratory complications} \mid \text{smoker})$. Show your work. (3 points)
+\item Calculate $\Pr(\text{smoker} \mid \text{respiratory complications})$. Show your work. (3 points)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\subsection*{Question 7: Law of Total Probability (7 points)}
+
+A clinic's patient population:
+\begin{itemize}
+\item 60\% are adults, 40\% are children
+\item Among adults, 20\% have allergies
+\item Among children, 35\% have allergies
+\end{itemize}
+
+\begin{enumerate}[label=\alph*)]
+\item What is the overall probability that a randomly selected patient has allergies? Show your work using the law of total probability. (5 points)
+\item If a patient has allergies, what is the probability they are a child? (2 points)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\subsection*{Question 8: Independence (7 points)}
+
+Two screening tests are given:
+\begin{itemize}
+\item $\Pr(\text{Test A positive}) = 0.10$
+\item $\Pr(\text{Test B positive}) = 0.15$
+\item $\Pr(\text{both positive}) = 0.015$
+\end{itemize}
+
+\begin{enumerate}[label=\alph*)]
+\item Are Test A and Test B independent? Show your work. (5 points)
+\item Explain what independence would mean in this clinical context. (2 points)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\section{Part 3: Diagnostic Testing and 2$\times$2 Tables (30 points)}
+
+\subsection*{Question 9: Sensitivity and Specificity Definitions (6 points)}
+
+A rapid flu test is being evaluated.
+
+\begin{enumerate}[label=\alph*)]
+\item Define sensitivity in terms of conditional probability using proper notation [$\Pr(\cdot \mid \cdot)$]. (2 points)
+\item Define specificity in terms of conditional probability using proper notation. (2 points)
+\item Explain in plain language what a 90\% sensitivity means for patients who actually have the flu. (2 points)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\subsection*{Question 10: Creating a 2$\times$2 Table (10 points)}
+
+A COVID-19 rapid antigen test has:
+\begin{itemize}
+\item Sensitivity = 85\%
+\item Specificity = 95\%
+\end{itemize}
+
+In a community where 2\% of people currently have COVID-19, 10,000 people are tested.
+
+\begin{enumerate}[label=\alph*)]
+\item Create a complete 2$\times$2 table showing:
+   \begin{itemize}
+   \item Disease status (rows): Has COVID / No COVID
+   \item Test result (columns): Positive / Negative
+   \item Fill in all four cells with actual counts (6 points)
+   \end{itemize}
+\item Add row and column totals to your table. (2 points)
+\item Verify your sensitivity and specificity calculations match the given values. (2 points)
+\end{enumerate}
+
+\vspace{3cm}
+
+\subsection*{Question 11: PPV and NPV Calculation (8 points)}
+
+Using the 2$\times$2 table from Question 10:
+
+\begin{enumerate}[label=\alph*)]
+\item Calculate the Positive Predictive Value (PPV). Show your work. (3 points)
+\item Calculate the Negative Predictive Value (NPV). Show your work. (3 points)
+\item Explain in one sentence what the PPV means for someone who tests positive. (2 points)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\subsection*{Question 12: The Counterintuitive Case (6 points)}
+
+Consider an HIV screening test with excellent performance:
+\begin{itemize}
+\item Sensitivity = 99.5\%
+\item Specificity = 98.5\%
+\item Population prevalence = 0.1\% (1 in 1,000)
+\end{itemize}
+
+Imagine screening 100,000 people.
+
+\begin{enumerate}[label=\alph*)]
+\item Without doing calculations, would you expect the PPV to be high or low? Why? (2 points)
+\item Create the 2$\times$2 table with actual counts for 100,000 people screened. (3 points)
+\item Calculate the PPV and explain why it might surprise people despite the excellent sensitivity and specificity. (1 point)
+\end{enumerate}
+
+\vspace{3cm}
+
+\section{Part 4: Risk Measures (15 points)}
+
+\subsection*{Question 13: Relative Risk (8 points)}
+
+A 5-year cohort study of 1,000 people examined coffee consumption and heart disease:
+\begin{itemize}
+\item 400 heavy coffee drinkers: 60 developed heart disease
+\item 600 light/non coffee drinkers: 48 developed heart disease
+\end{itemize}
+
+\begin{enumerate}[label=\alph*)]
+\item Calculate the risk of heart disease in heavy coffee drinkers. (2 points)
+\item Calculate the risk of heart disease in light/non coffee drinkers. (2 points)
+\item Calculate the Relative Risk (RR). (2 points)
+\item Interpret the RR in one complete sentence. (2 points)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\subsection*{Question 14: Understanding Risk Ratios (7 points)}
+
+For each Relative Risk value below, explain what it means:
+
+\begin{enumerate}[label=\alph*)]
+\item RR = 1.0 (2 points)
+\item RR = 2.5 (2 points)
+\item RR = 0.6 (2 points)
+\item When RR $>$ OR, is the disease common or rare? (1 point)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\section{Part 5: Probability Distributions in R (10 points)}
+
+\subsection*{Question 15: Binomial Distribution (5 points)}
+
+A new medication has a 75\% success rate. A hospital treats 20 patients with this medication.
+
+\begin{enumerate}[label=\alph*)]
+\item What is the probability that exactly 15 patients respond successfully? Write the R code and provide the answer. (2 points)
+\item What is the probability that at least 16 patients respond successfully? Write the R code and provide the answer. (3 points)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\subsection*{Question 16: Normal Distribution (5 points)}
+
+Adult cholesterol levels are normally distributed with mean = 200 mg/dL and SD = 40 mg/dL.
+
+\begin{enumerate}[label=\alph*)]
+\item What proportion of adults have cholesterol levels above 240 mg/dL (high risk)? Write the R code and provide the answer. (2 points)
+\item What cholesterol level represents the 90th percentile? Write the R code and provide the answer. (3 points)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\section*{Bonus: AI-Enhanced Learning (5 bonus points)}
+
+\subsection*{Question 17: AI Verification (5 bonus points)}
+
+Choose ONE problem from Part 3 (Diagnostic Testing).
+
+\begin{enumerate}[label=\alph*)]
+\item Ask an AI tool (like Claude, ChatGPT) to solve it. Include your exact prompt. (1 point)
+\item Verify the AI's answer by working through it yourself. Did the AI get it right? (2 points)
+\item Identify one strength and one potential limitation of using AI for this type of problem. (2 points)
+\end{enumerate}
+
+\vspace{2cm}
+
+\section*{Submission Requirements}
+
+\subsection*{Required Files:}
+\begin{enumerate}
+\item \textbf{PDF Document} with all written work, tables, and calculations
+\item \textbf{R Script File (.R)} with all R code properly commented
+\item \textbf{AI Usage Documentation} (if applicable):
+   \begin{itemize}
+   \item Prompts used
+   \item How you verified outputs
+   \item Your own understanding of the solutions
+   \end{itemize}
+\end{enumerate}
+
+\subsection*{Formatting Guidelines:}
+\begin{itemize}
+\item Clearly label each question number
+\item Show all calculation steps
+\item For 2$\times$2 tables, draw clear grids with labels
+\item Round consistently per instructions
+\end{itemize}
+
+\section*{Grading Rubric}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcp{8cm}}
+\toprule
+\textbf{Category} & \textbf{Points} & \textbf{Criteria} \\
+\midrule
+Calculations & 40 & Correct formulas, accurate arithmetic \\
+Methods & 30 & Appropriate approach, proper notation \\
+Interpretation & 20 & Clear explanations, correct context \\
+R Code & 10 & Working code, proper comments \\
+Bonus & +5 & Thoughtful AI integration \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{Academic Integrity}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,title=AI Usage Guidelines]
+
+\textbf{You are encouraged to:}
+\begin{itemize}
+\item[+] Use AI tools to check your work
+\item[+] Ask AI to explain concepts
+\item[+] Verify calculations with AI
+\end{itemize}
+
+\textbf{You must NOT:}
+\begin{itemize}
+\item[-] Submit AI-generated work without understanding it
+\item[-] Copy solutions without showing your reasoning
+\item[-] Use AI as a substitute for learning
+\end{itemize}
+
+\textbf{Remember:} The goal is to develop YOUR ability to solve these problems, with AI as a learning aid.
+\end{tcolorbox}
+
+\end{document}
