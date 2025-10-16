@@ -1,0 +1,4119 @@
+name,id,sis_id,section,section_id,section_sis_id,submitted,attempt,"58010138: Question 1: Basic R Operations (5 points)
+Write R code to:
+
+Create a vector with the following systolic blood pressures: 118, 132, 145, 128, 155, 122, 138 (1 point)
+Calculate the mean and standard deviation (2 points)
+Determine how many patients have high blood pressure (≥140 mmHg) (2 points)
+
+Paste your R code in the text box below.",5.0,"58010139: Question 2a: In a hospital emergency department, 40% of patients come for injuries, 35% come for illnesses, and 25% come for other reasons.
+What is the probability the next patient does NOT come for an injury?",2.0,"58010140: Question 2b: If 200 patients visit the ED this week, how many would you expect to come for illnesses?
+Enter your answer as a whole number.",3.0,"58010141: Question 3: Sample Space and Events (5 points)
+A clinical trial randomly assigns patients to three treatment groups:
+
+50 patients receive Drug A
+75 patients receive Drug B
+75 patients receive Placebo
+
+a) What is the probability a randomly selected patient received Drug A? (2 points)
+b) What is the probability a randomly selected patient did NOT receive placebo? (3 points)
+Show your work.",5.0,"58010142: Question 4a: A screening test for diabetes has a 95% specificity (true negative rate).
+What is the probability of a false positive?",3.0,58010143: Question 4b: Explain in plain language what the false positive probability of 0.05 means.,2.0,"58010144: Question 5: Addition Rule (5 points)
+In a study of 300 adults:
+
+120 have high blood pressure
+90 have high cholesterol
+30 have both conditions
+
+a) Calculate P(high BP OR high cholesterol) using the addition rule. Show your work. (4 points)
+b) Are these events mutually exclusive? Explain. (1 point)",5.0,"58010145: Question 6: Basic Conditional Probability (6 points)
+In a group of 500 hospital patients:
+
+200 are smokers
+150 have respiratory complications
+100 are smokers with respiratory complications
+
+a) Calculate P(respiratory complications | smoker). Show your work. (3 points)
+b) Calculate P(smoker | respiratory complications). Show your work. (3 points)",6.0,"58010146: Question 7: Law of Total Probability (7 points)
+A clinic's patient population:
+
+60% are adults, 40% are children
+Among adults, 20% have allergies
+Among children, 35% have allergies
+
+a) What is the overall probability that a randomly selected patient has allergies? Show your work using the law of total probability. (5 points)
+b) If a patient has allergies, what is the probability they are a child? (2 points)",7.0,"58010147: Question 8: Independence (7 points)
+Two screening tests are given:
+
+P(Test A positive) = 0.10
+P(Test B positive) = 0.15
+P(both positive) = 0.015
+
+a) Are Test A and Test B independent? Show your work. (5 points)
+b) Explain what independence would mean in this clinical context. (2 points)",7.0,"58010148: Question 9: Sensitivity and Specificity Definitions (6 points)
+A rapid flu test is being evaluated.
+a) Define sensitivity in terms of conditional probability using proper notation [Pr(· | ·)]. (2 points)
+b) Define specificity in terms of conditional probability using proper notation. (2 points)
+c) Explain in plain language what a 90% sensitivity means for patients who actually have the flu. (2 points)",6.0,"58010149: Question 10: Creating a 2×2 Table (10 points)
+A COVID-19 rapid antigen test has:
+
+Sensitivity = 85%
+Specificity = 95%
+
+In a community where 2% of people currently have COVID-19, 10,000 people are tested.
+a) Create a complete 2×2 table showing disease status (Has COVID / No COVID) in rows and test result (Positive / Negative) in columns. Fill in all four cells with actual counts. (6 points)
+b) Add row and column totals to your table. (2 points)
+c) Verify your sensitivity and specificity calculations match the given values. (2 points)",10.0,"58010150: Question 11: PPV and NPV Calculation (8 points)
+Using the 2×2 table from Question 10:
+a) Calculate the Positive Predictive Value (PPV). Show your work. (3 points)
+b) Calculate the Negative Predictive Value (NPV). Show your work. (3 points)
+c) Explain in one sentence what the PPV means for someone who tests positive. (2 points)",8.0,"58010151: Question 12: The Counterintuitive Case (6 points)
+Consider an HIV screening test with excellent performance:
+
+Sensitivity = 99.5%
+Specificity = 98.5%
+Population prevalence = 0.1% (1 in 1,000)
+
+Imagine screening 100,000 people.
+a) Without doing calculations, would you expect the PPV to be high or low? Why? (2 points)
+b) Create the 2×2 table with actual counts for 100,000 people screened. (3 points)
+c) Calculate the PPV and explain why it might surprise people despite the excellent sensitivity and specificity. (1 point)",6.0,"58010152: Question 13: Relative Risk (8 points)
+A 5-year cohort study of 1,000 people examined coffee consumption and heart disease:
+
+400 heavy coffee drinkers: 60 developed heart disease
+600 light/non coffee drinkers: 48 developed heart disease
+
+a) Calculate the risk of heart disease in heavy coffee drinkers. (2 points)
+b) Calculate the risk of heart disease in light/non coffee drinkers. (2 points)
+c) Calculate the Relative Risk (RR). (2 points)
+d) Interpret the RR in one complete sentence. (2 points)",8.0,"58010153: Question 14: Understanding Risk Ratios (7 points)
+For each Relative Risk value below, explain what it means:
+a) RR = 1.0 (2 points)
+b) RR = 2.5 (2 points)
+c) RR = 0.6 (2 points)
+d) When RR  OR, is the disease common or rare? (1 point)",7.0,"58010154: Question 15: Binomial Distribution (5 points)
+A new medication has a 75% success rate. A hospital treats 20 patients with this medication.
+a) What is the probability that exactly 15 patients respond successfully? Write the R code and provide the answer. (2 points)
+b) What is the probability that at least 16 patients respond successfully? Write the R code and provide the answer. (3 points)",5.0,"58010155: Question 16: Normal Distribution (5 points)
+Adult cholesterol levels are normally distributed with mean = 200 mg/dL and SD = 40 mg/dL.
+a) What proportion of adults have cholesterol levels above 240 mg/dL (high risk)? Write the R code and provide the answer. (2 points)
+b) What cholesterol level represents the 90th percentile? Write the R code and provide the answer. (3 points)",5.0,"58010156: Bonus Question 17: AI Verification (5 bonus points)
+Choose ONE problem from Part 3 (Diagnostic Testing).
+a) Ask an AI tool (like Claude, ChatGPT) to solve it. Include your exact prompt. (1 point)
+b) Verify the AI's answer by working through it yourself. Did the AI get it right? (2 points)
+c) Identify one strength and one potential limitation of using AI for this type of problem. (2 points)",5.0,n correct,n incorrect,score
+Riley Bond,6584923,934434645,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-13 04:42:18 UTC,1,"bp <- c(118, 132, 145, 128, 155, 122, 138)
+
+mean(bp)
+
+sd(bp)
+
+high_bp_count <- sum(bp >= 140)
+
+sum(bp>=140)",0.0,0.60,2.0,70,0.0,"a) 50/200= 0.25 (25%)
+
+b) 1-placebo= 1-(175/200)=125/200=0.625 (62.5%)",0.0,0.05,3.0,"Out of every 100 people who do not have diabetes, 5 of them will test falsely positive for the disease, in other words incorrectly test positive.",0.0,"(120/300)+(90/300)-(30/300)=180/300=0.6 or 60%
+
+The events are not mutually exclusive because they can occur at the same time, meaning some patients have both, high cholesterol and high BP.",0.0,"smokers with complications/total smokers=100/200=0.5 or 50%
+
+ 
+
+smokers with complications/total complications=100/150=0.666 or 66.6%",0.0,"(0.2x0.6)+(0.35x0.4)=0.12+0.14=0.26 or 26%
+
+ 
+
+0.14(P allergy and child)/0.26(P allergy)=0.539 or 53.9%",0.0,"P(A)×P(B)=0.10×0.15=0.015
+
+This means A and B are independent
+
+In this context, the result of test A being positive does not affect the probability of test B being positive.",0.0,"Sensitivity=P(Test positive∣Have flu) 
+
+ 
+
+Specificity=P(Test negative∣No flu) 
+
+ 
+
+A sensitivity of 90% in this case means that out of all patients who actually have the flu, 90% of them will test positive on this test.",0.0,"> total <- 10000
+> prevalence <- 0.02
+> sensitivity <- 0.85
+> specificity <- 0.95
+> have_covid <- total * prevalence
+> no_covid <- total - have_covid
+> TP <- have_covid * sensitivity
+> FN <- have_covid - TP
+> TN <- no_covid * specificity
+> FP <- no_covid - TN
+> test_results <- matrix(c(TP, FN, FP, TN), nrow = 2, byrow = TRUE)
+> rownames(test_results) <- c(""Has COVID"", ""No COVID"")
+> colnames(test_results) <- c(""Test Positive"", ""Test Negative"")
+> test_results_with_totals <- addmargins(test_results)
+> print(""2x2 Table with counts:"")
+[1] ""2x2 Table with counts:""
+> print(test_results_with_totals)
+          Test Positive Test Negative   Sum
+Has COVID           170            30   200
+No COVID            490          9310  9800
+Sum                 660          9340 10000
+> calc_sensitivity <- TP / (TP + FN)
+> calc_specificity <- TN / (TN + FP)
+
+[1] 0.85
+
+[1] 0.95",0.0,"PPV <- TP / (TP + FP)
+
+[1] 0.2575758
+
+NPV <- TN / (TN + FN)
+
+[1] 0.996788
+
+The PPV means that for someone who test positive, they have a 26% chance of actually having covid-19.",0.0,"I would expect the PPV to be low because the prevalence of HIV is low, and this is typically a good indicator for PPV.
+
+table_2x2 <- matrix(c(TP, FN, FP, TN), nrow = 2, byrow = TRUE)
+rownames(table_2x2) <- c(""Has HIV"", ""No HIV"")
+colnames(table_2x2) <- c(""Test Positive"", ""Test Negative"")
+
+print(table_2x2)
+
+PPV <- TP / (TP + FP)
+
+[0.0626]
+
+This might surprise people despite having excellent sensitivity and specificity because the disease is rare- only 6.3% have the disease.
+
+ 
+
+ ",0.0,"> risk_heavy <- heavy_cases / heavy_total
+
+> risk_light <- light_cases / light_total
+
+> RR <- risk_heavy / risk_light
+
+> cat(""a) Risk in heavy coffee drinkers:"", round(risk_heavy * 100, 2), ""%\n"")
+a) Risk in heavy coffee drinkers: 15 %
+> cat(""b) Risk in light/non coffee drinkers:"", round(risk_light * 100, 2), ""%\n"")
+b) Risk in light/non coffee drinkers: 8 %
+> cat(""c) Relative Risk (RR):"", round(RR, 3), ""\n"")
+c) Relative Risk (RR): 1.875 
+
+d) heavy coffee drinkers had 1.88 times the risk of heart disease than light/non coffee drinkers",0.0,"a) no difference in risk between the exposed and unexposed.
+
+b) the exposed group has 2.5 times the risk of developing the disease
+
+c)the exposed group has 40% lower risk of developing the disease
+
+d) the disease is common when RR>OR",0.0,"prob_15 <- dbinom(15, size = 20, prob = 0.75)
+
+prob_15
+
+[1] 0.2023
+
+ 
+
+prob_16_or_more <- 1 - pbinom(15, size = 20, prob = 0.75)
+
+prob_16_or_more
+
+[1] 0.2027",0.0,"p_above_240 <- 1 - pnorm(240, mean = 200, sd = 40)
+
+p_above_240
+
+[1] 0.1587
+
+ 
+
+chol_90th <- qnorm(0.90, mean = 200, sd = 40)
+
+chol_90th
+
+[1] 251.2",0.0,"A COVID-19 rapid antigen test has:
+
+*
+
+Sensitivity = 85%
+
+*
+
+Specificity = 95%
+
+*
+
+In a community where 2% of people currently have COVID-19, 10,000 people are tested.
+
+a) Create a complete 2×2 table showing disease status (Has COVID / No COVID) in rows and test result (Positive / Negative) in columns. Fill in all four cells with actual counts.
+b) Add row and column totals to your table.
+c) Verify your sensitivity and specificity calculations match the given values.
+
+✅ Given:
+--------
+
+*
+
+Total people tested: 10,000
+
+*
+
+Prevalence (current cases): 2% → 0.02 × 10,000 = 200 people have COVID
+
+*
+
+Therefore, 9,800 people do not have COVID
+
+*
+
+Sensitivity: 85% → probability the test correctly identifies someone with COVID
+
+*
+
+Specificity: 95% → probability the test correctly identifies someone without COVID
+
+### 🧮 a) Create the complete 2×2 table
+--------------------------------------
+
+We'll compute the four key cells:
+
+1. Has COVID (200 people):
+--------------------------
+
+*
+
+True Positives (TP) = Sensitivity × Has COVID = 0.85 × 200 = 170
+
+*
+
+False Negatives (FN) = 200 - 170 = 30
+
+2. No COVID (9,800 people):
+---------------------------
+
+*
+
+True Negatives (TN) = Specificity × No COVID = 0.95 × 9,800 = 9,310
+
+*
+
+False Positives (FP) = 9,800 - 9,310 = 490
+
+🧾 Completed 2×2 Table:
+----------------------
+
+Test Positive
+
+Test Negative
+
+Row Total
+
+Has COVID
+
+170
+
+30
+
+200
+
+No COVID
+
+490
+
+9,310
+
+9,800
+
+Column Total
+
+660
+
+9,340
+
+10,000
+
+✅ b) Row and column totals are included above.
+----------------------------------------------
+
+*
+
+Row Totals:
+
+*
+
+Has COVID: 170 + 30 = 200
+
+*
+
+No COVID: 490 + 9,310 = 9,800
+
+*
+
+Column Totals:
+
+*
+
+Test Positive: 170 + 490 = 660
+
+*
+
+Test Negative: 30 + 9,310 = 9,340
+
+✅ c) Verify sensitivity and specificity:
+----------------------------------------
+
+Sensitivity:
+------------
+
+True PositivesAll with COVID=170200=0.85=85%\frac{\text{True Positives}}{\text{All with COVID}} = \frac{170}{200} = 0.85 = 85\%All with COVIDTrue Positives​=200170​=0.85=85%
+
+Specificity:
+------------
+
+True NegativesAll without COVID=93109800=0.95=95%\frac{\text{True Negatives}}{\text{All without COVID}} = \frac{9310}{9800} = 0.95 = 95\%All without COVIDTrue Negatives​=98009310​=0.95=95%
+
+✔️ Both match the given values. ✅
+
+ 
+
+Yes, AI got it right.
+
+Strength: AI can perform quick calculations accurately.
+
+Limitation: AI can use outdated data for comparison, or have trouble explaining reasoning.
+
+ ",0.0,18,1,5.0
+Miguel Merales,6166514,932699570,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-13 04:38:44 UTC,1,"a.)
+> bp_systolic<-c(118,132,145,128,155,122,138)
+> bp_systolic
+[1] 118 132 145 128 155 122
+[7] 138
+
+b.)
+> mean(bp_systolic)
+[1] 134
+
+> sd(bp_systolic)
+[1] 13.02562
+
+c.)
+> sum(bp_systolic>=140) [1] 2
+# Two patients have high blood pressure.",0.0,0.60,2.0,70,0.0,"a.)
+
+50/(50+75+75)=
+
+50/200
+
+(50/200)/50=
+
+1/4 or 0.25%
+
+ 
+
+b.)
+
+(50+75)/(50+75+75)=
+
+125/200
+
+(125/200)/25=
+
+5/8 or 0.625%",0.0,0.05,3.0,There is a 5% chance that a patient has diabetes even though they had a negative test. ,0.0,"a.)
+
+P(A∪B)=P(A)+P(B)−P(A∩B)
+
+ 
+
+P(HBP​)=120/300
+
+P(H_{Chol}) = \frac{90}{300} = \frac{90}{300}P(HChol​)=90/120
+
+P(\text{both}) = P(H_{BP}\cap H_{Chol}) = \frac{30}{300} = \frac{30}{300}P(both)=P(HBP​∩HChol​)=30/300
+
+​
+
+P(HBP​∪HChol​)= 120/300+90/300-30/300=
+
+120+90-30/300=
+
+180/300=
+
+0.6
+
+ 
+
+b.)
+
+The events are not mutually exclusive because the P(HBP​∩HChol) is not zero but 0.1 making them not mutually exclusive. ​",0.0,"a.)
+
+P(respiratory complications | smoker)=
+
+P(Respiratory complications∩Smoker)/P(Smoker)=
+
+(100/500)/(200/500)=
+
+100/200=
+
+0.5 or 50%
+
+b.)
+
+P(smoker | respiratory complications)=
+
+P(Smoker∩Respiratory complications)/P(Respiratory complications)=
+
+(100/500)/(150/500)=
+
+100/150=
+
+approximately 0.67 or 67%",0.0,"a.)
+
+P(Allergies)=P(Allergies∣Adult)×P(Adult)+P(Allergies∣Child)×P(Child)=
+
+P(Allergies)=(0.20)(0.60)+(0.35)(0.40)=
+
+P(Allergies)=0.12+.14=
+
+P(Allergies)= 0.26
+
+ 
+
+b.)
+
+P(Child∣Allergies)=P(Allergies∣Child)×P(Child)/P(Allergies)=
+
+(0.35)(0.4)/0.26= 0.5385
+
+About 0.54 or 53.85%​",0.0,"a.)
+
+P(A∩B)=P(A)×P(B)=
+
+0.10x0.15=
+
+0.015
+
+Since P(A∩B) is equal to P(both positive) which would mean that Test A and Test B are independent from each other. 
+
+ 
+
+b.)
+
+In a clinical context, independence would mean that patient that tests positive for either test would be no more or less probable to test positive for the other test than any other patient. ",0.0,"a.)
+
+Pr(Positive flu test | flu present)
+
+b.)
+
+Pr(Negative flu test | flu absent)
+
+c.)
+
+That test can detect 90% of people who truly have the flu but might give a false negative to the other 10% people who also truly have the flu. ",0.0,"a.-b.)
+
+Has COVID
+
+No COVID
+
+Total
+
+Test +
+
+170
+
+490
+
+660
+
+Test -
+
+30
+
+9,310
+
+9,340
+
+Total
+
+200
+
+9,800
+
+10,000
+
+c.)
+
+10,000x(prevalence)= 10,000x0.2=200
+
+Sensitivity:  200x0.85= 170
+
+10,000-200=9,800
+
+Specificity: 9,800 x 0.95= 9,310",0.0,"a.)
+
+PPV=
+
+170/660=
+
+approximately 0.268 or 26.8%
+
+b.)
+
+NPV=
+
+9,310/9,340=
+
+Approximately 0.997 or 99.7%
+
+c.)
+
+The probability of that test would actually indicate infection is 26.8%",0.0,"a.)
+
+I would expect PPV to be low because there is a low prevalence among the population.
+
+b.)
+
+HIV +
+
+HIV -
+
+Total
+
+Test +
+
+100
+
+1,498
+
+1,598
+
+Test -
+
+0
+
+98,402
+
+98,402
+
+Total
+
+100
+
+99,900
+
+100,000
+
+c.)
+
+PPV=
+
+100/1,598=
+
+0.063 or 6.3%
+
+Because with a low prevalence, false positively will significantly outnumber the true positives.  
+
+ ",0.0,"a.)
+
+Risk= number with disease/total group of heavy coffee drinkers=
+
+60/400=
+
+0.15 or 15%
+
+b.)
+
+Risk=number with disease/ total group of light or non-coffee drinkers=
+
+48/600=
+
+0.08 or 8%
+
+c.)
+
+RR= Risk of heavy coffee drinkers/ Risk of light or non-coffee drinkers=
+
+0.15/0.08=
+
+1.875
+
+d.)
+
+In a span of 5 years, heavy coffee drinkers are 1.875 times more likely to develop heart disease than light/non-coffee drinkers. 
+
+ 
+
+ ",0.0,"a.) 
+
+RR=1.0 means that there is no difference in risk between the exposed group and the unexposed group.
+
+b.)
+
+RR=2.5 means that the exposed group is 2.5 times more at risk to develop disease than the unexposed group.
+
+c.)
+
+RR=0.6 means that the exposed group is 40% less at risk to develop disease than the unexposed group and that the group has a protective effect. 
+
+d.)
+
+When RR>OR, the disease is common.
+
+ ",0.0,"a.)
+
+> p_15 <- dbinom(15, 20, 0.75)
+> cat(""Pr(X = 15) ="", round(p_15, 4), ""\n"")
+Pr(X = 15) = 0.2023
+
+Approximately 0.202 or 20.2%
+
+ 
+
+ 
+
+b.)
+
+> p_atleast_16 <- pbinom(15, 20, 0.75, lower.tail = FALSE)
+> cat(""Pr(X >= 16) ="", round(p_atleast_16, 4), ""\n"")
+Pr(X >= 16) = 0.4148
+
+Approximately 0.415 or 41.5%",0.0,"a.)
+
+> p_above_240 <- 1 - pnorm(240, mean = 200, sd = 40)
+> p_above_240
+[1] 0.1586553
+
+Approximately 0.159 or 15.9%
+
+ 
+
+b.)
+
+> chol_90th <- qnorm(0.90, mean = 200, sd = 40)
+> chol_90th
+[1] 251.2621
+
+Approximately 251.3 mg/dL",0.0,"I did not find any part of the test or content labeled ""Part 3 (Diagnostic Testing)"". I was unsure what problem choices I could choose from since it was not labeled with ""Part 3 (Diagnostic Testing)"".",0.0,18,1,5.0
+Lan Nguyen,6350175,933328341,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-13 04:26:33 UTC,1,"1a)bp<-c(118,132,145,128,155,122,138)
+
+1b)mean(bp) = 134
+
+sd(bp)= 13.02562
+
+1c) patients<-data.frame(
+  id=1:7,
+  systolic=c(118,132,145,128,155,122,138)
+)
+patients$HighBp<-with(patients, systolic>=140)
+high_bp_patients<-subset(patients, HighBp==TRUE)
+print(high_bp_patients)
+
+There are 2 patients with high blood pressure ",0.0,0.60,2.0,70,0.0,"3a) 50/(50+75+75)=0.25=25%
+
+b)(50+75)/(50+75+75)=0.625=62.5%
+
+ ",0.0,0.05,3.0,The probability that a screening test incorrectly identifies someone has the disease when they actually do not is 0.05 or 5%.,0.0,"(120/300)+(90/300)-(30/300)=0.6 
+
+These events are not mutually exclusive because in this study some people have both conditions and in order for events to be mutually exclusive the events cannot happen at the same time.",0.0,"a) 100/200=0.5
+
+b) 200/(100+150)=0.8 
+
+ ",0.0,"a) (0.60*0.20)+(0.40*0.35)=0.26
+
+b) (0.35*0.4)/0.26=0.54",0.0,"a)0.10*0.15=0.015 so Test A and Test B are independent
+
+b)Independence means that the result of one test does not affect the probability of getting a positive result on the other test. Knowing whether a patient tested positive (or negative) on Test A gives no information about whether they are likely to test positive on Test B.",0.0,"a) Sensitivity is the probability a person screens/tests positive given the person has the disease. Pr(test positive|has disease)
+
+b) Specificity is the probability a person screens/tests negative given the person has no disease. Pr(test negative|no disease)
+
+c) The probability that the screening test correctly identifies that the person actually has the flu is 90%",0.0,"                             Positive                  Negative            Total
+
+Has COVID          170                         30                     200
+
+No COVID            490                         9310                9800
+
+Total                      660                          9340                10000
+
+ 
+
+Sensitivity: 170/200=0.85 
+
+Specificity: 9310/9800=0.95 ",0.0,"a) PPV: 170/660=0.258=25.8%
+
+b) NPV: 9310/9340= 0.997=99.7%
+
+c) The probability that the patient has COVID given a positive screening test is 25.8%",0.0,"You would expect the PPV to be low because the prevalence is also low.
+
+                      Positive                  Negative            Total
+
+Has HIV          100                         0                        100
+
+No HIV           1498                       98402                99900
+
+Total                1598                       98402              100000
+
+PPV: 100/1598=0.063=6.3%
+
+With low prevalence, false positive vastly outnumber true positives.
+
+ ",0.0,"a)60/400=0.15
+
+b)48/600=0.08
+
+c)0.15/0.08=1.875
+
+Heavy coffee drinkers have 1.875 times the risk of light/non coffee drinkers",0.0,"a) There is no difference in risk between the exposed group and the unexposed group.
+
+b)The exposed group has a 2.5 times more likely to develop the disease compared to the unexposed group.
+
+c)The exposed group has a 40% less risk of developing the disease compared to the unexposed group.
+
+d) The disease is common",0.0,"a) dbinom(15, size=20, p=0.75)=0.2023
+
+b) 1-pbinom(15, size=20, p=0.75)=0.2611",0.0,"a) 1-pnorm(240, mean=200, sd=40)=0.1587
+
+b) qnorm(0.90, mean=200, sd=40)=251.2
+
+ ",0.0,"",0.0,18,1,5.0
+Anjali Baldevbhai Chaudhari,6583876,934547877,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-13 03:47:29 UTC,1,"a) Create a vector of systolic blood pressures
+systolic_bp <- c(118, 132, 145, 128, 155, 122, 138)
+systolic_bp
+
+(b) Calculate the mean and standard deviation
+mean_bp <- mean(systolic_bp)
+sd_bp <- sd(systolic_bp)
+mean_bp
+sd_bp
+
+(c) Determine how many patients have high blood pressure (≥140 mmHg)
+high_bp_count <- sum(systolic_bp >= 140)
+high_bp_count",0.0,0.60,2.0,70,0.0,"Total patients (patients receive Drug A+patients receive Drug B+patients receive Placebo) : 200
+a) P(Drug A) = Number of drug A patients/Total Patients
+                     =50/200 =0.25 =25%  
+The probability a randomly selected patient received Drug A is 0.25 or 25%.
+
+b) Patients not Placebo=Drug A+Drug B=50+75=125
+
+P(NOT Placebo)=125/200​ =0.625
+The probability a randomly selected patient did NOT receive placebo is 0.625 or 62.5%.
+
+ ",0.0,0.05,3.0,"It means that out of every 100 people without the disease, 5 will get a wrong, positive result. As there's a 5% chance that the test will incorrectly come back as positive.",0.0,"Total adults = 300
+High blood pressure = 120
+High cholesterol = 90
+Both conditions = 30
+
+a) Using the addition rule:
+P(high BP or high cholesterol) = P(high BP) + P(high cholesterol) − P(both)
+= (120/300) + (90/300) − (30/300)
+= 0.4 + 0.3 − 0.1 = 0.6 (60%)
+
+b) No, they are not mutually exclusive because 30 adults have both conditions.
+
+ ",0.0,"Basic Conditional Probability
+P(A∣B)= P(A∩B)/P(B)
+
+where P(A∩B) is the probability of both events happening, and P(B) is the probability of the condition event.
+
+R=(Respiratory Complications) 150
+S=(Smoker) 200
+Total Patients =500
+Smoker: P(S) =200/500 =0.40
+Respiratory complications(R) =150/500 =0.30
+both S and R = P(S∩R) =100/150 =0.20
+
+a). P(respiratory complications | smoker): 
+
+P(R|S) =P(R∩S)​/P(S) =0.20/0.40​
+
+P(R|S) =0.50
+
+The probability of a smoker having respiratory complications is 0.50 (or 50%).
+
+b). P(smoker | respiratory complications):
+
+P(S|R) =P(S∩R)​/P(R)=0.20/0.30​
+
+P(S|R) =0.667
+
+The probability of a patient with respiratory complications being a smoker is approximately 0.667 (or 66.7%).
+
+  
+
+​",0.0,"Adults = 60% = 0.60
+Children = 40% = 0.40
+⁠P(Allergies | Adult) = 0.20
+⁠P(Allergies | Child) = 0.35
+
+a) Overall probability that a randomly selected patient has allergies:
+P(Allergies) = P(Adult) × P(Allergies | Adult) + P(Child) × P(Allergies | Child)
+= (0.60 × 0.20) + (0.40 × 0.35)
+= 0.12 + 0.14 = 0.26 (26%)
+
+b)If a patient has allergies, what is the probability they are a child:
+P(Child | Allergies) = [P(Child) × P(Allergies | Child)] / P(Allergies)
+= (0.40 × 0.35) / 0.26
+= 0.14 / 0.26 = 0.5385 = 0.54 (54%)",0.0,"P(Test A positive) = 0.10
+P(Test B positive) = 0.15
+P(Both positive) = 0.015
+
+a) For independent events,
+P(A and B) = P(A) × P(B)
+P(A) × P(B) = 0.10 × 0.15 = 0.015
+
+Compare with given P(A and B) = 0.015
+
+Since P(A and B) = P(A) × P(B), the two tests are independent.
+
+Test A and Test B are independent because the joint probability equals the product of their individual probabilities.
+
+b)  In this clinical context, whether a patient tests positive on Test A does not influence the likelihood of testing positive on Test B.
+The tests are independent; the outcome of one test has no effect on the outcome of the other.",0.0,"a) Define Sensitivity:
+----------------------
+
+Sensitivity is the probability of a positive test result, given that the disease is actually present.
+
+Sensitivity= Pr(Positive Test|Disease Present)
+
+b) Define Specificity
+---------------------
+
+Specificity is the probability of a negative test result, given that the disease is actually absent.
+
+Specificity=Pr(Negative Test|Disease Absent)
+
+c) Plain Language Explanation
+-----------------------------
+
+A 90% sensitivity means that if you take 100 people who actually have the flu, the rapid test will correctly identify and give a positive result to 90 of those people.
+
+It is the test's ability to correctly identify the disease (the True Positive rate).",0.0,"Sensitivity (Pr(Test +|Has COVID)) =0.85
+
+Specificity (Pr(Test -|No COVID)) =0.95
+
+Prevalence (Pr(Has COVID)) =0.02
+
+Total with COVID: 10,000×0.02 =200
+Total without COVID: 10,000−200 =9,800
+True Positives (TP): 200×Sensitivity =200×0.85 =170
+False Negatives (FN): 200−TP =200−170 =30
+True Negatives (TN): 9,800×Specificity =9,800×0.95 =9,310
+False Positives (FP): 9,800−TN =9,800−9,310 =490
+
+Test Positive
+
+Test Negative
+
+Total
+
+Has COVID
+
+170 (TP)
+
+30 (FN)
+
+200
+
+No COVID
+
+490 (FP)
+
+9,310 (TN)
+
+9,800
+
+Total
+
+660 
+
+9,340 
+
+10,000
+
+ 
+
+Sensitivity Verification
+------------------------
+
+Sensitivity =True Positives/Total with Disease​ =170/200 ​=0.85
+The verified sensitivity of 85% matches the given value
+
+Specificity Verification
+------------------------
+
+Specificity =True Negatives/Total without Disease ​=9,310​/9,800 =0.95
+
+The verified specificity of 95% matches the given value.
+
+ ",0.0,"True Positives (TP): 170
+False Positives (FP): 490
+Total Test Positives: 170+490=660
+True Negatives (TN): 9,310
+False Negatives (FN): 30
+Total Test Negatives: 9,310+30=9,340
+
+-----------------------------------
+a) Positive Predictive Value (PPV):
+
+-----------------------------------
+
+PPV=Pr(Disease|Positive Test) = TP/Total Test Positives ​=660170​ =0.2576
+The Positive Predictive Value (PPV) is approximately 0.258 (or 25.8%).
+
+b) Negative Predictive Value (NPV)
+NPV=Pr(No Disease∣Negative Test)= TN​/Total Test Negatives =93409310​ =0.9968
+The Negative Predictive Value (NPV) is approximately 0.997 (or 99.7%).
+
+For someone in this community who tests positive, there is a 25.8% chance they actually have COVID-19.​
+​
+
+ 
+
+​
+​
+
+ 
+
+-
+ 
+-
+
+ 
+
+ ",0.0,"Sensitivity = 99.5% (0.995)
+Specificity = 98.5% (0.985)
+⁠Population prevalence = 0.1% (0.001)
+⁠Total people screened = 100,000
+
+a) The PPV would be low because the disease is very rare (0.1%). Even with a highly accurate test, most people tested do not have the disease, so false positives outnumber true positives, lowering the PPV.
+
+b) 
+
+HIV + 
+
+HIV - 
+
+Total
+
+Test +
+
+100 
+
+1,498 
+
+1,598
+
+Test -
+
+0 
+
+98,402 
+
+98,402
+
+Total
+
+100
+
+99,900
+
+100,000
+
+True Positives = 100 × 0.995 = 99.5
+⁠False Negatives = 100 × 0.005 = 0.5
+⁠True Negatives = 99,900 × 0.985 = 98,407.5
+⁠False Positives = 99,900 × 0.015 = 1,492.5
+
+c) PPV = True Positives / (True Positives + False Positives)
+PPV = 99.5 / (99.5 + 1,492.5) = 99.5 / 1,592 = 0.0625 = 6.25%
+
+d) Even with excellent sensitivity and specificity, the PPV is low because the disease is very rare. This means that most positive results are false positives, which can be surprising.",0.0,"Heavy coffee drinkers = 400, cases = 60
+⁠Light/non coffee drinkers = 600, cases = 48
+
+a) Risk of heart disease in heavy coffee drinkers:
+Risk = Cases / Total = 60 / 400 = 0.15 (15%)
+
+b) Risk of heart disease in light/non coffee drinkers:
+Risk = Cases / Total = 48 / 600 = 0.08 (8%)
+
+c) Relative Risk (RR):
+RR = Risk in exposed / Risk in unexposed = 0.15 / 0.08 = 1.875
+
+d) Heavy coffee drinkers have 1.875 times the risk of developing heart disease compared to light or non coffee drinkers over 5 years.
+
+ ",0.0,"a) RR = 1.0
+A relative risk of 1.0 means there is no difference in risk between the exposed and unexposed groups; the exposure does not affect the likelihood of the outcome.
+
+b) RR = 2.5
+A relative risk of 2.5 means the exposed group has 2.5 times higher risk of developing the outcome compared to the unexposed group.
+
+c) RR = 0.6
+A relative risk of 0.6 means the exposed group has 40% lower risk of developing the outcome compared to the unexposed group.
+
+d) When RR > OR, the disease is generally common.",0.0,"Success rate = 75% (0.75)
+⁠Number of patients = 20
+
+a) Probability that exactly 15 patients respond successfully
+R code:  dbinom(15, size = 20, prob = 0.75)
+Answer: 0.202 (20.2%)
+
+b) Probability that at least 16 patients respond successfully
+R code: 1 - pbinom(15, size = 20, prob = 0.75)
+Answer: 0.250 (25%)",0.0,"Mean = 200 mg/dL
+⁠SD = 40 mg/dL
+
+a) Proportion of adults with cholesterol above 240 mg/dL
+R code:
+1 - pnorm(240, mean = 200, sd = 40)
+Answer:
+P(X > 240) = 0.1587 (15.87%)
+
+ 
+
+b) Cholesterol level representing the 90th percentile
+R code:
+qnorm(0.90, mean = 200, sd = 40)
+Answer:
+90th percentile ≈ 253.3 mg/dL
+
+ ",0.0,"I will choose Question 11 (PPV and NPV Calculation) from the Diagnostic Testing section for this question, as it requires applying the conditional probability concepts.
+
+Exact Prompt:
+""A 2x2 table for a COVID test on 10,000 people shows 170 True Positives, 490 False Positives, 30 False Negatives, and 9310 True Negatives. Calculate the Positive Predictive Value (PPV) and the Negative Predictive Value (NPV).""
+
+AI Solution : The AI tool used the standard formulas and returned:
+
+PPV: 170/170+490 ​​≈0.2576 or 25.76%
+NPV: 310/9310+309 ​​≈0.9968 or 99.68%
+
+Verification and Accuracy:
+PPV=Pr(Disease|Positive Test) = TP/Total Test Positives ​=660170​ =0.2576
+NPV=Pr(No Disease∣Negative Test)= TN​/Total Test Negatives =93409310​ =0.9968
+
+Conclusion: The AI got the answer correct. It correctly identified and applied the conditional probability formulas for PPV and NPV to the given input counts.
+
+Strength: AI can instantly perform complex calculations and combinatorics, generating R code (like the diagnostic_matrics function) for Baye's theorem and predictive values. This is faster than manual computation.
+
+Limitation: A major risk is that users or the AI itself might misinterpret conditional probability (e.g., confusing P(Disease∣Test +) with P(Test +∣Disease)). If the prompt had asked the AI to create the 2×2 table from sensitivity/specificity alone, an incorrect prevalence input or assumption could lead to an incorrect answer that the user accepts without verification. ",0.0,18,1,5.0
+Melissa Cook,6712481,933632330,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-13 02:31:33 UTC,1,"R code: 
+
+systolic_bp <- c(118, 132, 145, 128, 155, 122, 138)
+mean(systolic_bp)
+sd(systolic_bp)
+high_pb <- systolic_bp[systolic_bp >= 140]
+high_pb
+
+ 
+
+A. systolic_bp <- c(118, 132, 145, 128, 155, 122, 138)
+
+b. mean= 134 sd= 13.03
+
+C. 2 (145,155)",0.0,0.60,2.0,70,0.0,"A. 50+75+75=200 total options 
+
+50/200=0.25 = 25% 
+
+ 
+
+B. 50+75=125 
+
+125/200=0.625 = 62.5%
+
+ ",0.0,0.05,3.0,The false positive probability of 0.05 means that there is a 5% chance that someone who does not have the disease will show a positive result on the test. ,0.0,"A. P(A or B) = P(A) + P(B) - P(A and B)
+
+ 
+
+P(high BP or high cholesterol) = (120/300) + (90/300) - (30/300) 
+
+P(high BP or high cholesterol) = 0.4 + 0.3 - 0.1
+
+P(high BP or high cholesterol = 0.60 or 60% 
+
+ 
+
+B. These events are not mutually exclusive because there are 30 adults who have both conditions, therefore someone could have both high blood pressure and high cholesterol at the same time. 
+
+ ",0.0,"A. P(respiratory complications | smoker) = 100/200 = 0.5 or 50% 
+
+Since 200 of the patients are smokers and 100 of them have respiratory complications. 
+
+ 
+
+B. P(smoker | respiratory complications) = 100/150 = 0.67 or 67% ",0.0,[IMG_0066.jpg] (/users/6712481/files/114104418/preview?verifier=yBErnnFwNgsu2zp4mid4YUMK3YyPnAT198YNYpE2) ,0.0,"[IMG_0065.jpg] (/users/6712481/files/114104115/preview?verifier=QsdK9ZrFhdePcmlbkJ4B8iQajYGMBmTI2u92Y271)
+
+B. Independence in this clinical context means that the results of Test A and the results of Test B do not influence each other and are not related. ",0.0,"A. Pr(positive test|flu present)
+
+B. Pr(negative test|flu not present) 
+
+C. A 90% sensitivity for patients who actually have the flu means that the test correctly identifies people who actually have the flu 90% of the time. If you have the flu you have a 90% chance of testing positive correctly. ",0.0,[IMG_0061.jpg] (/users/6712481/files/114101644/preview?verifier=kQYdSh4USjNWIhDsYiN8a9jlq1HDmPiYJ8i0FpD5),0.0,"[IMG_0062.jpg] (/users/6712481/files/114101964/preview?verifier=ruvkC3qNJdEw4hGvGvJ0VJ7yqlVaF9HsuMB3Nn9o)
+
+C. A PPV of 25.8% means that a person who tests positive has a 25.8% chance that they have the disease. ",0.0,"A. Without calculations I would expect the PPV to be low because the prevalence of the disease is low. 
+
+[IMG_0063.jpg] (/users/6712481/files/114102409/preview?verifier=j5p04NA84Uxi2nTJtMrrOEN7zXVsmGFiUpt2Scl3)
+
+C cont. It might surprise people that the positive predictive value is less than 50% on a test with a very high sensitivity and specificity rate because they would assume since it has an accurate sensitivity it would generate less false positives. However since the prevalence is so low, it leads to many false positives. ",0.0,"[IMG_0064.jpg] (/users/6712481/files/114102676/preview?verifier=tnHY5cn1GQ2b2EZNuWyq3PODOcyXisPrEWjbPsbZ)
+
+D. Heavy coffee drinkers have 1.86 times the risk of heart disease. ",0.0,"A. A relative risk value of 1.0 means that given item has 1 times the risk of whatever outcome. 
+
+B. A relative risk value of 2.5 means that given item has 2.5 times the risk of whatever outcome. 
+
+C. A relative risk value of 0.6 means that given item has 0.6 times the risk of whatever outcome. 
+
+D. When relative risk is greater than odds ratio the disease is common. ",0.0,"A. 
+
+R Code: 
+
+n <- 20
+p <- 0.75
+p_15 <- dbinom(15, n, p)
+cat(""\n=== Vaccine Efficacy Trial ===\n"")
+cat(""P(exactly 15 protected):"", round(p_15, 3), ""\n"")
+
+probability exactly 15 = 0.202 or 20.2%
+
+ 
+
+B. R code: 
+
+p_atleast_16 <- pbinom(15, n, p, lower.tail = FALSE)
+cat(""P(at least 16 protected):"", round(p_atleast_16, 2), ""\n"")
+
+probability at least 16 patients respond successfully is 0.41 or 41% ",0.0,"A. 
+
+R code: 
+
+mu_cholesterol <- 200
+sigma_cholesterol <- 40
+p_above_240 <- 1 - pnorm(240, mu_cholesterol , sigma_cholesterol)
+cat(""P(cholesterol> 240):"", round(p_above_240 * 100, 1), ""%\n"")
+
+P(cholesterol> 240): 15.9%
+
+ 
+
+B. R Code: 
+
+qnorm(0.9, mu_cholesterol, sigma_cholesterol)
+
+251.26 is the 90th percentile.",0.0,"",0.0,18,1,5.0
+Constanza Cordova Silva,6328750,933983146,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-13 00:56:53 UTC,1,">bp <- c(118,132,145,128,155,122,138) 
+> bp 
+[1] 118 132 145 128 155 122 138
+> mean(bp)
+[1] 134
+> sd(bp)
+[1] 13.02562
+> high_bp <- sum(bp >= 140) 
+> high_bp
+[1] 2
+> ",0.0,0.60,2.0,70,0.0,"a) P(Drug A) = 50/200 = 0.25 * 100 = 25% chance they received Drug A 
+
+ 
+
+b) P(Not Placebo) = 1-(P(Placebo)) = 1 - (75/200) = 125/200 = 0.625 * 100 = 62.5% chance the patient did not receive Placebo ",0.0,0.05,3.0,"False positive probability of 0.05 means that out of 100 people who do not have diabetes, 5 of them will still test positive for diabetes when using this screening test. ",0.0,"a) addition rule --> P (A ∪ B) = P(A) + P(B) - P(A ∩ B) = (120/300) + (90/300) - (30/300) = 0.60 * 100 = 60% that someone has either high blood pressure OR high cholesterol. 
+
+ 
+
+b) No, these events are not mutually exclusive because some patients can have BOTH high blood pressure and high cholesterol, so the conditions (i.e. events) can occur together. ",0.0,"a) P(respiratory complications | smoker) = P(smoker AND respiratory complications) / P (smoker) = 100/200 = 0.50 * 100 =50% 
+
+ 
+
+b) P(smoker | respiratory complications) = P(smoker AND respiratory complications) / P(respiratory complications) =100/150 = 0.66667 * 100 = 66.7%",0.0,"a) P(allergies) = P(allergies | adult) * P(adult)  + P(allergies | child) * P(child)  = (0.60 * 0.20) + (0.40 * 0.35) = 0.12 + 0.14 = 0.26 * 100 = 26% 
+
+ 
+
+b) P(child | allergies) = P(allergies | child) * P(child)  / P(allergies) = 0.35 * 0.40/0.26 = 0.5385 * 100 = 53.85% ",0.0,"a) P( A and B) vs. P(A) * P(B) = 0.10 * 0.15 = 0.015
+
+P(both positive) = 0.015
+
+P(A and B) = P(A) * P(B) , the two tests are independent 
+
+ 
+
+b) In this context, independence means that the result of one test (either Test A or Test B) does not affect the likelihood of the results of another. 
+
+ ",0.0,"a) sensitivity = Pr(Test positive | Disease present) 
+
+ 
+
+b) specificity = Pr(Test negative | Disease absent) 
+
+ 
+
+c) 90% sensitivity means that 90 out of every 100 patients who actually have the flu will test positive using this rapid flu test. ",0.0,"a) 
+
+Test Positive
+
+Test Negative
+
+Total 
+
+Has Covid
+
+170
+
+30
+
+200
+
+No Covid
+
+490
+
+9,310
+
+9,800
+
+Total 
+
+660
+
+9,340
+
+10,000
+
+ 
+
+c) sensitivity = true positives / total with disease = 170/200 = 0.85 = 85% sensitivity 
+
+specificity = true negatives / total without disease = 9310/9800 = 0.95 = 95% specificity ",0.0,"a) PPV = 170/660 = 0.2576 * 100 = 25.76%
+
+ 
+
+b) NPV = 9310/9340 = 0.9968 * 100 = 99.69% 
+
+ 
+
+c) If someone tests positive, there is a 25.76% that that individual actually has COVID-19. ",0.0,"a) You would expect PPV to be low because prevalence of HIV is very low, meaning that most people tested don't have HIV so small false positive rate can lead to more false positives. 
+
+ 
+
+b)
+
+Test Positive
+
+Test Negative
+
+Total
+
+Has HIV
+
+99
+
+1
+
+100
+
+No HIV
+
+1,498
+
+98,402
+
+99,900
+
+Total
+
+1,597
+
+98,403
+
+100,000
+
+ 
+
+c) PPV = 99/1597 = 0.062 * 100 = 6.2% 
+
+This can surprise people because even though the test is very accurate, the low prevalence means most positive results are actually false positives. ",0.0,"a) Risk(heavy coffee drinker) = 60/400 = 0.15 * 100 = 15% 
+
+ 
+
+b) Risk(light/non coffee drinker) = 48/600 = 0.08 * 100 = 8%
+
+ 
+
+c) RR = 0.15/0.08 = 1.875 
+
+ 
+
+d) People who are heavy coffee drinkers have 1.875 times the risk of developing heart disease when compared to light or non-coffee drinkers over the course of 5 years. ",0.0,"a) This means that the exposure has no effect on the risk of disease. 
+
+ 
+
+b) This means that the exposure is associated with a 2.5 times higher risk of disease when compared to unexposed individuals. 
+
+ 
+
+c) This means that the exposure is associated with a 40% lower risk of disease when compared to unexposed individuals. 
+
+ 
+
+d) When RR > OR, that means the disease is common. ",0.0,"a) > dbinom(15, size = 20, prob = 0.75)
+[1] 0.2023312
+
+ 
+
+b) > sum(dbinom(16:20, size = 20, prob = 0.75)) 
+[1] 0.4148415 ",0.0,"a) > 1 - pnorm(240, mean = 200, sd = 40) 
+[1] 0.1586553 = 15.86%
+
+ 
+
+b) > qnorm(0.90, mean = 200, sd = 40) 
+[1] 251.2621",0.0,"",0.0,18,1,5.0
+Samantha Koester,6445581,933661427,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-12 23:36:21 UTC,1,"systolic_bp<- c(118,132,145,128,155,122,138)
+> mean(systolic_bp)
+[1] 134
+> sd(systolic_bp)
+[1] 13.02562
+> high_bp<- sum(systolic_bp >= 140)
+> high_bp
+[1] 2",0.0,0.60,2.0,80,0.0,"A) Pr(Drug A): 50/200=1/4= 0.25
+
+B) Pr(Drug A and B): 125/200= 5/8= 0.625",0.0,0.05,3.0,There is a 5% percent chance that there will be a positive screening test result on a person without the disease. This screening test is effective for detecting positive cases of disease in people who have the disease.,0.0,"a) P= Pr(0.40) + Pr(0.30)- Pr(0.10)= 0.60 
+
+b) No because it is possible to have both high blood pressure and high cholesterol, which therefore does not make these events mutually exclusive. ",0.0,"A) P(respiratory complications | smoker) = 100/200=0.5
+
+B) P(smoker | respiratory complications) = 100/150 =0.667",0.0,"A) Pr(allergy) = (0.2 x 0.6) + (0.35 x 0.4) 
+
+Pr(allergy)= 0.12 + 0.14 = 0.26
+
+B) Pr(not a child) = (0.35 x 0.4)/(0.26) 
+
+Pr(not a child) = (0.14/0.26) = 0.5385",0.0,"A) P(A∩B) = 0.10 x 0.15=0.015. The tests are independent
+
+B) The result of test A does not affect the outcome of test B",0.0,"A) Sensitivity [Pr( test positive | disease present)]
+
+B) Specificity [Pr(test negative |disease absent)]
+
+C) 90% sensitivity for patients who actually have the flu means that the test will show a true positive 90% of the time. If 100 people have the flu, 90 of them will test positive",0.0,"A) 
+
+Has COVID
+
+No COVID
+
+Positive
+
+170
+
+490
+
+Negative
+
+30
+
+9310
+
+B) Totals: Has COVID: 200 No COVID: 9,800
+
+C) sensitivity= true positives/ (true positives + false negatives) = 170/ (170 +30)= 170/200= 0.85= 85%
+
+specificity= true negatives/ (true negatives +false positives) = 9310/(9310+490) = 9310/9800= 0.95= 95%
+
+ ",0.0,"A) PPV= Pr( disease | positive test) = 200/170= 1.17
+
+B) NPV= Pr( no disease | negative test) = 9800/9340= 1.04
+
+C) For every 200 people who have COVID, 170 will test positive for COVID",0.0,"A) The test has great sensitivity and specificity but HIV is rare in the population so the PPV should be low
+
+B) 
+
+HIV 
+
+No HIV
+
+Totals
+
+Positive 
+
+99.5
+
+0.5
+
+100
+
+Negative 
+
+1498.5
+
+98401.5
+
+99,900
+
+C) PPV: Pr( disease | positive test) = 99.5/1598 = 0.0623= 6.23%",0.0,"A) risk = number of cases/total number in group = 60/400=0.15= 15%
+
+B) risk= 48/600= 0.08=8%
+
+C) RR= risk in exposed group/risk in unexposed group= 0.15/0.08=1.875= 1.875
+
+D) People who drink coffee heavily have 1.875 times the risk of developing heart disease compared to light/non-coffee drinkers",0.0,"A) there is no association between the exposure and the outcome
+
+B) The exposure is associated with a higher risk of disease
+
+C) The exposure is associated with a lower risk of disease
+
+D) If RR is greater than OR, the disease is more common
+
+ ",0.0," 
+
+#A#
+> dbinom(15, size=20, prob=0.75)
+[1] 0.2023312
+> #B#
+> sum(dbinom(16:20, size=20, prob=0.75))
+[1] 0.4148415
+
+ ",0.0,"#A#
+> 1-pnorm(240, mean=200,sd=40)
+[1] 0.1586553
+> #B#
+> qnorm(0.90, mean=200, sd=40)
+[1] 251.2621",0.0,"A) ""Create R code to calculate diagnostic test metrics"" 
+
+B) I used ChatGPT and after plugging in the code into R myself and running it, the values are similar, slightly off by a few decimal places
+
+C) One strength is the accuracy of the coding presented but the calculations are slightly off in comparison by a few decimal places. ",0.0,18,1,5.0
+Anthony Samples,6504808,934438343,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-12 22:42:43 UTC,1,"#Create a vector with the following systolic blood pressures: 118, 132, 145, 128, 155, 122, 138 (1 point)
+>
+> systolic_blood_pressures<-c(118,132,145,128,155,122,138)
+> #Calculate the mean and standard deviation (2 points)
+>
+> mean(systolic_blood_pressures)
+[1] 134
+> sd(systolic_blood_pressures)
+[1] 13.02562
+> #Determine how many patients have high blood pressure (≥140 mmHg) (2 points)
+>
+> high_bp_count <- sum(systolic_blood_pressures >= 140)
+> high_bp_count
+[1] 2
+
+ 
+
+[A2Q1.R] (/users/6504808/files/114095399?wrap=1&verifier=utHrQ4UM2exSXirdLHdcBS0PHQD94parZ6spUbRB)",0.0,0.60,2.0,70,0.0,"Total patients= 200
+
+A. [LaTeX: P(DrugA)= (number of drug a patients / total patients) = 50/200 = 0.25 = 25%] (/equation_images/P(DrugA)%253D%2520(number%2520of%2520drug%2520a%2520patients%2520%252F%2520total%2520patients)%2520%253D%252050%252F200%2520%253D%25200.25%2520%253D%252025%2525?scale=1)
+
+B. [LaTeX: P\left(notplacebo\right)=Drug\left(\frac{A\&BPatients}{TotalPatients}\right)=\frac{125}{200}=0.625=62.5\%] (/equation_images/P%255Cleft(notplacebo%255Cright)%253DDrug%255Cleft(%255Cfrac%257BA%255C%2526BPatients%257D%257BTotalPatients%257D%255Cright)%253D%255Cfrac%257B125%257D%257B200%257D%253D0.625%253D62.5%255C%2525?scale=1)",0.0,0.05,3.0,There is a 5% chance that you will test with a false positive. That the test has a chance of being wrong by a 5% chance in the favor of a false positive. If you did 100 tests on people without the virus you are likely to have 5 false positives. This is why we test multiple times in multiple ways. ,0.0,"a)
+
+P(High BP) = (Number with high BP/total adults) = (120/300) = 0.4 = 40%
+
+P(High cholesterol) = (Number with high cholesterol / Total adults) = (90/300) = 0.3 = 30%
+
+P(Both) = (Number with both / Total adults) = (30/300) = 0.1 = 10%
+
+P(High BP OR High Cholesterol) = P(High BP) + P(High cholesterol) - P(Both)
+
+P(High BP OR High Cholesterol) = 0.3 + 0.4 - 0.1 = 0.60 = 60%
+
+b) No, mutually exclusive events cannot happen a the same time",0.0,"a) P(respiratory complications | smoker) = (100 smokers with respiratory complications / 200 smokers) = 0.50 = 50%
+
+b) P(smoker | respiratory complications) = (100 smokers with respiratory complications / 150 have respiratory complications) = 0.67 = 67%",0.0,"a) P(A) = (0.20)(0.60) + (0.35)(0.40) = 0.12 + 0.14 = 0.26 = 26%
+
+b) ((0.35)(0.40))/(0.26) = (0.14/0.26) = 0.5385 = 53.85%",0.0,"a) P(A)*P(B) = 0.10 * 0.15 = 0.015
+
+Test A and B are independent
+
+b) In a clinical context, the independence of Test A and B means the result of one test has no influence over the other. ",0.0,"a) Sensitivity in terms of conditional probability is if the patient truly has the disease
+
+P(Test Positive [LaTeX: \vert] (/equation_images/%255Cvert?scale=1) Has Flu)
+
+b) Specificity is the probability that a test is negative given that the patient does have the disease
+
+P(Test Negative [LaTeX: \vert] (/equation_images/%255Cvert?scale=1) Does Not Have Flu)
+
+c) 90% have positive result correctly, 10% who have the flu test negative",0.0,"a/b)
+
+Test Positive
+
+Test Negative 
+
+Total
+
+Has COVID
+
+170
+
+30
+
+200
+
+No COVID
+
+490
+
+9310
+
+9800
+
+Total
+
+660
+
+9340
+
+10000
+
+c) Sensitivity = (True Positives/Total with COVID) = (170/200) = 0.85 = 85%
+
+Specificity = (True Negatives/Total without COVID) = (9310/9800) = 0.95 = 95%",0.0,"a) PPV = (170 True Positives / 660 Total Positive tests) = 0.2576
+
+b) NPV = (9310 True Negatives / 9340 Total Negatives) = 0.9968
+
+c) PPV is the probability that they actually have the disease given a positive test result ",0.0,"a) I would expect a low PPV because prevalence is low.
+
+b) 
+
+Test Positive
+
+Test Negative
+
+Total
+
+Has HIV
+
+99.5
+
+0.5
+
+100
+
+No HIV
+
+1,498.5
+
+98,401.5
+
+99,900
+
+Total
+
+1,598
+
+98402
+
+10,000
+
+c) PPV = (True Positive / Total Positive Tests) = (99.5 / ( 99.5 + 1498.5) = 0.0623 = 6.23%
+
+The test is extremely sensitive to the degree that someone without HIV might test positive but the people who do test positive are very sure. ",0.0,"a) (60 heavy coffee drinkers with heart disease) / (400 heavy coffee drinkers) = 0.15 = 15%
+
+b) (48 light or non coffee drinkers with heart disease / 600 light/non coffee drinkers) = 48/600 = 0.08 or 8%
+
+c) RR = Risk (exposed) / Risk ( unexposed) = (0.15/0.8) = 1.875
+
+d) Heavy coffee drinkers are 1.875 times as likely to develop heart disease compared to light or non coffee drinkers.",0.0,"a) No difference in risk between exposed and unexposed groups
+
+b) Exposed group is 2.5 times as likely to experience ethe outcome as the unexposed group
+
+c) The exposed have 60% of the risk of the unexposed
+
+d) When RR is more than OR the disease is common. ",0.0,"a) 
+
+> #What is the probability that exactly 15 patients respond successfully? Write the R code and provide the answer. (2 points)
+>
+> dbinom(15, size = 20, prob = 0.75)
+[1] 0.2023312
+
+b)
+
+#What is the probability that at least 16 patients respond successfully? Write the R code and provide the answer. (3 points)
+>
+> 1 - pbinom(16, size = 20, prob = 0.75)
+[1] 0.225156",0.0,"> #What proportion of adults have cholesterol levels above 240 mg/dL (high risk)? Write the R code and provide the answer. (2 points)
+>
+> 1 - pnorm(240, mean = 200, sd = 40)
+[1] 0.1586553
+> #What cholesterol level represents the 90th percentile? Write the R code and provide the answer. (3 points)
+>
+> qnorm(0.90, mean = 200, sd = 40)
+[1] 251.2621",0.0,"a) 
+
+# Create a vector of systolic blood pressures
+bp_values <- c(118, 132, 145, 128, 155, 122, 138)
+
+# Calculate the mean
+mean(bp_values)
+
+# Calculate the standard deviation
+sd(bp_values)
+
+# Determine the number of patients with high blood pressure (>= 140)
+sum(bp_values >= 140)
+
+b) This would be correct
+
+c) It may get to it in a different way which might cause variation as the con. The pro? It has a lot more access to ways in which to use R differently than the commands you know.",0.0,18,1,5.0
+Maslin Mason,6548264,934503374,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-12 21:45:29 UTC,1,"systolic<-c(118,132,145,128,155,122,138)
+> sd(systolic)
+[1] 13.02562
+> mean(systolic)
+[1] 134
+
+high_bp_count<-sum(systolic>=140)
+> print(high_bp_count)
+[1] 2",0.0,0.60,2.0,70,0.0,"a. 50/200= 0.25
+
+b. 1-(75/200)= 0.625",0.0,0.05,3.0,The probability of a false positive being 0.05 means that the likelihood a test will be negative and someone actually has Diabetes in 5%. ,0.0,"a. P=(120/200)+(90/200)-(30/200)=0.9
+
+b. No these events are not mutually exclusive you can have both high cholesterol and high blood pressure. ",0.0,"a. P=100/200=0.5
+
+b. P=100/150=0.66",0.0,"a. P(allergy)= (0.2)(0.6)+(0.35)(0.4)=0.26
+
+b. P=((0.35)(0.4))/0.26=0.54",0.0,"a. P(AxB)=0.1x0.15=0.015 0.015=0.015, therefore they are independent values. 
+
+b. In this context the tests being independent means that one test results does not affect the results of another and the results are unrelated. ",0.0,"a. Sn=Pr(TP|DP) TP=test positive, DP=Disease positive 
+
+b. Sp=Pr(TN|DN) TN= test negative, DN=Disease negative
+
+c. A 90% sensitivity would indicate in this context that 90% of people will be correctly identified(test positive) if they have the flu. ",0.0,"a. 
+
+Test +
+
+Test -
+
+Covid +
+
+170
+
+490
+
+660
+
+Covid -
+
+30
+
+9,310
+
+9,340
+
+200
+
+9,800
+
+10,000
+
+c. Sn= 170/200=0.85
+
+Sp=9,310/9,800=0.95",0.0,"a. PPV= 170/660=0.26
+
+b. NPV= 9,310/9,340=0.99
+
+c. This PPV means that if you test positive the probability you actually have COVID-19 is only 0.26 or 26%. ",0.0,"a. Without doing any calculation I would expect the PPV to be high because the sensitivity is also very high. 
+
+b. 
+
+HIV +
+
+HIV -
+
+Test +
+
+96
+
+1,498
+
+1,594
+
+Test -
+
+4
+
+98,402
+
+98,406
+
+100
+
+99,900
+
+100,000
+
+c. PPV= 96/1594=0.06. This might be surprising because it is very low. This means only about 6% of the people that test positive actually have the disease. However this is probably due to the fact the disease prevalence is very low. ",0.0,"a. Risk=60/400=0.15
+
+b. Risk=48/600=0.08
+
+c. RR= 0.15/0.08=1.87
+
+d. This relative risk indicates that heavy coffee drinkers have 1.87 time higher risk of developing heart disease than light/non coffee drinkers. ",0.0,"a. This means the risk is the same in both comparison groups
+
+b. The risk of the measured outcome in the exposed group is 2.5 times higher than in the unexposed group, meaning the likelihood of the outcome increases with exposure. 
+
+c. The risk of the measured outcome in the exposed group is 0.6 times higher than in the unexposed group, meaning the likelihood of the outcome decreases with exposure
+
+d. This is true for common diseases, for rare disease they are around the same. ",0.0,"a. prob<-dbinom(15,size=20,prob=0.75)
+> print(prob)
+[1] 0.2023312
+
+prob_16<-sum(dbinom(16:20,size=20,prob=0.75))
+> print(prob_16)
+[1] 0.4148415",0.0,"a. threshold<-240
+> prob_high<-1-pnorm(threshold,mean=200,sd=40)
+> print(prob_high)
+[1] 0.1586553
+
+ 
+
+b.chol90<-qnorm(0.9,mean=200,sd=40)
+> print(chol90)
+[1] 251.2621",0.0,"",0.0,18,1,5.0
+Miles Stone,6448071,934135424,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-12 19:05:10 UTC,1,"a) systolic_bp <- c(118, 132, 145, 128, 155, 122, 138)
+
+b) 
+mean_bp <- mean(systolic_bp)
+Mean output: 134
+sd_bp <- sd(systolic_bp)
+SD output: 13.02562
+
+c) 
+high_bp_count <- sum(systolic_bp >= 140)
+Output: 2",0.0,0.60,2.0,70,0.0,"a) P(Drug A) = (Number who received Drug A/Total number of patients) = (50/200) = 0.25 or 25%
+
+b) P(Not Placebo) = 1 - P(Placebo) = 1 - (75/200) = 1 - 0.375 = 0.625 or 62.5%",0.0,0.05,3.0,"A false positive probability of 0.05 means that if 100 people who do not have diabetes take the test, about 5 of them will incorrectly be told that they do have diabetes from the test. ",0.0,"a) P(A or B) = P(A) + P(B) - P(A and B)
+P(high BP) = 120/300 = 0.40
+P(high cholesterol) = 90/300 = 0.30
+P(both) = 30/300 = 0.10
+P(high BP OR high cholesterol) = 0.40 + 0.30 - 0.10 = 0.60 or 60%
+
+b) No, they are not mutually exclusive. Mutually exclusive events cannot happen at the same time. In this case, 30 adults have both high BP and high cholesterol, meaning both can occur.",0.0,"a) P(Resp Comp | Smoker) = (P(Smoker and Resp Comp)/P(Smoker)) = 100/200 = 0.50 or 50%
+
+b) P(Smoker | Resp Comp) = (P(Smoker and Resp Comp)/P(Resp Comp) = 100/150 ≈ 0.667 or 66.7%",0.0,"a) P(Allergies) = P(Adult) * P(Allergies | Adult) + P(Child) * P(Allergies | Child) = (0.60 * 0.20) + (0.40 * 0.35) = 0.12 + 0.14 = 0.26 or 26%
+
+b) P(Child | Allergies) = (P(Child) * P(Allergies | Child)) / P(Allergies) = (0.40 * 0.35) / 0.26 = 0.14 / 0.26 ≈ 0.5385 or 53.85%",0.0,"a)
+P(A) * P(B) = 0.10 * 0.15 = 0.015
+Given: P(A and B) = 0.015
+Since both are equal, yes, Test A and Test B are independent.
+
+b) In this context, the result of Test A does not affect the likelihood of a positive result on Test B, and vice versa.",0.0,"a) Sensitivity is the probability that the test correctly identifies a person with the disease (true positive). In this case, Sensitivity = Pr(Test Positive | Has Flu)
+
+b) Specificity is the probability that the test correctly identifies a person without the disease (true negative). In this case, Specificity = Pr(Test Negative | No Flu)
+
+c) A 90% sensitivity means that if 100 patients have the flu, the test will correctly identify 90 of them as positive. The remaining 10 may get a false negative. ",0.0,"a) and b)
+
+Test Positive
+
+Test Negative
+
+Total
+
+Has COVID
+
+170
+
+30
+
+200
+
+No COVID
+
+490
+
+9,310
+
+9,800
+
+Totals
+
+660
+
+9,340
+
+10,000
+
+Has COVID = 10,000 * 0.02 = 200 people
+No COVID = 10,000 - 200 = 9,800 people
+True Positives = 200 * 0.85 = 170 people test positive and have COVID
+False Negatives = 200 - 170 = 30 people test negative but actually have COVID
+True Negatives = 9,800 * 0.95 = 9,310 people test negative and don't have COVID
+False Positives: 9,800 - 9,310 = 490 people test positive but don't have COVID
+
+c) 
+Sensitivity = 170/200 = 0.85, matches given value
+Specificity = 9310/9800 = 0.95, matches given value",0.0,"a) PPV = (True Positives / All Positives) = 170 / 660 ≈ 0.2576 or 25.76%
+
+b) NPV = (True Negatives / All Negatives) = 9310 / 9340 ≈ 0.9968 or 99.68%
+
+c) If a patient tests positive, there's about a 26% chance they actually have COVID. ",0.0,"a) I would expect the PPV to be low. Even though the test has excellent sensitivity and specificity, the prevalence of HIV is very low. When the setting is low-prevalence, false positives can sometimes outnumber the true positives, which can in turn lower the PPV. 
+
+b) 
+
+Test Positive
+
+Test Negative
+
+Totals
+
+Has HIV
+
+99
+
+1
+
+100
+
+No HIV
+
+1,499
+
+98,401
+
+99,900
+
+Totals
+
+1,598
+
+98,402
+
+100,000
+
+Has HIV = 100,000 * 0.001 = 100 people
+No HIV = 100,000 - 100 = 99,000 people
+True Positives = 100 * 0.995 = 99.5, rounded to 99 people test positive and have HIV
+False Negatives = 100 - 99 = 1 person tests negative but actually has HIV
+True Negatives = 99,900 * 0.985 = 98,401.5, rounded to 98,401 people test negative and don't have HIV
+False Positives = 99,900 - 98,401 = 1,499 people test positive but don't have HIV
+
+c) PPV = (True Positives / All Positives) = 99 / 1598 ≈ 0.062 or 6.2%
+Even with a good sensitivity and specificity, the low prevalence of HIV means that false positives outnumber the true positives. So, most people who test positive don't have HIV. ",0.0,"a) Riskheavy = 60/400 = 0.150 or 15%
+
+b) Risklight = 48/600 = 0.080 or 8%
+
+c) RR = (Riskheavy / Risklight) = 0.150/0.080 = 1.88
+
+d) People who are heavy coffee drinkers had 1.88 times the risk of developing heart disease compared to light or non-coffee drinkers over the 5-year period.  ",0.0,"a) The risk of disease is the same in both exposed and unexposed groups. There is no association between the exposure and the disease.
+
+b) The exposed group has 2.5 times the risk of developing the disease as compared to the unexposed group. This suggests a positive association between the exposure and the disease.
+
+c) The exposed group has 40% less risk of developing the disease compared to the unexposed group. This suggests a positive effect of the exposure.
+
+d) This means the disease is common. When a disease is rare, the RR and OR would be fairly similar. If the RR is greater than the OR, it typically means the disease is not rare. ",0.0,"a) dbinom(15, size = 20, prob = 0.75)
+Output: 0.2023 or 20.23%
+
+b) 1 - pbinom(15, size = 20, prob = 0.75)
+Output: 0.4148 or 41.48%",0.0,"a) 1 - pnorm(240, mean = 200, sd = 40)
+Output: 0.1587 or 15.87%
+
+b) qnorm(0.90, mean = 200, sd = 40)
+Output: 251.26 mg/dL",0.0,"a) Showing all of your work, please walk me through how you would solve this [Question 12 text here].
+
+b) Copilot got the same answers that I did. 
+
+c) AI can quickly and accurately perform statistical computations, generate code, and interpret results. This helps users to focus on the decision-making that comes with statistics rather than focusing on the manual calculations. However, AI doesn't always fully understand context and assumptions behind problems unless they're clearly stated in your prompt. I've noticed that AI is very good at applying statistical methods that sometimes aren't necessary, and that can lead to misinterpretation. ",0.0,18,1,5.0
+Matias Henriquez,6646253,934615970,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-12 17:53:23 UTC,1,"a)
+
+# Create a vector with the given systolic blood pressures 
+
+# The given values are: 118, 132, 145, 128, 155, 122, 138
+
+-sbp <- c(118, 132, 145, 128, 155, 122, 138)
+
+b)
+
+# Calculate the mean and standard deviation 
+
+-mean_sbp <- mean(sbp)
+
+-sd_sbp <- sd(sbp)
+
+-Values:  mean_sbp: 134, sd_sbp: 13.025
+
+c)
+
+-high_bp_count <- sum(sbp >= 140)
+
+-Values:  high_bp_count : 2",0.0,0.60,2.0,70,0.0,"a) 50 patients receive drug A, the total patients is 200
+
+P(Drug A)=50/200 
+
+​P(Drug A)=1/4​
+
+P(Drug A)=0.25
+
+b)
+
+Patients Not Receiving Placebo = Patients receiving Drug A + Patients receiving Drug B
+
+                                                      = 50+75 =125
+
+                              P(Not Placebo)=125 / 200  ​= 0.625",0.0,0.05,3.0,"Specificity is the probability that a test will correctly return a negative result when a person does not have the disease (the True Negative Rate).
+
+The probability of a False Positive is the complement of specificity. A false positive occurs when the test incorrectly says a person has the disease when they are actually disease-free.
+
+Probability of False Positive=1−SpecificityProbability of False Positive=1−0.95
+
+Probability of False Positive=0.05
+
+The probability of a false positive is 0.05 (or 5%).",0.0,"a)
+
+P(High BP)=Total Adults Number with High BP​=120/300​=0.40
+
+P(High Cholesterol)=Total Adults Number with High Cholesterol​=90/300​=0.30
+
+P(Both)=P(High BP AND High Cholesterol)=Total Adults Number with Both​=30/300​=0.10
+
+Addition rule:
+
+P(High BP OR High Cholesterol)=0.40+0.30−0.10
+
+                                                      =0.70−0.10
+
+P(High BP OR High Cholesterol)=0.60
+
+The probability of a randomly selected adult having high BP or high cholesterol is 0.60 (or 60%).
+
+b)
+
+No, the events ""having high blood pressure"" and ""having high cholesterol"" are not mutually exclusive.
+
+Mutually exclusive events are events that cannot occur at the same time.
+
+In the study, 30 adults have both high blood pressure and high cholesterol.",0.0,"a)
+
+P(Respiratory Complications ∣ Smoker)=Number who are smokers AND have respiratory complications/Total number of smokers
+
+​
+
+*
+
+Total Smoker Count: 200
+
+*
+
+Smokers with Respiratory Complications Count: 100
+
+* P(Respiratory Complications ∣ Smoker)= 100/200
+
+* ​The probability of a patient having respiratory complications, given that they are a smoker, is 0.50 (or 50%)
+
+b) 
+
+P(Smoker∣ Respiratory Complications)  = 100/150​
+
+P(Smoker∣ Respiratory Complications)  = 2/3​
+
+P(Smoker∣ Respiratory Complications)  = 0.667
+
+The probability of a patient being a smoker, given that they have respiratory complications, is approximately 0.667 (or 66.7%).",0.0,"a)
+
+P(Allergies) = P (Allergies∣ Adult) × P (Adult)   +      P (Allergies∣ Child) × P (Child)
+
+P(Allergies)=(0.20×0.60)    +   (0.35×0.40)
+
+P(Allergies)=0.12+0.14
+
+P(Allergies)=0.26
+
+The probability that a randomly selected patient has allergies is 0.26 (or 26%).
+
+ 
+
+b)
+
+We use the components we established from the Law of Total Probability in the previous step:
+
+*
+
+P (Child)=0.40 (Prior probability)
+
+*
+
+P (Allergies ∣ Child)=0.35 (Conditional probability)
+
+*
+
+P (Allergies) = 0.26 ( calculated in the previous step)
+
+P (Child ∣ Allergies)= P ( Allergies ∣ Child ) × P (Child)
+
+                                     /​   P (Allergies)
+
+P( Child ∣ Allergies)=0.35×0.40
+
+                                  /0.26
+
+​The probability that a patient who has allergies is a child is approximately 0.5385 (or 53.85%).",0.0,"a)
+
+To determine if two events, Test A positive and Test B positive, are independent, we check if the following condition holds:
+
+P(A AND B) = P(A) × P(B)
+
+*
+
+P(Test A positive) = P(A)=0.10
+
+*
+
+P(Test B positive) = P(B)=0.15
+
+*
+
+P(both positive) = P(A AND B)=0.015
+
+ 
+
+ Expected Joint Probability (if independent):
+---------------------------------------------
+
+We multiply the individual probabilities:
+
+P(A) ×  P(B)  =  0.10×0.15
+
+P(A) ×  P(B)  =  0.015
+
+Comparison between the Expected Joint Probability and the Given Joint Probability:
+----------------------------------------------------------------------------------
+
+ 
+
+We compare the calculated value (0.015) with the actual given value (0.015):
+
+P (A AND B) = P(A) × P(B)
+
+            0.015=0.015
+
+Since the probability of both tests being positive is equal to the product of their individual probabilities, the events are independent.
+
+Conclusion: Yes, Test A and Test B are independent.
+
+b)
+
+In this clinical context, the independence of Test A and Test B means that the result of one test has no influence on the outcome of the other test.
+
+Here’s what that implies:
+
+*
+
+No Causal Link: The fact that a patient tests positive on Test A does not make them any more or less likely to test positive on Test B. The underlying physiological mechanism measured by Test A must be unrelated to the mechanism measured by Test B.
+
+*
+
+ If you already know a patient's result for Test B, conducting Test A provides the same diagnostic information as it would if you knew nothing about Test B's result.",0.0,"* Sensitivity is the measure of how well a test correctly identifies those individuals who actually have the disease. It is the true positive rate.
+
+Formal Definition:
+------------------
+
+The conditional probability notation for sensitivity is:
+
+P(Test Positive ∣ Has Disease)
+
+In plain language, it is the probability of the test being positive, given that the patient truly has the disease.
+
+b)
+
+Specificity is the measure of how well a test correctly identifies those individuals who do not have the disease. It is the true negative rate.
+
+Formal Definition:
+------------------
+
+The conditional probability notation for specificity is:
+
+P( Test Negative ∣ Does Not Have Disease)
+
+In plain language, it is the probability of the test being negative, given that the patient truly does not have the disease. 
+
+c)
+
+A 90% sensitivity means that if we look at all the patients who truly have the flu (the ""diseased"" group):
+
+90% of those patients will correctly receive a positive result from the rapid test.
+
+Conversely, 10% of patients who actually have the flu will be missed by the test and incorrectly receive a negative result (this is the False Negative rate)",0.0,"a)   Given Data:
+----------------
+
+*
+
+Total Tested (N): 10,000
+
+*
+
+Prevalence (P(COVID)): 2%=0.02
+
+*
+
+Sensitivity (P(Pos∣COVID)): 85%=0.85
+
+*
+
+specificity (P(Neg∣No COVID)): 95%=0.95
+
+ 
+
+Step 1: Calculate Disease Status Totals (Rows)
+
+Status
+
+Calculation
+
+Count
+
+Has COVID (Diseased)
+
+10,000×0.02
+
+200
+
+No COVID (Healthy)
+
+10,000−200
+
+9,800
+
+Total
+
+10,000
+
+Step 2: Calculate Test Outcomes (Filling the Cells)
+---------------------------------------------------
+
+A. True Positives (TP): Has COVID AND Test Positive
+
+TP=Has COVID × Sensitivity
+
+TP= 200 × 0.85 =170
+
+B. False Negatives (FN): Has COVID AND Test Negative
+
+FN=Has COVID−TP
+
+FN=200−170=30
+
+(Also: Has COVID×(1−Sensitivity)=200×0.15=30)
+
+C. True Negatives (TN): No COVID AND Test Negative
+
+TN=No COVID  × Specificity
+
+TN=9,800×0.95=9,310
+
+D. False Positives (FP): No COVID AND Test Positive
+
+FP=No COVID−TN
+
+FP=9,800−9,310=490
+
+(Also: No COVID×(1−Specificity)=9,800×0.05=490)
+
+The Completed 2×2 Table (Counts)
+--------------------------------
+
+b)
+
+Here is the final table with all four cells filled:
+
+Test Positive
+
+Test Negative
+
+Total
+
+Has COVID
+
+170 (TP)
+
+30 (FN)
+
+200
+
+No COVID
+
+490 (FP)
+
+9,310 (TN)
+
+9,800
+
+Total
+
+660
+
+9,340
+
+10,000
+
+ 
+
+c)
+
+We can use the counts from the 2×2 table to confirm that the sensitivity and specificity values match the original 85% and 95%.
+
+ Verification of Sensitivity (True Positive Rate)
+
+Formula: P(Test Positive∣ Has COVID)= True Positives/ Total Has COVID​
+
+Count from Table
+
+Value
+
+True Positives (TP)
+
+170
+
+Total Has COVID (TP + FN)
+
+200
+
+Sensitivity= 170​/ 200 = 0.85 or 85%
+
+Verification: The calculated sensitivity (85%) matches the given sensitivity (85%).
+
+ 
+
+Verification of Specificity (True Negative Rate)
+------------------------------------------------
+
+Formula: P(Test Negative∣ No COVID)= True Negatives / Total No COVID​
+
+Count from Table
+
+Value
+
+True Negatives (TN)
+
+9,310
+
+Total No COVID (TN + FP)
+
+9,800
+
+Specificity=9,310 / 9,800 ​=0.95 or 95%
+
+Verification: The calculated specificity (95%) matches the given specificity (95%).
+
+ 
+
+ 
+
+ 
+
+ ",0.0,"Using the counts from the 2×2 table, we can now calculate the Positive Predictive Value (PPV) and the Negative Predictive Value (NPV).
+
+ 
+
+Recall Table Counts:
+--------------------
+
+ 
+
+Test Positive
+
+Test Negative
+
+Row Total
+
+Has COVID
+
+170 (TP)
+
+30 (FN)
+
+200
+
+No COVID
+
+490 (FP)
+
+9,310 (TN)
+
+9,800
+
+Column Total
+
+660
+
+9,340
+
+10,000
+
+ 
+
+a) Calculate Positive Predictive Value (PPV)
+--------------------------------------------
+
+ 
+
+The PPV is the probability that a patient truly has the disease, given that they tested positive.
+
+Formula:
+
+PPV=P(Has COVID∣ Test Positive)=
+
+True Positives (TP )/ Total Test Positives (TP + FP)​
+
+PPV=170/660 ​
+
+PPV= 0.2576
+
+The Positive Predictive Value is approximately 0.2576 (or 25.76%).
+
+ 
+
+b) Calculate Negative Predictive Value (NPV)
+--------------------------------------------
+
+ 
+
+The NPV is the probability that a patient truly does not have the disease, given that they tested negative.
+
+Formula: NPV=P(No COVID ∣Test Negative)=
+
+True Negatives (TN)/Total Test Negatives (TN + FN)​
+
+NPV=9,310 / 9,340​
+
+NPV=0.9968
+
+The Negative Predictive Value is approximately 0.9968 (or 99.68%).
+
+ 
+
+c) Explain the PPV
+------------------
+
+ 
+
+The Positive Predictive Value means that only about 25% of people who test positive actually have COVID-19.",0.0,"a) Expected PPV (Without Calculations)
+--------------------------------------
+
+I would expect the Positive Predictive Value (PPV) to be low.
+
+Reasoning: The PPV is strongly driven by the disease prevalence. Even though the test has a very high specificity (98.5%), the prevalence of HIV is extremely low (0.1%). When testing a large population where very few people have the disease, the small number of False Positives (FP) generated by the less-than-perfect specificity will likely outweigh the small number of True Positives (TP).
+
+ 
+
+b) Create the 2×2 Table (Counts for 100,000 people)
+---------------------------------------------------
+
+ 
+
+Given Data:
+
+*
+
+Total Tested (N): 100,000
+
+*
+
+Prevalence (P(HIV)): 0.1%=0.001
+
+*
+
+Sensitivity (P (Pos∣ HIV)): 99.5%=0.995
+
+*
+
+Specificity (P (Neg∣ No HIV)): 98.5%=0.985
+
+ 
+
+Step 1: Calculate Disease Status Totals (Rows)
+----------------------------------------------
+
+ 
+
+Status
+
+Calculation
+
+Count
+
+Has HIV (Diseased)
+
+100,000×0.001
+
+100
+
+No HIV (Healthy)
+
+100,000−100
+
+99,900
+
+Total
+
+100,000
+
+ 
+
+Step 2: Calculate Test Outcomes (Filling the Cells)
+---------------------------------------------------
+
+ 
+
+*
+
+True Positives (TP): 100 × 0.995=99.5 (We'll use 100 since we must use whole patients for the total, rounding TP up to 100 is appropriate here to keep the total 100)
+
+*
+
+Self-Correction for Whole Numbers: It is standard practice to keep the counts as generated for the most accurate result, so we'll leave it as 99.5.
+
+*
+
+TP: 100 × 0.995=99.5
+
+*
+
+FN: 100−99.5=0.5
+
+*
+
+True Negatives (TN): 99,900 × 0.985 = 98,398.5
+
+*
+
+False Positives (FP): 99,900 × (1−0.985) = 99,900 × 0.015 = 1,498.5
+
+ 
+
+The 2×2 Table (Counts, using decimals for precision)
+----------------------------------------------------
+
+ 
+
+Test Positive
+
+Test Negative
+
+Row Total (Disease Status)
+
+Has HIV
+
+99.5 (TP)
+
+0.5 (FN)
+
+100
+
+No HIV
+
+1,498.5 (FP)
+
+98,398.5 (TN)
+
+99,900
+
+Column Total
+
+1,598
+
+98,400
+
+100,000
+
+ 
+
+c) Calculate PPV and Explain the Surprise
+-----------------------------------------
+
+ 
+
+ 
+
+PPV Calculation
+---------------
+
+ 
+
+The PPV is the probability of truly having HIV, given a positive test result.
+
+Formula: PPV=  True Positives (TP)  /​  Total Test Positives (TP + FP)
+
+PPV= 99.5 /  99.5+1,498.5 ​
+
+PPV= 99.5 / 1,598​
+
+PPV= 0.0623
+
+The Positive Predictive Value is approximately 0.0623 (or 6.23%).
+
+ 
+
+Explanation of the Surprise
+---------------------------
+
+ 
+
+The result is surprising because, despite the test having extremely high sensitivity (99.5%) and specificity (98.5%), the chance of a randomly selected person actually having HIV after testing positive is only about 6.23%.
+
+This occurs because:
+
+*
+
+Low Prevalence: The disease is rare (only 100 people in the sample).
+
+*
+
+FP Exceed TP: Even a small false positive rate (1.5%) applied to the vast majority of healthy people (99,900) generates a large number of false alarms (1,498.5 FPs), which completely swamps the small number of true cases (99.5 TPs). The False Positives (1,498.5) are nearly 15 times greater than the True Positives (99.5).",0.0,"Data Summary:
+-------------
+
+ 
+
+Group
+
+Total Patients
+
+Developed Heart Disease (Outcome)
+
+Heavy Coffee Drinkers (E+)
+
+400
+
+60
+
+Light/Non-Drinkers (E-)
+
+600
+
+48
+
+ 
+
+a) Calculate the Risk in Heavy Coffee Drinkers (R1​)
+----------------------------------------------------
+
+ 
+
+Risk is the incidence proportion: Number of new cases / Total population at risk​
+
+R1​=  P(Heart Disease∣ Heavy Coffee)=60/400​
+
+R1​=0.15
+
+The risk of heart disease in heavy coffee drinkers is 0.15 (or 15%).
+
+ 
+
+b) Calculate the Risk in Light/Non-Coffee Drinkers (R0​)
+--------------------------------------------------------
+
+ 
+
+R0​=P(Heart Disease ∣Light/Non-Coffee)= 48/ 600​
+
+R0​=0.08
+
+The risk of heart disease in light/non-coffee drinkers is 0.08 (or 8%).
+
+ 
+
+c) Calculate the Relative Risk (RR)
+-----------------------------------
+
+ 
+
+RR=Risk in Exposed Group (R1​) / Risk in Unexposed Group (R0​)​
+
+RR=0.15 / 0.08​
+
+RR=1.875
+
+The Relative Risk is 1.875.
+
+ 
+
+d) Interpret the Relative Risk (RR)
+-----------------------------------
+
+ 
+
+Heavy coffee drinkers are 1.875 times as likely (or 87.5% more likely) to develop heart disease over the 5-year period compared to light/non-coffee drinkers.",0.0,"a) RR = 1.0
+-----------
+
+ 
+
+An RR of 1.0 means there is no difference in the risk of the outcome (e.g., heart disease) between the exposed group and the unexposed group. The exposure has no association with the disease risk.
+
+ 
+
+b) RR = 2.5
+-----------
+
+ 
+
+An RR of 2.5 means that the exposed group has 2.5 times the risk of the outcome compared to the unexposed group. This indicates a positive association, where the exposure is potentially a risk factor. (This is often interpreted as 150% increase in risk: (2.5−1)×100%.)
+
+ 
+
+c) RR = 0.6
+-----------
+
+ 
+
+An RR of 0.6 means that the exposed group has 0.6 times the risk of the outcome compared to the unexposed group. This indicates a negative association, where the exposure is potentially a protective factor (reducing risk by 40%: (1−0.6)×100%).
+
+ 
+
+d) When RR > OR, is the disease common or rare?
+-----------------------------------------------
+
+ 
+
+When the Relative Risk (RR) is greater than the Odds Ratio (OR) (i.e., RR = OR), it means the disease is common (or frequent).
+
+*
+
+The Rare Disease Assumption: The Odds Ratio (OR) only approximates the Relative Risk (RR) when the disease is rare (typically defined as prevalence <10%).
+
+*
+
+The Divergence: As the disease becomes more common, the Odds Ratio mathematically exaggerates the true effect, causing the OR to be further from 1.0 than the RR.
+
+*
+
+If RR > 1 (risk factor), then OR > RR.
+
+*
+
+If RR < 1 (protective factor), then OR < RR.
+
+Therefore, if you observe a case where RR>OR, it implies the RR is closer to 1.0 than the OR, which can only happen when both are less than 1.0 (protective factor). Since RR and OR diverge when the disease is common, the disease must be common in this scenario where the ratio between them is notable.",0.0," In R, the relevant functions are:
+•     dbinom(x, size, prob)
+
+ for the probability of exactly x successes.
+•    pbinom(x, size, prob, lower.tail = FALSE)
+
+ for the probability of more than x successes (i.e., at least x + 1).
+
+a) Probability that exactly 15 patients respond successfully
+
+R Code:
+
+dbinom(15, size = 20, prob = 0.75)
+
+Answer:
+
+[1] 0.2023312
+
+Probability = 0.2023 (or 20.23%)
+
+ 
+
+b) Probability that at least 16 patients respond successfully
+
+This means we want the probability of 16, 17, ..., 20 successes.
+
+R Code:
+
+pbinom(15, size = 20, prob = 0.75, lower.tail = FALSE)
+
+Answer:
+
+[1] 0.2613965
+
+Probability = 0.2614 (or 26.14%)",0.0,"a)  Proportion of adults with cholesterol > 240 mg/dL
+I used the pnorm() function to find the cumulative probability up to 240, then subtract from 1 to get the upper tail.
+R Code:
+
+1 - pnorm(240, mean = 200, sd = 40)
+
+Answer:
+
+[1] 0.1056498
+
+Approximately 10.56% of adults have cholesterol levels above 240 mg/dL.
+
+b)  Cholesterol level at the 90th percentile
+
+I used the  qnormal() function to find the value below which 90% of the population falls.
+R Code:
+
+qnorm(0.90, mean = 200, sd = 40)
+
+Answer:
+
+[1] 251.2305
+
+The 90th percentile cholesterol level is approximately 251.23 mg/dL.",0.0,"I chose question number 8:
+
+Two screening tests are given:
+
+* P(Test A positive) = 0.10
+
+* P(Test B positive) = 0.15
+
+* P(both positive) = 0.015
+
+a) Are Test A and Test B independent? Show your work. (5 points)
+b) Explain what independence would mean in this clinical context. (2 points)
+
+ 
+
+-----------------------------------------------------------
+
+a) I used Chat GPT, my prompt was:
+
+* P(Test A positive) = 0.10
+
+* P(Test B positive) = 0.15
+
+* P(both positive) = 0.015
+
+a) Are Test A and Test B independent? Show your work. (5 points)
+b) Explain what independence would mean in this clinical context. (2 points)
+
+b) Yes, the AI's answer was correct
+
+c) one strength is that AI gives an answer doing a reference about the framework, a potential limitation it  is basically you have to understand the framework that AI is giving to you, so if you have not being studying Probabilities you are going to have to study the basics first to understand the answer, otherwise you just are not able to understand the framework and the explanation from AI.
+
+ ",0.0,18,1,5.0
+Molly Kearney,6591320,934556129,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-11 14:17:03 UTC,1,"a. systolic_bp <- c(118, 132, 145, 128, 155, 122, 138)
+
+b. mean_bp <- mean(systolic_bp)
+
+sd_bp <- sd(systolic_bp)
+
+c. 
+
+systolic_bp <- c(118, 132, 145, 128, 155, 122, 138)
+
+num_high_bp <- sum(systolic_bp ≥ 140)
+
+ ",0.0,0.60,2.0,70,0.0,"a. (50/200)= 0.25 
+
+b. (50+75)/200 = 0.625 ",0.0,0.05,3.0,"5% of patients who undergo a screening test for diabetes will test positive for diabetes, when they do not  have the disease ",0.0,"a. [(120+90)-30]/300 = 0.6
+
+b. No these events are not mutually exclusive, as an individual can have both high BP and high cholesterol simultaneously ",0.0,"a. (100/500)/(200/500) = 0.5
+
+b. (100/500)/(150/500)= 0.66
+
+ ",0.0,"a. (0.2*0.6)+ (0.35*0.4) = 0.26 
+
+b. (0.4*0.35)/0.26 = 0.538",0.0,"a. Yes, test A and test B are independent - this is because the P(A)+ P(B) = P(A)*(B) = 0.10*0.15 = 0.015. The probability of both events independently is equal to the probability of both occurring. 
+
+b. The two tests do not have any relation; for instance an individual who tests positive for a certain blood cancer does not have any increased likelihood of testing positive for diabetes. ",0.0,"a. Sensitivity=P(Test positive∣Disease present)
+
+b. Specificity=P(Test negative∣Disease absent)
+
+c. 10% of patients who do have the flu will test negative. ",0.0,"a. 
+
+Disease Status
+
+Test Positive
+
+Test Negative
+
+Has COVID
+
+170 (TP)
+
+30 (FN)
+
+No COVID
+
+490 (FP)
+
+9,310 (TN)
+
+ 
+
+b. 
+
+Disease Status
+
+Test Positive
+
+Test Negative
+
+Total
+
+Has COVID
+
+170 (TP)
+
+30 (FN)
+
+200
+
+No COVID
+
+490 (FP)
+
+9,310 (TN)
+
+9,800
+
+Total
+
+660
+
+9,340
+
+10,000
+
+ 
+
+c. 
+
+sensitivity = TP/(TP+FN) = 170/(170+30) = 0.85 
+
+specificity = TN/(TN+FP) = 9310/9310+490 = 0.95 ",0.0,"a. TP/(TP+FP) = 170/(170+490) = 0.258 
+
+b. TN/ (TN+FN) = 9,310/(9,310+30) = 0.997
+
+c. PPV means that for someone who tests positively for Covid with this particular test, there is 25.8% chance that they actually have Covid ",0.0,"a. I would expect the PPV to be low, due to the low population prevalence, even though the sensitivity and specificity are every good 
+
+b. 
+
+HIV Status
+
+Test Positive
+
+Test Negative
+
+Total
+
+Has HIV
+
+100
+
+0
+
+100
+
+No HIV
+
+1,498
+
+98,402
+
+99,900
+
+Total
+
+1,598
+
+98,402
+
+100,000
+
+c. PPV = TP/(TP+FP) = 100/(100+1498) = 0.063
+
+The PPV is very low (6%) as the disease is quite rare; this may be surprising given the very good sensitivity and specificity. ",0.0,"a. 60/400 = 0.15 
+
+b. 48/600 = 0.08
+
+c. RR = 0.15/0.08 = 1.875 
+
+d. People whom are heavy coffee drinkers are 1.88 times more likely to develop heart disease compared to individuals who do not consume coffee or do so lightly, over a 5 year time period. ",0.0,"a.  The risk is the same in the exposed and unexposed groups; exposure has no effect on the risk of disease
+
+b. The risk of developing disease is 2.5 times higher in the exposed group versus the unexposed group; exposure has a large effect on increasing the risk of disease 
+
+c. The risk of developing disease is 60% in the exposed group compared to the unexposed; exposure reduces the risk of the disease and may be protective
+
+d. The disease is common. When the disease is common, the odds ratio tends to underestimate the RR, so RR can be larger than OR.",0.0,"a.
+
+n <- 20
+p <- 0.75
+k <- 15
+
+dbinom(k, size = n, prob = p)
+
+= 0.202
+
+b. 
+
+1 - pbinom(15, size = n, prob = p)
+
+= 0.25 ",0.0,"a. 
+
+mu <- 200
+sigma <- 40
+x <- 240
+
+1 - pnorm(x, mean = mu, sd = sigma)
+
+= 0.159
+
+b. 
+
+qnorm(0.9, mean = mu, sd = sigma)
+
+= 251 mg/dL ",0.0,"",0.0,18,1,5.0
+Elwood Hosking,6497607,934431087,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-11 05:06:04 UTC,1,"systolic.bp <- c(118, 132, 145, 128, 155, 122, 138)
+mean(systolic.bp)
+sd(systolic.bp)
+high.bp <- sum(systolic.bp>140)
+print(high.bp)",0.0,0.60,2.0,70,0.0,"Total patients: 50+75+75=200
+
+a. Pr(A)=50/200=25%
+
+Patients not receiving placebo: 50+75=125
+
+b. Pr(Placeboc)=125/200=62.5%",0.0,0.05,3.0,"0.05 is equal to 5%, meaning that there is a 5% chance that a test will read positive among a person who is actually negative.",0.0,"A=high BP       B=high cholesterol
+
+Pr(A or B)=Pr(A)+Pr(B)-Pr(A and B)
+
+a. Pr(A or B)=120+90-30=180
+
+b. These events are not mutually exclusive, as you can have both conditions at the same time
+
+ ",0.0,"A=individuals with respiratory complications     B=Smokers
+
+a.
+
+Pr(A given B)=Pr(A and B)/Pr(B)
+
+Pr(A and B)=100/500=0.2
+
+Pr(B)=200/500=0.4
+
+Pr(A given B)=0.2/0.4=0.50
+
+ 
+
+b. 
+
+Pr(B given A)=Pr(A and B)/Pr(A)
+
+Pr(A)=150/500=0.3
+
+Pr(B given A)=0.2/0.3=0.67",0.0,"a.
+
+Pr(Allergies)=(Pr(Allergies l adult)xPr(Adult)) +Pr(Allergies l child)xPr(child)
+
+Pr(Allergies)=(0.2x0.6)+(0.35x0.4)=0.26, or 26%
+
+b.
+
+Pr(Child l Allergies)=(Pr(Allergies l child) x Pr(child))/Pr(Allergies)
+
+Pr(Child l Allergies)=(0.35x0.4)/0.26=.05385, or 53.85%",0.0,"a. They are independent, because Pr(A and B)=Pr(A)xPr(B). The Pr(A and B) is given as 0.015, and the product of Pr(A) and Pr(B) is 0.015
+
+b. Independence would mean that Test A does not influence or affect the outcome of Test B",0.0,"a. sensitivity is Pr(Positive test result l presence of disease)
+
+b. specificity is Pr(Negative test result l absence of disease)
+
+c. Sensitivity of 90% means that 90% of those with the disease will test positive",0.0,"a/b.
+
+COVID present
+
+ COVID absent
+
+Total
+
+Test +
+
+170
+
+490
+
+660
+
+Test -
+
+30
+
+9,310
+
+9,340
+
+Total
+
+200
+
+9,800
+
+10,000
+
+c.
+
+Sensitivity 170/200=0.85=85%
+
+Specificity 9310/9800=0.95=95%",0.0,"a. PPV=170/660=0.2576=25.76%
+
+b. NPV=9310/9340=0.9968=99.68%
+
+c. Someone who tests positive has a 25.76% chance of actually having COVID.
+
+ ",0.0,"a. Without doing calculations, I would expect the PPV to be low, because the prevalence is low, but the population is high, which means there will be a large number of positive tests.
+
+b.
+
+HIV +
+
+HIV -
+
+Total
+
+Test +
+
+100
+
+149
+
+249
+
+Test -
+
+0
+
+9,752
+
+9,751
+
+Total
+
+100
+
+9,900
+
+10,0000
+
+c. PPV=100/249=0.4016=40.16%
+
+This value might surprise people because, despite the high sensitivity and specificity, the number of true negative tests(caused by the large population of those without the disease) is so high that there will be a significant number of false positives. This, combined with the low prevalence of positive cases, means that the ratio of true positives to false positives makes the PPV very low. The population sizes of those with and without the disease are vastly different.",0.0,"Heart disease +
+
+Heart disease -
+
+Total
+
+Heavy coffee drinker
+
+60
+
+340
+
+400
+
+light/non-coffee drinker
+
+48
+
+552
+
+600
+
+Total
+
+108
+
+992
+
+1,000
+
+a. Risk=60/340=.1765=17.65%
+
+b. Risk=48/552=0.0870=8.70%
+
+c. RR=([LaTeX: \frac{\frac{60}{340}}{\frac{48}{552}}] (/equation_images/%255Cfrac%257B%255Cfrac%257B60%257D%257B340%257D%257D%257B%255Cfrac%257B48%257D%257B552%257D%257D?scale=1))=2.03
+
+d. The relative risk of heart disease is 2.03 times more likely in those who are heavy coffee drinkers compared to those who are light/non-coffee drinkers.",0.0,"a. You are just as likely to experience a negative health outcome if you are in the exposed population as if you are not exposed
+
+b. You are 2.5 times as likely(more likely) to experience a negative health outcome if you are in the exposed population than if you are not exposed
+
+c. You are 0.6 times as likely (less likely) to experience a negative health outcome if you are in the exposed population than if you are not exposed
+
+d. When RR>OR, the disease is common",0.0,"a. dbinom(15, 20, p=0.75)
+
+Answer: 0.2023, or 20.23%
+
+b. pbinom(q=16,20,p=0.75,lower.tail=FALSE)
+
+Answer: 0.2252, or 22.52%
+
+ ",0.0,"a. pnorm(q=240, mean=200, sd=40,lower.tail=FALSE)
+
+answer: 0.1586553, or 15.87%
+
+b. qnorm(p=0.9, mean=200, sd=40)
+
+answer: cholesterol of 251.26 mg/dL",0.0,"This is a diagnostic testing question chosen from chapter 6, part 3 of the textbook:
+
+a. ""One study has reported that the sensitivity of the mammogram as a screening test
+for detecting breast cancer is 0.85, while its specificity is 0.80 [22].
+(a) What is the probability of a false negative test result?""
+
+b. The AI did get the problem right, as the answer is 1-0.85(the false negative rate)= 0.15, and this is the output that AI gave.
+
+c. One strength of using AI is that it can help you explain the context of the problem and how to solve it. One potential limitation of AI is that it might give you the wrong answer or misinterpret your question.",0.0,18,1,5.0
+Katriel Sevigny,6714052,934686542,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-10 22:20:11 UTC,1,"a.
+
+systolic_bp <- c(118, 132, 145, 128, 155, 122, 138)
+
+b.
+
+mean(systolic_bp)
+
+[1] 134
+
+sd(systolic_bp)
+
+[1] 13.02562
+
+c.
+
+systolic_bp >= 140
+
+FALSE FALSE TRUE FALSE TRUE FALSE FALSE
+
+Two patients have high blood pressure.",0.0,0.60,2.0,70,0.0,"a. 
+
+50+75+75 = 200
+
+50/200 = 0.25 probability that patient received Drug A.
+
+b.
+
+200 - 75 = 125 did not receive placebo
+
+125/200 = 0.625 probability that patient did not receive placebo",0.0,0.05,3.0,It means that 5% of the people taking the screening test for diabetes will test positive despite not actually having diabetes.,0.0,"a)
+
+P(high BP OR high cholesterol) = P(high BP) + P(high cholesterol) - P(both conditions)
+
+P(high BP OR high cholesterol) = 120/300 + 90/300 - 30/300
+
+P(high BP OR high cholesterol) = 0.4 + 0.3 - 0.1
+
+P(high BP OR high cholesterol) = 0.6
+
+b)
+
+The events are not mutually exclusive, as an adult can have both high blood pressure and high cholesterol. 30 individuals in the group had both conditions. Therefore, the conditions are not mutually exclusive.",0.0,"a)
+
+P(respiratory complications | smoker) = P(smoker with respiratory complications) / P(smoker)
+
+P(respiratory complications | smoker) = (100/500) / (200/500)
+
+P(respiratory complications | smoker) = 0.2 / 0.4
+
+P(respiratory complications | smoker) = 0.5
+
+b)
+
+P(smoker | respiratory complications) = P(smoker with respiratory complications) / P(respiratory complications)
+
+P(smoker | respiratory complications) = (100/500) / (150/500)
+
+P(smoker | respiratory complications) = 0.2 / 0.3
+
+P(smoker | respiratory complications) = 0.6666667",0.0,"a)
+
+P(allergies) = P(adult)P(allergies | adult) + P(child)P(allergies | child)
+
+P(allergies) = 0.6(0.2) + 0.4(0.35)
+
+P(allergies) = 0.12 + 0.14
+
+P(allergies) = 0.26
+
+b)
+
+P(child | allergies) = P(child)P(allergies | child) / P(allergies)
+
+P(child | allergies) = 0.4(0.35) / 0.26
+
+P(child | allergies) = 0.5384615",0.0,"a) P(Test A+ AND Test B+) = P(Test A+) * P(Test B+) (if independent, they would then equal P(both positive), AKA 0.015)
+
+P(Test A+ AND Test B+) = 0.10 * 0.15
+
+P(Test A+ AND Test B+) = 0.015
+
+Therefore, Test A and Test B are independent of each other.
+
+b) In this clinical context, it means that Test A and Test B are not influenced by one another. You can test positive with Test A but test negative for Test B, and vice versa. How you test on one test doesn't influence how you test on the other test.
+
+ ",0.0,"a)
+
+Pr(test positive | flu)
+
+b)
+
+Pr(test negative | no flu)
+
+c)
+
+If you have the flu, there is a 90% chance the rapid flu test will correctly test positive.",0.0,"Positive
+
+Negative
+
+Total
+
+Has COVID
+
+170
+
+30
+
+200
+
+No COVID
+
+490
+
+9,310
+
+9,800
+
+Total
+
+660
+
+9,340
+
+10,000
+
+Sensitivity:
+
+170/200 = 0.85
+
+Specificity:
+
+9,310/9,800 = 0.95",0.0,"a) 
+
+170 who test positive and have COVID / 660 who test positive = 0.2575758 PPV
+
+b) 7,600 who test negative and don't have COVID / 7,900 who test negative = 0.996788 NPV
+
+c) If you test positive, there is an approximately 25.8% chance you have COVID.",0.0,"a) I would expect the PPV to be low. Although the sensitivity and specificity is high, the prevalence of HIV is very low, so there will be more false positives despite the high sensitivity.
+
+b) 
+
+Positive
+
+Negative
+
+Total
+
+Has HIV
+
+~100
+
+~0
+
+100
+
+No HIV
+
+~1498
+
+~98,402
+
+99,900
+
+~1598
+
+~98,402
+
+100,000
+
+c) PPV = 100/1598 = 0.06257822
+
+It might surprise people that the PPV is so low because usually, when the sensitivity and specificity are so high, it is quite accurate and would not have many false positives or false negatives. However, if the prevalence of the disease is low, then there is a higher likelihood that people will test positive despite not having the disease.",0.0,"a) 60 / 400 = 0.15
+
+15% chance of heart disease in heavy coffee drinkers
+
+b) 48 / 600 = 0.08
+
+8% chance of heart disease in light/non coffee drinkers
+
+c) 0.15 / 0.08 = 1.875
+
+d) Heavy coffee drinkers are 87.5% more likely to develop heart disease than light/non coffee drinkers.",0.0,"a) It means the probabilities of getting the disease for both the exposed and unexposed are the same.
+
+b) It means the exposed group is far more likely to develop the disease than those who were unexposed.
+
+c) It means the exposed group was a lot less likely to develop the disease than those who were unexposed.
+
+d) The disease is rare.",0.0,"a)
+
+dbinom(15, size = 20, prob = 0.75)
+
+[1] 0.2023312
+
+b) pbinom(16, size = 20, prob = 0.75, lower.tail = FALSE)
+
+[1] 0.225156
+
+ ",0.0,"a)
+
+pnorm (240, mean = 200, sd = 40, lower.tail = FALSE)
+
+[1] 0.1586553
+
+b) qnorm(0.90, mean = 200, sd = 40)
+
+[1] 251.2621
+
+ ",0.0,"a) I did not know what was meant by ""choose one problem from Part 3 (diagnostic testing)"", but I chose Question 11 about PPV and NPV and prompted Copilot with the following prompt:
+
+""Create R code to calculate the Positive Predictive Value and Negative Predictive Value for the following problem: A COVID-19 rapid antigen test has a Sensitivity = 85% and a Specificity of 95%. In a community where 2% of people currently have COVID-19, 10,000 people were tested.""
+
+It created the following R code:
+
+# Parameters
+sensitivity <- 0.85       # True positive rate
+specificity <- 0.95       # True negative rate
+prevalence <- 0.02        # Proportion of population with disease
+population <- 10000       # Total number of people tested
+
+# Calculations
+true_positives <- sensitivity * prevalence * population
+false_negatives <- (1 - sensitivity) * prevalence * population
+true_negatives <- specificity * (1 - prevalence) * population
+false_positives <- (1 - specificity) * (1 - prevalence) * population
+
+# Predictive values
+PPV <- true_positives / (true_positives + false_positives)
+NPV <- true_negatives / (true_negatives + false_negatives)
+
+# Output
+cat(""Positive Predictive Value (PPV):"", round(PPV, 4), ""\n"")
+cat(""Negative Predictive Value (NPV):"", round(NPV, 4), ""\n"")
+
+b) The AI got the answer correct. I worked through the answer previously on this test.
+
+c) AI was able to come up with the answer quite quickly despite how complex the calculations can be. However, one limitation is that the AI could become confused or add equations that may not be necessary for the problem you present to it. It is good to double check the complex calculations to ensure the AI did it correctly.",0.0,18,1,5.0
+Camryn Kay,6428677,934286440,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-10 16:58:20 UTC,1,"> systolic_bp <- c(118, 132, 145, 128, 155, 122, 138)
+> mean(systolic_bp)
+[1] 134
+> sd(systolic_bp)
+[1] 13.02562
+> sum(systolic_bp>=140)
+[1] 2
+> ",0.0,0.60,2.0,70,0.0,"Total patients: 50+75+75= 200 
+
+a) 50/200 = 0.25 or 25% 
+
+b) 200 - 75 = 125
+
+125/200 = 0.625 or 62.5% ",0.0,0.05,3.0,A false probability of 0.05 means that there is a 5% chance that the test will say something is positive and that is not true. ,0.0,"a) 
+
+Total population: 300
+
+(120/300) + (90/300) - (30/300) = [(120+90-30)/300] = 180/300 = 0.6
+
+b) 
+
+These events are not mutually exclusive because a patient can have high blood pressure and high cholesterol at the same time. 
+
+ ",0.0,"a) (100/500)/(200/500)= 100/200 = 0.5
+
+b) (100/500)/(150/500) = 100/150 = 2/3 or 0.667
+
+ ",0.0,"a) 
+
+(0.2)(0.6) + (0.35)(0.40) = 
+
+0.12+0.14 = 0.26 or 26% 
+
+b) 
+
+((0.35)(0.40))/0.26 = 
+
+0.14/0.26 = 0.05385 or 53.85%",0.0,"a) 
+
+0.10 x 0.15 = 0.015 
+
+The tests are independent because the individual probabilities are equal to the joint probability. 
+
+b) In this clinical context, independence means the outcome of one of the tests does not affect the outcome of the other. ",0.0,"a) Sensitivity is the probability that the test can correctly identify the person that is positive with the flu. 
+
+Sensitivity = Pr(Test Positive | Flu) 
+
+b) Specificity is the probability of the test correctly identifying a person that is negative with the flu. 
+
+Specificity=Pr(Test negative | flu) 
+
+c)  A 90% sensitivity means that if a patient has the flue there is a 90% chance that the test will show an accurate positive result, meaning it would screen 90 out of 100 patients who have the flu correctly. ",0.0,"a) 
+
+Has covid = 2% of 10,000 = 200 
+
+No covid = 10,000-200 = 9,800 
+
+TP = 0.85x200 = 170 
+
+FN = 200 - 170 = 30 
+
+TN = 0.95 x 9,800 = 9,310 
+
+FP = 9,800 -9,310 = 490 
+
++ Test 
+
+- Test 
+
+Total 
+
+Has COVID
+
+170
+
+30
+
+200
+
+No COVID 
+
+490
+
+9,310
+
+9,800
+
+Total
+
+660
+
+9,340
+
+9,800
+
+Sensitivity= 170/200 = 0.85 or 85% 
+
+Specificity = 9,310/9,800 = 0.95 or 95% 
+
+ ",0.0,"a) PPV = 170/660 = 0.2576 or 25.76% 
+
+b) NPV = 9,310/9,340 = 0.9968 or 99.68% 
+
+c) The PPV means that there is about a 26% change that someone who tested positive actually has COVID. ",0.0,"a) I would expect the PPV to be low because the prevalence of HIV within the population is a low percentage. 
+
+b) 
+
+Disease +
+
+Disease - 
+
+Total 
+
+Test +
+
+100
+
+1,498
+
+1,598
+
+Test - 
+
+0
+
+98,402
+
+98,402
+
+Total 
+
+100
+
+99,900
+
+100,000
+
+c) PPV = 100/1598 = 0.0626 or 6.26% 
+
+The PPV might surprise people because it is only about 6.3% which means that out of all the people who test positive for HIV, only 6.3% of those people actually have HIV. ",0.0,"a) risk in heavy coffee drinkers = 60/400 = 0.15 or 15% 
+
+b) risk in non-heavy coffee drinkers = 48/600 = 0.08 or 8%
+
+c) RR = 0.15/0.08 = 1.875
+
+d) Heavy coffee drinkers are at a 1.875 times higher risk of developing heart disease than those that are light or non-coffee drinkers over a 5 year period. ",0.0,"a) There is no relative risk of the outcome in exposed and unexposed groups. 
+
+b) The exposed group is at 2.5 times higher risk of developing the outcome when compared ot the unexposed group. 
+
+c) The exposed group has a 40% lower risk of getting the disease compared to the unexposed group. 
+
+d) The disease is common. ",0.0,"a) 
+
+> n=20
+> p=0.75
+> p_exact_15 <- dbinom(15, n, p)
+> p_exact_15
+[1] 0.2023312
+
+Answer: 0.202
+
+b) 
+
+> p_at_least_16 <- 1 - pbinom(15,n,p)
+> p_at_least_16
+[1] 0.4148415
+
+Answer: 0.415",0.0,"a) 
+
+> mean<-200
+> sd<-40
+> x<-240
+> p_above_240 <- 1 - pnorm(x,mean,sd)
+> p_above_240
+[1] 0.1586553
+
+Answer: 0.159 
+
+b) 
+
+> mean<-200
+> sd<-40
+> p <-0.9
+> chol_90th <- qnorm(p,mean,sd)
+> chol_90th
+[1] 251.2621
+
+Answer: 251.26",0.0,"a) ""Simulate dice rolling to estimate probability using r coding"" 
+
+b) When I put the prompt into Chat GPT, it gave me an example of rolling a sum of 7 with two dice. It gave me the code and an answer of 0.1667. When I put the code into R it gave me an answer of 0.1664, which is almost identical to the answer AI gave me. 
+
+c) A strength I found in this is that it can show me each step of code that I can input into R and explain why. A weakness is that the answer are not always accurate. ",0.0,18,1,5.0
+Zak Taylor,6090328,932503958,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-10 05:52:10 UTC,1,"a) systolic_bp <- c(118, 132, 145, 128, 155, 122, 138)
+
+b) mean_bp <- mean(systolic_bp)
+
+mean_bp
+[1] 134
+
+sd_bp <- sd(systolic_bp)
+sd_bp
+[1] 13.02562
+
+c) high_bp_count <- sum(systolic_bp >= 140)
+
+high_bp_count
+[1] 2",0.0,0.60,2.0,70,0.0,"a) 50 + 75 +75 = 200 patients 
+
+p(drug A) = 50/200 = 1/4=0.25=25%
+
+b)
+
+50+75/200=125/200=5/8=0.625=62.5%",0.0,0.05,3.0,"A false positive probability of 0.05 means 5% of people who don't have diabetes will still test positive. 
+
+For every 100 healthy people tested, only about 5 of them would be incorrectly told they might have diabetes, even though they don't. ",0.0,"a) 
+
+P(High BP) = 120/300= 0.40
+
+p(High Cholesterol) = 90/300=0.30
+
+p(both) = 30/300= 0.10
+
+P(high BP or High Cholesterol) = 0.40 + 0.30 - 0.10 = 0.60
+
+P(high BP or High Cholesterol)= 0.60
+
+b)
+
+No, they are not mutually exclusive, because 30 adults have both conditions. ",0.0,"a)
+
+100/500=0.2 x 500=100
+
+200/500=0.4 x 500=200
+
+100/200=0.5
+
+b)
+
+100/500=0.2 x 500= 100
+
+150/500=0.3x 500=150
+
+100/150= 0.667",0.0,"a)
+
+P(Allergies)= (0.20)(0.60) + (0.35)(0.40)
+
+P(Allergies)= 0.12 + 0.14 = 0.26
+
+P(Allergies)= 0.26 
+
+b)
+
+(0.35)(0.40)/0.26= 0.14/0.26 = 0.538
+
+P(Child | Allergies)≈0.54",0.0,"a)
+
+P(A)×P(B)=0.10 x 0.15 = 0.015
+
+ P(A and B)=0.015
+
+Yes, Test A and Test B are independent. 
+
+b)
+
+Independence means that one test result doesn't influence the result of the other test result. 
+
+If a patient tests positive on Test A that has no effect on their chance of testing positive on Test B. ",0.0,"a)
+
+Sensitivity=P(Test Positive | Disease Present)
+
+b)
+
+Specificity=P(Test Negative | Disease Absent)
+
+c)
+
+It means that among patients who actually have the flu, 9 out of 10 will correctly test positive. 
+
+ ",0.0,"a/b)
+
+ 
+
+Disease Status
+
+Test Positive 
+
+Test Negative
+
+Total
+
+Has COVID
+
+170 (TP)
+
+30 (FN)
+
+200
+
+No COVID
+
+490 (FP)
+
+9,310 (TN)
+
+9,800
+
+Total
+
+660
+
+9,340
+
+10,000
+
+c) 
+
+Sensitivity = 170/200 = 0.85 = 85%
+
+Specificity = 9,310/ 9,800 = 0.95 = 95%
+
+Yes, it matches the given values. ",0.0,"a) 
+
+PPV = 170/ (170 + 490) = 170/660 = 0.2576
+
+PPV= 0.258 (≈ 25.8%)
+
+b) 
+
+NPV = 9,310/ (9,310 + 30) = 9,310/9,340 = 0.9968
+
+NPV = 0.997 (≈ 99.7%)
+
+c) A PPV of 25.8% means that for the people who test positive, only about 1 in. 4 actually have COVID, the rest are false positives. ",0.0,"a)
+
+We expect the PPV to be low because most positive tests will come from people who don't actually have HIV. 
+
+b)
+
+Disease Status 
+
+Test positive 
+
+Test Negative
+
+Total
+
+Has HIV
+
+100
+
+1
+
+101
+
+No HIV
+
+1,499
+
+98,401
+
+99,900
+
+Total
+
+1,599
+
+98,402
+
+100,000
+
+c)
+
+PPV = 100 / (100 + 1,499) = 100 / 1,599 = 0.0625 = 6.25%
+
+Only about 6% of people who test positive actually have HIV. 
+
+This might surprise people because low disease prevalence means false positives greatly outnumber true positives. ",0.0,"a)
+
+60/400 = 0.15
+
+Risk= 15%
+
+b)
+
+48/600 = 0.08
+
+Risk = 8%
+
+c)
+
+0.15 / 0.08 = 1.875
+
+RR = 1.88 (rounded)
+
+d)
+
+Heavy coffee drinkers have about 1.88 times the risk of developing heart disease compared to light or non-coffee drinkers over the 5-year period. ",0.0,"a)
+
+There is no association between exposure and disease. 
+
+b) 
+
+This shows a strong positive association between the exposure and disease. 
+
+c)
+
+This shows the exposed group has a 0.6 times the risk of developing the diseased compared to the unexposed group. 
+
+d)
+
+The disease is common. When a disease is common, the OR overestimates the RR.  ",0.0,"a) 
+
+dbinom(15, size = 20, prob = 0.75)
+[1] 0.2023312 = 20%
+
+b)
+
+sum(dbinom(16:20, size = 20, prob = 0.75))
+[1] 0.4148415 = 41%",0.0,"a)
+
+> 1 - pnorm(240, mean = 200, sd = 40)
+[1] 0.1586553 (≈ 15.9%)
+
+b) 
+
+> qnorm(0.90, mean = 200, sd = 40)
+[1] 251.2621 = 251.3 mg/dL
+
+ ",0.0,"a)
+
+This is the problem I used: a) What is the probability that exactly 15 patients respond successfully? Write the R code and provide the answer. (2 points)
+
+Prompt: 
+
+Solve this: A new medication has a 75% success rate. A hospital treats 20 patients with this medication.
+
+a) What is the probability that exactly 15 patients respond successfully? Write the R code and provide the answer. (2 points)
+
+b)
+
+AI: P(X=15)=15504×(0.01336)×(0.0009766)=0.2023
+
+answer matches my answer. 
+
+c) One strength of AI is helping clean up and R code issues. One limitation is with complex large volume data AI won't account for missing information and report it but rather ""fill in the gaps"". ",0.0,18,1,5.0
+Allie Penfold,6489373,934416516,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-09 22:01:55 UTC,1,"> c(118, 132, 145, 128, 155, 122, 138)-> systolic_bp
+> systolic_bp
+[1] 118 132 145 128 155 122 138
+> mean(systolic_bp)
+[1] 134
+> sd(systolic_bp)
+[1] 13.02562
+> sum(systolic_bp>= 140)
+[1] 2",0.0,0.60,2.0,70,0.0,"Total Patients: 50+75+75=200
+
+a.) 50/200 = 0.25 or 25%
+
+b.) 200-75=125
+
+125/200= 0.625 or 62.5%
+
+ ",0.0,0.05,3.0,This means there is a 5% chance that the test says something is positive and it's not true.,0.0,"a) (120/300)+(90/300)-(30/300)= (120+90-30)/300= 180/300= 0.6
+
+b) These are not mutually exclusive because people can have high blood pressure and high cholesterol at the same time.",0.0,"a.) (100/500)/(200/500)= 100/200 = 0.5
+
+b.) (100/500)/(150/500)= 100/150 = 2/3 or 0.667",0.0,"a.) (0.20)(0.60)+(0.35)(0.40)
+
+0.12+0.14 = 0.26 or 26%
+
+b.) ((0.35)(0.40))/ 0.26 = 0.14/0.26 = 0.5385 or 53.85%",0.0,"a.) 0.10 x 0.15 = 0.015
+
+The individual probabilities are equal to the joint probability so the tests are independent.
+
+b.) Independence means the outcome of one of the tests does not affect the outcome of the other.",0.0,"a.) Sensitivity is the probability that the test can correctly identify the person that is positive with the flu.
+
+Sensitivity = Pr(Test positive | Flu)
+
+b.) Specificity is the probability of the test correctly identifying a person that is negative with the flu.
+
+Specificity= Pr(Test negative | Flu)
+
+c.) This sensitivity means that if a patient has the flu there is a 90% chance that the test will show an accurate positive result. Meaning it would correctly screen 90 out of 100 patients that have the flu.",0.0,"a.) Has Covid = 2% of 10,000 = 200
+
+No Covid = 10,000-200 = 9,800
+
+TP = 0.85 x 200 = 170
+
+FN = 200- 170 = 30
+
+TN = 0.95 x 9,800 = 9,310
+
+FP = 9,800 - 9,310 = 490
+
++ Test
+
+- Test
+
+Total
+
+Has Covid
+
+170
+
+30
+
+200
+
+No Covid
+
+490
+
+9,310
+
+9,800
+
+Total
+
+660
+
+9,340
+
+10,000
+
+Sensitivity= 170/200 = 0.85 or 85%
+
+Specificity = 9,310/9,800 = 0.95 or 95%",0.0,"a.) PPV =170/660 = 0.2576 or 25.76%
+
+b.) NPV = 9,310/9,340 = 0.9968 or 99.68%
+
+c.) There is about a 26% chance that someone that tested postive to the test actually has COVID-19.",0.0,"a.) I would expect the PPV to be low because the prevelance of HIV within the population is a very low percentage.
+
+b.)
+
+Disease +
+
+Disease -
+
+Total
+
+Test +
+
+100
+
+1,498
+
+1,598
+
+Test -
+
+0
+
+98,402
+
+98,402
+
+Total
+
+100
+
+99,900
+
+100,000
+
+c.) PPV= 100/1598 = 0.0626 or 6.26%
+
+-The PPV is only about 6.3% which means that out of all people who test postive only that percent actually has HIV.",0.0,"a.) Risk in heavy = 60/400 = 0.15 or 15%
+
+b.) Risk in non-heavy = 48/600 = 48/600 = 0.08 or 8%
+
+c.) RR = 0.15/0.08= 1.875
+
+d.) Heavy coffee drinkers are at a 1.875 times higher risk of developing heart disease than those that are light or non-coffee drinkers over a 5 yr period.",0.0,"a.) There is no difference in the risk of the outcome is exposed and unexposed groups
+
+b.) The exposed group is 2.5 times higher risk of developing the disease when compared to the unexposed group.
+
+c.) The exposed group has a 40% lower risk of getting the disease comparatively to the unexposed group.
+
+d.) This is commonly seen when the disease is common.",0.0,"a.) Code: 
+
+n<-20
+p<-0.75
+k<-15
+
+prob_exactly_k<-dbinom(k,n,p)
+prob_exactly_k
+
+Answer: 0.202
+
+b.) Code:
+
+prob_at_least_16 <-1 - pbinom(15,n,p)
+prob_at_least_16
+
+Answer: 0.415
+
+ ",0.0,"a.) Code:
+
+mean<-200
+sd<-40
+x<-240
+
+prob_above_240 <- 1 - pnorm(x,mean,sd)
+prob_above_240
+
+Answer: 0.159
+
+b.) Code: 
+
+mean <- 200
+sd <- 40
+p <- 0.90
+
+chol_90th <- qnorm(p, mean, sd)
+chol_90th
+
+Answer: 251.26",0.0,"A.) ""Simulate coin flips to estimate probability using r coding""
+
+b.) When I put the prompt into AI it gave me a code and an answer of 0.6. When I worked the code into R I got a total of 0.501. Since fliping a coin is typicallys seen as 50/50 probability this can be seen as correct. 
+
+c.)  Strength it is quick and can help explain things
+
+Weakness: The answers can sometimes be in accurate.",0.0,18,1,5.0
+Zoey Riess,6294688,933664802,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-09 21:57:28 UTC,1,"> systolic.bp<-c(118, 132, 145, 128, 155, 122, 138)
+> mean(systolic.bp)
+[1] 134
+> sd(systolic.bp)
+[1] 13.02562
+
+> high_bp_count <- sum(systolic.bp >= 140)
+> high_bp_count
+[1] 2",0.0,0.60,2.0,70,0.0,"a) 50/200= 0.25= 25%
+
+b) 125/200=0.625= 62.5%",0.0,0.05,3.0,There is a 5% chance that a patient will test positive for diabetes but not actually have the disease. ,0.0,"a) P(high BP)= 120/300= 0.4
+
+P(high cholesterol)= 90/300= 0.3
+
+P(Both)= 30/300= 0.1
+
+0.4 + 0.3 - 0.1= 0.6 = 60%
+
+b) No, these events are not mutually exclusive because it is possible to have high blood pressure and high cholesterol at the same time. ",0.0,"a) P(respiratory complications | smoker) = 100/200 = 0.5 = 50%
+
+b) P(smoker | respiratory complications) = 100/150 = 0.67 = 67% ",0.0,"a) P(Allergies) = (0.20×0.60) + (0.35×0.40) = 0.12+0.14 = 0.26
+
+b) P(child|allergies)=(0.35*0.40)/0.26 = 0.140/0.26 = 0.538",0.0,"a) 0.10*0.15=0.015
+
+These two tests are independent because the probability of both being positive equals the product of their individual probabilities.
+
+b) If Test A and Test B are independent, a patient's chance of testing positive on Test B is the same whether or not they tested positive on Test A.
+
+ ",0.0,"a) Sensitivity=Pr(Test positive∣Disease present)
+
+b) Specificity=Pr(Test negative∣Disease absent)
+
+c) A 90% sensitivity means that if 100 patients actually have the flu, the test will correctly identify about 90 of them as positive for the flu.",0.0,"(TP): 0.85 × 200 = 170
+
+ (FN): 200 - 170 = 30
+
+(TN): 0.95 × 9,800 = 9,310
+
+(FP): 9,800 - 9,310 = 490
+
+Test Positive 
+
+Test Negative 
+
+Total 
+
+Has COVID
+
+170
+
+30
+
+200
+
+No COVID
+
+490
+
+9,310
+
+9,800
+
+Total 
+
+660
+
+9,340
+
+10,000",0.0,"a) PPV = 170/(170 + 490) = 170/660 = 0.258
+
+b) NPV = 9,310/(9,310 + 30) = 9,310/9,340 = 0.997
+
+c) The PPV tells you the probability that a person who tests positive actually has the disease",0.0,"a) You would expect the PPV to be low because the prevalence of the disease is so low. 
+
+c) 100/(100+1,499)= 100/1,599= 0.0625= 6.3%. A PPV of 6.3 might surprise people because it indicates that there are quite a few false positives despite having excellent sensitivity and specificity. 
+
+Test Positive 
+
+Test Negative 
+
+Total 
+
+Has HIV 
+
+100
+
+0
+
+100
+
+No HIV 
+
+1,499
+
+98,401
+
+99,900
+
+Total 
+
+1,599
+
+98,401
+
+100,000",0.0,"a) 60/400 = 0.15 = 15%
+
+b) 48/600 = 0.08 = 8%
+
+c) 0.15/0.8 = 1.875
+
+d) Heavy coffee drinkers have 1.88 times higher risk of developing heart disease compared to light or non-coffee drinkers.",0.0,"a) When RR = 1.0, that means that there is no association between the exposure and the disease. 
+
+b) When RR = 2.5, that means that there is a positive association between the exposure and the disease. 
+
+c) When RR = 0.6, that means that there is a negative association between the exposure and the disease. 
+
+d) When RR > OR, it means that the disease is common. ",0.0,"a) 
+
+> dbinom(15, size = 20, prob = 0.75)
+[1] 0.2023312
+
+b)
+
+> pbinom(15, size = 20, prob = 0.75)
+[1] 0.5851585",0.0,"a) 
+
+> pnorm(240, mean = 200, sd = 40)
+[1] 0.8413447
+
+b)
+
+> qnorm(0.90, mean = 200, sd = 40)
+[1] 251.2621",0.0,"a) My exact prompt to ChatGPT: ""Write an R code to simulate coin flips to estimate probability"" 
+
+b) After working through the problem myself, ChatGPT was close, but not right. If we're trying to estimate the probability of flipping heads during a coin flip, we would estimate that the probability would be around 50%. After running the code that ChatGPT gave me, R Studio gave me the output of 0.487. Which again, is close, but ideally the answer would be one that you'd round to 0.5. 
+
+c) A strength of using AI for this type of problem is that it can help you work out the steps within each portion of the code to obtain the correct answer. However the limitation is that the answer that ChatGPT thinks that R Studio will produce is not always accurate. It is best to check your work manually for these types of problems. ",0.0,18,1,5.0

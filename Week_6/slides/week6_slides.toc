@@ -1,0 +1,7 @@
+\beamer@sectionintoc {1}{Review from Week 5}{3}{0}{1}
+\beamer@sectionintoc {2}{Statistical Power (Chapter 11)}{4}{0}{2}
+\beamer@sectionintoc {3}{Two-Sample t-Tests: Independent Samples (Chapter 12)}{12}{0}{3}
+\beamer@sectionintoc {4}{Paired t-Tests (Chapter 12)}{19}{0}{4}
+\beamer@sectionintoc {5}{Analysis of Variance (ANOVA) (Chapter 12)}{24}{0}{5}
+\beamer@sectionintoc {6}{AI-Enhanced Learning for Power and Comparisons}{35}{0}{6}
+\beamer@sectionintoc {7}{Summary and Key Formulas}{40}{0}{7}

@@ -1,0 +1,834 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+\definecolor{codebackground}{RGB}{248,248,248}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+% Configure listings for code display
+\lstset{
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  breakatwhitespace=true,
+  postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+
+% Code environment using tcolorbox with listings
+\newtcblisting{rcode}{
+  colback=white,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=0pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  width=\textwidth,
+  breakable,
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false
+  }
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 7 Lab: Nonparametric Methods}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Format:} Online\\
+\textbf{Tools Required:} R, RStudio\\
+\textbf{Estimated Time:} 90 minutes
+
+\section{Learning Objectives}
+
+By the end of this lab, you will be able to:
+\begin{enumerate}
+\item Check normality assumptions using visual and statistical methods
+\item Choose between parametric and nonparametric tests appropriately
+\item Perform sign tests in R
+\item Use Wilcoxon signed-rank test for one-sample and paired data
+\item Conduct Wilcoxon rank-sum tests for independent samples
+\item Perform Kruskal-Wallis tests for multiple groups
+\item Compare parametric and nonparametric results
+\item Interpret rank-based test output
+\item \textcolor{aiblue}{\textbf{Use AI tools to help select and implement appropriate tests}}
+\end{enumerate}
+
+\section{Introduction: When Assumptions Fail}
+
+Parametric tests (t-tests, ANOVA) assume data are normally distributed. When this assumption is violated---due to skewness, outliers, small sample sizes, or ordinal data---nonparametric tests offer robust alternatives.
+
+\vspace{0.3cm}
+\textbf{Key differences:}
+\begin{itemize}
+\item \textbf{Parametric tests:} Use actual data values, assume normality
+\item \textbf{Nonparametric tests:} Use ranks, minimal assumptions
+\end{itemize}
+
+\section{Part 1: Checking Normality Assumptions}
+
+Before choosing a test, always check if parametric assumptions hold.
+
+\subsection{Exercise 1.1: Visual Assessment}
+
+\begin{rcode}
+# Generate sample data
+set.seed(524)
+normal_data <- rnorm(30, mean=100, sd=15)
+skewed_data <- rexp(30, rate=0.02)  # Exponential (skewed)
+
+# Create multi-panel plot
+par(mfrow=c(2,3))
+
+# Normal data
+hist(normal_data, main="Normal Data\nHistogram",
+     col="lightblue", probability=TRUE)
+lines(density(normal_data), col="red", lwd=2)
+
+qqnorm(normal_data, main="Normal Data\nQ-Q Plot")
+qqline(normal_data, col="red", lwd=2)
+
+boxplot(normal_data, main="Normal Data\nBoxplot",
+        horizontal=TRUE, col="lightblue")
+
+# Skewed data
+hist(skewed_data, main="Skewed Data\nHistogram",
+     col="lightcoral", probability=TRUE)
+lines(density(skewed_data), col="red", lwd=2)
+
+qqnorm(skewed_data, main="Skewed Data\nQ-Q Plot")
+qqline(skewed_data, col="red", lwd=2)
+
+boxplot(skewed_data, main="Skewed Data\nBoxplot",
+        horizontal=TRUE, col="lightcoral")
+
+par(mfrow=c(1,1))
+\end{rcode}
+
+\textbf{Observations:}
+\begin{itemize}
+\item \textbf{Normal data:} Histogram bell-shaped, Q-Q plot points follow line, boxplot symmetric
+\item \textbf{Skewed data:} Histogram right-skewed, Q-Q plot deviates, boxplot asymmetric with outliers
+\end{itemize}
+
+\subsection{Exercise 1.2: Shapiro-Wilk Test}
+
+The Shapiro-Wilk test formally tests normality.
+
+\vspace{0.2cm}
+\textbf{Hypotheses:}
+\begin{itemize}
+\item $H_0$: Data are normally distributed
+\item $H_A$: Data are not normally distributed
+\end{itemize}
+
+\begin{rcode}
+# Test normality
+shapiro.test(normal_data)
+shapiro.test(skewed_data)
+
+# Create function for comprehensive assessment
+assess_normality <- function(data, name="Data") {
+  cat("\n=== Normality Assessment for", name, "===\n")
+  cat("Sample size:", length(data), "\n")
+  cat("Mean:", round(mean(data), 2), "\n")
+  cat("SD:", round(sd(data), 2), "\n")
+  cat("Median:", round(median(data), 2), "\n\n")
+
+  # Shapiro-Wilk test
+  sw <- shapiro.test(data)
+  cat("Shapiro-Wilk Test:\n")
+  cat("  W =", round(sw$statistic, 4), "\n")
+  cat("  p-value =", format.pval(sw$p.value, digits=3), "\n\n")
+
+  # Decision
+  if (sw$p.value < 0.05) {
+    cat("CONCLUSION: Reject normality (p < 0.05)\n")
+    cat("RECOMMENDATION: Use nonparametric test\n")
+  } else {
+    cat("CONCLUSION: Normality assumption reasonable\n")
+    cat("RECOMMENDATION: Parametric test appropriate\n")
+  }
+}
+
+# Use the function
+assess_normality(normal_data, "Normal Data")
+assess_normality(skewed_data, "Skewed Data")
+\end{rcode}
+
+\textbf{Interpretation:}
+\begin{itemize}
+\item If $p \geq 0.05$: Fail to reject $H_0$, normality assumption reasonable
+\item If $p < 0.05$: Reject $H_0$, use nonparametric test
+\end{itemize}
+
+\section{Part 2: Sign Test}
+
+The simplest nonparametric test. Uses only the direction of differences.
+
+\subsection{Exercise 2.1: One-Sample Sign Test}
+
+\textbf{Research question:} Is the median recovery time different from 7 days?
+
+\begin{rcode}
+# Data: Recovery times (days)
+recovery <- c(8, 5, 7, 10, 4, 9, 3, 12, 6, 11, 7)
+
+# Hypothesized median
+med0 <- 7
+
+# Manual calculation
+diff <- recovery - med0
+signs <- sign(diff[diff != 0])  # Remove zeros
+
+n <- length(signs)
+b_plus <- sum(signs > 0)
+b_minus <- sum(signs < 0)
+
+cat("Number of observations:", length(recovery), "\n")
+cat("Non-zero differences:", n, "\n")
+cat("Positive differences:", b_plus, "\n")
+cat("Negative differences:", b_minus, "\n\n")
+
+# Sign test using binomial test
+# H0: median = 7 (p = 0.5 for + or -)
+result <- binom.test(b_plus, n, p=0.5, alternative="two.sided")
+print(result)
+
+# Interpretation
+cat("\nConclusion:\n")
+if (result$p.value < 0.05) {
+  cat("Reject H0: Median is significantly different from", med0, "\n")
+} else {
+  cat("Fail to reject H0: No evidence median differs from", med0, "\n")
+}
+\end{rcode}
+
+\subsection{Exercise 2.2: Paired Sign Test}
+
+\textbf{Before/after treatment comparison}
+
+\begin{rcode}
+# Pain scores (1-10 scale)
+before <- c(7, 8, 6, 9, 5, 8, 7, 6)
+after <- c(5, 6, 4, 7, 4, 6, 5, 5)
+
+# Calculate differences
+diff <- before - after
+cat("Differences (before - after):", diff, "\n")
+
+# Count signs
+signs <- sign(diff)
+n_pos <- sum(signs > 0)
+n_neg <- sum(signs < 0)
+n_zero <- sum(signs == 0)
+
+cat("\nPositive differences:", n_pos, "\n")
+cat("Negative differences:", n_neg, "\n")
+cat("Zero differences:", n_zero, "\n\n")
+
+# Sign test
+result <- binom.test(n_pos, n_pos + n_neg, p=0.5,
+                     alternative="two.sided")
+print(result)
+
+# Effect size: proportion with improvement
+prop_improved <- n_pos / (n_pos + n_neg)
+cat("\nProportion improved:", round(prop_improved, 3), "\n")
+\end{rcode}
+
+\textbf{Try it yourself:}
+Modify the code to test if treatment reduces pain (one-sided test, alternative="greater").
+
+\vspace{2cm}
+
+\section{Part 3: Wilcoxon Signed-Rank Test}
+
+More powerful than sign test---uses both direction AND magnitude of differences.
+
+\subsection{Exercise 3.1: One-Sample Wilcoxon Test}
+
+\begin{rcode}
+# Same recovery time data
+recovery <- c(8, 5, 7, 10, 4, 9, 3, 12, 6, 11, 7)
+med0 <- 7
+
+# Wilcoxon signed-rank test
+result <- wilcox.test(recovery, mu=med0, alternative="two.sided")
+print(result)
+
+# Summary statistics
+cat("\nSummary Statistics:\n")
+cat("Sample median:", median(recovery), "\n")
+cat("Hypothesized median:", med0, "\n")
+cat("Mean:", round(mean(recovery), 2), "\n")
+cat("SD:", round(sd(recovery), 2), "\n")
+
+# Compare with sign test
+sign_result <- binom.test(sum(sign(recovery - med0) > 0),
+                          length(recovery[recovery != med0]),
+                          p=0.5, alternative="two.sided")
+
+cat("\n=== Test Comparison ===\n")
+cat("Sign test p-value:", format.pval(sign_result$p.value), "\n")
+cat("Wilcoxon p-value:", format.pval(result$p.value), "\n")
+cat("\nWilcoxon is typically more powerful\n")
+\end{rcode}
+
+\subsection{Exercise 3.2: Paired Wilcoxon Test}
+
+\begin{rcode}
+# Blood pressure: before and after medication
+before <- c(145, 138, 150, 142, 156, 148, 140, 152, 144, 146)
+after <- c(138, 135, 142, 140, 148, 145, 136, 145, 141, 143)
+
+# Method 1: Paired test
+result1 <- wilcox.test(before, after, paired=TRUE)
+
+# Method 2: Test differences against 0
+diff <- before - after
+result2 <- wilcox.test(diff, mu=0)
+
+# Both methods equivalent
+print(result1)
+
+cat("\nDescriptive Statistics:\n")
+cat("Mean difference:", round(mean(diff), 2), "mmHg\n")
+cat("Median difference:", median(diff), "mmHg\n")
+cat("SD of differences:", round(sd(diff), 2), "\n")
+
+# Visualization
+par(mfrow=c(1,2))
+
+boxplot(before, after, names=c("Before", "After"),
+        main="Blood Pressure",
+        ylab="BP (mmHg)",
+        col=c("lightcoral", "lightblue"))
+
+hist(diff, main="Distribution of Differences",
+     xlab="Difference (Before - After)",
+     col="lightyellow",
+     breaks=5)
+abline(v=0, col="red", lwd=2, lty=2)
+abline(v=median(diff), col="blue", lwd=2)
+legend("topright", c("No difference", "Median diff"),
+       col=c("red", "blue"), lty=c(2,1), lwd=2)
+
+par(mfrow=c(1,1))
+\end{rcode}
+
+\subsection{Exercise 3.3: Compare with Paired t-test}
+
+\begin{rcode}
+# Same blood pressure data
+before <- c(145, 138, 150, 142, 156, 148, 140, 152, 144, 146)
+after <- c(138, 135, 142, 140, 148, 145, 136, 145, 141, 143)
+diff <- before - after
+
+# Check normality of differences
+shapiro.test(diff)
+
+# Paired t-test
+t_result <- t.test(before, after, paired=TRUE)
+
+# Wilcoxon test
+w_result <- wilcox.test(before, after, paired=TRUE)
+
+# Compare results
+cat("=== Parametric vs. Nonparametric ===\n\n")
+
+cat("Paired t-test:\n")
+cat("  t =", round(t_result$statistic, 3), "\n")
+cat("  df =", t_result$parameter, "\n")
+cat("  p-value =", format.pval(t_result$p.value), "\n")
+cat("  95% CI:", round(t_result$conf.int, 2), "\n\n")
+
+cat("Wilcoxon signed-rank test:\n")
+cat("  V =", w_result$statistic, "\n")
+cat("  p-value =", format.pval(w_result$p.value), "\n\n")
+
+cat("Conclusion: Both tests reach same decision\n")
+cat("(when data approximately normal, similar p-values)\n")
+\end{rcode}
+
+\section{Part 4: Wilcoxon Rank-Sum Test (Mann-Whitney)}
+
+For comparing two independent groups.
+
+\subsection{Exercise 4.1: Two-Sample Comparison}
+
+\textbf{Clinical trial:} Compare pain relief from two treatments
+
+\begin{rcode}
+# Pain relief scores (0-10 scale)
+treatment_A <- c(3, 5, 6, 2, 8, 4, 7, 5, 6, 4)
+treatment_B <- c(6, 8, 7, 9, 5, 8, 10, 7, 9, 8)
+
+# Check normality
+cat("=== Normality Assessment ===\n")
+cat("Treatment A:\n")
+print(shapiro.test(treatment_A))
+cat("\nTreatment B:\n")
+print(shapiro.test(treatment_B))
+
+# Wilcoxon rank-sum test
+result <- wilcox.test(treatment_A, treatment_B,
+                      alternative="two.sided")
+print(result)
+
+# Descriptive statistics
+cat("\n=== Descriptive Statistics ===\n")
+cat("Treatment A:\n")
+cat("  Median:", median(treatment_A), "\n")
+cat("  Mean:", round(mean(treatment_A), 2), "\n")
+cat("  SD:", round(sd(treatment_A), 2), "\n\n")
+
+cat("Treatment B:\n")
+cat("  Median:", median(treatment_B), "\n")
+cat("  Mean:", round(mean(treatment_B), 2), "\n")
+cat("  SD:", round(sd(treatment_B), 2), "\n")
+
+# Visualization
+boxplot(treatment_A, treatment_B,
+        names=c("Treatment A", "Treatment B"),
+        main="Pain Relief Comparison",
+        ylab="Pain Relief Score",
+        col=c("lightblue", "lightgreen"))
+stripchart(list(A=treatment_A, B=treatment_B),
+           vertical=TRUE, method="jitter",
+           add=TRUE, pch=19, col="darkgray")
+\end{rcode}
+
+\subsection{Exercise 4.2: Handling Outliers}
+
+Nonparametric tests are robust to outliers.
+
+\begin{rcode}
+# Create data with outlier
+set.seed(123)
+group_A <- c(23, 25, 28, 30, 32, 35, 38, 95)  # Outlier!
+group_B <- c(20, 22, 24, 26, 29, 31, 33, 36)
+
+# Parametric test (affected by outlier)
+t_result <- t.test(group_A, group_B)
+
+# Nonparametric test (robust)
+w_result <- wilcox.test(group_A, group_B)
+
+# Compare
+cat("=== Effect of Outlier ===\n\n")
+
+cat("Descriptive Statistics:\n")
+cat("Group A (with outlier=95):\n")
+cat("  Mean:", round(mean(group_A), 2), "\n")
+cat("  Median:", median(group_A), "\n\n")
+
+cat("Group B:\n")
+cat("  Mean:", round(mean(group_B), 2), "\n")
+cat("  Median:", median(group_B), "\n\n")
+
+cat("Two-sample t-test:\n")
+cat("  p-value =", format.pval(t_result$p.value), "\n")
+cat("  Mean difference:", round(diff(t_result$estimate), 2), "\n\n")
+
+cat("Wilcoxon rank-sum test:\n")
+cat("  p-value =", format.pval(w_result$p.value), "\n")
+cat("  Median A:", median(group_A), "vs Median B:", median(group_B), "\n\n")
+
+cat("Note: Wilcoxon is robust to the extreme outlier (95)\n")
+cat("t-test is heavily influenced by it\n")
+
+# Visualization
+par(mfrow=c(1,2))
+
+boxplot(group_A, group_B, names=c("A", "B"),
+        main="Boxplot (shows outlier)",
+        col=c("lightcoral", "lightblue"))
+text(1, 95, "Outlier!", pos=4, col="red")
+
+stripchart(list(A=group_A, B=group_B),
+           vertical=TRUE, method="jitter",
+           main="Individual Points",
+           pch=19, col=c("red", "blue"))
+points(1, 95, pch=19, col="red", cex=2)
+
+par(mfrow=c(1,1))
+\end{rcode}
+
+\section{Part 5: Kruskal-Wallis Test}
+
+Nonparametric alternative to one-way ANOVA.
+
+\subsection{Exercise 5.1: Comparing Three Groups}
+
+\begin{rcode}
+# Pain relief from three drugs
+drug_A <- c(2, 3, 4, 3, 2, 4)
+drug_B <- c(4, 6, 5, 7, 5, 6)
+drug_C <- c(5, 8, 9, 10, 7, 9)
+
+# Combine data
+pain_relief <- c(drug_A, drug_B, drug_C)
+drug <- factor(rep(c("A", "B", "C"), each=6))
+
+# Kruskal-Wallis test
+result <- kruskal.test(pain_relief ~ drug)
+print(result)
+
+# Descriptive statistics by group
+cat("\n=== Descriptive Statistics ===\n")
+for (d in c("A", "B", "C")) {
+  data <- pain_relief[drug == d]
+  cat("\nDrug", d, ":\n")
+  cat("  Median:", median(data), "\n")
+  cat("  Mean:", round(mean(data), 2), "\n")
+  cat("  Range:", range(data)[1], "-", range(data)[2], "\n")
+}
+
+# Visualization
+boxplot(pain_relief ~ drug,
+        main="Pain Relief by Drug",
+        xlab="Drug",
+        ylab="Pain Relief Score",
+        col=c("lightblue", "lightgreen", "lightyellow"))
+stripchart(pain_relief ~ drug,
+           vertical=TRUE, method="jitter",
+           add=TRUE, pch=19, col="darkgray")
+\end{rcode}
+
+\subsection{Exercise 5.2: Post-Hoc Tests}
+
+If Kruskal-Wallis is significant, determine which groups differ.
+
+\begin{rcode}
+# Same data
+pain_relief <- c(drug_A, drug_B, drug_C)
+drug <- factor(rep(c("A", "B", "C"), each=6))
+
+# First run Kruskal-Wallis
+kw_result <- kruskal.test(pain_relief ~ drug)
+cat("Kruskal-Wallis p-value:", format.pval(kw_result$p.value), "\n\n")
+
+if (kw_result$p.value < 0.05) {
+  cat("Significant! Now do pairwise comparisons...\n\n")
+
+  # Pairwise Wilcoxon tests with Bonferroni correction
+  pairwise_result <- pairwise.wilcox.test(pain_relief, drug,
+                                          p.adjust.method="bonferroni")
+  print(pairwise_result)
+
+  cat("\nInterpretation:\n")
+  cat("- Compare each p-value to alpha = 0.05\n")
+  cat("- Bonferroni correction adjusts for multiple tests\n")
+} else {
+  cat("Not significant. No post-hoc tests needed.\n")
+}
+\end{rcode}
+
+\subsection{Exercise 5.3: Compare with One-Way ANOVA}
+
+\begin{rcode}
+# Same data
+pain_relief <- c(drug_A, drug_B, drug_C)
+drug <- factor(rep(c("A", "B", "C"), each=6))
+
+# Check normality assumption for ANOVA
+cat("=== Check Normality ===\n")
+for (d in c("A", "B", "C")) {
+  data <- pain_relief[drug == d]
+  cat("\nDrug", d, ":\n")
+  sw <- shapiro.test(data)
+  cat("  Shapiro-Wilk p =", format.pval(sw$p.value), "\n")
+}
+
+# ANOVA
+anova_result <- aov(pain_relief ~ drug)
+cat("\n=== One-Way ANOVA ===\n")
+print(summary(anova_result))
+
+# Kruskal-Wallis
+kw_result <- kruskal.test(pain_relief ~ drug)
+cat("\n=== Kruskal-Wallis Test ===\n")
+print(kw_result)
+
+cat("\n=== Comparison ===\n")
+cat("ANOVA F-test p-value:",
+    format.pval(summary(anova_result)[[1]][["Pr(>F)"]][1]), "\n")
+cat("Kruskal-Wallis p-value:", format.pval(kw_result$p.value), "\n")
+cat("\nBoth reach same conclusion when assumptions met\n")
+\end{rcode}
+
+\section{Part 6: Practical Decision-Making}
+
+\subsection{Exercise 6.1: Test Selection Flowchart}
+
+Create a function that recommends the appropriate test.
+
+\begin{rcode}
+recommend_test <- function(data1, data2=NULL, paired=FALSE) {
+  cat("=== Test Recommendation System ===\n\n")
+
+  # One-sample or two-sample?
+  if (is.null(data2)) {
+    cat("Scenario: One-sample test\n\n")
+
+    # Check normality
+    sw <- shapiro.test(data1)
+    cat("Normality test (Shapiro-Wilk):\n")
+    cat("  p-value =", format.pval(sw$p.value), "\n\n")
+
+    if (sw$p.value >= 0.05) {
+      cat("RECOMMENDATION: One-sample t-test\n")
+      cat("Reason: Data approximately normal\n")
+    } else {
+      cat("RECOMMENDATION: Wilcoxon signed-rank test\n")
+      cat("Reason: Data not normal (p < 0.05)\n")
+    }
+
+  } else {
+    if (paired) {
+      cat("Scenario: Paired two-sample test\n\n")
+      diff <- data1 - data2
+      sw <- shapiro.test(diff)
+      cat("Normality test on differences:\n")
+      cat("  p-value =", format.pval(sw$p.value), "\n\n")
+
+      if (sw$p.value >= 0.05) {
+        cat("RECOMMENDATION: Paired t-test\n")
+        cat("Reason: Differences approximately normal\n")
+      } else {
+        cat("RECOMMENDATION: Wilcoxon signed-rank test\n")
+        cat("Reason: Differences not normal\n")
+      }
+
+    } else {
+      cat("Scenario: Independent two-sample test\n\n")
+      sw1 <- shapiro.test(data1)
+      sw2 <- shapiro.test(data2)
+
+      cat("Normality tests:\n")
+      cat("  Group 1 p =", format.pval(sw1$p.value), "\n")
+      cat("  Group 2 p =", format.pval(sw2$p.value), "\n\n")
+
+      if (sw1$p.value >= 0.05 && sw2$p.value >= 0.05) {
+        cat("RECOMMENDATION: Two-sample t-test\n")
+        cat("Reason: Both groups approximately normal\n")
+      } else {
+        cat("RECOMMENDATION: Wilcoxon rank-sum test\n")
+        cat("Reason: At least one group not normal\n")
+      }
+    }
+  }
+}
+
+# Test the function
+set.seed(456)
+normal_sample <- rnorm(20, mean=100, sd=15)
+skewed_sample <- rexp(20, rate=0.05)
+
+recommend_test(normal_sample)
+cat("\n")
+recommend_test(skewed_sample)
+\end{rcode}
+
+\section{Practice Problems}
+
+\subsection{Problem 1: Hospital Stay Duration}
+
+Compare median hospital stay between two surgical procedures. Data are skewed.
+
+\begin{rcode}
+# Hospital stay (days)
+procedure_1 <- c(3, 4, 5, 3, 6, 4, 7, 5, 4, 12)
+procedure_2 <- c(5, 6, 8, 7, 9, 6, 8, 10, 7, 15)
+
+# Your tasks:
+# a) Create boxplots
+# b) Check normality
+# c) Choose and perform appropriate test
+# d) Interpret results in clinical context
+\end{rcode}
+
+\textbf{Solution space:}
+
+\vspace{4cm}
+
+\subsection{Problem 2: Ordinal Pain Scores}
+
+Pain scores (1-10) before and after treatment for 15 patients.
+
+\begin{rcode}
+# Pain scores (ordinal)
+before <- c(7, 8, 6, 9, 5, 8, 7, 6, 8, 7, 9, 6, 7, 8, 5)
+after <- c(5, 6, 4, 7, 4, 6, 5, 5, 6, 5, 7, 4, 5, 6, 4)
+
+# Your tasks:
+# a) Why is nonparametric test appropriate here?
+# b) Perform sign test
+# c) Perform Wilcoxon signed-rank test
+# d) Compare results and power
+\end{rcode}
+
+\textbf{Solution space:}
+
+\vspace{4cm}
+
+\subsection{Problem 3: Multiple Treatment Comparison}
+
+Compare effectiveness of four diet programs.
+
+\begin{rcode}
+# Weight loss (kg) after 3 months
+diet_A <- c(2.1, 3.2, 2.5, 3.0, 2.8)
+diet_B <- c(3.5, 4.2, 3.8, 4.0, 3.9)
+diet_C <- c(4.5, 5.1, 4.8, 5.3, 4.9)
+diet_D <- c(2.8, 3.0, 2.9, 3.1, 2.7)
+
+# Your tasks:
+# a) Combine data appropriately
+# b) Perform Kruskal-Wallis test
+# c) If significant, do post-hoc tests
+# d) Visualize results
+# e) Make clinical recommendations
+\end{rcode}
+
+\textbf{Solution space:}
+
+\vspace{4cm}
+
+\section{Saving Your Work}
+
+\textbf{IMPORTANT:} Save your R script!
+
+\begin{rcode}
+# At the top of your R script, add:
+# Name: Your Name
+# Date: Today's Date
+# Lab: Week 7 - Nonparametric Methods
+
+# Save your workspace
+save.image("week7_lab.RData")
+
+# To load it later:
+# load("week7_lab.RData")
+\end{rcode}
+
+\section{\textcolor{aiblue}{AI-Enhanced Learning Tips}}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,title=Using AI Tools for Nonparametric Tests]
+
+\textbf{Good prompts for AI assistance:}
+\begin{itemize}
+\item "My data has outliers. Should I use t-test or Wilcoxon? Explain trade-offs"
+\item "Show me how to check normality in R with both visual and statistical methods"
+\item "Compare parametric and nonparametric results for my data: [paste data]"
+\item "Explain when to use sign test vs. Wilcoxon signed-rank test"
+\item "Create R code for Kruskal-Wallis with post-hoc tests"
+\end{itemize}
+
+\textbf{AI can help with:}
+\begin{itemize}
+\item Choosing the right test for your data characteristics
+\item Generating code for assumption checking
+\item Interpreting test output
+\item Creating visualizations
+\item Understanding when results differ between parametric/nonparametric
+\end{itemize}
+
+\textbf{Remember to verify:}
+\begin{itemize}
+\item Test assumptions AI suggests are actually met
+\item P-values and test statistics are reasonable
+\item Conclusions match your data characteristics
+\item Interpretations make sense in context
+\end{itemize}
+\end{tcolorbox}
+
+\section{Summary}
+
+\textbf{Key concepts from this lab:}
+\begin{enumerate}
+\item \textbf{Always check assumptions first}
+  \begin{itemize}
+  \item Visual: histograms, Q-Q plots, boxplots
+  \item Statistical: Shapiro-Wilk test
+  \end{itemize}
+
+\item \textbf{Nonparametric test selection}
+  \begin{itemize}
+  \item One-sample: Sign test or Wilcoxon signed-rank
+  \item Paired: Sign test or Wilcoxon signed-rank
+  \item Two independent: Wilcoxon rank-sum (Mann-Whitney)
+  \item Multiple groups: Kruskal-Wallis
+  \end{itemize}
+
+\item \textbf{When to use nonparametric}
+  \begin{itemize}
+  \item Ordinal data
+  \item Non-normal continuous data
+  \item Small samples with uncertain normality
+  \item Presence of outliers
+  \end{itemize}
+
+\item \textbf{Trade-offs}
+  \begin{itemize}
+  \item Parametric: More powerful IF assumptions met
+  \item Nonparametric: Robust, fewer assumptions, slightly less power
+  \end{itemize}
+\end{enumerate}
+
+\section{Additional Resources}
+
+\begin{itemize}
+\item R Documentation:
+  \begin{itemize}
+  \item \texttt{?wilcox.test} -- Wilcoxon tests
+  \item \texttt{?kruskal.test} -- Kruskal-Wallis test
+  \item \texttt{?shapiro.test} -- Normality testing
+  \end{itemize}
+\item Textbook: Pagano \& Gauvreau, Chapter 13
+\item Quick-R: Nonparametric Statistics
+\end{itemize}
+
+\end{document}

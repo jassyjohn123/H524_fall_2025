@@ -1,0 +1,39 @@
+\frametitle{AI Demo: Checking Assumptions}
+\textbf{Prompt:} ``How do I check if my data is normal enough for a t-test?''
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+# Check normality for t-test
+
+data <- c(...)  # your data
+
+# Visual checks (most important!)
+par(mfrow = c(2, 2))
+
+# 1. Histogram
+hist(data, breaks = 10, main = "Histogram", prob = TRUE)
+curve(dnorm(x, mean = mean(data), sd = sd(data)),
+      add = TRUE, col = "red", lwd = 2)
+
+# 2. Q-Q plot (most useful!)
+qqnorm(data)
+qqline(data, col = "red")
+# Points should roughly follow the line
+
+# 3. Boxplot
+boxplot(data, main = "Boxplot")
+# Should be roughly symmetric, check for outliers
+
+# 4. Density plot
+plot(density(data), main = "Density Plot")
+
+# Formal test
+shapiro.test(data)
+# p > 0.05 suggests normality
+# But with large n, minor deviations become "significant"
+
+# Rule of thumb: t-test is robust for n >= 30 unless
+# extreme outliers or strong skewness
+\end{verbatim}

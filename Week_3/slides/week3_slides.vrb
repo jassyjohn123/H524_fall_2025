@@ -1,0 +1,27 @@
+\frametitle{R Example: Comparing Z and t CIs}
+\footnotesize
+\begin{verbatim}
+# Sample data
+data <- rnorm(15, mean=100, sd=15)
+xbar <- mean(data)
+s <- sd(data)
+n <- length(data)
+se <- s/sqrt(n)
+
+# Z-based CI (assumes sigma known = 15)
+z_crit <- qnorm(0.975)
+z_ci <- xbar + c(-1, 1) * z_crit * 15/sqrt(n)
+
+# t-based CI (sigma unknown, use s)
+t_crit <- qt(0.975, df=n-1)
+t_ci <- xbar + c(-1, 1) * t_crit * se
+
+# Compare
+cat("Z-based CI:", round(z_ci, 2), "\n")
+cat("t-based CI:", round(t_ci, 2), "\n")
+cat("t CI is", round((t_ci[2]-t_ci[1])/(z_ci[2]-z_ci[1]), 3),
+    "times wider\n")
+
+# Note: Difference decreases as n increases
+# For n=100, they're nearly identical
+\end{verbatim}

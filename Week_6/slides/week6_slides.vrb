@@ -1,0 +1,36 @@
+\frametitle{AI Demo: ANOVA and Post-Hoc Tests}
+\textbf{Prompt:} ``Perform ANOVA comparing 4 treatment groups and follow up with post-hoc tests in R''
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+# Assume data structure:
+# outcome: numeric response variable
+# treatment: factor with 4 levels
+
+# Step 1: Check assumptions
+# Visualize distributions
+boxplot(outcome ~ treatment, data=mydata,
+        main="Outcome by Treatment Group")
+
+# Test homogeneity of variance
+bartlett.test(outcome ~ treatment, data=mydata)
+# If p > 0.05, variances are equal (good!)
+
+# Step 2: Perform ANOVA
+model <- aov(outcome ~ treatment, data=mydata)
+summary(model)
+
+# Step 3: If ANOVA significant, do post-hoc tests
+# Tukey's HSD (most common)
+TukeyHSD(model, conf.level=0.95)
+
+# Visualize Tukey results
+plot(TukeyHSD(model))
+
+# Interpretation:
+# - ANOVA tests if ANY groups differ (omnibus test)
+# - Tukey tells you WHICH specific pairs differ
+# - Tukey controls family-wise error rate at 0.05
+\end{verbatim}

@@ -1,0 +1,494 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{booktabs}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{correctgreen}{RGB}{34,139,34}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 3 Assignment - ANSWER KEY}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Total Points:} 100 (+ 5 bonus)\\
+\textbf{Instructor Use Only}
+
+\section*{Multiple Choice Answer Key}
+
+\subsection*{Part 1: Binomial Distribution (23 points)}
+
+\begin{table}[h]
+\begin{tabular}{clcp{8cm}}
+\toprule
+\textbf{Q\#} & \textbf{Answer} & \textbf{Pts} & \textbf{Topic} \\
+\midrule
+1 & \textcolor{correctgreen}{A} & 5 & Binomial conditions \\
+2 & \textcolor{correctgreen}{A} & 3 & P(X=12) = 0.2501 \\
+3 & \textcolor{correctgreen}{B} & 3 & P(X$\geq$13) = 0.3980 \\
+4 & \textcolor{correctgreen}{A} & 2 & R code for binomial \\
+5 & \textcolor{correctgreen}{A} & 2 & Expected value = 12 \\
+6 & \textcolor{correctgreen}{A} & 2 & SD = 1.549 \\
+7 & \textcolor{correctgreen}{A} & 3 & Vaccine P(X$<$20) = 0.0334 \\
+8 & \textcolor{correctgreen}{A} & 3 & Vaccine P(22$\leq$X$\leq$24) = 0.6918 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Part 2: Normal Distribution (22 points)}
+
+\begin{table}[h]
+\begin{tabular}{clcp{8cm}}
+\toprule
+\textbf{Q\#} & \textbf{Answer} & \textbf{Pts} & \textbf{Topic} \\
+\midrule
+9 & \textcolor{correctgreen}{A} & 2 & Z-score = 1.5 \\
+10 & \textcolor{correctgreen}{A} & 3 & P(X$>$185) = 0.0668 \\
+11 & \textcolor{correctgreen}{A} & 3 & P(165$<$X$<$180) = 0.5328 \\
+12 & \textcolor{correctgreen}{A} & 3 & 90th percentile = 182.8 cm \\
+14 & \textcolor{correctgreen}{A} & 2 & 25th percentile = 163.3 cm \\
+16 & \textcolor{correctgreen}{A} & 2 & Empirical rule: 120 to 280 mg/dL \\
+17 & \textcolor{correctgreen}{A} & 3 & P(X$>$280) = 0.0228 \\
+18 & \textcolor{correctgreen}{A} & 2 & P(BP$>$140) = 0.2024 \\
+19 & \textcolor{correctgreen}{A} & 2 & Expected hypertensive = 202 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Part 3: Sampling Distributions and CLT (23 points)}
+
+\begin{table}[h]
+\begin{tabular}{clcp{8cm}}
+\toprule
+\textbf{Q\#} & \textbf{Answer} & \textbf{Pts} & \textbf{Topic} \\
+\midrule
+20 & \textcolor{correctgreen}{A} & 2 & $E(\bar{X})$ = 100 \\
+21 & \textcolor{correctgreen}{A} & 2 & SE = 4 \\
+22 & \textcolor{correctgreen}{A} & 3 & SE with n=100 is 2 \\
+23 & \textcolor{correctgreen}{A} & 2 & CLT: $N(100, 3.125^2)$ \\
+24 & \textcolor{correctgreen}{A} & 4 & P($\bar{X}$$>$105) = 0.0548 \\
+25 & \textcolor{correctgreen}{A} & 2 & P(97$<$$\bar{X}$$<$103) = 0.6629 \\
+26 & \textcolor{correctgreen}{A} & 2 & SE = 5 (with $\sigma$=30, n=36) \\
+27 & \textcolor{correctgreen}{A} & 2 & SE decreases with larger n \\
+28 & \textcolor{correctgreen}{A} & 1 & SD vs SE concept \\
+29 & \textcolor{correctgreen}{A} & 3 & P($\bar{X}$$<$3350) = 0.1587 \\
+30 & \textcolor{correctgreen}{A} & 2 & R code for CLT \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Part 4: CI Interpretation (5 points)}
+
+\begin{table}[h]
+\begin{tabular}{clcp{8cm}}
+\toprule
+\textbf{Q\#} & \textbf{Answer} & \textbf{Pts} & \textbf{Topic} \\
+\midrule
+31 & \textcolor{correctgreen}{A} & 2 & Correct CI interpretation \\
+32 & \textcolor{correctgreen}{A} & 2 & Meaning of 95\% confidence \\
+33 & \textcolor{correctgreen}{A} & 1 & 99\% CI is wider \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+\section*{Multiple Choice - Detailed Solutions}
+
+\subsection*{Part 1: Binomial Distribution}
+
+\textbf{Question 2:} P(X = 12) for n=15, p=0.80
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$P(X=12) = \binom{15}{12}(0.80)^{12}(0.20)^3 = \textbf{0.2501}$$
+R code: \texttt{dbinom(12, 15, 0.80)}
+
+\vspace{0.5cm}
+
+\textbf{Question 3:} P(X $\geq$ 13) for n=15, p=0.80
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$P(X \geq 13) = P(X=13) + P(X=14) + P(X=15) = \textbf{0.3980}$$
+R code: \texttt{sum(dbinom(13:15, 15, 0.80))} or \texttt{pbinom(12, 15, 0.80, lower.tail=FALSE)}
+
+\vspace{0.5cm}
+
+\textbf{Question 5:} Expected value for n=15, p=0.80
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$E(X) = np = 15 \times 0.80 = \textbf{12}$$
+
+\vspace{0.5cm}
+
+\textbf{Question 6:} Standard deviation for n=15, p=0.80
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$SD(X) = \sqrt{np(1-p)} = \sqrt{15 \times 0.80 \times 0.20} = \sqrt{2.4} = \textbf{1.549}$$
+
+\vspace{0.5cm}
+
+\textbf{Question 7:} Vaccine efficacy - P(X $<$ 20) for n=25, p=0.90
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$P(X < 20) = P(X \leq 19) = \textbf{0.0334}$$
+R code: \texttt{pbinom(19, 25, 0.90)}
+
+\vspace{0.5cm}
+
+\textbf{Question 8:} Vaccine efficacy - P(22 $\leq$ X $\leq$ 24) for n=25, p=0.90
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$P(22 \leq X \leq 24) = P(X=22) + P(X=23) + P(X=24) = \textbf{0.6918}$$
+R code: \texttt{sum(dbinom(22:24, 25, 0.90))} or \texttt{pbinom(24, 25, 0.90) - pbinom(21, 25, 0.90)}
+
+\subsection*{Part 2: Normal Distribution}
+
+\textbf{Question 9:} Z-score for X=185, $\mu$=170, $\sigma$=10
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$Z = \frac{X - \mu}{\sigma} = \frac{185 - 170}{10} = \frac{15}{10} = \textbf{1.5}$$
+
+\vspace{0.5cm}
+
+\textbf{Question 10:} P(X $>$ 185) for $\mu$=170, $\sigma$=10
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$Z = 1.5 \text{ (from Q9)}$$
+$$P(X > 185) = P(Z > 1.5) = \textbf{0.0668}$$
+R code: \texttt{pnorm(185, 170, 10, lower.tail=FALSE)} or \texttt{1 - pnorm(1.5)}
+
+\vspace{0.5cm}
+
+\textbf{Question 11:} P(165 $<$ X $<$ 180) for $\mu$=170, $\sigma$=10
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$Z_1 = \frac{165-170}{10} = -0.5, \quad Z_2 = \frac{180-170}{10} = 1.0$$
+$$P(165 < X < 180) = P(-0.5 < Z < 1.0) = \textbf{0.5328}$$
+R code: \texttt{pnorm(180, 170, 10) - pnorm(165, 170, 10)}
+
+\vspace{0.5cm}
+
+\textbf{Question 12:} 90th percentile for $\mu$=170, $\sigma$=10
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$Z_{0.90} = 1.282 \text{ (from z-table or R)}$$
+$$X = \mu + Z\sigma = 170 + 1.282(10) = \textbf{182.8 cm}$$
+R code: \texttt{qnorm(0.90, 170, 10)}
+
+\vspace{0.5cm}
+
+\textbf{Question 14:} 25th percentile for $\mu$=170, $\sigma$=10
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$Z_{0.25} = -0.674 \text{ (from z-table or R)}$$
+$$X = \mu + Z\sigma = 170 + (-0.674)(10) = \textbf{163.3 cm}$$
+R code: \texttt{qnorm(0.25, 170, 10)}
+
+\vspace{0.5cm}
+
+\textbf{Question 16:} Empirical rule - 95\% range for $\mu$=200, $\sigma$=40
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$\text{95\% of data: } \mu \pm 2\sigma = 200 \pm 2(40) = \textbf{120 to 280 mg/dL}$$
+
+\vspace{0.5cm}
+
+\textbf{Question 17:} P(X $>$ 280) for $\mu$=200, $\sigma$=40
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$Z = \frac{280-200}{40} = 2.0$$
+$$P(X > 280) = P(Z > 2.0) = \textbf{0.0228}$$
+R code: \texttt{pnorm(280, 200, 40, lower.tail=FALSE)}
+
+\vspace{0.5cm}
+
+\textbf{Question 18:} P(BP $>$ 140) for $\mu$=125, $\sigma$=18
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$Z = \frac{140-125}{18} = 0.833$$
+$$P(X > 140) = P(Z > 0.833) = \textbf{0.2024}$$
+R code: \texttt{pnorm(140, 125, 18, lower.tail=FALSE)}
+
+\vspace{0.5cm}
+
+\textbf{Question 19:} Expected number hypertensive in 1000 people
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$\text{Expected} = n \times p = 1000 \times 0.2024 = \textbf{202}$$
+
+\subsection*{Part 3: Sampling Distributions and CLT}
+
+\textbf{Question 20:} Mean of sampling distribution, $\mu$=100, $\sigma$=20, n=25
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$E(\bar{X}) = \mu = \textbf{100}$$
+
+\vspace{0.5cm}
+
+\textbf{Question 21:} Standard error, $\mu$=100, $\sigma$=20, n=25
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$SE = \frac{\sigma}{\sqrt{n}} = \frac{20}{\sqrt{25}} = \frac{20}{5} = \textbf{4}$$
+
+\vspace{0.5cm}
+
+\textbf{Question 22:} Standard error with n=100
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$SE = \frac{\sigma}{\sqrt{n}} = \frac{20}{\sqrt{100}} = \frac{20}{10} = \textbf{2}$$
+
+\vspace{0.5cm}
+
+\textbf{Question 23:} CLT distribution, $\mu$=100, $\sigma$=25, n=64
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$SE = \frac{\sigma}{\sqrt{n}} = \frac{25}{\sqrt{64}} = \frac{25}{8} = 3.125$$
+$$\bar{X} \sim N(100, 3.125^2)$$
+
+\vspace{0.5cm}
+
+\textbf{Question 24:} P($\bar{X}$ $>$ 105), $\mu$=100, SE=3.125
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$Z = \frac{105 - 100}{3.125} = 1.6$$
+$$P(\bar{X} > 105) = P(Z > 1.6) = 0.0548$$
+R code: \texttt{pnorm(105, 100, 3.125, lower.tail=FALSE)}
+
+\vspace{0.5cm}
+
+\textbf{Question 25:} P(97 $<$ $\bar{X}$ $<$ 103), $\mu$=100, SE=3.125
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$Z_1 = \frac{97-100}{3.125} = -0.96, \quad Z_2 = \frac{103-100}{3.125} = 0.96$$
+$$P(97 < \bar{X} < 103) = P(-0.96 < Z < 0.96) = 0.6629$$
+R code: \texttt{pnorm(103, 100, 3.125) - pnorm(97, 100, 3.125)}
+
+\vspace{0.5cm}
+
+\textbf{Question 26:} Standard error, $\sigma$=30, n=36
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$SE = \frac{\sigma}{\sqrt{n}} = \frac{30}{\sqrt{36}} = \frac{30}{6} = 5$$
+
+\vspace{0.5cm}
+
+\textbf{Question 29:} P($\bar{X}$ $<$ 3350), $\mu$=3400, $\sigma$=500, n=100
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$SE = \frac{500}{\sqrt{100}} = 50$$
+$$Z = \frac{3350-3400}{50} = -1.0$$
+$$P(\bar{X} < 3350) = P(Z < -1.0) = 0.1587$$
+R code: \texttt{pnorm(3350, 3400, 50)}
+
+\newpage
+
+\section*{Fill-In Questions - Detailed Solutions}
+
+\subsection*{Question 13: Manual CI Calculation (10 points)}
+
+\textbf{Data:} $\bar{x} = 6.2$, $s = 2.4$, $n = 20$
+
+\textbf{Part a: (2 points)} Should you use a $z$ or $t$ distribution? Why?
+
+\textcolor{correctgreen}{\textbf{Answer:}} Use \textbf{t-distribution} because:
+\begin{itemize}
+\item Population SD ($\sigma$) is unknown
+\item Small sample size ($n = 20 < 30$)
+\end{itemize}
+
+\textbf{Part b: (2 points)} Find the appropriate critical value for a 95\% confidence interval.
+
+\textcolor{correctgreen}{\textbf{Answer:}}
+\begin{itemize}
+\item $df = n - 1 = 19$
+\item $t_{0.975, 19} = \textbf{2.093}$
+\item R code: \texttt{qt(0.975, 19)}
+\end{itemize}
+
+\textbf{Part c: (2 points)} Calculate the standard error.
+
+\textcolor{correctgreen}{\textbf{Answer:}}
+$$SE = \frac{s}{\sqrt{n}} = \frac{2.4}{\sqrt{20}} = \frac{2.4}{4.472} = \textbf{0.536}$$
+
+\textbf{Part d: (2 points)} Calculate the margin of error.
+
+\textcolor{correctgreen}{\textbf{Answer:}}
+$$ME = t_{critical} \times SE = 2.093 \times 0.536 = \textbf{1.122}$$
+
+\textbf{Part e: (2 points)} Construct the 95\% confidence interval.
+
+\textcolor{correctgreen}{\textbf{Answer:}}
+$$CI = \bar{x} \pm ME = 6.2 \pm 1.122 = \textbf{(5.08, 7.32) \text{ points}}$$
+
+\vspace{1cm}
+
+\subsection*{Question 15: CI with R (5 points)}
+
+\textbf{Data:} Cholesterol reduction for 30 patients
+
+\textbf{Part a: (2 points)} Write R code to calculate a 95\% confidence interval using \texttt{t.test()}.
+
+\textcolor{correctgreen}{\textbf{Answer:}}
+\begin{verbatim}
+cholesterol_reduction <- c(28, 32, 25, 30, 27, 35, 22, 29, 31, 26,
+                          24, 33, 28, 30, 27, 29, 31, 25, 28, 32,
+                          26, 30, 29, 27, 34, 28, 31, 25, 29, 30)
+
+result <- t.test(cholesterol_reduction, conf.level = 0.95)
+result$conf.int
+\end{verbatim}
+
+\textbf{Part b: (1 point)} Report the confidence interval.
+
+\textcolor{correctgreen}{\textbf{Answer:}} 95\% CI: \textbf{(27.57, 29.83) mg/dL}
+
+\textbf{Part c: (2 points)} Based on this interval, is there strong evidence that the mean reduction exceeds 25 mg/dL? Explain.
+
+\textcolor{correctgreen}{\textbf{Answer:}} \textbf{Yes}, there is strong evidence. The entire 95\% confidence interval is above 25 mg/dL, so we can be 95\% confident that the true mean exceeds 25 mg/dL.
+
+\newpage
+
+\subsection*{Question 34: Comprehensive Problem (5 points)}
+
+\textbf{Data:} 80 patients, 72 successful, $\bar{x} = 35$ mg/dL, $s = 8$ mg/dL
+
+\textbf{Part a: (2 points)} Calculate a 95\% confidence interval for the true success rate (proportion).
+
+\textcolor{correctgreen}{\textbf{Answer:}}
+\begin{align*}
+\hat{p} &= \frac{72}{80} = 0.90\\
+SE_p &= \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} = \sqrt{\frac{0.90(0.10)}{80}} = 0.0335\\
+CI &= 0.90 \pm 1.96(0.0335) = 0.90 \pm 0.066 = \textbf{(0.834, 0.966)}\\
+&\text{or } \textbf{(83.4\%, 96.6\%)}
+\end{align*}
+
+\textbf{Part b: (2 points)} Calculate a 95\% confidence interval for the true mean cholesterol reduction.
+
+\textcolor{correctgreen}{\textbf{Answer:}}
+\begin{align*}
+SE &= \frac{s}{\sqrt{n}} = \frac{8}{\sqrt{80}} = 0.894\\
+CI &= 35 \pm 1.96(0.894) = 35 \pm 1.752 = \textbf{(33.25, 36.75) \text{ mg/dL}}
+\end{align*}
+
+\textbf{Part c: (1 point)} Write complete R code to perform both calculations and create a visualization.
+
+\textcolor{correctgreen}{\textbf{Answer:}}
+\begin{verbatim}
+# Part a: CI for proportion
+n <- 80
+successes <- 72
+p_hat <- successes / n
+se_p <- sqrt(p_hat * (1 - p_hat) / n)
+ci_prop <- p_hat + c(-1, 1) * 1.96 * se_p
+cat("95% CI for success rate:", round(ci_prop, 3), "\n")
+
+# Part b: CI for mean
+chol_mean <- 35
+chol_sd <- 8
+se_mean <- chol_sd / sqrt(n)
+ci_mean <- chol_mean + c(-1, 1) * 1.96 * se_mean
+cat("95% CI for mean:", round(ci_mean, 2), "mg/dL\n")
+
+# Visualization
+set.seed(123)
+chol_data <- rnorm(80, mean = 35, sd = 8)
+hist(chol_data, main = "Cholesterol Reduction Distribution",
+     xlab = "Reduction (mg/dL)", col = "lightblue", breaks = 15)
+abline(v = ci_mean, col = "red", lwd = 2, lty = 2)
+legend("topright", legend = "95% CI", col = "red", lty = 2, lwd = 2)
+\end{verbatim}
+
+\vspace{1cm}
+
+\subsection*{Question 35: AI Verification and Learning (5 bonus points)}
+
+\textcolor{correctgreen}{\textbf{Grading Notes:}}
+
+\textbf{Part a: (1 point)} Student should provide actual AI prompt and response
+
+\textbf{Part b: (2 points)} Student should verify AI answer step-by-step, identifying any errors
+\begin{itemize}
+\item Step-by-step verification: 1 point
+\item Correctly identifying accuracy/errors: 1 point
+\end{itemize}
+
+\textbf{Part c: (2 points)} Student should evaluate quality of AI's CLT explanation
+\begin{itemize}
+\item Providing AI's explanation: 0.5 points
+\item Thoughtful evaluation of quality: 1 point
+\item Discussion of strengths/weaknesses: 0.5 points
+\end{itemize}
+
+\textbf{Look for:}
+\begin{itemize}
+\item Clear documentation of AI interaction
+\item Critical thinking about AI responses
+\item Understanding of statistical concepts
+\item Ability to verify and evaluate AI output
+\end{itemize}
+
+\newpage
+
+\section*{Quick Reference: Correct Answers Summary}
+
+\textbf{All MC Questions (31 total):} Q1-Q12, Q14, Q16-Q33 - Answer is always \textcolor{correctgreen}{A} for this version
+
+\textbf{Fill-In Questions (4 total):}
+\begin{itemize}
+\item Q13 (10 pts): Manual CI = (5.08, 7.32)
+\item Q15 (5 pts): R-based CI = (27.57, 29.83); Yes, exceeds 25
+\item Q34 (5 pts): Proportion CI = (83.4\%, 96.6\%); Mean CI = (33.25, 36.75)
+\item Q35 (5 pts bonus): Graded based on quality of AI interaction and analysis
+\end{itemize}
+
+\section*{Grading Summary}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Section} & \textbf{Points} & \textbf{Score} \\
+\midrule
+Part 1: Binomial Distribution (Q1-Q8) & 23 & \\
+Part 2: Normal Distribution (Q9-Q12, Q14, Q16-Q19) & 22 & \\
+Part 3: Sampling/CLT (Q20-Q30) & 23 & \\
+Part 4: Manual CI (Q13) & 10 & \\
+Part 4: CI Interpretation (Q31-Q33) & 5 & \\
+Part 4: CI with R (Q15) & 5 & \\
+Part 5: Comprehensive (Q34) & 5 & \\
+Part 5: Formulas/Tables & 7 & \\
+\midrule
+\textbf{Subtotal} & \textbf{100} & \\
+Bonus: AI Learning (Q35) & +5 & \\
+\midrule
+\textbf{Total Possible} & \textbf{105} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Note:} This answer key reflects the updated assignment with 31 multiple choice questions and 4 fill-in questions (including 1 bonus).
+
+\end{document}

@@ -1,0 +1,10 @@
+# At the top of your R script, add:
+# Name: Your Name
+# Date: Today's Date
+# Lab: Week 7 - Nonparametric Methods
+
+# Save your workspace
+save.image("week7_lab.RData")
+
+# To load it later:
+# load("week7_lab.RData")

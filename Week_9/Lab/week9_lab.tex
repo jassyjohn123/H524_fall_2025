@@ -1,0 +1,781 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+\definecolor{codebackground}{RGB}{248,248,248}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+% Configure listings for code display
+\lstset{
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  breakatwhitespace=true,
+  postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+
+% Code environment using tcolorbox with listings
+\newtcblisting{rcode}{
+  colback=white,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=0pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  width=\textwidth,
+  breakable,
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false
+  }
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 9 Lab: Correlation and Simple Linear Regression}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Format:} Online\\
+\textbf{Tools Required:} R, RStudio\\
+\textbf{Estimated Time:} 90 minutes
+
+\section{Learning Objectives}
+
+By the end of this lab, you will be able to:
+\begin{enumerate}
+\item Calculate and interpret Pearson and Spearman correlation coefficients
+\item Test the significance of correlation coefficients
+\item Create scatter plots with informative labels and regression lines
+\item Fit simple linear regression models using \texttt{lm()}
+\item Interpret regression output (coefficients, $R^2$, $p$-values)
+\item Check regression assumptions using diagnostic plots
+\item Make predictions using regression models
+\item Calculate confidence and prediction intervals
+\item \textcolor{aiblue}{\textbf{Use AI tools to help with regression analysis and interpretation}}
+\end{enumerate}
+
+\section{Part 1: Correlation Analysis}
+
+Correlation measures the strength and direction of the linear relationship between two continuous variables.
+
+\subsection{Exercise 1.1: Calculating Correlation}
+
+\textbf{Scenario:} We have data on age and systolic blood pressure for 15 adults.
+
+\begin{rcode}
+# Age and systolic blood pressure data
+age <- c(35, 38, 40, 42, 45, 47, 48, 50, 52, 55, 58, 60, 62, 65, 68)
+sbp <- c(118, 122, 125, 128, 130, 132, 135, 136, 138, 140, 145, 148,
+         150, 155, 158)
+
+# Calculate Pearson correlation coefficient
+cor_result <- cor.test(age, sbp)
+print(cor_result)
+
+# Extract key information
+cat("\nPearson correlation coefficient: r =", round(cor_result$estimate, 3), "\n")
+cat("95% Confidence Interval:", round(cor_result$conf.int, 3), "\n")
+cat("t-statistic:", round(cor_result$statistic, 3), "\n")
+cat("p-value:", format.pval(cor_result$p.value, digits=3), "\n")
+
+# Interpretation
+if(cor_result$p.value < 0.05) {
+  cat("\nConclusion: There is significant evidence of correlation (p < 0.05)\n")
+} else {
+  cat("\nConclusion: No significant evidence of correlation (p >= 0.05)\n")
+}
+\end{rcode}
+
+\textbf{Questions:}
+\begin{enumerate}[label=\alph*)]
+\item What is the value of the correlation coefficient? Is it positive or negative?
+\item What does this tell us about the relationship between age and blood pressure?
+\item Is the correlation statistically significant?
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\subsection{Exercise 1.2: Visualizing Correlation}
+
+Always visualize your data before computing statistics!
+
+\begin{rcode}
+# Create scatter plot
+plot(age, sbp,
+     main = "Systolic Blood Pressure vs. Age",
+     xlab = "Age (years)",
+     ylab = "Systolic BP (mmHg)",
+     pch = 19,
+     col = "blue",
+     cex = 1.2)
+
+# Add grid for easier reading
+grid()
+
+# Add correlation coefficient to plot
+text(40, 155,
+     paste("r =", round(cor(age, sbp), 3)),
+     pos = 4, cex = 1.2, col = "red")
+
+# Optionally, add a lowess smoother to see the trend
+lines(lowess(age, sbp), col = "red", lwd = 2)
+\end{rcode}
+
+\textbf{Observation:} Does the scatter plot support the correlation coefficient you calculated? Do you see a linear trend?
+
+\vspace{1cm}
+
+\subsection{Exercise 1.3: Spearman Correlation}
+
+Spearman correlation is based on ranks and is more robust to outliers.
+
+\begin{rcode}
+# Calculate Spearman correlation
+spearman_result <- cor.test(age, sbp, method = "spearman")
+print(spearman_result)
+
+# Compare Pearson and Spearman
+pearson_r <- cor(age, sbp, method = "pearson")
+spearman_r <- cor(age, sbp, method = "spearman")
+
+cat("\nPearson r:", round(pearson_r, 3), "\n")
+cat("Spearman rho:", round(spearman_r, 3), "\n")
+cat("Difference:", round(abs(pearson_r - spearman_r), 3), "\n")
+\end{rcode}
+
+\textbf{Question:} Why are Pearson and Spearman correlations similar in this case? When would they differ substantially?
+
+\vspace{1.5cm}
+
+\subsection{Exercise 1.4: Effect of Outliers on Correlation}
+
+Let's see how outliers affect correlation.
+
+\begin{rcode}
+# Create data with an outlier
+age_outlier <- c(age, 45)
+sbp_outlier <- c(sbp, 95)  # Unusually low BP for age 45
+
+# Calculate correlations with and without outlier
+r_original <- cor(age, sbp)
+r_outlier <- cor(age_outlier, sbp_outlier)
+
+cat("Original correlation:", round(r_original, 3), "\n")
+cat("With outlier:", round(r_outlier, 3), "\n")
+cat("Change:", round(r_outlier - r_original, 3), "\n")
+
+# Visualize the effect
+par(mfrow = c(1, 2))
+
+# Original data
+plot(age, sbp, main = "Original Data",
+     xlab = "Age", ylab = "SBP", pch = 19, col = "blue")
+text(40, 155, paste("r =", round(r_original, 3)), col = "red")
+
+# With outlier
+plot(age_outlier, sbp_outlier, main = "With Outlier",
+     xlab = "Age", ylab = "SBP", pch = 19, col = "blue")
+points(45, 95, col = "red", pch = 19, cex = 2)  # Highlight outlier
+text(40, 155, paste("r =", round(r_outlier, 3)), col = "red")
+
+par(mfrow = c(1, 1))
+\end{rcode}
+
+\textbf{Key lesson:} Always examine your data visually. A single outlier can dramatically change the correlation!
+
+\vspace{0.5cm}
+
+\section{Part 2: Simple Linear Regression}
+
+Regression allows us to model the relationship and make predictions.
+
+\subsection{Exercise 2.1: Fitting a Regression Model}
+
+\begin{rcode}
+# Fit simple linear regression: sbp ~ age
+model <- lm(sbp ~ age)
+
+# Display full summary
+summary(model)
+
+# Extract key components
+coef_table <- summary(model)$coefficients
+r_squared <- summary(model)$r.squared
+adj_r_squared <- summary(model)$adj.r.squared
+residual_se <- summary(model)$sigma
+
+cat("\n=== Regression Results Summary ===\n")
+cat("Intercept (b0):", round(coef(model)[1], 2), "mmHg\n")
+cat("Slope (b1):", round(coef(model)[2], 2), "mmHg/year\n")
+cat("R-squared:", round(r_squared, 4), "\n")
+cat("Adjusted R-squared:", round(adj_r_squared, 4), "\n")
+cat("Residual standard error:", round(residual_se, 2), "mmHg\n")
+
+# Regression equation
+cat("\nRegression equation:\n")
+cat("SBP =", round(coef(model)[1], 2), "+",
+    round(coef(model)[2], 2), "* Age\n")
+\end{rcode}
+
+\textbf{Interpretation questions:}
+\begin{enumerate}[label=\alph*)]
+\item What is the slope? Interpret it in context.
+\item What is the intercept? Is it meaningful in this context?
+\item What percentage of variability in SBP is explained by age?
+\item Is the relationship statistically significant?
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection{Exercise 2.2: Visualizing the Regression Line}
+
+\begin{rcode}
+# Scatter plot with regression line
+plot(age, sbp,
+     main = "Systolic BP vs. Age with Regression Line",
+     xlab = "Age (years)",
+     ylab = "Systolic BP (mmHg)",
+     pch = 19,
+     col = "blue",
+     cex = 1.2)
+
+# Add regression line
+abline(model, col = "red", lwd = 2)
+
+# Add confidence band
+age_pred <- seq(min(age), max(age), length.out = 100)
+conf_interval <- predict(model,
+                         newdata = data.frame(age = age_pred),
+                         interval = "confidence",
+                         level = 0.95)
+
+# Plot confidence bands
+lines(age_pred, conf_interval[,"lwr"], col = "gray", lty = 2, lwd = 1.5)
+lines(age_pred, conf_interval[,"upr"], col = "gray", lty = 2, lwd = 1.5)
+
+# Add equation to plot
+equation <- paste("SBP =", round(coef(model)[1], 1), "+",
+                  round(coef(model)[2], 2), "* Age")
+text(40, 155, equation, pos = 4, col = "red", cex = 1)
+
+# Add R-squared
+text(40, 150, paste("R-squared =", round(r_squared, 3)),
+     pos = 4, col = "red", cex = 1)
+
+# Add legend
+legend("topleft",
+       legend = c("Observed data", "Regression line", "95% CI"),
+       col = c("blue", "red", "gray"),
+       lty = c(NA, 1, 2),
+       pch = c(19, NA, NA),
+       lwd = c(NA, 2, 1.5))
+\end{rcode}
+
+\subsection{Exercise 2.3: Making Predictions}
+
+\begin{rcode}
+# Predict SBP for specific ages
+new_ages <- data.frame(age = c(45, 55, 65))
+
+# Point predictions
+predictions <- predict(model, newdata = new_ages)
+cat("Point predictions:\n")
+for(i in 1:nrow(new_ages)) {
+  cat("Age", new_ages$age[i], "years: SBP =",
+      round(predictions[i], 1), "mmHg\n")
+}
+
+# Confidence intervals for mean response
+conf_int <- predict(model, newdata = new_ages,
+                    interval = "confidence", level = 0.95)
+cat("\n95% Confidence Intervals (for mean SBP):\n")
+print(round(conf_int, 1))
+
+# Prediction intervals for individual response
+pred_int <- predict(model, newdata = new_ages,
+                    interval = "prediction", level = 0.95)
+cat("\n95% Prediction Intervals (for individual SBP):\n")
+print(round(pred_int, 1))
+
+# Compare widths
+cat("\nNotice: Prediction intervals are WIDER than confidence intervals\n")
+cat("CI width for age 55:", round(conf_int[2,"upr"] - conf_int[2,"lwr"], 1), "mmHg\n")
+cat("PI width for age 55:", round(pred_int[2,"upr"] - pred_int[2,"lwr"], 1), "mmHg\n")
+\end{rcode}
+
+\textbf{Question:} Why are prediction intervals wider than confidence intervals?
+
+\vspace{1.5cm}
+
+\subsection{Exercise 2.4: Checking Regression Assumptions}
+
+Regression requires several assumptions. Let's check them!
+
+\begin{rcode}
+# Create 2x2 panel of diagnostic plots
+par(mfrow = c(2, 2))
+plot(model)
+par(mfrow = c(1, 1))
+
+# Residuals vs Fitted: checks linearity and constant variance
+# Normal Q-Q: checks normality of residuals
+# Scale-Location: checks homoscedasticity
+# Residuals vs Leverage: checks for influential points
+
+# Additional tests
+cat("\n=== Assumption Checks ===\n")
+
+# Test for normality of residuals
+shapiro_test <- shapiro.test(residuals(model))
+cat("\nShapiro-Wilk test for normality:\n")
+cat("W =", round(shapiro_test$statistic, 4),
+    ", p-value =", round(shapiro_test$p.value, 4), "\n")
+if(shapiro_test$p.value > 0.05) {
+  cat("Residuals appear normally distributed (p > 0.05)\n")
+} else {
+  cat("Evidence against normality (p < 0.05)\n")
+}
+
+# Examine residuals
+cat("\nResidual summary:\n")
+print(summary(residuals(model)))
+\end{rcode}
+
+\textbf{What to look for:}
+\begin{itemize}
+\item \textbf{Residuals vs Fitted:} Should show random scatter around zero (no pattern)
+\item \textbf{Normal Q-Q:} Points should follow diagonal line (normality)
+\item \textbf{Scale-Location:} Should show random scatter (constant variance)
+\item \textbf{Residuals vs Leverage:} No points with high leverage and large residuals
+\end{itemize}
+
+\vspace{0.5cm}
+
+\subsection{Exercise 2.5: ANOVA Table for Regression}
+
+\begin{rcode}
+# ANOVA table
+anova_table <- anova(model)
+print(anova_table)
+
+# Extract components
+ss_total <- sum((sbp - mean(sbp))^2)
+ss_regression <- anova_table$`Sum Sq`[1]
+ss_residual <- anova_table$`Sum Sq`[2]
+
+cat("\n=== ANOVA Decomposition ===\n")
+cat("Total SS:", round(ss_total, 2), "\n")
+cat("Regression SS:", round(ss_regression, 2), "\n")
+cat("Residual SS:", round(ss_residual, 2), "\n")
+cat("R-squared = Regression SS / Total SS =",
+    round(ss_regression / ss_total, 4), "\n")
+
+# F-test
+f_stat <- anova_table$`F value`[1]
+p_value <- anova_table$`Pr(>F)`[1]
+cat("\nF-statistic:", round(f_stat, 2), "\n")
+cat("p-value:", format.pval(p_value, digits=3), "\n")
+cat("\nConclusion: The regression model is",
+    ifelse(p_value < 0.05, "significant", "not significant"), "\n")
+\end{rcode}
+
+\section{Part 3: Real-World Examples}
+
+\subsection{Exercise 3.1: Birth Weight and Gestational Age}
+
+\begin{rcode}
+# Simulated data based on realistic values
+set.seed(524)
+gestational_age <- round(runif(50, 32, 42))
+birth_weight <- 150 * gestational_age - 2800 + rnorm(50, 0, 250)
+
+# Create data frame
+birth_data <- data.frame(weeks = gestational_age, weight = birth_weight)
+
+# Summary
+cat("Birth Weight Study\n")
+cat("Sample size:", nrow(birth_data), "\n")
+cat("Gestational age range:", range(birth_data$weeks), "weeks\n")
+cat("Birth weight range:", round(range(birth_data$weight)), "grams\n\n")
+
+# Correlation
+cor_birth <- cor.test(birth_data$weeks, birth_data$weight)
+cat("Pearson correlation: r =", round(cor_birth$estimate, 3), "\n")
+cat("p-value:", format.pval(cor_birth$p.value, digits=3), "\n\n")
+
+# Regression
+model_birth <- lm(weight ~ weeks, data = birth_data)
+summary(model_birth)
+
+# Plot
+plot(birth_data$weeks, birth_data$weight,
+     main = "Birth Weight vs. Gestational Age",
+     xlab = "Gestational Age (weeks)",
+     ylab = "Birth Weight (grams)",
+     pch = 19, col = "darkgreen", cex = 1.2)
+abline(model_birth, col = "red", lwd = 2)
+
+# Add interpretation
+cat("\n=== Clinical Interpretation ===\n")
+cat("Slope:", round(coef(model_birth)[2], 1), "grams per week\n")
+cat("Each additional week of gestation increases birth weight by",
+    round(coef(model_birth)[2], 0), "grams on average\n")
+cat("R-squared:", round(summary(model_birth)$r.squared, 3), "\n")
+cat("Gestational age explains",
+    round(100 * summary(model_birth)$r.squared, 1),
+    "% of variability in birth weight\n")
+\end{rcode}
+
+\textbf{Practice:} Use the model to predict birth weight for babies at 36, 38, and 40 weeks gestation. Include 95\% prediction intervals.
+
+\vspace{2cm}
+
+\subsection{Exercise 3.2: Exercise and Resting Heart Rate}
+
+\begin{rcode}
+# Simulated data
+set.seed(123)
+exercise_sessions <- sample(0:7, 30, replace = TRUE)
+resting_hr <- 78 - 2.5 * exercise_sessions + rnorm(30, 0, 5)
+
+# Create data frame
+hr_data <- data.frame(sessions = exercise_sessions, hr = resting_hr)
+
+# Scatter plot
+plot(hr_data$sessions, hr_data$hr,
+     main = "Resting Heart Rate vs. Exercise Frequency",
+     xlab = "Exercise Sessions per Week",
+     ylab = "Resting Heart Rate (bpm)",
+     pch = 19, col = "purple", cex = 1.2)
+
+# Correlation
+cor_hr <- cor.test(hr_data$sessions, hr_data$hr)
+cat("Correlation: r =", round(cor_hr$estimate, 3), "\n")
+cat("p-value:", format.pval(cor_hr$p.value, digits=3), "\n\n")
+
+# Regression
+model_hr <- lm(hr ~ sessions, data = hr_data)
+summary(model_hr)
+abline(model_hr, col = "red", lwd = 2)
+
+# Interpretation
+cat("\n=== Interpretation ===\n")
+cat("Slope:", round(coef(model_hr)[2], 2), "bpm per session\n")
+cat("Each additional exercise session per week is associated with",
+    abs(round(coef(model_hr)[2], 1)), "bpm decrease in resting heart rate\n")
+
+# Check assumptions
+par(mfrow = c(2, 2))
+plot(model_hr)
+par(mfrow = c(1, 1))
+\end{rcode}
+
+\section{Part 4: Advanced Topics}
+
+\subsection{Exercise 4.1: Comparing Two Regression Models}
+
+\begin{rcode}
+# Compare models with different predictors
+# Example: Height and weight data
+set.seed(456)
+height_cm <- rnorm(40, 170, 10)
+weight_kg <- 0.8 * height_cm - 70 + rnorm(40, 0, 5)
+age_years <- sample(20:60, 40, replace = TRUE)
+
+# Model 1: Weight predicted by height
+model1 <- lm(weight_kg ~ height_cm)
+
+# Model 2: Weight predicted by age
+model2 <- lm(weight_kg ~ age_years)
+
+# Compare R-squared
+cat("Model 1 (Height): R-squared =", round(summary(model1)$r.squared, 3), "\n")
+cat("Model 2 (Age): R-squared =", round(summary(model2)$r.squared, 3), "\n\n")
+
+# Compare AIC (lower is better)
+cat("Model 1 (Height): AIC =", round(AIC(model1), 2), "\n")
+cat("Model 2 (Age): AIC =", round(AIC(model2), 2), "\n\n")
+
+# Visualize both models
+par(mfrow = c(1, 2))
+plot(height_cm, weight_kg, main = "Model 1: Height",
+     xlab = "Height (cm)", ylab = "Weight (kg)", pch = 19)
+abline(model1, col = "red", lwd = 2)
+text(160, 100, paste("R² =", round(summary(model1)$r.squared, 3)))
+
+plot(age_years, weight_kg, main = "Model 2: Age",
+     xlab = "Age (years)", ylab = "Weight (kg)", pch = 19)
+abline(model2, col = "blue", lwd = 2)
+text(25, 100, paste("R² =", round(summary(model2)$r.squared, 3)))
+par(mfrow = c(1, 1))
+\end{rcode}
+
+\subsection{Exercise 4.2: Influence of Sample Size}
+
+\begin{rcode}
+# Demonstrate effect of sample size on inference
+set.seed(789)
+
+sample_sizes <- c(10, 30, 100, 300)
+results <- data.frame(n = sample_sizes, r = NA, p_value = NA,
+                      se_slope = NA, ci_width = NA)
+
+for(i in 1:length(sample_sizes)) {
+  n <- sample_sizes[i]
+
+  # Generate data
+  x <- rnorm(n, 50, 10)
+  y <- 2 + 0.5 * x + rnorm(n, 0, 5)
+
+  # Correlation
+  cor_result <- cor.test(x, y)
+
+  # Regression
+  model_temp <- lm(y ~ x)
+  se_slope <- summary(model_temp)$coefficients[2, "Std. Error"]
+  ci <- confint(model_temp)[2, ]
+  ci_width <- ci[2] - ci[1]
+
+  # Store results
+  results$r[i] <- cor_result$estimate
+  results$p_value[i] <- cor_result$p.value
+  results$se_slope[i] <- se_slope
+  results$ci_width[i] <- ci_width
+}
+
+cat("Effect of Sample Size on Inference:\n\n")
+print(round(results, 4))
+
+cat("\nKey observation: As sample size increases,\n")
+cat("  - Standard errors decrease\n")
+cat("  - Confidence intervals narrow\n")
+cat("  - Power to detect relationships increases\n")
+\end{rcode}
+
+\section{Practice Problems}
+
+\subsection{Problem 1: Cholesterol and Age}
+
+A study examines the relationship between age and total cholesterol in 25 adults.
+
+\begin{rcode}
+# Data
+set.seed(111)
+age_chol <- seq(30, 70, length.out = 25)
+cholesterol <- 160 + 1.2 * age_chol + rnorm(25, 0, 15)
+\end{rcode}
+
+\textbf{Tasks:}
+\begin{enumerate}[label=\alph*)]
+\item Create a scatter plot of cholesterol vs. age
+\item Calculate the Pearson correlation and test its significance
+\item Fit a linear regression model
+\item Interpret the slope in context
+\item Check regression assumptions
+\item Predict cholesterol level for a 50-year-old with 95\% prediction interval
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection{Problem 2: BMI and Blood Pressure}
+
+Examine the relationship between BMI and systolic blood pressure.
+
+\begin{rcode}
+# Data
+set.seed(222)
+bmi <- rnorm(35, 27, 5)
+sbp_bmi <- 95 + 1.8 * bmi + rnorm(35, 0, 8)
+\end{rcode}
+
+\textbf{Tasks:}
+\begin{enumerate}[label=\alph*)]
+\item Calculate correlation and test significance
+\item Fit linear regression
+\item Report the regression equation
+\item What is the predicted SBP for BMI = 30?
+\item Create a plot with regression line and 95\% confidence bands
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection{Problem 3: Comparing Correlations}
+
+Compare the correlation between height and weight for males vs. females.
+
+\begin{rcode}
+# Data
+set.seed(333)
+height_male <- rnorm(25, 178, 8)
+weight_male <- 0.9 * height_male - 75 + rnorm(25, 0, 6)
+
+height_female <- rnorm(25, 165, 7)
+weight_female <- 0.85 * height_female - 65 + rnorm(25, 0, 5)
+\end{rcode}
+
+\textbf{Tasks:}
+\begin{enumerate}[label=\alph*)]
+\item Calculate correlation for males
+\item Calculate correlation for females
+\item Compare the two correlations. Are they similar?
+\item Create side-by-side scatter plots
+\item Fit separate regression models for each group
+\end{enumerate}
+
+\vspace{2cm}
+
+\section{Saving Your Work}
+
+\textbf{IMPORTANT:} Save your R script!
+
+\begin{rcode}
+# At the top of your R script, add:
+# Name: Your Name
+# Date: Today's Date
+# Lab: Week 9 - Correlation and Simple Linear Regression
+
+# Save your workspace
+save.image("week9_lab.RData")
+
+# To load it later:
+# load("week9_lab.RData")
+\end{rcode}
+
+\section{\textcolor{aiblue}{AI-Enhanced Learning Tips}}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,title=Using AI Tools for Regression Analysis]
+
+\textbf{Good prompts for AI assistance:}
+\begin{itemize}
+\item ``Explain the difference between correlation and regression with examples''
+\item ``How do I interpret a regression slope of 1.25 mmHg per year?''
+\item ``Create R code to check regression assumptions with diagnostic plots''
+\item ``What does it mean if residuals show a curved pattern?''
+\item ``Generate scatter plot with regression line and prediction bands''
+\end{itemize}
+
+\textbf{AI can help with:}
+\begin{itemize}
+\item Interpreting regression output
+\item Creating publication-quality plots
+\item Checking assumptions
+\item Troubleshooting R code errors
+\item Understanding confidence vs. prediction intervals
+\item Explaining statistical concepts
+\end{itemize}
+
+\textbf{Remember:}
+\begin{itemize}
+\item Always verify AI-generated results
+\item Check that interpretations make biological sense
+\item Examine plots visually, don't just trust numbers
+\item AI is a learning tool, you are the analyst!
+\end{itemize}
+\end{tcolorbox}
+
+\section{Key Takeaways}
+
+\begin{enumerate}
+\item \textbf{Correlation:} Measures strength and direction of linear relationship ($-1$ to $+1$)
+\item \textbf{Regression:} Models relationship and allows prediction
+\item \textbf{Always visualize:} Scatter plots reveal patterns that statistics might miss
+\item \textbf{Check assumptions:} Use residual plots (linearity, normality, constant variance)
+\item \textbf{Interpret slope in context:} What does 1-unit change in X mean for Y?
+\item \textbf{$R^2$:} Proportion of variance explained (0 to 1)
+\item \textbf{Prediction intervals:} Wider than confidence intervals (account for individual variation)
+\item \textbf{Correlation $\neq$ causation:} Need experiments for causal claims
+\end{enumerate}
+
+\section{R Functions Reference}
+
+\begin{itemize}
+\item \textbf{Correlation:}
+  \begin{itemize}
+  \item \texttt{cor(x, y)} -- Correlation coefficient
+  \item \texttt{cor.test(x, y)} -- Test significance, get CI
+  \item \texttt{cor(x, y, method="spearman")} -- Spearman correlation
+  \end{itemize}
+
+\item \textbf{Regression:}
+  \begin{itemize}
+  \item \texttt{lm(y \textasciitilde\ x)} -- Fit linear model
+  \item \texttt{summary(model)} -- Detailed output
+  \item \texttt{coef(model)} -- Extract coefficients
+  \item \texttt{confint(model)} -- Confidence intervals for coefficients
+  \item \texttt{anova(model)} -- ANOVA table
+  \end{itemize}
+
+\item \textbf{Prediction:}
+  \begin{itemize}
+  \item \texttt{predict(model, newdata)} -- Point predictions
+  \item \texttt{predict(model, newdata, interval="confidence")} -- CI for mean
+  \item \texttt{predict(model, newdata, interval="prediction")} -- PI for individual
+  \end{itemize}
+
+\item \textbf{Diagnostics:}
+  \begin{itemize}
+  \item \texttt{plot(model)} -- Diagnostic plots (residuals, Q-Q, etc.)
+  \item \texttt{residuals(model)} -- Extract residuals
+  \item \texttt{fitted(model)} -- Extract fitted values
+  \item \texttt{shapiro.test(residuals(model))} -- Test normality
+  \end{itemize}
+
+\item \textbf{Plotting:}
+  \begin{itemize}
+  \item \texttt{plot(x, y)} -- Scatter plot
+  \item \texttt{abline(model)} -- Add regression line
+  \item \texttt{lines(x, y)} -- Add lines to existing plot
+  \end{itemize}
+\end{itemize}
+
+\section{Additional Resources}
+
+\begin{itemize}
+\item R Documentation: \texttt{?lm}, \texttt{?cor.test}, \texttt{?predict}
+\item Textbook: Pagano \& Gauvreau, Chapters 17 and 18
+\item Quick-R: Linear Regression (\url{https://www.statmethods.net/stats/regression.html})
+\item R for Data Science: \url{https://r4ds.had.co.nz/}
+\end{itemize}
+
+\end{document}

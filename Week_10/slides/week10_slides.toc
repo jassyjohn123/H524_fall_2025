@@ -1,0 +1,10 @@
+\beamer@sectionintoc {1}{Review from Week 9}{3}{0}{1}
+\beamer@sectionintoc {2}{Regression Assumptions}{5}{0}{2}
+\beamer@sectionintoc {3}{Diagnostic Plots}{7}{0}{3}
+\beamer@sectionintoc {4}{Outliers and Influential Points}{12}{0}{4}
+\beamer@sectionintoc {5}{Transformations}{15}{0}{5}
+\beamer@sectionintoc {6}{Hypothesis Testing and Confidence Intervals}{20}{0}{6}
+\beamer@sectionintoc {7}{Presenting Statistical Results}{24}{0}{7}
+\beamer@sectionintoc {8}{Case Study: Complete Analysis}{29}{0}{8}
+\beamer@sectionintoc {9}{AI for Statistical Communication}{36}{0}{9}
+\beamer@sectionintoc {10}{Final Project Guidance}{41}{0}{10}

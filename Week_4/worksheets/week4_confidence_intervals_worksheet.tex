@@ -1,0 +1,417 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+
+% Define OSU orange and AI blue colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large Week 4 In-Class Worksheet}}\\
+\textcolor{white}{\textbf{\large Confidence Intervals}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Name:} \rule{8cm}{0.4pt} \hfill \textbf{Date:} \rule{4cm}{0.4pt}\\[0.5ex]
+\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Confidence Intervals for Means and Proportions
+
+\vspace{8pt}
+
+\section*{Instructions}
+Work with a partner to solve the following problems. Show all your work, including formulas and calculations. You may use R to verify your answers, but demonstrate your understanding by showing the steps manually first.
+
+\vspace{12pt}
+
+\section{Problem 1: CI for Population Mean}
+
+A clinical trial tests a new pain medication on 20 patients. The pain reduction scores (on a 0-100 scale) have:
+\begin{itemize}
+\item Sample mean: $\bar{x} = 42.5$ points
+\item Sample standard deviation: $s = 8.6$ points
+\item Sample size: $n = 20$
+\end{itemize}
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate the standard error of the mean.
+
+\vspace{0.3cm}
+
+\textbf{Formula:} $\text{SE} = \frac{s}{\sqrt{n}}$
+
+\vspace{2.5cm}
+
+\textbf{Part B:} Find the critical value for a 95\% confidence interval.
+
+\vspace{0.3cm}
+
+Degrees of freedom: $\text{df} = n - 1 = $
+
+\vspace{0.5cm}
+
+Critical value from t-distribution: $t_{0.975, \text{df}} = $ \hspace{1cm} (Use R: \texttt{qt(0.975, df)} or t-table)
+
+\vspace{2cm}
+
+\textbf{Part C:} Calculate the margin of error.
+
+\vspace{0.3cm}
+
+\textbf{Formula:} $\text{ME} = t_{\text{critical}} \times \text{SE}$
+
+\vspace{2.5cm}
+
+\textbf{Part D:} Construct the 95\% confidence interval.
+
+\vspace{0.3cm}
+
+\textbf{Formula:} $\text{CI} = \bar{x} \pm \text{ME}$
+
+\vspace{2.5cm}
+
+\textbf{Part E:} Write a complete interpretation of your confidence interval in context.
+
+\vspace{3cm}
+
+\newpage
+
+\section{Problem 2: Effect of Confidence Level}
+
+Using the same pain medication data from Problem 1 ($n=20$, $\bar{x}=42.5$, $s=8.6$):
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate a 90\% confidence interval.
+
+\vspace{0.3cm}
+
+Critical value: $t_{0.95, 19} = $ \hspace{1cm} (Use R: \texttt{qt(0.95, 19)})
+
+\vspace{0.5cm}
+
+Margin of error:
+
+\vspace{2cm}
+
+90\% CI:
+
+\vspace{2cm}
+
+\textbf{Part B:} Calculate a 99\% confidence interval.
+
+\vspace{0.3cm}
+
+Critical value: $t_{0.995, 19} = $ \hspace{1cm} (Use R: \texttt{qt(0.995, 19)})
+
+\vspace{0.5cm}
+
+Margin of error:
+
+\vspace{2cm}
+
+99\% CI:
+
+\vspace{2cm}
+
+\textbf{Part C:} Compare the three intervals (90\%, 95\%, 99\%). What pattern do you observe? Explain why this makes sense.
+
+\vspace{3cm}
+
+\textbf{Part D:} If you needed to be very confident about your estimate (e.g., for a safety-critical decision), which confidence level would you choose? What is the trade-off?
+
+\vspace{3cm}
+
+\newpage
+
+\section{Problem 3: CI for a Proportion}
+
+A vaccine trial tests 250 participants. Of these, 218 developed protective antibodies.
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate the sample proportion $\hat{p}$.
+
+\vspace{0.3cm}
+
+$\hat{p} = \frac{x}{n} = $
+
+\vspace{1.5cm}
+
+\textbf{Part B:} Check whether the normal approximation is appropriate.
+
+\vspace{0.3cm}
+
+Condition 1: $n\hat{p} = $
+
+\vspace{1cm}
+
+Condition 2: $n(1-\hat{p}) = $
+
+\vspace{1cm}
+
+Are both $\geq 10$? \hspace{2cm} Can we proceed?
+
+\vspace{1.5cm}
+
+\textbf{Part C:} Calculate the standard error for the proportion.
+
+\vspace{0.3cm}
+
+\textbf{Formula:} $\text{SE} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$
+
+\vspace{2.5cm}
+
+\textbf{Part D:} Calculate a 95\% confidence interval for the true proportion.
+
+\vspace{0.3cm}
+
+Critical value: $z_{0.975} = 1.96$
+
+\vspace{0.5cm}
+
+Margin of error: $\text{ME} = z \times \text{SE} = $
+
+\vspace{2cm}
+
+95\% CI:
+
+\vspace{2cm}
+
+Express as a percentage: \hspace{2cm} ( \hspace{2cm} \%, \hspace{2cm} \% )
+
+\vspace{1.5cm}
+
+\textbf{Part E:} Interpret this interval in the context of vaccine efficacy.
+
+\vspace{3cm}
+
+\newpage
+
+\section{Problem 4: Sample Size Planning}
+
+You are planning a study to estimate the mean cholesterol level in a population.
+
+\vspace{6pt}
+
+\textbf{Given information:}
+\begin{itemize}
+\item From prior studies, you estimate $\sigma \approx 40$ mg/dL
+\item You want a 95\% confidence interval
+\item You want the margin of error to be no more than 6 mg/dL
+\end{itemize}
+
+\vspace{6pt}
+
+\textbf{Part A:} What critical value will you use for planning?
+
+\vspace{0.3cm}
+
+For 95\% confidence: $z_{0.975} = $
+
+\vspace{1.5cm}
+
+\textbf{Part B:} Calculate the required sample size.
+
+\vspace{0.3cm}
+
+\textbf{Formula:} $n = \left(\frac{z \times \sigma}{\text{ME}}\right)^2$
+
+\vspace{3cm}
+
+Remember to round UP to the next whole number!
+
+\vspace{0.3cm}
+
+Required sample size: $n = $
+
+\vspace{1.5cm}
+
+\textbf{Part C:} What if you wanted a margin of error of only 4 mg/dL instead? Calculate the new required sample size.
+
+\vspace{3cm}
+
+\textbf{Part D:} Compare your answers from Parts B and C. What happens to the required sample size when you reduce the margin of error from 6 to 4? Why?
+
+\vspace{3cm}
+
+\newpage
+
+\section{Problem 5: Comparing Two CIs}
+
+A researcher measures vitamin D levels (ng/mL) in two different samples:
+
+\vspace{0.3cm}
+
+\textbf{Sample A:} $n = 15$, $\bar{x} = 28.4$, $s = 6.2$
+
+\textbf{Sample B:} $n = 50$, $\bar{x} = 28.4$, $s = 6.2$
+
+\vspace{6pt}
+
+Notice: Both samples have the same mean and SD, but different sample sizes.
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate the standard error for each sample.
+
+\vspace{0.3cm}
+
+Sample A: $\text{SE}_A = $
+
+\vspace{2cm}
+
+Sample B: $\text{SE}_B = $
+
+\vspace{2cm}
+
+\textbf{Part B:} Find the critical values for 95\% CIs.
+
+\vspace{0.3cm}
+
+Sample A ($\text{df} = 14$): $t_{0.975, 14} = $ \hspace{1cm} (Use R or table)
+
+\vspace{1cm}
+
+Sample B ($\text{df} = 49$): $t_{0.975, 49} = $ \hspace{1cm} (Use R or table)
+
+\vspace{1cm}
+
+Note: For large df, $t \approx 1.96$
+
+\vspace{1cm}
+
+\textbf{Part C:} Calculate 95\% confidence intervals for both samples.
+
+\vspace{0.3cm}
+
+Sample A (n=15):
+
+\vspace{3cm}
+
+Sample B (n=50):
+
+\vspace{3cm}
+
+\textbf{Part D:} Which confidence interval is narrower? Explain why, relating your answer to the concept of standard error.
+
+\vspace{3.5cm}
+
+\textbf{Part E:} Both intervals are estimating the same population parameter. What does this tell you about the relationship between sample size and precision?
+
+\vspace{3cm}
+
+\newpage
+
+\section{Problem 6: Integration Problem - Blood Pressure Study}
+
+A pharmaceutical company is testing a new blood pressure medication. They measure the change in systolic blood pressure (mmHg) for 36 patients after 8 weeks of treatment. The data show:
+
+\begin{itemize}
+\item Mean reduction: $\bar{x} = 12.8$ mmHg
+\item Standard deviation: $s = 5.4$ mmHg
+\item Sample size: $n = 36$
+\end{itemize}
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate a 95\% confidence interval for the true mean blood pressure reduction.
+
+\vspace{0.3cm}
+
+\textbf{Step 1:} Standard error
+
+\vspace{2cm}
+
+\textbf{Step 2:} Critical value ($\text{df} = 35$)
+
+\vspace{1.5cm}
+
+\textbf{Step 3:} Margin of error
+
+\vspace{2cm}
+
+\textbf{Step 4:} Confidence interval
+
+\vspace{2cm}
+
+\textbf{Part B:} The company wants to claim that the medication reduces blood pressure by more than 10 mmHg on average. Based on your confidence interval, can they make this claim with confidence? Explain.
+
+\vspace{3cm}
+
+\textbf{Part C:} If they wanted to estimate the mean reduction with a margin of error of only 1.5 mmHg (using the same confidence level), approximately how many patients would they need in the study? Use $\sigma \approx 5.4$ from this pilot study.
+
+\vspace{4cm}
+
+\textbf{Part D:} Suppose the company now wants to estimate the \textit{proportion} of patients who achieve at least a 15 mmHg reduction. In the pilot study, 20 out of 36 patients achieved this level of reduction. Calculate a 95\% CI for this proportion.
+
+\vspace{0.3cm}
+
+Check conditions:
+
+\vspace{1.5cm}
+
+Calculate CI:
+
+\vspace{4cm}
+
+\newpage
+
+\section*{Reflection Questions}
+
+\textbf{1.} In your own words, explain what a 95\% confidence interval means. What does the ``95\%'' refer to?
+
+\vspace{3cm}
+
+\textbf{2.} Why do we use the t-distribution instead of the normal (Z) distribution when calculating confidence intervals for a mean? When would we use Z instead?
+
+\vspace{3cm}
+
+\textbf{3.} A wider confidence interval is less precise. What are the three main factors that affect how wide a confidence interval is? For each factor, explain how it affects width.
+
+\vspace{4cm}
+
+\textbf{4.} When planning a study, why is it important to determine sample size ahead of time? What information do you need to calculate required sample size?
+
+\vspace{3cm}
+
+\textbf{5.} Compare confidence intervals for means vs. proportions:
+\begin{itemize}
+\item What's the same?
+\item What's different?
+\item When would you use each one?
+\end{itemize}
+
+\vspace{3cm}
+
+\section*{R Verification (Optional)}
+
+Use R to verify your calculations for any of the problems above. Write the R code you used:
+
+\vspace{4cm}
+
+\end{document}

@@ -1,0 +1,775 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+\definecolor{codebackground}{RGB}{248,248,248}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+% Configure listings for code display
+\lstset{
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  breakatwhitespace=true,
+  postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+
+% Code environment using tcolorbox with listings
+\newtcblisting{rcode}{
+  colback=white,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=0pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  width=\textwidth,
+  breakable,
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false
+  }
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 4 Lab: Confidence Intervals}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Format:} Online\\
+\textbf{Tools Required:} R, RStudio\\
+\textbf{Estimated Time:} 90 minutes
+
+\section{Learning Objectives}
+
+By the end of this lab, you will be able to:
+\begin{enumerate}
+\item Calculate confidence intervals for a population mean using t-distribution
+\item Use \texttt{t.test()} in R to compute CIs efficiently
+\item Calculate and interpret confidence intervals for proportions
+\item Understand how sample size, variability, and confidence level affect CI width
+\item Determine required sample sizes for desired precision
+\item Check normality assumptions using diagnostic plots
+\item Visualize confidence intervals and their interpretation
+\item \textcolor{aiblue}{\textbf{Use AI tools to help with CI calculations and interpretation}}
+\end{enumerate}
+
+\section{Part 1: Confidence Intervals for the Mean}
+
+Confidence intervals provide a range of plausible values for an unknown population parameter. For a population mean with unknown variance, we use the t-distribution.
+
+\subsection{Exercise 1.1: Manual CI Calculation}
+
+\textbf{Scenario:} A study measures systolic blood pressure in 25 hypertensive patients.
+
+\begin{rcode}
+# Blood pressure data (mmHg)
+bp_data <- c(128, 132, 125, 138, 130, 135, 127, 140, 129, 133,
+             136, 126, 131, 134, 137, 142, 124, 139, 128, 135,
+             130, 141, 127, 133, 136)
+
+# Step 1: Calculate sample statistics
+n <- length(bp_data)
+xbar <- mean(bp_data)
+s <- sd(bp_data)
+
+cat("Sample size (n):", n, "\n")
+cat("Sample mean:", round(xbar, 2), "mmHg\n")
+cat("Sample SD:", round(s, 3), "mmHg\n\n")
+
+# Step 2: Calculate standard error
+se <- s / sqrt(n)
+cat("Standard error:", round(se, 3), "mmHg\n\n")
+
+# Step 3: Find critical value from t-distribution
+df <- n - 1
+conf_level <- 0.95
+alpha <- 1 - conf_level
+t_crit <- qt(1 - alpha/2, df)
+
+cat("Degrees of freedom:", df, "\n")
+cat("Confidence level:", conf_level*100, "%\n")
+cat("t critical value:", round(t_crit, 4), "\n\n")
+
+# Step 4: Calculate margin of error
+margin_error <- t_crit * se
+cat("Margin of error:", round(margin_error, 3), "mmHg\n\n")
+
+# Step 5: Construct confidence interval
+ci_lower <- xbar - margin_error
+ci_upper <- xbar + margin_error
+
+cat("95% Confidence Interval:\n")
+cat("(", round(ci_lower, 2), ", ", round(ci_upper, 2), ") mmHg\n", sep="")
+\end{rcode}
+
+\textbf{Interpretation:} We are 95\% confident that the true mean systolic blood pressure for hypertensive patients is between the lower and upper bounds.
+
+\vspace{0.5cm}
+
+\textbf{Your turn:} What would happen to the CI if we used 90\% confidence instead? Calculate it below:
+
+\vspace{2cm}
+
+\subsection{Exercise 1.2: Using t.test() for CIs}
+
+The \texttt{t.test()} function provides an easier way to calculate confidence intervals.
+
+\begin{rcode}
+# Same blood pressure data
+# Use t.test() to get 95% CI
+result <- t.test(bp_data, conf.level=0.95)
+
+# Display the full output
+print(result)
+
+# Extract just the confidence interval
+ci <- result$conf.int
+cat("\n95% CI from t.test():", round(ci, 2), "\n")
+
+# Compare with manual calculation
+cat("Manual CI: (", round(ci_lower, 2), ", ", round(ci_upper, 2), ")\n", sep="")
+cat("t.test CI: (", round(ci[1], 2), ", ", round(ci[2], 2), ")\n", sep="")
+cat("These should match!\n")
+\end{rcode}
+
+\textbf{Advantages of t.test():}
+\begin{itemize}
+\item Simpler and faster
+\item Less chance of calculation errors
+\item Provides additional information (mean, t-statistic, p-value)
+\item Easy to change confidence level
+\end{itemize}
+
+\subsection{Exercise 1.3: Different Confidence Levels}
+
+Let's see how the confidence level affects the interval width.
+
+\begin{rcode}
+# Pain reduction scores from a clinical trial
+pain_reduction <- c(42, 38, 51, 45, 39, 48, 44, 50, 43, 47,
+                    41, 46, 49, 40, 52, 37, 45, 48, 42, 44)
+
+# Calculate sample mean
+mean_reduction <- mean(pain_reduction)
+cat("Sample mean pain reduction:", round(mean_reduction, 2), "points\n\n")
+
+# Calculate CIs for different confidence levels
+conf_levels <- c(0.90, 0.95, 0.99)
+
+for (conf in conf_levels) {
+  result <- t.test(pain_reduction, conf.level=conf)
+  ci <- result$conf.int
+  width <- ci[2] - ci[1]
+
+  cat(conf*100, "% CI: (", round(ci[1], 2), ", ", round(ci[2], 2),
+      ")  Width = ", round(width, 2), "\n", sep="")
+}
+
+cat("\nNotice: Higher confidence = wider interval\n")
+cat("Trade-off: More confidence means less precision\n")
+\end{rcode}
+
+\textbf{Question:} Why does higher confidence require a wider interval? Discuss with your partner.
+
+\vspace{2cm}
+
+\subsection{Exercise 1.4: Effect of Sample Size}
+
+Sample size has a major impact on CI width. Let's demonstrate this.
+
+\begin{rcode}
+# Simulate the effect of sample size on CI width
+set.seed(524)
+
+# Population parameters (true values)
+true_mean <- 100
+true_sd <- 20
+
+# Different sample sizes
+sample_sizes <- c(10, 25, 50, 100, 200)
+
+cat("Effect of Sample Size on 95% CI Width\n")
+cat("(Population: mean=100, SD=20)\n\n")
+
+results <- data.frame(n=sample_sizes,
+                      CI_lower=NA, CI_upper=NA,
+                      width=NA, SE=NA)
+
+for (i in 1:length(sample_sizes)) {
+  n <- sample_sizes[i]
+
+  # Draw a sample
+  sample_data <- rnorm(n, mean=true_mean, sd=true_sd)
+
+  # Calculate CI
+  result <- t.test(sample_data, conf.level=0.95)
+  ci <- result$conf.int
+
+  # Store results
+  results$CI_lower[i] <- ci[1]
+  results$CI_upper[i] <- ci[2]
+  results$width[i] <- ci[2] - ci[1]
+  results$SE[i] <- sd(sample_data) / sqrt(n)
+
+  cat("n =", sprintf("%3d", n),
+      "  SE =", sprintf("%5.2f", results$SE[i]),
+      "  95% CI: (", round(ci[1], 1), ", ", round(ci[2], 1), ")",
+      "  Width =", round(results$width[i], 1), "\n", sep="")
+}
+
+cat("\nObservation: Larger n gives narrower (more precise) CIs\n")
+cat("SE decreases as 1/sqrt(n)\n")
+\end{rcode}
+
+\textbf{Question:} How much would you need to increase the sample size to cut the CI width in half?
+
+\vspace{2cm}
+
+\section{Part 2: Checking Assumptions}
+
+The t-interval requires that the data come from an approximately normal distribution (or that $n$ is large enough for CLT).
+
+\subsection{Exercise 2.1: Visual Checks for Normality}
+
+\begin{rcode}
+# Cholesterol data
+cholesterol <- c(205, 198, 220, 185, 210, 195, 225, 200, 215, 192,
+                 208, 196, 218, 203, 212, 189, 207, 201, 213, 199,
+                 223, 191, 206, 214, 197)
+
+# Create diagnostic plots
+par(mfrow=c(1,3))  # 1 row, 3 columns
+
+# 1. Histogram
+hist(cholesterol, breaks=10, col="lightblue", border="white",
+     main="Histogram", xlab="Cholesterol (mg/dL)",
+     freq=FALSE)  # density scale
+
+# Overlay normal curve
+xfit <- seq(min(cholesterol), max(cholesterol), length=100)
+yfit <- dnorm(xfit, mean=mean(cholesterol), sd=sd(cholesterol))
+lines(xfit, yfit, col="red", lwd=2)
+
+# 2. Boxplot (check for outliers)
+boxplot(cholesterol, col="lightgreen",
+        main="Boxplot", ylab="Cholesterol (mg/dL)")
+
+# 3. Q-Q plot (most important!)
+qqnorm(cholesterol, main="Q-Q Plot", pch=19, col="blue")
+qqline(cholesterol, col="red", lwd=2)
+
+par(mfrow=c(1,1))  # Reset layout
+
+# Interpretation guide
+cat("\nAssessing Normality:\n")
+cat("- Histogram: Should be roughly bell-shaped\n")
+cat("- Boxplot: Check for extreme outliers\n")
+cat("- Q-Q plot: Points should fall on the line\n")
+cat("  (slight deviations at ends are OK)\n")
+\end{rcode}
+
+\textbf{Assessment:} Based on these plots, do the cholesterol data appear approximately normal?
+
+\vspace{2cm}
+
+\subsection{Exercise 2.2: Shapiro-Wilk Test}
+
+A formal statistical test for normality.
+
+\begin{rcode}
+# Shapiro-Wilk test
+shapiro_result <- shapiro.test(cholesterol)
+
+cat("Shapiro-Wilk Test for Normality\n")
+cat("H0: Data come from a normal distribution\n\n")
+cat("Test statistic W:", round(shapiro_result$statistic, 4), "\n")
+cat("P-value:", round(shapiro_result$p.value, 4), "\n\n")
+
+if (shapiro_result$p.value > 0.05) {
+  cat("Conclusion: No evidence against normality (p > 0.05)\n")
+  cat("Safe to use t-interval\n")
+} else {
+  cat("Conclusion: Evidence of non-normality (p < 0.05)\n")
+  cat("Consider: transformation or larger sample size\n")
+}
+\end{rcode}
+
+\textbf{Note:} With large samples, the test becomes very sensitive and may reject normality for trivial departures. Visual inspection is often more useful.
+
+\subsection{Exercise 2.3: Robustness of t-Interval}
+
+The t-interval is fairly robust to mild departures from normality, especially with larger samples.
+
+\begin{rcode}
+# Demonstrate robustness with slightly skewed data
+set.seed(123)
+
+# Generate right-skewed data (exponential)
+skewed_data <- rexp(30, rate=0.1)
+
+# Check normality
+par(mfrow=c(1,2))
+hist(skewed_data, breaks=10, col="lightcoral", border="white",
+     main="Skewed Data", xlab="Value")
+qqnorm(skewed_data, main="Q-Q Plot", pch=19)
+qqline(skewed_data, col="red", lwd=2)
+par(mfrow=c(1,1))
+
+# Calculate CI anyway (n=30 is borderline)
+result <- t.test(skewed_data, conf.level=0.95)
+cat("\n95% CI for skewed data:", round(result$conf.int, 2), "\n")
+cat("Sample mean:", round(mean(skewed_data), 2), "\n")
+
+# Shapiro test
+cat("\nShapiro test p-value:", round(shapiro.test(skewed_data)$p.value, 4), "\n")
+cat("\nWith n=30, t-interval is reasonably robust\n")
+cat("For severe skewness or n<15, consider alternatives\n")
+\end{rcode}
+
+\section{Part 3: Confidence Intervals for Proportions}
+
+When the outcome is binary (success/failure), we estimate a population proportion.
+
+\subsection{Exercise 3.1: Basic CI for Proportion}
+
+\begin{rcode}
+# Vaccine efficacy study
+# 174 out of 200 developed immunity
+n <- 200
+x <- 174  # Number of successes
+p_hat <- x / n
+
+cat("Sample proportion:", p_hat, "\n")
+cat("Percentage:", p_hat*100, "%\n\n")
+
+# Check conditions for normal approximation
+cat("Checking conditions:\n")
+cat("n*p_hat =", n*p_hat, "(should be >= 10)\n")
+cat("n*(1-p_hat) =", n*(1-p_hat), "(should be >= 10)\n")
+
+if (n*p_hat >= 10 && n*(1-p_hat) >= 10) {
+  cat("Conditions met! Can use normal approximation.\n\n")
+} else {
+  cat("Conditions NOT met. Use exact methods.\n\n")
+}
+
+# Calculate standard error for proportion
+se_prop <- sqrt(p_hat * (1 - p_hat) / n)
+cat("Standard error:", round(se_prop, 4), "\n\n")
+
+# 95% CI using normal approximation
+z_crit <- qnorm(0.975)  # 1.96
+margin <- z_crit * se_prop
+
+ci_lower <- p_hat - margin
+ci_upper <- p_hat + margin
+
+cat("95% Confidence Interval for proportion:\n")
+cat("(", round(ci_lower, 4), ", ", round(ci_upper, 4), ")\n", sep="")
+cat("Or: (", round(ci_lower*100, 2), "%, ", round(ci_upper*100, 2), "%)\n", sep="")
+
+# Alternative: use prop.test()
+prop_result <- prop.test(x, n, conf.level=0.95, correct=FALSE)
+cat("\nUsing prop.test():\n")
+print(prop_result$conf.int)
+\end{rcode}
+
+\textbf{Interpretation:} We are 95\% confident that the true vaccine efficacy is between the lower and upper bounds.
+
+\subsection{Exercise 3.2: Disease Prevalence}
+
+\begin{rcode}
+# Diabetes screening study
+# 65 out of 500 adults test positive
+n_screen <- 500
+positive <- 65
+prevalence <- positive / n_screen
+
+cat("Sample prevalence:", prevalence, "\n")
+cat("As percentage:", prevalence*100, "%\n\n")
+
+# Calculate 95% CI
+se_prev <- sqrt(prevalence * (1 - prevalence) / n_screen)
+z <- 1.96
+
+ci_prev_lower <- prevalence - z * se_prev
+ci_prev_upper <- prevalence + z * se_prev
+
+cat("95% CI for prevalence:\n")
+cat("(", round(ci_prev_lower*100, 2), "%, ",
+    round(ci_prev_upper*100, 2), "%)\n", sep="")
+
+# Using prop.test
+prop.test(positive, n_screen, conf.level=0.95, correct=FALSE)
+\end{rcode}
+
+\textbf{Your turn:} If 150 out of 400 patients responded to treatment, calculate the 95\% CI for the response rate.
+
+\vspace{3cm}
+
+\section{Part 4: Sample Size Determination}
+
+Before conducting a study, we need to determine how many subjects to recruit.
+
+\subsection{Exercise 4.1: Sample Size for Estimating a Mean}
+
+\begin{rcode}
+# Function to calculate required sample size
+sample_size_mean <- function(sigma, margin_error, conf_level=0.95) {
+  alpha <- 1 - conf_level
+  z_crit <- qnorm(1 - alpha/2)
+
+  n <- (z_crit * sigma / margin_error)^2
+
+  return(ceiling(n))  # Always round up!
+}
+
+# Example: Cholesterol study
+# Want margin of error = 5 mg/dL
+# Literature suggests SD = 40 mg/dL
+
+sigma_est <- 40
+me_desired <- 5
+
+n_required <- sample_size_mean(sigma_est, me_desired, 0.95)
+
+cat("Sample Size Calculation\n")
+cat("=======================\n")
+cat("Estimated population SD:", sigma_est, "mg/dL\n")
+cat("Desired margin of error:", me_desired, "mg/dL\n")
+cat("Confidence level: 95%\n\n")
+cat("Required sample size:", n_required, "\n")
+\end{rcode}
+
+\subsection{Exercise 4.2: How Margin of Error Affects Sample Size}
+
+\begin{rcode}
+# Blood pressure study planning
+# Assume SD = 15 mmHg
+
+sigma_bp <- 15
+
+# Try different margins of error
+margins <- c(2, 3, 4, 5, 10)
+
+cat("Blood Pressure Study Planning\n")
+cat("(Estimated SD = 15 mmHg, 95% confidence)\n\n")
+cat("Desired ME    Required n\n")
+cat("----------    ----------\n")
+
+for (me in margins) {
+  n <- sample_size_mean(sigma_bp, me, 0.95)
+  cat(sprintf("%5d mmHg", me), "       ", sprintf("%4d", n), "\n")
+}
+
+cat("\nKey insight: To halve ME, need 4x the sample size!\n")
+\end{rcode}
+
+\subsection{Exercise 4.3: Sample Size for Proportion}
+
+\begin{rcode}
+# Function for proportion sample size
+sample_size_prop <- function(p, margin_error, conf_level=0.95) {
+  alpha <- 1 - conf_level
+  z_crit <- qnorm(1 - alpha/2)
+
+  n <- (z_crit / margin_error)^2 * p * (1 - p)
+
+  return(ceiling(n))
+}
+
+# Prevalence study
+# Want ME = 0.03 (3 percentage points)
+
+me_prev <- 0.03
+
+# Scenario 1: No prior information (use p=0.5 - conservative)
+n_conservative <- sample_size_prop(0.5, me_prev, 0.95)
+
+# Scenario 2: Prior studies suggest p = 0.15
+n_informed <- sample_size_prop(0.15, me_prev, 0.95)
+
+cat("Sample Size for Prevalence Study\n")
+cat("(Desired ME = 3%, 95% confidence)\n\n")
+cat("Conservative (p=0.5):", n_conservative, "subjects\n")
+cat("Informed (p=0.15):", n_informed, "subjects\n\n")
+cat("Savings from prior information:", n_conservative - n_informed, "subjects\n")
+
+# Show how p affects required n
+cat("\nEffect of assumed proportion:\n")
+proportions <- c(0.1, 0.2, 0.3, 0.4, 0.5)
+for (p in proportions) {
+  n <- sample_size_prop(p, me_prev, 0.95)
+  cat("p =", p, " -> n =", n, "\n")
+}
+cat("\np=0.5 gives maximum n (most conservative)\n")
+\end{rcode}
+
+\section{Part 5: Visualizing Confidence Intervals}
+
+Understanding what confidence intervals mean through simulation.
+
+\subsection{Exercise 5.1: The Meaning of 95\% Confidence}
+
+\begin{rcode}
+# Simulate many samples and their CIs
+set.seed(524)
+
+true_mean <- 100   # True population mean (usually unknown!)
+true_sd <- 15      # True population SD
+sample_size <- 25
+num_samples <- 20  # Draw 20 different samples
+
+# Storage
+ci_results <- data.frame(sample_num=1:num_samples,
+                         lower=NA, upper=NA,
+                         sample_mean=NA,
+                         contains_true_mean=NA)
+
+# Draw samples and calculate CIs
+for (i in 1:num_samples) {
+  # Draw a random sample
+  sample_data <- rnorm(sample_size, mean=true_mean, sd=true_sd)
+
+  # Calculate CI
+  result <- t.test(sample_data, conf.level=0.95)
+  ci <- result$conf.int
+
+  # Store results
+  ci_results$lower[i] <- ci[1]
+  ci_results$upper[i] <- ci[2]
+  ci_results$sample_mean[i] <- mean(sample_data)
+  ci_results$contains_true_mean[i] <- (ci[1] <= true_mean) & (true_mean <= ci[2])
+}
+
+# How many CIs contain the true mean?
+num_contain <- sum(ci_results$contains_true_mean)
+cat("Out of", num_samples, "confidence intervals,",
+    num_contain, "contain the true mean\n")
+cat("Percentage:", round(num_contain/num_samples*100, 1), "%\n")
+cat("Expected: ~95%\n")
+\end{rcode}
+
+\subsection{Exercise 5.2: Plotting Multiple CIs}
+
+\begin{rcode}
+# Visualize the confidence intervals
+plot(NULL, xlim=c(85, 115), ylim=c(0, num_samples+1),
+     xlab="Value", ylab="Sample Number",
+     main="20 Confidence Intervals (95% level)")
+
+# Add vertical line at true mean
+abline(v=true_mean, col="blue", lwd=2, lty=1)
+
+# Draw each CI
+for (i in 1:num_samples) {
+  # Color: green if contains true mean, red if doesn't
+  color <- ifelse(ci_results$contains_true_mean[i],
+                  "darkgreen", "red")
+
+  # Draw horizontal line for CI
+  segments(ci_results$lower[i], i,
+           ci_results$upper[i], i,
+           col=color, lwd=2)
+
+  # Add point at sample mean
+  points(ci_results$sample_mean[i], i,
+         pch=19, col=color, cex=0.8)
+}
+
+# Add legend
+legend("topleft",
+       legend=c("True mean", "Contains true mean", "Misses true mean"),
+       col=c("blue", "darkgreen", "red"),
+       lty=c(1, 1, 1), lwd=c(2, 2, 2))
+
+text(115, num_samples,
+     paste(num_contain, "out of", num_samples),
+     pos=2, col="darkgreen", font=2)
+\end{rcode}
+
+\textbf{Key insight:} The confidence level (95\%) refers to the long-run frequency. In repeated sampling, 95\% of intervals will contain the true parameter.
+
+\section{Practice Problems}
+
+\subsection{Problem 1: Clinical Trial}
+
+A new drug for lowering cholesterol is tested on 30 patients. The mean reduction is 28 mg/dL with SD = 12 mg/dL.
+
+\begin{enumerate}[label=\alph*)]
+\item Calculate a 95\% confidence interval for the true mean reduction
+\item Calculate a 99\% confidence interval
+\item Interpret both intervals in context
+\item If the goal was a reduction of at least 25 mg/dL, what does your CI tell you?
+\end{enumerate}
+
+\vspace{3cm}
+
+\subsection{Problem 2: Adverse Events}
+
+In a safety trial, 8 out of 150 patients experienced adverse events.
+
+\begin{enumerate}[label=\alph*)]
+\item Check whether normal approximation is appropriate
+\item Calculate a 95\% CI for the true proportion of adverse events
+\item Express your answer as a percentage
+\end{enumerate}
+
+\vspace{3cm}
+
+\subsection{Problem 3: Study Planning}
+
+You're planning a study to estimate mean body temperature with 95\% confidence.
+
+\begin{enumerate}[label=\alph*)]
+\item If you want margin of error = 0.2°F and you estimate SD = 0.7°F, how many subjects do you need?
+\item What if you want ME = 0.1°F instead?
+\item How does doubling precision affect required sample size?
+\end{enumerate}
+
+\vspace{3cm}
+
+\subsection{Problem 4: Assumption Checking}
+
+Load this dataset and check normality assumptions:
+
+\begin{rcode}
+reaction_times <- c(245, 267, 289, 234, 256, 278, 298, 241,
+                    263, 287, 312, 338, 229, 251, 273)
+
+# Create histogram, boxplot, and Q-Q plot
+# Run Shapiro-Wilk test
+# Assess whether t-interval is appropriate
+\end{rcode}
+
+\vspace{3cm}
+
+\section{\textcolor{aiblue}{AI-Enhanced Learning Tips}}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,title=Using AI Tools for Confidence Intervals]
+
+\textbf{Good prompts for AI assistance:}
+\begin{itemize}
+\item ``Calculate a 95\% CI for mean given n=20, mean=45, SD=8''
+\item ``Show me step-by-step how to compute margin of error''
+\item ``What sample size do I need for ME=3 if SD=15 at 95\% confidence?''
+\item ``Explain why we use t-distribution instead of normal distribution''
+\item ``Create R code to check normality with histogram and Q-Q plot''
+\item ``How do I interpret a confidence interval for a clinical audience?''
+\end{itemize}
+
+\textbf{AI can help with:}
+\begin{itemize}
+\item Step-by-step CI calculations
+\item Explaining when to use different methods (t vs Z, mean vs proportion)
+\item Generating diagnostic plots
+\item Sample size calculations
+\item Writing proper interpretations
+\item Debugging R code errors
+\end{itemize}
+
+\textbf{Verification checklist:}
+\begin{itemize}
+\item Check that AI used correct formula (t for mean with unknown SD)
+\item Verify degrees of freedom are correct (n-1)
+\item Ensure critical value matches confidence level
+\item Confirm standard error calculation
+\item Cross-check with \texttt{t.test()} output
+\end{itemize}
+
+\textbf{Practice prompt:}
+``I have cholesterol data from 25 patients: mean=205, SD=42. Calculate a 95\% CI step-by-step, explain each step, and show how to verify it in R using t.test().''
+\end{tcolorbox}
+
+\section{Key Takeaways}
+
+\begin{enumerate}
+\item \textbf{t-Interval for mean:} $\bar{x} \pm t_{\alpha/2, n-1} \times \frac{s}{\sqrt{n}}$
+  \begin{itemize}
+  \item Use when population SD is unknown (almost always!)
+  \item Requires approximate normality or large n ($\geq$ 30)
+  \end{itemize}
+
+\item \textbf{CI for proportion:} $\hat{p} \pm z_{\alpha/2} \times \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$
+  \begin{itemize}
+  \item Requires $n\hat{p} \geq 10$ and $n(1-\hat{p}) \geq 10$
+  \item Uses normal (Z) distribution
+  \end{itemize}
+
+\item \textbf{Factors affecting CI width:}
+  \begin{itemize}
+  \item Larger n $\to$ narrower CI (more precise)
+  \item Larger s $\to$ wider CI (less precise)
+  \item Higher confidence $\to$ wider CI (more certain)
+  \end{itemize}
+
+\item \textbf{Interpretation:} ``We are 95\% confident that the true population parameter is between [lower, upper]''
+
+\item \textbf{Sample size:} $n = \left(\frac{z \times \sigma}{\text{ME}}\right)^2$ (always round up!)
+
+\item \textbf{R functions:}
+  \begin{itemize}
+  \item \texttt{t.test(data, conf.level=0.95)} - CI for mean
+  \item \texttt{prop.test(x, n, conf.level=0.95)} - CI for proportion
+  \item \texttt{qt(p, df)} - t critical values
+  \item \texttt{qnorm(p)} - Z critical values
+  \end{itemize}
+\end{enumerate}
+
+\section{Saving Your Work}
+
+\begin{rcode}
+# Save your workspace
+save.image("week4_lab.RData")
+
+# To load later:
+# load("week4_lab.RData")
+
+# Save your R script with header:
+# Name: Your Name
+# Date: Today's Date
+# Lab: Week 4 - Confidence Intervals
+\end{rcode}
+
+\end{document}

@@ -169,13 +169,6 @@ sum(patient_data$has_diabetes)
 # What proportion have diabetes?
 mean(patient_data$has_diabetes)
 
-pdt %>%
-  select(patient_id, age, systolic_bp) %>%
-  summarize(
-    mean_age = mean(age),
-    mean_systolic = mean(systolic_bp)
-  )
-
 # ============================================================================
 # PART 4: INTRODUCTION TO PROBABILITY IN R
 # ============================================================================

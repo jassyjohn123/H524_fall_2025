@@ -1,0 +1,1288 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Define custom colors for AI slides
+\definecolor{AIBlue}{RGB}{30, 144, 255}
+\definecolor{AILightBlue}{RGB}{173, 216, 230}
+\definecolor{AINavy}{RGB}{25, 25, 112}
+
+% Commands to switch to AI color scheme
+\newcommand{\AIcolors}{%
+  \setbeamercolor{frametitle}{bg=AIBlue,fg=white}%
+  \setbeamercolor{title}{bg=AINavy,fg=white}%
+  \setbeamercolor{structure}{fg=AIBlue}%
+  \setbeamercolor{item}{fg=AINavy}%
+  \setbeamercolor{normal text}{fg=black}%
+}
+
+% Command to restore default colors
+\newcommand{\defaultcolors}{%
+  \setbeamercolor{frametitle}{bg=osaorange,fg=white}%
+  \setbeamercolor{title}{bg=osaorange,fg=white}%
+  \setbeamercolor{structure}{fg=osaorange}%
+  \setbeamercolor{item}{fg=black}%
+  \setbeamercolor{normal text}{fg=black}%
+}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Set colors
+\setbeamercolor{structure}{fg=osaorange}
+\setbeamercolor{title}{fg=white,bg=osaorange}
+\setbeamercolor{frametitle}{fg=white,bg=osaorange}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\title{H524 Introduction to Biostatistics}
+\subtitle{Week 9: Correlation and Simple Linear Regression}
+\author{Dr. John Molitor}
+\institute{Oregon State University\\College of Health}
+\date{Fall 2025}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Review and Introduction}
+
+\begin{frame}
+\frametitle{What We've Learned So Far}
+\textbf{Weeks 1-8 covered:}
+\begin{itemize}
+\item Descriptive statistics and data visualization
+\item Probability and diagnostic testing
+\item Sampling distributions and Central Limit Theorem
+\item Confidence intervals
+\item Hypothesis testing (one-sample, two-sample, paired)
+\item ANOVA (comparing multiple groups)
+\item Categorical data analysis (chi-square tests)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{This Week:} Relationships between continuous variables
+\begin{itemize}
+\item How do two variables relate to each other?
+\item Can we predict one variable from another?
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Reading:} Pagano \& Gauvreau Chapters 17 and 18
+\end{frame}
+
+\begin{frame}
+\frametitle{New Questions We Can Answer}
+\textbf{Previous weeks:} Comparisons between groups
+\begin{itemize}
+\item Is mean cholesterol different between treatment groups?
+\item Is smoking status associated with lung cancer?
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{This week:} Relationships between continuous variables
+\begin{itemize}
+\item How is systolic blood pressure related to age?
+\item Can we predict birth weight from gestational age?
+\item Is there a relationship between BMI and cholesterol?
+\item How strong is the association between height and weight?
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Key concepts:}
+\begin{itemize}
+\item \textbf{Correlation:} Measure strength and direction of linear relationship
+\item \textbf{Regression:} Predict one variable from another
+\end{itemize}
+\end{frame}
+
+\section{Correlation (Chapter 17)}
+
+\begin{frame}
+\frametitle{What is Correlation?}
+\textbf{Correlation:} A measure of the linear association between two continuous variables
+
+\vspace{0.5cm}
+\textbf{Key characteristics:}
+\begin{itemize}
+\item Measures strength and direction of relationship
+\item Ranges from $-1$ to $+1$
+\item $r = 0$: No linear relationship
+\item $r = +1$: Perfect positive linear relationship
+\item $r = -1$: Perfect negative linear relationship
+\item $|r| > 0.7$: Strong correlation
+\item $|r| = 0.3$ to $0.7$: Moderate correlation
+\item $|r| < 0.3$: Weak correlation
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Important:} Correlation measures LINEAR relationships only
+\begin{itemize}
+\item Two variables can be strongly related but have $r \approx 0$ if relationship is nonlinear
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Visualizing Correlation}
+\textbf{Scatter plots reveal the relationship:}
+
+\vspace{0.3cm}
+\begin{itemize}
+\item \textbf{Positive correlation:} As X increases, Y increases
+  \begin{itemize}
+  \item Example: Height and weight
+  \item Points trend upward from left to right
+  \end{itemize}
+
+\vspace{0.3cm}
+\item \textbf{Negative correlation:} As X increases, Y decreases
+  \begin{itemize}
+  \item Example: Exercise frequency and resting heart rate
+  \item Points trend downward from left to right
+  \end{itemize}
+
+\vspace{0.3cm}
+\item \textbf{No correlation:} No clear pattern
+  \begin{itemize}
+  \item Example: Shoe size and IQ
+  \item Points scattered randomly
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Always plot your data first!} Summary statistics can mislead without visualization.
+\end{frame}
+
+\begin{frame}
+\frametitle{Pearson Correlation Coefficient}
+\textbf{Most common correlation measure: Pearson's $r$}
+
+\vspace{0.3cm}
+\textbf{Formula:}
+$$r = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2} \sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}}$$
+
+Alternative formula:
+$$r = \frac{1}{n-1} \sum_{i=1}^{n} \left(\frac{x_i - \bar{x}}{s_x}\right) \left(\frac{y_i - \bar{y}}{s_y}\right)$$
+
+\vspace{0.3cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item $r$ measures how consistently X and Y vary together
+\item Standardized measure (unitless)
+\item Symmetric: $r_{xy} = r_{yx}$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{In R:} \texttt{cor(x, y)} or \texttt{cor.test(x, y)}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Age and Systolic Blood Pressure}
+\textbf{Research question:} Is blood pressure related to age?
+
+\vspace{0.3cm}
+\textbf{Data:} 15 adults aged 30-70 years
+
+\begin{center}
+\begin{tabular}{ccc|ccc}
+\toprule
+Subject & Age & SBP & Subject & Age & SBP \\
+\midrule
+1 & 35 & 118 & 9 & 52 & 138 \\
+2 & 38 & 122 & 10 & 55 & 140 \\
+3 & 40 & 125 & 11 & 58 & 145 \\
+4 & 42 & 128 & 12 & 60 & 148 \\
+5 & 45 & 130 & 13 & 62 & 150 \\
+6 & 47 & 132 & 14 & 65 & 155 \\
+7 & 48 & 135 & 15 & 68 & 158 \\
+8 & 50 & 136 & & & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Pearson correlation:} $r = 0.98$ (very strong positive)
+
+\textbf{Interpretation:} Age and systolic BP are strongly positively correlated
+\end{frame}
+
+\begin{frame}
+\frametitle{Testing Correlation Significance}
+\textbf{Question:} Is the observed correlation statistically significant, or could it be due to chance?
+
+\vspace{0.3cm}
+\textbf{Hypotheses:}
+\begin{itemize}
+\item $H_0: \rho = 0$ (population correlation is zero)
+\item $H_A: \rho \neq 0$ (population correlation is not zero)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Test statistic:}
+$$t = \frac{r\sqrt{n-2}}{\sqrt{1-r^2}} \sim t_{n-2}$$
+
+\vspace{0.3cm}
+\textbf{Example: Age and BP}
+\begin{itemize}
+\item $r = 0.98$, $n = 15$
+\item $t = \frac{0.98\sqrt{13}}{\sqrt{1-0.98^2}} = \frac{3.535}{0.199} = 17.76$
+\item $df = 13$, $p < 0.001$
+\item \textbf{Conclusion:} Very strong evidence of positive correlation
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{In R:} \texttt{cor.test(age, sbp)} provides $r$, $t$, $p$-value, and CI
+\end{frame}
+
+\begin{frame}
+\frametitle{Assumptions for Pearson Correlation}
+\textbf{For valid inference, we assume:}
+
+\begin{enumerate}
+\item \textbf{Bivariate normality:} (X, Y) follow a bivariate normal distribution
+  \begin{itemize}
+  \item Each variable approximately normal
+  \item Joint distribution is elliptical
+  \end{itemize}
+
+\item \textbf{Linear relationship:} Association is linear
+  \begin{itemize}
+  \item Check with scatter plot
+  \item Pearson $r$ may miss nonlinear patterns
+  \end{itemize}
+
+\item \textbf{No extreme outliers:} Outliers strongly influence $r$
+  \begin{itemize}
+  \item Single outlier can create or destroy correlation
+  \item Always examine scatter plot
+  \end{itemize}
+
+\item \textbf{Random sample:} Observations independently sampled
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{If assumptions violated:} Consider Spearman's rank correlation (more robust)
+\end{frame}
+
+\begin{frame}
+\frametitle{Spearman's Rank Correlation}
+\textbf{Alternative to Pearson:} Based on ranks, not raw values
+
+\vspace{0.3cm}
+\textbf{When to use Spearman's $r_s$:}
+\begin{itemize}
+\item Relationship is monotonic but not linear
+\item Data contain outliers
+\item Data are ordinal (ranks)
+\item Distribution is highly skewed
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Method:}
+\begin{enumerate}
+\item Rank X values: $1, 2, 3, \ldots, n$
+\item Rank Y values: $1, 2, 3, \ldots, n$
+\item Calculate Pearson correlation on ranks
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Properties:}
+\begin{itemize}
+\item Ranges from $-1$ to $+1$
+\item Less sensitive to outliers than Pearson $r$
+\item Detects monotonic (not just linear) relationships
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{In R:} \texttt{cor(x, y, method="spearman")}
+\end{frame}
+
+\begin{frame}
+\frametitle{Correlation vs. Causation}
+\textbf{CRITICAL WARNING:}
+
+\vspace{0.3cm}
+\begin{center}
+\Large{\textbf{Correlation does NOT imply causation!}}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Examples of spurious correlations:}
+\begin{itemize}
+\item Ice cream sales and drowning deaths (both increase in summer)
+\item Number of fire trucks and damage from fires (both higher for big fires)
+\item Shoe size and reading ability in children (both increase with age)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Possible explanations for correlation:}
+\begin{enumerate}
+\item X causes Y
+\item Y causes X
+\item Both X and Y caused by third variable (confounding)
+\item Coincidence
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{To establish causation:} Need randomized controlled experiments, not just observational correlations
+\end{frame}
+
+\begin{frame}
+\frametitle{Important Properties of Correlation}
+\textbf{What correlation tells us:}
+\begin{itemize}
+\item Strength of linear relationship
+\item Direction (positive or negative)
+\item Statistical significance
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{What correlation does NOT tell us:}
+\begin{itemize}
+\item Causation (as discussed)
+\item The form of the relationship (linear? exponential?)
+\item How to predict Y from X
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Key limitations:}
+\begin{itemize}
+\item Sensitive to outliers
+\item Only measures linear relationships
+\item Same $r$ can arise from very different scatter plots
+\item Restricted range reduces correlation
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Coefficient of determination:} $r^2$
+\begin{itemize}
+\item Proportion of variability in Y explained by X
+\item Example: $r = 0.80$ means $r^2 = 0.64$ (64\% of variance explained)
+\end{itemize}
+\end{frame}
+
+\section{Simple Linear Regression (Chapter 18)}
+
+\begin{frame}
+\frametitle{From Correlation to Regression}
+\textbf{Correlation:} Measures strength of relationship (symmetric)
+
+\vspace{0.3cm}
+\textbf{Regression:} Models relationship to make predictions (asymmetric)
+
+\vspace{0.5cm}
+\textbf{Simple linear regression:}
+\begin{itemize}
+\item One response variable (Y): outcome we want to predict
+\item One predictor variable (X): variable we use for prediction
+\item Assumes linear relationship: $Y = \beta_0 + \beta_1 X + \epsilon$
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Goals of regression:}
+\begin{enumerate}
+\item Describe relationship between X and Y
+\item Estimate the effect of X on Y
+\item Predict Y for given values of X
+\item Test hypotheses about the relationship
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Example:} Predict birth weight (Y) from gestational age (X)
+\end{frame}
+
+\begin{frame}
+\frametitle{The Simple Linear Regression Model}
+\textbf{Population model:}
+$$Y_i = \beta_0 + \beta_1 X_i + \epsilon_i$$
+
+where:
+\begin{itemize}
+\item $Y_i$: Response variable for subject $i$
+\item $X_i$: Predictor variable for subject $i$
+\item $\beta_0$: Population intercept (value of Y when X = 0)
+\item $\beta_1$: Population slope (change in Y per unit change in X)
+\item $\epsilon_i$: Random error term, $\epsilon_i \sim N(0, \sigma^2)$
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Sample regression line (fitted model):}
+$$\hat{Y}_i = b_0 + b_1 X_i$$
+
+where:
+\begin{itemize}
+\item $\hat{Y}_i$: Predicted value of Y for subject $i$
+\item $b_0$: Sample estimate of $\beta_0$
+\item $b_1$: Sample estimate of $\beta_1$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Interpreting Regression Coefficients}
+\textbf{Intercept ($b_0$):}
+\begin{itemize}
+\item Predicted value of Y when X = 0
+\item May not be meaningful if X = 0 is outside observed range
+\item Example: Birth weight when gestational age = 0 weeks (nonsensical)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Slope ($b_1$):}
+\begin{itemize}
+\item Change in Y for each 1-unit increase in X
+\item Most important parameter
+\item \textbf{Example:} $b_1 = 100$ g/week
+  \begin{itemize}
+  \item Each additional week of gestation increases birth weight by 100 g
+  \item 3 weeks longer gestation $\Rightarrow$ 300 g heavier baby (on average)
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Key point:} Slope quantifies the relationship
+\begin{itemize}
+\item $b_1 > 0$: Positive relationship
+\item $b_1 < 0$: Negative relationship
+\item $b_1 = 0$: No linear relationship
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Least Squares Estimation}
+\textbf{How do we find the best-fitting line?}
+
+\vspace{0.3cm}
+\textbf{Method of least squares:} Minimize sum of squared residuals
+
+\vspace{0.3cm}
+\textbf{Residual:} $e_i = Y_i - \hat{Y}_i$ (observed $-$ predicted)
+
+\vspace{0.3cm}
+\textbf{Objective:} Minimize $\sum_{i=1}^{n} e_i^2 = \sum_{i=1}^{n} (Y_i - \hat{Y}_i)^2$
+
+\vspace{0.5cm}
+\textbf{Formulas for estimates:}
+$$b_1 = \frac{\sum_{i=1}^{n}(X_i - \bar{X})(Y_i - \bar{Y})}{\sum_{i=1}^{n}(X_i - \bar{X})^2} = r \times \frac{s_Y}{s_X}$$
+
+$$b_0 = \bar{Y} - b_1 \bar{X}$$
+
+\vspace{0.3cm}
+\textbf{Properties:}
+\begin{itemize}
+\item Regression line always passes through $(\bar{X}, \bar{Y})$
+\item Unique solution (one best-fitting line)
+\item Sum of residuals equals zero: $\sum e_i = 0$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Age and Blood Pressure Regression}
+\textbf{Data:} Age (X) and systolic BP (Y) from 15 adults
+
+\vspace{0.3cm}
+\textbf{Summary statistics:}
+\begin{itemize}
+\item $\bar{X} = 50$ years, $s_X = 10.49$ years
+\item $\bar{Y} = 138$ mmHg, $s_Y = 13.42$ mmHg
+\item $r = 0.98$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Calculate slope:}
+$$b_1 = r \times \frac{s_Y}{s_X} = 0.98 \times \frac{13.42}{10.49} = 1.25 \text{ mmHg/year}$$
+
+\textbf{Calculate intercept:}
+$$b_0 = \bar{Y} - b_1 \bar{X} = 138 - 1.25(50) = 75.5 \text{ mmHg}$$
+
+\vspace{0.3cm}
+\textbf{Regression equation:}
+$$\widehat{\text{SBP}} = 75.5 + 1.25 \times \text{Age}$$
+
+\textbf{Interpretation:} For each additional year of age, systolic BP increases by 1.25 mmHg on average
+\end{frame}
+
+\begin{frame}
+\frametitle{Making Predictions}
+\textbf{Using the regression equation for prediction:}
+$$\widehat{\text{SBP}} = 75.5 + 1.25 \times \text{Age}$$
+
+\vspace{0.3cm}
+\textbf{Example predictions:}
+\begin{itemize}
+\item Age 40: $\widehat{\text{SBP}} = 75.5 + 1.25(40) = 125.5$ mmHg
+\item Age 55: $\widehat{\text{SBP}} = 75.5 + 1.25(55) = 144.3$ mmHg
+\item Age 70: $\widehat{\text{SBP}} = 75.5 + 1.25(70) = 163.0$ mmHg
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Cautions about prediction:}
+\begin{itemize}
+\item \textbf{Interpolation:} Predictions within range of observed X (safe)
+\item \textbf{Extrapolation:} Predictions outside range of observed X (risky!)
+  \begin{itemize}
+  \item Age 20: $\widehat{\text{SBP}} = 75.5 + 1.25(20) = 100.5$ mmHg (OK if reasonable)
+  \item Age 100: $\widehat{\text{SBP}} = 75.5 + 1.25(100) = 200.5$ mmHg (unreliable!)
+  \end{itemize}
+\item Relationship may not hold outside observed range
+\item Always check if prediction is in plausible range
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Residuals and Residual Plots}
+\textbf{Residual:} Difference between observed and predicted
+$$e_i = Y_i - \hat{Y}_i$$
+
+\vspace{0.3cm}
+\textbf{Why residuals matter:}
+\begin{itemize}
+\item Measure quality of fit
+\item Check regression assumptions
+\item Identify outliers and influential points
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Residual plot:} Plot $e_i$ vs. $\hat{Y}_i$ (or vs. $X_i$)
+
+\vspace{0.3cm}
+\textbf{What to look for:}
+\begin{itemize}
+\item \textbf{Good:} Random scatter around zero, constant spread
+\item \textbf{Problem:} Curved pattern (nonlinearity)
+\item \textbf{Problem:} Funnel shape (non-constant variance)
+\item \textbf{Problem:} Extreme outliers
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Always examine residual plots!} They reveal model inadequacies
+\end{frame}
+
+\begin{frame}
+\frametitle{Assessing Model Fit: $R^2$}
+\textbf{Coefficient of determination:} $R^2$
+
+\vspace{0.3cm}
+$$R^2 = \frac{\text{SS}_{\text{regression}}}{\text{SS}_{\text{total}}} = 1 - \frac{\text{SS}_{\text{residual}}}{\text{SS}_{\text{total}}}$$
+
+For simple linear regression: $R^2 = r^2$
+
+\vspace{0.5cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item Proportion of variability in Y explained by X
+\item Ranges from 0 to 1 (or 0\% to 100\%)
+\item $R^2 = 0$: X explains none of the variability in Y
+\item $R^2 = 1$: X explains all of the variability in Y (perfect fit)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Example: Age and BP}
+\begin{itemize}
+\item $r = 0.98$, so $R^2 = 0.98^2 = 0.96$ or 96\%
+\item Age explains 96\% of the variability in systolic BP
+\item Remaining 4\% due to other factors (genetics, diet, exercise, etc.)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression Assumptions}
+\textbf{For valid inference, we assume:}
+
+\begin{enumerate}
+\item \textbf{Linearity:} True relationship between X and Y is linear
+  \begin{itemize}
+  \item Check with scatter plot and residual plot
+  \end{itemize}
+
+\item \textbf{Independence:} Observations are independent
+  \begin{itemize}
+  \item Violated by clustered or repeated measures data
+  \end{itemize}
+
+\item \textbf{Normality:} Residuals are normally distributed
+  \begin{itemize}
+  \item Check with Q-Q plot or histogram of residuals
+  \item Less critical for large samples (CLT)
+  \end{itemize}
+
+\item \textbf{Constant variance (homoscedasticity):} Spread of residuals is constant
+  \begin{itemize}
+  \item Check with residual plot
+  \item No funnel shape
+  \end{itemize}
+
+\item \textbf{No influential outliers:} Extreme points can distort fit
+  \begin{itemize}
+  \item Check with residual plot and leverage diagnostics
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Inference for Regression Slope}
+\textbf{Key question:} Is there a significant linear relationship between X and Y?
+
+\vspace{0.3cm}
+\textbf{Hypotheses:}
+\begin{itemize}
+\item $H_0: \beta_1 = 0$ (no linear relationship)
+\item $H_A: \beta_1 \neq 0$ (linear relationship exists)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Test statistic:}
+$$t = \frac{b_1 - 0}{\text{SE}(b_1)} \sim t_{n-2}$$
+
+where $\text{SE}(b_1) = \frac{s}{\sqrt{\sum(X_i - \bar{X})^2}}$ and $s = \sqrt{\frac{\sum e_i^2}{n-2}}$ is the residual standard error
+
+\vspace{0.3cm}
+\textbf{Confidence interval for $\beta_1$:}
+$$b_1 \pm t_{n-2, \alpha/2} \times \text{SE}(b_1)$$
+
+\vspace{0.3cm}
+\textbf{Note:} In simple linear regression, testing $\beta_1 = 0$ is equivalent to testing $\rho = 0$
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Testing Age-BP Relationship}
+\textbf{Regression output from R:}
+
+\begin{center}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+& Estimate & Std. Error & t value & $p$-value \\
+\midrule
+Intercept & 75.5 & 4.23 & 17.85 & $<0.001$ \\
+Age & 1.25 & 0.083 & 15.06 & $<0.001$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Residual standard error: 2.84 mmHg\\
+$R^2 = 0.946$, Adjusted $R^2 = 0.942$
+
+\vspace{0.3cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item $b_1 = 1.25$ mmHg/year (95\% CI: 1.07 to 1.43)
+\item $t = 15.06$ with $df = 13$, $p < 0.001$
+\item Very strong evidence that age is associated with systolic BP
+\item For each year increase in age, SBP increases by 1.25 mmHg (95\% CI: 1.07 to 1.43)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{In R:} \texttt{summary(lm(sbp \textasciitilde\ age))}
+\end{frame}
+
+\begin{frame}
+\frametitle{ANOVA for Regression}
+\textbf{Analysis of Variance decomposes total variability:}
+
+$$\text{SS}_{\text{total}} = \text{SS}_{\text{regression}} + \text{SS}_{\text{residual}}$$
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+Source & df & SS & MS & F \\
+\midrule
+Regression & 1 & 1823.7 & 1823.7 & 226.8 \\
+Residual & 13 & 104.5 & 8.04 & \\
+\midrule
+Total & 14 & 1928.2 & & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{F-test:}
+$$F = \frac{\text{MS}_{\text{regression}}}{\text{MS}_{\text{residual}}} = \frac{1823.7}{8.04} = 226.8$$
+
+$p < 0.001$: Strong evidence that the regression model is significant
+
+\vspace{0.3cm}
+\textbf{Note:} For simple linear regression, $F = t^2$ and both tests are equivalent
+\end{frame}
+
+\begin{frame}
+\frametitle{Prediction Intervals}
+\textbf{Two types of intervals for predictions:}
+
+\vspace{0.3cm}
+\textbf{1. Confidence interval for mean response:}
+\begin{itemize}
+\item Estimates the mean Y for a given X
+\item Narrower interval
+\item ``What is the average BP for all 55-year-olds?''
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{2. Prediction interval for individual response:}
+\begin{itemize}
+\item Predicts Y for a specific individual at given X
+\item Wider interval (accounts for individual variation)
+\item ``What BP will this specific 55-year-old have?''
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Both intervals:}
+\begin{itemize}
+\item Are narrowest at $\bar{X}$
+\item Widen as we move away from $\bar{X}$
+\item Should not be used for extrapolation
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{In R:} \texttt{predict(model, newdata, interval="confidence")} or \texttt{interval="prediction"}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Prediction Intervals}
+\textbf{For a 55-year-old:}
+
+\vspace{0.3cm}
+Point prediction: $\widehat{\text{SBP}} = 75.5 + 1.25(55) = 144.3$ mmHg
+
+\vspace{0.5cm}
+\textbf{95\% Confidence interval for mean SBP:}
+\begin{itemize}
+\item Estimates average SBP for all 55-year-olds
+\item CI: (142.8, 145.8) mmHg
+\item Relatively narrow (2-3 mmHg)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{95\% Prediction interval for individual SBP:}
+\begin{itemize}
+\item Predicts SBP for one specific 55-year-old
+\item PI: (138.0, 150.6) mmHg
+\item Much wider (12-13 mmHg)
+\item Accounts for individual variation around the mean
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Interpretation:} We're 95\% confident this individual's SBP will be between 138 and 151 mmHg
+\end{frame}
+
+\begin{frame}
+\frametitle{Transformations in Regression}
+\textbf{When assumptions are violated:} Consider transforming variables
+
+\vspace{0.3cm}
+\textbf{Common transformations:}
+\begin{itemize}
+\item \textbf{Log transformation:} For right-skewed data or multiplicative relationships
+  \begin{itemize}
+  \item $\log(Y)$ vs. $X$: Exponential growth/decay
+  \item $Y$ vs. $\log(X)$: Logarithmic relationship
+  \item $\log(Y)$ vs. $\log(X)$: Power relationship
+  \end{itemize}
+
+\item \textbf{Square root:} For count data or moderate skewness
+  \begin{itemize}
+  \item $\sqrt{Y}$ vs. $X$
+  \end{itemize}
+
+\item \textbf{Reciprocal:} For hyperbolic relationships
+  \begin{itemize}
+  \item $1/Y$ vs. $X$
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Benefits:}
+\begin{itemize}
+\item Linearize relationship
+\item Stabilize variance
+\item Improve normality of residuals
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Caution:} Interpretation changes with transformed variables
+\end{frame}
+
+\section{AI as a Learning Tool for Regression}
+
+\AIcolors
+\begin{frame}
+\frametitle{AI for Regression Analysis}
+\textbf{How AI can help this week:}
+\begin{itemize}
+\item \textbf{Code generation:} Create regression models in R
+\item \textbf{Interpretation:} Explain regression output
+\item \textbf{Diagnostics:} Generate residual plots and check assumptions
+\item \textbf{Visualization:} Create scatter plots with regression lines
+\item \textbf{Predictions:} Calculate predictions and intervals
+\item \textbf{Conceptual help:} Clarify difference between correlation and regression
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Example prompts:}
+\begin{itemize}
+\item ``Create R code to fit linear regression of weight on height, plot results''
+\item ``Explain how to interpret regression slope in context of my data''
+\item ``Generate residual plots to check regression assumptions''
+\item ``Calculate 95\% prediction interval for new observation''
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Fitting Regression Model}
+\textbf{Prompt:} ``Fit linear regression of systolic BP on age in R''
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+# Sample data: age and systolic BP
+age <- c(35, 38, 40, 42, 45, 47, 48, 50, 52, 55, 58, 60, 62, 65, 68)
+sbp <- c(118, 122, 125, 128, 130, 132, 135, 136, 138, 140, 145, 148,
+         150, 155, 158)
+
+# Fit linear regression model
+model <- lm(sbp ~ age)
+
+# Display regression summary
+summary(model)
+
+# Extract key information
+cat("Regression equation:\n")
+cat("SBP =", round(coef(model)[1], 2), "+",
+    round(coef(model)[2], 2), "* Age\n\n")
+
+# Interpretation
+cat("Interpretation: For each additional year of age,\n")
+cat("systolic BP increases by", round(coef(model)[2], 2), "mmHg\n\n")
+
+# R-squared
+cat("R-squared:", round(summary(model)$r.squared, 3), "\n")
+cat("Age explains", round(100*summary(model)$r.squared, 1),
+    "% of variability in SBP\n")
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Visualization}
+\textbf{Prompt:} ``Create scatter plot with regression line and prediction interval''
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+# Scatter plot with regression line
+plot(age, sbp,
+     main = "Systolic BP vs. Age",
+     xlab = "Age (years)",
+     ylab = "Systolic BP (mmHg)",
+     pch = 19, col = "blue", cex = 1.5)
+
+# Add regression line
+abline(model, col = "red", lwd = 2)
+
+# Add prediction interval
+new_ages <- seq(min(age), max(age), length.out = 100)
+pred_interval <- predict(model,
+                         newdata = data.frame(age = new_ages),
+                         interval = "prediction",
+                         level = 0.95)
+
+# Plot prediction bands
+lines(new_ages, pred_interval[,"lwr"], col = "gray", lty = 2, lwd = 2)
+lines(new_ages, pred_interval[,"upr"], col = "gray", lty = 2, lwd = 2)
+
+# Add legend
+legend("topleft",
+       legend = c("Observed data", "Regression line", "95% PI"),
+       col = c("blue", "red", "gray"),
+       lty = c(NA, 1, 2),
+       pch = c(19, NA, NA),
+       lwd = 2)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Checking Assumptions}
+\textbf{Prompt:} ``Create diagnostic plots to check regression assumptions''
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+# Create 2x2 panel of diagnostic plots
+par(mfrow = c(2, 2))
+
+# 1. Residuals vs Fitted (check linearity and constant variance)
+plot(model, which = 1)
+
+# 2. Q-Q plot (check normality of residuals)
+plot(model, which = 2)
+
+# 3. Scale-Location plot (check homoscedasticity)
+plot(model, which = 3)
+
+# 4. Residuals vs Leverage (check for influential points)
+plot(model, which = 5)
+
+par(mfrow = c(1, 1))  # Reset plotting layout
+
+# Shapiro-Wilk test for normality of residuals
+shapiro_test <- shapiro.test(residuals(model))
+cat("\nShapiro-Wilk test for normality of residuals:\n")
+cat("W =", round(shapiro_test$statistic, 4),
+    ", p-value =", round(shapiro_test$p.value, 4), "\n")
+cat("If p > 0.05, residuals appear normally distributed\n")
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Making Predictions}
+\textbf{Prompt:} ``Predict systolic BP for ages 45, 55, and 65 with confidence intervals''
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+# Create data frame with new ages
+new_data <- data.frame(age = c(45, 55, 65))
+
+# Predict mean SBP (confidence interval)
+conf_predictions <- predict(model,
+                            newdata = new_data,
+                            interval = "confidence",
+                            level = 0.95)
+
+# Predict individual SBP (prediction interval)
+pred_predictions <- predict(model,
+                            newdata = new_data,
+                            interval = "prediction",
+                            level = 0.95)
+
+# Display results
+cat("Predictions for systolic BP:\n\n")
+for(i in 1:nrow(new_data)) {
+  cat("Age", new_data$age[i], "years:\n")
+  cat("  Predicted SBP:", round(conf_predictions[i,"fit"], 1), "mmHg\n")
+  cat("  95% CI for mean:",
+      round(conf_predictions[i,"lwr"], 1), "to",
+      round(conf_predictions[i,"upr"], 1), "mmHg\n")
+  cat("  95% PI for individual:",
+      round(pred_predictions[i,"lwr"], 1), "to",
+      round(pred_predictions[i,"upr"], 1), "mmHg\n\n")
+}
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{AI Best Practices for Regression}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{DO:}
+\begin{itemize}
+\item Visualize data before modeling
+\item Check all assumptions
+\item Examine residual plots
+\item Interpret in context
+\item Report confidence intervals
+\item Verify AI predictions
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\textbf{DON'T:}
+\begin{itemize}
+\item Skip diagnostic plots
+\item Ignore assumption violations
+\item Extrapolate beyond data
+\item Confuse correlation with causation
+\item Blindly trust AI output
+\item Forget biological plausibility
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.3cm}
+\textbf{Key Verification Steps:}
+\begin{enumerate}
+\item Check scatter plot makes sense
+\item Verify regression coefficients are reasonable
+\item Examine residual plots for patterns
+\item Confirm $R^2$ and $p$-values match interpretation
+\item Test predictions against known values
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{AI for Learning Regression Concepts}
+\textbf{Effective AI prompts for understanding:}
+
+\vspace{0.3cm}
+\begin{itemize}
+\item ``Explain the difference between correlation and regression with a medical example''
+\item ``Why do we check residual plots? What patterns indicate problems?''
+\item ``What's the difference between confidence interval and prediction interval?''
+\item ``When should I use Spearman correlation instead of Pearson?''
+\item ``How do I interpret a regression slope in my specific context?''
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{AI can help with:}
+\begin{itemize}
+\item Conceptual explanations
+\item Interpretation of output
+\item Choosing appropriate methods
+\item Troubleshooting problems
+\item Generating example datasets
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Remember:} AI is a tutor, not a replacement for understanding. Always verify and think critically!
+\end{frame}
+
+\defaultcolors
+
+\section{Summary and Examples}
+
+\begin{frame}
+\frametitle{Correlation vs. Regression Summary}
+\begin{center}
+\begin{tabular}{p{4cm}p{4cm}}
+\toprule
+\textbf{Correlation} & \textbf{Regression} \\
+\midrule
+Symmetric & Asymmetric \\
+Measures strength & Models relationship \\
+No prediction & Makes predictions \\
+$r$ ranges $-1$ to $+1$ & Slope can be any value \\
+Unitless & Has units \\
+$r_{xy} = r_{yx}$ & Different X vs. Y roles \\
+Single number & Equation \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{When to use each:}
+\begin{itemize}
+\item \textbf{Correlation:} To measure and test strength of association
+\item \textbf{Regression:} To predict, model relationships, estimate effects
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Relationship:} In simple linear regression, $t$-test for $\beta_1 = 0$ is equivalent to $t$-test for $\rho = 0$
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{R Code: Complete Analysis}
+\footnotesize
+\begin{verbatim}
+# Data
+age <- c(35, 38, 40, 42, 45, 47, 48, 50, 52, 55,
+         58, 60, 62, 65, 68)
+sbp <- c(118, 122, 125, 128, 130, 132, 135, 136, 138,
+         140, 145, 148, 150, 155, 158)
+
+# 1. Correlation
+cor.test(age, sbp)  # r = 0.98, p < 0.001
+
+# 2. Scatter plot
+plot(age, sbp, main = "Age vs. SBP",
+     xlab = "Age (years)", ylab = "SBP (mmHg)",
+     pch = 19, col = "blue")
+
+# 3. Regression
+model <- lm(sbp ~ age)
+summary(model)      # Detailed output
+abline(model, col = "red", lwd = 2)  # Add line to plot
+
+# 4. Diagnostics
+par(mfrow = c(2, 2))
+plot(model)         # All diagnostic plots
+
+# 5. Predictions
+predict(model, newdata = data.frame(age = 55),
+        interval = "prediction")
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{Practical Example: Birth Weight Study}
+\textbf{Research question:} How does gestational age affect birth weight?
+
+\vspace{0.3cm}
+\textbf{Data:} 50 newborns, gestational age 32-42 weeks
+
+\vspace{0.3cm}
+\textbf{Analysis:}
+\begin{itemize}
+\item Scatter plot shows strong positive linear relationship
+\item Pearson correlation: $r = 0.87$ ($p < 0.001$)
+\item Regression: $\widehat{\text{Weight}} = -2800 + 150 \times \text{Weeks}$
+  \begin{itemize}
+  \item Intercept: $-2800$ g (not meaningful; 0 weeks is impossible)
+  \item Slope: 150 g/week (95\% CI: 130 to 170)
+  \item $R^2 = 0.76$ (76\% of variability explained)
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item Each additional week of gestation increases birth weight by 150 g on average
+\item Strong evidence of positive linear relationship ($p < 0.001$)
+\item Can predict birth weight from gestational age with reasonable accuracy
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Practical Example: Exercise and Heart Rate}
+\textbf{Research question:} Is exercise frequency associated with resting heart rate?
+
+\vspace{0.3cm}
+\textbf{Data:} 30 adults, exercise sessions per week (0-7), resting HR (bpm)
+
+\vspace{0.3cm}
+\textbf{Analysis:}
+\begin{itemize}
+\item Scatter plot shows negative linear trend
+\item Pearson correlation: $r = -0.68$ ($p < 0.001$)
+\item Regression: $\widehat{\text{HR}} = 78 - 2.5 \times \text{Sessions}$
+  \begin{itemize}
+  \item Intercept: 78 bpm (resting HR with no exercise)
+  \item Slope: $-2.5$ bpm/session (95\% CI: $-3.8$ to $-1.2$)
+  \item $R^2 = 0.46$ (46\% explained)
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item Each additional exercise session per week reduces resting HR by 2.5 bpm
+\item Moderate negative association (still significant)
+\item Other factors also influence resting HR (54\% of variance unexplained)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Common Pitfalls in Regression}
+\textbf{Mistakes to avoid:}
+
+\begin{enumerate}
+\item \textbf{Ignoring assumptions}
+  \begin{itemize}
+  \item Always check residual plots
+  \item Don't force linear model on nonlinear data
+  \end{itemize}
+
+\item \textbf{Extrapolation}
+  \begin{itemize}
+  \item Don't predict outside range of observed X
+  \item Relationship may not hold in unobserved region
+  \end{itemize}
+
+\item \textbf{Causation claims}
+  \begin{itemize}
+  \item Regression shows association, not causation
+  \item Need experiments for causal inference
+  \end{itemize}
+
+\item \textbf{Ignoring outliers}
+  \begin{itemize}
+  \item Single outlier can drastically change regression line
+  \item Investigate influential points
+  \end{itemize}
+
+\item \textbf{Over-interpreting $R^2$}
+  \begin{itemize}
+  \item Low $R^2$ doesn't mean relationship is unimportant
+  \item Clinical significance $\neq$ statistical significance
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Summary}
+\textbf{Today we covered:}
+\begin{itemize}
+\item \textbf{Chapter 17: Correlation}
+  \begin{itemize}
+  \item Pearson and Spearman correlation
+  \item Testing significance
+  \item Correlation vs. causation
+  \end{itemize}
+
+\item \textbf{Chapter 18: Simple Linear Regression}
+  \begin{itemize}
+  \item Least squares estimation
+  \item Interpreting slope and intercept
+  \item Inference for regression coefficients
+  \item Prediction and prediction intervals
+  \item Checking assumptions with residual plots
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Key formulas:}
+\begin{itemize}
+\item Regression line: $\hat{Y} = b_0 + b_1 X$
+\item Slope: $b_1 = r \times s_Y / s_X$
+\item $R^2 = r^2$ (proportion of variance explained)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Next Week:} Multiple regression (more than one predictor)
+\end{frame}
+
+\begin{frame}
+\frametitle{Key Takeaways}
+\begin{enumerate}
+\item \textbf{Always visualize first:} Scatter plots reveal patterns
+
+\item \textbf{Correlation measures association:} But not causation
+
+\item \textbf{Regression quantifies relationships:} Allows prediction
+
+\item \textbf{Check assumptions:} Use residual plots
+
+\item \textbf{Interpret slope in context:} What does 1-unit change in X mean?
+
+\item \textbf{$R^2$ shows explained variance:} But low $R^2$ can still be important
+
+\item \textbf{Don't extrapolate:} Stay within range of data
+
+\item \textbf{Understand uncertainty:} Report confidence/prediction intervals
+\end{enumerate}
+
+\vspace{0.5cm}
+\textbf{In R:}
+\begin{itemize}
+\item \texttt{cor.test(x, y)} for correlation
+\item \texttt{lm(y \textasciitilde\ x)} for regression
+\item \texttt{plot(model)} for diagnostics
+\item \texttt{predict(model, newdata)} for predictions
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions?}
+\begin{center}
+\Large{Thank you!}
+
+\vspace{1cm}
+
+\textbf{Email:} john.molitor@oregonstate.edu\\
+\textbf{Office:} 153 Milam
+\end{center}
+\end{frame}
+
+\end{document}

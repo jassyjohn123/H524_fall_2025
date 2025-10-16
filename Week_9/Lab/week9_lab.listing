@@ -1,0 +1,10 @@
+# At the top of your R script, add:
+# Name: Your Name
+# Date: Today's Date
+# Lab: Week 9 - Correlation and Simple Linear Regression
+
+# Save your workspace
+save.image("week9_lab.RData")
+
+# To load it later:
+# load("week9_lab.RData")

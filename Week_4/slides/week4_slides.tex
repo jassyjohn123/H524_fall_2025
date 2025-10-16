@@ -1,0 +1,1278 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Define custom colors for AI slides
+\definecolor{AIBlue}{RGB}{30, 144, 255}
+\definecolor{AILightBlue}{RGB}{173, 216, 230}
+\definecolor{AINavy}{RGB}{25, 25, 112}
+
+% Commands to switch to AI color scheme
+\newcommand{\AIcolors}{%
+  \setbeamercolor{frametitle}{bg=AIBlue,fg=white}%
+  \setbeamercolor{title}{bg=AINavy,fg=white}%
+  \setbeamercolor{structure}{fg=AIBlue}%
+  \setbeamercolor{item}{fg=AINavy}%
+  \setbeamercolor{normal text}{fg=black}%
+}
+
+% Command to restore default colors
+\newcommand{\defaultcolors}{%
+  \setbeamercolor{frametitle}{bg=osaorange,fg=white}%
+  \setbeamercolor{title}{bg=osaorange,fg=white}%
+  \setbeamercolor{structure}{fg=osaorange}%
+  \setbeamercolor{item}{fg=black}%
+  \setbeamercolor{normal text}{fg=black}%
+}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Set colors
+\setbeamercolor{structure}{fg=osaorange}
+\setbeamercolor{title}{fg=white,bg=osaorange}
+\setbeamercolor{frametitle}{fg=white,bg=osaorange}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\title{H524 Introduction to Biostatistics}
+\subtitle{Week 4: Confidence Intervals}
+\author{Dr. John Molitor}
+\institute{}
+\date{Fall 2025}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Review from Week 3}
+
+\begin{frame}
+\frametitle{Quick Review: Sampling Distributions}
+\textbf{Last week we covered:}
+\begin{itemize}
+\item Binomial and normal distributions
+\item Standardization and Z-scores
+\item Central Limit Theorem: $\bar{X} \sim N\left(\mu, \frac{\sigma^2}{n}\right)$ for large $n$
+\item Standard error: $\text{SE} = \frac{\sigma}{\sqrt{n}}$
+\item Introduction to confidence intervals
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{This Week:} Deep dive into confidence intervals (Chapter 9)
+
+\vspace{0.3cm}
+\textbf{Reading:} Pagano \& Gauvreau Chapter 9
+\end{frame}
+
+\begin{frame}
+\frametitle{The Problem of Point Estimation}
+\textbf{Scenario:} We measure cholesterol in 25 randomly selected adults
+\begin{itemize}
+\item Sample mean: $\bar{x} = 205$ mg/dL
+\item Sample SD: $s = 42$ mg/dL
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Question:} What is the true population mean $\mu$?
+
+\vspace{0.3cm}
+\textbf{Point estimate:} Our best guess is $\bar{x} = 205$ mg/dL
+
+\vspace{0.5cm}
+\textbf{But...}
+\begin{itemize}
+\item Different samples would give different $\bar{x}$ values
+\item We know there's sampling variability
+\item How confident are we in this estimate?
+\item What's the range of plausible values for $\mu$?
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solution:} Use a \textit{confidence interval} instead of just a point estimate
+\end{frame}
+
+\section{Confidence Intervals: Core Concepts}
+
+\begin{frame}
+\frametitle{What is a Confidence Interval?}
+\textbf{Definition:} A range of values that likely contains the unknown population parameter
+
+\vspace{0.5cm}
+\textbf{General Form:}
+$$\text{Estimate} \pm \text{Margin of Error}$$
+$$\text{Estimate} \pm (\text{Critical Value}) \times (\text{Standard Error})$$
+
+\vspace{0.5cm}
+\textbf{For a population mean:}
+$$\bar{x} \pm t_{\alpha/2, n-1} \times \frac{s}{\sqrt{n}}$$
+
+\vspace{0.5cm}
+\textbf{Components:}
+\begin{itemize}
+\item $\bar{x}$ = sample mean (point estimate)
+\item $s$ = sample standard deviation
+\item $n$ = sample size
+\item $t_{\alpha/2, n-1}$ = critical value from t-distribution
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Confidence Level and Interpretation}
+\textbf{Confidence level:} Usually 95\%, but can be 90\%, 99\%, etc.
+
+\vspace{0.5cm}
+\textbf{Correct interpretation of a 95\% CI:}
+\begin{itemize}
+\item ``We are 95\% confident that the true population mean is between [lower, upper]''
+\item If we repeated this procedure many times, 95\% of the intervals would contain $\mu$
+\item The method is reliable 95\% of the time
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{What 95\% confidence does NOT mean:}
+\begin{itemize}
+\item $\times$ ``There's a 95\% probability $\mu$ is in this interval''
+  \begin{itemize}
+  \item $\mu$ is fixed (not random); it's either in or out
+  \end{itemize}
+\item $\times$ ``95\% of the data falls in this interval''
+  \begin{itemize}
+  \item CI is about the mean, not individual values
+  \end{itemize}
+\item $\times$ ``There's a 95\% chance the next sample mean will be in this interval''
+  \begin{itemize}
+  \item Each new sample gets its own CI
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Visualizing Confidence Intervals}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% True mean line
+\draw[thick] (0,6) -- (10,6);
+\node at (10.5,6) {$\mu$ = 200};
+
+% Multiple CIs
+\foreach \y/\lower/\upper/\color in {
+  5/3.5/6.8/green!60!black,
+  4.5/3.2/6.5/green!60!black,
+  4/3.8/6.2/green!60!black,
+  3.5/4.2/6.9/green!60!black,
+  3/2.5/5.8/red,
+  2.5/3.9/6.4/green!60!black,
+  2/3.6/6.7/green!60!black,
+  1.5/4.1/6.3/green!60!black,
+  1/3.4/6.1/green!60!black,
+  0.5/3.7/6.6/green!60!black
+} {
+  \draw[\color, very thick] (\lower,\y) -- (\upper,\y);
+  \filldraw[\color] ({(\lower+\upper)/2},\y) circle (2pt);
+}
+
+% Labels
+\node[anchor=east] at (0,6) {True mean:};
+\node[anchor=west, green!60!black] at (10.5,1) {Contains $\mu$};
+\node[anchor=west, red] at (10.5,3) {Misses $\mu$};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{If we took 20 samples:}
+\begin{itemize}
+\item Each sample gives a different CI
+\item About 95\% of CIs (19 out of 20) contain $\mu$
+\item About 5\% (1 out of 20) miss $\mu$
+\end{itemize}
+\end{frame}
+
+\section{One-Sample t-Interval}
+
+\begin{frame}
+\frametitle{When to Use the t-Distribution}
+\textbf{Recall from Week 3:}
+\begin{itemize}
+\item If $\sigma$ is known: use Z-distribution (rare in practice)
+\item If $\sigma$ is unknown: use t-distribution (almost always)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{The t-distribution:}
+\begin{itemize}
+\item Bell-shaped like normal, but heavier tails
+\item Accounts for uncertainty in estimating $\sigma$ with $s$
+\item Determined by degrees of freedom: $\text{df} = n - 1$
+\item As $n$ increases, t approaches normal
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Assumptions for t-interval:}
+\begin{enumerate}
+\item Random sample from the population
+\item Population is approximately normal, OR $n$ is large ($n \geq 30$)
+\item Observations are independent
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Robust to mild departures from normality, especially for larger $n$}
+\end{frame}
+
+\begin{frame}
+\frametitle{Computing a t-Based Confidence Interval}
+\textbf{Step 1: Calculate sample statistics}
+\begin{itemize}
+\item Sample mean: $\bar{x}$
+\item Sample SD: $s$
+\item Sample size: $n$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Step 2: Compute standard error}
+$$\text{SE} = \frac{s}{\sqrt{n}}$$
+
+\vspace{0.3cm}
+\textbf{Step 3: Find critical value}
+\begin{itemize}
+\item Degrees of freedom: $\text{df} = n - 1$
+\item For 95\% CI: $t_{0.975, \text{df}}$ (leaves 2.5\% in each tail)
+\item Use t-table or R: \texttt{qt(0.975, df)}
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Step 4: Calculate margin of error}
+$$\text{ME} = t_{\alpha/2, \text{df}} \times \text{SE}$$
+
+\vspace{0.3cm}
+\textbf{Step 5: Construct interval}
+$$\text{CI} = \bar{x} \pm \text{ME} = (\bar{x} - \text{ME}, \bar{x} + \text{ME})$$
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Blood Pressure Study}
+\textbf{Research question:} What is the mean systolic blood pressure for adults with hypertension?
+
+\vspace{0.3cm}
+\textbf{Data:} Random sample of $n = 25$ hypertensive adults
+\begin{itemize}
+\item Sample mean: $\bar{x} = 128.4$ mmHg
+\item Sample SD: $s = 12.6$ mmHg
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Calculate 95\% CI:}
+
+\textbf{Step 1:} Standard error
+$$\text{SE} = \frac{12.6}{\sqrt{25}} = \frac{12.6}{5} = 2.52 \text{ mmHg}$$
+
+\textbf{Step 2:} Critical value ($\text{df} = 24$)
+$$t_{0.975, 24} = 2.064$$
+
+\textbf{Step 3:} Margin of error
+$$\text{ME} = 2.064 \times 2.52 = 5.20 \text{ mmHg}$$
+
+\textbf{Step 4:} Confidence interval
+$$\text{95\% CI} = 128.4 \pm 5.20 = (123.2, 133.6) \text{ mmHg}$$
+\end{frame}
+
+\begin{frame}
+\frametitle{Interpreting the Blood Pressure CI}
+\textbf{Result:} 95\% CI = (123.2, 133.6) mmHg
+
+\vspace{0.5cm}
+\textbf{Correct interpretation:}
+\begin{itemize}
+\item ``We are 95\% confident that the true mean systolic blood pressure for adults with hypertension is between 123.2 and 133.6 mmHg''
+\item Based on this sample, plausible values for $\mu$ range from 123.2 to 133.6
+\item If we repeated this study many times, 95\% of our CIs would contain $\mu$
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Clinical context:}
+\begin{itemize}
+\item Normal BP: $< 120$ mmHg systolic
+\item Elevated: 120-129 mmHg
+\item Hypertension Stage 1: 130-139 mmHg
+\item The entire CI is above normal range
+\item This provides evidence that the population mean is elevated
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Drug Efficacy Trial}
+\textbf{Scenario:} A new pain medication is tested on 16 patients
+
+\vspace{0.3cm}
+\textbf{Outcome:} Pain reduction score (0-100 scale)
+\begin{itemize}
+\item Sample mean: $\bar{x} = 45.2$ points
+\item Sample SD: $s = 8.4$ points
+\item Sample size: $n = 16$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Calculate 95\% CI:}
+
+Standard error: $\text{SE} = \frac{8.4}{\sqrt{16}} = \frac{8.4}{4} = 2.10$
+
+Critical value: $t_{0.975, 15} = 2.131$
+
+Margin of error: $\text{ME} = 2.131 \times 2.10 = 4.48$
+
+\textbf{95\% CI: $(45.2 - 4.48, 45.2 + 4.48) = (40.7, 49.7)$ points}
+
+\vspace{0.3cm}
+\textbf{Interpretation:} We are 95\% confident that the true mean pain reduction is between 40.7 and 49.7 points.
+\end{frame}
+
+\section{Factors Affecting CI Width}
+
+\begin{frame}
+\frametitle{What Makes a CI Wider or Narrower?}
+\textbf{Recall:} $\text{CI} = \bar{x} \pm t_{\alpha/2, n-1} \times \frac{s}{\sqrt{n}}$
+
+\vspace{0.5cm}
+\textbf{Three main factors affect width:}
+
+\begin{enumerate}
+\item \textbf{Sample size ($n$)}
+  \begin{itemize}
+  \item Larger $n$ $\Rightarrow$ smaller SE $\Rightarrow$ narrower CI
+  \item Width decreases by factor of $1/\sqrt{n}$
+  \item To halve width, need $4\times$ the sample size
+  \end{itemize}
+
+\item \textbf{Sample variability ($s$)}
+  \begin{itemize}
+  \item Larger $s$ $\Rightarrow$ larger SE $\Rightarrow$ wider CI
+  \item More variable data = more uncertainty
+  \item Cannot control $s$ (it's a property of the population)
+  \end{itemize}
+
+\item \textbf{Confidence level ($1-\alpha$)}
+  \begin{itemize}
+  \item Higher confidence $\Rightarrow$ larger $t$ $\Rightarrow$ wider CI
+  \item Trade-off: confidence vs. precision
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Effect of Sample Size}
+\textbf{Same data, different sample sizes:}
+
+\vspace{0.3cm}
+Suppose $\bar{x} = 100$, $s = 20$ across all samples
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{cccccc}
+\toprule
+$n$ & SE & df & $t_{0.975}$ & ME & 95\% CI \\
+\midrule
+10 & 6.32 & 9 & 2.262 & 14.3 & (85.7, 114.3) \\
+25 & 4.00 & 24 & 2.064 & 8.3 & (91.7, 108.3) \\
+50 & 2.83 & 49 & 2.010 & 5.7 & (94.3, 105.7) \\
+100 & 2.00 & 99 & 1.984 & 4.0 & (96.0, 104.0) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Observations:}
+\begin{itemize}
+\item As $n$ increases, SE decreases
+\item As $n$ increases, $t$ approaches 1.96 (Z-value)
+\item CI width decreases substantially with larger $n$
+\item Diminishing returns: 10$\to$25 gives bigger gain than 50$\to$100
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Effect of Confidence Level}
+\textbf{Same data, different confidence levels:}
+
+\vspace{0.3cm}
+Pain study: $n = 16$, $\bar{x} = 45.2$, $s = 8.4$, $\text{SE} = 2.10$
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{ccccc}
+\toprule
+Confidence & $\alpha$ & $t_{\alpha/2, 15}$ & ME & CI \\
+\midrule
+90\% & 0.10 & 1.753 & 3.68 & (41.5, 48.9) \\
+95\% & 0.05 & 2.131 & 4.48 & (40.7, 49.7) \\
+99\% & 0.01 & 2.947 & 6.19 & (39.0, 51.4) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{The confidence-precision trade-off:}
+\begin{itemize}
+\item More confident $\Rightarrow$ wider interval (less precise)
+\item Less confident $\Rightarrow$ narrower interval (more precise)
+\item 95\% is conventional in most fields
+\item 99\% for high-stakes decisions (e.g., safety-critical applications)
+\item 90\% for preliminary or exploratory studies
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Effect of Variability}
+\textbf{Same sample size and confidence, different variability:}
+
+\vspace{0.3cm}
+All samples: $n = 25$, $\bar{x} = 50$, 95\% confidence, $t_{0.975, 24} = 2.064$
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{ccccc}
+\toprule
+Scenario & $s$ & SE & ME & 95\% CI \\
+\midrule
+Low variability & 5 & 1.00 & 2.06 & (48.0, 52.0) \\
+Moderate variability & 10 & 2.00 & 4.13 & (45.9, 54.1) \\
+High variability & 20 & 4.00 & 8.26 & (41.7, 58.3) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Key insight:}
+\begin{itemize}
+\item Variability directly impacts precision
+\item Cannot change $s$ through study design (it's a population property)
+\item Can only counteract high $s$ by increasing $n$
+\item More homogeneous populations give more precise estimates
+\end{itemize}
+\end{frame}
+
+\section{Confidence Intervals for Proportions}
+
+\begin{frame}
+\frametitle{CI for a Population Proportion}
+\textbf{When the outcome is binary:}
+\begin{itemize}
+\item Success/failure, yes/no, disease/no disease
+\item Estimate population proportion $p$
+\item Sample proportion: $\hat{p} = \frac{x}{n}$ (where $x$ = number of successes)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Standard error for proportion:}
+$$\text{SE} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
+
+\vspace{0.5cm}
+\textbf{95\% Confidence interval (Wald method):}
+$$\hat{p} \pm z_{0.975} \times \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
+$$\hat{p} \pm 1.96 \times \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$$
+
+\vspace{0.3cm}
+\textbf{Note:} Uses Z (not t) because with large $n$, proportion is approximately normal
+\end{frame}
+
+\begin{frame}
+\frametitle{When to Use Normal Approximation for Proportions}
+\textbf{The normal approximation works well when:}
+$$n\hat{p} \geq 10 \quad \text{and} \quad n(1-\hat{p}) \geq 10$$
+
+\vspace{0.3cm}
+This ensures:
+\begin{itemize}
+\item At least 10 successes
+\item At least 10 failures
+\item Sampling distribution of $\hat{p}$ is approximately normal
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{If conditions not met:}
+\begin{itemize}
+\item Use exact binomial methods (beyond this course)
+\item Or use Wilson score interval (more advanced)
+\item Or collect more data
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Common in biostatistics:}
+\begin{itemize}
+\item Disease prevalence
+\item Treatment success rates
+\item Adverse event rates
+\item Survey response proportions
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Vaccine Efficacy}
+\textbf{Clinical trial:} New vaccine tested on 200 people
+\begin{itemize}
+\item 174 developed immunity (positive antibody response)
+\item Sample proportion: $\hat{p} = \frac{174}{200} = 0.87$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Check conditions:}
+\begin{itemize}
+\item $n\hat{p} = 200 \times 0.87 = 174 \geq 10$ \checkmark
+\item $n(1-\hat{p}) = 200 \times 0.13 = 26 \geq 10$ \checkmark
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Calculate 95\% CI:}
+
+Standard error: $\text{SE} = \sqrt{\frac{0.87 \times 0.13}{200}} = \sqrt{\frac{0.1131}{200}} = \sqrt{0.0005655} = 0.0238$
+
+Margin of error: $\text{ME} = 1.96 \times 0.0238 = 0.047$
+
+\textbf{95\% CI: $0.87 \pm 0.047 = (0.823, 0.917)$ or (82.3\%, 91.7\%)}
+
+\vspace{0.3cm}
+\textbf{Interpretation:} We are 95\% confident that the true vaccine efficacy is between 82.3\% and 91.7\%.
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Disease Prevalence}
+\textbf{Public health survey:} Screen 500 adults for diabetes
+\begin{itemize}
+\item 65 test positive
+\item Sample proportion: $\hat{p} = \frac{65}{500} = 0.13$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Check conditions:}
+\begin{itemize}
+\item $n\hat{p} = 500 \times 0.13 = 65 \geq 10$ \checkmark
+\item $n(1-\hat{p}) = 500 \times 0.87 = 435 \geq 10$ \checkmark
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Calculate 95\% CI:}
+
+SE: $\sqrt{\frac{0.13 \times 0.87}{500}} = \sqrt{0.0002262} = 0.0150$
+
+ME: $1.96 \times 0.0150 = 0.0294$
+
+\textbf{95\% CI: $0.13 \pm 0.029 = (0.101, 0.159)$ or (10.1\%, 15.9\%)}
+
+\vspace{0.3cm}
+\textbf{Interpretation:} We estimate that between 10.1\% and 15.9\% of adults in this population have diabetes.
+\end{frame}
+
+\section{Sample Size Determination}
+
+\begin{frame}
+\frametitle{Planning Studies: How Large a Sample?}
+\textbf{Before collecting data, researchers ask:}
+\begin{itemize}
+\item How many subjects do we need?
+\item What precision do we want?
+\item How wide will our confidence interval be?
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Sample size determination:}
+\begin{itemize}
+\item Work backwards from desired margin of error
+\item Requires estimate of population variability
+\item Balances precision with cost/feasibility
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{General approach:}
+\begin{enumerate}
+\item Specify desired margin of error (ME)
+\item Estimate population SD ($\sigma$) from pilot data or literature
+\item Choose confidence level (usually 95\%)
+\item Solve for $n$ in the ME equation
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Sample Size for Estimating a Mean}
+\textbf{Starting with margin of error formula:}
+$$\text{ME} = z_{\alpha/2} \times \frac{\sigma}{\sqrt{n}}$$
+
+\vspace{0.3cm}
+\textbf{Solve for $n$:}
+$$\sqrt{n} = \frac{z_{\alpha/2} \times \sigma}{\text{ME}}$$
+$$n = \left(\frac{z_{\alpha/2} \times \sigma}{\text{ME}}\right)^2$$
+
+\vspace{0.5cm}
+\textbf{For 95\% confidence:}
+$$n = \left(\frac{1.96 \times \sigma}{\text{ME}}\right)^2$$
+
+\vspace{0.3cm}
+\textbf{Note:}
+\begin{itemize}
+\item Uses Z (not t) for planning
+\item Round up to next integer
+\item May need to iterate if using t-distribution
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Cholesterol Study Planning}
+\textbf{Goal:} Estimate mean cholesterol with margin of error = 5 mg/dL
+
+\vspace{0.3cm}
+\textbf{Given information:}
+\begin{itemize}
+\item Desired ME = 5 mg/dL
+\item From literature: $\sigma \approx 40$ mg/dL
+\item Confidence level: 95\% (so $z_{0.975} = 1.96$)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Calculate required sample size:}
+$$n = \left(\frac{1.96 \times 40}{5}\right)^2 = \left(\frac{78.4}{5}\right)^2 = (15.68)^2 = 245.86$$
+
+\vspace{0.3cm}
+\textbf{Round up:} $n = 246$ subjects
+
+\vspace{0.5cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item Need to sample 246 people
+\item Will give 95\% CI with margin of error $\pm 5$ mg/dL
+\item Actual CI might be slightly different (using $s$ instead of $\sigma$)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Blood Pressure Study Planning}
+\textbf{Different margins of error:}
+
+\vspace{0.3cm}
+Suppose $\sigma = 15$ mmHg for blood pressure, 95\% confidence
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+Desired ME & Calculation & Required $n$ \\
+\midrule
+2 mmHg & $(1.96 \times 15 / 2)^2$ & 217 \\
+3 mmHg & $(1.96 \times 15 / 3)^2$ & 97 \\
+5 mmHg & $(1.96 \times 15 / 5)^2$ & 35 \\
+10 mmHg & $(1.96 \times 15 / 10)^2$ & 9 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Key insights:}
+\begin{itemize}
+\item Halving ME requires $4\times$ the sample size
+\item More precision is expensive (in terms of sample size)
+\item Diminishing returns: going from ME=5 to ME=2 adds 182 subjects
+\item Practical considerations: balance precision with feasibility
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Sample Size for Estimating a Proportion}
+\textbf{For proportions:}
+$$n = \left(\frac{z_{\alpha/2}}{\text{ME}}\right)^2 p(1-p)$$
+
+\vspace{0.3cm}
+\textbf{Problem:} We need $p$ to calculate $n$, but we don't know $p$ yet!
+
+\vspace{0.5cm}
+\textbf{Three approaches:}
+
+\begin{enumerate}
+\item \textbf{Use pilot data or prior estimate:}
+  \begin{itemize}
+  \item Previous studies suggest $p \approx 0.3$
+  \item Use this value in the formula
+  \end{itemize}
+
+\item \textbf{Conservative approach:}
+  \begin{itemize}
+  \item Use $p = 0.5$ (maximizes $p(1-p)$)
+  \item Gives largest possible $n$ (safe but possibly wasteful)
+  \end{itemize}
+
+\item \textbf{Range of plausible values:}
+  \begin{itemize}
+  \item Calculate $n$ for several plausible $p$ values
+  \item Choose based on context
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Prevalence Study Planning}
+\textbf{Goal:} Estimate disease prevalence with ME = 0.03 (3\%), 95\% confidence
+
+\vspace{0.3cm}
+\textbf{Scenario 1:} No prior information (use $p = 0.5$)
+$$n = \left(\frac{1.96}{0.03}\right)^2 \times 0.5 \times 0.5 = (65.33)^2 \times 0.25 = 1067.1$$
+Need $n = 1068$ subjects
+
+\vspace{0.3cm}
+\textbf{Scenario 2:} Prior studies suggest $p \approx 0.15$
+$$n = \left(\frac{1.96}{0.03}\right)^2 \times 0.15 \times 0.85 = (65.33)^2 \times 0.1275 = 544.5$$
+Need $n = 545$ subjects
+
+\vspace{0.5cm}
+\textbf{Comparison:}
+\begin{itemize}
+\item Conservative approach requires nearly 2$\times$ more subjects
+\item If we have good prior information, can save resources
+\item Trade-off: certainty in planning vs. sample size efficiency
+\end{itemize}
+\end{frame}
+
+\section{Advanced Topics and Considerations}
+
+\begin{frame}
+\frametitle{Large Sample vs Small Sample CIs}
+\textbf{When $n$ is large ($n \geq 30$ as rule of thumb):}
+\begin{itemize}
+\item t-distribution $\approx$ normal distribution
+\item Can use $z \approx 1.96$ instead of $t$ for 95\% CI
+\item CLT ensures $\bar{X}$ is approximately normal
+\item Less sensitive to departures from normality
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{When $n$ is small ($n < 30$):}
+\begin{itemize}
+\item Must use t-distribution (heavier tails)
+\item Need stronger normality assumption
+\item Check data for severe skewness or outliers
+\item Consider transformations if badly non-normal
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Practical guideline:}
+\begin{itemize}
+\item Always use t-distribution when $\sigma$ unknown
+\item Check normality assumption with histogram or Q-Q plot
+\item For very small $n$ ($< 15$), be especially careful
+\item Robust methods exist for non-normal data (beyond this course)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Using CIs for Hypothesis Testing}
+\textbf{CIs can answer yes/no questions:}
+
+\vspace{0.3cm}
+\textbf{Example:} Is the population mean different from a specific value?
+
+\vspace{0.3cm}
+\textbf{Drug efficacy study:}
+\begin{itemize}
+\item Research question: Does the drug reduce pain by more than 30 points on average?
+\item 95\% CI for mean reduction: (35.2, 48.6)
+\item Since entire CI is above 30, YES, strong evidence
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{General rule for 95\% CI:}
+\begin{itemize}
+\item If hypothesized value is \textit{outside} the CI: reject at $\alpha = 0.05$
+\item If hypothesized value is \textit{inside} the CI: fail to reject at $\alpha = 0.05$
+\item CI gives more information than p-value (shows magnitude and precision)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Next week:} Formal hypothesis testing procedures
+\end{frame}
+
+\begin{frame}
+\frametitle{Common Mistakes with Confidence Intervals}
+\textbf{1. Misinterpreting the confidence level}
+\begin{itemize}
+\item $\times$ ``95\% probability that $\mu$ is in this interval''
+\item \checkmark ``95\% of such intervals contain $\mu$''
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{2. Confusing CI for mean with range of data}
+\begin{itemize}
+\item CI estimates where population mean is
+\item Not where individual observations fall
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{3. Ignoring assumptions}
+\begin{itemize}
+\item Random sampling required
+\item Independence required
+\item Approximate normality (or large $n$)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{4. Using Z when should use t}
+\begin{itemize}
+\item Always use t when $\sigma$ is unknown (almost always!)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{5. Forgetting to round $n$ up in planning}
+\begin{itemize}
+\item $n = 245.86$ means need 246 subjects, not 245
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Checking Assumptions: Normality}
+\textbf{How to assess if data are approximately normal:}
+
+\vspace{0.3cm}
+\textbf{1. Histogram}
+\begin{itemize}
+\item Should be roughly bell-shaped
+\item Check for severe skewness or multiple modes
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{2. Q-Q plot (quantile-quantile plot)}
+\begin{itemize}
+\item Points should fall roughly on a straight line
+\item Deviations at ends less concerning than in middle
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{3. Formal tests (Shapiro-Wilk)}
+\begin{itemize}
+\item Tests null hypothesis that data are normal
+\item Very sensitive with large $n$ (may reject for trivial departures)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Remember:}
+\begin{itemize}
+\item t-procedures are robust to mild departures
+\item Larger $n$ means less sensitive to non-normality (CLT)
+\item Outliers more problematic than skewness
+\end{itemize}
+\end{frame}
+
+\section{AI as a Learning Tool for Confidence Intervals}
+
+\AIcolors
+\begin{frame}
+\frametitle{AI for Confidence Interval Analysis}
+\textbf{How AI can help this week:}
+\begin{itemize}
+\item \textbf{CI calculations:} Computing intervals step-by-step
+\item \textbf{Sample size planning:} Determining required $n$
+\item \textbf{Interpretation:} Writing correct interpretations
+\item \textbf{Assumption checking:} Creating diagnostic plots
+\item \textbf{Comparison:} Different confidence levels or methods
+\item \textbf{R code:} Using \texttt{t.test()} and related functions
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Example prompts:}
+\begin{itemize}
+\item ``Calculate 95\% CI for mean given: n=20, mean=105, SD=15''
+\item ``How many subjects needed for ME=3 if SD=12 at 95\% confidence?''
+\item ``Create R code to check normality assumption with histogram and Q-Q plot''
+\item ``Explain the difference between 90\%, 95\%, and 99\% confidence intervals''
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: CI Calculation in R}
+\textbf{Prompt:} ``Calculate 95\% CI for cholesterol data in R''
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+# Cholesterol data (mg/dL)
+cholesterol <- c(205, 198, 220, 185, 210, 195, 225, 200, 215, 192,
+                 208, 196, 218, 203, 212, 189, 207, 201, 213, 199)
+
+# Calculate sample statistics
+n <- length(cholesterol)
+xbar <- mean(cholesterol)
+s <- sd(cholesterol)
+se <- s / sqrt(n)
+
+# Calculate 95% CI using t-distribution
+df <- n - 1
+t_crit <- qt(0.975, df)
+me <- t_crit * se
+ci_lower <- xbar - me
+ci_upper <- xbar + me
+
+# Display results
+cat("Sample size:", n, "\n")
+cat("Sample mean:", round(xbar, 2), "mg/dL\n")
+cat("Sample SD:", round(s, 2), "mg/dL\n")
+cat("Standard error:", round(se, 3), "mg/dL\n")
+cat("t critical value:", round(t_crit, 3), "\n")
+cat("Margin of error:", round(me, 2), "mg/dL\n")
+cat("95% CI: (", round(ci_lower, 2), ", ", round(ci_upper, 2), ")\n", sep="")
+
+# Alternative: use t.test() function
+t.test(cholesterol, conf.level=0.95)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Sample Size Calculation}
+\textbf{Prompt:} ``Calculate sample size needed for blood pressure study in R''
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+# Sample size calculation for estimating mean BP
+# Goal: 95% CI with margin of error = 3 mmHg
+# Estimated population SD = 15 mmHg
+
+sigma_est <- 15     # Estimated population SD
+me_desired <- 3     # Desired margin of error
+conf_level <- 0.95  # Confidence level
+alpha <- 1 - conf_level
+z_crit <- qnorm(1 - alpha/2)  # 1.96 for 95%
+
+# Calculate required sample size
+n_required <- (z_crit * sigma_est / me_desired)^2
+
+cat("Sample size calculation:\n")
+cat("Estimated SD:", sigma_est, "mmHg\n")
+cat("Desired margin of error:", me_desired, "mmHg\n")
+cat("Confidence level:", conf_level*100, "%\n")
+cat("Z critical value:", round(z_crit, 3), "\n\n")
+cat("Required sample size (exact):", round(n_required, 2), "\n")
+cat("Required sample size (rounded up):", ceiling(n_required), "\n")
+
+# Verify the calculation
+actual_me <- z_crit * sigma_est / sqrt(ceiling(n_required))
+cat("\nVerification - actual ME with n =", ceiling(n_required), ":",
+    round(actual_me, 3), "mmHg\n")
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Comparing Confidence Levels}
+\textbf{Prompt:} ``Compare 90\%, 95\%, 99\% CIs for same data in R''
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+# Sample data: pain reduction scores
+pain_reduction <- c(42, 38, 51, 45, 39, 48, 44, 50, 43, 47,
+                    41, 46, 49, 40, 52)
+
+# Calculate sample statistics
+n <- length(pain_reduction)
+xbar <- mean(pain_reduction)
+s <- sd(pain_reduction)
+se <- s / sqrt(n)
+df <- n - 1
+
+# Calculate CIs for different confidence levels
+conf_levels <- c(0.90, 0.95, 0.99)
+
+cat("Sample mean:", round(xbar, 2), "\n")
+cat("Sample SD:", round(s, 3), "\n")
+cat("Sample size:", n, "\n")
+cat("Standard error:", round(se, 3), "\n\n")
+
+for (conf in conf_levels) {
+  alpha <- 1 - conf
+  t_crit <- qt(1 - alpha/2, df)
+  me <- t_crit * se
+  ci_lower <- xbar - me
+  ci_upper <- xbar + me
+  width <- ci_upper - ci_lower
+
+  cat(conf*100, "% CI: (", round(ci_lower, 2), ", ",
+      round(ci_upper, 2), ")  Width = ", round(width, 2), "\n", sep="")
+}
+
+cat("\nNotice: Higher confidence = wider interval\n")
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Checking Normality Assumption}
+\textbf{Prompt:} ``Create diagnostic plots to check normality assumption''
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+# Sample data
+data <- c(23, 25, 28, 22, 27, 24, 26, 29, 25, 23, 28, 24, 27, 25, 26)
+
+# Create diagnostic plots
+par(mfrow=c(1,2))  # 1 row, 2 columns
+
+# 1. Histogram with normal curve overlay
+hist(data, breaks=8, prob=TRUE, col="lightblue",
+     main="Histogram with Normal Curve",
+     xlab="Value", border="white")
+# Overlay theoretical normal curve
+xfit <- seq(min(data), max(data), length=100)
+yfit <- dnorm(xfit, mean=mean(data), sd=sd(data))
+lines(xfit, yfit, col="red", lwd=2)
+
+# 2. Q-Q plot
+qqnorm(data, main="Q-Q Plot", pch=19, col="blue")
+qqline(data, col="red", lwd=2)
+
+par(mfrow=c(1,1))  # Reset layout
+
+# Formal normality test
+shapiro_test <- shapiro.test(data)
+cat("\nShapiro-Wilk test for normality:\n")
+cat("W statistic:", round(shapiro_test$statistic, 4), "\n")
+cat("p-value:", round(shapiro_test$p.value, 4), "\n")
+if (shapiro_test$p.value > 0.05) {
+  cat("Conclusion: No evidence against normality (p > 0.05)\n")
+} else {
+  cat("Conclusion: Evidence of non-normality (p < 0.05)\n")
+}
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{AI Best Practices for CIs}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{DO:}
+\begin{itemize}
+\item Verify calculations manually first
+\item Check assumptions before computing CI
+\item Ask for interpretations
+\item Request visualizations
+\item Compare different methods
+\item Use AI to learn concepts
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\textbf{DON'T:}
+\begin{itemize}
+\item Trust results blindly
+\item Skip assumption checking
+\item Confuse Z and t methods
+\item Ignore sample size requirements
+\item Forget to interpret in context
+\item Use without understanding
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.3cm}
+\textbf{Key Verification Steps:}
+\begin{enumerate}
+\item Check that sample statistics are correct
+\item Verify correct critical value (t not Z, correct df)
+\item Confirm SE calculation
+\item Ensure interpretation makes sense in context
+\item Cross-check with \texttt{t.test()} output
+\end{enumerate}
+\end{frame}
+
+\defaultcolors
+
+\section{R Examples and Practice}
+
+\begin{frame}[fragile]
+\frametitle{R Example: Basic t-Interval}
+\small
+\begin{verbatim}
+# Blood pressure data (mmHg)
+bp <- c(128, 132, 125, 138, 130, 135, 127, 140,
+        129, 133, 136, 126, 131, 134, 137)
+
+# Method 1: Manual calculation
+xbar <- mean(bp)
+s <- sd(bp)
+n <- length(bp)
+se <- s / sqrt(n)
+df <- n - 1
+t_crit <- qt(0.975, df)  # 95% CI
+me <- t_crit * se
+ci <- c(xbar - me, xbar + me)
+
+cat("Manual: 95% CI =", round(ci, 2), "\n")
+
+# Method 2: Using t.test()
+result <- t.test(bp, conf.level=0.95)
+cat("t.test(): 95% CI =", round(result$conf.int, 2), "\n")
+
+# Both methods give same answer
+print(result)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{R Example: CI for Proportion}
+\small
+\begin{verbatim}
+# Vaccine study: 174 out of 200 developed immunity
+x <- 174        # Number of successes
+n <- 200        # Sample size
+p_hat <- x / n  # Sample proportion
+
+# Check conditions
+cat("np =", n*p_hat, ", n(1-p) =", n*(1-p_hat), "\n")
+
+# Calculate 95% CI
+se <- sqrt(p_hat * (1 - p_hat) / n)
+z_crit <- qnorm(0.975)  # 1.96
+me <- z_crit * se
+ci_lower <- p_hat - me
+ci_upper <- p_hat + me
+
+cat("Sample proportion:", p_hat, "\n")
+cat("Standard error:", round(se, 4), "\n")
+cat("95% CI: (", round(ci_lower, 4), ", ",
+    round(ci_upper, 4), ")\n", sep="")
+cat("95% CI: (", round(ci_lower*100, 2), "%, ",
+    round(ci_upper*100, 2), "%)\n", sep="")
+
+# Alternative: use prop.test()
+prop.test(x, n, conf.level=0.95)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{R Example: Sample Size Planning}
+\footnotesize
+\begin{verbatim}
+# Function to calculate required sample size for mean
+sample_size_mean <- function(sigma, me, conf.level=0.95) {
+  alpha <- 1 - conf.level
+  z <- qnorm(1 - alpha/2)
+  n <- (z * sigma / me)^2
+  return(ceiling(n))  # Round up
+}
+
+# Example: Cholesterol study
+sigma_est <- 40   # mg/dL
+me_desired <- 5   # mg/dL
+
+n_needed <- sample_size_mean(sigma_est, me_desired, 0.95)
+cat("Required sample size:", n_needed, "\n")
+
+# Try different margins of error
+margins <- c(2, 3, 5, 10)
+for (me in margins) {
+  n <- sample_size_mean(sigma_est, me, 0.95)
+  cat("ME =", me, "-> n =", n, "\n")
+}
+
+# For proportions
+sample_size_prop <- function(p, me, conf.level=0.95) {
+  alpha <- 1 - conf.level
+  z <- qnorm(1 - alpha/2)
+  n <- (z / me)^2 * p * (1-p)
+  return(ceiling(n))
+}
+
+# Conservative (p=0.5)
+cat("\nProportion (p=0.5, ME=0.03):",
+    sample_size_prop(0.5, 0.03, 0.95), "\n")
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{R Example: Visualizing Multiple CIs}
+\footnotesize
+\begin{verbatim}
+# Simulate multiple samples and CIs
+set.seed(524)
+true_mean <- 100   # True population mean
+true_sd <- 15      # True population SD
+n <- 25            # Sample size
+num_samples <- 20  # Number of samples to draw
+
+# Storage for CIs
+ci_data <- data.frame(sample=1:num_samples,
+                      lower=NA, upper=NA, contains_mu=NA)
+
+for (i in 1:num_samples) {
+  sample_data <- rnorm(n, true_mean, true_sd)
+  result <- t.test(sample_data, conf.level=0.95)
+  ci_data$lower[i] <- result$conf.int[1]
+  ci_data$upper[i] <- result$conf.int[2]
+  ci_data$contains_mu[i] <- (ci_data$lower[i] <= true_mean) &
+                             (true_mean <= ci_data$upper[i])
+}
+
+# Plot the CIs
+plot(NULL, xlim=c(85, 115), ylim=c(0, num_samples+1),
+     xlab="Value", ylab="Sample Number",
+     main="20 Confidence Intervals (95% level)")
+abline(v=true_mean, col="blue", lwd=2)
+for (i in 1:num_samples) {
+  color <- ifelse(ci_data$contains_mu[i], "darkgreen", "red")
+  segments(ci_data$lower[i], i, ci_data$upper[i], i, col=color, lwd=2)
+  points(mean(c(ci_data$lower[i], ci_data$upper[i])), i, pch=19, col=color)
+}
+legend("topleft", c("True mean", "Contains mu", "Misses mu"),
+       col=c("blue", "darkgreen", "red"), lty=1, lwd=2)
+cat(sum(ci_data$contains_mu), "out of", num_samples, "CIs contain mu\n")
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{Summary}
+\textbf{Chapter 9 Key Concepts:}
+\begin{itemize}
+\item \textbf{Confidence intervals:} Range of plausible values for parameter
+  \begin{itemize}
+  \item General form: Estimate $\pm$ (Critical value) $\times$ SE
+  \end{itemize}
+\item \textbf{t-interval for mean:} $\bar{x} \pm t_{\alpha/2, n-1} \times \frac{s}{\sqrt{n}}$
+  \begin{itemize}
+  \item Use when $\sigma$ unknown (almost always)
+  \item Requires approximate normality or large $n$
+  \end{itemize}
+\item \textbf{CI for proportion:} $\hat{p} \pm z_{\alpha/2} \times \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$
+  \begin{itemize}
+  \item Requires $n\hat{p} \geq 10$ and $n(1-\hat{p}) \geq 10$
+  \end{itemize}
+\item \textbf{Factors affecting width:}
+  \begin{itemize}
+  \item Sample size $n$ (larger $\to$ narrower)
+  \item Variability $s$ (larger $\to$ wider)
+  \item Confidence level (higher $\to$ wider)
+  \end{itemize}
+\item \textbf{Sample size planning:} Work backwards from desired ME
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Next Week:} Hypothesis testing (one-sample and two-sample tests)
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions?}
+\begin{center}
+\Large{Thank you!}
+
+\vspace{1cm}
+
+\textbf{Email:} john.molitor@oregonstate.edu\\
+\textbf{Office:} 153 Milam
+\end{center}
+\end{frame}
+
+\end{document}

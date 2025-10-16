@@ -1,0 +1,30 @@
+\frametitle{R Code: Complete Analysis}
+\footnotesize
+\begin{verbatim}
+# Data
+age <- c(35, 38, 40, 42, 45, 47, 48, 50, 52, 55,
+         58, 60, 62, 65, 68)
+sbp <- c(118, 122, 125, 128, 130, 132, 135, 136, 138,
+         140, 145, 148, 150, 155, 158)
+
+# 1. Correlation
+cor.test(age, sbp)  # r = 0.98, p < 0.001
+
+# 2. Scatter plot
+plot(age, sbp, main = "Age vs. SBP",
+     xlab = "Age (years)", ylab = "SBP (mmHg)",
+     pch = 19, col = "blue")
+
+# 3. Regression
+model <- lm(sbp ~ age)
+summary(model)      # Detailed output
+abline(model, col = "red", lwd = 2)  # Add line to plot
+
+# 4. Diagnostics
+par(mfrow = c(2, 2))
+plot(model)         # All diagnostic plots
+
+# 5. Predictions
+predict(model, newdata = data.frame(age = 55),
+        interval = "prediction")
+\end{verbatim}

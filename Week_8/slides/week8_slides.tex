@@ -1,0 +1,1197 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Define custom colors for AI slides
+\definecolor{AIBlue}{RGB}{30, 144, 255}
+\definecolor{AILightBlue}{RGB}{173, 216, 230}
+\definecolor{AINavy}{RGB}{25, 25, 112}
+
+% Commands to switch to AI color scheme
+\newcommand{\AIcolors}{%
+  \setbeamercolor{frametitle}{bg=AIBlue,fg=white}%
+  \setbeamercolor{title}{bg=AINavy,fg=white}%
+  \setbeamercolor{structure}{fg=AIBlue}%
+  \setbeamercolor{item}{fg=AINavy}%
+  \setbeamercolor{normal text}{fg=black}%
+}
+
+% Command to restore default colors
+\newcommand{\defaultcolors}{%
+  \setbeamercolor{frametitle}{bg=osaorange,fg=white}%
+  \setbeamercolor{title}{bg=osaorange,fg=white}%
+  \setbeamercolor{structure}{fg=osaorange}%
+  \setbeamercolor{item}{fg=black}%
+  \setbeamercolor{normal text}{fg=black}%
+}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Set colors
+\setbeamercolor{structure}{fg=osaorange}
+\setbeamercolor{title}{fg=white,bg=osaorange}
+\setbeamercolor{frametitle}{fg=white,bg=osaorange}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\title{H524 Introduction to Biostatistics}
+\subtitle{Week 8: Contingency Tables and Chi-Square Tests}
+\author{Dr. John Molitor}
+\institute{}
+\date{Fall 2025}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Review: Where We've Been}
+
+\begin{frame}
+\frametitle{Quick Review: Weeks 6-7 Recap}
+\textbf{Recent Topics Covered:}
+\begin{itemize}
+\item \textbf{Week 6:} Hypothesis Testing Framework
+  \begin{itemize}
+  \item One-sample and two-sample t-tests
+  \item Paired tests
+  \item Type I and Type II errors, power
+  \end{itemize}
+\item \textbf{Week 7:} Nonparametric Methods
+  \begin{itemize}
+  \item Sign test, Wilcoxon signed-rank test
+  \item Mann-Whitney U test
+  \item When to use nonparametric vs parametric tests
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Common theme:} Comparing means (continuous outcomes)
+
+\vspace{0.3cm}
+\textbf{This week:} Categorical outcomes and associations
+\end{frame}
+
+\begin{frame}
+\frametitle{From Continuous to Categorical Data}
+\textbf{So far in H524:}
+\begin{itemize}
+\item Continuous outcomes: blood pressure, cholesterol, pain scores
+\item Methods: t-tests, confidence intervals, ANOVA
+\item Questions: Are means different between groups?
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{New challenge: Categorical outcomes}
+\begin{itemize}
+\item Binary: disease/no disease, treatment success/failure
+\item Nominal: blood type (A, B, AB, O), race/ethnicity
+\item Ordinal: disease stage (I, II, III, IV), pain level (none, mild, moderate, severe)
+\item Count data: number of deaths, adverse events, cases
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Key Questions:}
+\begin{itemize}
+\item Is there an association between two categorical variables?
+\item Do observed frequencies match expected frequencies?
+\item Are two categorical variables independent?
+\end{itemize}
+\end{frame}
+
+\section{Chi-Square Goodness-of-Fit Test (Ch 15.1)}
+
+\begin{frame}
+\frametitle{Introduction to Chi-Square Tests}
+\textbf{The chi-square ($\chi^2$) test family:}
+\begin{itemize}
+\item Tests for categorical data
+\item Based on comparing observed vs expected frequencies
+\item Named after the chi-square distribution
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Two main types:}
+\begin{enumerate}
+\item \textbf{Goodness-of-fit test:} Does a single categorical variable follow a specified distribution?
+  \begin{itemize}
+  \item Example: Are blood types distributed as expected (45\% O, 40\% A, 11\% B, 4\% AB)?
+  \end{itemize}
+\item \textbf{Test of independence:} Are two categorical variables associated?
+  \begin{itemize}
+  \item Example: Is smoking status associated with lung cancer?
+  \end{itemize}
+\end{enumerate}
+
+\vspace{0.5cm}
+\textbf{Reading:} Pagano \& Gauvreau Chapters 15-16
+\end{frame}
+
+\begin{frame}
+\frametitle{Goodness-of-Fit Test: The Basic Idea}
+\textbf{Question:} Do observed data match a theoretical distribution?
+
+\vspace{0.5cm}
+\textbf{Setup:}
+\begin{itemize}
+\item One categorical variable with $k$ categories
+\item Null hypothesis specifies expected proportions: $p_1, p_2, \ldots, p_k$
+\item Observed counts: $O_1, O_2, \ldots, O_k$ (total $n$)
+\item Expected counts: $E_i = np_i$ for each category
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Chi-square test statistic:}
+$$\chi^2 = \sum_{i=1}^{k} \frac{(O_i - E_i)^2}{E_i}$$
+
+\vspace{0.3cm}
+\textbf{Intuition:}
+\begin{itemize}
+\item If observed $\approx$ expected, then $\chi^2$ is small
+\item If observed differs from expected, then $\chi^2$ is large
+\item Large $\chi^2 \Rightarrow$ reject $H_0$ (poor fit)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chi-Square Distribution}
+\textbf{Properties of the $\chi^2$ distribution:}
+\begin{itemize}
+\item Right-skewed, non-negative values only
+\item Determined by degrees of freedom: $df = k - 1$
+\item Mean = $df$, Variance = $2 \times df$
+\item As $df$ increases, approaches normal distribution
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Assumptions for chi-square tests:}
+\begin{enumerate}
+\item Random sample
+\item Independent observations
+\item Expected counts $\geq 5$ in each category
+  \begin{itemize}
+  \item If violated: combine categories or use Fisher's exact test
+  \end{itemize}
+\item Sufficiently large sample size
+\end{enumerate}
+
+\vspace{0.5cm}
+\textbf{R function:} \texttt{pchisq(q, df, lower.tail=FALSE)} for p-values
+\end{frame}
+
+\begin{frame}
+\frametitle{Example 1: Blood Type Distribution}
+\textbf{Scenario:} U.S. population blood type distribution:
+\begin{itemize}
+\item Type O: 45\%
+\item Type A: 40\%
+\item Type B: 11\%
+\item Type AB: 4\%
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Question:} Does a sample of 200 hospital patients match this distribution?
+
+\vspace{0.3cm}
+\textbf{Observed counts:}
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+Blood Type & O & A & B & AB \\
+\midrule
+Observed & 85 & 78 & 28 & 9 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Hypotheses:}
+\begin{itemize}
+\item $H_0$: Hospital patients have same blood type distribution as general population
+\item $H_A$: Distribution differs from general population
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example 1: Calculations}
+\textbf{Step 1: Calculate expected counts}
+
+Expected: $E_i = n \times p_i$ where $n = 200$
+
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+Blood Type & O & A & B & AB \\
+\midrule
+Observed ($O_i$) & 85 & 78 & 28 & 9 \\
+Expected ($E_i$) & 90 & 80 & 22 & 8 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Step 2: Calculate chi-square statistic}
+
+$$\chi^2 = \frac{(85-90)^2}{90} + \frac{(78-80)^2}{80} + \frac{(28-22)^2}{22} + \frac{(9-8)^2}{8}$$
+
+$$= \frac{25}{90} + \frac{4}{80} + \frac{36}{22} + \frac{1}{8}$$
+
+$$= 0.278 + 0.050 + 1.636 + 0.125 = 2.089$$
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example 1: Conclusion}
+\textbf{Step 3: Find p-value}
+
+\begin{itemize}
+\item Degrees of freedom: $df = k - 1 = 4 - 1 = 3$
+\item Test statistic: $\chi^2 = 2.089$
+\item P-value: $P(\chi^2_3 > 2.089) = 0.554$
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{R code:}
+\begin{verbatim}
+pchisq(2.089, df=3, lower.tail=FALSE)
+# Returns: 0.554
+\end{verbatim}
+
+\vspace{0.5cm}
+\textbf{Conclusion:}
+\begin{itemize}
+\item P-value = 0.554 $>$ 0.05
+\item Fail to reject $H_0$
+\item No evidence that hospital blood type distribution differs from general population
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example 2: Mendelian Genetics}
+\textbf{Scenario:} Mendel's pea plant experiments predict 3:1 ratio of dominant to recessive traits.
+
+\vspace{0.3cm}
+\textbf{Observed data:} 315 dominant, 108 recessive (total = 423)
+
+\vspace{0.3cm}
+\textbf{Expected proportions:} 75\% dominant, 25\% recessive
+
+\vspace{0.5cm}
+\textbf{Calculations:}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Trait & Dominant & Recessive \\
+\midrule
+Observed & 315 & 108 \\
+Expected & 317.25 & 105.75 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$$\chi^2 = \frac{(315-317.25)^2}{317.25} + \frac{(108-105.75)^2}{105.75} = 0.016 + 0.048 = 0.064$$
+
+\vspace{0.3cm}
+\textbf{Result:} $df = 1$, p-value = 0.800
+
+\textbf{Conclusion:} Data consistent with 3:1 ratio
+\end{frame}
+
+\section{Contingency Tables (Ch 15.2-15.3)}
+
+\begin{frame}
+\frametitle{Contingency Tables: Introduction}
+\textbf{Contingency table} (cross-tabulation): Displays frequency distribution of two categorical variables
+
+\vspace{0.5cm}
+\textbf{General $r \times c$ table:}
+\begin{itemize}
+\item $r$ rows (levels of variable 1)
+\item $c$ columns (levels of variable 2)
+\item Cell counts: $O_{ij}$ = observed count in row $i$, column $j$
+\item Row totals, column totals, grand total $n$
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Key Question:} Are the two variables independent?
+
+\vspace{0.3cm}
+\textbf{Hypotheses:}
+\begin{itemize}
+\item $H_0$: Row and column variables are independent (no association)
+\item $H_A$: Row and column variables are associated (dependent)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{$2 \times 2$ Contingency Table}
+\textbf{Most common case:} Two binary variables
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{l|cc|c}
+& \textbf{Disease} & \textbf{No Disease} & \textbf{Total} \\
+\hline
+\textbf{Exposed} & $a$ & $b$ & $a+b$ \\
+\textbf{Not Exposed} & $c$ & $d$ & $c+d$ \\
+\hline
+\textbf{Total} & $a+c$ & $b+d$ & $n$ \\
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Examples:}
+\begin{itemize}
+\item Exposure (smoking) vs Disease (lung cancer)
+\item Treatment (drug vs placebo) vs Outcome (success vs failure)
+\item Risk factor (hypertension) vs Event (stroke vs no stroke)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Measures we can calculate:}
+\begin{itemize}
+\item Relative risk
+\item Odds ratio
+\item Chi-square test for independence
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chi-Square Test of Independence}
+\textbf{Test statistic for $r \times c$ table:}
+
+$$\chi^2 = \sum_{i=1}^{r} \sum_{j=1}^{c} \frac{(O_{ij} - E_{ij})^2}{E_{ij}}$$
+
+\vspace{0.3cm}
+\textbf{Expected count formula:}
+$$E_{ij} = \frac{(\text{Row } i \text{ total}) \times (\text{Column } j \text{ total})}{\text{Grand total}}$$
+
+\vspace{0.5cm}
+\textbf{Degrees of freedom:}
+$$df = (r - 1) \times (c - 1)$$
+
+\vspace{0.5cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item Expected counts assume independence (null hypothesis)
+\item Large differences between $O_{ij}$ and $E_{ij} \Rightarrow$ evidence of association
+\item Compare $\chi^2$ to chi-square distribution with appropriate $df$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example 3: Smoking and Lung Cancer}
+\textbf{Case-control study:} 100 lung cancer patients, 100 controls
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{l|cc|c}
+& \textbf{Lung Cancer} & \textbf{No Cancer} & \textbf{Total} \\
+\hline
+\textbf{Smoker} & 85 & 55 & 140 \\
+\textbf{Non-smoker} & 15 & 45 & 60 \\
+\hline
+\textbf{Total} & 100 & 100 & 200 \\
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Question:} Is there an association between smoking and lung cancer?
+
+\vspace{0.3cm}
+\textbf{Hypotheses:}
+\begin{itemize}
+\item $H_0$: Smoking status and lung cancer are independent
+\item $H_A$: Smoking status and lung cancer are associated
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example 3: Expected Counts}
+\textbf{Calculate expected counts under independence:}
+
+$$E_{ij} = \frac{(\text{Row total}) \times (\text{Column total})}{n}$$
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{l|cc}
+& \textbf{Cancer} & \textbf{No Cancer} \\
+\hline
+\textbf{Smoker} & $\frac{140 \times 100}{200} = 70$ & $\frac{140 \times 100}{200} = 70$ \\
+\textbf{Non-smoker} & $\frac{60 \times 100}{200} = 30$ & $\frac{60 \times 100}{200} = 30$ \\
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Summary table:}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Cell & Observed & Expected \\
+\midrule
+Smoker + Cancer & 85 & 70 \\
+Smoker + No Cancer & 55 & 70 \\
+Non-smoker + Cancer & 15 & 30 \\
+Non-smoker + No Cancer & 45 & 30 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example 3: Chi-Square Calculation}
+\textbf{Calculate test statistic:}
+
+$$\chi^2 = \frac{(85-70)^2}{70} + \frac{(55-70)^2}{70} + \frac{(15-30)^2}{30} + \frac{(45-30)^2}{30}$$
+
+$$= \frac{225}{70} + \frac{225}{70} + \frac{225}{30} + \frac{225}{30}$$
+
+$$= 3.214 + 3.214 + 7.500 + 7.500 = 21.43$$
+
+\vspace{0.5cm}
+\textbf{Find p-value:}
+\begin{itemize}
+\item $df = (r-1)(c-1) = (2-1)(2-1) = 1$
+\item $\chi^2 = 21.43$
+\item P-value $= P(\chi^2_1 > 21.43) < 0.0001$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Conclusion:} Very strong evidence of association between smoking and lung cancer (p $<$ 0.0001)
+\end{frame}
+
+\begin{frame}
+\frametitle{Example 4: Treatment Efficacy}
+\textbf{Clinical trial:} New drug vs placebo for treating infection
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{l|cc|c}
+& \textbf{Cured} & \textbf{Not Cured} & \textbf{Total} \\
+\hline
+\textbf{Drug} & 48 & 12 & 60 \\
+\textbf{Placebo} & 32 & 28 & 60 \\
+\hline
+\textbf{Total} & 80 & 40 & 120 \\
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Expected counts:}
+\begin{center}
+\begin{tabular}{l|cc}
+& \textbf{Cured} & \textbf{Not Cured} \\
+\hline
+\textbf{Drug} & 40 & 20 \\
+\textbf{Placebo} & 40 & 20 \\
+\end{tabular}
+\end{center}
+
+$$\chi^2 = \frac{(48-40)^2}{40} + \frac{(12-20)^2}{20} + \frac{(32-40)^2}{40} + \frac{(28-20)^2}{20} = 9.60$$
+
+\vspace{0.3cm}
+\textbf{Result:} $df = 1$, p-value = 0.002
+
+\textbf{Conclusion:} Strong evidence drug is more effective than placebo
+\end{frame}
+
+\begin{frame}
+\frametitle{Larger Contingency Tables}
+\textbf{Example:} $3 \times 3$ table - Disease severity by age group
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{l|ccc|c}
+& \textbf{Mild} & \textbf{Moderate} & \textbf{Severe} & \textbf{Total} \\
+\hline
+\textbf{Young ($<40$)} & 45 & 20 & 5 & 70 \\
+\textbf{Middle (40-60)} & 30 & 35 & 15 & 80 \\
+\textbf{Older ($>60$)} & 15 & 25 & 10 & 50 \\
+\hline
+\textbf{Total} & 90 & 80 & 30 & 200 \\
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Analysis:}
+\begin{itemize}
+\item $df = (3-1)(3-1) = 4$
+\item Calculate 9 expected counts
+\item Sum contributions: $\chi^2 = \sum \frac{(O_{ij}-E_{ij})^2}{E_{ij}}$
+\item Compare to $\chi^2_4$ distribution
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Interpretation:} Significant result indicates association between age and disease severity, but doesn't specify pattern
+\end{frame}
+
+\section{Fisher's Exact Test (Ch 15.4)}
+
+\begin{frame}
+\frametitle{When Chi-Square Fails: Small Samples}
+\textbf{Problem:} Chi-square test assumes large sample sizes
+\begin{itemize}
+\item Rule of thumb: All expected counts $\geq 5$
+\item When violated, chi-square approximation poor
+\item P-values unreliable
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Solution: Fisher's Exact Test}
+\begin{itemize}
+\item Calculates exact probability under null hypothesis
+\item No large-sample approximation needed
+\item Works for any sample size
+\item Most commonly used for $2 \times 2$ tables
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Trade-offs:}
+\begin{itemize}
+\item More computationally intensive
+\item Exact p-values (conservative)
+\item R implementation: \texttt{fisher.test()}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Fisher's Exact Test: Example}
+\textbf{Scenario:} Rare disease study with small sample
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{l|cc|c}
+& \textbf{Disease} & \textbf{No Disease} & \textbf{Total} \\
+\hline
+\textbf{Exposed} & 8 & 2 & 10 \\
+\textbf{Not Exposed} & 3 & 7 & 10 \\
+\hline
+\textbf{Total} & 11 & 9 & 20 \\
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Check chi-square assumptions:}
+\begin{itemize}
+\item Expected count (Exposed, No Disease) = $\frac{10 \times 9}{20} = 4.5$ (OK)
+\item Expected count (Not Exposed, Disease) = $\frac{10 \times 11}{20} = 5.5$ (OK)
+\item Borderline for chi-square assumptions
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Better approach:} Use Fisher's exact test
+
+\textbf{R code:} \texttt{fisher.test(matrix(c(8,2,3,7), nrow=2))}
+
+\textbf{Result:} P-value = 0.035 (two-sided)
+\end{frame}
+
+\begin{frame}
+\frametitle{Fisher's Exact Test: How It Works}
+\textbf{Concept:} Calculate probability of observed table and all more extreme tables
+
+\vspace{0.5cm}
+\textbf{For $2 \times 2$ table:}
+\begin{center}
+\begin{tabular}{l|cc|c}
+& Col 1 & Col 2 & Total \\
+\hline
+Row 1 & $a$ & $b$ & $a+b$ \\
+Row 2 & $c$ & $d$ & $c+d$ \\
+\hline
+Total & $a+c$ & $b+d$ & $n$ \\
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Exact probability (hypergeometric):}
+$$P = \frac{\binom{a+b}{a} \binom{c+d}{c}}{\binom{n}{a+c}}$$
+
+\vspace{0.5cm}
+\textbf{P-value:} Sum probabilities for observed and all more extreme configurations (fixing margins)
+
+\vspace{0.3cm}
+\textbf{Note:} Hand calculation tedious; always use R!
+\end{frame}
+
+\section{Effect Sizes and Measures of Association (Ch 16)}
+
+\begin{frame}
+\frametitle{Beyond Significance: Measuring Association}
+\textbf{Chi-square test tells us:}
+\begin{itemize}
+\item Whether association exists (p-value)
+\item But NOT the strength of association
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Effect size measures for $2 \times 2$ tables:}
+\begin{enumerate}
+\item \textbf{Relative Risk (RR):} Ratio of probabilities
+  $$RR = \frac{P(\text{Disease} \mid \text{Exposed})}{P(\text{Disease} \mid \text{Not Exposed})} = \frac{a/(a+b)}{c/(c+d)}$$
+
+\item \textbf{Odds Ratio (OR):} Ratio of odds
+  $$OR = \frac{a \times d}{b \times c}$$
+
+\item \textbf{Risk Difference:} Absolute difference in probabilities
+  $$RD = \frac{a}{a+b} - \frac{c}{c+d}$$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Relative Risk vs Odds Ratio}
+\textbf{When to use which?}
+
+\vspace{0.5cm}
+\textbf{Relative Risk:}
+\begin{itemize}
+\item Cohort studies, randomized trials
+\item When incidence can be calculated
+\item Direct interpretation: "X times more likely"
+\item Example: RR = 2.5 means exposed group is 2.5 times more likely to develop disease
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Odds Ratio:}
+\begin{itemize}
+\item Case-control studies
+\item When incidence cannot be calculated directly
+\item Approximates RR when disease is rare
+\item Symmetric: OR(A $\mid$ B) = OR(B $\mid$ A)
+\item Used in logistic regression
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item RR or OR = 1: No association
+\item RR or OR $>$ 1: Positive association (increased risk)
+\item RR or OR $<$ 1: Negative association (protective effect)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Calculating RR and OR}
+\textbf{Smoking and lung cancer data (from earlier):}
+
+\begin{center}
+\begin{tabular}{l|cc|c}
+& \textbf{Cancer} & \textbf{No Cancer} & \textbf{Total} \\
+\hline
+\textbf{Smoker} & 85 & 55 & 140 \\
+\textbf{Non-smoker} & 15 & 45 & 60 \\
+\hline
+\textbf{Total} & 100 & 100 & 200 \\
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Relative Risk:}
+$$RR = \frac{85/140}{15/60} = \frac{0.607}{0.250} = 2.43$$
+
+\vspace{0.3cm}
+\textbf{Odds Ratio:}
+$$OR = \frac{85 \times 45}{55 \times 15} = \frac{3825}{825} = 4.64$$
+
+\vspace{0.5cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item Smokers are 2.43 times more likely to have lung cancer
+\item Odds of cancer among smokers are 4.64 times odds among non-smokers
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Confidence Intervals for RR and OR}
+\textbf{Point estimates alone insufficient - need uncertainty!}
+
+\vspace{0.5cm}
+\textbf{95\% CI for Odds Ratio:}
+$$\text{CI} = \exp\left[\log(OR) \pm 1.96 \times SE_{\log(OR)}\right]$$
+
+where
+$$SE_{\log(OR)} = \sqrt{\frac{1}{a} + \frac{1}{b} + \frac{1}{c} + \frac{1}{d}}$$
+
+\vspace{0.5cm}
+\textbf{Smoking example:} OR = 4.64
+$$SE_{\log(OR)} = \sqrt{\frac{1}{85} + \frac{1}{55} + \frac{1}{15} + \frac{1}{45}} = 0.330$$
+
+$$95\% \text{ CI} = \exp[\log(4.64) \pm 1.96 \times 0.330] = (2.40, 8.98)$$
+
+\vspace{0.3cm}
+\textbf{Interpretation:} We're 95\% confident true OR is between 2.40 and 8.98
+
+\textbf{Key:} CI doesn't include 1 $\Rightarrow$ significant association
+\end{frame}
+
+\begin{frame}
+\frametitle{McNemar's Test for Paired Data}
+\textbf{Special case:} Matched pairs or repeated measures with binary outcomes
+
+\vspace{0.5cm}
+\textbf{Example:} Before/after treatment study
+
+\begin{center}
+\begin{tabular}{l|cc|c}
+& \textbf{After: Pos} & \textbf{After: Neg} & \textbf{Total} \\
+\hline
+\textbf{Before: Pos} & $a$ & $b$ & $a+b$ \\
+\textbf{Before: Neg} & $c$ & $d$ & $c+d$ \\
+\hline
+\textbf{Total} & $a+c$ & $b+d$ & $n$ \\
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{McNemar's test statistic:}
+$$\chi^2 = \frac{(b - c)^2}{b + c}$$
+
+Only discordant pairs ($b$ and $c$) contribute!
+
+\vspace{0.5cm}
+\textbf{When to use:}
+\begin{itemize}
+\item Matched case-control studies
+\item Before-after studies with same subjects
+\item Twin studies
+\end{itemize}
+\end{frame}
+
+\section{Practical Considerations and R Implementation}
+
+\begin{frame}[fragile]
+\frametitle{Chi-Square Tests in R}
+\textbf{Goodness-of-fit test:}
+\begin{verbatim}
+# Observed counts
+observed <- c(85, 78, 28, 9)
+# Expected proportions
+expected_props <- c(0.45, 0.40, 0.11, 0.04)
+
+# Chi-square test
+chisq.test(observed, p=expected_props)
+\end{verbatim}
+
+\vspace{0.5cm}
+\textbf{Test of independence:}
+\begin{verbatim}
+# Create contingency table
+data <- matrix(c(85, 55, 15, 45), nrow=2, byrow=TRUE)
+rownames(data) <- c("Smoker", "Non-smoker")
+colnames(data) <- c("Cancer", "No Cancer")
+
+# Chi-square test
+chisq.test(data)
+
+# With continuity correction (for 2x2 tables)
+chisq.test(data, correct=TRUE)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Fisher's Exact Test and Effect Sizes in R}
+\textbf{Fisher's exact test:}
+\begin{verbatim}
+# For 2x2 table
+data <- matrix(c(8, 2, 3, 7), nrow=2)
+fisher.test(data)
+\end{verbatim}
+
+\vspace{0.5cm}
+\textbf{Odds ratio and confidence interval:}
+\begin{verbatim}
+# Using fisher.test
+result <- fisher.test(data)
+result$estimate    # Odds ratio
+result$conf.int    # 95% CI
+
+# Manual calculation
+OR <- (data[1,1] * data[2,2]) / (data[1,2] * data[2,1])
+\end{verbatim}
+
+\vspace{0.5cm}
+\textbf{Relative risk (manual):}
+\begin{verbatim}
+RR <- (data[1,1]/sum(data[1,])) /
+      (data[2,1]/sum(data[2,]))
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Visualizing Contingency Tables}
+\begin{verbatim}
+# Create data
+data <- matrix(c(85, 55, 15, 45), nrow=2)
+rownames(data) <- c("Smoker", "Non-smoker")
+colnames(data) <- c("Cancer", "No Cancer")
+
+# Mosaic plot
+mosaicplot(data, main="Smoking and Lung Cancer",
+           color=c("red", "blue"),
+           xlab="Smoking Status", ylab="Cancer Status")
+
+# Grouped barplot
+barplot(data, beside=TRUE, legend=TRUE,
+        col=c("darkred", "darkgreen"),
+        main="Smoking and Lung Cancer",
+        xlab="Cancer Status", ylab="Count")
+
+# Proportions plot
+prop_data <- prop.table(data, margin=1)  # Row proportions
+barplot(prop_data, beside=TRUE, legend=TRUE,
+        col=c("darkred", "darkgreen"),
+        main="Cancer Rates by Smoking Status",
+        ylab="Proportion")
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{Common Mistakes and Pitfalls}
+\textbf{1. Using chi-square with small expected counts}
+\begin{itemize}
+\item Check all expected counts $\geq 5$
+\item If violated: use Fisher's exact test or combine categories
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{2. Confusing association with causation}
+\begin{itemize}
+\item Chi-square shows association, not causation
+\item May be confounding variables
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{3. Using chi-square for paired/matched data}
+\begin{itemize}
+\item Independence assumption violated
+\item Use McNemar's test instead
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{4. Ignoring effect size}
+\begin{itemize}
+\item Significant p-value doesn't mean strong association
+\item Always report OR or RR with confidence intervals
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{5. Multiple testing without adjustment}
+\begin{itemize}
+\item Testing many pairs in large tables inflates Type I error
+\item Consider Bonferroni or other corrections
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Choosing the Right Test}
+\begin{center}
+\begin{tabular}{p{4cm}p{6cm}}
+\toprule
+\textbf{Situation} & \textbf{Test} \\
+\midrule
+One categorical variable vs expected distribution & Chi-square goodness-of-fit \\[0.3cm]
+Two independent categorical variables (large sample) & Chi-square test of independence \\[0.3cm]
+Two independent categorical variables (small sample) & Fisher's exact test \\[0.3cm]
+Paired/matched binary data & McNemar's test \\[0.3cm]
+Ordinal variables with natural ordering & Consider Cochran-Armitage trend test \\[0.3cm]
+Multiple categorical variables & Log-linear models (beyond this course) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+\section{AI as a Learning Tool for Categorical Data}
+
+\begin{frame}
+\frametitle{AI for Contingency Table Analysis}
+\textbf{How AI can help this week:}
+\begin{itemize}
+\item \textbf{Test selection:} Choosing between chi-square, Fisher's, McNemar's
+\item \textbf{Expected counts:} Calculating and verifying assumptions
+\item \textbf{Effect sizes:} Computing RR, OR, and confidence intervals
+\item \textbf{Interpretation:} Understanding what results mean
+\item \textbf{Visualization:} Creating mosaic plots and grouped bar charts
+\item \textbf{R code:} Implementing tests and extracting results
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Example prompts:}
+\begin{itemize}
+\item "Show me how to do chi-square test in R for a 3x3 contingency table"
+\item "Calculate odds ratio and 95\% CI from a 2x2 table with counts: 25, 10, 5, 20"
+\item "When should I use Fisher's exact test instead of chi-square?"
+\item "Create a mosaic plot for my contingency table data"
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Chi-Square Test Analysis}
+\textbf{Prompt:} "Analyze this 2x2 table and compute chi-square test, RR, and OR"
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+# Enter data
+data <- matrix(c(48, 12, 32, 28), nrow=2, byrow=TRUE)
+rownames(data) <- c("Drug", "Placebo")
+colnames(data) <- c("Cured", "Not Cured")
+
+# Display table
+print(data)
+addmargins(data)
+
+# Chi-square test
+chi_result <- chisq.test(data)
+cat("Chi-square statistic:", round(chi_result$statistic, 3), "\n")
+cat("P-value:", format.pval(chi_result$p.value, digits=3), "\n")
+
+# Expected counts
+cat("\nExpected counts:\n")
+print(round(chi_result$expected, 2))
+
+# Effect sizes
+# Relative Risk
+rr <- (data[1,1]/sum(data[1,])) / (data[2,1]/sum(data[2,]))
+cat("\nRelative Risk:", round(rr, 3), "\n")
+
+# Odds Ratio
+or <- (data[1,1]*data[2,2]) / (data[1,2]*data[2,1])
+cat("Odds Ratio:", round(or, 3), "\n")
+
+# Fisher's test (includes OR and CI)
+fisher_result <- fisher.test(data)
+cat("\nFisher's OR:", round(fisher_result$estimate, 3), "\n")
+cat("95% CI:", round(fisher_result$conf.int, 3), "\n")
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Visualizing Contingency Tables}
+\textbf{Prompt:} "Create informative visualizations for my contingency table"
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+# Data
+data <- matrix(c(85, 55, 15, 45), nrow=2)
+rownames(data) <- c("Smoker", "Non-smoker")
+colnames(data) <- c("Cancer", "No Cancer")
+
+# Create 2x2 plot layout
+par(mfrow=c(2,2))
+
+# 1. Mosaic plot
+mosaicplot(data, main="Mosaic Plot", color=c("red", "lightblue"),
+           xlab="Smoking", ylab="Cancer")
+
+# 2. Grouped barplot (counts)
+barplot(data, beside=TRUE, legend=TRUE, col=c("darkred", "darkgreen"),
+        main="Counts by Group", ylab="Frequency",
+        args.legend=list(x="topright"))
+
+# 3. Stacked proportions
+prop_col <- prop.table(data, margin=2)
+barplot(prop_col, col=c("darkred", "darkgreen"), legend=TRUE,
+        main="Proportions (by Column)", ylab="Proportion",
+        args.legend=list(x="topright"))
+
+# 4. Side-by-side proportions (risk)
+prop_row <- prop.table(data, margin=1)
+barplot(prop_row, beside=TRUE, legend=TRUE, col=c("darkred", "darkgreen"),
+        main="Cancer Rate by Smoking Status", ylab="Proportion",
+        names.arg=c("Cancer", "No Cancer"),
+        args.legend=list(x="topright"))
+
+par(mfrow=c(1,1))
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Interpreting Results}
+\textbf{Prompt:} "Explain the results of my chi-square test and what the OR means"
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\small
+\begin{verbatim}
+Your chi-square test results:
+- Chi-square statistic: 21.43
+- Degrees of freedom: 1
+- P-value: < 0.0001
+
+Interpretation:
+1. Statistical Significance:
+   The extremely small p-value (< 0.0001) provides very strong
+   evidence against the null hypothesis of independence.
+   We reject the null and conclude there IS a significant
+   association between smoking and lung cancer.
+
+2. Odds Ratio = 4.64 (95% CI: 2.40, 8.98):
+   - Smokers have 4.64 times the ODDS of having lung cancer
+     compared to non-smokers
+   - We're 95% confident the true OR is between 2.40 and 8.98
+   - Since the CI doesn't include 1, this confirms significance
+   - This is a strong association
+
+3. Clinical Importance:
+   Not only is the association statistically significant, but
+   the effect size (OR=4.64) indicates a strong practical
+   relationship. This suggests smoking is an important risk
+   factor for lung cancer.
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{AI Best Practices for Categorical Analysis}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{DO:}
+\begin{itemize}
+\item Verify assumptions (expected counts)
+\item Check which test is appropriate
+\item Request both p-values and effect sizes
+\item Ask for visualization code
+\item Request interpretation in context
+\item Double-check calculations
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\textbf{DON'T:}
+\begin{itemize}
+\item Trust test choice blindly
+\item Skip assumption checking
+\item Report only p-values
+\item Confuse RR and OR
+\item Ignore small expected counts
+\item Conclude causation from association
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.3cm}
+\textbf{Key Verification Steps:}
+\begin{enumerate}
+\item Check table margins sum correctly
+\item Verify expected counts $\geq$ 5 for chi-square
+\item Confirm OR and RR calculations manually
+\item Ensure CI interpretation is correct
+\item Validate that conclusions match the data
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Task: Power Analysis for Contingency Tables}
+\textbf{Advanced prompt:} "Calculate sample size needed to detect OR=2.5"
+
+\vspace{0.2cm}
+\textbf{This week's AI-integrated tasks:}
+\begin{enumerate}
+\item Generate R code for chi-square test with multiple tables
+\item Calculate and interpret odds ratios with confidence intervals
+\item Create publication-quality mosaic plots
+\item Explain when to use Fisher's vs chi-square
+\item Simulate contingency table data with specified association
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Sample Problem:}
+\small
+\begin{verbatim}
+"I have a 3x4 contingency table of treatment group (3 levels)
+by outcome (4 levels). Create R code to:
+1) Perform chi-square test
+2) Visualize the table
+3) Calculate standardized residuals to identify which cells
+   contribute most to significance
+4) Interpret results in clinical context"
+\end{verbatim}
+\end{frame}
+
+\section{Summary and Next Steps}
+
+\begin{frame}
+\frametitle{Summary: Categorical Data Analysis}
+\textbf{Key Concepts:}
+\begin{itemize}
+\item \textbf{Chi-square goodness-of-fit:} One variable vs expected distribution
+\item \textbf{Chi-square independence test:} Association between two categorical variables
+\item \textbf{Fisher's exact test:} Small samples or when chi-square assumptions violated
+\item \textbf{McNemar's test:} Paired/matched binary data
+\item \textbf{Effect sizes:} Relative risk (RR) and odds ratio (OR)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{R Functions:}
+\begin{itemize}
+\item \texttt{chisq.test()} -- Chi-square tests
+\item \texttt{fisher.test()} -- Fisher's exact test
+\item \texttt{mcnemar.test()} -- McNemar's test
+\item Manual calculations for RR, OR, and CIs
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Remember:}
+\begin{itemize}
+\item Check assumptions (especially expected counts)
+\item Report effect sizes with confidence intervals
+\item Association $\neq$ causation
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Looking Ahead}
+\textbf{Next Week (Week 9):} Correlation and Simple Linear Regression
+\begin{itemize}
+\item Quantifying linear relationships between continuous variables
+\item Pearson and Spearman correlation
+\item Simple linear regression
+\item Prediction and inference
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Connection to this week:}
+\begin{itemize}
+\item This week: Association between categorical variables
+\item Next week: Association between continuous variables
+\item Both involve testing independence/association
+\item Different methods, same statistical thinking
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Reading:} Pagano \& Gauvreau Chapter 17 (Correlation and Regression)
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions?}
+\begin{center}
+\Large{Thank you!}
+
+\vspace{1cm}
+
+\textbf{Email:} john.molitor@oregonstate.edu\\
+\textbf{Office:} 153 Milam
+
+\vspace{1cm}
+
+\textbf{This week's materials:}
+\begin{itemize}
+\item Lab: Chi-square and contingency table exercises in R
+\item Worksheet: Practice problems with partners
+\item Office hours: Available for questions on categorical analysis
+\end{itemize}
+\end{center}
+\end{frame}
+
+\end{document}

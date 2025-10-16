@@ -1,0 +1,48 @@
+# Parameters
+set.seed(524)
+pop_mean <- 75
+pop_sd <- 12
+sample_size <- 40
+num_samples <- 1000
+
+# a) Generate 1000 sample means
+sample_means <- replicate(num_samples, {
+  sample_data <- rnorm(sample_size, mean=pop_mean, sd=pop_sd)
+  mean(sample_data)
+})
+
+# c) Compare empirical SD to theoretical SE
+empirical_sd <- sd(sample_means)
+theoretical_se <- pop_sd / sqrt(sample_size)
+
+cat("Empirical SD of sample means:", round(empirical_sd, 3), "\n")
+cat("Theoretical SE:", round(theoretical_se, 3), "\n")
+cat("Difference:", round(abs(empirical_sd - theoretical_se), 3), "\n\n")
+
+# b) and d) Histogram with overlay
+hist(sample_means, breaks=30, prob=TRUE,
+     main="Sampling Distribution of Mean (CLT Demonstration)",
+     xlab="Sample Mean",
+     ylab="Density",
+     col="lightblue",
+     border="white",
+     xlim=c(70, 80))
+
+# d) Overlay theoretical normal curve
+curve(dnorm(x, mean=pop_mean, sd=theoretical_se),
+      add=TRUE, col="red", lwd=3)
+
+# Add legend
+legend("topright",
+       legend=c("Empirical Distribution", "Theoretical Normal (CLT)"),
+       col=c("lightblue", "red"),
+       lty=c(NA, 1),
+       lwd=c(NA, 3),
+       pch=c(15, NA),
+       pt.cex=2)
+
+# Add text annotations
+text(pop_mean, 0.18, paste("Mean =", round(mean(sample_means), 2)),
+     pos=3, col="darkblue")
+text(pop_mean, 0.16, paste("SE =", round(empirical_sd, 2)),
+     pos=3, col="darkblue")

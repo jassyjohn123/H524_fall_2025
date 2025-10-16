@@ -1,0 +1,5 @@
+\beamer@sectionintoc {1}{Review and Introduction}{3}{0}{1}
+\beamer@sectionintoc {2}{Correlation (Chapter 17)}{5}{0}{2}
+\beamer@sectionintoc {3}{Simple Linear Regression (Chapter 18)}{14}{0}{3}
+\beamer@sectionintoc {4}{AI as a Learning Tool for Regression}{29}{0}{4}
+\beamer@sectionintoc {5}{Summary and Examples}{36}{0}{5}

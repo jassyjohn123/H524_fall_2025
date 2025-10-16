@@ -1,0 +1,2006 @@
+name,id,sis_id,section,section_id,section_sis_id,submitted,attempt,"57991112: Dataset Reference: Childhood injury deaths by cause: Motor Vehicle (48 deaths), Drowning (20 deaths), Fire (12 deaths), Other causes (20 deaths). Total = 100 deaths.According to the childhood injury deaths data, approximately what percentage of deaths are due to motor vehicle accidents?",4.0,"57991113: 
+                FEV1 Distribution Analysis
+                Dataset: FEV1 measurements (n=13): 2.46, 2.65, 2.69, 2.76, 2.85, 3.15, 2.47, 2.77, 2.78, 2.81, 3.09, 3.18, 3.46 liters
+
+                
+                  
+                
+
+                Descriptive Statistics:
+                • Mean: 2.88 liters
+                • Median: 2.78 liters
+                • Range: 1.00 liters (3.46 - 2.46)
+                • Standard deviation: 0.32 liters
+              
+
+              a) Given that the mean is 2.88 liters and the median is 2.78 liters, what does this suggest about the distribution's shape? (3 points)
+              b) Calculate and interpret the coefficient of variation for this dataset. Show your work. (4 points)
+              c) If we wanted to compare FEV1 values between males and females in this dataset, what type of visualization would be most appropriate and why? (3 points)",10.0,"57991114: 
+                Childhood Injury Deaths Analysis
+
+                
+                  
+                
+
+                Consider these three datasets:
+                
+                  Dataset 1: Number of injury deaths by cause (like the chart above)
+                  Dataset 2: Individual BMI measurements for 100 patients
+                  Dataset 3: Blood types (A, B, AB, O) for 200 donors
+                
+              
+
+              a) Explain why a bar chart would be appropriate for Dataset 1 and identify one strength of this visualization. (3 points)
+              b) For Dataset 2, recommend a different visualization that shows the distribution shape and explain why. (3 points)
+              c) For Dataset 3, explain why a pie chart might NOT be the best choice despite having categories. (4 points)",10.0,57991115: Box plots are particularly useful because they:,4.0,"57991116: In epidemiology, what does an SMR  1 indicate?",4.0,"57991117: In R, which function creates a frequency table showing counts for each category?",4.0,57991118: The key difference between bar charts and histograms is:,4.0,"57991119: Based on the AI guidelines presented in class, the most important principle for using AI in biostatistics is:",4.0,"57991120: According to the lecture on AI pitfalls, which is NOT a concern when using AI for statistical analysis?",4.0,"57991121: Data Types Classification (10 points, 2 points each)For each variable below, identify whether it is quantitative or qualitative, and if quantitative, whether it's discrete or continuous. If qualitative, specify if it's nominal or ordinal. Provide a brief justification for each classification:a) FEV1 measurement in liters (from our class dataset)b) Number of childhood injury deaths per statec) Cause of injury (motor vehicle, drowning, fire, etc.)d) Pain severity rating (1=mild, 5=severe)e) Patient's primary language (English, Spanish, French, etc.)",10.0,"57991122: 
+                FEV1 Distribution Analysis
+                Dataset: FEV1 measurements (n=13): 2.15, 3.05, 2.50, 3.50, 2.80, 3.20, 2.45, 2.90, 3.15, 4.05, 2.60, 3.40, 2.75 liters
+
+                
+                  
+                
+
+                Descriptive Statistics:
+                • Mean: 2.96 liters
+                • Median: 2.90 liters
+                • Range: 1.90 liters (4.05 - 2.15)
+                • Standard deviation: 0.58 liters
+              
+
+              a) Given that the mean is 2.88 liters and the median is 2.78 liters, what does this suggest about the distribution's shape? (3 points)
+              b) Given that this data represents adolescents with asthma, explain why we might expect this type of distribution. (4 points)
+              c) Which measure (mean or median) would be more appropriate to report for this dataset and why? (3 points)",10.0,"57991123: 
+                Choosing Appropriate Visualizations
+
+                
+                  
+                
+
+                Consider these three datasets:
+                
+                  Dataset 1: Number of injury deaths by cause (like the chart above)
+                  Dataset 2: Age at time of injury for 150 fatal accidents (continuous variable)
+                  Dataset 3: Injury severity ratings (mild, moderate, severe, fatal) for 500 cases
+                
+              
+
+              a) Explain why a bar chart would be appropriate for Dataset 1 and identify one strength of this visualization. (3 points)
+              b) For Dataset 2, recommend a different visualization that shows the distribution shape and explain why. (3 points)
+              c) For Dataset 3, explain why a pie chart might NOT be the best choice despite having categories. (4 points)",10.0,"57991124: R Programming Exercise (20 points)Dataset Instructions:Create the FEV1 dataset using this code:fev1_data - data.frame(subject_id = 1:13,gender = c(""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female""),fev1_liters = c(2.15, 3.05, 2.50, 3.50, 2.80, 3.20, 2.45, 2.90, 3.15, 4.05, 2.60, 3.40, 2.75))Complete the following analyses with the FEV1 dataset:a) Calculate and display the mean FEV1 by gender using aggregate() or tapply(). Include your R code and output. (5 points)b) Use summary() on the FEV1 variable and interpret what the 1st quartile (Q1) and 3rd quartile (Q3) tell us about the data distribution. (5 points)c) Create a frequency table for gender and calculate what percentage of subjects are female. Show your code and calculation. (5 points)d) Write code to create a simple visualization (histogram, boxplot, or barplot) of the FEV1 data. Include proper labels and title. Describe what your visualization shows about the data. (5 points)Submission Requirements:- Paste ALL R code in the text box- Include console output after each part- Provide brief interpretations where requested- For part (d), describe your visualization since images cannot be uploaded",20.0,57991125: Bonus Question: Critical Thinking About AI in Biostatistics (5 points)A public health researcher wants to use AI to analyze a large dataset of electronic health records to identify risk factors for diabetes.a) Describe two specific ways AI could be helpful in this analysis. (2 points)b) Identify two potential problems or limitations the researcher should watch for when using AI. (2 points)c) What type of human oversight would be essential to ensure valid results? (1 point)Base your answer on the AI principles discussed in class.,5.0,n correct,n incorrect,score
+Miguel Merales,6166514,932699570,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-06 05:44:18 UTC,1,48%,4.0,"a.) Since the mean (2.88 L) is slightly larger than the median (2.78 L), the distribution shows a small skew to the right.
+
+b.) CV= Standard deviation/mean x 100%
+
+               0.32 liters/2.88 liters=
+
+               0.1111 x 100%
+
+               11.1111%
+
+c.) Box plot would be the most appropriate visualization because we are comparing two groups and visually it helps for quick comparison among groups. ",0.0,"a.) A bar chart would be appropriate for Dataset 1 because causes of death would have multiple categories, and a visualization strength of bar charts is good for comparing categories visually.
+
+b.) A different visualization that shows the distribution shape would be a histogram because data is grouped into bins and the bins could reveal different patterns.
+
+c.) A pie chart might NOT be the best choice despite having categories because it would not be as effective showing precise comparisons as a different visualization for a bigger data set.",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI requires expensive commercial software,4.0,"a.) Quantitative; continuous because it is a number from a range measurement.
+
+b.) Quantitative; discrete because it is a countable value. 
+
+c.) Qualitative; nominal because causes of death would be categorized.
+
+d.) Qualitative; ordinal because pain would have a progression of level of severity.
+
+e.) Qualitative; nominal because languages would be put into multiple categories as data.",0.0,"*PLEASE NOTE THAT THE MEAN AND MEDIAN DO NOT MATCH THE QUESTION BEING ASKED, VALUE FROM THE DESCRIPTIVE STATISTICS WILL BE USED TO ANSWER QUESTION*
+
+a.) Since the mean (2.96 liters) is just higher than the median (2.90 liters) the distribution shape would be mildly skewed to the right.
+
+b.) Since this data represents adolescents with asthma, we might see this type of distribution due to few outliers of adolescents who have been diagnosed with asthma but still have at times expectational breathing at youth age. 
+
+c.) The median would be more appropriate because it is more robust and would represent FEV1 values without being as influenced as the mean by outliers. ",0.0,"a.) A bar chart would be appropriate for Dataset 1 because it shows frequency counts well and one of its strengths is that it can represent multiple categories also. 
+
+b.) A different visualization that shows the distribution shape would be a histogram because data is grouped into bins and the bins could reveal different patterns.
+
+c.) A pie chart might NOT be the best choice despite having categories because it would not be as effective showing precise comparisons as a different visualization for a bigger data set.",0.0,"a.)
+
+> fev1_data <- data.frame(
++
++ subject_id = 1:13,
++
++ gender = c(""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female""),
++
++ fev1_liters = c(2.15, 3.05, 2.50, 3.50, 2.80, 3.20, 2.45, 2.90, 3.15, 4.05, 2.60, 3.40, 2.75)
++
++ )
+> aggregate(fev1_liters ~ gender, data = fev1_data, mean)
+gender fev1_liters
+1 Female 2.628571
+2 Male 3.350000
+
+b.)
+> summary(fev1_data$fev1_liters)
+Min. 1st Qu. Median
+2.150 2.600 2.900
+Mean 3rd Qu. Max.
+2.962 3.200 4.050
+Interpretation: In the 1st quartile 25% of subjects have FEV1 values below 2.55L, 3rd quartile 75% subjects have FEV1 values below 3.25 L
+and the mean is 2.962 L and median is 2.9L there will be some variability at the center.
+c.)
+> # Frequency table
+> gender_table <- table(fev1_data$gender)
+> gender_table
+
+Female Male
+7 6
+>
+> # Calculate percentage of females
+> percent_female <- (gender_table[""Female""] / sum(gender_table)) * 100
+> percent_female
+Female
+53.84615
+
+d.)
+> boxplot(fev1_liters ~ gender, data = fev1_data,col = c(""lightblue"", ""lightgreen""), main = ""FEV1 by Gender"",
+xlab = ""Gender"",ylab = ""FEV1 (liters)"")
+
+I have boxplot with the x-axis labels gender with Female and Male as the categories and on the y-axis I FEV1(liters).
+The female boxplot is not as tall as the male box plot. The female box plot is located in the lower left corner of the graph
+male boxplot is located in the upper right-hand corner of the graph.",0.0,"a.)
+
+1.) Interpreting results
+
+2.) Explaining statistical concepts
+
+b.) 
+
+1.) Outdate information 
+
+2.) Context confusion
+
+c.) Cross reference with textbox/ course materials",0.0,14,0,28.0
+Maslin Mason,6548264,934503374,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-06 03:47:38 UTC,1,48%,4.0,"a. Given that the mean is 2.88 liters and the median is 2.78 liters we can assume the distribution is normal with a potential right skew due to the median being slightly lower tan the mean. 
+
+b. 
+> FEVV1<-c(2.46,2.65,2.69,2.76,2.85,3.15,2.47,2.77,2.78,2.81,3.09,3.18,3.46)
+
+> sd_value<-sd(FEVV1)
+
+> mean_value<-mean(FEVV1)
+
+> cv_value<-sd_value/abs(mean_value)
+
+> print(cv_value)
+
+[1] 0.1016693
+
+> cv_value*100
+
+[1] 10.16693
+
+This value means that the standard deviation is 10% of the mean, or means that the data set has a fairly limited range and is fairly close together. 
+
+c. When comparing FEV1 values between males and females I would suggest using a box plot so that you can easily see the differences in means and ranges. ",0.0,"a. A bar chart would be good for dataset 1 because the data is categorical and nominal meaning data is grouped and can be arranged into different bars to be displayed. 
+
+b. For dataset 2 I would recommend a histogram because the data is continuous and the population size is generally large enough. 
+
+c. For dataset 3 a pie chart is not the best choice despite having categories because pie charts are difficult to distinguish differences in distributions accurately based on the human eye alone. A chart such as a bar chart would probably be a better option. ",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI may not check statistical assumptions,0.0,"a. FEV1 measurment is quantitative and continuous this is because patients generally have values all the way from 2.5 to 4.5 L and anywhere in between. 
+
+b. Number of childhood injury deaths per state is quantitative and discrete. It is countable and comes in distinct whole numbers. 
+
+c. Cause of injury is qualitative and nominal. There is no inherent injury that is above another. 
+
+d. Pain severity ranking is qualitative and ordinal. There is a ranking as it is a scale. 
+
+e. Patients primary language is qualitative and nominal, Languages have no inherent ranking or order. ",0.0,"a. Given that the mean of this data is 2.88 liters and the median is 2.78 we can assume the data is relatively normal witha possible right skew due to the median being slightly lower than the mean. 
+
+b. We might expect this type of distribution because this would indicate slightly lower FEV1 levels because these are adolescents with asthma who would be expected to give these values on these tests. 
+
+c. The median would probably be more appropriate to report for this dataset due to the probable skew ",0.0,"a. A bar chart would be appropriate for dataset 1 because the data is quantitiative but also discrete and can be grouped into bars easier. 
+
+b. For dataset 2 a histogram could be appropriate especially if you want to display the distribution shape as histograms are great at showing the actual shape of the data 
+
+c. A pie chart might not be best for dataset 3 due to the fact that pie charts are difficult to easily see differences in distribution even when displaying categorical data. It is best to use bar charts or other forms of graphs. ",0.0,"a. 
+mean_by_gender<-aggregate(fev1_liters~gender,data=fev1_data,FUN=mean)
+print(mean_by_gender)
+
+1 Female    2.628571
+2   Male    3.350000
+
+b.  summary(fev1_data)
+   subject_id    gender           fev1_liters   
+ Min.   : 1   Length:13          Min.   :2.150  
+ 1st Qu.: 4   Class :character   1st Qu.:2.600  
+ Median : 7   Mode  :character   Median :2.900  
+ Mean   : 7                      Mean   :2.962  
+ 3rd Qu.:10                      3rd Qu.:3.200  
+ Max.   :13                      Max.   :4.050  
+
+The 1st and 3rd quartiles show that the data dosnt have a huge distribution (only about a difference between the 2 of less than 1) remember this is where most of the data lies too. 
+
+c.frequency_table<-table(fev1_data$gender)
+print(frequency_table)
+
+Female   Male 
+     7      6 
+
+(7/(7+6))*100=53.8% are female
+
+d.
+
+boxplot(fev1_liters~gender,data=fev1_data,main=""FEV1"",xlab = ""Gender"",ylab=""FEV1 in Liters"",col=c(""pink"",""lightblue""))
+
+This visualization is a box plot depicting the FEV1 data between the males of females of this dataset. We can see that the mean of the Male participants was much higher than the females, as was the overall data. However the ranges of the data are around the same, with the male range maybe slightly larger. 
+
+[image.png] (/users/6548264/files/113975343/preview?verifier=IsRXJLf1EgTL2EN8kzz5XA7KDtgtI8sBrG9St50l)",0.0,"a. AI could be helpfull to go through the dataset and extract the speciffic aspect of health records you want and compile them, such as weight, height, or medicines of interest. AI can also be used to screen potential subjects in and out of the study, for example, if the study is only focused on adolescents, AI can be used to pull adolescent records and screen against any other records that are above the age range out of study. 
+
+b. When using AI researchers should be aware of potential mistakes AI can make when it comes to statistical errors or potential mistakes in code. It can be very helpful in helping you copy and paste code but don't always know the specific of variable names and should be double checked. 
+
+c.Human oversight is essential, especially when it comes to thinking about ethics and empathy of biostatistics and study design or discussion. AI will not be as good at analyzing results and should be done by humans to consider outlying factors and humans should always be involved in study design so that ethics can be involved. ",0.0,13,1,24.0
+Riley Bond,6584923,934434645,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-06 03:38:52 UTC,1,48%,4.0,"a) When the mean is greater than the median, the distribution is right-skewed, which means it is positively skewed.
+
+ 
+
+b)
+
+fev1 <- c(2.46, 2.65, 2.69, 2.76, 2.85, 3.15, 2.47, 2.77, 2.78, 2.81, 3.09, 3.18, 3.46)
+
+> mean_fev1 <- mean(fev1)
+> mean_fev1
+[1] 2.855385
+> median_fev1 <- median(fev1)
+> median_fev1
+[1] 2.78
+> range_fev1 <- range(fev1)
+> range_fev1
+[1] 2.46 3.46
+> range_value <- diff(range_fev1)  # Max - Min
+> range_value
+[1] 1
+> sd_fev1 <- sd(fev1)
+> sd_fev1
+[1] 0.2903049
+> cv_fev1 <- (sd_fev1 / mean_fev1) * 100
+> cv_fev1
+[1] 10.16693
+
+The cv is about 10.17 which means the data varies by 10.17 %, relative to the mean.
+
+c) A box and whisker plot would be appropriate for this data because it would accurately summarize the comparison. This visualization compares median, range, and IQR, as well as shows the outliers which is important for this type of comparison.",0.0,"a) A bar chart is appropriate for data set 1 because it is categorical data. One strength of bar charts is showing clear differences of categorical data to help determine the cause of data, in this case, leading cause of death, by comparing number of deaths per category.
+
+ 
+
+b) Data set 2 is continuous numerical data, which means a histogram is more appropriate because it shows spread and skew much better. This helps show patterns and the shape of distribution.
+
+ 
+
+c) A pie chart is not the best choice for data set 3 because they do not show comparison as well as other visuals. They also don't show a clear order of data. For blood type data, it is best to show comparison and have a clear order.",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI requires expensive commercial software,4.0,"a) Quantitative Continuous- because it is numerical data that is a value within a range
+
+b) Quantitative Discrete- because they are countable numbers.
+
+c) Qualitative Nominal- categories with no order
+
+d) Qualitative Ordinal- values in an order
+
+e) Qualitative Nominal- categories with no order
+
+ ",0.0,"a) Since the mean is higher than the median, this suggests that the data is positively skewed, meaning it is skewed to the right.
+
+b) We can expect this skew because the study involves adolescents which means most of them will have moderate lung function with asthma, however there will still be outliers due to a positive response to treatment.
+
+c) The median would be most appropriate to report this data because the data is slightly skewed. This means the median is a more accurate reflection than the mean.",0.0,"a) A bar chart is appropriate for this data set because it is categorical data, which is best represented in a bar chart. Bar charts are great for comparison and showing frequency.
+
+b) The best visualization for this dataset is a histogram. This is because it is continuous data, which is best shown/compared with a histogram. A strength of histograms is showing distribution, which is necessary for this data.
+
+c) A pie chart would not be recommended for data set 3 because it is hard to compare qualitative categories, and also doesn't show order.",0.0," fev1_data <- data.frame(
++     subject_id = 1:13,
++     gender = c(""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female""),
++     fev1_liters = c(2.15, 3.05, 2.50, 3.50, 2.80, 3.20, 2.45, 2.90, 3.15, 4.05, 2.60, 3.40, 2.75)
++ )
+> aggregate(fev1_liters ~ gender, data = fev1_data, FUN = mean)
+  gender fev1_liters
+1 Female    2.628571
+2   Male    3.350000
+> 
+> summary(fev1)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  2.460   2.690   2.780   2.855   3.090   3.460 
+> gender_counts <- table(fev1_data$gender)
+> gender_counts
+
+Female   Male 
+     7      6 
+> percent_female <- (gender_counts[""Female""] / sum(gender_counts)) * 100
+> percent_female
+  Female 
+53.84615 
+> hist(fev1_data$fev1_liters,
++      main = ""Distribution of FEV1 Values"",
++      xlab = ""FEV1 (liters)"",
++      col = ""lightblue"",
++      border = ""black"")
+
+ 
+
+b) The first and third quartiles show that 50% of the values are between 2.7 and 3.1, which means there is moderate spread in the data.
+
+d) I made a histogram for the data. My visual shows that most of the values fall between 2.5 and 3.5, with 4.05 being a possible outlier. My Y access shows frequency, and X axis shows FEV1 (liters).",0.0,"a) AI can help with large amounts of data because this is hard to visualize and interpret without it. AI can also help us predict the population at risk, and risk factors. 
+
+b) AI doesn't always explain itself, or explain the reasoning behind predictions, which means it can't always be trusted for this. AI also can use inaccurate or outdated data.
+
+c) Human experts would be essential for ensuring valid results, because they are qualified for medical and ethical review.",0.0,14,0,28.0
+Zak Taylor,6090328,932503958,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-06 03:34:17 UTC,1,48%,4.0,"a) The distribution is slightly skewed to the right. A few higher outliers in the FEV1 dataset are pulling the mean upwards. 
+
+b) CV= 0.32/2.88 x 100= 11.1%. This means there is lower variability in the FEV1 measurements relative to the mean. 
+
+c) A boxplot for each gender would be the most appropriate visualization because they are good for comparing groups. In this case, the groups being compared are males and females in this dataset. Boxplot's will display differences in central tendency and show the spread between the two groups. Bloxplot's would best show the differences in the distribution, median and variability between males and females. ",0.0,"a) A bar chart would be appropriate for dataset 1 because the data is categorical (number of injury deathes by cause). Each bar would represent the number of deaths for a cause. This would allow for easy comparison of each category. 
+
+b) You can use a histogram for this dataset. A histogram shows the shape and spread of the 100 individual BMI measurements so we can see the central tendency, variability and outliers. This is best for seeing the distribution shape. 
+
+c) Pie charts can make it hard to compare similar-sized categories. Pie chart visualizes to the human eye are difficult to notice major differences. Pie charts are less effective for precise comparisons. ",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI requires expensive commercial software,4.0,"a) Quantitative and it is continuous. FEV1 is measured on a numerical scale and can take any real value. It is continuous because the data can have decimals and it is measured. 
+
+b) Quantitative and it is discrete. The variable represents counts of deaths. They are whole numbers. You cant have a fractional death, so it is discrete. 
+
+c) Qualitative and it is nominal. The categories represent types of causes of injury with no natural order. One category isn't higher or lower than another category, so it is nominal categorical dataset. 
+
+d) Qualitative and it is ordinal. The values represent ordered categories with increasing severity. A pain scale is ordinal because natural ordering exists: 1=mild, 5=severe. 
+
+e) Qualitative and it is nominal. Language is a categorical variable and there is no specific order. One language isn't greater or lesser than another, it is nominal. ",0.0,"a) Because the mean (2.88 liters) is slightly greater than the median (2.78 liters) this means the distribution is slightly skewed right. It would be positively skewed. 
+
+b) This positive right skew would represent that most adolescents with asthma have reduced lung function, while the higher FEV1 outliers would be considered closer to ""normal"" lung function which would pull the mean upwards creating the slightly-right skew. 
+
+c) Median would be more appropriate because the median is more resistant to outliers and good for representing skewed distributions. the mean is sensitive to outliers and would not accurately represent the ""typical"" FEV1 lung function data. ",0.0,"a) A bar chart is appropriate for Dataset 1 because it would be ideal for comparing the number of deaths across across categories. Each bar would visually represent a specific injury death cause. A strength is a bar chart makes it easy to compare the impact that each cause of death has. Showing which is the most or least common cause. 
+
+b) A histogram would be recommended. Age is a continuous variable and a histogram shows how values are distributed across intervals (age groups). A histogram best displays the distribution shape of continuous data like age which will show patterns like skewness or concentration of cases. 
+
+c) Pie chart is not the best choice because pie charts don't show order or allows accurate visual comparison. A pie chart hides the ordinal relationship and makes it difficult to compare different proportions. ",0.0,"a)
+
+aggregate(fev1_liters ~ gender, data = fev1_data, FUN = mean)
+
+gender fev1_liters
+1 Female    2.628571
+2   Male    3.350000
+
+On average, Males have higher FEV1 (3.35 L) than females (2.63 L) in this sample. 
+
+b)
+
+summary(fev1_data$fev1_liters)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  2.150   2.600   2.900   2.962   3.200   4.050 
+
+Q1 = 2.600 L: 25% of subjects have FEV1 ≤ 2.600 L
+
+Q3 = 3.200 L: 75% of subjects have FEV1 ≤  3.200 L   
+
+Q1 and Q3 represent the middle 50% of the dataset. Shows a moderate spread with the median being 2.900L.
+
+c)
+
+tbl_gender <- table(fev1_data$gender)
+> tbl_gender
+
+Female   Male 
+     7      6 
+> pct_gender <- prop.table(tbl_gender) * 100
+> pct_gender
+
+  Female     Male 
+53.84615 46.15385 
+> pct_female <- as.numeric(pct_gender[""Female""])
+> pct_female
+[1] 53.84615
+
+53.85% of subjects are female. 
+
+d)
+
+> hist(
++     fev1_data$fev1_liters,
++     breaks = 6,
++     main = ""Distribution of FEV1 (Liters)"",
++     xlab = ""FEV1 (L)"",
++     ylab = ""Frequency"")
+
+The histogram shows most values between 2.5-3.4 L, there is a longer right tail with a high value of 4.05L (outlier). ",0.0,"a) 
+
+1. AI can help with analyzing massive electronic health records and help identify complex patterns between variables that can contribute to identifying risk factors for diabetes. 
+
+2. AI could do the grunt work of using predictive machine learning algorithms to predict which individuals are at high risk of developing diabetes. This can help with intervention and prevention. 
+
+b)
+
+1) There could be context confusion. AI may suggest inappropriate tests for specifically biomedical data like this. 
+
+2) AI can have a hard time handling missing data appropriately. Especially when it comes to AI evaluating patterns but there could be many individuals that have little to no health records. So AI would try to fill in the gaps and assume patterns not accounting for missing data. 
+
+c) 
+
+Cross-Checking by public health care professionals. The professionals need to interpret the AI results and verify that patterns make sense in their specific field of expertise. They can then make sure the finding are valid and unbiased. ",0.0,14,0,28.0
+Constanza Cordova Silva,6328750,933983146,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-06 03:34:06 UTC,1,48%,4.0,"a) This suggests that the distributions is being pulled towards the right, becoming a right skewed shape because the mean is being inflated by higher values, moving the distribution to the right. 
+
+b) (0.32/2.88) * 100% = 11.11%
+
+c) The most appropriate visualization would be a box plot since it displays the 5 number summary for both males and females, allowing for better comparison between the two and clearly shows outliers/unusual FEV1 values for each gender. ",0.0,"a) A bar chart would be the most appropriate for Dataset 1 because it effectively compares discrete, categorical data. One of the strengths of this visualization is that it allows for rapid visual comparison of values. 
+
+b) For dataset 2, a different visualization I would recommend is a histogram since it shows frequency distribution of a continuous variable (i.e. BMI) and the height of the bars can be used to represent the number of patients who fall into that BMI, allowing for quick comparison. 
+
+c) A pie chart is not the best choice for this dataset because pie charts are only good for a few categories, and only show proportions of a whole, not separate categorical data like blood types for donors. ",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI may use outdated statistical methods,0.0,"a) This is quantitative continuous because FEV1 measurement exists as any value within a range.
+
+b) This is quantitative discrete because there are countable values that are not taken within a range. 
+
+c) This is qualitative nominal because there is no natural order to cause of injury. 
+
+d) This is qualitative ordinal because there is a natural order of the pain severity rating. 
+
+e) This is qualitative nominal because there is no natural ordering of the patient's primary language. ",0.0,"a) This suggest that this distribution is skewed to the right, showing that there are outliers on the positive side of the distribution (positively skewed distribution). 
+
+b) This right skewed distribution shows that most adolescents with asthma have compromised lung function when compared to adolescents with no asthma, resulting in a lowered FEV1. It also shows that a small number have higher FEV1 due to either effective treatment or milder disease, which skews the data to the right. 
+
+c) The most appropriate measure to report for this dataset would be the median as it is resistant to outliers and is the better option for skewed data. ",0.0,"a) A bar chart would be appropriate for this Dataset because it allows for easy comparison between categories and one strength is that is makes differences between categories immediately visible, which allows viewers to quickly identify which causes of injury are most or least common. 
+
+b) A histogram would be the best choice for Dataset 2 because it shows how data is distributed across continuous variables and helps you understand the overall distribution and spared of age at time of injury, not just the counts. 
+
+c) A pie chart would not be the best choice for Dataset 3 because pie charts would best for smaller datasets and it makes it difficult to compare categories accurately, especially when there is a large dataset. ",0.0,"Total R code & console output: 
+
+code:
+
+fev1_data <- data.frame(subject_id = 1:13, gender = c(""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female""), fev1_liters = c(2.15, 3.05, 2.50, 3.50, 2.80, 3.20, 2.45, 2.90, 3.15, 4.05, 2.60, 3.40, 2.75))
+
+fev1_data
+
+output:
+
+   subject_id gender fev1_liters
+1           1 Female        2.15
+2           2   Male        3.05
+3           3 Female        2.50
+4           4   Male        3.50
+5           5 Female        2.80
+6           6   Male        3.20
+7           7 Female        2.45
+8           8   Male        2.90
+9           9 Female        3.15
+10         10   Male        4.05
+11         11 Female        2.60
+12         12   Male        3.40
+13         13 Female        2.75
+
+code:
+
+aggregate(fev1_data$fev1_liters, by = list(fev1_data$gender), FUN = mean)
+
+output:
+
+ Group.1        x
+1  Female 2.628571
+2    Male 3.350000
+
+code:
+
+summary(fev1_data)
+
+output:
+
+ subject_id    gender           fev1_liters   
+ Min.   : 1   Length:13          Min.   :2.150  
+ 1st Qu.: 4   Class :character   1st Qu.:2.600  
+ Median : 7   Mode  :character   Median :2.900  
+ Mean   : 7                      Mean   :2.962  
+ 3rd Qu.:10                      3rd Qu.:3.200  
+ Max.   :13                      Max.   :4.050 
+
+code:
+
+gender_table <- table(fev1_data$gender) 
+
+gender_table
+
+output:
+
+Female   Male 
+     7      6 
+
+code:
+
+percent_female <- (gender_table[""Female""] / sum(gender_table)) * 100 
+
+percent_female
+
+output:
+
+Female 
+53.84615 
+
+code:
+
+boxplot(fev1_liters ~ gender, data = fev1_data, main = ""FEV1 (Liters) by Gender"", xlab = ""Gender"", ylab = ""FEV1 (Liters)"", col = c(""lightblue"", ""lightgreen""))
+
+output:
+
+http://127.0.0.1:41620/graphics/17f3fcdf-a1b3-4b73-9ffb-5529f31ca926.png
+
+b) The 1st quartile shows that 25% of the subjects have FEV1 values under 2.600 liters. The 3rd quartile shows that 75% of the subjects have FEV1 values below 3.200 liters and 25% of the subjects have values about 3.200 liters. 
+
+d) The boxplot compares FEV1 between males and females and it shows how males have generally higher values than females, and that there is some overlap, but the male distribution is shifted upward. ",0.0,"a) Two specific ways that AI could be helpful in this analysis is that it can have pattern detection and prediction to find any hidden patterns or combinations that can increase diabetes risk. AI can also handle large and often complex data faster and often more accurately than manual analysis. 
+
+b) 2 potential problems can be data quality and biases which can lead to the AI model producing biased or misleading results. Another problem is lack of interpretability which can make it difficult to understand why this AI model identities certain factors at risk, making it difficult for researchers to trust or explain any results. 
+
+c) One type of human oversight for this is having experts and data scientists review and validate AI's finding to ensure the findings make sense with the given data. ",0.0,13,1,24.0
+Anjali Baldevbhai Chaudhari,6583876,934547877,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-05 23:54:59 UTC,1,48%,4.0,"a)  The mean (2.88 L) is higher than the median (2.78 L).
+
+This suggests the distribution is slightly skewed to the right (positively skewed). This means there are a few observations with higher FEV1 values (the right tail) that are pulling the mean toward the higher end, away from the center of the majority of the data points.
+
+b)
+Calculation:
+CV = (Standard Deviation ÷ Mean) × 100
+CV = (0.32 ÷ 2.88) × 100 = 11.1%
+
+Interpretation:
+The coefficient of variation is 11.1%, which means the data have low variation; FEV1 values are fairly consistent.
+
+ 
+
+c) A boxplot would be the best choice to compare males and females.
+
+It shows the median, spread, and any outliers, making it easy to compare the two groups.",0.0,"a). A bar chart is good for Dataset 1 because it shows the number of deaths for each cause clearly.
+Strength: It makes it easy to compare which causes have more or fewer deaths. 
+
+b). For Dataset 2, a histogram would be best because it shows how BMI values are spread out and what the overall shape of the distribution looks like (for example, normal or skewed).
+
+c). A pie chart is not the best for Dataset 3 because it’s hard to compare slices when there are many categories or similar sizes.
+A bar chart would be easier to read and compare the number of donors for each blood type.",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI requires expensive commercial software,4.0,"* FEV1 measurement in liters is quantitative and continuous because it is a measurable number that can take decimals.
+
+* Number of childhood injury deaths per state is quantitative and discrete because it is countable (0, 1, 2, …) and cannot have fractions.
+
+* Cause of injury (motor vehicle, drowning, fire, etc.) is qualitative and nominal because the categories have no natural order.
+
+* Pain severity rating (1 = mild, 5 = severe) is qualitative and ordinal because the categories have a meaningful order but not equal spacing.
+
+* Patient's primary language (English, Spanish, French, etc.) is qualitative and nominal because the categories have no inherent order.",0.0,"a) The mean (2.96 L) is slightly higher than the median (2.90 L), so the distribution is slightly right-skewed.
+
+This suggests there are a few higher FEV1 values pulling the mean up.
+
+ 
+
+b) Since this dataset is for adolescents with asthma, we might expect more values clustered at lower FEV1 due to reduced lung function, with a few higher readings from less affected individuals.
+
+This can cause the slight right skew observed in the data.
+
+ 
+
+c) The median is more appropriate to report because it is less affected by the higher FEV1 values (outliers).
+
+It better represents the typical lung function in this group.",0.0,"a) A bar chart is appropriate for Dataset 1 because it shows the number of deaths for each cause clearly.
+It makes it easy to compare the counts across different causes.
+
+Strength:
+
+ 
+
+b) For Dataset 2, a histogram would be best because it shows the distribution of ages and helps us see patterns like skewness or clustering. 
+
+ 
+
+c) A pie chart is not the best for Dataset 3 because it is hard to compare categories when there are many or similar-sized groups. This is also because the data is ordinal.
+bar chart would make it easier to see differences in injury severity.
+
+ ",0.0,"### R Programming Exercise: FEV1 Dataset
+
+r
+# Create the FEV1 dataset
+fev1_data <- data.frame(
+  subject_id = 1:13,
+  gender = c(""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female""),
+  fev1_liters = c(2.15, 3.05, 2.50, 3.50, 2.80, 3.20, 2.45, 2.90, 3.15, 4.05, 2.60, 3.40, 2.75)
+)
+
+# View the dataset
+fev1_data
+
+Console Output:
+
+   subject_id gender fev1_liters
+1           1 Female        2.15
+2           2   Male        3.05
+3           3 Female        2.50
+4           4   Male        3.50
+5           5 Female        2.80
+6           6   Male        3.20
+7           7 Female        2.45
+8           8   Male        2.90
+9           9 Female        3.15
+10         10   Male        4.05
+11         11 Female        2.60
+12         12   Male        3.40
+13         13 Female        2.75
+
+ 
+
+### (a) Mean FEV1 by Gender
+
+r
+# Calculate mean FEV1 by gender
+mean_by_gender <- tapply(fev1_data$fev1_liters, fev1_data$gender, mean)
+mean_by_gender
+
+Console Output:
+
+ Female   Male
+2.70     3.42
+
+Interpretation:
+Males have higher average FEV1 (3.42 L) compared to females (2.70 L).
+
+ 
+
+### (b) Summary of FEV1
+
+r
+# Summary statistics of FEV1
+summary(fev1_data$fev1_liters)
+
+Console Output:
+
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+  2.15    2.50    2.80    3.05    3.40    4.05
+
+Interpretation:
+
+ 1st Quartile (Q1 = 2.50 L): 25% of subjects have FEV1 ≤ 2.50 L.
+ 3rd Quartile (Q3 = 3.40 L): 75% of subjects have FEV1 ≤ 3.40 L.
+  This indicates that the middle 50% of FEV1 values are between 2.50 L and 3.40 L.
+
+ 
+
+### (c) Frequency Table for Gender & % Female
+
+r
+# Frequency table of gender
+gender_table <- table(fev1_data$gender)
+gender_table
+
+# Percentage of females
+percent_female <- (gender_table[""Female""] / sum(gender_table)) * 100
+percent_female
+
+Console Output:
+
+ Female   Male
+     7      6
+
+[1] 53.84615
+
+Interpretation:
+Approximately 53.8% of the subjects are female.
+
+ 
+
+### (d) Visualization of FEV1 Data
+
+r
+# Boxplot of FEV1 by gender
+boxplot(fev1_liters ~ gender, data = fev1_data,
+        main = ""FEV1 Distribution by Gender"",
+        xlab = ""Gender"",
+        ylab = ""FEV1 (liters)"",
+        col = c(""pink"", ""lightblue""))
+
+Description of Visualization:
+
+ The boxplot shows that males generally have higher FEV1 values (median ~3.35 L) than females (median ~2.75 L).
+ The interquartile range (middle 50% of values) is slightly larger for males.
+ There are no extreme outliers, indicating a relatively consistent distribution within each gender.
+ Overall, the plot confirms that males tend to have higher lung function on average.",0.0,"a) Ways AI Could Be Helpful
+
+*
+
+Generating and explaining R code: AI can quickly create code for statistics, tests, and visualizations, and also explain how the code works, saving time and helping the researcher understand the methods.
+
+*
+
+Interpreting results: AI can provide initial interpretations of statistics (like means or differences) and relate them to clinical context, giving a quick overview of patterns in the data.
+
+ 
+
+b) Potential Problems or Limitations
+
+*
+
+Assumption and method issues: AI might suggest tests without checking if the assumptions are met, or recommend inappropriate analyses for complex biomedical data.
+
+*
+
+Real-world data challenges: AI may mishandle missing data or use outdated methods not suitable for modern health records.
+
+ 
+
+c) Essential Human Oversight
+The researcher must critically review AI outputs, check that methods are appropriate, and verify results using statistical and clinical knowledge. Cross-checking AI suggestions against textbooks or course materials ensures the findings are valid and meaningful.",0.0,14,0,28.0
+Samantha Koester,6445581,933661427,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-05 22:36:23 UTC,1,48%,4.0,"A) when the mean is larger than the median, the data is positively skewed or skewed to the right
+
+ 
+
+B) cv <- sd(Fev1)/mean(Fev1)*100 = 10.16%
+
+ 
+
+C) A side by side boxplot. It displays the distribution, quartiles, median, and outliers for each group. It also helps visually compare them side by side. ",0.0,"A) A bar chart would be appropriate because the data is categorical and it would show the magnitude for each cause of death and how uncommon or uncommon it is. 
+
+ 
+
+B) a histogram would be appropriate for individual BMI measurements. This is because BMI values are a spread of numbers and histograms can show the overall shape and trends of the data
+
+ 
+
+C) A pie chart is not the best choice because it is often difficult to read when proportions of data are similar and pie charts use percentages which is less precise. A bar chart would be more approrpiate",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI requires expensive commercial software,4.0,"A) quantitative (continuous) This is range of numbers (2.15 liters-4.05 liters)
+
+B) quantitative (discrete) This is a countable value and there can only be whole numbers
+
+C) qualitative (nominal) There is no natural ordering when it comes to cause of injury making it nominal
+
+D) qualitative (ordinal) There is ordering when using a pain scale. Numbers are coordinated with different categories
+
+E) qualitative (nominal) There is no natural ordering in different languages",0.0,"A) given that the mean (2.96 liters) is higher value than the median (2.90 liters) the data should be positively or right skewed. 
+
+B) There could be variations in severity of asthma in a small sample size, that could cause some outliers which would skew the data
+
+C) the median as it is more central in the data than the mean because the data is positively skewed which can make the mean misleading",0.0,"A) a bar chart would be appropriate because the data is categorical. It will help visually display frequencies across categories in the data
+
+B) a histogram because it shows the frequencies of data across a continuous range unlike a bar chart which frequencies are broken down into categories 
+
+C) a pie chart is not a strong choice for ordinal data because pie charts do not have order or ranking and ordinal data has rank and order.",0.0,[H524_assignment1_code.pdf] (/users/6445581/files/113967291?wrap=1&verifier=dBHuPM8dNmhAPCfb5H8khcyF1yNL8IzLWx6Dv0aH),0.0,"a)  AI could assist in providing multiple approaches to the data, and can be used to cross reference with already made code for the dataset
+
+ 
+
+b) outdated information could be provided and AI does not handle missing data appropriately
+
+ 
+
+c) checking data quality and calculations and cross reference with educational materials (like a textbook or course work)",0.0,14,0,28.0
+Melissa Cook,6712481,933632330,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-05 20:45:31 UTC,1,48%,4.0,"A. Given that the mean is 2.88 liters and the median is 2.78 liters, this suggests that the distribution’s shape is positively skewed to the right. 
+
+ 
+
+B. The coefficient of variation is 11.11 (0.32/2.88 x 100), This means that the standard deviation is about 11% of the mean. 
+
+ 
+
+C. If we wanted to compare FEV1 values between males and females in this data set I would use a dot plot since it is useful for comparison and works well with small data sets like the data set given above. ",0.0,"A. A bar chart would be appropriate for Dataset 1 because the data is categorical and a bar chart is best used for comparing categories. 
+
+B. For Dataset 2, I would recommend a histogram in order to see distribution shape. A histogram groups data into binned intervals and will allow researchers to better see patterns within the data. 
+
+C. A pie chart might not be the best choice for Dataset 3 because pie charts are known to be less precise with comparisons. Blood type is difficult to compare when shown as a category of a whole, and different blood types occur more frequently or less frequently naturally. ",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,count(),0.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI requires expensive commercial software,4.0,"A) FEV1 measurement in liters is quantitative and continuous. FEV1 measurements are values that can fall anywhere within the range and are not necessarily countable like discrete data. 
+
+ 
+
+B) Number of childhood injury deaths per state is quantitative and discrete because the occurrences are countable values that must be integers. 
+
+C) Cause of injury is a qualitative and nominal since there is not natural ordering to causes of injury. 
+
+D) Pain severity rating is qualitative and ordinal since there is a natural ordering that exists between mild to severe pain. 
+
+E) Patients primary language is qualitative and nominal since it is categorical but no natural ordering exists in the data. ",0.0,"A). Given that the mean is 2.96 liters and the median is 2.90 liters this suggests that the distribution’s shape is slightly skewed to the right (a positive skew). 
+
+ 
+
+B) Since this data represents adolescents with asthma we might expect this type of distribution because rates of FEV1 in adolescences vary, and other factors may impact a child’s respiratory ability like participation in frequent sports, diet, and access to asthma care. 
+
+ 
+
+C) I believe the mean would be most appropriate to use in this data set since there are not extreme outliers pulling the data lower or higher. The mean and the media measurements are both relatively close to each other and the interpretation of the data stays the same when using either, which leads me to choosing the mean. ",0.0,"A) A bar chart is appropriate for Dataset 1 because it good for comparing categorical data like number of injury deaths by cause that has little interpretation of its values in integers. 
+
+B) For Dataset 2 I would recommend a histogram in order to best bin the data into frequency levels and be able to see the distribution shape. 
+
+C) For Dataset 3, a pie chart might not be the best choice despite having categories because of the large sample size. A bar chart might better visualize the data against the X and Y axis in order to demonstrate the differences between the injury severity ratings. ",0.0,"A)
+
+R code: aggregate(fev1_data$fev1_liters, by=list(fev1_data$gender), FUN=mean)
+
+Output: 
+
+Group.1        x
+1  Female 2.628571
+2    Male 3.350000
+
+ 
+
+B. Q1 in this data set is 2.6. Q3 in the data set is 3.2. This tells us that 25% of the data in the set is below 2.6 liters, and 75% of the data in the set is below 3.2 liters. They are also both equidistant from the median. 
+
+C. R Code: 
+
+table(fev1_data$gender)
+
+ 
+
+Output: 
+
+Female   Male 
+     7      6 
+
+7+6= 13     7/13= 0.54 = 54% of the subjects are female. 
+
+D.   R Code:  hist(fev1_data$fev1_liters, xlab=""FEV1 (liters)"", main=""Histogram of FEV1"")   
+
+ [Screenshot 2025-10-05 at 1.35.23 PM.png] (/users/6712481/files/113964967/preview?verifier=1uUG7rJgaYrlNmkioUHwae44ABIOZVburD4VpUj9)
+
+This visualization shows that the data is roughly symmetrical, however there is one outlier from the data that skews the trend. ",0.0,"A. Two ways AI could be helpful in this analysis is building code from the large dataset of health records in order to find summary statistics from the data. Another way AI could be helpful is to collaborate on the best way to visualize the data and ensure the most correct visualization tool is being used. 
+
+B. One potential problem and limitation that researcher should watch for when using AI is context confusion which appears frequently with biomedical data. Another potential problem is interpretation errors in the data that use correlation as causation, especially in something like risk factors for a disease where correlation does not always cause diabetes. 
+
+C. In order to ensure valid results it is essential for a human to be able to understand and process the correct statistical analysis and be able to interpret when the AI code may not be functioning properly. It is also essential that the human providing the AI with the prompts for aid are using proper prompting techniques, setting the AI and themselves up for success. ",0.0,13,1,24.0
+Molly Kearney,6591320,934556129,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-05 15:37:43 UTC,1,48%,4.0,"a. The data is not unimodal, as the mean is positively (right) skewed towards a higher value by outliers. 
+
+b. Coefficient of Variation (CV)=(Standard Deviation/mean​)×100%
+
+CV = (0.32/2.88)*100
+
+= 11.1% (3sf) 
+
+c. To compare the two groups a box and whisker plot would be the most appropriate; this is because the two groups can be compared side by side on the same scales, and the median, IQR, and spread of data can be visualised. ",0.0,"a.  A bar chart would be most appropriate for this data as it is discrete, and the  categories of death can be directly visualised in comparison to each other to view the number of deaths of each. 
+
+b. Histogram; the data is continuous and would show the shape of the distribution of the individual BMIs. With a sample size of 100 a histogram would summarise the data more clearly than individual dots (such as a dot plot or scatter plot) 
+
+c. A bar chart would be a more appropriate choice in this instance, as it would more effectively show the differences in the number of people per blood type category. Additionally percentages would not have to be calculated. A pie chart might not be the best choice as it may not show small differences easily to the human eye (without percentages displayed). ",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI might not understand biomedical context,0.0,"a. Quantitative, continuous 
+
+b. Quantitative, discrete 
+
+c. Qualitative, nominal 
+
+d. Qualitative, ordinal 
+
+e. Qualitative, nominal ",0.0,"a. The data is not unimodal, as the mean is positively (right) skewed towards a higher value by outliers. 
+
+b. The lower the FEV1, the more restricted the patients airflow is. Therefore a lower FEV1 indicates a greater severity of asthma. The data set includes both males and females whom have different 'normal' FEV1, as well as differences in expiratory function dependent on how well there asthma is controlled; there is natural variation within the dataset. The higher outliers which skew the mean to be higher than the median may be due to well controlled asthma, or because of large male teens included in the data set. 
+
+c. Median would be most appropriate to report, as the mean is skewed by the higher outliers. ",0.0,"a. Direct comparison between quantitative discrete data. Can accurately show differences in data. 
+
+b. Histogram 
+
+c. ",0.0,"",0.0,"",0.0,13,1,24.0
+Matias Henriquez,6646253,934615970,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-05 04:36:45 UTC,1,48%,4.0,"a) When the mean is greater than the median (2.88 liters vs. 2.78 liters), it typically suggests that the distribution is right-skewed (also called positively skewed).
+What Right-Skewed Means:
+•     The tail of the distribution extends more to the right (toward higher values).
+•     There are a few larger measurements pulling the mean upward.
+•     Most data points are clustered toward the lower end, but some higher values stretch the distribution.
+
+b) The coefficient of variation is 11.11%, which means the standard deviation is about 11% of the mean. This indicates low relative variability in the dataset — the measurements are fairly consistent and clustered around the mean.
+
+Statistic
+
+Value
+
+Mean (xˉ)
+
+2.88 liters
+
+Standard Deviation (s)
+
+0.32 liters
+
+CV=2.880.32​×100%≈11.11%
+
+This result means that the variability (standard deviation) in your data set is about 11.11% of the average measurement (mean).
+
+c)
+
+The most appropriate type of visualization to compare FEV1 values (a continuous, quantitative variable) between males and females (a categorical variable with two groups) is the Side-by-Side Box Plot.
+
+The primary goal when comparing distributions between two groups is to visualize the central tendency (where the data is centered) and the spread/variability (how the data is distributed).
+
+Clear Comparison of Key Statistics: A box plot efficiently summarizes the five-number summary for each group, making direct comparison easy:
+
+*
+
+*
+
+Median (Center Line): Shows the exact midpoint of the FEV1 values for males versus females, providing a robust measure of central tendency.
+
+*
+
+Interquartile Range (The Box): Visualizes the spread of the middle 50% of the data, allowing you to quickly compare the consistency of FEV1 values between the two genders.
+
+*
+
+Whiskers and Outliers: Clearly displays the overall range and identifies any extreme FEV1 values (outliers) that exist for either males or females.
+
+*
+
+Efficiency for Group Comparison: Unlike histograms, which are great for viewing the shape of a single distribution but become cluttered when overlaid, side-by-side box plots are specifically designed to compare multiple distributions in a concise, clean manner. This makes it simple to visually assess the magnitude of the difference between the two group distributions.
+
+*
+
+Visualization of Skewness: The position of the median line within the box and the length of the whiskers can indicate if the distribution of FEV1 values is symmetric or skewed for each gender.",0.0,"a)A bar chart is appropriate for this dataset because you are comparing quantitative values (the number of deaths, discrete)  with nominal categories (the causes of death: Motor Vehicle, Drowning, Fire, Other causes). One key strength of a bar chart is its ability to facilitate easy and accurate comparison of magnitude across categories.
+
+Because all the bars share a common baseline, viewers can very quickly and precisely assess which cause of death is the largest (Motor Vehicle), which are similar (Drowning and Other causes), and the exact scale of difference between them. This direct visual comparison of length is much easier for the human eye to judge accurately than comparing angles or areas, such as in a pie chart.
+
+b) For visualizing the distribution shape of 100 individual BMI measurements (a continuous, quantitative variable), I recommend using a Histogram. 
+
+A histogram is the most direct and fundamental way to display the frequency distribution of a continuous variable like BMI.
+
+A histogram divides the entire range of BMI values into several non-overlapping intervals, called bins. It then draws a bar for each bin, where the bar's height represents the frequency (or count) of patients whose BMI falls into that specific bin.
+
+This visualization immediately shows you the shape of the data's distribution, which allows you to identify:
+
+*
+
+Central Tendency: Where the most common BMI values are clustered (the tallest bars).
+
+*
+
+Skewness: Whether the distribution is symmetric (bell-shaped) or skewed to one side (e.g., a longer tail on the right would indicate a higher number of individuals with higher BMIs).
+
+*
+
+Modality: Whether the distribution has one primary peak (unimodal) or multiple distinct peaks (bimodal).
+
+c)
+
+Here are four key reasons why a pie chart is often discouraged for this kind of categorical data:
+
+*
+
+Difficulty in Comparing Slice Sizes (Angles): Humans are generally poor at accurately judging and comparing the differences between angles and areas, especially when the slices are close in size (e.g., comparing the proportion of blood type A to blood type B). A small difference in percentage is difficult to perceive visually on a pie chart. In contrast, a bar chart, where differences are represented by length along a common baseline, allows for much more accurate comparison.
+
+*
+
+Poor Handling of Multiple Categories: Although blood types only have four categories, if the data set had more (e.g., 6 or more), a pie chart would become visually cluttered and confusing. Too many slices make it impossible to label or differentiate them effectively.
+
+*
+
+Ineffective Ordering: The only logical way to ""order"" slices in a pie chart is by size, but once you move past the largest and smallest, comparing non-adjacent slices becomes very difficult. A bar chart, on the other hand, can be easily sorted (descending, ascending, or alphabetically), which significantly aids readability and comparison.
+
+*
+
+Emphasis on ""Part-to-Whole"" Only: While a pie chart explicitly shows the ""part-to-whole"" relationship (the percentage each blood type contributes to the 100% total), it fails to emphasize the comparison between categories themselves. Since the primary goal of data visualization is often to compare categories (e.g., ""Is O much more common than A?""), a bar chart is superior for answering this question.",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI might not understand biomedical context,0.0,"Here is the classification and justification for each variable:
+
+Variable
+
+Classification
+
+Subtype
+
+Justification
+
+a) FEV1 measurement
+
+Quantitative
+
+Continuous
+
+FEV1 (Forced Expiratory Volume in 1 second) is a measurement that can take on any value within a given range (e.g., , , liters), limited only by the precision of the measuring instrument.
+
+b) Number of childhood injury deaths
+
+Quantitative
+
+Discrete
+
+The count of deaths must be a whole number (an integer). It is countable and cannot logically take on a fractional value (e.g., you can't have deaths).
+
+c) Cause of injury
+
+Qualitative
+
+Nominal
+
+The categories (Motor Vehicle, Drowning, Fire) are simply labels used to classify the data. They have no inherent order or rank.
+
+d) Pain severity rating
+
+Qualitative
+
+Ordinal
+
+The ratings (1=mild, 5=severe) are categories that have a meaningful, ranked order. A rating of is greater than a rating of , but the difference between and is not necessarily the same as the difference between and .
+
+e) Patient's primary language
+
+Qualitative
+
+Nominal
+
+The languages (English, Spanish, French) are distinct categories used for labeling or grouping. There is no inherent order or hierarchy among them.",0.0,"a) the mean is 2.96 lt not 2.88 liters, the median is 2.9 Liters. 
+
+The relationship between the mean and the median suggests that the distribution of FEV1 measurements is slightly positively skewed (or skewed to the right).
+
+Justification:
+--------------
+
+*
+
+In this dataset, the Mean (2.96 L) is slightly greater than the Median (2.90 L).
+
+*
+
+The mean is pulled toward higher values by a few larger measurements (like the maximum value of 4.05 L) in the upper tail of the data.
+
+*
+
+This inequality, Mean>Median, is the classic indicator of a positive skew, meaning the right side of the distribution is stretched out by a relatively long tail of higher FEV1 values.
+
+b)
+
+We might expect this type of distribution—which shows a fair amount of variability and spread—for two key reasons related to the nature of the condition and the patient population.
+
+That's an insightful question. Given that the data you provided (FEV1 measurements with a mean of 2.96 L and a relatively high standard deviation of 0.58 L, resulting in a CV of ≈19.59%) represents adolescents with asthma, we might expect this type of distribution—which shows a fair amount of variability and spread—for two key reasons related to the nature of the condition and the patient population.
+
+ 
+
+----------------------------
+1. Variable Disease Severity
+----------------------------
+
+ 
+
+Asthma is characterized by wide variability in its clinical expression, even within a specific age group. Not all adolescents with asthma experience the same level of airway limitation:
+
+*
+
+Controlled vs. Uncontrolled: Some patients will have well-controlled asthma, resulting in FEV1 values close to or within the normal range (e.g., 3.5 L to 4.05 L in your dataset), leading to higher measurements.
+
+*
+
+Persistent Limitation: Others may have more severe, persistent asthma, resulting in lower, restricted FEV1 values (e.g., 2.15 L to 2.50 L).
+
+*
+
+The spread of these different severity levels across the n=13 sample directly contributes to the large range (1.90 L) and the high standard deviation (0.58 L) you calculated.
+
+ 
+
+--------------------------------
+2. Fluctuations in Lung Function
+--------------------------------
+
+ 
+
+FEV1 is a dynamic measure, meaning it is not static, especially in asthma patients:
+
+*
+
+Medication Use: The time of the measurement relative to the use of a bronchodilator (rescue inhaler) can significantly affect the value. An FEV1 measured shortly after using a bronchodilator will be higher than one measured when the airways are more constricted.
+
+*
+
+Environmental Triggers: Measurements taken during or shortly after exposure to an allergen or irritant (a cold room, exercise, pollution) will result in a temporarily lower FEV1 due to acute bronchoconstriction.
+
+ 
+
+ 
+
+c)
+
+The Median would be the more appropriate measure of central tendency to report for this dataset.
+
+ 
+
+Why the Median is Preferred
+---------------------------
+
+ 
+
+The appropriateness of a measure depends on the distribution's shape and the presence of outliers. The median is preferred here for three reasons:
+
+*
+
+Skewness: As previously established, the data is slightly positively skewed (Mean, 2.96 L>Median,2.90 L). When a distribution is skewed, the mean is pulled in the direction of the skew (towards the higher values), making it a less accurate representation of the typical center of the data. The median (the 50th percentile) is resistant to this skew.
+
+*
+
+Robustness to Outliers: The dataset's maximum FEV1 value (4.05 L) could be considered an outlier or just an extreme high value. If this value were even higher (e.g., 5.0 L), it would drastically inflate the mean but would not affect the median at all. The median is more robust to extreme values.
+
+*
+
+Better Representation of the ""Typical"" Patient: For a slightly skewed distribution like this, the median value (2.90 L) better reflects the FEV1 of the most central or typical adolescent in the group, as it is not artificially inflated by the few highest values.
+
+ ",0.0,"This task synthesizes and refines the answers to questions asked earlier in the conversation. I will provide a consolidated, clear, and comprehensive response.
+
+ 
+
+----------------------------------------------
+a) Dataset 1: Number of Injury Deaths by Cause
+----------------------------------------------
+
+ 
+
+A bar chart is the appropriate visualization for Dataset 1 because it involves comparing quantitative values (number of deaths) across discrete, nominal categories (cause of death, e.g., Motor Vehicle, Drowning, Fire).
+
+*
+
+Strength: The primary strength is that it facilitates easy and accurate comparison of magnitude. Humans are highly effective at comparing the lengths of bars that share a common baseline, allowing quick identification of the largest and smallest causes of death.
+
+ 
+
+-----------------------------------------------------------
+b) Dataset 2: Age at Time of Injury for 150 Fatal Accidents
+-----------------------------------------------------------
+
+ 
+
+For visualizing the distribution shape of Age (a continuous, quantitative variable), I recommend a Histogram.
+
+*
+
+Justification: A histogram divides the continuous age data into specific bins (age ranges) and displays the frequency (count) of accidents falling into each bin. This immediately reveals the shape of the distribution, allowing analysts to identify:
+
+*
+
+Central Tendency: The most common age range(s) for fatal accidents.
+
+*
+
+Skewness: Whether the accidents cluster at younger or older ages.
+
+*
+
+Modality: Whether there is one peak or multiple distinct peaks in the distribution.
+
+ 
+
+---------------------------------------------------------------------
+c) Dataset 3: Injury Severity Ratings (mild, moderate, severe, fatal)
+---------------------------------------------------------------------
+
+ 
+
+A pie chart is generally not the best choice for Dataset 3 (Ordinal Qualitative Data) for the following reasons:
+
+*
+
+Poor Comparison of Angles: The human eye struggles to accurately judge and compare the sizes of different angular slices, especially when the proportions are similar (e.g., comparing the percentage of ""mild"" vs. ""moderate"" injuries). A small difference in percentage can be visually misleading.
+
+*
+
+Order is Lost: The data (Mild → Moderate → Severe → Fatal) is ordinal, meaning it has a critical, inherent rank. A pie chart focuses only on the part-to-whole relationship and fails to effectively display or utilize this important sequential order.
+
+*
+
+Emphasis Misplaced: Pie charts emphasize the contribution of each part to the whole, but the primary interest here is likely comparing the frequencies of severity levels (e.g., ""How much more common are mild injuries than severe ones?""). A bar chart, sorted by the ordinal rank, would answer this comparative question far more clearly.",0.0," 
+
+ 
+
+----------------------
+R Programming Exercise
+----------------------
+
+ 
+
+ 
+
+Dataset Creation
+----------------
+
+ 
+
+R
+
+fev1_data <- data.frame(
+subject_id = 1:13,
+gender = c(""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female""),
+fev1_liters = c(2.15, 3.05, 2.50, 3.50, 2.80, 3.20, 2.45, 2.90, 3.15, 4.05, 2.60, 3.40, 2.75)
+)
+
+ 
+
+----------------------
+a) Mean FEV1 by Gender
+----------------------
+
+ 
+
+R Code:
+
+R
+
+# Calculate the mean FEV1 by gender using the aggregate() function
+mean_fev1_by_gender <- aggregate(fev1_liters ~ gender, data = fev1_data, FUN = mean)
+
+# Display the result
+print(mean_fev1_by_gender)
+
+Output:
+
+gender fev1_liters
+1 Female 2.637143
+2 Male 3.340000
+
+Interpretation: The mean FEV1 is 2.64 liters for Females and 3.34 liters for Males. This suggests that, on average, males in this dataset have a significantly higher FEV1 compared to females, which is a biologically expected finding.
+
+ 
+
+---------------------------
+b) Summary of FEV1 Variable
+---------------------------
+
+ 
+
+R Code:
+
+R
+
+# Use the summary() function on the FEV1 variable
+fev1_summary <- summary(fev1_data$fev1_liters)
+
+# Display the result
+print(fev1_summary)
+
+Output:
+
+Min. 1st Qu. Median Mean 3rd Qu. Max.
+2.150 2.500 2.900 2.962 3.200 4.050
+
+Interpretation of Quartiles (Q1​ and Q3​):
+
+*
+
+1st Quartile (Q1​): 2.50 liters. This means that 25% of the FEV1 measurements in the dataset are less than or equal to 2.50 liters.
+
+*
+
+3rd Quartile (Q3​): 3.20 liters. This means that 75% of the FEV1 measurements are less than or equal to 3.20 liters, or, conversely, that 25% of the measurements are greater than or equal to 3.20 liters.
+
+The range between Q1​ and Q3​ (the Interquartile Range) is 3.20−2.50=0.70 liters, which represents the middle 50% of the data.
+
+ 
+
+----------------------------------------
+c) Frequency Table and Female Percentage
+----------------------------------------
+
+ 
+
+R Code:
+
+R
+
+# 1. Create a frequency table for gender
+gender_counts <- table(fev1_data$gender)
+
+# 2. Display the frequency table
+print(gender_counts)
+
+# 3. Calculate the percentage of subjects who are female
+total_subjects <- sum(gender_counts)
+female_percentage <- (gender_counts[""Female""] / total_subjects) * 100
+
+# 4. Display the calculation and result
+cat(""\nTotal Subjects:"", total_subjects, ""\n"")
+cat(""Female Subjects:"", gender_counts[""Female""], ""\n"")
+cat(""Percentage of Subjects who are Female:"", round(female_percentage, 2), ""%\n"")
+
+Output:
+
+Female Male
+7 6
+
+Total Subjects: 13
+Female Subjects: 7
+Percentage of Subjects who are Female: 53.85 %
+
+Calculation Summary: There are 7 female subjects out of a total of 13 subjects. The percentage is calculated as (7/13)×100≈53.85%.
+
+ 
+
+-----------------------------
+d) Visualization of FEV1 Data
+-----------------------------
+
+ 
+
+R Code:
+
+R
+
+# Create a Boxplot visualization of FEV1, stratified by gender
+boxplot(fev1_liters ~ gender,
+data = fev1_data,
+main = ""FEV1 Distribution by Gender in Asthma Adolescents"",
+xlab = ""Gender"",
+ylab = ""FEV1 (Liters)"",
+col = c(""pink"", ""lightblue""))
+
+Description of Visualization (Box Plot):
+
+The visualization is a Side-by-Side Box Plot comparing the distribution of FEV1 (Liters) for the two gender groups.
+
+*
+
+Center and Spread: The box plot clearly shows that the entire distribution for Males (Median ≈3.20 L, range from 2.90 L to 4.05 L) is positioned higher on the y-axis than the distribution for Females (Median ≈2.60 L, range from 2.15 L to 3.15 L). This visually reinforces the conclusion from part (a) that males have higher lung capacity.
+
+*
+
+Variability: The length of the boxes (the Interquartile Range) appears somewhat similar between the two groups, indicating comparable variability in the middle 50% of FEV1 scores.
+
+*
+
+Skewness/Symmetry: The median lines appear relatively centered within both boxes, suggesting the central 50% of the FEV1 data is roughly symmetrical for both male and female subjects in this small sample.
+
+*
+
+Outliers: No individual points are plotted outside the whiskers, indicating there are no statistical outliers in the FEV1 measurements for either gender group.",0.0,"-------------------------------
+a) Two Ways AI Could Be Helpful
+-------------------------------
+
+ 
+
+*
+
+Feature Selection and Dimensionality Reduction: Electronic Health Records (EHRs) contain thousands of variables (e.g., lab results, medications, demographics, diagnoses). Traditional statistical models struggle with this high volume. AI, particularly machine learning algorithms, can efficiently sift through thousands of features to automatically identify the most predictive risk factors for diabetes (e.g., specific lab result combinations or medication histories) that a human statistician might miss.
+
+*
+
+Predictive Modeling and Risk Stratification: AI can be used to build sophisticated predictive models (like Random Forests or Neural Networks) that combine complex, non-linear relationships among variables. This allows the researcher to not just identify known risks, but to stratify the patient population into highly accurate risk groups (e.g., ""high,"" ""moderate,"" or ""low"" probability of developing diabetes within the next five years) much more accurately than simple regression models.
+
+ 
+
+----------------------------------------
+b) Two Potential Problems or Limitations
+----------------------------------------
+
+ 
+
+*
+
+Bias and Fairness: The AI model is only as good as the data it's trained on. If the EHR data heavily underrepresents specific demographic groups (e.g., racial minorities or low-income populations), the AI model may learn and perpetuate that bias. The identified risk factors or the resulting predictive model may be less accurate or even entirely irrelevant for the underrepresented groups.
+
+*
+
+""Black Box"" Interpretability: Many powerful AI models (especially deep learning) are complex and difficult to interpret. They can identify a risk factor, but they cannot always explain why that factor is important or how it interacts with others. This ""black box"" nature makes it hard for a public health researcher to translate the model's findings into meaningful, actionable clinical or public health recommendations.
+
+ 
+
+----------------------------
+c) Essential Human Oversight
+----------------------------
+
+ 
+
+The essential type of human oversight required is Clinical and Epidemiological Vetting (or Domain Expertise Validation).
+
+The researcher must critically evaluate the AI's output (the identified risk factors and the model's predictions) to ensure they are biologically plausible and clinically relevant. If the AI identifies a variable with no known biological link to diabetes as a top predictor, human experts must investigate and potentially discard it, preventing the publication of statistically significant but medically meaningless results.",0.0,13,1,24.0
+Lan Nguyen,6350175,933328341,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-05 00:49:35 UTC,1,48%,4.0,"The distribution is bi-modal with an outlier.
+
+(0.32 liters/2.88 liters)*100=11.11 liters
+
+I think a box plot would be better to compare FEV1 values between males and females because box plots are good for comparing groups.",0.0,"A bar chart would be best appropriate for dataset 1 because you are trying to compare categorical data meaning different categories within a group. A bar chart will help you see how many deaths were caused due to which category and it would give you an idea of which category caused the most deaths.
+
+A histogram would be best for dataset 2 because you want to see the distribution shape and a histogram is good for that and will make you be able to see data grouped into each interval which you can then analyze because different intervals can show different patterns.
+
+Dataset 3 might not be the best visualization for a pie chart because the sample size is too big making it less effective for precise comparisons. ",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI requires expensive commercial software,4.0,"FEV1 measurement in liters is quantitative since its a value number and continuous because its within a range and there is no endpoint
+
+Number of childhood injury deaths per state is quantitative because its a value number and discrete because its not within a range and there is an endpoint because you can't have a decimal point of a person dying because that wouldn't make sense
+
+Cause of injury is qualitative because its considered categorical data which means there's no numbers and the data is grouped in categories and it would be considered nominal because there is no order to the different categories
+
+Pain severity rating is qualitative because it's considered categorical data and it would be considered ordinal because there is an order to the different categories.",0.0,"The distribution is left-skewed with an outlier
+
+I think we might expect this kind of distribution because of the age of the participants and a few of the data are a lot lower compared to some of the other data making the mean extremely sensitive to these low values causing the distribution to shift to the left
+
+I think the median would be more appropriate for this distribution because its left-skewed and is less affected then the mean since it's just the middle data of the ordered data",0.0,"Bar chart would be best appropriate because you are dealing with categorical data and you can compare each of the categories to the number of deaths and figure out which category caused the most deaths
+
+A histogram would be best for dataset 2 because you want to see the distribution shape and histograms are good for seeing that.
+
+A pie chart is not the best for dataset 3 because the sample size is too big making the chart harder to visualize and analyze data.
+
+ ",0.0,"R code: aggregate(fev1_liters ~ gender, data = fev1_data, mean)
+
+Output:    gender     fev1_liters
+              1 Female    2.628571
+              2   Male      3.350000
+
+ 
+
+R code: summary(fev1_data)
+
+Output: Minimum: 2.150
+
+               1st Quartile: 2.600
+
+               3rd Quartile: 3.200
+
+               Mean: 2.962
+
+               Median: 2.900
+
+               Max: 4.050
+
+The first quartile tells us that 25% of the data fall below 2.6 and the 3rd quartile tells us that 75% of the data fall below 3.2
+
+R code: table(fev1_data$gender)
+
+output: Female   Male 
+              7             6 
+
+Proportion of females: (6/13)*100=46%
+
+ 
+
+R code: hist(fev1_data$fev1_liters,
+     main = ""Distribution of FEV1 Values"",
+     xlab = ""FEV1 (liters)"",
+     ylab = ""Frequency"",
+     col = ""lightgreen"",
+     border = ""white"",
+     breaks = 5)
+
+The histogram shows us the distribution of FEV1 values and tells us the frequency or how many FEV1 values fall within a certain interval.
+
+ ",0.0,"AI can help you create a histograms to reveal any patterns or identify the distribution shape. It can also help you create a bar graph to help you compare different risk factors for diabetes and help you analyze the data more to see if one is more likely to lead to diabetes
+
+AI does not handle missing data appropriately and it can confuse correlation with causation so it's probably not the best idea to ask for help in creating a scatterplot
+
+Humans can check to see if the data fits the suggested method.
+
+ 
+
+ ",0.0,14,0,28.0
+Anthony Samples,6504808,934438343,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-04 20:42:37 UTC,1,48%,4.0,"a. Distribution is positively skewed
+
+b. CV= ((0.32/2.88)*100)= 11.11%
+
+c. Box plot, it compares distribution of a continuous variable across different levels of categorical variable",0.0,"a. It effectively visualizes the frequency or count of categorical data
+
+b. Histogram: It groups continuous info, like BMI, into intervals and plots the frequency of each interval as a bar
+
+c. Pie charts may not be the best choice for this because if proportions are similar then it doesn't show much of a difference. A bar chart would show a clearer comparison",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI requires expensive commercial software,4.0,"a. quantitative, continuous: number, limited only by precision
+
+b. quantitative, discrete: numerical count, values must be whole numbers
+
+c. qualitative, nominal: variable is qualitative because it describes characteristics, nominal because of categories no order
+
+d. qualitative, ordinal: variable, with order
+
+e. qualitative, nominal: categories with no order",0.0,"a. Positively skewed
+
+b. Right skewed distribution for FEV1 measurements might be expected in adolescents with asthma for several reasons such as disease, outside influences, and variable airflow obstruction
+
+c. Median, resistance to skew",0.0,"a. bar chart is appropriate because it effectively compare the counts of the data
+
+b. histogram, it is specifically designed to show the distribution of a continuous variable such as age
+
+c. Pie chart might not be great because people might struggle with comparing sizes ",0.0,"a. # Create the FEV1 dataset
+fev1_data <- data.frame(
+  subject_id = 1:13,
+  gender = c(""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female""),
+  fev1_liters = c(2.15, 3.05, 2.50, 3.50, 2.80, 3.20, 2.45, 2.90, 3.15, 4.05, 2.60, 3.40, 2.75)
+)
+# Calculate the mean FEV1 by gender
+mean_fev1_by_gender <- aggregate(fev1_liters ~ gender, data = fev1_data, FUN = mean)
+print(mean_fev1_data_by_gender)
+> print(mean_fev1_data_by_gender)
+mean_fev1_by_gender <- aggregate(fev1_liters ~ gender, data = fev1_data, FUN = mean)
+print(mean_fev1_by_gender)
+# Get summary statistics for the fev1_liters variable
+summary(fev1_data$fev1_liters)
+# Create a frequency table for gender
+gender_freq_table <- table(fev1_data$gender)
+print(gender_freq_table)
+# Calculate the percentage of subjects who are female
+percentage_female <- (gender_freq_table[""Female""] / sum(gender_freq_table)) * 100
+print(percentage_female)
+# Create a boxplot of FEV1 by gender using ggplot2
+library(ggplot2)
+ggplot(fev1_data, aes(x = gender, y = fev1_liters)) +
+  +     geom_boxplot() +
+  +     labs(
+    +         title = ""Distribution of FEV1 by Gender"",
+    +         x = ""Gender"",
+    +         y = ""FEV1 (Liters)""
+    +     ) +
+  +     theme_minimal()
+ggplot(fev1_data, aes(x = gender, y = fev1_liters)) +
+  geom_boxplot() +
+  labs(
+    title = ""Distribution of FEV1 by Gender"",
+    x = ""Gender"",
+    y = ""FEV1 (Liters)""
+  ) +
+  theme_minimal()
+theme_minimal(fev1_data)
+
+b. 
+
+# Create the FEV1 dataset
+> fev1_data <- data.frame(
++ subject_id = 1:13,
++ gender = c(""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female""),
++ fev1_liters = c(2.15, 3.05, 2.50, 3.50, 2.80, 3.20, 2.45, 2.90, 3.15, 4.05, 2.60, 3.40, 2.75)
++ )
+> print(mean_fev1_by_gender)
+
+Error: object 'mean_fev1_by_gender' not found
+
+> print(mean_fev1_data_by_gender)
+
+Error: object 'mean_fev1_data_by_gender' not found
+
+> > print(mean_fev1_data_by_gender)
+
+Error: unexpected '>' in "">""
+
+> mean_fev1_by_gender <- aggregate(fev1_liters ~ gender, data = fev1_data, FUN = mean)
+> print(mean_fev1_by_gender)
+gender fev1_liters
+1 Female 2.628571
+2 Male 3.350000
+> # Get summary statistics for the fev1_liters variable
+> summary(fev1_data$fev1_liters)
+Min. 1st Qu. Median Mean 3rd Qu. Max.
+2.150 2.600 2.900 2.962 3.200 4.050
+> # Create a frequency table for gender
+> gender_freq_table <- table(fev1_data$gender)
+> # Create a frequency table for gender
+> gender_freq_table <- table(fev1_data$gender)
+> print(gender_freq_table)
+
+Female Male
+7 6
+> # Calculate the percentage of subjects who are female
+> percentage_female <- (gender_freq_table[""Female""] / sum(gender_freq_table)) * 100
+> print(percentage_female)
+Female
+53.84615
+> # Create a boxplot of FEV1 by gender using ggplot2
+> library(ggplot2)
+
+Error in library(ggplot2) : there is no package called ‘ggplot2’
+
+> ggplot(fev1_data, aes(x = gender, y = fev1_liters)) +
++ geom_boxplot() +
++ labs(
++ title = ""Distribution of FEV1 by Gender"",
++ x = ""Gender"",
++ y = ""FEV1 (Liters)""
++ ) +
++ theme_minimal()
+
+Error in ggplot(fev1_data, aes(x = gender, y = fev1_liters)) : could not find function ""ggplot""
+
+> ggplot(fev1_data, aes(x = gender, y = fev1_liters)) +
++ + geom_boxplot() +
++ + labs(
++ + title = ""Distribution of FEV1 by Gender"",
+
+Error: unexpected '=' in: "" + labs( + title =""
+
+> ggplot(fev1_data, aes(x = gender, y = fev1_liters)) +
++ geom_boxplot() +
++ labs(
++ title = ""Distribution of FEV1 by Gender"",
++ x = ""Gender"",
++ y = ""FEV1 (Liters)""
++ ) +
++ ggplot(fev1_data, aes(x = gender, y = fev1_liters)) +
++ geom_boxplot() +
++ labs(
++ title = ""Distribution of FEV1 by Gender"",
++ x = ""Gender"",
++ y = ""FEV1 (Liters)""
++ ) +
++ theme_minimal()
+
+Error in ggplot(fev1_data, aes(x = gender, y = fev1_liters)) : could not find function ""ggplot""
+
+> theme_minimal(fev1_data)
+
+Error in theme_minimal(fev1_data) : could not find function ""theme_minimal""
+
+>
+
+C&D. 43% female so this would be a pretty minimal difference pie chart making it harder to read",0.0,"a. Discovering complex patterns and risk factors 
+
+Developing personalized predictive risk models
+
+b. Bias in data
+
+""black box"" problem
+
+c. Evaluate the models findings",0.0,14,0,28.0
+Miles Stone,6448071,934135424,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-04 19:10:53 UTC,1,48%,4.0,"a) Because the mean is greater than the median, this means that the data is right-skewed, indicating that while most individuals have FEV1 values around the median (2.78 L), a few have significantly higher values that increase the mean.
+
+b) CV = (SD / Mean) * 100
+Given: Mean = 2.88 L, SD = 0.32 L
+
+CV = (0.32/2.88) * 100 ≈ 11.11%
+A CV of 11.11% indicates low relative variability. This means that the FEV1 values are fairly consistent and clustered closely around the mean. 
+
+c) To compare FEV1 values between males and females, a box plot would be the most appropriate visualization. This is because it quickly communities the median, quartiles, range, and any outliers. It is also useful for side-by-side comparisons of distributions, such as male vs. female. ",0.0,"a) A bar chart is ideal for categorical data such as causes for injury, and it also clearly shows comparisons between categories. One strength of bar charts is that they make it easy to visually compare the counts across the categories.
+
+b) A histogram would probably be most appropriate, as it shows the distribution shape of continuous data. A histogram displays how BMI values are spread across the bin intervals, which reveals things like outliers and skewed data. It gives a detailed view of the frequency distribution.
+
+c) While pie charts are categorical, they can be really misleading when there are too many categories or when precise comparisons are needed. Pie charts rely on very general angles and areas, which are very difficult to interpret compared to length or height. Because of this, a bar chart would probably be the best. ",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI might not understand biomedical context,0.0,"a)
+Type: Quantitative
+Subtype: Continuous 
+Justification: FEV1 is a numerical measurement that can take on any value within a range, including decimals, making it continuous. 
+
+b)
+Type: Quantitative
+Subtype: Discrete
+Justification: Count of deaths can only be whole numbers, so it is quantitative discrete. 
+
+c) 
+Type: Qualitative
+Subtype: Nominal
+Justification: These are categorical groups without any inherent order. 
+
+d) 
+Type: Quantitative
+Subtype: Ordinal
+Justification: The numbers represent ordered categories of pain severity. All Likert scales are ordinal.
+
+e) 
+Type: Qualitative
+Subtype: Nominal
+Justification: Languages are categories without a natural order. ",0.0,"a) Since the mean is slightly greater than the median, this suggests a right-skewed data distribution. This means that the FEV1 values are not perfectly symmetrical, with a tendency toward higher values in a few individuals.
+
+b) A right-skewed distribution in FEV1 measurements among adolescents with asthma is expected due to the variability in both disease severity and response to treatment. As we know, asthma affects lung function differently across individuals, and while many adolescents may have reduced or moderate FEV1 values, others, especially those with well-controlled or mild asthma, may exhibit a higher lung function. This variation leads to a distribution where most values are moderate, but a few higher values extend the tail, resulting in skewness.
+
+c) For this dataset, the median is the more appropriate measure of central tendency. Since the data is skewed, the mean can be disproportionately influenced by extreme values (such as the highest rate at 4.05 L). The median, on the other hand, represents the middle value and is less affected by outliers, making it a more reliable indicator of the typical FEV1 level in this group of adolescents with asthma. Reporting the median provides a clearer picture of the central tendency without the distortion from unusually high values.",0.0,"a) A bar chart is appropriate for Dataset 1 because it involves categorical data. Bar charts are designed to display and compare frequencies across categories, making them ideal for this type of information. One key strength of a bar chart is its ability to clearly show differences in the various magnitude(s) between categories, which allows viewers to quickly identify which causes of injury are most or least common.
+
+b) For Dataset 2, which contains continuous data representing age at the time of injury, a histogram would be the most appropriate visualization. As we've discussed in class, histograms group continuous data into intervals and display the frequency of observations within each interval/bin, making it easy to see the overall shape of the distribution. This helps identify patterns such as skewness, modality, and spread, which are important for understanding how age is distributed among fatal injury cases.
+
+c) Although Dataset 3 involves categorical data, a pie chart may not be the best choice for visualizing it. As I discussed in question three above, pie charts can be difficult to interpret when there are multiple categories with similar proportions, as it becomes hard to compare slice sizes accurately. Additionally, pie charts do not effectively show order or hierarchy. A bar chart would be a better alternative, as it allows for clearer comparisons and can reflect the ordered nature of the categories.",0.0,"a)
+
+tapply(fev1_data$fev1_liters, fev1_data$gender, mean)
+
+Output:
+Female     Male 
+2.628571 3.350000 
+
+b)
+
+summary(fev1_data$fev1_liters)
+
+The 1st quartile (Q1) is 2.60 liters, which means that 25% of the subjects have FEV1 values less than or equal to 2.60 liters. This represents the lower end of the distribution and helps identify individuals with relatively lower lung function within the dataset.
+
+The 3rd quartile (Q3) is 3.20 liters, indicating that 75% of the subjects have FEV1 values less than or equal to 3.20 liters, and conversely, 25% have values above this level. This marks the upper boundary of the middle 50% of the data.",0.0,"a) AI could be incredibly useful in analyzing a large dataset of electronic health records to identify risk factors for diabetes. First, it can process and analyze massive amounts of data quickly, including structured data like lab results and unstructured data like clinical notes. This allows one to uncover patterns and associations that might not be obvious through traditional methods. Second, AI can help build predictive models that identify individuals at high risk for developing diabetes based on combinations of variables such as age, BMI, family history, and lifestyle factors. These models can improve early detection and targeted interventions.
+
+b) While AI is very powerful, there are important limitations one needs to be aware of. One concern is that AI might not account for important statistical assumptions, such as data normality or independence, which could lead to inaccurate conclusions if not properly validated. Another issue is that AI may lack biomedical context. It might identify correlations that are statistically significant but clinically irrelevant, or misinterpret medical terminology if the data isn't clean or well-labeled. These limitations mean that the public health researcher needs to be cautious and critical when interpreting AI-generated results.
+
+c) To ensure valid results, human oversight is essential at every stages of the analysis. The researcher needs to work closely with clinicians other experts who can interpret the findings in a meaningful medical context (if the public health researcher does not have those skills) and help determine whether the identified risk factors are clinically plausible. Additionally, collaboration with biostatisticians or data scientists is important to validate the AI models, check for bias, and ensure that the methods used are appropriate for the data. This kind of interdisciplinary oversight helps ensure that the results are both scientifically sound and practically useful.",0.0,13,1,24.0
+Elwood Hosking,6497607,934431087,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-03 22:57:21 UTC,1,48%,4.0,"a. The distributions shape is right skewed
+
+b. 0.32/2.88=.111 This value indicates that there is low variability within the dataset, meaning that the data is probably reliable.
+
+c. A box plot would be most appropriate, as it can compare two different categories with all of the measures in a 5 number summary.",0.0,"a.  A bar chart would be appropriate for dataset 1 because the data is nominal, meaning that it's categorical data and has no natural ordering. Bar charts make it easy to compare across categories.
+
+b. A histogram would be best for dataset 2 because although the data is continuous(taking any value within a range), a histogram can bin the data, allowing for a visualization of continuous data.
+
+c. A pie chart would not be the best choice for dataset 3 because there is four categories, and the more categories you have in a pie chart, it becomes more difficult to provide an effective visual, because it may be more difficult to see some slices and read labels.",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI requires expensive commercial software,4.0,"a. Quantitative variable, specifically continuous, because a volume in liters can take any value within a range.
+
+b. Quantitative variable, specifically discrete, because the data will all be countable values, or integers.
+
+c. Qualitative variable, specifically nominal, because the data is categorical, but there is no natural ordering.
+
+d. Qualitative variable, specifically ordinal, because the data is categorical and also has a natural ordering to it.
+
+e Qualitative variable, specifically nominal, because the data is categorical, but there is no natural ordering.",0.0,"a. The distributions shape should be right skewed.
+
+b. This distribution is expected because adolescents with asthma will likely have a lower lung function and therefore lower FEV1 score, which is why the data is clustered closer to zero, indicating that most of the sample population has poorer lung function, with a few outliers on the higher end.
+
+c. The median would be more appropriate for this dataset, because a right skewed distribution means that there are some outliers on the upper quartile bringing up the average, making it not reflective of the population.",0.0,"a. A bar chart would be appropriate for dataset 1 because the data is nominal, meaning that it's categorical data and has no natural ordering. Bar charts make it easy to compare across categories.
+
+b. A histogram would show the distribution shape, because with the correct number of bins, the graph would show the frequency of data points in each bin, visualizing the distribution shape.
+
+c. A pie chart would not be the best choice for dataset 3 because there is four categories, and the more categories you have in a pie chart, it becomes more difficult to provide an effective visual , because it may be more difficult to see some slices and read labels.",0.0,"a.  Code:
+
+aggregate(fev1_liters~gender, data=fev1_data, FUN=mean)
+
+     Output: 
+
+gender fev1_liters
+1 Female 2.628571
+2 Male 3.350000
+
+b. Code: 
+
+summary(fev1_data)
+
+Output:
+
+summary(fev1_data)
+subject_id gender fev1_liters
+Min. : 1 Length:13 Min. :2.150
+1st Qu.: 4 Class :character 1st Qu.:2.600
+Median : 7 Mode :character Median :2.900
+Mean : 7 Mean :2.962
+3rd Qu.:10 3rd Qu.:3.200
+Max. :13 Max. :4.050
+
+ 
+
+Q1 and Q3 are equidistant from the median, but Q3 is about 33% closer to the mean than Q1, suggesting that the distribution is slightly left skewed.
+
+c. Code:
+
+gender<-table(fev1_data$gender)
+print(gender)
+females<-sum(fev1_data$gender==""Female"")
+totalsample<-length(fev1_data$gender)
+females/totalsample)
+
+    Output: 
+
+Female Male
+7 6
+> females<-sum(fev1_data$gender==""Female"")
+> totalsample<-length(fev1_data$gender)
+> females/totalsample
+[1] 0.5384615
+
+d. This visualization shows us that males, on average, according to this data set, have a larger lung capacity than females, with a slightly larger IQR. Males had an outlier on the higher end but not the lower end. Outliers for females are not too extreme, and are about the same distance from the IQR on each side. The mean is fairly close to the median for both genders.
+
+d. [Rplot01.png] (/users/6497607/files/113944147/preview?verifier=zWQIPjo7lVPFcQCjuAUYsy0DHLeaZZ7Q5iTNXZrF)
+
+I couldn't fit the entire console in frame but here is a picture of my entire r studio for extra clarity:
+
+[Screenshot 2025-10-03 154259.png] (/users/6497607/files/113944765/preview?verifier=MhWlHQbOMYFCQIxj04Zjvxx2V7uRMyLAKIX1mZbr)
+
+ ",0.0,"a. AI could be helpful in analysis by explaining statistical concepts and by interpreting results
+
+b. Two potential problems a researcher should watch for is missing values in a dataset, and outdated code or other info.
+
+c. Essential human oversight involves cross checking information, calculations and code with other AI, with a credible source, or by hand.",0.0,14,0,28.0
+Camryn Kay,6428677,934286440,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-03 19:56:22 UTC,1,48%,4.0,"a) This is because the mean is greater than the median which means that the distribution's shape is positively skewed. 
+
+b) 0.32/2.88 x 100 = 11.11%
+
+c) The type of visualization that would be the most appropriate is a box plot because it is good for small sample sizes and would be better for visualizing the comparison. ",0.0,"a) A bar chart would be appropriate for Dataset 1 because Dataset 1 contains categorical variables that are associated with numeric counts. A bar chart would also allow for an easier identification of trends. 
+
+b) A recommendation for Dataset 2 would be a histogram because it would be easier to see the distribution shape due to the data set being a larger side. 
+
+c) A pie chart would not be the best choice because it is difficult to compare the size of slices and it is not as precise to represent this kind of data. ",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI requires expensive commercial software,4.0,"a) The FEV1 measurement in liters would be a quantitative continuous variable because not only takes whole numbers in a range but can take many values outside of that. 
+
+b) The number of childhood injury deaths per state would be a quantitative discrete variable because it is countable. 
+
+c) Cause of injury is a qualitative nominal variable due to the no natural order. 
+
+d) Pain severity rating would be qualitative ordinal variable because a natural order exists. 
+
+e) Patient's primary language is qualitative nominal data because there is no natural order. ",0.0,"a) Given the mean and median, the distribution shape is positively skewed with a right-skewed distribution. This means there are fewer high FEV1 values that are pulling up the mean while the other variables are on the lower end. 
+
+b) Given that this data represents adolescents with asthma, we can expect a right-skewed distribution because most people with asthma will have lower lung function but adolescents with controlled asthma may have higher FEV1 values which will cause outliers putting the mean above the median. 
+
+c) The median is more appropriate to report for this data set because it is less affected by outliers. This shows a more accurate FEV1 value in the group of adolescents while also allowing a better visual of the dataset. ",0.0,"a) A bar chart is appropriate because the data is categorical which allows for an easy comparison between the categories and clearly shows which causes are the most and least common. 
+
+b) A histogram works best because ages is a continuous variable. A histogram will show the overall distribution shape and will highlight where fatal accidents are happening most frequently across ages ranges. 
+
+c) A pie chart is not the best choice because you cannot compare portions across multiple categories, would not create a direct visual comparison, and they are difficult to read when representing this kind of data.  ",0.0,"> # HW1 R Programming Exercise 
+> fev1_data <- data.frame(
++   
++   subject_id = 1:13,
++   
++   gender = c(""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female""),
++   
++   fev1_liters = c(2.15, 3.05, 2.50, 3.50, 2.80, 3.20, 2.45, 2.90, 3.15, 4.05, 2.60, 3.40, 2.75)
++   
++ )
+> #Question A
+> aggregate(fev1_liters~gender,data=fev1_data, FUN=mean)
+  gender fev1_liters
+1 Female    2.628571
+2   Male    3.350000
+> #Question B
+> summary(fev1_data$fev1_liters)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  2.150   2.600   2.900   2.962   3.200   4.050 
+> #Question C
+> table(fev1_data$gender)
+
+Female   Male 
+     7      6 
+> #Percentage female
+> prop.table(table(fev1_data$gender))*100
+
+  Female     Male 
+53.84615 46.15385 
+> #Question D 
+> boxplot(fev1_liters~gender, data=fev1_data,
++         col=c(""lightpink"",""lightblue""),
++         main=""FEV1 by Gender"",
++         xlab=""gender"",
++         ylab=""FEV1(liters)"")
+
+I was able to upload the image of the box plot here: 
+
+[Rplot01.png] (/users/6428677/files/113941251/preview?verifier=Br3PzR1EQ2YzswnkO6ZH62WJzkNA6xVw79j4KEEu)",0.0,"a) One way AI could be helpful in this analysis is that it would be able to use pattern recognition that may not be noticeable by humans due to their complexity. Another way AI could be helpful is its ability to handle larger datasets in seconds rather than have a human comb through it. 
+
+b) A potential problem would be bias in the data set as electronic health records may not be complete or disproportionately represent certain groups. Another potential problem is the lack of transparency or the ""why"" behind a prediction being made. 
+
+c) We must validate our AI findings to ensure that the identified risk factors make sense medically and ethically. We should cross-check all results against established research. ",0.0,14,0,28.0
+Zoey Riess,6294688,933664802,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-03 19:54:24 UTC,1,48%,4.0,"a) Because the mean is greater than the median, this suggests that the distribution's shape is right and positively skewed. 
+
+b) 0.32/2.88 x 100 = 11.11%
+
+c) A box plot would be an appropriate visualization because it is good for small sample sizes and for visualizing the comparison. ",0.0,"a) A bar chart would be appropriate for Dataset 1 because Dataset 1 consists of categorical variables that are associated with numeric counts. A bar chart would allow for easier identification in trends. 
+
+b) For Dataset 2, a histogram would be the most appropriate to see the distribution shape because a histogram is best for a data set of that size. Additionally, a histogram will clearly show the distribution shape. 
+
+c) A pie chart may not be the best choice for Dataset 3 because it is difficult to compare the size of slices, and a pie chart is not precisely enough for this type of data. ",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI requires expensive commercial software,4.0,"a) The FEV1 measurement in liters would be a quantitative continuous variable because it can take many values in a range, not only whole numbers. 
+
+b) The number of childhood injury deaths per state would be a quantitative discrete variable because this variable is countable. 
+
+c) Cause of injury is a qualitative nominal variable because it has no natural order. 
+
+d) Pain severity is a qualitative ordinal variable because it has a natural order. 
+
+e) Patient's primary language is a qualitative nominal variable because it has no natural order. ",0.0,"a) Given that the mean is 2.88 liters and the median is 2.78 liters, it is probable that the distribution's shape is right and positively skewed. 
+
+b) We can expect a right-skewed distribution because adolescents with asthma may have higher FEV1 values, which would contribute to making the mean larger than the median, causing the right/positive skew. 
+
+c) For this data set, the median would be more appropriate to report because this data set is likely to have outliers, which is less likely to be represented by the mean. ",0.0,"a) A bar chart would be appropriate for Dataset 1 because a bar chart will be the easiest to show comparison between the categories. 
+
+b) For Dataset 2, a histogram would be most appropriate because it would show the distribution of ages of fatal car accidents, allowing for trends to be more easily identified. 
+
+c) A pie chart might not be the best choice for Dataset 3 because piecharts lack the precision necessary to compare variables and draw meaningful conclusions. ",0.0,"fev1_data <- data.frame( subject_id = 1:13, gender = c(""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female""), fev1_liters = c(2.15, 3.05, 2.50, 3.50, 2.80, 3.20, 2.45, 2.90, 3.15, 4.05, 2.60, 3.40, 2.75))
+tapply(fev1_data$fev1_liters, fev1_data$gender, mean)
+
+##   Female     Male
+## 2.628571 3.350000
+
+summary(fev1_data$fev1_liters)
+
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+##   2.150   2.600   2.900   2.962   3.200   4.050
+
+#Q1 and Q3 help me understand where most of the FEV1 values are concentrated and the degree of spread and skewness in adolescent asthma patients’ lung function.
+gender_freq <- table(fev1_data$gender)
+print(gender_freq)
+
+##
+## Female   Male
+##      7      6
+
+percent_female <- (gender_freq[""Female""] / sum(gender_freq)) * 100
+print(percent_female)
+
+##   Female
+## 53.84615
+
+boxplot(fev1_data$fev1_liters, main = ""Distribution of FEV1 Values in Adolescents with Asthma"", ylab = ""FEV1 (liters)"", col = ""lightblue"")
+axis(1, at=1, labels=""All Subjects"")
+
+[Picture1.png] (/users/6294688/files/113941303/preview?verifier=vhapVqfBcwnH4sh1wMtB73vraULFmzJMqZSkNJKj)
+
+# The box plot shows a spread between 2.15 and 4.05 L, with most values clustered around the median.",0.0,"a) Pattern recognition and predictive modeling are two ways that AI could be helpful in this analysis. Pattern recognition helps in identifying complex patterns in large datasets and predictive modeling for training it to predict patient outcomes based off health records.
+b) Bias data and inability to interpret outputs are two potential limitations to using AI. If it is not a diverse dataset AI may produce skewed inaccurate results. AI can also be difficult to understand and see how it arrived upon particular conclusions.
+c) Experts in respectful fields should always review outputs produced by AI to ensure that results are accurate and ethical. ",0.0,14,0,28.0
+Allie Penfold,6489373,934416516,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-03 19:50:58 UTC,1,48%,4.0,"a.) positivly skewed because the mean is bigger than the median.
+
+ 
+
+b.) (0.32/2.88) x 100 =11.11%
+
+ 
+
+c.) A box plot, because it can display distributions and can help show comparisons between both the variables side by side and can be helpful with small sample sizes.",0.0,"A.) A bar chart is appropriate because it can split it into easily read categories. one strength is that it makes identifying trends easier at a glance.
+
+b.) A histogram is ideal for this dataset because it can group continuous BMI values into ranges and shows where each person falls. This can show a better shape of distribution making it easier to understand BMI across the population.
+
+C.) A pie chart may be misleading when there are several categories with similar proportions. It can make it difficult to interpret and makes comparison difficult.",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI requires expensive commercial software,4.0,"a.) Quantitative - Continuous
+
+* This is a numerical measurment and can take on many values within a range and not just whole numbers. It is also measured with precision, making it continuous.
+
+b.) Quanitative- Discrete
+
+* This can only be whole numbers making it discrete.
+
+c.) Qualitative- Nominal
+
+* The variable is representive of categories with no order.
+
+d.) Qualitative- Ordinal
+
+* This is showing ranked categories of severitiy but each level is not completely uniform.
+
+e.) Qualitative- Nominal
+
+- There is not clear ranking and no higher or lower.",0.0,"a.) Positively skewed - Right-skewed distribution. This means there are fewer high FEV1 values pulling the mean up while the other values are on the lower end.
+
+b.) May expect a right-skewed distribution because most people with asthma will have lower lung function however with a smaller number of adolescents with controlled asthma there may be higher FEV1 values. This can cause a skew of distribution to the right.
+
+c.) The median is more apporopriate to measure to report because it is less affected by outliers, it is in a skewed distribution and a median can give a better visual of the central tendency of the individual. This also can show a more accureat FEV1 value in a group of adolescents.",0.0,"a.) The data invloves categories and counts, which a bar chart is good at displaying. One strength is that it makes it easy to compare frequency.
+
+b.) A histogram is helpful to show the distribution shape of continuous data grouping ages and showing the cases that fall into wach range. It is appropriate because it reveals the distribution pattern.
+
+c.) A pie chart may not be the best choice because it can be hard to compare slice sizes, there is not clear order, and can be very difficult to read. There are also better alternatives like the bar chart.",0.0,"# HW1 R Programming Exercise
+fev1_data <- data.frame(
+ 
+  subject_id = 1:13,
+ 
+  gender = c(""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female"", ""Male"", ""Female""),
+ 
+  fev1_liters = c(2.15, 3.05, 2.50, 3.50, 2.80, 3.20, 2.45, 2.90, 3.15, 4.05, 2.60, 3.40, 2.75)
+ 
+)
+#Question A
+aggregate(fev1_liters~gender,data=fev1_data, FUN=mean)
+
+##   gender fev1_liters
+## 1 Female    2.628571
+## 2   Male    3.350000
+
+#Question B
+summary(fev1_data$fev1_liters)
+
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+##   2.150   2.600   2.900   2.962   3.200   4.050
+
+#Question C
+table(fev1_data$gender)
+
+##
+## Female   Male
+##      7      6
+
+#Percentage female
+prop.table(table(fev1_data$gender))*100
+
+##
+##   Female     Male
+## 53.84615 46.15385
+
+#Question D
+boxplot(fev1_liters~gender, data=fev1_data,
+        col=c(""lightpink"",""lightblue""),
+        main=""FEV1 by Gender"",
+        xlab=""gender"",
+        ylab=""FEV1(liters)"")
+
+[9327d132-fc57-4de6-88ba-cb1d3feace24.png] (/users/6489373/files/113941337/preview?verifier=Pnn0JJo56JDZXbmhF2UTw5f1Z8y7sp7iTJFS28PU)",0.0,"A.) Pattern recognition- identifying complex patterns in large datasets
+
+Predictive modeling-  by training it to predict patient outcomes based off health records.
+
+B.) Bias Data - If it is not a diverse dataset AI may produce skewed inaccurate results.
+
+Lack of being able to interpret - AI can be difficult to understand and see how it arrived upon particular conclusions.
+
+C.) An ethical and clinical review by experts is extremely important to validate and interpret the findings of AI outputs. This can help ensure that results are ethical and medically sound.",0.0,14,0,28.0
+Katriel Sevigny,6714052,934686542,INTRODUCTION TO BIOSTATISTICS (H_524_001_F2025),2306702,H_524_001_F2025,2025-10-03 18:07:33 UTC,1,48%,4.0,"a) Since the median and mean are close together, this means the distribution is not skewed too much and that the middle point of the data is close to the average.
+
+b) 0.32 liters/2.88 liters = 0.111
+
+0.111*100 = 11.1% 
+
+The coefficient of variation is 11.1%, which means that the data points are closer to the mean and clustered around there. This is because it is a lower percentage. If it were a higher percentage, then the data points would be farther from the mean. Since they aren't, this means the data points are clustered around the mean.
+
+c) It may be best to do a frequency polygon. It is similar to a histogram in that it will have buckets of number ranges on the x-axis and the number of people along the y-axis, but it is easier to superimpose two different data sets over top each other. This will make it easier for someone to compare the two groups (males and females).",0.0,"a) A bar chart is appropriate for data that can be put into categories. In this case, the x-axis would be the type of injury deaths. One of a bar chart's strengths is that it is best used for datasets that use ordinal or nominal data. Since death injury type is nominal (the data is qualitative and does not have an inherent order to it), a bar chart would be appropriate.
+
+b) For dataset 2, a histogram would be a good visualization. This is because histograms are best used for data that is discrete or continuous. Individual BMI measurements would be continuous, as it would be in measurable numbers and you could have a decimal in the number. A histogram would also be appropriate, as the ""categories"" along the x-axis are bucketed and counts every datapoint that falls within that range of numbers. This would make it easier to see the distribution shape of the data.
+
+c) A pie chart may not be a good choice for displaying this data, because it is best used when your data is percentages of a whole. Furthermore, you may not be looking at how each blood type contributes to the whole and simply at how the different categories compare to one another. Consider a bar chart instead.",0.0,Display the five-number summary and outliers clearly,4.0,Higher mortality than expected,4.0,table(),4.0,Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps,4.0,"AI should enhance understanding, not replace critical thinking",4.0,AI requires expensive commercial software,4.0,"a) It is quantitative and continuous. This is because it is in measurable numbers, and you can have a partial liter.
+
+b) This would be quantitative and discrete. The data would be in countable numbers, because you cannot have half of a childhood injury death.
+
+c) Cause of injury would be qualitative and nominal. It is categorical, but the categories doesn't have an inherent order to them.
+
+d) Pain severity rating would be qualitative and ordinal. Although the categories could be codified from 1-5, it is still qualitative data, and there is a natural order from mild to severe.
+
+e) Primary language would be qualitative and nominal. The categories are the different languages, and there is no inherent order to the languages.",0.0,"a) Since the median and mean are so close together, we can assume that the middle values are close to the mean in the dataset, and that there are no major outliers.
+
+b) Since this data is dealing with people with asthma, we can assume that the data may skew lower because people with asthma are not able to breathe in much air. Therefore, they will have a lower number in liters.
+
+c) It may be more appropriate to report on the median in this case, because the mean is more sensitive to outliers, and although there is no major outliers, there is one number that is a bit higher than the others (4.05 liters) which we may need to account for. The median is less sensitive to outliers and therefore, may be more helpful to report.
+
+ ",0.0,"a) A bar chart would be appropriate because one of the bar chart's strengths is that it can display ordinal or nominal data really well. Since the cause of an injury death would be nominal, a bar chart would be the best visualization.
+
+b) For this dataset, I would recommend a histogram. Histograms specifically display continuous and discrete variables and is best used to show the distribution shape. This is because the x-axis ""buckets"" the data into certain categories depending on a range.
+
+c) A pie chart would not be the best choice here because pie charts are used to see what categories compose the whole and shows percentages. With injury severity, that information may not be relevant. Instead, a bar chart may be best to show exactly how many injuries were of a certain type of severity.",0.0,"a) [image.png] (/users/6714052/files/113938967/preview?verifier=73qzu6PNpCkokhXmHDEcy0kXr6LTFK3cYYNOD8TQ)
+
+b)[image.png] (/users/6714052/files/113938988/preview?verifier=dq8Ai13sfz9mNaAoZXzyo1UiY28rI1HGMlTaBitL)
+
+The 1st quartile tells us that 1/4th of the datapoints fall below 2.6, while the 3rd quartile tells us that 75% of the datapoints in this dataset fall below 3.2. This tells use that the IQR, which is 0.6. This means that the middle 50% of our datapoints fall within 0.6 liters of each other. This gives us the idea that a lot of datapoints fall close to the median.
+
+c)
+
+[image.png] (/users/6714052/files/113939211/preview?verifier=O3nDObHvhjhMv8MhXpubNA8cVVdJEzecLK6dG6tV)
+
+Female = 53.85% (rounded)
+
+d)
+
+[image.png] (/users/6714052/files/113939345/preview?verifier=hTxeuSHxVfJYcufPeEZf7OEuEoksAHsjbXgyVBYn)[image.png] (/users/6714052/files/113939347/preview?verifier=1JoT9prb37AnKbGkls17yZz4gmaUJDwD5NAqnDK9)
+
+The visualization shows that the people in this sample all roughly within 2.0 and 3.5 liters. There's also a small outlier around 4.0-4.5. This shows that the distribution is not necessarily normal and may be a little skewed.",0.0,"a) The researcher could use the AI to come up with the R code to analyze the data in such a large dataset. The researcher could also use the AI to suggest possible visualizations they could use when they want to show their findings to the wider community.
+
+b) The AI could not understand the context of the data and suggest tests that are not useful given the situation. The AI could also use outdated information and not know about the latest statistical methods in the field that could be useful in the public health researcher's work.
+
+c) The researcher should use their critical thinking to ensure the AI is helping. They should test the code and also check the data to see if it fits the context. They should also double check the AI's work by cross-referencing it with written materials on statistics and R.",0.0,14,0,28.0

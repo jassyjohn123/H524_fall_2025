@@ -1,0 +1,1065 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{array}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+% Configure R code listings
+\lstset{
+    language=R,
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    breakatwhitespace=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    numbers=left,
+    numberstyle=\tiny,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red},
+    columns=flexible,
+    keepspaces=true,
+    xleftmargin=0pt,
+    xrightmargin=0pt,
+    linewidth=\textwidth,
+    aboveskip=\baselineskip,
+    belowskip=\baselineskip,
+    framexleftmargin=0pt,
+    framexrightmargin=0pt
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Project Preparation Homework}}\\
+\textcolor{white}{\textbf{\Large GROUP ASSIGNMENT}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Due Date:} End of Week 8\\
+\textbf{Total Points:} 100\\
+\textbf{Format:} GROUP SUBMISSION - One PDF per group via Canvas\\
+\textbf{Group Size:} 4-5 students
+
+\section*{Overview}
+
+This assignment marks the beginning of your group final project for H524. By now, you have learned descriptive statistics, probability, confidence intervals, hypothesis testing (t-tests, ANOVA), and nonparametric methods. This assignment asks you to:
+
+\begin{enumerate}
+\item Form a research team of 4-5 students
+\item Select a biostatistics dataset of interest
+\item Develop testable research questions
+\item Conduct preliminary data exploration
+\item Create an analysis plan using methods from weeks 1-8
+\end{enumerate}
+
+This preparation will serve as the foundation for your final project presentation and report at the end of the term.
+
+\section*{Learning Objectives}
+
+By completing this assignment, you will:
+\begin{itemize}
+\item Practice collaborative research planning and teamwork
+\item Apply course concepts to real biomedical/public health data
+\item Develop testable hypotheses appropriate for your dataset
+\item Conduct comprehensive exploratory data analysis
+\item Create reproducible, well-documented R code
+\item Communicate statistical findings clearly
+\end{itemize}
+
+\section*{Timeline and Checkpoints}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lp{10cm}}
+\toprule
+\textbf{Week} & \textbf{Milestone} \\
+\midrule
+Week 7 & Form groups; begin dataset exploration \\
+Week 7.5 & Optional: Dataset approval office hours \\
+Week 8 & Complete data exploration and analysis plan \\
+Week 8 (end) & \textbf{SUBMISSION DEADLINE} \\
+\midrule
+Weeks 9-10 & Continue analysis (after learning new methods) \\
+Week 10 (end) & Final project presentations and reports due \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+\section{Part A: Group Formation and Organization (15 points)}
+
+\subsection{Required Information}
+
+Submit the following information about your research team:
+
+\subsubsection{Team Members (5 points)}
+
+Complete the following table:
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Name} & \textbf{Email} & \textbf{Primary Role(s)} \\
+\hline
+& & \\[2ex]
+\hline
+& & \\[2ex]
+\hline
+& & \\[2ex]
+\hline
+& & \\[2ex]
+\hline
+& & \\[2ex]
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Roles} (students may hold multiple roles):
+\begin{itemize}
+\item \textbf{Project Coordinator}: Schedules meetings, tracks deadlines, ensures all deliverables are complete
+\item \textbf{Data Analyst}: Leads R coding, data cleaning, statistical analysis
+\item \textbf{Writer/Editor}: Coordinates writing of reports, ensures clarity and grammar
+\item \textbf{Methods Specialist}: Ensures appropriate statistical methods are used correctly
+\item \textbf{Presenter}: Leads development of final presentation materials
+\end{itemize}
+
+\subsubsection{Communication and Collaboration Plan (5 points)}
+
+Describe your group's plan for working together:
+
+\begin{enumerate}[label=\alph*)]
+\item \textbf{Primary communication method:} (e.g., email, Slack, Discord, text)
+\item \textbf{Meeting schedule:} How often will you meet? When?
+\item \textbf{File sharing:} How will you share code and documents? (e.g., Google Drive, GitHub, Canvas)
+\item \textbf{Conflict resolution:} How will your group handle disagreements or unequal contributions?
+\end{enumerate}
+
+\subsubsection{Individual Contribution Statement (5 points)}
+
+At the end of your submission, include a brief statement from EACH group member describing:
+\begin{itemize}
+\item What you personally contributed to this assignment
+\item Approximately what percentage of the work you completed
+\item Any challenges your group faced in collaboration
+\end{itemize}
+
+\textbf{Note:} All group members should contribute meaningfully. If there are significant disparities in effort, please discuss with the instructor.
+
+\newpage
+
+\section{Part B: Dataset Selection and Description (20 points)}
+
+\subsection{Dataset Selection}
+
+Your group must select ONE dataset for analysis. You have two options:
+
+\subsubsection{Option 1: Choose from Curated Datasets (Recommended)}
+
+The instructor has prepared several high-quality biostatistics datasets appropriate for this course:
+
+\begin{enumerate}
+\item \textbf{Framingham Heart Study (subset)}: Cardiovascular disease risk factors
+\item \textbf{NHANES (subset)}: National health and nutrition data
+\item \textbf{COVID-19 Clinical Outcomes}: Patient characteristics and outcomes
+\item \textbf{Birth Weight Study}: Factors affecting infant birth weight
+\item \textbf{Cancer Survival Data}: Treatment outcomes and prognostic factors
+\item \textbf{Mental Health Survey}: Depression, anxiety, and demographic factors
+\end{enumerate}
+
+\textit{Detailed dataset descriptions and download links will be provided on Canvas.}
+
+\subsubsection{Option 2: Propose Your Own Dataset (Requires Approval)}
+
+If your group wants to use a different dataset, you must:
+
+\begin{itemize}
+\item Submit a 1-page justification by \textbf{Week 7, Wednesday}
+\item Include: dataset source, variables available, number of observations
+\item Explain why this dataset is suitable for H524 methods
+\item Receive instructor approval before proceeding
+\end{itemize}
+
+\textbf{Dataset Requirements (ANY dataset must meet these criteria):}
+\begin{itemize}
+\item At least 100 observations
+\item At least 8-10 variables (mix of continuous and categorical)
+\item Publicly available OR you have permission to use it
+\item Relevant to biostatistics, public health, or medicine
+\item Suitable for methods covered in weeks 1-8 (and weeks 9-10)
+\item Complete data documentation available
+\end{itemize}
+
+\subsection{Dataset Description (20 points)}
+
+Provide a comprehensive description of your chosen dataset:
+
+\subsubsection{Source and Context (5 points)}
+
+\begin{itemize}
+\item Full citation for the dataset (APA format)
+\item Brief background: What was the original study purpose?
+\item Population studied (who, where, when)
+\item Study design (cross-sectional, cohort, experimental, etc.)
+\end{itemize}
+
+\subsubsection{Dataset Overview (10 points)}
+
+\begin{itemize}
+\item Total number of observations (rows)
+\item Total number of variables (columns)
+\item Brief description of each variable including:
+  \begin{itemize}
+  \item Variable name
+  \item Variable type (continuous, discrete, categorical nominal, categorical ordinal)
+  \item Units of measurement (if applicable)
+  \item Possible range or categories
+  \end{itemize}
+\end{itemize}
+
+\textbf{Create a table summarizing all variables}. Example format:
+
+\begin{center}
+\begin{tabular}{|l|l|p{4cm}|l|}
+\hline
+\textbf{Variable} & \textbf{Type} & \textbf{Description} & \textbf{Range/Categories} \\
+\hline
+age & Continuous & Patient age at enrollment & 18-85 years \\
+\hline
+sex & Nominal & Biological sex & Male, Female \\
+\hline
+bp\_category & Ordinal & Blood pressure category & Normal, Elevated, High \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Missing Data Assessment (5 points)}
+
+\begin{itemize}
+\item Which variables have missing data?
+\item What percentage of observations are missing for each variable?
+\item How will you handle missing data in your analysis?
+\end{itemize}
+
+\subsubsection{Why This Dataset? (Bonus question, not graded)}
+
+In 2-3 sentences, explain what interested your group about this dataset and why it's important for public health or biomedicine.
+
+\newpage
+
+\section{Part C: Research Questions and Hypotheses (25 points)}
+
+Develop 2-3 specific, testable research questions based on your dataset. Each research question should include:
+
+\subsection{Research Question Format}
+
+For EACH research question (2-3 total), provide:
+
+\subsubsection{Question Statement (5 points per question)}
+
+State your research question clearly. Good research questions are:
+\begin{itemize}
+\item \textbf{Specific}: Focus on particular variables
+\item \textbf{Testable}: Can be answered with statistical methods
+\item \textbf{Relevant}: Important for public health or clinical practice
+\end{itemize}
+
+\textbf{Examples of good research questions:}
+\begin{itemize}
+\item ``Is there a significant difference in mean systolic blood pressure between smokers and non-smokers?''
+\item ``Are cholesterol levels normally distributed in this population?''
+\item ``Is there an association between BMI category and diabetes diagnosis?''
+\end{itemize}
+
+\textbf{Examples of poor research questions:}
+\begin{itemize}
+\item ``What can we learn from this data?'' (too vague)
+\item ``How does everything relate to everything?'' (not specific)
+\item ``What causes heart disease?'' (too broad, requires complex modeling)
+\end{itemize}
+
+\subsubsection{Formal Hypotheses (5 points per question)}
+
+For each research question, state:
+\begin{itemize}
+\item \textbf{Null hypothesis} ($H_0$): Statement of no effect/no difference
+\item \textbf{Alternative hypothesis} ($H_A$ or $H_1$): What you expect to find
+\end{itemize}
+
+Use proper statistical notation where appropriate.
+
+\textbf{Example:}
+\begin{itemize}
+\item $H_0$: $\mu_{\text{smokers}} = \mu_{\text{non-smokers}}$ (no difference in mean BP)
+\item $H_A$: $\mu_{\text{smokers}} \neq \mu_{\text{non-smokers}}$ (two-sided alternative)
+\end{itemize}
+
+\subsubsection{Public Health Significance (5 points per question)}
+
+For each research question, explain:
+\begin{itemize}
+\item Why is this question important?
+\item What are the potential implications if your hypothesis is supported?
+\item How might results inform public health policy or clinical practice?
+\end{itemize}
+
+Limit to 3-5 sentences per question.
+
+\subsubsection{Planned Statistical Method (5 points per question)}
+
+For each research question, specify:
+\begin{itemize}
+\item Which statistical test/method you will use (based on weeks 1-8 content)
+\item Why this method is appropriate for your variables and question
+\item What assumptions you need to check
+\end{itemize}
+
+\textbf{Methods you have learned (weeks 1-8):}
+\begin{itemize}
+\item Descriptive statistics and visualization
+\item One-sample t-test
+\item Two-sample t-test (independent samples)
+\item Paired t-test
+\item One-way ANOVA
+\item Nonparametric tests (Mann-Whitney U, Kruskal-Wallis, Wilcoxon signed-rank)
+\item Correlation (Pearson, Spearman)
+\end{itemize}
+
+\newpage
+
+\section{Part D: Initial Data Exploration (25 points)}
+
+Conduct a thorough exploratory data analysis (EDA) of your dataset. This section should include:
+
+\subsection{Summary Statistics (10 points)}
+
+For your key variables of interest:
+
+\subsubsection{Continuous Variables}
+Provide:
+\begin{itemize}
+\item Sample size (n)
+\item Mean and median
+\item Standard deviation and IQR
+\item Minimum and maximum values
+\item Any outliers identified
+\end{itemize}
+
+\textbf{Create summary tables}. Example:
+
+\begin{center}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Variable} & \textbf{n} & \textbf{Mean} & \textbf{SD} & \textbf{Median} & \textbf{IQR} & \textbf{Range} \\
+\midrule
+Age (years) & 500 & 52.3 & 12.1 & 51.0 & 44-60 & 18-85 \\
+SBP (mmHg) & 500 & 128.5 & 18.2 & 125.0 & 115-140 & 90-195 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Categorical Variables}
+Provide:
+\begin{itemize}
+\item Frequency counts for each category
+\item Percentages
+\item Mode (most common category)
+\end{itemize}
+
+\textbf{Create frequency tables}. Example:
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Category} & \textbf{Count} & \textbf{Percentage} \\
+\midrule
+Male & 245 & 49.0\% \\
+Female & 255 & 51.0\% \\
+\textbf{Total} & \textbf{500} & \textbf{100.0\%} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Data Visualization (10 points)}
+
+Create appropriate visualizations for your key variables. Include AT LEAST:
+
+\begin{itemize}
+\item \textbf{2-3 histograms} for continuous variables
+  \begin{itemize}
+  \item Assess distribution shape (normal, skewed, bimodal?)
+  \item Include reference lines for mean/median if helpful
+  \end{itemize}
+\item \textbf{2-3 box plots} comparing groups
+  \begin{itemize}
+  \item Show distribution differences between categories
+  \item Identify outliers visually
+  \end{itemize}
+\item \textbf{1-2 bar charts} for categorical variables
+\item \textbf{1-2 scatter plots} if examining relationships between continuous variables
+\end{itemize}
+
+\textbf{All plots must:}
+\begin{itemize}
+\item Have clear titles
+\item Have labeled axes with units
+\item Be large enough to read easily
+\item Be generated in R (no screenshots from other software)
+\end{itemize}
+
+\subsection{Distribution Assessment (5 points)}
+
+For each continuous variable you plan to analyze:
+
+\begin{itemize}
+\item Assess normality visually (histogram, Q-Q plot)
+\item Comment on skewness or outliers
+\item Discuss whether parametric tests are appropriate or if you need nonparametric alternatives
+\end{itemize}
+
+\textbf{Example discussion:}
+
+``Age appears approximately normally distributed based on the histogram, with no extreme outliers. The Q-Q plot shows points falling close to the reference line. Therefore, parametric methods (t-tests, ANOVA) are appropriate for this variable.
+
+Systolic blood pressure shows slight right skewness with 3 potential outliers above 180 mmHg. We will verify these are not data entry errors. If skewness persists, we may use Mann-Whitney U test instead of two-sample t-test.''
+
+\newpage
+
+\section{Part E: Preliminary Analysis Plan (15 points)}
+
+\subsection{Statistical Methods Selection (8 points)}
+
+For each research question from Part C, describe in detail:
+
+\begin{enumerate}
+\item \textbf{Which test you will use} (e.g., two-sample t-test, one-way ANOVA, Mann-Whitney U)
+\item \textbf{Why this test is appropriate}
+  \begin{itemize}
+  \item What are your independent and dependent variables?
+  \item What type of data do you have?
+  \item Does the test match your research question?
+  \end{itemize}
+\item \textbf{Assumptions to check}
+  \begin{itemize}
+  \item Independence of observations
+  \item Normality (if parametric)
+  \item Equal variances (if required)
+  \item Sample size requirements
+  \end{itemize}
+\item \textbf{How you will check assumptions}
+  \begin{itemize}
+  \item Visual methods (histograms, Q-Q plots, box plots)
+  \item Statistical tests (Shapiro-Wilk, Levene's test)
+  \item What you will do if assumptions are violated
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Potential Challenges and Solutions (4 points)}
+
+Identify potential issues you foresee and how you plan to address them:
+
+\begin{itemize}
+\item \textbf{Missing data}: How much is missing? Will you use complete case analysis, imputation, or another approach?
+\item \textbf{Outliers}: How will you handle extreme values? Remove? Transform? Use robust methods?
+\item \textbf{Small sample sizes}: Do you have adequate power for your planned tests?
+\item \textbf{Assumption violations}: What alternatives will you use if parametric assumptions fail?
+\item \textbf{Multiple comparisons}: Are you conducting multiple tests? Do you need to adjust p-values?
+\end{itemize}
+
+\subsection{Analysis Timeline (3 points)}
+
+Create a brief timeline for completing your final project:
+
+\begin{center}
+\begin{tabular}{|l|p{9cm}|}
+\hline
+\textbf{Week} & \textbf{Tasks} \\
+\hline
+Week 8 & Complete data exploration (THIS ASSIGNMENT) \\
+\hline
+Week 9 & Learn contingency tables/chi-square; apply to dataset if relevant \\
+\hline
+Week 9 & Conduct hypothesis tests; create results tables \\
+\hline
+Week 10 & Learn regression; apply to dataset if relevant \\
+\hline
+Week 10 & Finalize analysis; create visualizations \\
+\hline
+Week 10 & Write final report; create presentation slides \\
+\hline
+Week 10 (end) & Practice presentation; submit all materials \\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\section{Part F: R Code and Reproducibility (Appendix)}
+
+\subsection{Code Organization}
+
+Submit well-organized, fully commented R code that performs all analyses described in Parts B-E.
+
+\subsubsection{Required Code Sections}
+
+Your R code must include:
+
+\begin{enumerate}
+\item \textbf{Header Comments}
+\begin{lstlisting}
+# H524 Project Preparation - Group [Name]
+# Date: [Date]
+# Group Members: [Names]
+# Dataset: [Dataset name]
+# Purpose: Exploratory data analysis and research question development
+\end{lstlisting}
+
+\item \textbf{Package Loading}
+\begin{lstlisting}
+# Load required packages
+library(tidyverse)  # For data manipulation and visualization
+library(here)       # For file path management
+# Add other packages as needed
+\end{lstlisting}
+
+\item \textbf{Data Import and Cleaning}
+\begin{lstlisting}
+# Import dataset
+data <- read.csv("your_dataset.csv")
+
+# Check structure
+str(data)
+summary(data)
+
+# Handle missing data
+# [Your code here]
+
+# Check for duplicates
+# [Your code here]
+
+# Data type conversions if needed
+# [Your code here]
+\end{lstlisting}
+
+\item \textbf{Exploratory Data Analysis}
+\begin{lstlisting}
+# Summary statistics for continuous variables
+# [Your code here]
+
+# Frequency tables for categorical variables
+# [Your code here]
+
+# Create visualizations
+# Histograms
+# Box plots
+# Scatter plots
+# [Your code here]
+\end{lstlisting}
+
+\item \textbf{Assumption Checking}
+\begin{lstlisting}
+# Normality assessment
+# Q-Q plots
+# Shapiro-Wilk test
+# [Your code here]
+
+# Check for outliers
+# [Your code here]
+
+# Variance homogeneity (if needed)
+# [Your code here]
+\end{lstlisting}
+
+\item \textbf{Preliminary Statistical Tests} (optional at this stage)
+\begin{lstlisting}
+# If you want to run preliminary tests, include them here
+# Document results
+# [Your code here]
+\end{lstlisting}
+\end{enumerate}
+
+\subsection{Code Quality Requirements}
+
+Your code will be evaluated on:
+
+\begin{itemize}
+\item \textbf{Reproducibility (5 points)}
+  \begin{itemize}
+  \item Can the instructor run your code without errors?
+  \item Are file paths handled properly? (Use relative paths or \texttt{here()} package)
+  \item Are all required packages listed?
+  \item Does the code produce all tables and figures in your report?
+  \end{itemize}
+
+\item \textbf{Organization and Clarity (5 points)}
+  \begin{itemize}
+  \item Is code well-organized into logical sections?
+  \item Are variable names meaningful?
+  \item Is there adequate white space?
+  \end{itemize}
+
+\item \textbf{Documentation (5 points)}
+  \begin{itemize}
+  \item Are there comments explaining what each section does?
+  \item Are complex operations explained?
+  \item Would another student understand your code?
+  \end{itemize}
+\end{itemize}
+
+\subsection{RMarkdown Template (RECOMMENDED)}
+
+We strongly recommend using RMarkdown to integrate your code and written report. A template is provided below:
+
+\begin{lstlisting}
+---
+title: "H524 Project Preparation"
+author: "Group Name: [Your names]"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
+---
+
+# Part A: Group Information
+
+[Your content here]
+
+# Part B: Dataset Description
+
+[Your content here]
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(tidyverse)
+```
+
+```{r load-data}
+# Load your dataset
+data <- read.csv("your_dataset.csv")
+```
+
+# Part C: Research Questions
+
+[Your content here]
+
+# Part D: Data Exploration
+
+## Summary Statistics
+
+```{r summary-stats}
+# Your summary statistics code
+```
+
+## Visualizations
+
+```{r histograms}
+# Create histograms
+```
+
+# Part E: Analysis Plan
+
+[Your content here]
+
+# Appendix: Full R Code
+
+```{r ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
+# This automatically includes all code chunks
+```
+\end{lstlisting}
+
+\newpage
+
+\section*{Grading Rubric (100 points total)}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcl}
+\toprule
+\textbf{Component} & \textbf{Points} & \textbf{Key Criteria} \\
+\midrule
+\textbf{Part A: Group Organization} & 15 & \\
+\quad Team information & 5 & Complete roster with clear roles \\
+\quad Collaboration plan & 5 & Concrete meeting/communication plan \\
+\quad Individual contributions & 5 & Each member provides honest statement \\
+\midrule
+\textbf{Part B: Dataset Description} & 20 & \\
+\quad Source and context & 5 & Complete citation and background \\
+\quad Variable documentation & 10 & Comprehensive table with all variables \\
+\quad Missing data assessment & 5 & Identification and handling plan \\
+\midrule
+\textbf{Part C: Research Questions} & 25 & \\
+\quad Question clarity & 5 & Specific, testable, relevant (per question) \\
+\quad Hypotheses formulation & 5 & Proper null/alternative statements \\
+\quad Public health significance & 5 & Clear justification of importance \\
+\quad Method selection & 5 & Appropriate test chosen with rationale \\
+\midrule
+\textbf{Part D: Data Exploration} & 25 & \\
+\quad Summary statistics & 10 & Complete tables for key variables \\
+\quad Visualizations & 10 & Multiple appropriate plots with labels \\
+\quad Distribution assessment & 5 & Thoughtful evaluation of assumptions \\
+\midrule
+\textbf{Part E: Analysis Plan} & 15 & \\
+\quad Methods justification & 8 & Detailed plan with assumption checks \\
+\quad Challenges identified & 4 & Realistic issues with solutions \\
+\quad Timeline & 3 & Feasible schedule for completion \\
+\midrule
+\textbf{Part F: R Code Quality} & 15 & \\
+\quad Reproducibility & 5 & Code runs without errors \\
+\quad Organization & 5 & Clear structure, good naming \\
+\quad Documentation & 5 & Adequate comments throughout \\
+\midrule
+\textbf{Professional Presentation} & -5 & Deductions for poor formatting, typos \\
+\bottomrule
+\textbf{TOTAL} & \textbf{100} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Additional Evaluation Notes}
+
+\begin{itemize}
+\item \textbf{Group work expectations}: All members should contribute meaningfully. Individual contribution statements will be reviewed.
+\item \textbf{Statistical rigor}: Methods must be appropriate for your data and research questions.
+\item \textbf{Clarity of writing}: Scientific writing should be clear, concise, and professional.
+\item \textbf{Reproducibility}: Your code must run on the instructor's computer with only minor path changes.
+\end{itemize}
+
+\newpage
+
+\section*{AI Usage Guidelines}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,title=\textbf{AI-Enhanced Learning for Group Projects}]
+
+This is a GROUP assignment where collaboration and learning are paramount. AI tools can assist your learning, but you must understand and verify everything you submit.
+
+\subsection*{Encouraged AI Uses:}
+
+\begin{itemize}
+\item[+] \textbf{Code debugging}: ``Why is this R code giving an error?''
+\item[+] \textbf{Syntax help}: ``How do I create a grouped box plot in ggplot2?''
+\item[+] \textbf{Concept clarification}: ``Explain the difference between parametric and nonparametric tests''
+\item[+] \textbf{Writing improvement}: ``Help me make this explanation clearer'' (after you write a draft)
+\item[+] \textbf{Method selection}: ``I have continuous outcome and 3 groups. What test should I use?''
+\end{itemize}
+
+\subsection*{Prohibited AI Uses:}
+
+\begin{itemize}
+\item[-] \textbf{Complete delegation}: Asking AI to write your entire analysis
+\item[-] \textbf{Hypothesis generation}: AI should not choose your research questions
+\item[-] \textbf{Interpretation without understanding}: Copying AI explanations you don't comprehend
+\item[-] \textbf{Skipping group discussion}: Using AI instead of discussing with teammates
+\end{itemize}
+
+\subsection*{Required AI Documentation:}
+
+If you use AI tools significantly, include a brief section at the end of your report:
+
+\begin{itemize}
+\item Which AI tool(s) did you use? (e.g., ChatGPT, Claude, GitHub Copilot)
+\item For what purposes? (e.g., debugging code, explaining statistical concepts)
+\item How did you verify the AI's suggestions?
+\item What did you learn from the AI interaction?
+\end{itemize}
+
+\subsection*{Remember:}
+
+\begin{itemize}
+\item You are responsible for all content you submit
+\item You must understand every line of code and every statistical interpretation
+\item AI can assist learning, but cannot replace learning
+\item The goal is to develop YOUR group's analytical skills
+\end{itemize}
+
+\end{tcolorbox}
+
+\newpage
+
+\section*{Submission Requirements}
+
+\subsection*{What to Submit (One submission per group)}
+
+\begin{enumerate}
+\item \textbf{Main Report (PDF)}
+  \begin{itemize}
+  \item Generated from RMarkdown (strongly recommended) OR
+  \item Word document converted to PDF OR
+  \item LaTeX-generated PDF
+  \item Must include all Parts A-E
+  \item Must include all tables, figures, and narrative text
+  \item Expected length: 8-12 pages (not including code appendix)
+  \end{itemize}
+
+\item \textbf{R Code File(s)}
+  \begin{itemize}
+  \item Submit .Rmd file (if using RMarkdown) OR
+  \item Submit .R script file with all code
+  \item Ensure code is reproducible
+  \item Include comments throughout
+  \end{itemize}
+
+\item \textbf{Dataset File}
+  \begin{itemize}
+  \item If using a curated dataset: Include citation/link (no need to upload)
+  \item If using custom dataset: Upload data file (CSV format preferred)
+  \item Include data dictionary if not already documented
+  \end{itemize}
+
+\item \textbf{Individual Contribution Statements}
+  \begin{itemize}
+  \item Can be included at end of main PDF OR
+  \item Submit as separate document
+  \item Each group member must provide their own statement
+  \end{itemize}
+\end{enumerate}
+
+\subsection*{File Naming Convention}
+
+Use clear, consistent file names:
+
+\begin{itemize}
+\item Main report: \texttt{H524\_ProjectPrep\_GroupName.pdf}
+\item R code: \texttt{H524\_ProjectPrep\_GroupName.R} or \texttt{.Rmd}
+\item Dataset: \texttt{H524\_ProjectPrep\_GroupName\_data.csv}
+\end{itemize}
+
+\subsection*{Canvas Submission}
+
+\begin{itemize}
+\item ONE group member submits all files
+\item All other group members should be listed in the Canvas submission
+\item Submit by 11:59 PM on the due date (end of Week 8)
+\item Late penalty: 10\% per day (unless prior arrangement made)
+\end{itemize}
+
+\newpage
+
+\section*{Example Research Question Development}
+
+To help you develop strong research questions, here are examples using a hypothetical cardiovascular disease dataset:
+
+\subsection*{Example 1: Comparing Two Groups}
+
+\textbf{Research Question:}
+Is there a significant difference in mean systolic blood pressure between patients with and without diabetes?
+
+\textbf{Hypotheses:}
+\begin{itemize}
+\item $H_0$: $\mu_{\text{diabetes}} = \mu_{\text{no diabetes}}$ (no difference in mean SBP)
+\item $H_A$: $\mu_{\text{diabetes}} \neq \mu_{\text{no diabetes}}$ (there is a difference)
+\end{itemize}
+
+\textbf{Variables:}
+\begin{itemize}
+\item Independent: Diabetes status (categorical: yes/no)
+\item Dependent: Systolic blood pressure (continuous, mmHg)
+\end{itemize}
+
+\textbf{Statistical Method:}
+Two-sample t-test (or Mann-Whitney U if SBP not normally distributed)
+
+\textbf{Assumptions to Check:}
+\begin{itemize}
+\item Independence: Patients are independent observations
+\item Normality: Check histogram and Q-Q plot for SBP in each group
+\item Equal variances: Levene's test or examine box plots
+\end{itemize}
+
+\textbf{Public Health Significance:}
+Understanding blood pressure differences by diabetes status can inform screening recommendations and highlight the need for intensive BP management in diabetic patients.
+
+\subsection*{Example 2: Comparing Multiple Groups}
+
+\textbf{Research Question:}
+Do mean cholesterol levels differ significantly across three BMI categories (normal weight, overweight, obese)?
+
+\textbf{Hypotheses:}
+\begin{itemize}
+\item $H_0$: $\mu_{\text{normal}} = \mu_{\text{overweight}} = \mu_{\text{obese}}$ (all group means equal)
+\item $H_A$: At least one group mean differs from the others
+\end{itemize}
+
+\textbf{Variables:}
+\begin{itemize}
+\item Independent: BMI category (categorical: 3 levels)
+\item Dependent: Total cholesterol (continuous, mg/dL)
+\end{itemize}
+
+\textbf{Statistical Method:}
+One-way ANOVA (or Kruskal-Wallis if assumptions violated)
+
+\textbf{Assumptions to Check:}
+\begin{itemize}
+\item Independence: Patients are independent
+\item Normality: Check histograms for cholesterol in each BMI group
+\item Equal variances: Levene's test; examine box plots
+\end{itemize}
+
+\textbf{Public Health Significance:}
+If higher BMI is associated with elevated cholesterol, this supports weight management interventions for cardiovascular disease prevention.
+
+\subsection*{Example 3: Correlation/Association}
+
+\textbf{Research Question:}
+Is there a significant correlation between age and resting heart rate in this population?
+
+\textbf{Hypotheses:}
+\begin{itemize}
+\item $H_0$: $\rho = 0$ (no correlation between age and heart rate)
+\item $H_A$: $\rho \neq 0$ (there is a correlation)
+\end{itemize}
+
+\textbf{Variables:}
+\begin{itemize}
+\item Variable 1: Age (continuous, years)
+\item Variable 2: Heart rate (continuous, beats per minute)
+\end{itemize}
+
+\textbf{Statistical Method:}
+Pearson correlation (if both variables normally distributed) or Spearman correlation (if not)
+
+\textbf{Assumptions to Check:}
+\begin{itemize}
+\item Linearity: Create scatter plot
+\item Normality: Check histograms for both variables
+\item Outliers: Identify extreme values that might influence correlation
+\end{itemize}
+
+\textbf{Public Health Significance:}
+Understanding age-related changes in heart rate helps establish normal ranges and identify patients with abnormal cardiovascular responses.
+
+\subsection*{Tips for Your Group}
+
+\begin{itemize}
+\item Start with simple, clear questions
+\item Make sure your questions can be answered with methods from weeks 1-8
+\item Choose questions that genuinely interest your group
+\item Consider clinical or public health relevance
+\item Ensure your dataset has the necessary variables
+\end{itemize}
+
+\newpage
+
+\section*{Required R Packages}
+
+Your analysis will likely use the following R packages. Install them before beginning:
+
+\begin{lstlisting}
+# Core packages
+install.packages("tidyverse")   # Data manipulation and visualization
+install.packages("here")        # File path management
+
+# Summary statistics
+install.packages("psych")       # describe() function
+install.packages("Hmisc")       # More descriptive stats
+
+# Visualization
+install.packages("ggplot2")     # Already in tidyverse, but can load separately
+install.packages("gridExtra")   # Arrange multiple plots
+
+# Statistical tests
+# Base R includes t.test(), wilcox.test(), aov(), chisq.test(), cor.test()
+
+# Assumption checking
+install.packages("car")         # Levene's test, Q-Q plots
+
+# RMarkdown (if using)
+install.packages("rmarkdown")
+install.packages("knitr")
+\end{lstlisting}
+
+\section*{Getting Help}
+
+If your group encounters difficulties:
+
+\subsection*{Office Hours}
+\begin{itemize}
+\item Instructor office hours: [Days/times listed on syllabus]
+\item TA office hours: [Days/times listed on syllabus]
+\item Special project office hours Week 7.5 for dataset approval/questions
+\end{itemize}
+
+\subsection*{Canvas Discussion Board}
+\begin{itemize}
+\item Post general questions (not dataset-specific answers)
+\item Help other groups when you can
+\item Instructor monitors regularly
+\end{itemize}
+
+\subsection*{Email}
+\begin{itemize}
+\item For private group concerns
+\item For dataset approval requests
+\item For deadline extensions (must request BEFORE due date)
+\end{itemize}
+
+\subsection*{Resources}
+\begin{itemize}
+\item Course textbook: Pagano \& Gauvreau, \textit{Principles of Biostatistics}
+\item R documentation: \url{https://www.r-project.org/}
+\item RMarkdown guide: \url{https://rmarkdown.rstudio.com/}
+\item Course Canvas page: lecture notes, example code
+\end{itemize}
+
+\section*{Academic Integrity}
+
+\begin{tcolorbox}[colback=gray!10,colframe=black,boxrule=1pt]
+\textbf{Collaboration Policy:}
+
+\begin{itemize}
+\item \textbf{Within your group}: Full collaboration is expected and encouraged
+\item \textbf{Between groups}: You may discuss general concepts, but not share code or specific analyses
+\item \textbf{Outside resources}: You may consult textbooks, online tutorials, AI tools, but must cite sources
+\item \textbf{Plagiarism}: Copying from other groups, previous years, or uncited sources is prohibited
+\end{itemize}
+
+\textbf{What this means:}
+\begin{itemize}
+\item It's OK to say: ``Our group is using ANOVA for our main analysis. What are you using?''
+\item It's NOT OK to say: ``Can I see your R code for the ANOVA?''
+\item It's OK to use AI to debug code or explain concepts
+\item It's NOT OK to have AI write your entire analysis
+\end{itemize}
+
+All group members are responsible for ensuring academic integrity. Violations will result in zero points for the assignment and possible further consequences per university policy.
+\end{tcolorbox}
+
+\vspace{12pt}
+
+\begin{center}
+\textbf{\Large Good luck with your project!}\\
+\vspace{6pt}
+\textit{This is an opportunity to apply your biostatistics knowledge to real-world data.}\\
+\textit{Ask questions, collaborate with your team, and enjoy the process of discovery.}
+\end{center}
+
+\end{document}

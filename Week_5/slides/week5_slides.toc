@@ -1,0 +1,11 @@
+\beamer@sectionintoc {1}{Review from Week 4}{3}{0}{1}
+\beamer@sectionintoc {2}{Introduction to Hypothesis Testing (Ch 10.1)}{5}{0}{2}
+\beamer@sectionintoc {3}{Test Statistics and P-values (Ch 10.2)}{10}{0}{3}
+\beamer@sectionintoc {4}{Type I and Type II Errors (Ch 10.3)}{15}{0}{4}
+\beamer@sectionintoc {5}{One-Sample t-Test (Ch 10.4)}{19}{0}{5}
+\beamer@sectionintoc {6}{One-Sample z-Test (Ch 10.5)}{24}{0}{6}
+\beamer@sectionintoc {7}{Confidence Intervals and Hypothesis Tests}{26}{0}{7}
+\beamer@sectionintoc {8}{Practical Considerations}{28}{0}{8}
+\beamer@sectionintoc {9}{R Examples and Practice}{32}{0}{9}
+\beamer@sectionintoc {10}{AI as a Learning Tool for Hypothesis Testing}{37}{0}{10}
+\beamer@sectionintoc {11}{Summary}{42}{0}{11}

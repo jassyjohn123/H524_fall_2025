@@ -103,24 +103,24 @@ min_bp <- min(blood_pressure)  # 110
 range_bp <- max_bp - min_bp    # 83
 
 # Calculate variance
-var_bp <- var(blood_pressure)  # 1116.4
+var_bp <- var(blood_pressure)  # 1046
 
 # Calculate standard deviation
-sd_bp <- sd(blood_pressure)    # 33.41
+sd_bp <- sd(blood_pressure)    # 32.34
 
 # Calculate standard error of the mean
 n <- length(blood_pressure)    # 6
-sem_bp <- sd_bp / sqrt(n)      # 13.64
+sem_bp <- sd_bp / sqrt(n)      # 13.20
 
 # Results Summary:
 # Range: 83 mmHg (193 - 110)
-# Variance: 1116.4 mmHg^2 (sample variance)
-# Standard Deviation: 33.41 mmHg (square root of variance)
-# Standard Error of Mean: 13.64 mmHg (33.41/√6)
+# Variance: 1046 mmHg^2 (sample variance)
+# Standard Deviation: 32.34 mmHg (square root of variance)
+# Standard Error of Mean: 13.20 mmHg (32.34/√6)
 
 # Discussion: These measures tell us the blood pressure data has considerable
-# spread (range = 83), high variability (SD = 33.41), and the mean has
-# substantial uncertainty (SEM = 13.64).
+# spread (range = 83), high variability (SD = 32.34), and the mean has
+# substantial uncertainty (SEM = 13.20).
 
 # ============================================================================
 # Part 5: AI-Enhanced Data Exploration

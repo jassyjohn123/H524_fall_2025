@@ -1,0 +1,1299 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Define custom colors for AI slides
+\definecolor{AIBlue}{RGB}{30, 144, 255}
+\definecolor{AILightBlue}{RGB}{173, 216, 230}
+\definecolor{AINavy}{RGB}{25, 25, 112}
+
+% Commands to switch to AI color scheme
+\newcommand{\AIcolors}{%
+  \setbeamercolor{frametitle}{bg=AIBlue,fg=white}%
+  \setbeamercolor{title}{bg=AINavy,fg=white}%
+  \setbeamercolor{structure}{fg=AIBlue}%
+  \setbeamercolor{item}{fg=AINavy}%
+  \setbeamercolor{normal text}{fg=black}%
+}
+
+% Command to restore default colors
+\newcommand{\defaultcolors}{%
+  \setbeamercolor{frametitle}{bg=osaorange,fg=white}%
+  \setbeamercolor{title}{bg=osaorange,fg=white}%
+  \setbeamercolor{structure}{fg=osaorange}%
+  \setbeamercolor{item}{fg=black}%
+  \setbeamercolor{normal text}{fg=black}%
+}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Set colors
+\setbeamercolor{structure}{fg=osaorange}
+\setbeamercolor{title}{fg=white,bg=osaorange}
+\setbeamercolor{frametitle}{fg=white,bg=osaorange}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{listings}
+\usetikzlibrary{shapes,arrows}
+
+\title{H524 Introduction to Biostatistics}
+\subtitle{Week 10: More on Simple Linear Regression \& Project Presentations}
+\author{Dr. John Molitor}
+\institute{}
+\date{Fall 2025}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Review from Week 9}
+
+\begin{frame}
+\frametitle{Quick Review: Simple Linear Regression}
+\textbf{Last week we covered:}
+\begin{itemize}
+\item Simple linear regression model: $Y = \beta_0 + \beta_1 X + \epsilon$
+\item Least squares estimation: minimizing residuals
+\item Coefficient interpretation
+\item Correlation vs. regression
+\item R-squared and model fit
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{This Week:} Model diagnostics, assumptions, transformations, and presenting results
+
+\vspace{0.3cm}
+\textbf{Reading:} Pagano \& Gauvreau Chapter 18 (continued)
+\end{frame}
+
+\begin{frame}
+\frametitle{The Fitted Model Recap}
+\textbf{Simple Linear Regression:}
+$$\hat{y} = b_0 + b_1 x$$
+
+\vspace{0.3cm}
+where:
+\begin{itemize}
+\item $b_1 = r \cdot \frac{s_y}{s_x}$ (slope)
+\item $b_0 = \bar{y} - b_1\bar{x}$ (intercept)
+\item $r$ = correlation coefficient
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Key Concepts:}
+\begin{itemize}
+\item \textbf{Residual:} $e_i = y_i - \hat{y}_i$ (observed - predicted)
+\item \textbf{Sum of Squared Errors:} $SSE = \sum e_i^2$
+\item \textbf{R-squared:} $R^2 = r^2$ (proportion of variance explained)
+\end{itemize}
+\end{frame}
+
+\section{Regression Assumptions}
+
+\begin{frame}
+\frametitle{The Four Key Assumptions}
+\textbf{For valid inference from linear regression:}
+
+\vspace{0.3cm}
+\begin{enumerate}
+\item \textbf{Linearity:} The relationship between $X$ and $Y$ is linear
+  \begin{itemize}
+  \item Check: Scatterplot, residual plot
+  \end{itemize}
+
+\item \textbf{Independence:} Observations are independent
+  \begin{itemize}
+  \item Check: Study design, temporal patterns
+  \end{itemize}
+
+\item \textbf{Homoscedasticity:} Constant variance of residuals
+  \begin{itemize}
+  \item Check: Residual vs fitted plot
+  \end{itemize}
+
+\item \textbf{Normality:} Residuals are approximately normal
+  \begin{itemize}
+  \item Check: Q-Q plot, histogram of residuals
+  \end{itemize}
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Acronym:} LINE (Linearity, Independence, Normality, Equal variance)
+\end{frame}
+
+\begin{frame}
+\frametitle{Why Assumptions Matter}
+\textbf{Consequences of violated assumptions:}
+
+\vspace{0.3cm}
+\textbf{Linearity violation:}
+\begin{itemize}
+\item Biased estimates
+\item Poor predictions
+\item Misleading relationships
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Independence violation:}
+\begin{itemize}
+\item Underestimated standard errors
+\item Invalid p-values and confidence intervals
+\item False sense of precision
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Homoscedasticity violation:}
+\begin{itemize}
+\item Inefficient estimates
+\item Invalid hypothesis tests
+\item Incorrect prediction intervals
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Normality violation:}
+\begin{itemize}
+\item Less critical with large samples (CLT)
+\item Affects confidence intervals and hypothesis tests
+\end{itemize}
+\end{frame}
+
+\section{Diagnostic Plots}
+
+\begin{frame}[fragile]
+\frametitle{Residual vs Fitted Plot}
+\textbf{Purpose:} Check linearity and homoscedasticity
+
+\vspace{0.3cm}
+\textbf{What to look for:}
+\begin{itemize}
+\item \textbf{Good:} Random scatter around horizontal line at zero
+\item \textbf{Bad:} Patterns, curves, funneling
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Common patterns:}
+\begin{itemize}
+\item \textbf{Curved pattern:} Non-linear relationship (try transformation)
+\item \textbf{Funnel shape:} Non-constant variance (heteroscedasticity)
+\item \textbf{Clusters/groups:} Missing categorical variable
+\item \textbf{Outliers:} Points far from the cloud
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{R code:}
+\begin{verbatim}
+plot(fitted(model), residuals(model))
+abline(h=0, lty=2)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Q-Q Plot (Quantile-Quantile)}
+\textbf{Purpose:} Check normality of residuals
+
+\vspace{0.3cm}
+\textbf{What to look for:}
+\begin{itemize}
+\item \textbf{Good:} Points fall approximately on a straight line
+\item \textbf{Bad:} Systematic departures from the line
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Common patterns:}
+\begin{itemize}
+\item \textbf{S-shaped curve:} Heavy tails (outliers)
+\item \textbf{Curve below then above:} Right skewness
+\item \textbf{Curve above then below:} Left skewness
+\item \textbf{Points at ends deviate:} Extreme values
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{R code:}
+\begin{verbatim}
+qqnorm(residuals(model))
+qqline(residuals(model))
+\end{verbatim}
+
+\vspace{0.2cm}
+\textbf{Note:} Minor departures are okay, especially with small samples
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Scale-Location Plot}
+\textbf{Purpose:} Check homoscedasticity (constant variance)
+
+\vspace{0.3cm}
+\textbf{What it shows:} Square root of standardized residuals vs fitted values
+
+\vspace{0.3cm}
+\textbf{What to look for:}
+\begin{itemize}
+\item \textbf{Good:} Random scatter with horizontal trend line
+\item \textbf{Bad:} Upward or downward trend
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item Horizontal line $\Rightarrow$ constant variance
+\item Upward slope $\Rightarrow$ variance increases with fitted values
+\item Downward slope $\Rightarrow$ variance decreases with fitted values
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{R code:}
+\begin{verbatim}
+plot(model, which=3)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Residuals vs Leverage Plot}
+\textbf{Purpose:} Identify influential observations
+
+\vspace{0.3cm}
+\textbf{Key Concepts:}
+\begin{itemize}
+\item \textbf{Leverage:} How far $x_i$ is from $\bar{x}$ (potential influence)
+\item \textbf{Cook's Distance:} Actual influence on fitted values
+\item \textbf{Influential point:} High leverage AND large residual
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{What to look for:}
+\begin{itemize}
+\item Points outside Cook's distance contours (dashed lines)
+\item Cook's distance $> 0.5$ or $> 1$ suggests influential observation
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{R code:}
+\begin{verbatim}
+plot(model, which=5)
+\end{verbatim}
+
+\vspace{0.2cm}
+\textbf{Action:} Investigate influential points, but don't automatically remove them
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Creating All Diagnostic Plots in R}
+\textbf{Method 1: All four plots at once}
+\small
+\begin{verbatim}
+par(mfrow=c(2,2))
+plot(model)
+par(mfrow=c(1,1))
+\end{verbatim}
+
+\vspace{0.3cm}
+\normalsize
+\textbf{Method 2: Individual plots}
+\small
+\begin{verbatim}
+# 1. Residuals vs Fitted
+plot(model, which=1)
+
+# 2. Q-Q plot
+plot(model, which=2)
+
+# 3. Scale-Location
+plot(model, which=3)
+
+# 4. Residuals vs Leverage
+plot(model, which=5)
+\end{verbatim}
+\end{frame}
+
+\section{Outliers and Influential Points}
+
+\begin{frame}
+\frametitle{Types of Unusual Observations}
+\textbf{Three types to distinguish:}
+
+\vspace{0.3cm}
+\textbf{1. Outlier:}
+\begin{itemize}
+\item Large residual (far from regression line)
+\item May or may not be influential
+\item Check for data entry errors
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{2. High leverage point:}
+\begin{itemize}
+\item Extreme $x$ value (far from $\bar{x}$)
+\item Potential to be influential
+\item May not have large residual
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{3. Influential point:}
+\begin{itemize}
+\item High leverage AND large residual
+\item Removing it substantially changes regression line
+\item Check Cook's distance
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Dealing with Influential Points}
+\textbf{DO NOT automatically remove outliers!}
+
+\vspace{0.3cm}
+\textbf{Steps to take:}
+\begin{enumerate}
+\item \textbf{Check for errors:}
+  \begin{itemize}
+  \item Data entry mistakes
+  \item Measurement errors
+  \item Wrong units
+  \end{itemize}
+
+\item \textbf{Investigate context:}
+  \begin{itemize}
+  \item Is it a legitimate observation?
+  \item Does it represent a special subgroup?
+  \item Was there a protocol violation?
+  \end{itemize}
+
+\item \textbf{Perform sensitivity analysis:}
+  \begin{itemize}
+  \item Fit model with and without the point
+  \item Report both analyses
+  \item Discuss impact on conclusions
+  \end{itemize}
+
+\item \textbf{Consider robust methods:}
+  \begin{itemize}
+  \item Robust regression (less sensitive to outliers)
+  \item Transformations
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example: Identifying Influential Points in R}
+\small
+\begin{verbatim}
+# Fit model
+model <- lm(y ~ x, data=mydata)
+
+# Calculate Cook's distance
+cooks <- cooks.distance(model)
+
+# Identify influential points (Cook's D > 0.5)
+influential <- which(cooks > 0.5)
+print(influential)
+
+# Show influential observations
+mydata[influential, ]
+
+# Compare models with/without influential points
+model_full <- lm(y ~ x, data=mydata)
+model_reduced <- lm(y ~ x, data=mydata[-influential,])
+
+summary(model_full)
+summary(model_reduced)
+\end{verbatim}
+\end{frame}
+
+\section{Transformations}
+
+\begin{frame}
+\frametitle{When to Transform Data}
+\textbf{Transformations can help when:}
+\begin{itemize}
+\item Relationship is non-linear
+\item Variance is non-constant
+\item Residuals are non-normal
+\item Interpretation requires it (e.g., multiplicative effects)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Common transformations:}
+\begin{itemize}
+\item \textbf{Log:} $\log(Y)$ or $\log(X)$ -- for right skewness, exponential growth
+\item \textbf{Square root:} $\sqrt{Y}$ -- for count data, mild right skewness
+\item \textbf{Reciprocal:} $1/Y$ or $1/X$ -- for rates, strong right skewness
+\item \textbf{Square:} $Y^2$ or $X^2$ -- for quadratic relationships
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Box-Cox transformation:} Data-driven choice of power transformation
+\end{frame}
+
+\begin{frame}
+\frametitle{Log Transformation}
+\textbf{Most common transformation in biostatistics}
+
+\vspace{0.3cm}
+\textbf{Model forms:}
+\begin{enumerate}
+\item \textbf{Log-linear:} $\log(Y) = \beta_0 + \beta_1 X$
+  \begin{itemize}
+  \item Interpretation: 1-unit increase in $X$ $\Rightarrow$ $(e^{\beta_1} - 1) \times 100\%$ change in $Y$
+  \end{itemize}
+
+\item \textbf{Linear-log:} $Y = \beta_0 + \beta_1 \log(X)$
+  \begin{itemize}
+  \item Interpretation: 1\% increase in $X$ $\Rightarrow$ $\beta_1/100$ unit change in $Y$
+  \end{itemize}
+
+\item \textbf{Log-log:} $\log(Y) = \beta_0 + \beta_1 \log(X)$
+  \begin{itemize}
+  \item Interpretation: $\beta_1$ is the elasticity (1\% change in $X$ $\Rightarrow$ $\beta_1\%$ change in $Y$)
+  \end{itemize}
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{When to use:}
+\begin{itemize}
+\item Right-skewed data
+\item Multiplicative relationships
+\item Relative changes more meaningful than absolute
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example: Log Transformation in R}
+\textbf{Scenario:} BMI vs medical cost (right-skewed)
+
+\small
+\begin{verbatim}
+# Original model (may violate assumptions)
+model_original <- lm(cost ~ bmi, data=health)
+
+# Log-transformed response
+model_log <- lm(log(cost) ~ bmi, data=health)
+
+# Compare diagnostics
+par(mfrow=c(2,2))
+plot(model_original)
+plot(model_log)
+par(mfrow=c(1,1))
+
+# Interpretation
+summary(model_log)
+# If beta1 = 0.05, then 1-unit increase in BMI
+# increases cost by (exp(0.05)-1)*100 = 5.1%
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{Polynomial Regression}
+\textbf{For non-linear relationships with turning points}
+
+\vspace{0.3cm}
+\textbf{Quadratic model:}
+$$Y = \beta_0 + \beta_1 X + \beta_2 X^2 + \epsilon$$
+
+\vspace{0.3cm}
+\textbf{When to use:}
+\begin{itemize}
+\item U-shaped or inverted U-shaped relationship
+\item Single peak or valley
+\item Example: age vs bone density (increases then decreases)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item $\beta_1$: slope at $X = 0$
+\item $\beta_2$: rate of change in slope
+\item If $\beta_2 > 0$: U-shaped (convex)
+\item If $\beta_2 < 0$: inverted U-shaped (concave)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Warning:} Don't extrapolate beyond data range!
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Polynomial Regression in R}
+\small
+\begin{verbatim}
+# Create quadratic term
+mydata$age_squared <- mydata$age^2
+
+# Fit quadratic model
+model_quad <- lm(bone_density ~ age + age_squared,
+                 data=mydata)
+
+# Alternative: use poly() function
+model_quad2 <- lm(bone_density ~ poly(age, 2, raw=TRUE),
+                  data=mydata)
+
+summary(model_quad)
+
+# Find peak (maximum bone density)
+# Peak at: -beta1 / (2 * beta2)
+beta1 <- coef(model_quad)[2]
+beta2 <- coef(model_quad)[3]
+peak_age <- -beta1 / (2 * beta2)
+print(paste("Peak at age:", round(peak_age, 1)))
+\end{verbatim}
+\end{frame}
+
+\section{Hypothesis Testing and Confidence Intervals}
+
+\begin{frame}
+\frametitle{Testing the Slope}
+\textbf{Null hypothesis:} $H_0: \beta_1 = 0$ (no linear relationship)
+
+\textbf{Alternative:} $H_A: \beta_1 \neq 0$ (linear relationship exists)
+
+\vspace{0.5cm}
+\textbf{Test statistic:}
+$$t = \frac{b_1 - 0}{SE(b_1)} \sim t_{n-2}$$
+
+where $SE(b_1) = \frac{s_e}{\sqrt{\sum(x_i - \bar{x})^2}}$ and $s_e = \sqrt{\frac{SSE}{n-2}}$
+
+\vspace{0.5cm}
+\textbf{Decision:}
+\begin{itemize}
+\item Reject $H_0$ if $|t| > t_{\alpha/2, n-2}$ or $p < \alpha$
+\item Fail to reject if $|t| \leq t_{\alpha/2, n-2}$ or $p \geq \alpha$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Note:} This tests whether $X$ is useful for predicting $Y$
+\end{frame}
+
+\begin{frame}
+\frametitle{Confidence Interval for Slope}
+\textbf{95\% CI for $\beta_1$:}
+$$b_1 \pm t_{0.975, n-2} \times SE(b_1)$$
+
+\vspace{0.5cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item We are 95\% confident the true slope is in this interval
+\item If interval excludes 0, reject $H_0: \beta_1 = 0$
+\item Width reflects precision of estimate
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Example:}
+\begin{itemize}
+\item $b_1 = 2.5$ (estimated slope)
+\item $SE(b_1) = 0.8$
+\item $n = 30$, so $t_{0.975, 28} = 2.048$
+\item 95\% CI: $2.5 \pm 2.048(0.8) = (0.86, 4.14)$
+\item Interpretation: For each 1-unit increase in $X$, $Y$ increases between 0.86 and 4.14 units
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Confidence vs Prediction Intervals}
+\textbf{Two types of intervals for predictions:}
+
+\vspace{0.3cm}
+\textbf{1. Confidence Interval for Mean Response:}
+\begin{itemize}
+\item Estimates the \textbf{average} $Y$ for a given $X = x_0$
+\item Answers: What is the mean outcome for this X?
+\item Narrower interval
+\item Example: Mean blood pressure for all 50-year-olds
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{2. Prediction Interval for Individual Response:}
+\begin{itemize}
+\item Predicts a \textbf{single} $Y$ for a given $X = x_0$
+\item Answers: What will this individual's outcome be?
+\item Wider interval (includes individual variability)
+\item Example: Blood pressure for one specific 50-year-old
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Key difference:} Prediction interval accounts for both:
+\begin{enumerate}
+\item Uncertainty in estimating the mean (same as CI)
+\item Variability of individuals around the mean (extra)
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Computing Intervals in R}
+\small
+\begin{verbatim}
+# Fit model
+model <- lm(sbp ~ age, data=health)
+
+# New data point
+new_data <- data.frame(age = 50)
+
+# Confidence interval for mean SBP at age 50
+predict(model, newdata=new_data,
+        interval="confidence", level=0.95)
+# Example output: fit=130, lwr=128, upr=132
+
+# Prediction interval for individual at age 50
+predict(model, newdata=new_data,
+        interval="prediction", level=0.95)
+# Example output: fit=130, lwr=110, upr=150
+
+# Note: Prediction interval is wider!
+\end{verbatim}
+\end{frame}
+
+\section{Presenting Statistical Results}
+
+\begin{frame}
+\frametitle{Elements of a Good Statistical Presentation}
+\textbf{For your final projects, include:}
+
+\vspace{0.3cm}
+\begin{enumerate}
+\item \textbf{Clear research question}
+  \begin{itemize}
+  \item What are you trying to learn?
+  \end{itemize}
+
+\item \textbf{Descriptive statistics}
+  \begin{itemize}
+  \item Sample size, means, SDs
+  \item Summary tables
+  \end{itemize}
+
+\item \textbf{Visualizations}
+  \begin{itemize}
+  \item Scatterplots, histograms, boxplots
+  \item Clear labels and legends
+  \end{itemize}
+
+\item \textbf{Statistical methods}
+  \begin{itemize}
+  \item Which tests/models did you use?
+  \item Why did you choose them?
+  \end{itemize}
+
+\item \textbf{Results}
+  \begin{itemize}
+  \item Effect sizes, confidence intervals, p-values
+  \item Interpretation in context
+  \end{itemize}
+
+\item \textbf{Limitations and assumptions}
+  \begin{itemize}
+  \item What could go wrong?
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Reporting Regression Results}
+\textbf{Essential components:}
+
+\vspace{0.3cm}
+\begin{itemize}
+\item \textbf{Sample size:} $n = 250$ observations
+\item \textbf{Model equation:} $\hat{Y} = b_0 + b_1 X$
+\item \textbf{Coefficient estimates:}
+  \begin{itemize}
+  \item Point estimates
+  \item Standard errors
+  \item 95\% confidence intervals
+  \end{itemize}
+\item \textbf{Statistical significance:} t-statistics, p-values
+\item \textbf{Model fit:} $R^2$, residual standard error
+\item \textbf{Interpretation in context:}
+  \begin{itemize}
+  \item What does the slope mean practically?
+  \item Clinical/scientific significance vs statistical
+  \end{itemize}
+\item \textbf{Diagnostics:} Did assumptions hold?
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Example:} ``For each 1-unit increase in BMI, systolic BP increased by 1.2 mmHg (95\% CI: 0.8-1.6, p<0.001). The model explained 23\% of the variance in SBP ($R^2=0.23$).''
+\end{frame}
+
+\begin{frame}
+\frametitle{Common Mistakes to Avoid}
+\textbf{Don't:}
+\begin{itemize}
+\item Confuse correlation with causation
+  \begin{itemize}
+  \item ``X \textbf{is associated with} Y'' not ``X \textbf{causes} Y''
+  \end{itemize}
+\item Over-interpret R-squared
+  \begin{itemize}
+  \item Low $R^2$ doesn't mean the relationship isn't important
+  \end{itemize}
+\item Extrapolate beyond the data range
+  \begin{itemize}
+  \item Don't predict for X values outside your sample
+  \end{itemize}
+\item Ignore influential points without investigation
+\item Report only p-values without effect sizes
+  \begin{itemize}
+  \item \textbf{Always} report confidence intervals!
+  \end{itemize}
+\item Forget to check assumptions
+  \begin{itemize}
+  \item Always create diagnostic plots
+  \end{itemize}
+\item Use jargon without explanation
+  \begin{itemize}
+  \item Explain terms for non-statistical audience
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Creating Effective Visualizations}
+\textbf{Best practices:}
+
+\vspace{0.3cm}
+\begin{itemize}
+\item \textbf{Always label axes} with units
+\item \textbf{Include informative titles}
+\item \textbf{Use appropriate plot types}
+  \begin{itemize}
+  \item Scatterplot for continuous X and Y
+  \item Boxplot for categorical X, continuous Y
+  \end{itemize}
+\item \textbf{Show the data and the model}
+  \begin{itemize}
+  \item Points + regression line
+  \item Confidence/prediction bands
+  \end{itemize}
+\item \textbf{Use color wisely}
+  \begin{itemize}
+  \item Colorblind-friendly palettes
+  \item Sufficient contrast
+  \end{itemize}
+\item \textbf{Keep it simple}
+  \begin{itemize}
+  \item One main message per plot
+  \item Remove unnecessary elements
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example: Publication-Quality Plot}
+\small
+\begin{verbatim}
+# Create professional scatterplot with regression
+model <- lm(sbp ~ age, data=health)
+
+# Set up plot
+plot(health$age, health$sbp,
+     xlab="Age (years)",
+     ylab="Systolic Blood Pressure (mmHg)",
+     main="Relationship between Age and Blood Pressure",
+     pch=16, col=rgb(0,0,0,0.3), cex=1.2)
+
+# Add regression line
+abline(model, col="red", lwd=2)
+
+# Add confidence band
+new_age <- seq(min(health$age), max(health$age), 0.1)
+pred_ci <- predict(model,
+                   newdata=data.frame(age=new_age),
+                   interval="confidence")
+lines(new_age, pred_ci[,"lwr"], col="blue", lty=2)
+lines(new_age, pred_ci[,"upr"], col="blue", lty=2)
+
+# Add legend
+legend("topleft",
+       c("Observed", "Fitted line", "95% CI"),
+       col=c("black", "red", "blue"),
+       lty=c(NA, 1, 2), pch=c(16, NA, NA))
+\end{verbatim}
+\end{frame}
+
+\section{Case Study: Complete Analysis}
+
+\begin{frame}
+\frametitle{Case Study: FEV and Age}
+\textbf{Research Question:} How does lung function (FEV) change with age in children?
+
+\vspace{0.3cm}
+\textbf{Data:} 654 children aged 3-19 years
+\begin{itemize}
+\item \textbf{Outcome:} FEV (forced expiratory volume, liters)
+\item \textbf{Predictor:} Age (years)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Hypothesis:} FEV increases with age as lungs develop
+
+\vspace{0.3cm}
+\textbf{Analysis Plan:}
+\begin{enumerate}
+\item Descriptive statistics and visualization
+\item Fit simple linear regression
+\item Check assumptions
+\item Interpret results
+\item Consider alternatives if needed
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Step 1: Descriptive Statistics}
+\small
+\begin{verbatim}
+# Summary statistics
+summary(fev_data$age)
+#   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+#   3.00    8.00   10.00    9.93   12.00   19.00
+
+summary(fev_data$fev)
+#   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+#  0.791   1.981   2.547   2.637   3.119   5.793
+
+sd(fev_data$age)      # 2.95 years
+sd(fev_data$fev)      # 0.87 liters
+
+# Correlation
+cor(fev_data$age, fev_data$fev)
+# r = 0.877 (strong positive correlation)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Step 2: Initial Visualization}
+\small
+\begin{verbatim}
+# Scatterplot
+plot(fev_data$age, fev_data$fev,
+     xlab="Age (years)",
+     ylab="FEV (liters)",
+     main="FEV vs Age in Children",
+     pch=16, col=rgb(0,0,1,0.3))
+
+# Observations:
+# - Strong positive relationship
+# - Possible non-linearity (steeper for younger)
+# - Greater variability for older children
+\end{verbatim}
+
+\vspace{0.2cm}
+\normalsize
+\textbf{Initial impression:} Linear model may work, but check diagnostics
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Step 3: Fit Linear Model}
+\small
+\begin{verbatim}
+# Fit simple linear regression
+model <- lm(fev ~ age, data=fev_data)
+summary(model)
+
+# Coefficients:
+#             Estimate Std. Error t value Pr(>|t|)
+# (Intercept)  0.43161    0.06328   6.821  1.8e-11 ***
+# age          0.22204    0.00608  36.515  < 2e-16 ***
+# ---
+# Residual standard error: 0.358 on 652 degrees of freedom
+# Multiple R-squared:  0.6714,    Adjusted R-squared:  0.6709
+# F-statistic: 1333 on 1 and 652 DF,  p-value: < 2.2e-16
+
+# Interpretation:
+# FEV increases by 0.222 liters per year of age
+# Model explains 67.1% of variance
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Step 4: Check Assumptions}
+\small
+\begin{verbatim}
+# Diagnostic plots
+par(mfrow=c(2,2))
+plot(model)
+par(mfrow=c(1,1))
+
+# Observations:
+# 1. Residuals vs Fitted: slight curve (non-linearity?)
+# 2. Q-Q plot: reasonably linear (normality OK)
+# 3. Scale-Location: some funneling (heteroscedasticity?)
+# 4. Residuals vs Leverage: a few high leverage points
+
+# Potential issues:
+# - Non-linearity (could try quadratic or log)
+# - Non-constant variance (more spread for older ages)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Step 5: Consider Alternatives}
+\textbf{Given diagnostic concerns, try quadratic model:}
+
+\small
+\begin{verbatim}
+# Quadratic model
+model_quad <- lm(fev ~ age + I(age^2), data=fev_data)
+summary(model_quad)
+
+# Coefficients:
+#             Estimate Std. Error t value Pr(>|t|)
+# (Intercept)  1.04423    0.10055   10.39  < 2e-16 ***
+# age         -0.01626    0.02273   -0.72    0.475
+# I(age^2)     0.01201    0.00109   11.00  < 2e-16 ***
+# ---
+# Multiple R-squared:  0.7198,    Adjusted R-squared:  0.7189
+
+# Better R-squared (72% vs 67%)
+# Check diagnostics again...
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{Step 6: Interpret and Report}
+\textbf{Final Model:} Quadratic relationship
+
+$$\text{FEV} = 1.04 - 0.016 \times \text{Age} + 0.012 \times \text{Age}^2$$
+
+\vspace{0.3cm}
+\textbf{Key Findings:}
+\begin{itemize}
+\item FEV increases with age in children, but non-linearly
+\item Rate of increase accelerates with age
+\item Model explains 72\% of variance
+\item All coefficients highly significant ($p < 0.001$)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Conclusion:}
+\begin{itemize}
+\item Strong positive relationship between age and lung function
+\item Quadratic model fits better than linear
+\item Results consistent with biological lung development
+\item Caution: Don't extrapolate to adults (age > 19)
+\end{itemize}
+\end{frame}
+
+\section{AI for Statistical Communication}
+
+\AIcolors
+\begin{frame}
+\frametitle{AI for Presenting Statistical Results}
+\textbf{How AI can help with your project presentations:}
+
+\vspace{0.3cm}
+\begin{itemize}
+\item \textbf{Clarifying explanations:} Translate technical results for non-experts
+\item \textbf{Visualization code:} Generate R code for publication-quality plots
+\item \textbf{Interpretation guidance:} Help explain what results mean in context
+\item \textbf{Checking logic:} Verify your statistical reasoning
+\item \textbf{Writing assistance:} Draft results sections
+\item \textbf{Q\&A preparation:} Anticipate questions about your analysis
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Example prompts:}
+\begin{itemize}
+\item ``Explain what R-squared means to someone without statistics training''
+\item ``Create a scatterplot with regression line and 95\% CI bands in R''
+\item ``How do I interpret a slope of 2.5 with 95\% CI (1.2, 3.8)?''
+\item ``What are potential limitations of simple linear regression?''
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Explaining Results}
+\textbf{Prompt:} ``I found slope = 1.2 (SE = 0.3) for BMI predicting blood pressure. Explain this to a doctor.''
+
+\vspace{0.3cm}
+\textbf{Claude AI Response:}
+\small
+\begin{verbatim}
+This means that for each 1-point increase in BMI,
+we expect systolic blood pressure to increase by
+1.2 mmHg on average.
+
+The standard error (0.3) tells us the precision of
+this estimate. A 95% confidence interval would be:
+1.2 ± 1.96(0.3) = (0.6, 1.8) mmHg
+
+Clinically, this suggests that a patient with BMI
+of 30 would have blood pressure about 12 mmHg
+higher than a patient with BMI of 20, all else equal.
+
+This is a statistically significant and clinically
+meaningful association, though it doesn't prove that
+reducing BMI will lower blood pressure (correlation
+vs causation).
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Creating Visualizations}
+\textbf{Prompt:} ``Create an R plot showing regression line with both confidence and prediction bands''
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+# Fit model
+model <- lm(y ~ x, data=mydata)
+
+# Create sequence for predictions
+x_seq <- seq(min(mydata$x), max(mydata$x), length=100)
+
+# Confidence interval
+pred_ci <- predict(model, newdata=data.frame(x=x_seq),
+                   interval="confidence", level=0.95)
+
+# Prediction interval
+pred_pi <- predict(model, newdata=data.frame(x=x_seq),
+                   interval="prediction", level=0.95)
+
+# Plot
+plot(mydata$x, mydata$y, pch=16, col="gray50",
+     xlab="X", ylab="Y", main="Regression with Intervals")
+lines(x_seq, pred_ci[,"fit"], col="blue", lwd=2)
+lines(x_seq, pred_ci[,"lwr"], col="blue", lty=2)
+lines(x_seq, pred_ci[,"upr"], col="blue", lty=2)
+lines(x_seq, pred_pi[,"lwr"], col="red", lty=2)
+lines(x_seq, pred_pi[,"upr"], col="red", lty=2)
+legend("topleft", c("Data", "Fit", "95% CI", "95% PI"),
+       col=c("gray50","blue","blue","red"), lty=c(NA,1,2,2),
+       pch=c(16,NA,NA,NA))
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{AI Best Practices for Presentations}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{DO:}
+\begin{itemize}
+\item Use AI to clarify complex concepts
+\item Ask for multiple visualization options
+\item Request interpretation help
+\item Generate example explanations
+\item Check your statistical reasoning
+\item Get help with R code
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\textbf{DON'T:}
+\begin{itemize}
+\item Let AI write entire presentation
+\item Use AI explanations without understanding
+\item Trust AI for statistical decisions
+\item Copy AI text verbatim
+\item Skip checking AI's work
+\item Ignore your own judgment
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5cm}
+\textbf{Remember:} AI is a tool to enhance YOUR work, not replace it
+
+\vspace{0.3cm}
+\textbf{For final projects:}
+\begin{itemize}
+\item You must understand everything you present
+\item Be prepared to answer questions independently
+\item Acknowledge AI assistance if used
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{AI Task: Preparing Your Presentation}
+\textbf{Use AI to help with these tasks:}
+
+\vspace{0.3cm}
+\begin{enumerate}
+\item \textbf{Simplify technical language}
+  \begin{itemize}
+  \item Ask AI to rephrase statistical jargon
+  \end{itemize}
+
+\item \textbf{Create clear visualizations}
+  \begin{itemize}
+  \item Get R code for professional plots
+  \end{itemize}
+
+\item \textbf{Anticipate questions}
+  \begin{itemize}
+  \item Ask ``What questions might someone ask about this analysis?''
+  \end{itemize}
+
+\item \textbf{Check interpretations}
+  \begin{itemize}
+  \item Verify your understanding is correct
+  \end{itemize}
+
+\item \textbf{Draft explanations}
+  \begin{itemize}
+  \item Get help wording conclusions
+  \end{itemize}
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Example:} ``Review my regression analysis and suggest improvements to the presentation''
+\end{frame}
+
+\defaultcolors
+
+\section{Final Project Guidance}
+
+\begin{frame}
+\frametitle{Final Project Presentations}
+\textbf{Format:}
+\begin{itemize}
+\item 10-12 minute presentation
+\item 3-5 minutes for questions
+\item PowerPoint, Beamer, or Google Slides
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Required content:}
+\begin{enumerate}
+\item Introduction and research question
+\item Data description and summary statistics
+\item Statistical methods used
+\item Results (tables, figures)
+\item Interpretation and conclusions
+\item Limitations
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Grading criteria:}
+\begin{itemize}
+\item Clarity and organization (20\%)
+\item Appropriate statistical methods (30\%)
+\item Correct interpretation (25\%)
+\item Quality of visualizations (15\%)
+\item Presentation delivery (10\%)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tips for Successful Presentations}
+\textbf{Do:}
+\begin{itemize}
+\item Practice your presentation multiple times
+\item Speak clearly and at moderate pace
+\item Make eye contact with audience
+\item Explain statistical terms
+\item Focus on interpretation, not just methods
+\item Use clear, uncluttered slides
+\item Tell a story with your data
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Don't:}
+\begin{itemize}
+\item Read directly from slides
+\item Use too much text on slides
+\item Skip over assumptions or limitations
+\item Ignore questions you don't know -- say ``good question, I'll look into that''
+\item Go over time limit
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Common Presentation Pitfalls}
+\textbf{Avoid these mistakes:}
+
+\vspace{0.3cm}
+\begin{enumerate}
+\item \textbf{Too much technical detail}
+  \begin{itemize}
+  \item Focus on interpretation, not formulas
+  \end{itemize}
+
+\item \textbf{No context for numbers}
+  \begin{itemize}
+  \item Always interpret in practical terms
+  \end{itemize}
+
+\item \textbf{Cluttered visualizations}
+  \begin{itemize}
+  \item One clear message per plot
+  \end{itemize}
+
+\item \textbf{Ignoring limitations}
+  \begin{itemize}
+  \item Acknowledge what your analysis can't tell you
+  \end{itemize}
+
+\item \textbf{Poor time management}
+  \begin{itemize}
+  \item Practice with a timer
+  \end{itemize}
+
+\item \textbf{Not checking assumptions}
+  \begin{itemize}
+  \item Always show diagnostic plots
+  \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Summary}
+\textbf{This week we covered:}
+\begin{itemize}
+\item \textbf{Regression diagnostics:}
+  \begin{itemize}
+  \item Four key assumptions (LINE)
+  \item Diagnostic plots
+  \item Identifying influential points
+  \end{itemize}
+
+\item \textbf{Transformations:}
+  \begin{itemize}
+  \item Log, square root, polynomial
+  \item When and why to transform
+  \end{itemize}
+
+\item \textbf{Inference:}
+  \begin{itemize}
+  \item Hypothesis tests for slope
+  \item Confidence and prediction intervals
+  \end{itemize}
+
+\item \textbf{Communication:}
+  \begin{itemize}
+  \item Reporting results clearly
+  \item Creating effective visualizations
+  \item Using AI to enhance presentations
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Final Project Presentations:} Next week!
+
+\vspace{0.3cm}
+\textbf{Prepare:} Practice your presentation, check all analyses, create clear visuals
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions?}
+\begin{center}
+\Large{Thank you!}
+
+\vspace{0.5cm}
+
+\textbf{Good luck with your final projects!}
+
+\vspace{1cm}
+
+\textbf{Email:} john.molitor@oregonstate.edu\\
+\textbf{Office:} 153 Milam
+\end{center}
+\end{frame}
+
+\end{document}

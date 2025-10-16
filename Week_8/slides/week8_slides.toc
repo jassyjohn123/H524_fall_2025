@@ -1,0 +1,8 @@
+\beamer@sectionintoc {1}{Review: Where We've Been}{3}{0}{1}
+\beamer@sectionintoc {2}{Chi-Square Goodness-of-Fit Test (Ch 15.1)}{5}{0}{2}
+\beamer@sectionintoc {3}{Contingency Tables (Ch 15.2-15.3)}{12}{0}{3}
+\beamer@sectionintoc {4}{Fisher's Exact Test (Ch 15.4)}{20}{0}{4}
+\beamer@sectionintoc {5}{Effect Sizes and Measures of Association (Ch 16)}{23}{0}{5}
+\beamer@sectionintoc {6}{Practical Considerations and R Implementation}{28}{0}{6}
+\beamer@sectionintoc {7}{AI as a Learning Tool for Categorical Data}{33}{0}{7}
+\beamer@sectionintoc {8}{Summary and Next Steps}{39}{0}{8}

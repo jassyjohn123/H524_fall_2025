@@ -1,0 +1,492 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+
+% Define OSU orange and AI blue colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large Week 8 In-Class Worksheet}}\\
+\textcolor{white}{\textbf{\large Contingency Tables and Chi-Square Tests}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Name:} \rule{8cm}{0.4pt} \hfill \textbf{Date:} \rule{4cm}{0.4pt}\\[0.5ex]
+\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Chi-Square Tests, Fisher's Exact Test, Odds Ratios
+
+\vspace{8pt}
+
+\section*{Instructions}
+Work with a partner to solve the following problems. Show all your work including formulas, calculations, and interpretations. You may use R to verify answers, but demonstrate understanding by showing the steps.
+
+\vspace{12pt}
+
+\section{Problem 1: Chi-Square Goodness-of-Fit Test}
+
+A genetics researcher is studying flower color in pea plants. Mendelian genetics predicts a 9:3:3:1 ratio for four color types. The researcher observes the following in 160 plants:
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Purple & Red & Pink & White \\
+\midrule
+95 & 28 & 26 & 11 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part A:} State the null and alternative hypotheses.
+
+\vspace{2.5cm}
+
+\textbf{Part B:} Calculate the expected counts for each color type based on the 9:3:3:1 ratio.
+
+\vspace{0.3cm}
+
+\textbf{Total plants:} $n = 160$
+
+\vspace{0.3cm}
+
+\textbf{Expected proportions:} Purple = 9/16, Red = 3/16, Pink = 3/16, White = 1/16
+
+\vspace{0.3cm}
+
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+Color & Observed & Expected Proportion & Expected Count & $(O-E)^2/E$ \\
+\hline
+Purple & 95 & 9/16 = 0.5625 & & \\[0.5cm]
+Red & 28 & 3/16 = 0.1875 & & \\[0.5cm]
+Pink & 26 & 3/16 = 0.1875 & & \\[0.5cm]
+White & 11 & 1/16 = 0.0625 & & \\[0.5cm]
+\hline
+\end{tabular}
+
+\vspace{1cm}
+
+\textbf{Part C:} Calculate the chi-square test statistic.
+
+\vspace{0.3cm}
+
+$$\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i} = $$
+
+\vspace{3cm}
+
+\textbf{Part D:} Determine the degrees of freedom and find the p-value (use R or chi-square table).
+
+\vspace{0.3cm}
+
+$df = k - 1 = $
+
+\vspace{1cm}
+
+P-value =
+
+\vspace{1cm}
+
+\textbf{Part E:} State your conclusion at $\alpha = 0.05$ level.
+
+\vspace{2.5cm}
+
+\newpage
+
+\section{Problem 2: $2 \times 2$ Contingency Table - Smoking and Heart Disease}
+
+A cohort study follows 500 smokers and 500 non-smokers for 10 years to assess heart disease incidence.
+
+\begin{center}
+\begin{tabular}{l|cc|c}
+& \textbf{Heart Disease} & \textbf{No Heart Disease} & \textbf{Total} \\
+\hline
+\textbf{Smoker} & 75 & 425 & 500 \\
+\textbf{Non-smoker} & 35 & 465 & 500 \\
+\hline
+\textbf{Total} & 110 & 890 & 1000 \\
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part A:} State the hypotheses for a chi-square test of independence.
+
+\vspace{2.5cm}
+
+\textbf{Part B:} Calculate the expected counts for each cell.
+
+\vspace{0.3cm}
+
+Formula: $E_{ij} = \frac{(\text{Row } i \text{ total}) \times (\text{Column } j \text{ total})}{\text{Grand total}}$
+
+\vspace{0.3cm}
+
+\begin{tabular}{l|cc}
+& \textbf{Heart Disease} & \textbf{No Heart Disease} \\
+\hline
+\textbf{Smoker} & & \\[1cm]
+\textbf{Non-smoker} & & \\[1cm]
+\end{tabular}
+
+\vspace{1.5cm}
+
+\textbf{Part C:} Calculate the chi-square test statistic.
+
+\vspace{0.3cm}
+
+$$\chi^2 = \sum_{i,j} \frac{(O_{ij} - E_{ij})^2}{E_{ij}} = $$
+
+\vspace{3.5cm}
+
+\textbf{Part D:} Find the p-value and state your conclusion. ($df = (r-1)(c-1)$)
+
+\vspace{0.3cm}
+
+$df = $
+
+\vspace{0.5cm}
+
+P-value =
+
+\vspace{1cm}
+
+Conclusion:
+
+\vspace{2cm}
+
+\newpage
+
+\textbf{Part E:} Calculate the relative risk (RR) of heart disease for smokers vs non-smokers.
+
+\vspace{0.3cm}
+
+Risk of heart disease among smokers = $\frac{75}{500} = $
+
+\vspace{1cm}
+
+Risk of heart disease among non-smokers = $\frac{35}{500} = $
+
+\vspace{1cm}
+
+$$\text{Relative Risk} = \frac{\text{Risk (smokers)}}{\text{Risk (non-smokers)}} = $$
+
+\vspace{2cm}
+
+\textbf{Interpretation:}
+
+\vspace{2cm}
+
+\textbf{Part F:} Calculate the odds ratio (OR).
+
+\vspace{0.3cm}
+
+$$\text{Odds Ratio} = \frac{a \times d}{b \times c} = \frac{75 \times 465}{425 \times 35} = $$
+
+\vspace{2.5cm}
+
+\textbf{Part G:} Calculate the 95\% confidence interval for the odds ratio.
+
+\vspace{0.3cm}
+
+$$SE_{\log(OR)} = \sqrt{\frac{1}{a} + \frac{1}{b} + \frac{1}{c} + \frac{1}{d}} = $$
+
+\vspace{2cm}
+
+$$\log(OR) \pm 1.96 \times SE_{\log(OR)} = $$
+
+\vspace{2cm}
+
+$$95\% \text{ CI for OR} = \left(e^{\text{lower}}, e^{\text{upper}}\right) = $$
+
+\vspace{2cm}
+
+\textbf{Interpretation:} Does the CI include 1? What does this mean?
+
+\vspace{2cm}
+
+\newpage
+
+\section{Problem 3: Fisher's Exact Test}
+
+A small clinical trial tests a new treatment for a rare disease. Results:
+
+\begin{center}
+\begin{tabular}{l|cc|c}
+& \textbf{Improved} & \textbf{Not Improved} & \textbf{Total} \\
+\hline
+\textbf{Treatment} & 7 & 3 & 10 \\
+\textbf{Control} & 2 & 8 & 10 \\
+\hline
+\textbf{Total} & 9 & 11 & 20 \\
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate the expected counts for a chi-square test.
+
+\vspace{0.3cm}
+
+\begin{tabular}{l|cc}
+& \textbf{Improved} & \textbf{Not Improved} \\
+\hline
+\textbf{Treatment} & & \\[1cm]
+\textbf{Control} & & \\[1cm]
+\end{tabular}
+
+\vspace{1.5cm}
+
+\textbf{Part B:} Are the chi-square test assumptions satisfied? Explain.
+
+\vspace{0.3cm}
+
+Rule: All expected counts should be $\geq 5$
+
+\vspace{2.5cm}
+
+\textbf{Part C:} Based on your answer to Part B, which test should be used?
+
+\vspace{2.5cm}
+
+\textbf{Part D:} Use R to perform Fisher's exact test and report the p-value and odds ratio.
+
+\vspace{0.3cm}
+
+\textbf{R code:}
+
+\vspace{2cm}
+
+P-value (two-sided) =
+
+\vspace{1cm}
+
+Odds Ratio =
+
+\vspace{1cm}
+
+95\% CI for OR =
+
+\vspace{1cm}
+
+\textbf{Part E:} State your conclusion about treatment effectiveness.
+
+\vspace{3cm}
+
+\newpage
+
+\section{Problem 4: Larger Contingency Table}
+
+A study examines the relationship between education level and exercise frequency among 300 adults.
+
+\begin{center}
+\begin{tabular}{l|ccc|c}
+& \textbf{Never} & \textbf{Sometimes} & \textbf{Regularly} & \textbf{Total} \\
+\hline
+\textbf{High School} & 35 & 45 & 20 & 100 \\
+\textbf{Bachelor's} & 25 & 40 & 35 & 100 \\
+\textbf{Graduate} & 15 & 30 & 55 & 100 \\
+\hline
+\textbf{Total} & 75 & 115 & 110 & 300 \\
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part A:} What are the degrees of freedom for this chi-square test?
+
+\vspace{0.3cm}
+
+$$df = (r - 1) \times (c - 1) = $$
+
+\vspace{2cm}
+
+\textbf{Part B:} Calculate the expected count for the cell (Bachelor's, Regularly).
+
+\vspace{0.3cm}
+
+$$E_{\text{Bachelor's, Regularly}} = \frac{(\text{Row total}) \times (\text{Column total})}{\text{Grand total}} = $$
+
+\vspace{2.5cm}
+
+\textbf{Part C:} Using R, perform the chi-square test. Report:
+
+\vspace{0.3cm}
+
+\textbf{R code:}
+
+\vspace{2cm}
+
+$\chi^2$ statistic =
+
+\vspace{1cm}
+
+P-value =
+
+\vspace{1cm}
+
+\textbf{Part D:} State your conclusion. Is there an association between education level and exercise frequency?
+
+\vspace{3cm}
+
+\textbf{Part E:} Looking at the data, describe the pattern you observe.
+
+\vspace{0.3cm}
+
+Hint: Calculate the proportion who exercise regularly in each education group.
+
+\vspace{0.3cm}
+
+High School: $\frac{20}{100} = 20\%$
+
+\vspace{0.5cm}
+
+Bachelor's:
+
+\vspace{0.5cm}
+
+Graduate:
+
+\vspace{1cm}
+
+\textbf{Pattern:}
+
+\vspace{2.5cm}
+
+\newpage
+
+\section{Problem 5: McNemar's Test for Paired Data}
+
+A study evaluates whether a public health campaign changes people's attitudes. 60 people surveyed before and after:
+
+\begin{center}
+\begin{tabular}{l|cc|c}
+& \multicolumn{2}{c|}{\textbf{After Campaign}} & \\
+\textbf{Before Campaign} & \textbf{Positive} & \textbf{Negative} & \textbf{Total} \\
+\hline
+\textbf{Positive} & 18 & 12 & 30 \\
+\textbf{Negative} & 22 & 8 & 30 \\
+\hline
+\textbf{Total} & 40 & 20 & 60 \\
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part A:} Why is McNemar's test appropriate here instead of a standard chi-square test?
+
+\vspace{3cm}
+
+\textbf{Part B:} Identify the discordant pairs.
+
+\vspace{0.3cm}
+
+Changed from Positive to Negative:
+
+\vspace{1cm}
+
+Changed from Negative to Positive:
+
+\vspace{1cm}
+
+\textbf{Part C:} Calculate McNemar's test statistic.
+
+\vspace{0.3cm}
+
+$$\chi^2_{\text{McNemar}} = \frac{(b - c)^2}{b + c} = $$
+
+\vspace{3cm}
+
+\textbf{Part D:} Find the p-value (use R or chi-square table with $df = 1$).
+
+\vspace{0.3cm}
+
+P-value =
+
+\vspace{1.5cm}
+
+\textbf{Part E:} State your conclusion. Did the campaign significantly change attitudes?
+
+\vspace{3cm}
+
+\textbf{Part F:} In which direction did attitudes change more?
+
+\vspace{2.5cm}
+
+\newpage
+
+\section*{Reflection Questions}
+
+\textbf{1.} What is the key difference between a chi-square goodness-of-fit test and a chi-square test of independence?
+
+\vspace{3cm}
+
+\textbf{2.} When should you use Fisher's exact test instead of a chi-square test?
+
+\vspace{3cm}
+
+\textbf{3.} Explain the difference between relative risk and odds ratio. When is each appropriate?
+
+\vspace{3cm}
+
+\textbf{4.} Why does a confidence interval for an odds ratio that includes 1.0 indicate no significant association?
+
+\vspace{3cm}
+
+\textbf{5.} What does it mean if a chi-square test is significant ($p < 0.05$) but the odds ratio is close to 1?
+
+\vspace{3cm}
+
+\section*{R Code Reference}
+
+\textbf{Chi-square goodness-of-fit:}
+\begin{verbatim}
+observed <- c(95, 28, 26, 11)
+expected_props <- c(9/16, 3/16, 3/16, 1/16)
+chisq.test(observed, p=expected_props)
+\end{verbatim}
+
+\textbf{Chi-square test of independence:}
+\begin{verbatim}
+data <- matrix(c(75, 425, 35, 465), nrow=2, byrow=TRUE)
+chisq.test(data)
+\end{verbatim}
+
+\textbf{Fisher's exact test:}
+\begin{verbatim}
+data <- matrix(c(7, 3, 2, 8), nrow=2, byrow=TRUE)
+fisher.test(data)
+\end{verbatim}
+
+\textbf{McNemar's test:}
+\begin{verbatim}
+data <- matrix(c(18, 12, 22, 8), nrow=2, byrow=TRUE)
+mcnemar.test(data)
+\end{verbatim}
+
+\end{document}

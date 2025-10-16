@@ -1,0 +1,8 @@
+\beamer@sectionintoc {1}{Review and Motivation}{3}{0}{1}
+\beamer@sectionintoc {2}{Sign Test}{8}{0}{2}
+\beamer@sectionintoc {3}{Wilcoxon Signed-Rank Test}{13}{0}{3}
+\beamer@sectionintoc {4}{Two-Sample Wilcoxon Rank-Sum Test}{18}{0}{4}
+\beamer@sectionintoc {5}{Kruskal-Wallis Test}{23}{0}{5}
+\beamer@sectionintoc {6}{When to Use Nonparametric vs. Parametric Tests}{29}{0}{6}
+\beamer@sectionintoc {7}{AI as a Learning Tool for Nonparametric Methods}{34}{0}{7}
+\beamer@sectionintoc {8}{Summary and Practice}{39}{0}{8}

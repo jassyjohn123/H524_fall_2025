@@ -1,0 +1,8 @@
+\beamer@sectionintoc {1}{Review from Week 2}{3}{0}{1}
+\beamer@sectionintoc {2}{Binomial Distribution (Ch 7.1)}{4}{0}{2}
+\beamer@sectionintoc {3}{Normal Distribution (Ch 7.2)}{10}{0}{3}
+\beamer@sectionintoc {4}{Other Important Distributions (Ch 7.4)}{19}{0}{4}
+\beamer@sectionintoc {5}{Sampling Distributions (Ch 8)}{22}{0}{5}
+\beamer@sectionintoc {6}{Confidence Intervals (Introduction)}{29}{0}{6}
+\beamer@sectionintoc {7}{AI as a Learning Tool for Distributions}{35}{0}{7}
+\beamer@sectionintoc {8}{R Examples and Practice}{42}{0}{8}

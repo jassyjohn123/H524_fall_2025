@@ -1,0 +1,312 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Set up headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{osaorange}{H524 Introduction to Biostatistics}}
+\rhead{Week 10 Worksheet}
+\cfoot{\thepage}
+
+\title{\textcolor{osaorange}{\textbf{Week 10 Partner Worksheet}}\\
+\large{Regression Diagnostics and Model Assessment}}
+\author{}
+\date{Fall 2025}
+
+\begin{document}
+
+\maketitle
+
+\noindent\textbf{Names:} \underline{\hspace{6cm}}
+
+\vspace{0.5cm}
+
+\noindent\textbf{Instructions:} Work with your partner to complete these problems. Show your work and explain your reasoning. You may use R for calculations and creating plots.
+
+\section*{Problem 1: Interpreting Diagnostic Plots (25 points)}
+
+A researcher studies the relationship between hours of study per week (X) and exam score (Y) for 80 students. After fitting a simple linear regression, they obtain the following diagnostic plots:
+
+\vspace{0.3cm}
+
+\textbf{Plot A: Residuals vs Fitted}
+\begin{itemize}
+\item Shows a clear U-shaped pattern
+\item Residuals are positive for low fitted values, negative for middle values, positive for high values
+\end{itemize}
+
+\textbf{Plot B: Q-Q Plot}
+\begin{itemize}
+\item Points fall approximately on a straight line
+\item Slight deviation at the extreme ends
+\end{itemize}
+
+\textbf{Plot C: Scale-Location Plot}
+\begin{itemize}
+\item Shows relatively horizontal trend line
+\item Random scatter of points
+\end{itemize}
+
+\textbf{Plot D: Residuals vs Leverage}
+\begin{itemize}
+\item Three points are labeled: observations 15, 42, and 73
+\item Observation 42 has high leverage and falls outside Cook's distance contour
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{a)} (6 points) Based on the Residuals vs Fitted plot, which regression assumption is violated? What does this pattern suggest about the relationship between study hours and exam score?
+
+\vspace{3cm}
+
+\textbf{b)} (5 points) What does the Q-Q plot tell you about the normality assumption? Should you be concerned?
+
+\vspace{2.5cm}
+
+\textbf{c)} (5 points) What does the Scale-Location plot indicate about the homoscedasticity assumption?
+
+\vspace{2.5cm}
+
+\textbf{d)} (5 points) Observation 42 appears to be influential. What should the researcher do about this observation? List at least three steps.
+
+\vspace{3cm}
+
+\textbf{e)} (4 points) Given the U-shaped pattern in the residuals, suggest two potential remedies to improve the model fit.
+
+\vspace{2.5cm}
+
+\newpage
+
+\section*{Problem 2: Cook's Distance and Influence (20 points)}
+
+A study examines the relationship between age (X) and bone mineral density (Y) in 50 postmenopausal women. The regression yields:
+
+$$\hat{Y} = 1.25 - 0.015X, \quad R^2 = 0.42$$
+
+Cook's distances for selected observations are:
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+Observation & Age (years) & BMD (g/cm$^2$) & Cook's D \\
+\midrule
+1 & 52 & 0.98 & 0.02 \\
+12 & 68 & 0.23 & 0.78 \\
+27 & 59 & 0.82 & 0.05 \\
+38 & 75 & 0.12 & 0.12 \\
+49 & 54 & 1.15 & 0.03 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\textbf{a)} (5 points) Which observation(s) are influential based on Cook's distance? Use the threshold of 0.5.
+
+\vspace{2cm}
+
+\textbf{b)} (6 points) Looking at observation 12, explain why it has high Cook's distance. Consider both its age and BMD values relative to the regression line.
+
+\vspace{3cm}
+
+\textbf{c)} (5 points) The researcher refits the model without observation 12 and obtains:
+
+$$\hat{Y} = 1.18 - 0.012X, \quad R^2 = 0.61$$
+
+Compare this to the original model. How did removing the influential point affect:
+\begin{itemize}
+\item The slope?
+\item The R-squared?
+\end{itemize}
+
+\vspace{3cm}
+
+\textbf{d)} (4 points) Should the researcher report only the model without observation 12, only the model with it, or both? Explain your reasoning.
+
+\vspace{3cm}
+
+\newpage
+
+\section*{Problem 3: Transformations (25 points)}
+
+A pharmaceutical company studies the relationship between drug dose (mg) and plasma concentration ($\mu$g/mL) in 60 patients. The data show strong right skewness in plasma concentration. Two models are fit:
+
+\textbf{Model 1 (Original scale):}
+$$\widehat{\text{Concentration}} = 2.5 + 1.8 \times \text{Dose}, \quad R^2 = 0.35$$
+
+Diagnostic plots show:
+\begin{itemize}
+\item Funnel-shaped pattern in residuals (variance increases with fitted values)
+\item Right-skewed residuals in Q-Q plot
+\end{itemize}
+
+\textbf{Model 2 (Log-transformed):}
+$$\widehat{\log(\text{Concentration})} = 0.85 + 0.12 \times \text{Dose}, \quad R^2 = 0.72$$
+
+Diagnostic plots show:
+\begin{itemize}
+\item Random scatter in residuals
+\item Nearly normal residuals in Q-Q plot
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{a)} (6 points) Which model better satisfies the regression assumptions? Justify your answer based on the diagnostic information provided.
+
+\vspace{3cm}
+
+\textbf{b)} (7 points) For Model 2, interpret the slope of 0.12 in practical terms. Specifically, if the dose increases by 1 mg, by what percentage does the plasma concentration change?
+
+\textit{Hint: Use the formula $(e^{\beta_1} - 1) \times 100\%$}
+
+\vspace{3cm}
+
+\textbf{c)} (6 points) Using Model 2, predict the plasma concentration for a patient receiving a 10 mg dose. Show your calculation.
+
+\textit{Hint: First predict log(Concentration), then back-transform using $e^{\text{prediction}}$}
+
+\vspace{3cm}
+
+\textbf{d)} (6 points) A colleague suggests trying a square root transformation instead of log. Under what circumstances would a square root transformation be more appropriate than a log transformation?
+
+\vspace{3cm}
+
+\newpage
+
+\section*{Problem 4: Confidence vs Prediction Intervals (15 points)}
+
+A cardiologist studies systolic blood pressure (SBP) as a function of age. Based on 100 patients, the fitted model is:
+
+$$\widehat{\text{SBP}} = 95 + 0.8 \times \text{Age}$$
+
+with residual standard error $s_e = 12$ mmHg.
+
+For a 60-year-old patient:
+\begin{itemize}
+\item 95\% Confidence Interval for mean SBP: (131.6, 136.4) mmHg
+\item 95\% Prediction Interval for individual SBP: (108.2, 159.8) mmHg
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{a)} (4 points) What is the predicted SBP for a 60-year-old patient?
+
+\vspace{2cm}
+
+\textbf{b)} (6 points) Explain the difference between the confidence interval and prediction interval in this context. Why is the prediction interval wider?
+
+\vspace{3.5cm}
+
+\textbf{c)} (5 points) A physician wants to know: ``What is the typical blood pressure for 60-year-old patients?'' Which interval should they use? What about if they want to predict the blood pressure for a specific 60-year-old patient coming in tomorrow?
+
+\vspace{3.5cm}
+
+\newpage
+
+\section*{Problem 5: Reporting Results (15 points)}
+
+You are asked to review a colleague's regression analysis. They provide the following summary:
+
+\begin{quote}
+\textit{``We found that X is significantly related to Y (p < 0.001). The R-squared is 0.18, which is low but acceptable. The slope is 2.3.''}
+\end{quote}
+
+The full model output shows:
+\begin{itemize}
+\item $n = 250$ observations
+\item Slope: $b_1 = 2.3$, $SE = 0.4$
+\item 95\% CI for slope: (1.5, 3.1)
+\item Intercept: $b_0 = 15.6$
+\item $R^2 = 0.18$, $p < 0.001$
+\end{itemize}
+
+Diagnostic plots were not shown.
+
+\vspace{0.5cm}
+
+\textbf{a)} (6 points) List three important pieces of information that are missing from the colleague's summary.
+
+\vspace{3cm}
+
+\textbf{b)} (5 points) Rewrite the results in a more complete and informative way, including:
+\begin{itemize}
+\item Sample size
+\item Effect size with confidence interval
+\item Interpretation in context (assume Y = cholesterol in mg/dL, X = BMI)
+\item Model fit
+\end{itemize}
+
+\vspace{4cm}
+
+\textbf{c)} (4 points) Why should the colleague have included diagnostic plots in their report? What could go wrong if assumptions are not checked?
+
+\vspace{3cm}
+
+\newpage
+
+\section*{Bonus Problem: Polynomial Regression (10 points)}
+
+A developmental psychologist studies the relationship between age (3-18 years) and vocabulary score. A scatterplot suggests an inverted U-shape: vocabulary increases rapidly in childhood, peaks around age 12-14, then slightly decreases in adolescence (possibly due to test design).
+
+A quadratic model is fit:
+
+$$\widehat{\text{Score}} = 20 + 15 \times \text{Age} - 0.5 \times \text{Age}^2$$
+
+with $R^2 = 0.78$ and all coefficients significant at $p < 0.01$.
+
+\vspace{0.5cm}
+
+\textbf{a)} (4 points) At what age is vocabulary score predicted to be maximum?
+
+\textit{Hint: The maximum occurs at Age = $-\beta_1 / (2\beta_2)$}
+
+\vspace{3cm}
+
+\textbf{b)} (3 points) Predict the vocabulary score for:
+\begin{itemize}
+\item A 6-year-old child
+\item A 15-year-old adolescent
+\end{itemize}
+
+\vspace{3cm}
+
+\textbf{c)} (3 points) The researcher wants to use this model to predict vocabulary scores for 25-year-old adults. What would you advise? Why?
+
+\vspace{3cm}
+
+\section*{Summary Questions}
+
+After completing this worksheet, discuss with your partner:
+
+\begin{enumerate}
+\item What is the most important diagnostic plot and why?
+\item When should you consider transforming your data?
+\item How do you decide whether to remove an influential point?
+\item What's the difference between statistical and practical significance?
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\hrule
+
+\vspace{0.3cm}
+
+\textbf{Reminder:} For your final project presentations next week:
+\begin{itemize}
+\item Always check regression assumptions
+\item Report confidence intervals, not just p-values
+\item Create clear visualizations
+\item Interpret results in context
+\item Acknowledge limitations
+\end{itemize}
+
+\end{document}

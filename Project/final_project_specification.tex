@@ -1,0 +1,936 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+% Code environment
+\newtcblisting{rcode}{
+  colback=white,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=0pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  width=\textwidth,
+  breakable,
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false
+  }
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Final Group Project Specification}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Project Timeline}\\
+\textbf{Week 7-8:} Project preparation homework (dataset selection, proposal)\\
+\textbf{Weeks 9-10:} Data analysis and report writing\\
+\textbf{Week 10:} In-class presentations (10-15 minutes per group)\\
+\textbf{End of Term:} Final written report and code submission\\
+\textbf{Weight:} 25\% of final course grade
+
+\section{Project Overview}
+
+\subsection{Learning Objectives}
+
+By completing this group project, you will:
+
+\begin{itemize}
+\item Apply statistical methods learned throughout the course to a real-world health dataset
+\item Formulate and test meaningful research questions using appropriate statistical techniques
+\item Create publication-quality tables, figures, and reports
+\item Collaborate effectively in a team environment
+\item Communicate statistical findings to both technical and non-technical audiences
+\item \textcolor{aiblue}{\textbf{Integrate AI tools responsibly} to enhance your analysis while maintaining statistical rigor}
+\item Develop reproducible research skills using R and RMarkdown
+\end{itemize}
+
+\subsection{Project Scope}
+
+This is a \textbf{GROUP project} with 4-5 students per team. Each group will:
+
+\begin{enumerate}
+\item Select a publicly available health-related dataset (approved in Week 7-8)
+\item Develop 2-3 research questions that can be addressed using methods from this course
+\item Conduct a complete statistical analysis including descriptive statistics, hypothesis testing, and regression
+\item Produce a professional written report (10-15 pages)
+\item Deliver an in-class presentation (10-15 minutes)
+\item Submit well-documented, reproducible R code
+\end{enumerate}
+
+\section{Required Deliverables}
+
+\subsection{Deliverable 1: Written Report (10-15 pages)}
+
+Your report should follow the structure of a scientific research article. Use RMarkdown to create a professional PDF document.
+
+\subsubsection{Executive Summary (1 page)}
+
+\begin{itemize}
+\item Brief background and context
+\item Key research questions
+\item Main findings (2-3 bullet points)
+\item Primary conclusions and implications
+\end{itemize}
+
+\subsubsection{Introduction \& Background (2 pages)}
+
+\begin{itemize}
+\item \textbf{Research Context:} Why is this topic important for public health?
+\item \textbf{Literature Review:} Summarize 3-5 relevant published studies (use PubMed, Google Scholar)
+\item \textbf{Research Questions:} State 2-3 specific, testable research questions
+\item \textbf{Hypotheses:} For each research question, state your null and alternative hypotheses
+\item \textbf{References:} Use APA format for all citations
+\end{itemize}
+
+\subsubsection{Data \& Methods (2-3 pages)}
+
+\begin{itemize}
+\item \textbf{Dataset Description:}
+  \begin{itemize}
+  \item Source and citation
+  \item Study design (cross-sectional, cohort, etc.)
+  \item Sample size and time period
+  \item Population characteristics
+  \end{itemize}
+
+\item \textbf{Variables and Measures:}
+  \begin{itemize}
+  \item Primary outcome variable(s)
+  \item Primary exposure/predictor variable(s)
+  \item Confounding or effect modification variables
+  \item Variable types (continuous, categorical, ordinal)
+  \item Any transformations or recoding performed
+  \end{itemize}
+
+\item \textbf{Statistical Methods:}
+  \begin{itemize}
+  \item Descriptive statistics used
+  \item Hypothesis tests performed (with justification)
+  \item Regression models fitted
+  \item Significance level ($\alpha$) used
+  \item How missing data was handled
+  \end{itemize}
+
+\item \textbf{Software:}
+  \begin{itemize}
+  \item R version and key packages used
+  \item \textcolor{aiblue}{AI tools used and their role in the analysis}
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Results (3-4 pages)}
+
+\begin{itemize}
+\item \textbf{Descriptive Statistics:}
+  \begin{itemize}
+  \item Table 1: Participant characteristics (demographics, key variables)
+  \item Summary statistics: means, SDs, medians, IQRs, frequencies, percentages
+  \item Visual summaries: histograms, boxplots, bar charts
+  \end{itemize}
+
+\item \textbf{Primary Analyses:}
+  \begin{itemize}
+  \item Present results for each research question
+  \item Include test statistics, p-values, and confidence intervals
+  \item Provide effect sizes where appropriate
+  \item Use tables and figures to communicate findings clearly
+  \end{itemize}
+
+\item \textbf{Table and Figure Requirements:}
+  \begin{itemize}
+  \item All tables numbered (Table 1, Table 2, etc.) with descriptive captions
+  \item All figures numbered (Figure 1, Figure 2, etc.) with descriptive captions
+  \item Tables: Use publication-quality formatting (no vertical lines, minimal horizontal lines)
+  \item Figures: Clear axis labels, legends, and titles; readable font sizes
+  \item Reference all tables/figures in the text
+  \end{itemize}
+
+\item \textbf{Statistical Reporting Standards:}
+  \begin{itemize}
+  \item Report exact p-values (not just ``p < 0.05'') when p > 0.001
+  \item Include 95\% confidence intervals for key estimates
+  \item Report effect sizes (e.g., mean differences, odds ratios, correlation coefficients)
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Discussion \& Conclusions (2-3 pages)}
+
+\begin{itemize}
+\item \textbf{Interpretation of Findings:}
+  \begin{itemize}
+  \item What do your results mean in the context of your research questions?
+  \item How do your findings compare to the literature?
+  \item What are the public health implications?
+  \end{itemize}
+
+\item \textbf{Limitations:}
+  \begin{itemize}
+  \item Study design limitations
+  \item Data quality issues
+  \item Statistical limitations
+  \item Generalizability concerns
+  \end{itemize}
+
+\item \textbf{Strengths:}
+  \begin{itemize}
+  \item What makes this analysis valuable?
+  \item What did you do particularly well?
+  \end{itemize}
+
+\item \textbf{Future Directions:}
+  \begin{itemize}
+  \item What additional analyses could be done?
+  \item What data would help answer remaining questions?
+  \item What interventions or policies might be informed by this work?
+  \end{itemize}
+
+\item \textbf{Conclusions:}
+  \begin{itemize}
+  \item Concise summary of key findings
+  \item Main take-home messages
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{References}
+
+\begin{itemize}
+\item Minimum of 5 references in APA format
+\item Include dataset citation
+\item Use primary sources (journal articles, government reports)
+\end{itemize}
+
+\subsubsection{Appendix (if needed)}
+
+\begin{itemize}
+\item Supplementary tables or figures
+\item Additional sensitivity analyses
+\item Extended technical details
+\end{itemize}
+
+\subsection{Deliverable 2: R Code (Well-Documented)}
+
+Submit your complete R code as either:
+\begin{itemize}
+\item An RMarkdown (.Rmd) file that generates your report, OR
+\item A standalone R script (.R) file with all analyses
+\end{itemize}
+
+\subsubsection{Code Requirements}
+
+\begin{itemize}
+\item \textbf{Reproducibility:}
+  \begin{itemize}
+  \item Code runs from start to finish without errors
+  \item Includes code to load the dataset (with instructions on where to obtain it)
+  \item Sets random seed if any randomization is used
+  \item Includes \texttt{sessionInfo()} at the end
+  \end{itemize}
+
+\item \textbf{Organization:}
+  \begin{itemize}
+  \item Clear sections with headers (e.g., ``Data Loading'', ``Cleaning'', ``Analysis'', ``Figures'')
+  \item Logical flow from data import to final results
+  \item All packages loaded at the beginning
+  \end{itemize}
+
+\item \textbf{Documentation:}
+  \begin{itemize}
+  \item Comments explaining what each section does
+  \item Comments for any complex or non-obvious code
+  \item Variable names that are clear and descriptive
+  \end{itemize}
+
+\item \textbf{Good Coding Practices:}
+  \begin{itemize}
+  \item Consistent indentation and spacing
+  \item No hard-coded values that should be variables
+  \item Functions used for repeated operations
+  \item Avoid unnecessary code repetition
+  \end{itemize}
+
+\item \textbf{AI-Generated Code:}
+  \begin{itemize}
+  \item \textcolor{aiblue}{Mark which sections were AI-generated (use comments)}
+  \item \textcolor{aiblue}{Document how you verified AI code works correctly}
+  \item \textcolor{aiblue}{Explain any modifications you made to AI output}
+  \end{itemize}
+\end{itemize}
+
+\subsection{Deliverable 3: Presentation (10-15 minutes)}
+
+Each group will present their project during Week 10.
+
+\subsubsection{Presentation Structure}
+
+\begin{itemize}
+\item \textbf{Introduction (2-3 minutes):}
+  \begin{itemize}
+  \item Research question and motivation
+  \item Brief background
+  \end{itemize}
+
+\item \textbf{Methods (2-3 minutes):}
+  \begin{itemize}
+  \item Dataset overview
+  \item Key variables
+  \item Statistical methods used
+  \end{itemize}
+
+\item \textbf{Results (4-6 minutes):}
+  \begin{itemize}
+  \item 2-3 key tables or figures
+  \item Main statistical findings
+  \item Focus on most important results
+  \end{itemize}
+
+\item \textbf{Discussion \& Conclusions (2-3 minutes):}
+  \begin{itemize}
+  \item What do findings mean?
+  \item Limitations
+  \item Take-home message
+  \end{itemize}
+
+\item \textbf{Q\&A (5 minutes):}
+  \begin{itemize}
+  \item Be prepared to answer questions about methods, results, and interpretations
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Presentation Requirements}
+
+\begin{itemize}
+\item Create slides using Beamer (LaTeX) or PowerPoint
+\item Each team member must present at least one section
+\item Include a title slide with all team member names
+\item Use clear, readable fonts (minimum 20pt for body text)
+\item Limit text on slides (use bullet points, not paragraphs)
+\item Include visual elements (tables, figures, diagrams)
+\item Practice timing to stay within 10-15 minutes
+\item Upload slides to Canvas before your presentation
+\end{itemize}
+
+\section{Statistical Analysis Requirements}
+
+Your project must include \textbf{at least 4} of the following statistical methods:
+
+\begin{enumerate}
+\item \textbf{Descriptive Statistics and Visualizations}
+  \begin{itemize}
+  \item Summary statistics for all key variables
+  \item At least 3 high-quality figures (histograms, boxplots, scatterplots, etc.)
+  \item At least 1 well-formatted table of descriptive statistics
+  \end{itemize}
+
+\item \textbf{Confidence Intervals}
+  \begin{itemize}
+  \item 95\% CIs for means, proportions, or regression coefficients
+  \item Proper interpretation of confidence intervals
+  \end{itemize}
+
+\item \textbf{Hypothesis Testing}
+  \begin{itemize}
+  \item Choose appropriate test(s): two-sample t-test, paired t-test, one-way ANOVA, chi-square test
+  \item State null and alternative hypotheses
+  \item Report test statistics, p-values, and conclusions
+  \end{itemize}
+
+\item \textbf{Correlation Analysis}
+  \begin{itemize}
+  \item Pearson or Spearman correlation
+  \item Correlation matrix if multiple variables
+  \item Scatterplots with correlation coefficients
+  \end{itemize}
+
+\item \textbf{Simple Linear Regression}
+  \begin{itemize}
+  \item Fit at least one regression model
+  \item Interpret slope and intercept
+  \item Report R-squared
+  \item Check model assumptions (residual plots)
+  \item Predict values for new observations
+  \end{itemize}
+
+\item \textbf{Additional Methods (as appropriate)}
+  \begin{itemize}
+  \item Stratified analyses
+  \item Effect modification or interaction assessment
+  \item Sensitivity analyses
+  \item Non-parametric methods (if assumptions violated)
+  \end{itemize}
+\end{enumerate}
+
+\textbf{Note:} Choose methods appropriate for your research questions and data. Quality of analysis is more important than quantity.
+
+\section{AI Integration Requirements}
+
+This course embraces AI as a tool for learning and productivity. Your project must document AI use.
+
+\subsection{Required AI Documentation}
+
+In a dedicated section of your report or in code comments, address:
+
+\begin{enumerate}
+\item \textbf{AI Tools Used:}
+  \begin{itemize}
+  \item Which AI tools did you use? (e.g., Microsoft Copilot, GitHub Copilot, ChatGPT)
+  \item For what tasks? (e.g., code generation, debugging, explanation of concepts, literature search)
+  \end{itemize}
+
+\item \textbf{How AI Assisted Your Work:}
+  \begin{itemize}
+  \item Provide specific examples of AI prompts and outputs
+  \item Explain how AI helped you solve problems or understand concepts
+  \item What percentage of your code was AI-generated vs. written by you?
+  \end{itemize}
+
+\item \textbf{Verification of AI Outputs:}
+  \begin{itemize}
+  \item How did you verify AI-generated code was correct?
+  \item Did you find any errors in AI outputs? How did you fix them?
+  \item What manual checks did you perform?
+  \end{itemize}
+
+\item \textbf{Reflection on AI's Role:}
+  \begin{itemize}
+  \item What did AI do well?
+  \item What did AI struggle with?
+  \item How did using AI affect your learning?
+  \item Would you use AI differently next time?
+  \end{itemize}
+\end{enumerate}
+
+\subsection{AI Best Practices}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,title=AI Use Guidelines]
+
+\textbf{Encouraged:}
+\begin{itemize}
+\item[+] Using AI to generate starter code templates
+\item[+] Asking AI to explain statistical concepts or error messages
+\item[+] Using AI to help debug code
+\item[+] Asking AI to suggest visualization options
+\item[+] Using AI to improve code documentation
+\end{itemize}
+
+\textbf{Required:}
+\begin{itemize}
+\item[\checkmark] Verify all AI outputs are correct
+\item[\checkmark] Understand every line of code you submit
+\item[\checkmark] Document AI use transparently
+\item[\checkmark] Test AI-generated code thoroughly
+\end{itemize}
+
+\textbf{Prohibited:}
+\begin{itemize}
+\item[-] Submitting AI-generated work you don't understand
+\item[-] Using AI to fabricate data or results
+\item[-] Copying AI output without verification
+\item[-] Failing to disclose AI use when required
+\end{itemize}
+
+\end{tcolorbox}
+
+\section{Grading Rubric}
+
+Total: 100 points = 25\% of course grade
+
+\subsection{Written Report (60 points)}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{5cm}cp{7cm}}
+\toprule
+\textbf{Component} & \textbf{Points} & \textbf{Criteria} \\
+\midrule
+Introduction \& Background & 10 & Clear research questions, relevant literature review, well-motivated hypotheses \\
+\midrule
+Methods Description & 10 & Complete description of data, variables, and statistical methods; appropriate method selection \\
+\midrule
+Results Presentation & 15 & Clear tables and figures, appropriate statistical reporting, comprehensive results \\
+\midrule
+Statistical Correctness & 15 & Correct application of methods, accurate calculations, proper interpretation \\
+\midrule
+Discussion \& Conclusions & 10 & Thoughtful interpretation, acknowledgment of limitations, clear conclusions \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{R Code (20 points)}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{5cm}cp{7cm}}
+\toprule
+\textbf{Component} & \textbf{Points} & \textbf{Criteria} \\
+\midrule
+Reproducibility & 10 & Code runs without errors, produces all reported results, includes session info \\
+\midrule
+Code Quality \& Documentation & 10 & Well-organized, clearly commented, follows good practices, AI use documented \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Presentation (15 points)}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{5cm}cp{7cm}}
+\toprule
+\textbf{Component} & \textbf{Points} & \textbf{Criteria} \\
+\midrule
+Content \& Clarity & 10 & Clear communication, effective visuals, appropriate content selection, timing \\
+\midrule
+Team Participation & 5 & All members participate, balanced contributions, ability to answer questions \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Peer Evaluation (5 points)}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{5cm}cp{7cm}}
+\toprule
+\textbf{Component} & \textbf{Points} & \textbf{Criteria} \\
+\midrule
+Individual Contribution & 5 & Based on peer evaluations of contribution to team effort \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Note:} Peer evaluation forms will be completed confidentially by each team member after the project is submitted.
+
+\section{Group Dynamics}
+
+\subsection{Team Formation}
+
+\begin{itemize}
+\item Groups of 4-5 students will be formed in Week 7
+\item You may self-select groups or be assigned by instructor
+\item All group members are expected to contribute equally
+\end{itemize}
+
+\subsection{Equal Contribution Expectation}
+
+Each team member should contribute to:
+\begin{itemize}
+\item Dataset selection and proposal development
+\item Literature review
+\item Data analysis and coding
+\item Writing different sections of the report
+\item Creating presentation slides
+\item Presenting during the oral presentation
+\end{itemize}
+
+\subsection{Peer Evaluation Process}
+
+After project submission, each team member will complete a confidential peer evaluation form rating:
+\begin{itemize}
+\item Quality of contributions
+\item Reliability and timeliness
+\item Communication and collaboration
+\item Overall effort level
+\end{itemize}
+
+Individual grades may be adjusted up or down based on peer evaluations if there is evidence of unequal contribution.
+
+\subsection{Conflict Resolution}
+
+If conflicts arise within your group:
+
+\begin{enumerate}
+\item \textbf{Team Discussion:} Try to resolve issues through open communication within the group
+\item \textbf{Document Issues:} Keep records of team meetings, task assignments, and communications
+\item \textbf{Seek Help Early:} Contact the instructor if issues cannot be resolved internally
+\item \textbf{Formal Complaint:} If needed, submit written documentation of the issue to the instructor
+\end{enumerate}
+
+Waiting until the last minute to report conflicts is not acceptable. Notify the instructor as soon as problems arise.
+
+\section{Technical Specifications}
+
+\subsection{File Formats}
+
+\begin{itemize}
+\item \textbf{Written Report:} PDF (generated from RMarkdown preferred)
+\item \textbf{Code:} .R or .Rmd files
+\item \textbf{Presentation:} PDF or PowerPoint (.pptx)
+\item \textbf{Data:} Include dataset or clear instructions for obtaining it
+\end{itemize}
+
+\subsection{File Naming Conventions}
+
+Use the following naming scheme:
+
+\begin{itemize}
+\item Report: \texttt{GroupX\_Final\_Report.pdf}
+\item Code: \texttt{GroupX\_Analysis\_Code.R} or \texttt{GroupX\_Analysis\_Code.Rmd}
+\item Presentation: \texttt{GroupX\_Presentation.pdf}
+\item Data (if included): \texttt{GroupX\_Data.csv} (or other format)
+\end{itemize}
+
+Replace ``X'' with your group number (e.g., Group1, Group2, etc.)
+
+\subsection{Submission Method}
+
+\begin{itemize}
+\item Create a single ZIP file containing all required files
+\item Name the ZIP file: \texttt{GroupX\_Final\_Project.zip}
+\item Submit via Canvas by the deadline
+\item Only ONE team member needs to submit (include all names in submission)
+\end{itemize}
+
+\subsection{Late Policy}
+
+\begin{itemize}
+\item \textbf{Presentations:} Cannot be made up if missed (0 points for presentation component)
+\item \textbf{Written Report:} 10\% penalty per day late (up to 3 days)
+\item \textbf{After 3 days:} No credit given
+\item \textbf{Extensions:} Must be requested at least 48 hours before deadline with valid reason
+\end{itemize}
+
+\section{Example Projects}
+
+To help you understand expectations, here are examples of appropriate project topics and approaches:
+
+\subsection{Example 1: NHANES Physical Activity and Hypertension}
+
+\textbf{Dataset:} National Health and Nutrition Examination Survey (NHANES)
+
+\textbf{Research Questions:}
+\begin{itemize}
+\item Is physical activity level associated with prevalence of hypertension in US adults?
+\item Does this association differ by age group?
+\end{itemize}
+
+\textbf{Methods Used:}
+\begin{itemize}
+\item Descriptive statistics for demographics and key variables
+\item Chi-square test for association between physical activity category and hypertension
+\item Two-sample t-test comparing blood pressure between active and sedentary individuals
+\item Logistic regression predicting hypertension from physical activity (controlling for age, BMI)
+\item Stratified analysis by age group
+\end{itemize}
+
+\textbf{Key Findings (hypothetical):}
+\begin{itemize}
+\item 32\% of sedentary adults had hypertension vs. 18\% of physically active adults (p < 0.001)
+\item After adjusting for age and BMI, physical activity remained protective (OR = 0.58, 95\% CI: 0.45-0.75)
+\item Association strongest in adults over 50 years old
+\end{itemize}
+
+\subsection{Example 2: Framingham Heart Study and Cholesterol}
+
+\textbf{Dataset:} Framingham Heart Study (teaching dataset)
+
+\textbf{Research Questions:}
+\begin{itemize}
+\item What is the relationship between age and total cholesterol?
+\item Does smoking status affect cholesterol levels?
+\end{itemize}
+
+\textbf{Methods Used:}
+\begin{itemize}
+\item Descriptive statistics and histograms for cholesterol distribution
+\item Correlation analysis between age and cholesterol
+\item Simple linear regression: cholesterol $\sim$ age
+\item Two-sample t-test comparing cholesterol between smokers and non-smokers
+\item Multiple linear regression: cholesterol $\sim$ age + smoking + BMI
+\end{itemize}
+
+\textbf{Key Findings (hypothetical):}
+\begin{itemize}
+\item Moderate positive correlation between age and cholesterol (r = 0.42, p < 0.001)
+\item For each additional year of age, cholesterol increases by 0.85 mg/dL (95\% CI: 0.70-1.00)
+\item Smokers had 8.2 mg/dL higher cholesterol than non-smokers (p = 0.03)
+\end{itemize}
+
+\subsection{Example 3: COVID-19 Vaccination and Demographics}
+
+\textbf{Dataset:} CDC COVID-19 vaccination data (county-level)
+
+\textbf{Research Questions:}
+\begin{itemize}
+\item Is county-level vaccination rate associated with median household income?
+\item Do urban and rural counties differ in vaccination rates?
+\end{itemize}
+
+\textbf{Methods Used:}
+\begin{itemize}
+\item Descriptive statistics for vaccination rates across counties
+\item Scatterplot and correlation between vaccination rate and income
+\item Simple linear regression: vaccination rate $\sim$ median income
+\item Two-sample t-test comparing urban vs. rural vaccination rates
+\item ANOVA comparing vaccination rates across regions (Northeast, South, Midwest, West)
+\end{itemize}
+
+\textbf{Key Findings (hypothetical):}
+\begin{itemize}
+\item Strong positive correlation between county income and vaccination rate (r = 0.68, p < 0.001)
+\item Each \$10,000 increase in median income associated with 5.2\% higher vaccination rate
+\item Urban counties had 12\% higher vaccination rates than rural counties (p < 0.001)
+\end{itemize}
+
+\section{Timeline and Milestones}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{3cm}p{10cm}}
+\toprule
+\textbf{Week} & \textbf{Milestone} \\
+\midrule
+Week 7 & Form groups; begin exploring datasets \\
+\midrule
+Week 8 & Submit project proposal (dataset, research questions, planned methods) \\
+\midrule
+Week 9 & Data cleaning and preliminary analyses; draft Methods section \\
+\midrule
+Week 10 (early) & Complete analyses; draft Results section; create presentation slides \\
+\midrule
+Week 10 (end) & IN-CLASS PRESENTATIONS \\
+\midrule
+End of Term & Final written report and code due \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Week 8 Proposal Requirements}
+
+Submit a 1-2 page proposal including:
+\begin{itemize}
+\item Group members and contact information
+\item Dataset selected (with citation/link)
+\item 2-3 proposed research questions
+\item List of variables to be analyzed
+\item Planned statistical methods
+\item Potential challenges or concerns
+\end{itemize}
+
+This proposal will receive feedback from the instructor to help guide your project.
+
+\section{Resources}
+
+\subsection{RMarkdown Report Template}
+
+An RMarkdown template for your report is provided on Canvas:
+\begin{itemize}
+\item \texttt{H524\_Project\_Report\_Template.Rmd}
+\end{itemize}
+
+This template includes:
+\begin{itemize}
+\item YAML header for PDF generation
+\item Section structure matching this specification
+\item Example code for tables and figures
+\item Citation examples
+\end{itemize}
+
+\subsection{Beamer Presentation Template}
+
+A Beamer (LaTeX) template for your presentation is provided on Canvas:
+\begin{itemize}
+\item \texttt{H524\_Project\_Presentation\_Template.tex}
+\end{itemize}
+
+This template includes OSU branding and example slides.
+
+\subsection{Peer Evaluation Form}
+
+The peer evaluation form will be distributed after presentations and is due with the final report. It includes:
+\begin{itemize}
+\item Rating scales for each team member's contributions
+\item Open-ended questions about team dynamics
+\item Confidential submission to instructor only
+\end{itemize}
+
+\subsection{Dataset Resources}
+
+Recommended sources for health datasets:
+\begin{itemize}
+\item \textbf{CDC Data:} \url{https://data.cdc.gov/}
+\item \textbf{NHANES:} \url{https://wwwn.cdc.gov/nchs/nhanes/}
+\item \textbf{Framingham Heart Study:} Teaching datasets available on Canvas
+\item \textbf{Behavioral Risk Factor Surveillance System (BRFSS):} \url{https://www.cdc.gov/brfss/}
+\item \textbf{UCI Machine Learning Repository:} \url{https://archive.ics.uci.edu/ml/}
+\item \textbf{Kaggle Datasets:} \url{https://www.kaggle.com/datasets}
+\item \textbf{Data.gov:} \url{https://data.gov/}
+\end{itemize}
+
+\subsection{Style Guide for Tables and Figures}
+
+\textbf{Tables:}
+\begin{itemize}
+\item Use horizontal lines sparingly (top, bottom, below headers)
+\item Avoid vertical lines
+\item Left-align text, right-align numbers
+\item Include units in column headers
+\item Use footnotes for clarifications
+\item Caption goes above the table
+\end{itemize}
+
+\textbf{Figures:}
+\begin{itemize}
+\item Use clear, readable fonts (minimum 10pt)
+\item Label all axes with units
+\item Include legends when multiple groups shown
+\item Use colorblind-friendly palettes
+\item Caption goes below the figure
+\item Export at high resolution (300 dpi for publication)
+\end{itemize}
+
+\subsection{APA Citation Examples}
+
+\textbf{Journal Article:}
+\begin{quote}
+Smith, J., \& Jones, M. (2023). The effect of exercise on blood pressure: A meta-analysis. \textit{American Journal of Public Health}, \textit{113}(4), 456-467. https://doi.org/10.2105/AJPH.2023.123456
+\end{quote}
+
+\textbf{Dataset:}
+\begin{quote}
+Centers for Disease Control and Prevention. (2022). \textit{National Health and Nutrition Examination Survey 2017-2020} [Dataset]. U.S. Department of Health and Human Services. https://wwwn.cdc.gov/nchs/nhanes/
+\end{quote}
+
+\textbf{Website:}
+\begin{quote}
+World Health Organization. (2023, June 15). \textit{Cardiovascular diseases (CVDs)}. https://www.who.int/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds)
+\end{quote}
+
+\subsection{AI Assistance}
+
+\textcolor{aiblue}{\textbf{AI Tools Can Help With:}}
+\begin{itemize}
+\item Generating code templates for common analyses
+\item Debugging error messages
+\item Creating ggplot2 visualization code
+\item Formatting tables with \texttt{kable} or \texttt{gt}
+\item Explaining statistical concepts
+\item Suggesting appropriate statistical tests
+\item Improving code documentation
+\item Finding relevant literature
+\end{itemize}
+
+\textcolor{aiblue}{\textbf{Remember:}} Always verify AI outputs and understand every line of code you submit!
+
+\section{Frequently Asked Questions}
+
+\textbf{Q: Can we use data we collected ourselves?}\\
+A: Yes, with instructor approval. You must have IRB approval if human subjects data was collected for research purposes.
+
+\textbf{Q: How long should our presentation be?}\\
+A: 10-15 minutes, followed by 5 minutes for questions. Practice your timing.
+
+\textbf{Q: Can we do more than the minimum 4 statistical methods?}\\
+A: Absolutely! Quality analysis is encouraged. Just ensure you do justice to each method.
+
+\textbf{Q: What if we can't meet as a group?}\\
+A: Use Zoom, Google Docs, and other collaboration tools. Document your group meetings and task assignments.
+
+\textbf{Q: Can we change our research question after the proposal?}\\
+A: Minor changes are fine. Major changes require instructor approval.
+
+\textbf{Q: How much code documentation is enough?}\\
+A: Every analysis section should have comments. Someone unfamiliar with your project should be able to follow your code.
+
+\textbf{Q: What if a team member isn't contributing?}\\
+A: Document the issue and contact the instructor immediately. Don't wait until the end.
+
+\textbf{Q: Can we use methods not covered in class?}\\
+A: Advanced methods are welcome if you can explain them correctly. Consult with the instructor first.
+
+\textbf{Q: How do we cite AI tools?}\\
+A: Include in your methods or acknowledgments: ``We used [Tool Name] [Version] to assist with [specific tasks]. All outputs were verified by the authors.''
+
+\textbf{Q: Is there a page limit?}\\
+A: The report should be 10-15 pages (excluding references and appendices). Quality over quantity.
+
+\section{Academic Integrity}
+
+All work submitted must represent your team's own understanding and effort.
+
+\begin{tcolorbox}[colback=red!10,colframe=red!80,title=Academic Integrity Violations]
+
+The following constitute academic dishonesty:
+\begin{itemize}
+\item Submitting AI-generated content without verification or understanding
+\item Fabricating or falsifying data or results
+\item Plagiarizing text from sources without proper citation
+\item Copying code from other groups without attribution
+\item Having someone outside your group complete substantial portions of the project
+\item Submitting work completed by a previous year's group
+\end{itemize}
+
+\textbf{Consequences:} Academic integrity violations will result in a zero on the project and possible referral to the Office of Student Conduct.
+
+\end{tcolorbox}
+
+\section{Summary Checklist}
+
+Before submitting, verify you have:
+
+\begin{itemize}
+\item[$\square$] Written report (10-15 pages) with all required sections
+\item[$\square$] Executive summary, introduction, methods, results, discussion, conclusions, references
+\item[$\square$] At least 4 statistical methods appropriately applied
+\item[$\square$] Publication-quality tables and figures with captions
+\item[$\square$] R code that runs without errors and is well-documented
+\item[$\square$] AI use documented in report and code
+\item[$\square$] Presentation slides uploaded to Canvas
+\item[$\square$] All files named correctly and zipped together
+\item[$\square$] Peer evaluation form completed
+\item[$\square$] All team members' names on report and presentation
+\item[$\square$] Submitted by deadline
+\end{itemize}
+
+\vspace{12pt}
+
+\begin{center}
+\Large\textbf{Good luck with your project!}
+\end{center}
+
+\vspace{8pt}
+
+\noindent Questions? Contact the instructor during office hours or via Canvas messaging.
+
+\end{document}

@@ -1,0 +1,414 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+
+% Define OSU orange and AI blue colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+\definecolor{correctgreen}{RGB}{34,139,34}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large Week 3 In-Class Worksheet - ANSWER KEY}}\\
+\textcolor{white}{\textbf{\large Probability Distributions and Sampling Distributions}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Binomial, Normal, Sampling Distributions, and Confidence Intervals
+
+\vspace{12pt}
+
+\section{Problem 1: Binomial Distribution}
+
+A new antibiotic has an 80\% success rate in treating a particular bacterial infection. A clinic treats 15 patients with this antibiotic.
+
+\textbf{Part A:} What is the probability that exactly 12 patients are successfully treated?
+
+\textbf{Given:} $n = 15$, $p = 0.80$, find $\Pr(X = 12)$
+
+\textbf{Formula:} $\Pr(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+\begin{align*}
+\Pr(X = 12) &= \binom{15}{12} (0.80)^{12} (0.20)^{3}\\
+&= \frac{15!}{12!3!} (0.80)^{12} (0.20)^{3}\\
+&= 455 \times 0.06872 \times 0.008\\
+&= \mathbf{0.2501}
+\end{align*}
+
+\vspace{0.5cm}
+
+\textbf{Part B:} What is the probability that at least 13 patients are successfully treated?
+
+Hint: $\Pr(X \geq 13) = \Pr(X=13) + \Pr(X=14) + \Pr(X=15)$
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+\begin{align*}
+\Pr(X=13) &= \binom{15}{13}(0.80)^{13}(0.20)^{2} = 0.2309\\
+\Pr(X=14) &= \binom{15}{14}(0.80)^{14}(0.20)^{1} = 0.1319\\
+\Pr(X=15) &= \binom{15}{15}(0.80)^{15}(0.20)^{0} = 0.0352\\
+\Pr(X \geq 13) &= 0.2309 + 0.1319 + 0.0352 = \mathbf{0.3980}
+\end{align*}
+
+\vspace{0.5cm}
+
+\textbf{Part C:} Calculate the expected number of successful treatments and the standard deviation.
+
+Expected value: $\mu = np$
+
+\textcolor{correctgreen}{\textbf{Solution:}} $\mu = 15 \times 0.80 = \mathbf{12}$
+
+Standard deviation: $\sigma = \sqrt{np(1-p)}$
+
+\textcolor{correctgreen}{\textbf{Solution:}} $\sigma = \sqrt{15 \times 0.80 \times 0.20} = \sqrt{2.4} = \mathbf{1.549}$
+
+\vspace{0.5cm}
+
+\textbf{Part D:} Use R to verify your answers. Write the R code you would use:
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+\begin{verbatim}
+# Part A: P(X = 12)
+dbinom(12, size=15, prob=0.80)
+
+# Part B: P(X >= 13)
+sum(dbinom(13:15, 15, 0.80))
+# OR: pbinom(12, 15, 0.80, lower.tail=FALSE)
+
+# Part C: Expected value and SD
+n <- 15
+p <- 0.80
+expected <- n * p
+std_dev <- sqrt(n * p * (1-p))
+\end{verbatim}
+
+\newpage
+
+\section{Problem 2: Normal Distribution}
+
+Adult systolic blood pressure is normally distributed with mean 125 mmHg and standard deviation 18 mmHg.
+
+\textbf{Part A:} What proportion of adults have blood pressure above 140~mmHg (hypertension)?
+
+\textbf{Step 1:} Standardize using $Z = \frac{X - \mu}{\sigma}$
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$Z = \frac{140 - 125}{18} = \frac{15}{18} = 0.833$$
+
+\textbf{Step 2:} Find $\Pr(Z > z)$ using the standard normal table or R
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$\Pr(Z > 0.833) = 1 - \Pr(Z < 0.833) = 1 - 0.7976 = \mathbf{0.2024}$$
+
+About \textbf{20.2\%} of adults have blood pressure above 140 mmHg.
+
+\vspace{0.5cm}
+
+\textbf{Part B:} What proportion have blood pressure between 110 and 140 mmHg?
+
+Hint: $\Pr(110 < X < 140) = \Pr(Z < z_2) - \Pr(Z < z_1)$
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+\begin{align*}
+Z_1 &= \frac{110 - 125}{18} = -0.833\\
+Z_2 &= \frac{140 - 125}{18} = 0.833\\
+\Pr(110 < X < 140) &= \Pr(Z < 0.833) - \Pr(Z < -0.833)\\
+&= 0.7976 - 0.2024 = \mathbf{0.5952}
+\end{align*}
+
+About \textbf{59.5\%} have blood pressure in this range.
+
+\vspace{0.5cm}
+
+\textbf{Part C:} Find the blood pressure value that represents the 90th percentile.
+
+\textbf{Step 1:} Find $z$ such that $\Pr(Z < z) = 0.90$
+
+\textcolor{correctgreen}{\textbf{Solution:}} From Z-table or R: $z_{0.90} = 1.282$
+
+\textbf{Step 2:} Convert back to original scale: $X = \mu + z\sigma$
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$X = 125 + 1.282(18) = 125 + 23.08 = \mathbf{148.08 \text{ mmHg}}$$
+
+\vspace{0.5cm}
+
+\textbf{Part D:} Write the R code to solve parts A, B, and C:
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+\begin{verbatim}
+mu <- 125
+sigma <- 18
+
+# Part A: P(X > 140)
+pnorm(140, mu, sigma, lower.tail=FALSE)
+
+# Part B: P(110 < X < 140)
+pnorm(140, mu, sigma) - pnorm(110, mu, sigma)
+
+# Part C: 90th percentile
+qnorm(0.90, mu, sigma)
+\end{verbatim}
+
+\newpage
+
+\section{Problem 3: Sampling Distribution and Central Limit Theorem}
+
+A population of cholesterol levels has mean $\mu = 200$ mg/dL and standard deviation $\sigma = 40$ mg/dL. A sample of $n = 64$ individuals is randomly selected.
+
+\textbf{Part A:} What is the distribution of the sample mean $\bar{X}$?
+
+By the Central Limit Theorem: $\bar{X} \sim N(\mu_{\bar{X}}, \sigma_{\bar{X}}^2)$
+
+Mean of $\bar{X}$: $\mu_{\bar{X}} = $
+
+\textcolor{correctgreen}{\textbf{Solution:}} $\mu_{\bar{X}} = \mu = \mathbf{200 \text{ mg/dL}}$
+
+Standard error of $\bar{X}$: $\sigma_{\bar{X}} = \frac{\sigma}{\sqrt{n}} = $
+
+\textcolor{correctgreen}{\textbf{Solution:}} $\sigma_{\bar{X}} = \frac{40}{\sqrt{64}} = \frac{40}{8} = \mathbf{5 \text{ mg/dL}}$
+
+\textbf{Therefore:} $\bar{X} \sim N(200, 5^2)$ or $\bar{X} \sim N(200, 25)$
+
+\vspace{0.5cm}
+
+\textbf{Part B:} What is the probability that the sample mean is greater than 210 mg/dL?
+
+\textbf{Step 1:} Standardize: $Z = \frac{\bar{X} - \mu_{\bar{X}}}{\sigma_{\bar{X}}}$
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$Z = \frac{210 - 200}{5} = 2.0$$
+
+\textbf{Step 2:} Find probability
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$\Pr(\bar{X} > 210) = \Pr(Z > 2.0) = 1 - 0.9772 = \mathbf{0.0228}$$
+
+R code: \texttt{pnorm(210, 200, 5, lower.tail=FALSE)}
+
+\vspace{0.5cm}
+
+\textbf{Part C:} What is the probability that the sample mean is between 195 and 205 mg/dL?
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+\begin{align*}
+Z_1 &= \frac{195 - 200}{5} = -1.0\\
+Z_2 &= \frac{205 - 200}{5} = 1.0\\
+\Pr(195 < \bar{X} < 205) &= \Pr(-1.0 < Z < 1.0)\\
+&= \Pr(Z < 1.0) - \Pr(Z < -1.0)\\
+&= 0.8413 - 0.1587 = \mathbf{0.6826}
+\end{align*}
+
+R code: \texttt{pnorm(205, 200, 5) - pnorm(195, 200, 5)}
+
+\vspace{0.5cm}
+
+\textbf{Part D:} How would your answers change if $n = 16$ instead of $n = 64$? Would that probability increase or decrease? Explain why.
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+
+With $n = 16$: $\sigma_{\bar{X}} = \frac{40}{\sqrt{16}} = 10$ (larger SE)
+
+That probability would \textbf{increase}. With a smaller sample size:
+\begin{itemize}
+\item Standard error is larger (10 vs. 5)
+\item The sampling distribution is more spread out
+\item Extreme values (like 210) are more likely
+\item Z-score would be smaller: $Z = \frac{210-200}{10} = 1.0$ instead of 2.0
+\item $\Pr(Z > 1.0) = 0.1587$ vs. $\Pr(Z > 2.0) = 0.0228$
+\end{itemize}
+
+\newpage
+
+\section{Problem 4: Confidence Intervals}
+
+A clinical trial measures the reduction in pain scores for 20 patients receiving a new medication. The sample mean reduction is $\bar{x} = 4.5$ points, with sample standard deviation $s = 1.8$ points.
+
+\textbf{Part A:} Calculate a 95\% confidence interval for the true mean pain reduction.
+
+\textbf{Step 1:} Determine what critical value to use. Should you use $z$ or $t$? Why?
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+
+Use \textbf{t-distribution} because:
+\begin{itemize}
+\item Population SD ($\sigma$) is unknown
+\item Small sample size ($n = 20 < 30$)
+\end{itemize}
+
+\textbf{Step 2:} Find the critical value.
+
+Degrees of freedom = $n - 1 = $
+
+\textcolor{correctgreen}{\textbf{Solution:}} $df = 20 - 1 = 19$
+
+Critical value: $t_{0.975, df} = $ (use R: \texttt{qt(0.975, df)})
+
+\textcolor{correctgreen}{\textbf{Solution:}} $t_{0.975, 19} = \mathbf{2.093}$
+
+\textbf{Step 3:} Calculate the standard error: $\text{SE} = \frac{s}{\sqrt{n}}$
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$SE = \frac{1.8}{\sqrt{20}} = \frac{1.8}{4.472} = \mathbf{0.403}$$
+
+\textbf{Step 4:} Calculate the margin of error: $\text{ME} = t_{critical} \times \text{SE}$
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$ME = 2.093 \times 0.403 = \mathbf{0.843}$$
+
+\textbf{Step 5:} Construct the confidence interval: $\bar{x} \pm \text{ME}$
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+$$CI = 4.5 \pm 0.843 = \mathbf{(3.66, 5.34) \text{ points}}$$
+
+\vspace{0.5cm}
+
+\textbf{Part B:} Interpret the confidence interval in context. Write a complete sentence explaining what this interval means.
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+
+We are 95\% confident that the true mean pain reduction for all patients receiving this medication is between 3.66 and 5.34 points.
+
+\vspace{0.5cm}
+
+\textbf{Part C:} If you wanted a 99\% confidence interval instead, would it be wider or narrower than the 95\% interval? Explain.
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+
+The 99\% CI would be \textbf{wider}. To be more confident that we've captured the true mean, we need a wider interval. The critical value increases ($t_{0.995, 19} = 2.861$ vs. $t_{0.975, 19} = 2.093$), resulting in a larger margin of error.
+
+\newpage
+
+\section{Problem 5: Integration Problem}
+
+A pharmaceutical company is testing a new cholesterol-lowering drug. In the clinical trial:
+\begin{itemize}
+\item 100 patients receive the drug
+\item Cholesterol reduction follows a normal distribution
+\item Sample mean reduction: $\bar{x} = 28$ mg/dL
+\item Sample standard deviation: $s = 12$ mg/dL
+\end{itemize}
+
+\textbf{Part A:} Calculate a 95\% confidence interval for the true mean cholesterol reduction.
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+
+With large sample ($n=100$), use z-distribution: $z_{0.975} = 1.96$ (or t-distribution: $t_{0.975,99} \approx 1.984$)
+
+\begin{align*}
+SE &= \frac{s}{\sqrt{n}} = \frac{12}{\sqrt{100}} = 1.2\\
+ME &= 1.96 \times 1.2 = 2.352\\
+CI &= 28 \pm 2.352 = \mathbf{(25.65, 30.35) \text{ mg/dL}}
+\end{align*}
+
+\vspace{0.5cm}
+
+\textbf{Part B:} Based on your confidence interval, is there strong evidence that the drug reduces cholesterol by more than 25 mg/dL on average? Explain your reasoning.
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+
+\textbf{Yes}, there is strong evidence. The entire 95\% confidence interval (25.65, 30.35) is above 25 mg/dL. This means we can be 95\% confident that the true mean reduction exceeds 25 mg/dL.
+
+\vspace{0.5cm}
+
+\textbf{Part C:} If individual cholesterol reductions are normally distributed with the sample statistics above, approximately what proportion of patients will experience a reduction of at least 40 mg/dL?
+
+Hint: Use the sample statistics as estimates of population parameters.
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+
+Using $\mu = 28$ and $\sigma = 12$ as population estimates:
+
+\begin{align*}
+Z &= \frac{40 - 28}{12} = 1.0\\
+\Pr(X \geq 40) &= \Pr(Z \geq 1.0) = 1 - 0.8413 = \mathbf{0.1587}
+\end{align*}
+
+About \textbf{15.9\%} of patients will experience a reduction of at least 40 mg/dL.
+
+R code: \texttt{pnorm(40, 28, 12, lower.tail=FALSE)}
+
+\vspace{0.5cm}
+
+\textbf{Part D:} Explain the difference between the questions in Parts B and C. Why do we use different approaches (confidence interval vs. normal probability)?
+
+\textcolor{correctgreen}{\textbf{Solution:}}
+
+\textbf{Part B (Confidence Interval):} Asks about the \emph{population mean} - we use the sampling distribution of the sample mean, which has SE = $\sigma/\sqrt{n}$ = 1.2.
+
+\textbf{Part C (Normal Probability):} Asks about \emph{individual patients} - we use the population distribution with SD = $\sigma$ = 12.
+
+The key difference:
+\begin{itemize}
+\item Part B: Inference about a parameter (mean) $\rightarrow$ use SE
+\item Part C: Prediction about individuals $\rightarrow$ use SD
+\end{itemize}
+
+Sample means are much less variable than individual observations, so the CI is narrower than the range containing 95\% of individuals.
+
+\newpage
+
+\section*{Reflection Questions}
+
+\textbf{1.} What is the key difference between a standard deviation and a standard error?
+
+\textcolor{correctgreen}{\textbf{Answer:}}
+
+\textbf{Standard Deviation (SD):} Measures variability of individual observations around the mean. Describes the spread of the data.
+
+\textbf{Standard Error (SE):} Measures variability of sample means around the population mean. Describes uncertainty in our estimate of the mean. $SE = \sigma/\sqrt{n}$, so it decreases with larger sample sizes.
+
+\vspace{0.5cm}
+
+\textbf{2.} When should you use a $t$-distribution instead of a normal distribution for confidence intervals?
+
+\textcolor{correctgreen}{\textbf{Answer:}}
+
+Use t-distribution when:
+\begin{itemize}
+\item Population standard deviation ($\sigma$) is unknown (must use sample SD $s$)
+\item Sample size is small (typically $n < 30$)
+\end{itemize}
+
+With large samples ($n \geq 30$), the t-distribution closely approximates the normal distribution.
+
+\vspace{0.5cm}
+
+\textbf{3.} How does sample size affect the width of a confidence interval?
+
+\textcolor{correctgreen}{\textbf{Answer:}}
+
+As sample size increases, confidence intervals become \textbf{narrower} (more precise):
+\begin{itemize}
+\item Larger $n$ $\rightarrow$ smaller SE ($SE = s/\sqrt{n}$)
+\item Smaller SE $\rightarrow$ smaller margin of error
+\item Smaller ME $\rightarrow$ narrower CI
+\end{itemize}
+
+To cut the CI width in half, you need to quadruple the sample size.
+
+\end{document}

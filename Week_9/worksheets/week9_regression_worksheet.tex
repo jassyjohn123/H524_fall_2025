@@ -1,0 +1,448 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+% Define OSU orange and AI blue colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large Week 9 In-Class Worksheet}}\\
+\textcolor{white}{\textbf{\large Correlation and Simple Linear Regression}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Name:} \rule{8cm}{0.4pt} \hfill \textbf{Date:} \rule{4cm}{0.4pt}\\[0.5ex]
+\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Correlation, Regression, and Prediction
+
+\vspace{8pt}
+
+\section*{Instructions}
+Work with a partner to solve the following problems. Show all your work and calculations. You may use R to verify answers, but demonstrate your understanding by showing the steps.
+
+\vspace{12pt}
+
+\section{Problem 1: Correlation Analysis}
+
+A researcher studies the relationship between daily calcium intake (mg) and bone density (g/cm$^2$) in 8 postmenopausal women:
+
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+Subject & Calcium (mg) & Bone Density (g/cm$^2$) \\
+\midrule
+1 & 800 & 0.85 \\
+2 & 1000 & 0.90 \\
+3 & 1200 & 0.95 \\
+4 & 900 & 0.88 \\
+5 & 1100 & 0.92 \\
+6 & 1300 & 0.98 \\
+7 & 950 & 0.89 \\
+8 & 1050 & 0.91 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\textbf{Part A:} Create a scatter plot of bone density (Y) vs. calcium intake (X). Describe the relationship you observe.
+
+\vspace{4cm}
+
+\textbf{Part B:} Calculate summary statistics:
+
+\vspace{0.3cm}
+
+Mean calcium intake: $\bar{X} = $ \rule{3cm}{0.4pt}
+
+\vspace{0.3cm}
+
+Mean bone density: $\bar{Y} = $ \rule{3cm}{0.4pt}
+
+\vspace{0.3cm}
+
+SD of calcium: $s_X = $ \rule{3cm}{0.4pt}
+
+\vspace{0.3cm}
+
+SD of bone density: $s_Y = $ \rule{3cm}{0.4pt}
+
+\vspace{1cm}
+
+\textbf{Part C:} The Pearson correlation coefficient is $r = 0.94$. Interpret this value in context.
+
+\vspace{3cm}
+
+\newpage
+
+\textbf{Part D:} Test whether the correlation is statistically significant at $\alpha = 0.05$.
+
+\vspace{0.3cm}
+
+Hypotheses:
+
+$H_0$: \rule{5cm}{0.4pt}
+
+$H_A$: \rule{5cm}{0.4pt}
+
+\vspace{0.5cm}
+
+Test statistic: $t = \frac{r\sqrt{n-2}}{\sqrt{1-r^2}}$
+
+\vspace{3cm}
+
+Degrees of freedom: $df = $ \rule{2cm}{0.4pt}
+
+\vspace{0.5cm}
+
+Critical value (from t-table): $t_{0.975, df} = $ \rule{2cm}{0.4pt}
+
+\vspace{0.5cm}
+
+Decision: \rule{8cm}{0.4pt}
+
+\vspace{0.5cm}
+
+Conclusion (in context):
+
+\vspace{2cm}
+
+\textbf{Part E:} Calculate the coefficient of determination, $r^2$. Interpret this value.
+
+\vspace{0.3cm}
+
+$r^2 = $ \rule{3cm}{0.4pt}
+
+\vspace{0.3cm}
+
+Interpretation:
+
+\vspace{2cm}
+
+\newpage
+
+\section{Problem 2: Simple Linear Regression}
+
+Using the same data from Problem 1, we want to predict bone density from calcium intake.
+
+\vspace{0.3cm}
+
+\textbf{Part A:} Calculate the regression slope using the formula:
+
+$$b_1 = r \times \frac{s_Y}{s_X}$$
+
+Given: $r = 0.94$, $s_Y = 0.042$ g/cm$^2$, $s_X = 167.7$ mg
+
+\vspace{3cm}
+
+\textbf{Part B:} Calculate the regression intercept using:
+
+$$b_0 = \bar{Y} - b_1 \bar{X}$$
+
+Given: $\bar{Y} = 0.910$ g/cm$^2$, $\bar{X} = 1037.5$ mg
+
+\vspace{3cm}
+
+\textbf{Part C:} Write the regression equation:
+
+$$\widehat{\text{Bone Density}} = $$ \rule{8cm}{0.4pt}
+
+\vspace{1cm}
+
+\textbf{Part D:} Interpret the slope in context. What does it mean biologically?
+
+\vspace{3cm}
+
+\textbf{Part E:} Is the intercept meaningful in this context? Why or why not?
+
+\vspace{2.5cm}
+
+\newpage
+
+\section{Problem 3: Predictions and Residuals}
+
+Continue with the regression model from Problem 2.
+
+\vspace{0.3cm}
+
+\textbf{Part A:} Use your regression equation to predict bone density for a woman with calcium intake of 1100 mg/day.
+
+\vspace{0.3cm}
+
+Calculation:
+
+\vspace{3cm}
+
+Predicted bone density: \rule{4cm}{0.4pt}
+
+\vspace{1cm}
+
+\textbf{Part B:} Subject 5 from the original data has calcium intake 1100 mg and observed bone density 0.92 g/cm$^2$. Calculate the residual for this subject.
+
+\vspace{0.3cm}
+
+Residual = Observed $-$ Predicted = \rule{6cm}{0.4pt}
+
+\vspace{3cm}
+
+\textbf{Part C:} Is this residual positive or negative? What does that tell you about this subject?
+
+\vspace{3cm}
+
+\textbf{Part D:} Would you feel confident predicting bone density for someone with calcium intake of 2000 mg/day? Why or why not?
+
+\vspace{3cm}
+
+\newpage
+
+\section{Problem 4: Blood Pressure and Age}
+
+A study of 12 adults examines the relationship between age and systolic blood pressure. The regression output is:
+
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+& Estimate & Std. Error & t value & $p$-value \\
+\midrule
+Intercept & 80.5 & 8.2 & 9.82 & $<0.001$ \\
+Age & 1.15 & 0.18 & 6.39 & $<0.001$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Residual standard error: 6.3 mmHg on 10 degrees of freedom\\
+Multiple R-squared: 0.803, Adjusted R-squared: 0.783
+
+\vspace{0.5cm}
+
+\textbf{Part A:} Write the regression equation.
+
+\vspace{2cm}
+
+\textbf{Part B:} Interpret the slope coefficient in the context of this study.
+
+\vspace{3cm}
+
+\textbf{Part C:} Test whether there is a significant relationship between age and blood pressure at $\alpha = 0.05$.
+
+\vspace{0.3cm}
+
+Hypotheses:
+
+$H_0$: \rule{5cm}{0.4pt}
+
+$H_A$: \rule{5cm}{0.4pt}
+
+\vspace{0.5cm}
+
+Test statistic: $t = $ \rule{3cm}{0.4pt} (from table above)
+
+\vspace{0.5cm}
+
+$p$-value: \rule{3cm}{0.4pt}
+
+\vspace{0.5cm}
+
+Decision and conclusion:
+
+\vspace{2.5cm}
+
+\newpage
+
+\textbf{Part D:} Construct a 95\% confidence interval for the slope $\beta_1$.
+
+\vspace{0.3cm}
+
+Formula: $b_1 \pm t_{0.975, 10} \times \text{SE}(b_1)$
+
+\vspace{0.3cm}
+
+Given: $t_{0.975, 10} = 2.228$, $\text{SE}(b_1) = 0.18$
+
+\vspace{3cm}
+
+95\% CI: \rule{6cm}{0.4pt}
+
+\vspace{0.5cm}
+
+Interpretation (in context):
+
+\vspace{2.5cm}
+
+\textbf{Part E:} What percentage of the variability in systolic blood pressure is explained by age?
+
+\vspace{2cm}
+
+\textbf{Part F:} Use the regression equation to predict systolic blood pressure for a 50-year-old.
+
+\vspace{3cm}
+
+\textbf{Part G:} The residual standard error is 6.3 mmHg. What does this tell us about the model's predictions?
+
+\vspace{3cm}
+
+\newpage
+
+\section{Problem 5: Comparing Methods}
+
+A pharmaceutical company studies the relationship between drug dosage (mg) and reduction in pain score (0-10 scale) for 15 patients. Summary statistics:
+
+\begin{itemize}
+\item $\bar{X} = 50$ mg, $s_X = 15$ mg
+\item $\bar{Y} = 4.2$ points, $s_Y = 1.8$ points
+\item Pearson correlation: $r = 0.72$
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{Part A:} Calculate the regression slope and intercept.
+
+\vspace{0.3cm}
+
+$b_1 = $ \rule{6cm}{0.4pt}
+
+\vspace{2cm}
+
+$b_0 = $ \rule{6cm}{0.4pt}
+
+\vspace{2cm}
+
+Regression equation: \rule{8cm}{0.4pt}
+
+\vspace{1cm}
+
+\textbf{Part B:} Calculate $R^2$. How much of the variability in pain reduction is explained by dosage?
+
+\vspace{3cm}
+
+\textbf{Part C:} Predict the pain reduction for a dosage of 60 mg.
+
+\vspace{3cm}
+
+\textbf{Part D:} If you wanted to achieve an average pain reduction of 5 points, what dosage would you recommend? (Hint: Solve the regression equation for X when $\hat{Y} = 5$)
+
+\vspace{4cm}
+
+\newpage
+
+\section*{Reflection Questions}
+
+Answer these questions to deepen your understanding:
+
+\vspace{0.5cm}
+
+\textbf{1.} What is the difference between correlation and regression? When would you use each?
+
+\vspace{3cm}
+
+\textbf{2.} Explain the difference between $r$ and $r^2$. Which is more directly interpretable and why?
+
+\vspace{3cm}
+
+\textbf{3.} Why is it important to examine a scatter plot before calculating correlation or fitting regression?
+
+\vspace{3cm}
+
+\textbf{4.} A study finds a strong positive correlation ($r = 0.85$) between ice cream sales and drowning deaths. Does this mean ice cream causes drowning? Explain.
+
+\vspace{3cm}
+
+\textbf{5.} What is extrapolation, and why is it risky in regression analysis?
+
+\vspace{3cm}
+
+\newpage
+
+\section*{R Code Reference}
+
+Here are the R commands you can use to check your work:
+
+\vspace{0.5cm}
+
+\textbf{For Problem 1:}
+\begin{verbatim}
+# Enter data
+calcium <- c(800, 1000, 1200, 900, 1100, 1300, 950, 1050)
+bone_density <- c(0.85, 0.90, 0.95, 0.88, 0.92, 0.98, 0.89, 0.91)
+
+# Summary statistics
+mean(calcium)
+sd(calcium)
+mean(bone_density)
+sd(bone_density)
+
+# Correlation test
+cor.test(calcium, bone_density)
+
+# Scatter plot
+plot(calcium, bone_density,
+     main = "Bone Density vs. Calcium Intake",
+     xlab = "Calcium (mg)",
+     ylab = "Bone Density (g/cm²)",
+     pch = 19)
+\end{verbatim}
+
+\vspace{0.5cm}
+
+\textbf{For Problems 2-3:}
+\begin{verbatim}
+# Fit regression model
+model <- lm(bone_density ~ calcium)
+
+# View results
+summary(model)
+
+# Extract coefficients
+coef(model)
+
+# Add regression line to plot
+abline(model, col = "red", lwd = 2)
+
+# Make predictions
+predict(model, newdata = data.frame(calcium = 1100))
+
+# Calculate residuals
+residuals(model)
+\end{verbatim}
+
+\vspace{0.5cm}
+
+\textbf{Checking assumptions:}
+\begin{verbatim}
+# Diagnostic plots
+par(mfrow = c(2, 2))
+plot(model)
+par(mfrow = c(1, 1))
+\end{verbatim}
+
+\end{document}

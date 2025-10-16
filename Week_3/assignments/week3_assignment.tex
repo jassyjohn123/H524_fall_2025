@@ -1,0 +1,669 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{array}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+% Code environment
+\newtcblisting{rcode}{
+  colback=white,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=0pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  width=\textwidth,
+  breakable,
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false
+  }
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 3: Probability Distributions and Sampling}}\\
+\textcolor{white}{\textbf{\Large Homework Assignment}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Due Date:} End of Week 4\\
+\textbf{Total Points:} 100 (+ 5 bonus)\\
+\textbf{Format:} Submit through Canvas
+
+\section*{Instructions}
+
+\begin{itemize}
+\item Show all work for full credit
+\item Round probabilities to 4 decimal places unless otherwise specified
+\item Round percentages to 1 decimal place
+\item Include R code where specified
+\item You may use R to check your work
+\end{itemize}
+
+\section{Part 1: Binomial Distribution (25 points)}
+
+\subsection*{Question 1: Binomial Conditions (5 points)}
+
+A pharmaceutical company claims that their new medication is effective for 80\% of patients. Which statement BEST describes why treating 15 patients constitutes a binomial experiment?
+
+\begin{enumerate}[label=\Alph*)]
+\item Each patient has two outcomes (success/failure), probability stays constant at 0.80, trials are independent, and there are a fixed number (15) of trials
+\item Each patient can have multiple outcomes, the probability changes with each patient, trials depend on previous results, and sample size is variable
+\item The medication works most of the time, some patients get better, the trials happen sequentially, and n=15
+\item Each patient is tested once, the success rate is high, patients don't affect each other, and we count total successes
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 2: Binomial Probability - Exactly 12 Successes (3 points)}
+
+For the medication scenario ($n=15$, $p=0.80$), what is the probability that exactly 12 patients respond successfully?
+
+\begin{enumerate}[label=\Alph*)]
+\item 0.2501
+\item 0.8000
+\item 0.1876
+\item 0.3980
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 3: Binomial Probability - At Least 13 Successes (3 points)}
+
+For the same scenario, what is the probability that at least 13 patients respond successfully?
+
+\begin{enumerate}[label=\Alph*)]
+\item 0.6482
+\item 0.3980
+\item 0.2309
+\item 0.5000
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 4: R Code for Binomial (2 points)}
+
+Which R code correctly calculates $\Pr(X \geq 13)$ for $n=15$, $p=0.80$?
+
+\begin{enumerate}[label=\Alph*)]
+\item \texttt{sum(dbinom(13:15, 15, 0.80))} or \texttt{pbinom(12, 15, 0.80, lower.tail=FALSE)}
+\item \texttt{dbinom(13, 15, 0.80)}
+\item \texttt{pbinom(13, 15, 0.80)}
+\item \texttt{1 - dbinom(0:12, 15, 0.80)}
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 5: Binomial Expected Value (2 points)}
+
+For the binomial scenario above ($n=15$, $p=0.80$), what is the expected number of successful responses?
+
+\begin{enumerate}[label=\Alph*)]
+\item 12
+\item 15
+\item 10
+\item 9.6
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 6: Binomial Standard Deviation (2 points)}
+
+What is the standard deviation for this binomial distribution?
+
+\begin{enumerate}[label=\Alph*)]
+\item 1.549
+\item 2.400
+\item 12.000
+\item 0.800
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 7: Vaccine Efficacy - Lower Tail (3 points)}
+
+A vaccine has 90\% efficacy. A clinic vaccinates 25 people. What is the probability that fewer than 20 people are protected?
+
+\begin{enumerate}[label=\Alph*)]
+\item 0.0334
+\item 0.1607
+\item 0.9018
+\item 0.5000
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 8: Vaccine Efficacy - Range (3 points)}
+
+For the same scenario, what is the probability that between 22 and 24 people (inclusive) are protected?
+
+\begin{enumerate}[label=\Alph*)]
+\item 0.6918
+\item 0.2659
+\item 0.1994
+\item 0.3826
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\section{Part 2: Normal Distribution (25 points)}
+
+\subsection*{Question 9: Z-Score Calculation (2 points)}
+
+Adult heights are normally distributed with mean 170 cm and standard deviation 10 cm. What is the Z-score for a person who is 185 cm tall?
+
+\begin{enumerate}[label=\Alph*)]
+\item 1.5
+\item 0.15
+\item 2.0
+\item -1.5
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 10: Upper Tail Probability (3 points)}
+
+Using the same height distribution, what proportion of adults are taller than 185 cm?
+
+\begin{enumerate}[label=\Alph*)]
+\item 0.0668
+\item 0.9332
+\item 0.1587
+\item 0.5000
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 11: Probability Between Two Values (3 points)}
+
+What proportion of adults have heights between 165 cm and 180 cm?
+
+\begin{enumerate}[label=\Alph*)]
+\item 0.5328
+\item 0.3085
+\item 0.6915
+\item 0.8413
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 12: 90th Percentile (3 points)}
+
+Using the height distribution (mean 170 cm, SD 10 cm), what height represents the 90th percentile?
+
+\begin{enumerate}[label=\Alph*)]
+\item 182.8 cm
+\item 190.0 cm
+\item 180.0 cm
+\item 175.6 cm
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 13: 25th Percentile (2 points)}
+
+What height represents the 25th percentile?
+
+\begin{enumerate}[label=\Alph*)]
+\item 163.3 cm
+\item 165.0 cm
+\item 167.5 cm
+\item 160.0 cm
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 14: Empirical Rule Range (2 points)}
+
+Cholesterol levels are normally distributed with mean 200 mg/dL and SD 40 mg/dL. Using the empirical rule, within what range do approximately 95\% of cholesterol values fall?
+
+\begin{enumerate}[label=\Alph*)]
+\item 120 to 280 mg/dL
+\item 160 to 240 mg/dL
+\item 180 to 220 mg/dL
+\item 100 to 300 mg/dL
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 15: Extreme Cholesterol Values (3 points)}
+
+What proportion have cholesterol levels above 280 mg/dL?
+
+\begin{enumerate}[label=\Alph*)]
+\item 0.0228
+\item 0.9772
+\item 0.0500
+\item 0.1587
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 16: Hypertension Proportion (2 points)}
+
+Systolic blood pressure is normally distributed with mean 125 mmHg and SD 18 mmHg. What proportion have blood pressure above 140 mmHg (hypertension)?
+
+\begin{enumerate}[label=\Alph*)]
+\item 0.2024
+\item 0.7976
+\item 0.1587
+\item 0.0668
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 17: Expected Number Hypertensive (2 points)}
+
+If 1000 people are screened, approximately how many would be classified as hypertensive?
+
+\begin{enumerate}[label=\Alph*)]
+\item 202
+\item 798
+\item 159
+\item 140
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\newpage
+
+\section{Part 3: Sampling Distributions and CLT (25 points)}
+
+\subsection*{Question 18: Sampling Distribution Mean (2 points)}
+
+A population has mean $\mu = 100$ and standard deviation $\sigma = 20$. If you take a sample of size $n=25$, what is the mean of the sampling distribution of $\bar{X}$?
+
+\begin{enumerate}[label=\Alph*)]
+\item 100
+\item 20
+\item 4
+\item 25
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 19: Standard Error Calculation (2 points)}
+
+What is the standard error of $\bar{X}$ for $n=25$?
+
+\begin{enumerate}[label=\Alph*)]
+\item 4
+\item 20
+\item 100
+\item 0.8
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 20: Effect of Sample Size on SE (3 points)}
+
+If $n=100$ instead of $n=25$, what is the new standard error?
+
+\begin{enumerate}[label=\Alph*)]
+\item 2
+\item 4
+\item 10
+\item 1
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 21: CLT Distribution (2 points)}
+
+A population of glucose levels has mean 100 mg/dL and standard deviation 25 mg/dL. A sample of 64 individuals is randomly selected. According to the Central Limit Theorem, the sample mean $\bar{X}$ is distributed as:
+
+\begin{enumerate}[label=\Alph*)]
+\item $N(100, 3.125^2)$
+\item $N(100, 25^2)$
+\item $N(100, 0.391^2)$
+\item $N(64, 25^2)$
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 22: Sample Mean Probability - Upper Tail (4 points)}
+
+For the glucose scenario above, what is the probability that the sample mean exceeds 105 mg/dL?
+
+\begin{enumerate}[label=\Alph*)]
+\item 0.0548
+\item 0.4207
+\item 0.9452
+\item 0.5000
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 23: Sample Mean Probability - Range (2 points)}
+
+What is the probability that the sample mean glucose level is between 97 and 103 mg/dL?
+
+\begin{enumerate}[label=\Alph*)]
+\item 0.6629
+\item 0.3830
+\item 0.4515
+\item 0.7881
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 24: SD vs SE Calculation (2 points)}
+
+If the population standard deviation is 30 and sample size is 36, what is the standard error?
+
+\begin{enumerate}[label=\Alph*)]
+\item 5
+\item 30
+\item 6
+\item 1.2
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 25: Effect of Sample Size on SE (2 points)}
+
+As sample size increases, what happens to the standard error and why is this important?
+
+\begin{enumerate}[label=\Alph*)]
+\item SE decreases; this makes our estimates more precise and reliable for inference
+\item SE increases; this makes our estimates more conservative
+\item SE stays the same; sample size doesn't affect variability
+\item SE decreases; this makes the population standard deviation smaller
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 26: SD vs SE Concept (1 point)}
+
+What is the key difference between standard deviation (SD) and standard error (SE)?
+
+\begin{enumerate}[label=\Alph*)]
+\item SD measures variability of individual observations; SE measures variability of sample means
+\item SD measures variability of sample means; SE measures variability of individual observations
+\item SD is always larger than SE
+\item SD and SE are the same when n=1
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 27: CLT Birth Weight Probability (3 points)}
+
+Birth weights have mean 3400g and SD 500g. You sample 100 births. What is the probability that the sample mean birth weight is less than 3350g?
+
+\begin{enumerate}[label=\Alph*)]
+\item 0.1587
+\item 0.4602
+\item 0.8413
+\item 0.0228
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 28: R Code for CLT (2 points)}
+
+Which R code correctly calculates the probability in Question 27?
+
+\begin{enumerate}[label=\Alph*)]
+\item \texttt{pnorm(3350, 3400, 500/sqrt(100))} or \texttt{pnorm(3350, 3400, 50)}
+\item \texttt{pnorm(3350, 3400, 500)}
+\item \texttt{pbinom(3350, 100, 0.5)}
+\item \texttt{pnorm(3350, 3400, 50, lower.tail=FALSE)}
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\newpage
+
+\section{Part 4: Confidence Intervals (20 points)}
+
+\subsection*{Question 13: Manual CI Calculation (10 points)}
+
+A study measures pain reduction scores for 20 patients receiving a new treatment:
+
+Sample mean: $\bar{x} = 6.2$ points\\
+Sample standard deviation: $s = 2.4$ points\\
+Sample size: $n = 20$
+
+\begin{enumerate}[label=\alph*)]
+\item Should you use a $z$ or $t$ distribution? Why? (2 points)
+\item Find the appropriate critical value for a 95\% confidence interval. (2 points)
+\item Calculate the standard error. (2 points)
+\item Calculate the margin of error. (2 points)
+\item Construct the 95\% confidence interval. (2 points)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\subsection*{Question 29: CI Interpretation (2 points)}
+
+Based on Question 13, which statement correctly interprets the 95\% confidence interval for mean pain reduction?
+
+\begin{enumerate}[label=\Alph*)]
+\item We are 95\% confident that the true mean pain reduction for all patients receiving this treatment is between 5.08 and 7.32 points
+\item 95\% of patients will have pain reduction between 5.08 and 7.32 points
+\item There is a 95\% probability that the sample mean is between 5.08 and 7.32 points
+\item The population mean is definitely between 5.08 and 7.32 points with 95\% certainty
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 30: Meaning of 95\% Confidence (2 points)}
+
+What does "95\% confident" mean in the context of confidence intervals?
+
+\begin{enumerate}[label=\Alph*)]
+\item If we repeated this study many times, 95\% of the confidence intervals we construct would contain the true population mean
+\item 95\% of the data values fall within the confidence interval
+\item There is a 95\% probability that our specific interval contains the population mean
+\item We are 95\% sure our sample mean equals the population mean
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 31: Comparing Confidence Levels (1 point)}
+
+If you calculated a 99\% confidence interval instead of 95\%, the interval would be:
+
+\begin{enumerate}[label=\Alph*)]
+\item Wider, because we need a larger range to be more confident we've captured the true mean
+\item Narrower, because we are more confident about the estimate
+\item The same width, confidence level doesn't affect interval width
+\item Wider, but only if sample size increases
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 15: CI with R (5 points)}
+
+A clinical trial measures cholesterol reduction for 30 patients:
+
+\texttt{cholesterol\_reduction <- c(28, 32, 25, 30, 27, 35, 22, 29, 31, 26,}\\
+\texttt{24, 33, 28, 30, 27, 29, 31, 25, 28, 32,}\\
+\texttt{26, 30, 29, 27, 34, 28, 31, 25, 29, 30)}
+
+\begin{enumerate}[label=\alph*)]
+\item Write R code to calculate a 95\% confidence interval using \texttt{t.test()}. (2 points)
+\item Report the confidence interval. (1 point)
+\item Based on this interval, is there strong evidence that the mean reduction exceeds 25 mg/dL? Explain. (2 points)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\section{Part 5: Integration and R Applications (5 points)}
+
+\subsection*{Question 16: Comprehensive Problem (5 points)}
+
+A pharmaceutical company tests a new drug. In trials with 80 patients:
+\begin{itemize}
+\item 72 patients respond successfully
+\item Mean cholesterol reduction: $\bar{x} = 35$ mg/dL
+\item Standard deviation: $s = 8$ mg/dL
+\end{itemize}
+
+\begin{enumerate}[label=\alph*)]
+\item Calculate a 95\% confidence interval for the true success rate (proportion). Hint: For proportions, use $\hat{p} \pm 1.96\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$ (2 points)
+\item Calculate a 95\% confidence interval for the true mean cholesterol reduction. (2 points)
+\item Write complete R code to perform both calculations and create a visualization of the cholesterol reduction data. (1 point)
+\end{enumerate}
+
+\vspace{1.5cm}
+
+\section*{Bonus: AI-Enhanced Learning (5 bonus points)}
+
+\subsection*{Question 17: AI Verification and Learning (5 bonus points)}
+
+Choose ONE problem from Part 3 (Sampling Distributions and CLT).
+
+\begin{enumerate}[label=\alph*)]
+\item Ask an AI tool (Claude, ChatGPT, etc.) to solve the problem. Include your exact prompt. (1 point)
+\item Verify the AI's answer by working through it yourself step-by-step. Did the AI get it correct? If not, identify the error. (2 points)
+\item Ask the AI to explain the Central Limit Theorem using a medical example different from those in class. Evaluate the quality of the explanation. (2 points)
+\end{enumerate}
+
+\vspace{2cm}
+
+\newpage
+
+\section*{Submission Requirements}
+
+\subsection*{Required Files:}
+\begin{enumerate}
+\item \textbf{PDF Document} with all written work, calculations, and interpretations
+\item \textbf{R Script File (.R)} with all R code properly commented
+\item \textbf{AI Usage Documentation} (if applicable for bonus):
+   \begin{itemize}
+   \item Prompts used
+   \item AI responses
+   \item Your verification and evaluation
+   \end{itemize}
+\end{enumerate}
+
+\subsection*{Formatting Guidelines:}
+\begin{itemize}
+\item Clearly label each question number
+\item Show all calculation steps for full credit
+\item For probability problems, write both the formula and the numerical answer
+\item Round consistently per instructions (probabilities to 4 decimals, percentages to 1 decimal)
+\item Include units where appropriate (mg/dL, mmHg, cm, etc.)
+\end{itemize}
+
+\section*{Grading Rubric}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcp{8cm}}
+\toprule
+\textbf{Category} & \textbf{Points} & \textbf{Criteria} \\
+\midrule
+Calculations & 40 & Correct formulas, accurate arithmetic \\
+Methods & 30 & Appropriate approach, proper formulas \\
+Interpretation & 20 & Clear explanations, correct context \\
+R Code & 10 & Working code, proper syntax, comments \\
+Bonus & +5 & Thoughtful AI integration and evaluation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{Common Mistakes to Avoid}
+
+\begin{itemize}
+\item \textbf{Binomial:} Forgetting to check conditions; using continuous formulas for discrete distributions
+\item \textbf{Normal:} Confusing $\Pr(X > a)$ with $\Pr(X < a)$; forgetting to standardize
+\item \textbf{Sampling Distributions:} Using population SD instead of SE; confusing individual vs. sample mean distributions
+\item \textbf{Confidence Intervals:} Using $z$ when you should use $t$; misinterpreting what "95\% confident" means
+\item \textbf{R Code:} Using \texttt{lower.tail=TRUE} when you need \texttt{lower.tail=FALSE}; forgetting to specify \texttt{mean} and \texttt{sd} parameters
+\end{itemize}
+
+\section*{Key Formulas}
+
+\textbf{Binomial Distribution:}
+$$\Pr(X = k) = \binom{n}{k} p^k (1-p)^{n-k}, \quad E(X) = np, \quad \text{SD}(X) = \sqrt{np(1-p)}$$
+
+\textbf{Standardization:}
+$$Z = \frac{X - \mu}{\sigma}$$
+
+\textbf{Sampling Distribution:}
+$$E(\bar{X}) = \mu, \quad \text{SE}(\bar{X}) = \frac{\sigma}{\sqrt{n}}$$
+
+\textbf{Confidence Interval (t-distribution):}
+$$\bar{x} \pm t_{\alpha/2, n-1} \times \frac{s}{\sqrt{n}}$$
+
+\section*{Academic Integrity}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,title=AI Usage Guidelines]
+
+\textbf{You are encouraged to:}
+\begin{itemize}
+\item[+] Use AI tools to check your work
+\item[+] Ask AI to explain concepts you don't understand
+\item[+] Verify your calculations with AI
+\item[+] Use AI to help debug R code
+\end{itemize}
+
+\textbf{You must NOT:}
+\begin{itemize}
+\item[-] Submit AI-generated work without understanding it
+\item[-] Copy solutions without showing your own reasoning
+\item[-] Use AI as a substitute for learning the material
+\item[-] Rely on AI for exam preparation without independent practice
+\end{itemize}
+
+\textbf{Remember:} The goal is to develop YOUR ability to work with probability distributions and understand statistical inference. AI is a tool to enhance learning, not replace it.
+\end{tcolorbox}
+
+\section*{Study Tips}
+
+\begin{enumerate}
+\item \textbf{Practice with R:} Work through all the lab exercises before attempting this assignment
+\item \textbf{Verify by hand:} For simple problems, calculate by hand first, then check with R
+\item \textbf{Understand, don't memorize:} Focus on understanding when to use each distribution
+\item \textbf{Draw pictures:} Sketch normal curves and shade regions for probability problems
+\item \textbf{Check your answers:} Probabilities must be between 0 and 1; CIs should make sense in context
+\end{enumerate}
+
+\section*{Resources}
+
+\begin{itemize}
+\item \textbf{Textbook:} Pagano \& Gauvreau, Chapters 7 and 8
+\item \textbf{Lecture Slides:} Week 3 slides with examples
+\item \textbf{Lab Materials:} Week 3 lab with step-by-step R code
+\item \textbf{R Documentation:} \texttt{?dbinom}, \texttt{?pnorm}, \texttt{?t.test}
+\item \textbf{Office Hours:} Wednesday 10:00-11:30am or by appointment
+\end{itemize}
+
+\end{document}

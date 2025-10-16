@@ -1,0 +1,10 @@
+# Save your workspace
+save.image("week4_lab.RData")
+
+# To load later:
+# load("week4_lab.RData")
+
+# Save your R script with header:
+# Name: Your Name
+# Date: Today's Date
+# Lab: Week 4 - Confidence Intervals

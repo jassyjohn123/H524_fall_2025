@@ -1,0 +1,14 @@
+# If ANOVA is significant (p < 0.05), do post-hoc
+if(p_value < 0.05) {
+  cat("\nANOVA is significant. Performing post-hoc tests...\n\n")
+
+  # Tukey HSD
+  tukey_results <- TukeyHSD(sleep_model)
+  print(tukey_results)
+
+  # Plot
+  plot(tukey_results, las=1)
+  abline(v=0, lty=2, col="red")
+} else {
+  cat("\nANOVA is not significant. No post-hoc tests needed.\n")
+}

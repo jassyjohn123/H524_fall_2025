@@ -1,0 +1,940 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questestinterop xmlns="http://www.imsglobal.org/xsd/ims_qtiasiv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/ims_qtiasiv1p2 http://www.imsglobal.org/xsd/ims_qtiasiv1p2p1.xsd">
+  <assessment ident="assignment1_homework" title="H524 Assignment 1: Introduction to Biostatistics and Data Visualization">
+    <qtimetadata>
+      <qtimetadatafield>
+        <fieldlabel>cc_maxattempts</fieldlabel>
+        <fieldentry>1</fieldentry>
+      </qtimetadatafield>
+      <qtimetadatafield>
+        <fieldlabel>qmd_timelimit</fieldlabel>
+        <fieldentry>180</fieldentry>
+      </qtimetadatafield>
+    </qtimetadata>
+    <section ident="root_section">
+
+      <!-- Question 1 -->
+      <item ident="q1" title="Question 1">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>4</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><strong>Dataset Reference:</strong> Childhood injury deaths by cause: Motor Vehicle (48 deaths), Drowning (20 deaths), Fire (12 deaths), Other causes (20 deaths). Total = 100 deaths.<br/><br/>According to the childhood injury deaths data, approximately what percentage of deaths are due to motor vehicle accidents?</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/html">25%</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/html">35%</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/html">48%</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/html">52%</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">c</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+            <displayfeedback feedbacktype="Response" linkrefid="correct1"/>
+          </respcondition>
+          <respcondition continue="Yes">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+            <displayfeedback feedbacktype="Response" linkrefid="incorrect1"/>
+          </respcondition>
+        </resprocessing>
+        <itemfeedback ident="correct1">
+          <flow_mat>
+            <material>
+              <mattext texttype="text/html">Correct! Motor vehicle accidents account for 48 out of 100 deaths, which is 48%.</mattext>
+            </material>
+          </flow_mat>
+        </itemfeedback>
+        <itemfeedback ident="incorrect1">
+          <flow_mat>
+            <material>
+              <mattext texttype="text/html">Incorrect. Motor vehicle accidents account for 48 out of 100 deaths, which equals 48%.</mattext>
+            </material>
+          </flow_mat>
+        </itemfeedback>
+      </item>
+
+      <!-- Question 2 with FEV1 Histogram -->
+      <item ident="q2" title="Question 2">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>10</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <div style="border: 1px solid #ccc; padding: 15px; margin: 15px 0; background-color: #f9f9f9;">
+                <h4>FEV1 Distribution Analysis</h4>
+                <p><strong>Dataset:</strong> FEV1 measurements (n=13): 2.46, 2.65, 2.69, 2.76, 2.85, 3.15, 2.47, 2.77, 2.78, 2.81, 3.09, 3.18, 3.46 liters</p>
+
+                <div style="text-align: center; margin: 20px 0;">
+                  <svg width="500" height="350" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid #ddd;">
+                    <!-- Histogram of FEV1 data -->
+                    <rect x="80" y="320" width="350" height="2" fill="black"/>
+                    <rect x="80" y="80" width="2" height="240" fill="black"/>
+
+                    <!-- Bars -->
+                    <rect x="100" y="250" width="60" height="70" fill="#69b7ff" stroke="black" stroke-width="1"/>
+                    <rect x="170" y="200" width="60" height="120" fill="#69b7ff" stroke="black" stroke-width="1"/>
+                    <rect x="240" y="150" width="60" height="170" fill="#69b7ff" stroke="black" stroke-width="1"/>
+                    <rect x="310" y="220" width="60" height="100" fill="#69b7ff" stroke="black" stroke-width="1"/>
+                    <rect x="380" y="280" width="60" height="40" fill="#69b7ff" stroke="black" stroke-width="1"/>
+
+                    <!-- Axis labels -->
+                    <text x="130" y="340" font-family="Arial" font-size="12" text-anchor="middle">2.4</text>
+                    <text x="200" y="340" font-family="Arial" font-size="12" text-anchor="middle">2.7</text>
+                    <text x="270" y="340" font-family="Arial" font-size="12" text-anchor="middle">3.0</text>
+                    <text x="340" y="340" font-family="Arial" font-size="12" text-anchor="middle">3.3</text>
+                    <text x="410" y="340" font-family="Arial" font-size="12" text-anchor="middle">3.6</text>
+
+                    <!-- Y-axis labels -->
+                    <text x="70" y="325" font-family="Arial" font-size="10" text-anchor="middle">0</text>
+                    <text x="70" y="275" font-family="Arial" font-size="10" text-anchor="middle">2</text>
+                    <text x="70" y="225" font-family="Arial" font-size="10" text-anchor="middle">4</text>
+                    <text x="70" y="175" font-family="Arial" font-size="10" text-anchor="middle">6</text>
+
+                    <text x="250" y="365" font-family="Arial" font-size="14" text-anchor="middle">FEV1 (liters)</text>
+                    <text x="40" y="200" font-family="Arial" font-size="14" text-anchor="middle" transform="rotate(-90 40 200)">Frequency</text>
+                    <text x="250" y="40" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">FEV1 Distribution (n=13)</text>
+                  </svg>
+                </div>
+
+                <p><strong>Descriptive Statistics:</strong><br/>
+                • Mean: 2.86 liters<br/>
+                • Median: 2.78 liters<br/>
+                • Range: 1.00 liters (3.46 - 2.46)<br/>
+                • Standard deviation: 0.29 liters</p>
+              </div>
+
+              <p>a) Given that the mean is 2.86 liters and the median is 2.78 liters, what does this suggest about the distribution's shape? (3 points)<br/>
+              b) Calculate and interpret the coefficient of variation for this dataset. Show your work. (4 points)<br/>
+              c) If we wanted to compare FEV1 values between males and females in this dataset, what type of visualization would be most appropriate and why? (3 points)</p>
+            </mattext>
+          </material>
+          <response_str ident="response2" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 3 with Injury Bar Chart -->
+      <item ident="q3" title="Question 3">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>10</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <div style="border: 1px solid #ccc; padding: 15px; margin: 15px 0; background-color: #f9f9f9;">
+                <h4>Childhood Injury Deaths Analysis</h4>
+
+                <div style="text-align: center; margin: 20px 0;">
+                  <svg width="600" height="400" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid #ddd;">
+                    <!-- Bar chart of childhood injury deaths -->
+                    <rect x="100" y="350" width="450" height="2" fill="black"/>
+                    <rect x="100" y="80" width="2" height="270" fill="black"/>
+
+                    <!-- Bars -->
+                    <rect x="130" y="200" width="80" height="150" fill="#ff6b6b" stroke="black" stroke-width="1"/>
+                    <rect x="230" y="290" width="80" height="60" fill="#4ecdc4" stroke="black" stroke-width="1"/>
+                    <rect x="330" y="313" width="80" height="37" fill="#ffcd56" stroke="black" stroke-width="1"/>
+                    <rect x="430" y="290" width="80" height="60" fill="#ff9f40" stroke="black" stroke-width="1"/>
+
+                    <!-- Axis labels -->
+                    <text x="170" y="375" font-family="Arial" font-size="11" text-anchor="middle" transform="rotate(-45 170 375)">Motor Vehicle</text>
+                    <text x="270" y="375" font-family="Arial" font-size="11" text-anchor="middle" transform="rotate(-45 270 375)">Drowning</text>
+                    <text x="370" y="375" font-family="Arial" font-size="11" text-anchor="middle" transform="rotate(-45 370 375)">Fire</text>
+                    <text x="470" y="375" font-family="Arial" font-size="11" text-anchor="middle" transform="rotate(-45 470 375)">Other</text>
+
+                    <!-- Value labels -->
+                    <text x="170" y="190" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">48%</text>
+                    <text x="270" y="280" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">20%</text>
+                    <text x="370" y="305" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">12%</text>
+                    <text x="470" y="280" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">20%</text>
+
+                    <!-- Y-axis labels -->
+                    <text x="90" y="355" font-family="Arial" font-size="10" text-anchor="end">0%</text>
+                    <text x="90" y="315" font-family="Arial" font-size="10" text-anchor="end">20%</text>
+                    <text x="90" y="275" font-family="Arial" font-size="10" text-anchor="end">40%</text>
+                    <text x="90" y="235" font-family="Arial" font-size="10" text-anchor="end">60%</text>
+
+                    <text x="325" y="45" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Childhood Injury Deaths by Cause</text>
+                    <text x="325" y="395" font-family="Arial" font-size="14" text-anchor="middle">Cause of Death</text>
+                    <text x="50" y="215" font-family="Arial" font-size="14" text-anchor="middle" transform="rotate(-90 50 215)">Percentage</text>
+                  </svg>
+                </div>
+
+                <p><strong>Consider these three datasets:</strong></p>
+                <ul>
+                  <li><strong>Dataset 1:</strong> Number of injury deaths by cause (like the chart above)</li>
+                  <li><strong>Dataset 2:</strong> Individual BMI measurements for 100 patients</li>
+                  <li><strong>Dataset 3:</strong> Blood types (A, B, AB, O) for 200 donors</li>
+                </ul>
+              </div>
+
+              <p>a) Explain why a bar chart would be appropriate for Dataset 1 and identify one strength of this visualization. (3 points)<br/>
+              b) For Dataset 2, recommend a different visualization that shows the distribution shape and explain why. (3 points)<br/>
+              c) For Dataset 3, explain why a pie chart might NOT be the best choice despite having categories. (4 points)</p>
+            </mattext>
+          </material>
+          <response_str ident="response3" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 4 -->
+      <item ident="q4" title="Question 4">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>4</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">Box plots are particularly useful because they:</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/html">Show the exact frequency of each data value</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/html">Display the five-number summary and outliers clearly</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/html">Are easier to create by hand than histograms</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/html">Work only with categorical data</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+            <displayfeedback feedbacktype="Response" linkrefid="correct4"/>
+          </respcondition>
+          <respcondition continue="Yes">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+            <displayfeedback feedbacktype="Response" linkrefid="incorrect4"/>
+          </respcondition>
+        </resprocessing>
+        <itemfeedback ident="correct4">
+          <flow_mat>
+            <material>
+              <mattext texttype="text/html">Correct! Box plots display the median, quartiles, and outliers clearly.</mattext>
+            </material>
+          </flow_mat>
+        </itemfeedback>
+        <itemfeedback ident="incorrect4">
+          <flow_mat>
+            <material>
+              <mattext texttype="text/html">Incorrect. Box plots show the five-number summary and outliers effectively.</mattext>
+            </material>
+          </flow_mat>
+        </itemfeedback>
+      </item>
+
+      <!-- Question 5 -->
+      <item ident="q5" title="Question 5">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>4</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">In epidemiology, what does an SMR > 1 indicate?</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/html">Lower mortality than expected</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/html">Higher mortality than expected</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/html">Average mortality rate</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/html">Invalid calculation</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+          <respcondition continue="Yes">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 6 -->
+      <item ident="q6" title="Question 6">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>4</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">In R, which function creates a frequency table showing counts for each category?</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/html">summary()</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/html">table()</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/html">count()</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/html">freq()</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+          <respcondition continue="Yes">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 7 -->
+      <item ident="q7" title="Question 7">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>4</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">The key difference between bar charts and histograms is:</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/html">Bar charts show categorical data with gaps between bars; histograms show continuous data with no gaps</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/html">Bar charts are always vertical; histograms are always horizontal</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/html">Bar charts show counts; histograms show percentages</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/html">Bar charts use colors; histograms are black and white</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+          <respcondition continue="Yes">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 8 -->
+      <item ident="q8" title="Question 8">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>4</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">Based on the AI guidelines presented in class, the most important principle for using AI in biostatistics is:</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/html">Use AI only for simple calculations</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/html">AI should enhance understanding, not replace critical thinking</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/html">Avoid AI completely in academic work</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/html">Use AI only for creating graphs</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+          <respcondition continue="Yes">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 9 -->
+      <item ident="q9" title="Question 9">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>4</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">According to the lecture on AI pitfalls, which is NOT a concern when using AI for statistical analysis?</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/html">AI may use outdated statistical methods</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/html">AI might not understand biomedical context</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/html">AI may not check statistical assumptions</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/html">AI requires expensive commercial software</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">d</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+          <respcondition continue="Yes">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 10 - Short Answer -->
+      <item ident="q10" title="Question 10">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>10</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><strong>Data Types Classification (10 points, 2 points each)</strong><br/><br/>For each variable below, identify whether it is quantitative or qualitative, and if quantitative, whether it's discrete or continuous. If qualitative, specify if it's nominal or ordinal. Provide a brief justification for each classification:<br/><br/>a) FEV1 measurement in liters (from our class dataset)<br/>b) Number of childhood injury deaths per state<br/>c) Cause of injury (motor vehicle, drowning, fire, etc.)<br/>d) Pain severity rating (1=mild, 5=severe)<br/>e) Patient's primary language (English, Spanish, French, etc.)</mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 11 - Short Answer with FEV1 Histogram -->
+      <item ident="q11" title="Question 11">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>10</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <div style="border: 1px solid #ccc; padding: 15px; margin: 15px 0; background-color: #f9f9f9;">
+                <h4>FEV1 Distribution Analysis</h4>
+                <p><strong>Dataset:</strong> FEV1 measurements (n=13): 2.15, 3.05, 2.50, 3.50, 2.80, 3.20, 2.45, 2.90, 3.15, 4.05, 2.60, 3.40, 2.75 liters</p>
+
+                <div style="text-align: center; margin: 20px 0;">
+                  <svg width="500" height="350" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid #ddd;">
+                    <!-- Histogram of FEV1 data -->
+                    <rect x="80" y="320" width="350" height="2" fill="black"/>
+                    <rect x="80" y="80" width="2" height="240" fill="black"/>
+
+                    <!-- Bars -->
+                    <rect x="100" y="250" width="60" height="70" fill="#69b7ff" stroke="black" stroke-width="1"/>
+                    <rect x="170" y="200" width="60" height="120" fill="#69b7ff" stroke="black" stroke-width="1"/>
+                    <rect x="240" y="150" width="60" height="170" fill="#69b7ff" stroke="black" stroke-width="1"/>
+                    <rect x="310" y="220" width="60" height="100" fill="#69b7ff" stroke="black" stroke-width="1"/>
+                    <rect x="380" y="280" width="60" height="40" fill="#69b7ff" stroke="black" stroke-width="1"/>
+
+                    <!-- Axis labels -->
+                    <text x="130" y="340" font-family="Arial" font-size="12" text-anchor="middle">2.2</text>
+                    <text x="200" y="340" font-family="Arial" font-size="12" text-anchor="middle">2.7</text>
+                    <text x="270" y="340" font-family="Arial" font-size="12" text-anchor="middle">3.2</text>
+                    <text x="340" y="340" font-family="Arial" font-size="12" text-anchor="middle">3.7</text>
+                    <text x="410" y="340" font-family="Arial" font-size="12" text-anchor="middle">4.2</text>
+
+                    <!-- Y-axis labels -->
+                    <text x="70" y="325" font-family="Arial" font-size="10" text-anchor="middle">0</text>
+                    <text x="70" y="275" font-family="Arial" font-size="10" text-anchor="middle">2</text>
+                    <text x="70" y="225" font-family="Arial" font-size="10" text-anchor="middle">4</text>
+                    <text x="70" y="175" font-family="Arial" font-size="10" text-anchor="middle">6</text>
+
+                    <text x="250" y="365" font-family="Arial" font-size="14" text-anchor="middle">FEV1 (liters)</text>
+                    <text x="40" y="200" font-family="Arial" font-size="14" text-anchor="middle" transform="rotate(-90 40 200)">Frequency</text>
+                    <text x="250" y="40" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">FEV1 Distribution (n=13)</text>
+                  </svg>
+                </div>
+
+                <p><strong>Descriptive Statistics:</strong><br/>
+                • Mean: 2.96 liters<br/>
+                • Median: 2.90 liters<br/>
+                • Range: 1.90 liters (4.05 - 2.15)<br/>
+                • Standard deviation: 0.51 liters</p>
+              </div>
+
+              <p>a) Given that the mean is 2.96 liters and the median is 2.90 liters, what does this suggest about the distribution's shape? (3 points)<br/>
+              b) Given that this data represents adolescents with asthma, explain why we might expect this type of distribution. (4 points)<br/>
+              c) Which measure (mean or median) would be more appropriate to report for this dataset and why? (3 points)</p>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 12 - Short Answer with Injury Bar Chart -->
+      <item ident="q12" title="Question 12">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>10</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">
+              <div style="border: 1px solid #ccc; padding: 15px; margin: 15px 0; background-color: #f9f9f9;">
+                <h4>Choosing Appropriate Visualizations</h4>
+
+                <div style="text-align: center; margin: 20px 0;">
+                  <svg width="600" height="400" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid #ddd;">
+                    <!-- Bar chart of childhood injury deaths -->
+                    <rect x="100" y="350" width="450" height="2" fill="black"/>
+                    <rect x="100" y="80" width="2" height="270" fill="black"/>
+
+                    <!-- Bars -->
+                    <rect x="130" y="200" width="80" height="150" fill="#ff6b6b" stroke="black" stroke-width="1"/>
+                    <rect x="230" y="290" width="80" height="60" fill="#4ecdc4" stroke="black" stroke-width="1"/>
+                    <rect x="330" y="313" width="80" height="37" fill="#ffcd56" stroke="black" stroke-width="1"/>
+                    <rect x="430" y="290" width="80" height="60" fill="#ff9f40" stroke="black" stroke-width="1"/>
+
+                    <!-- Axis labels -->
+                    <text x="170" y="375" font-family="Arial" font-size="11" text-anchor="middle" transform="rotate(-45 170 375)">Motor Vehicle</text>
+                    <text x="270" y="375" font-family="Arial" font-size="11" text-anchor="middle" transform="rotate(-45 270 375)">Drowning</text>
+                    <text x="370" y="375" font-family="Arial" font-size="11" text-anchor="middle" transform="rotate(-45 370 375)">Fire</text>
+                    <text x="470" y="375" font-family="Arial" font-size="11" text-anchor="middle" transform="rotate(-45 470 375)">Other</text>
+
+                    <!-- Value labels -->
+                    <text x="170" y="190" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">48%</text>
+                    <text x="270" y="280" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">20%</text>
+                    <text x="370" y="305" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">12%</text>
+                    <text x="470" y="280" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">20%</text>
+
+                    <!-- Y-axis labels -->
+                    <text x="90" y="355" font-family="Arial" font-size="10" text-anchor="end">0%</text>
+                    <text x="90" y="315" font-family="Arial" font-size="10" text-anchor="end">20%</text>
+                    <text x="90" y="275" font-family="Arial" font-size="10" text-anchor="end">40%</text>
+                    <text x="90" y="235" font-family="Arial" font-size="10" text-anchor="end">60%</text>
+
+                    <text x="325" y="45" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Childhood Injury Deaths by Cause</text>
+                    <text x="325" y="395" font-family="Arial" font-size="14" text-anchor="middle">Cause of Death</text>
+                    <text x="50" y="215" font-family="Arial" font-size="14" text-anchor="middle" transform="rotate(-90 50 215)">Percentage</text>
+                  </svg>
+                </div>
+
+                <p><strong>Consider these three datasets:</strong></p>
+                <ul>
+                  <li><strong>Dataset 1:</strong> Number of injury deaths by cause (like the chart above)</li>
+                  <li><strong>Dataset 2:</strong> Age at time of injury for 150 fatal accidents (continuous variable)</li>
+                  <li><strong>Dataset 3:</strong> Injury severity ratings (mild, moderate, severe, fatal) for 500 cases</li>
+                </ul>
+              </div>
+
+              <p>a) Explain why a bar chart would be appropriate for Dataset 1 and identify one strength of this visualization. (3 points)<br/>
+              b) For Dataset 2, recommend a different visualization that shows the distribution shape and explain why. (3 points)<br/>
+              c) For Dataset 3, explain why a pie chart might NOT be the best choice despite having categories. (4 points)</p>
+            </mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 13 - R Programming -->
+      <item ident="q13" title="Question 13">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>20</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><strong>R Programming Exercise (20 points)</strong><br/><br/><strong>Dataset Instructions:</strong><br/>Create the FEV1 dataset using this code:<br/><br/>fev1_data &lt;- data.frame(<br/>&nbsp;&nbsp;subject_id = 1:13,<br/>&nbsp;&nbsp;gender = c("Female", "Male", "Female", "Male", "Female", "Male", "Female", "Male", "Female", "Male", "Female", "Male", "Female"),<br/>&nbsp;&nbsp;fev1_liters = c(2.15, 3.05, 2.50, 3.50, 2.80, 3.20, 2.45, 2.90, 3.15, 4.05, 2.60, 3.40, 2.75)<br/>)<br/><br/>Complete the following analyses with the FEV1 dataset:<br/><br/>a) Calculate and display the mean FEV1 by gender using aggregate() or tapply(). Include your R code and output. (5 points)<br/><br/>b) Use summary() on the FEV1 variable and interpret what the 1st quartile (Q1) and 3rd quartile (Q3) tell us about the data distribution. (5 points)<br/><br/>c) Create a frequency table for gender and calculate what percentage of subjects are female. Show your code and calculation. (5 points)<br/><br/>d) Write code to create a simple visualization (histogram, boxplot, or barplot) of the FEV1 data. Include proper labels and title. Describe what your visualization shows about the data. (5 points)<br/><br/><strong>Submission Requirements:</strong><br/>- Paste ALL R code in the text box<br/>- Include console output after each part<br/>- Provide brief interpretations where requested<br/>- For part (d), describe your visualization since images cannot be uploaded</mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+
+      <!-- Question 14 - Bonus -->
+      <item ident="q14" title="Question 14 (Bonus)">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><strong>Bonus Question: Critical Thinking About AI in Biostatistics (5 points)</strong><br/><br/>A public health researcher wants to use AI to analyze a large dataset of electronic health records to identify risk factors for diabetes.<br/><br/>a) Describe two specific ways AI could be helpful in this analysis. (2 points)<br/>b) Identify two potential problems or limitations the researcher should watch for when using AI. (2 points)<br/>c) What type of human oversight would be essential to ensure valid results? (1 point)<br/><br/><em>Base your answer on the AI principles discussed in class.</em></mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <other/>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">0</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+    </section>
+  </assessment>
+</questestinterop>

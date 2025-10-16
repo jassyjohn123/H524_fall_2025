@@ -1,8 +1,8 @@
 # Week 1 R Examples for H524 Biostatistics
 # Introduction to R, Data Presentation, and Summary Measures
 
-# Set working directory to week1 folder
-setwd("/Users/molitorj/ms/OSU/classes/AI_H524/H524_fall_2025/week1")
+# Set working directory to Week_1 folder (adjust as needed for your system)
+# setwd("/Users/molitorj/ms/OSU/classes/AI_H524/H524_fall_2025/Week_1")
 
 # Load required libraries
 library(ggplot2)

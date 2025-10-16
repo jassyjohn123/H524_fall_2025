@@ -424,7 +424,7 @@ dbinom(12, size = 15, prob = 0.8)
 pbinom(11, size = 15, prob = 0.8, lower.tail = FALSE)
 # OR
 sum(dbinom(12:15, size = 15, prob = 0.8))
-# Answer: 0.6020
+# Answer: 0.6482
 
 # c) What is the expected number of successful responses?
 expected_successes <- 15 * 0.8

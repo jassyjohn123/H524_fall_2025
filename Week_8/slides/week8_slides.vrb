@@ -1,0 +1,25 @@
+\frametitle{AI Task: Power Analysis for Contingency Tables}
+\textbf{Advanced prompt:} "Calculate sample size needed to detect OR=2.5"
+
+\vspace{0.2cm}
+\textbf{This week's AI-integrated tasks:}
+\begin{enumerate}
+\item Generate R code for chi-square test with multiple tables
+\item Calculate and interpret odds ratios with confidence intervals
+\item Create publication-quality mosaic plots
+\item Explain when to use Fisher's vs chi-square
+\item Simulate contingency table data with specified association
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Sample Problem:}
+\small
+\begin{verbatim}
+"I have a 3x4 contingency table of treatment group (3 levels)
+by outcome (4 levels). Create R code to:
+1) Perform chi-square test
+2) Visualize the table
+3) Calculate standardized residuals to identify which cells
+   contribute most to significance
+4) Interpret results in clinical context"
+\end{verbatim}

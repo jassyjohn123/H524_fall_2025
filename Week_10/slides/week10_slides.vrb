@@ -1,0 +1,33 @@
+\frametitle{AI Demo: Creating Visualizations}
+\textbf{Prompt:} ``Create an R plot showing regression line with both confidence and prediction bands''
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+# Fit model
+model <- lm(y ~ x, data=mydata)
+
+# Create sequence for predictions
+x_seq <- seq(min(mydata$x), max(mydata$x), length=100)
+
+# Confidence interval
+pred_ci <- predict(model, newdata=data.frame(x=x_seq),
+                   interval="confidence", level=0.95)
+
+# Prediction interval
+pred_pi <- predict(model, newdata=data.frame(x=x_seq),
+                   interval="prediction", level=0.95)
+
+# Plot
+plot(mydata$x, mydata$y, pch=16, col="gray50",
+     xlab="X", ylab="Y", main="Regression with Intervals")
+lines(x_seq, pred_ci[,"fit"], col="blue", lwd=2)
+lines(x_seq, pred_ci[,"lwr"], col="blue", lty=2)
+lines(x_seq, pred_ci[,"upr"], col="blue", lty=2)
+lines(x_seq, pred_pi[,"lwr"], col="red", lty=2)
+lines(x_seq, pred_pi[,"upr"], col="red", lty=2)
+legend("topleft", c("Data", "Fit", "95% CI", "95% PI"),
+       col=c("gray50","blue","blue","red"), lty=c(NA,1,2,2),
+       pch=c(16,NA,NA,NA))
+\end{verbatim}
