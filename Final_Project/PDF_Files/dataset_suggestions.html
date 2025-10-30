@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dataset_suggestions</title>
+  <style>
+
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+
+body {
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 0.5in;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #333;
+}
+h1 {
+    color: #2c3e50;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+    font-size: 24pt;
+}
+h2 {
+    color: #34495e;
+    border-bottom: 2px solid #bdc3c7;
+    padding-bottom: 8px;
+    margin-top: 30px;
+    font-size: 18pt;
+}
+h3 {
+    color: #7f8c8d;
+    margin-top: 20px;
+    font-size: 14pt;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    font-size: 10pt;
+}
+th, td {
+    border: 1px solid #bdc3c7;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+}
+tr:nth-child(even) {
+    background-color: #ecf0f1;
+}
+code {
+    background-color: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 10pt;
+}
+pre {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+ul, ol {
+    margin: 15px 0;
+    padding-left: 30px;
+}
+li {
+    margin: 8px 0;
+}
+a {
+    color: #3498db;
+}
+hr {
+    border: none;
+    border-top: 2px solid #bdc3c7;
+    margin: 30px 0;
+}
+@media print {
+    @page {
+        margin: 0.75in;
+    }
+    body {
+        padding: 0;
+    }
+    .no-print {
+        display: none;
+    }
+}
+.print-button {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14pt;
+    margin: 20px 0;
+}
+.print-button:hover {
+    background-color: #2980b9;
+}
+</style>
+  <link rel="stylesheet" href="-" />
+</head>
+<body>
+
+<div class="no-print" style="background: #e8f4f8; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #3498db;">
+    <h2 style="margin-top: 0; color: #2c3e50;">📄 Save as PDF</h2>
+    <p><strong>To create a PDF from this document:</strong></p>
+    <ol style="margin: 10px 0;">
+        <li>Click the button below (or press <kbd>Ctrl+P</kbd> / <kbd>Cmd+P</kbd>)</li>
+        <li>Select "Save as PDF" or "Print to PDF"</li>
+        <li>Click "Save" and choose your location</li>
+    </ol>
+    <button class="print-button" onclick="window.print()">🖨️ Print/Save as PDF</button>
+    <p style="font-size: 10pt; color: #7f8c8d; margin-top: 15px;">
+        <em>The print instructions will not appear in the PDF.</em>
+    </p>
+</div>
+<h1 id="dataset-suggestions-for-final-project">Dataset Suggestions for
+Final Project</h1>
+<p>This document provides curated, accessible datasets for your final
+project. Choose data that matches your statistical method and research
+question.</p>
+<hr />
+<h2 id="general-dataset-repositories">General Dataset Repositories</h2>
+<h3 id="kaggle-datasets">1. Kaggle Datasets</h3>
+<ul>
+<li><strong>URL:</strong> https://www.kaggle.com/datasets</li>
+<li><strong>Access:</strong> Free account required</li>
+<li><strong>Best for:</strong> Beginner-friendly, clean datasets with
+documentation</li>
+<li><strong>File formats:</strong> CSV, JSON</li>
+<li><strong>Suggested search terms:</strong> “health”, “education”,
+“survey”, “correlation”, “categorical”</li>
+</ul>
+<h3 id="uci-machine-learning-repository">2. UCI Machine Learning
+Repository</h3>
+<ul>
+<li><strong>URL:</strong>
+https://archive.ics.uci.edu/ml/datasets.php</li>
+<li><strong>Access:</strong> Free, no account needed</li>
+<li><strong>Best for:</strong> Classic datasets, well-documented</li>
+<li><strong>File formats:</strong> CSV, TXT, ARFF</li>
+<li><strong>Note:</strong> Great for regression and classification
+projects</li>
+</ul>
+<h3 id="data.gov">3. Data.gov</h3>
+<ul>
+<li><strong>URL:</strong> https://data.gov</li>
+<li><strong>Access:</strong> Free, no account needed</li>
+<li><strong>Best for:</strong> Government data, public health,
+demographics</li>
+<li><strong>File formats:</strong> CSV, JSON, XML</li>
+<li><strong>Note:</strong> Very large datasets available - you may want
+to sample</li>
+</ul>
+<h3 id="google-dataset-search">4. Google Dataset Search</h3>
+<ul>
+<li><strong>URL:</strong> https://datasetsearch.research.google.com</li>
+<li><strong>Access:</strong> Free search engine for datasets</li>
+<li><strong>Best for:</strong> Finding datasets across multiple
+sources</li>
+<li><strong>Note:</strong> Check license and accessibility before
+committing</li>
+</ul>
+<h3 id="fivethirtyeight-data">5. FiveThirtyEight Data</h3>
+<ul>
+<li><strong>URL:</strong> https://data.fivethirtyeight.com</li>
+<li><strong>Access:</strong> Free, hosted on GitHub</li>
+<li><strong>Best for:</strong> Well-documented, interesting datasets
+with context</li>
+<li><strong>File formats:</strong> CSV</li>
+<li><strong>Topics:</strong> Politics, sports, economics, culture</li>
+</ul>
+<hr />
+<h2 id="datasets-by-statistical-method">Datasets by Statistical
+Method</h2>
+<h3 id="chi-square-test-categorical-data">Chi-Square Test (Categorical
+Data)</h3>
+<h4 id="titanic-survival-dataset">Titanic Survival Dataset</h4>
+<ul>
+<li><strong>Source:</strong> Kaggle</li>
+<li><strong>URL:</strong>
+https://www.kaggle.com/competitions/titanic/data</li>
+<li><strong>Variables:</strong> Survival, passenger class, sex, age,
+fare</li>
+<li><strong>Sample size:</strong> ~900 passengers</li>
+<li><strong>Research questions:</strong> Is survival independent of
+passenger class? Gender?</li>
+<li><strong>Notes:</strong> Classic dataset, very well-documented</li>
+</ul>
+<h4 id="movie-genre-and-rating">Movie Genre and Rating</h4>
+<ul>
+<li><strong>Source:</strong> Kaggle (search “IMDB movies”)</li>
+<li><strong>Variables:</strong> Genre, rating, year, duration</li>
+<li><strong>Sample size:</strong> Varies (1,000-50,000+)</li>
+<li><strong>Research questions:</strong> Is genre independent of rating
+category? Year?</li>
+</ul>
+<h4 id="student-survey-data">Student Survey Data</h4>
+<ul>
+<li><strong>Source:</strong> UCI Repository</li>
+<li><strong>URL:</strong>
+https://archive.ics.uci.edu/ml/datasets/Student+Performance</li>
+<li><strong>Variables:</strong> School, sex, study time, grades, alcohol
+consumption</li>
+<li><strong>Sample size:</strong> 649 students</li>
+<li><strong>Research questions:</strong> Is alcohol consumption
+independent of grades?</li>
+</ul>
+<hr />
+<h3 id="correlation-analysis-two-continuous-variables">Correlation
+Analysis (Two Continuous Variables)</h3>
+<h4 id="life-expectancy-and-gdp">Life Expectancy and GDP</h4>
+<ul>
+<li><strong>Source:</strong> Gapminder / Kaggle</li>
+<li><strong>URL:</strong> Search “gapminder” on Kaggle</li>
+<li><strong>Variables:</strong> Life expectancy, GDP per capita,
+population, year</li>
+<li><strong>Sample size:</strong> 200+ countries × multiple years</li>
+<li><strong>Research questions:</strong> Correlation between GDP and
+life expectancy?</li>
+</ul>
+<h4 id="air-quality-data">Air Quality Data</h4>
+<ul>
+<li><strong>Source:</strong> UCI Repository</li>
+<li><strong>URL:</strong>
+https://archive.ics.uci.edu/ml/datasets/Air+Quality</li>
+<li><strong>Variables:</strong> Temperature, humidity, pollutant
+levels</li>
+<li><strong>Sample size:</strong> 9,000+ hourly measurements</li>
+<li><strong>Research questions:</strong> Correlation between temperature
+and ozone?</li>
+</ul>
+<h4 id="housing-prices">Housing Prices</h4>
+<ul>
+<li><strong>Source:</strong> Kaggle (search “housing prices”)</li>
+<li><strong>Variables:</strong> Price, square footage, bedrooms,
+location</li>
+<li><strong>Sample size:</strong> Varies (500-20,000+)</li>
+<li><strong>Research questions:</strong> Correlation between square
+footage and price?</li>
+</ul>
+<h4 id="exam-scores-dataset">Exam Scores Dataset</h4>
+<ul>
+<li><strong>Source:</strong> Kaggle (search “students performance”)</li>
+<li><strong>Variables:</strong> Math score, reading score, writing
+score, study time</li>
+<li><strong>Sample size:</strong> 1,000 students</li>
+<li><strong>Research questions:</strong> Correlation between study time
+and scores?</li>
+</ul>
+<hr />
+<h3 id="linear-regression-one-outcome-one-or-more-predictors">Linear
+Regression (One Outcome, One or More Predictors)</h3>
+<h4 id="boston-housing">Boston Housing</h4>
+<ul>
+<li><strong>Source:</strong> Kaggle</li>
+<li><strong>URL:</strong> Search “Boston housing dataset”</li>
+<li><strong>Variables:</strong> Median home value, rooms, crime rate,
+distance to employment</li>
+<li><strong>Sample size:</strong> 506 neighborhoods</li>
+<li><strong>Research questions:</strong> Predict home value from number
+of rooms</li>
+<li><strong>Notes:</strong> Classic dataset for regression</li>
+</ul>
+<h4 id="medical-expenses">Medical Expenses</h4>
+<ul>
+<li><strong>Source:</strong> Kaggle</li>
+<li><strong>URL:</strong> Search “insurance medical costs”</li>
+<li><strong>Variables:</strong> Charges, age, BMI, children, smoker
+status, region</li>
+<li><strong>Sample size:</strong> 1,300+ individuals</li>
+<li><strong>Research questions:</strong> Predict medical costs from age
+and BMI</li>
+</ul>
+<h4 id="salary-prediction">Salary Prediction</h4>
+<ul>
+<li><strong>Source:</strong> Kaggle (search “salary data”)</li>
+<li><strong>Variables:</strong> Salary, years of experience, education,
+job title</li>
+<li><strong>Sample size:</strong> Varies</li>
+<li><strong>Research questions:</strong> Predict salary from experience
+and education</li>
+</ul>
+<hr />
+<h3 id="t-test-compare-two-groups">t-Test (Compare Two Groups)</h3>
+<h4 id="sleep-efficiency">Sleep Efficiency</h4>
+<ul>
+<li><strong>Source:</strong> Kaggle (search “sleep health”)</li>
+<li><strong>Variables:</strong> Sleep duration, age, gender, occupation,
+sleep quality</li>
+<li><strong>Sample size:</strong> 400+ individuals</li>
+<li><strong>Research questions:</strong> Do males and females differ in
+sleep duration?</li>
+</ul>
+<h4 id="plant-growth-experiments">Plant Growth Experiments</h4>
+<ul>
+<li><strong>Source:</strong> Built into R (datasets package)</li>
+<li><strong>R command:</strong> <code>data(PlantGrowth)</code></li>
+<li><strong>Variables:</strong> Plant weight, treatment group</li>
+<li><strong>Sample size:</strong> 30 plants</li>
+<li><strong>Research questions:</strong> Do treatment groups differ from
+control?</li>
+</ul>
+<h4 id="coffee-and-alertness">Coffee and Alertness</h4>
+<ul>
+<li><strong>Source:</strong> Kaggle (search “coffee” or create simulated
+data)</li>
+<li><strong>Variables:</strong> Alertness score, coffee consumption
+(yes/no), age</li>
+<li><strong>Sample size:</strong> Varies or simulate ~100</li>
+<li><strong>Research questions:</strong> Does coffee consumption affect
+alertness?</li>
+</ul>
+<h4 id="test-scores-method-comparison">Test Scores: Method
+Comparison</h4>
+<ul>
+<li><strong>Source:</strong> Create or simulate</li>
+<li><strong>Variables:</strong> Test score, teaching method (traditional
+vs. flipped)</li>
+<li><strong>Sample size:</strong> 50-100 students</li>
+<li><strong>Research questions:</strong> Do teaching methods produce
+different scores?</li>
+</ul>
+<hr />
+<h3 id="anova-compare-three-or-more-groups">ANOVA (Compare Three or More
+Groups)</h3>
+<h4 id="iris-dataset">Iris Dataset</h4>
+<ul>
+<li><strong>Source:</strong> Built into R (datasets package)</li>
+<li><strong>R command:</strong> <code>data(iris)</code></li>
+<li><strong>Variables:</strong> Sepal length/width, petal length/width,
+species (3 types)</li>
+<li><strong>Sample size:</strong> 150 flowers</li>
+<li><strong>Research questions:</strong> Do petal lengths differ across
+species?</li>
+<li><strong>Notes:</strong> Perfect for learning ANOVA</li>
+</ul>
+<h4 id="diet-and-weight-loss">Diet and Weight Loss</h4>
+<ul>
+<li><strong>Source:</strong> Kaggle (search “diet weight loss”)</li>
+<li><strong>Variables:</strong> Weight loss, diet type (3-4 types), age,
+gender</li>
+<li><strong>Sample size:</strong> 100-300 participants</li>
+<li><strong>Research questions:</strong> Which diet produces most weight
+loss?</li>
+</ul>
+<h4 id="anxiety-by-study-method">Anxiety by Study Method</h4>
+<ul>
+<li><strong>Source:</strong> Create or Kaggle (search “student
+anxiety”)</li>
+<li><strong>Variables:</strong> Anxiety score, study method (individual,
+group, online)</li>
+<li><strong>Sample size:</strong> 60-150 students</li>
+<li><strong>Research questions:</strong> Does anxiety differ by study
+method?</li>
+</ul>
+<hr />
+<h3 id="bootstrap-confidence-intervals">Bootstrap Confidence
+Intervals</h3>
+<p>Bootstrap can be applied to almost any dataset where you want to
+estimate uncertainty. Good candidates:</p>
+<h4 id="small-sample-datasets">Small Sample Datasets</h4>
+<ul>
+<li><strong>Source:</strong> Any dataset above with n &lt; 50</li>
+<li><strong>Why:</strong> Bootstrap is especially useful for small
+samples</li>
+<li><strong>Example:</strong> Estimate mean with 95% CI using
+bootstrap</li>
+</ul>
+<h4 id="skewed-data">Skewed Data</h4>
+<ul>
+<li><strong>Source:</strong> Income data, housing prices, medical
+costs</li>
+<li><strong>Why:</strong> Bootstrap doesn’t assume normality</li>
+<li><strong>Example:</strong> Median income with bootstrap CI</li>
+</ul>
+<h4 id="correlation-ci">Correlation CI</h4>
+<ul>
+<li><strong>Source:</strong> Any correlation dataset above</li>
+<li><strong>Why:</strong> Bootstrap provides CI for correlations</li>
+<li><strong>Example:</strong> “What’s the 95% CI for correlation between
+X and Y?”</li>
+</ul>
+<hr />
+<h2 id="creating-your-own-dataset">Creating Your Own Dataset</h2>
+<p>If you can’t find suitable data, you can:</p>
+<h3 id="survey-your-classmates">1. Survey Your Classmates</h3>
+<ul>
+<li>Quick Google Form with 5-10 questions</li>
+<li>Aim for 30+ responses</li>
+<li>Topics: sleep, study habits, stress, social media use</li>
+<li><strong>Approval:</strong> Check with instructor first</li>
+</ul>
+<h3 id="collect-observational-data">2. Collect Observational Data</h3>
+<ul>
+<li>Count events (e.g., bike vs. car traffic at different times)</li>
+<li>Measure repeated observations (e.g., coffee prices at different
+shops)</li>
+<li>Record publicly available information (e.g., restaurant
+ratings)</li>
+</ul>
+<h3 id="use-simulation-in-r">3. Use Simulation in R</h3>
+<ul>
+<li>Generate data that follows your research question</li>
+<li>Useful for understanding method mechanics</li>
+<li>Example: Simulate two groups with known difference for t-test</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean=</span><span class="dv">100</span>, <span class="at">sd=</span><span class="dv">15</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean=</span><span class="dv">110</span>, <span class="at">sd=</span><span class="dv">15</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(control, treatment),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Treatment&quot;</span>), <span class="at">each=</span><span class="dv">30</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<hr />
+<h2 id="dataset-selection-checklist">Dataset Selection Checklist</h2>
+<p>Before committing to a dataset, verify:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input><strong>Size:</strong> At least 30
+observations (more is better)</label></li>
+<li><label><input type="checkbox"></input><strong>Variables:</strong> Contains
+the types needed for your method</label></li>
+<li><label><input type="checkbox"></input><strong>Access:</strong> You can
+download it easily</label></li>
+<li><label><input type="checkbox"></input><strong>Quality:</strong> No major
+missing data issues (or plan to handle them)</label></li>
+<li><label><input type="checkbox"></input><strong>Documentation:</strong> You
+understand what variables mean</label></li>
+<li><label><input type="checkbox"></input><strong>Ethics:</strong> Publicly
+available or you have permission to use</label></li>
+<li><label><input type="checkbox"></input><strong>Interest:</strong> You find
+the topic engaging</label></li>
+<li><label><input type="checkbox"></input><strong>Scope:</strong> Not too
+complex for a 10-minute presentation</label></li>
+</ul>
+<hr />
+<h2 id="tips-for-data-exploration">Tips for Data Exploration</h2>
+<p>Once you have your data:</p>
+<ol type="1">
+<li><strong>Load and inspect</strong> - Look at first few rows, check
+variable types</li>
+<li><strong>Summary statistics</strong> - Means, SDs, ranges,
+counts</li>
+<li><strong>Check for missing data</strong> - Decide how to handle</li>
+<li><strong>Visualize</strong> - Histograms, boxplots, scatterplots</li>
+<li><strong>Check assumptions</strong> - Before running your statistical
+test</li>
+<li><strong>Ask AI for help</strong> - Use AI to explore and understand
+your data</li>
+</ol>
+<hr />
+<h2 id="getting-help">Getting Help</h2>
+<p>If you’re struggling to find appropriate data:</p>
+<ul>
+<li><strong>Office Hours:</strong> Dr. Molitor can suggest datasets for
+your question</li>
+<li><strong>Canvas Discussion:</strong> Post what you’re looking for,
+classmates may help</li>
+<li><strong>AI Tools:</strong> Ask ChatGPT/Claude “Where can I find data
+about X for Y analysis?”</li>
+<li><strong>Librarian:</strong> OSU librarians can help locate
+datasets</li>
+</ul>
+<hr />
+<h2 id="example-dataset-method-pairings">Example Dataset-Method
+Pairings</h2>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 18%" />
+<col style="width: 16%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Research Question</th>
+<th>Dataset</th>
+<th>Method</th>
+<th>Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Do survival rates differ by passenger class?</td>
+<td>Titanic</td>
+<td>Chi-Square</td>
+<td>Easy</td>
+</tr>
+<tr>
+<td>Is there correlation between GDP and life expectancy?</td>
+<td>Gapminder</td>
+<td>Correlation</td>
+<td>Easy</td>
+</tr>
+<tr>
+<td>Can we predict insurance costs from age and BMI?</td>
+<td>Medical Insurance</td>
+<td>Regression</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Do males and females differ in sleep duration?</td>
+<td>Sleep Health</td>
+<td>t-test</td>
+<td>Easy</td>
+</tr>
+<tr>
+<td>Do iris species differ in petal length?</td>
+<td>Iris</td>
+<td>ANOVA</td>
+<td>Easy</td>
+</tr>
+<tr>
+<td>What’s the 95% CI for median delivery time?</td>
+<td>Any small dataset</td>
+<td>Bootstrap</td>
+<td>Medium</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="dataset-ethics-reminder">Dataset Ethics Reminder</h2>
+<ul>
+<li><strong>Use publicly available data</strong> or data you collected
+ethically</li>
+<li><strong>Cite your data source</strong> in your presentation and
+write-up</li>
+<li><strong>Don’t use proprietary data</strong> without permission</li>
+<li><strong>Respect privacy</strong> - no personal/identifiable
+information</li>
+<li><strong>Be transparent</strong> about data cleaning or filtering
+choices</li>
+</ul>
+<hr />
+<p><strong>Last Updated:</strong> Fall 2025</p>
+<p><strong>Questions?</strong> Post in Canvas discussion or visit office
+hours</p>
+</body>
+</html>

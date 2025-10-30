@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>proposal_template</title>
+  <style>
+
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+body {
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 0.5in;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #333;
+}
+h1 {
+    color: #2c3e50;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+    font-size: 24pt;
+}
+h2 {
+    color: #34495e;
+    border-bottom: 2px solid #bdc3c7;
+    padding-bottom: 8px;
+    margin-top: 30px;
+    font-size: 18pt;
+}
+h3 {
+    color: #7f8c8d;
+    margin-top: 20px;
+    font-size: 14pt;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    font-size: 10pt;
+}
+th, td {
+    border: 1px solid #bdc3c7;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+}
+tr:nth-child(even) {
+    background-color: #ecf0f1;
+}
+code {
+    background-color: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 10pt;
+}
+pre {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+ul, ol {
+    margin: 15px 0;
+    padding-left: 30px;
+}
+li {
+    margin: 8px 0;
+}
+a {
+    color: #3498db;
+}
+hr {
+    border: none;
+    border-top: 2px solid #bdc3c7;
+    margin: 30px 0;
+}
+@media print {
+    @page {
+        margin: 0.75in;
+    }
+    body {
+        padding: 0;
+    }
+    .no-print {
+        display: none;
+    }
+}
+.print-button {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14pt;
+    margin: 20px 0;
+}
+.print-button:hover {
+    background-color: #2980b9;
+}
+</style>
+  <link rel="stylesheet" href="-" />
+</head>
+<body>
+
+<div class="no-print" style="background: #e8f4f8; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #3498db;">
+    <h2 style="margin-top: 0; color: #2c3e50;">📄 Save as PDF</h2>
+    <p><strong>To create a PDF from this document:</strong></p>
+    <ol style="margin: 10px 0;">
+        <li>Click the button below (or press <kbd>Ctrl+P</kbd> / <kbd>Cmd+P</kbd>)</li>
+        <li>Select "Save as PDF" or "Print to PDF"</li>
+        <li>Click "Save" and choose your location</li>
+    </ol>
+    <button class="print-button" onclick="window.print()">🖨️ Print/Save as PDF</button>
+    <p style="font-size: 10pt; color: #7f8c8d; margin-top: 15px;">
+        <em>The print instructions will not appear in the PDF.</em>
+    </p>
+</div>
+<h1 id="h524-final-project-proposal-template">H524 Final Project
+Proposal Template</h1>
+<p><strong>Team Name:</strong> [Your Team Name]</p>
+<p><strong>Team Members:</strong> - [Name 1] - [Role] - [Name 2] -
+[Role] - [Name 3] - [Role] - [Name 4] - [Role] - [Name 5] - [Role] (if
+applicable)</p>
+<p><strong>Submission Date:</strong> [Date]</p>
+<hr />
+<h2 id="word-proposal">150-Word Proposal</h2>
+<p><strong>Instructions:</strong> In approximately 150 words, describe
+your project including: (1) research question, (2) data source, (3)
+statistical method, and (4) planned AI tools.</p>
+<p>[Write your proposal here]</p>
+<hr />
+<h2 id="example-proposal">Example Proposal</h2>
+<p><em>Team StatWizards will investigate whether there is a relationship
+between daily screen time and sleep quality among college students using
+Pearson correlation analysis. We will use a publicly available dataset
+from Kaggle containing survey responses from 500 students, with
+variables measuring hours of daily screen time and self-reported sleep
+quality scores (1-10 scale). We plan to use ChatGPT and Claude to help
+us understand correlation assumptions (linearity, normality), generate R
+code for analysis and visualization, and interpret our results. We will
+document all prompts and compare how each AI explains correlation
+strength and significance. Team roles: Alex (coordinator), Jordan (AI
+tools), Sam (data/code), Taylor (presentation), Morgan
+(documentation).</em></p>
+<hr />
+<h2 id="quick-checklist">Quick Checklist</h2>
+<p>Before submitting, ensure your proposal includes:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>Clear research question</label></li>
+<li><label><input type="checkbox"></input>Data source identified (with
+approximate sample size if known)</label></li>
+<li><label><input type="checkbox"></input>Statistical method selected from
+H524 options (chi-square, correlation, regression, t-test, ANOVA,
+bootstrap)</label></li>
+<li><label><input type="checkbox"></input>At least 2 AI tools specified for
+comparison</label></li>
+<li><label><input type="checkbox"></input>All team members listed with
+roles</label></li>
+<li><label><input type="checkbox"></input>Approximately 150 words (±20 words
+is fine)</label></li>
+</ul>
+<hr />
+<h2 id="submission-instructions">Submission Instructions</h2>
+<ol type="1">
+<li>Save this file as: <code>TeamName_Proposal.md</code></li>
+<li>Submit to Canvas by Sunday of Week 5 at 11:59 PM</li>
+<li>One submission per team</li>
+<li>Be prepared to discuss your proposal in class during Weeks 6-7</li>
+</ol>
+</body>
+</html>

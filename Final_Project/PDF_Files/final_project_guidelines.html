@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>final_project_guidelines</title>
+  <style>
+
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+body {
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 0.5in;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #333;
+}
+h1 {
+    color: #2c3e50;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+    font-size: 24pt;
+}
+h2 {
+    color: #34495e;
+    border-bottom: 2px solid #bdc3c7;
+    padding-bottom: 8px;
+    margin-top: 30px;
+    font-size: 18pt;
+}
+h3 {
+    color: #7f8c8d;
+    margin-top: 20px;
+    font-size: 14pt;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    font-size: 10pt;
+}
+th, td {
+    border: 1px solid #bdc3c7;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+}
+tr:nth-child(even) {
+    background-color: #ecf0f1;
+}
+code {
+    background-color: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 10pt;
+}
+pre {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+ul, ol {
+    margin: 15px 0;
+    padding-left: 30px;
+}
+li {
+    margin: 8px 0;
+}
+a {
+    color: #3498db;
+}
+hr {
+    border: none;
+    border-top: 2px solid #bdc3c7;
+    margin: 30px 0;
+}
+@media print {
+    @page {
+        margin: 0.75in;
+    }
+    body {
+        padding: 0;
+    }
+    .no-print {
+        display: none;
+    }
+}
+.print-button {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14pt;
+    margin: 20px 0;
+}
+.print-button:hover {
+    background-color: #2980b9;
+}
+</style>
+  <link rel="stylesheet" href="-" />
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#h524-introduction-to-biostatistics" id="toc-h524-introduction-to-biostatistics">H524 Introduction to
+Biostatistics</a>
+<ul>
+<li><a href="#final-project-learn-and-apply-statistics-with-ai" id="toc-final-project-learn-and-apply-statistics-with-ai">Final Project:
+Learn and Apply Statistics with AI</a></li>
+<li><a href="#project-overview" id="toc-project-overview">📋 Project
+Overview</a></li>
+<li><a href="#your-task" id="toc-your-task">Your Task</a></li>
+<li><a href="#teams" id="toc-teams">Teams</a></li>
+<li><a href="#statistical-concepts-to-choose-from" id="toc-statistical-concepts-to-choose-from">Statistical Concepts to
+Choose From</a></li>
+<li><a href="#ai-tool-requirements" id="toc-ai-tool-requirements">AI
+Tool Requirements</a></li>
+<li><a href="#timeline" id="toc-timeline">Timeline</a></li>
+<li><a href="#what-to-turn-in" id="toc-what-to-turn-in">What to Turn
+In</a></li>
+<li><a href="#grading-100-points-total" id="toc-grading-100-points-total">Grading (100 points total)</a></li>
+<li><a href="#presentation-signup" id="toc-presentation-signup">Presentation Signup</a></li>
+<li><a href="#tips-for-success" id="toc-tips-for-success">Tips for
+Success</a></li>
+<li><a href="#example-project-flow" id="toc-example-project-flow">Example Project Flow</a></li>
+<li><a href="#academic-integrity" id="toc-academic-integrity">Academic
+Integrity</a></li>
+<li><a href="#resources" id="toc-resources">Resources</a></li>
+<li><a href="#frequently-asked-questions" id="toc-frequently-asked-questions">Frequently Asked Questions</a></li>
+</ul></li>
+</ul>
+</nav>
+
+<div class="no-print" style="background: #e8f4f8; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #3498db;">
+    <h2 style="margin-top: 0; color: #2c3e50;">📄 Save as PDF</h2>
+    <p><strong>To create a PDF from this document:</strong></p>
+    <ol style="margin: 10px 0;">
+        <li>Click the button below (or press <kbd>Ctrl+P</kbd> / <kbd>Cmd+P</kbd>)</li>
+        <li>Select "Save as PDF" or "Print to PDF"</li>
+        <li>Click "Save" and choose your location</li>
+    </ol>
+    <button class="print-button" onclick="window.print()">🖨️ Print/Save as PDF</button>
+    <p style="font-size: 10pt; color: #7f8c8d; margin-top: 15px;">
+        <em>The print instructions will not appear in the PDF.</em>
+    </p>
+</div>
+<h1 id="h524-introduction-to-biostatistics">H524 Introduction to
+Biostatistics</h1>
+<h2 id="final-project-learn-and-apply-statistics-with-ai">Final Project:
+Learn and Apply Statistics with AI</h2>
+<h3 id="fall-2025">Fall 2025</h3>
+<p><strong>Dr. John Molitor</strong></p>
+<hr />
+<h2 id="project-overview">📋 Project Overview</h2>
+<p>Use AI to teach yourself one statistical method we learned this
+semester — and apply it to a real question. You’ll then teach the class
+what you learned.</p>
+<hr />
+<h2 id="your-task">Your Task</h2>
+<p>Teams of 4-5 students will:</p>
+<ol type="1">
+<li>Choose a core stats concept (e.g., chi-square test, correlation,
+regression, t-test, ANOVA, bootstrap, etc.)</li>
+<li>Learn and apply it using AI tools</li>
+<li>Compare at least two AI platforms (demo both chat and code)</li>
+<li>Show what you learned, what worked, what didn’t, and how you
+verified the AI’s answers</li>
+</ol>
+<hr />
+<h2 id="teams">Teams</h2>
+<p><strong>Size:</strong> 4-5 students per team</p>
+<p><strong>Formation:</strong> Self-select teams by Week 4. Post team
+composition on Canvas discussion board.</p>
+<p><strong>Roles:</strong> While all team members contribute to all
+aspects, designate: - <strong>Project Coordinator:</strong> Manage
+timeline and submissions - <strong>AI Tool Lead:</strong> Coordinate AI
+platform testing and documentation - <strong>Data/Code Lead:</strong>
+Ensure reproducibility and code quality - <strong>Presentation
+Lead:</strong> Coordinate slide development and presentation flow -
+<strong>Documentation Lead:</strong> Compile prompt logs and
+write-up</p>
+<hr />
+<h2 id="statistical-concepts-to-choose-from">Statistical Concepts to
+Choose From</h2>
+<p>Select ONE of the following core methods from H524:</p>
+<h3 id="option-1-chi-square-test">Option 1: Chi-Square Test</h3>
+<p>Test for independence or goodness-of-fit with categorical data.</p>
+<p><strong>Example Topics:</strong> - Is music genre independent of mood
+tag? - Do voting patterns differ by age group? - Is disease prevalence
+independent of geographic region?</p>
+<h3 id="option-2-correlation-analysis">Option 2: Correlation
+Analysis</h3>
+<p>Examine linear relationships between continuous variables.</p>
+<p><strong>Example Topics:</strong> - Relationship between study hours
+and exam scores - Air quality index vs respiratory hospital admissions -
+Social media usage and self-reported well-being</p>
+<h3 id="option-3-linear-regression">Option 3: Linear Regression</h3>
+<p>Model continuous outcomes with one or more predictors.</p>
+<p><strong>Example Topics:</strong> - Do housing prices depend on square
+footage and location? - Predicting blood pressure from age and BMI -
+Effect of exercise duration on weight loss</p>
+<h3 id="option-4-t-test-independent-or-paired">Option 4: t-Test
+(Independent or Paired)</h3>
+<p>Compare means between two groups.</p>
+<p><strong>Example Topics:</strong> - Do organic apples cost more than
+conventional ones? - Sleep quality before vs after intervention - Math
+scores: traditional vs flipped classroom</p>
+<h3 id="option-5-anova">Option 5: ANOVA</h3>
+<p>Compare means across three or more groups.</p>
+<p><strong>Example Topics:</strong> - Pain scores across three
+medication types - Plant growth under different fertilizer treatments -
+Test anxiety levels across different study methods</p>
+<h3 id="option-6-bootstrap-confidence-intervals">Option 6: Bootstrap
+Confidence Intervals</h3>
+<p>Use resampling to estimate parameter uncertainty.</p>
+<p><strong>Example Topics:</strong> - What’s a 95% CI for average
+delivery time? - Bootstrap CI for correlation coefficient - Median
+household income CI for small samples</p>
+<hr />
+<h2 id="ai-tool-requirements">AI Tool Requirements</h2>
+<p><strong>You must compare at least 2 of these:</strong> - ChatGPT
+(with or without code interpreter) - Anthropic Claude - Google Gemini -
+Microsoft Copilot - Other AI tools (with instructor approval)</p>
+<p><strong>What to demonstrate:</strong> - Show prompts you used with
+each AI - Compare how each AI explained or solved your problem - Explain
+what you trusted, corrected, or changed - Demonstrate both chat-based
+help AND code generation (where applicable)</p>
+<hr />
+<h2 id="timeline">Timeline</h2>
+<table>
+<thead>
+<tr>
+<th>Week</th>
+<th>Milestone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Week 4</td>
+<td>Teams formed, posted on Canvas</td>
+</tr>
+<tr>
+<td>Week 5</td>
+<td><strong>150-word proposal due Sunday 11:59 PM</strong></td>
+</tr>
+<tr>
+<td>Week 6-7</td>
+<td>In-class proposal discussions and feedback</td>
+</tr>
+<tr>
+<td>Week 8-9</td>
+<td>Work on project (office hours available)</td>
+</tr>
+<tr>
+<td>Week 10</td>
+<td><strong>Presentations + all materials due</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="what-to-turn-in">What to Turn In</h2>
+<h3 id="presentation-10-minutes-total">1. Presentation (10 minutes
+total)</h3>
+<p>Use slides to cover:</p>
+<p><strong>Your Question (1-2 min)</strong> - What did you want to find
+out? - Why is it interesting or relevant?</p>
+<p><strong>Your Data (1 min)</strong> - Where it came from and what’s in
+it - Sample size, variables, any preprocessing</p>
+<p><strong>Your Method (2 min)</strong> - Which stats concept you chose
+and why - Brief explanation of the method</p>
+<p><strong>Your AI Process (3-4 min)</strong> - Show the prompts or
+examples you tried - Compare how at least 2 AIs explained or solved it -
+Explain what you trusted, corrected, or changed - Demo both chat
+assistance and code generation</p>
+<p><strong>Your Results (2 min)</strong> - Key outputs, graphs, and
+interpretation - Statistical significance and practical meaning</p>
+<p><strong>Takeaways (1 min)</strong> - What classmates should learn
+from your process - Recommendations for using AI in statistics</p>
+<h3 id="short-write-up-2-pages-max">2. Short Write-Up (2 pages max)</h3>
+<p>Include: - Which AI tools you used and why - What each AI did
+well/poorly - One workflow or strategy you’d recommend for others - Any
+code, screenshots, or outputs that show your steps</p>
+<h3 id="prompt-log-datacode">3. Prompt Log + Data/Code</h3>
+<p>Attach: - Prompts and short notes (copy/paste or screenshots) -
+Dataset (or link to data source) - Code or notebook (if applicable) with
+clear comments - 2-3 sentences on each teammate’s role</p>
+<hr />
+<h2 id="grading-100-points-total">Grading (100 points total)</h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Points</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Question &amp; Data</td>
+<td>10</td>
+<td>Clear, relevant, ethical use of data</td>
+</tr>
+<tr>
+<td>Method &amp; Accuracy</td>
+<td>25</td>
+<td>Correct test/model, assumptions checked</td>
+</tr>
+<tr>
+<td>AI Comparison</td>
+<td>25</td>
+<td>2+ AIs, transparent logs, clear reflection</td>
+</tr>
+<tr>
+<td>Interpretation</td>
+<td>15</td>
+<td>Results explained clearly and correctly</td>
+</tr>
+<tr>
+<td>Reproducibility</td>
+<td>15</td>
+<td>Code/data provided, process repeatable</td>
+</tr>
+<tr>
+<td>Presentation</td>
+<td>10</td>
+<td>Organized, engaging, within time</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>100</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Deductions:</strong> - -5 pts for going over time or missing
+files - -20 pts if fewer than 2 AIs are compared</p>
+<hr />
+<h2 id="presentation-signup">Presentation Signup</h2>
+<p>30 students → roughly 6-8 groups → presented over 2 class sessions in
+Week 10</p>
+<p>Each slot = 10 min presentation + 2 min Q&amp;A</p>
+<p>Sign up on the shared sheet (first come, first served). Swaps allowed
+with instructor approval.</p>
+<table>
+<thead>
+<tr>
+<th>Session</th>
+<th>Time</th>
+<th>Group/Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Session A</td>
+<td>00:00-00:12</td>
+<td></td>
+</tr>
+<tr>
+<td>Session A</td>
+<td>00:12-00:24</td>
+<td></td>
+</tr>
+<tr>
+<td>Session A</td>
+<td>00:24-00:36</td>
+<td></td>
+</tr>
+<tr>
+<td>Session A</td>
+<td>00:36-00:48</td>
+<td></td>
+</tr>
+<tr>
+<td>Session A</td>
+<td>00:48-01:00</td>
+<td></td>
+</tr>
+<tr>
+<td>Session A</td>
+<td>01:00-01:12</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Session B</td>
+<td>00:00-00:12</td>
+<td></td>
+</tr>
+<tr>
+<td>Session B</td>
+<td>00:12-00:24</td>
+<td></td>
+</tr>
+<tr>
+<td>Session B</td>
+<td>00:24-00:36</td>
+<td></td>
+</tr>
+<tr>
+<td>Session B</td>
+<td>00:36-00:48</td>
+<td></td>
+</tr>
+<tr>
+<td>Session B</td>
+<td>00:48-01:00</td>
+<td></td>
+</tr>
+<tr>
+<td>Session B</td>
+<td>01:00-01:12</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>See separate signup sheet for detailed scheduling.</p>
+<hr />
+<h2 id="tips-for-success">Tips for Success</h2>
+<ol type="1">
+<li><strong>Start Early:</strong> Don’t wait until Week 9 to begin</li>
+<li><strong>Document as You Go:</strong> Save all prompts and AI
+responses immediately</li>
+<li><strong>Verify Everything:</strong> Never trust AI output without
+checking</li>
+<li><strong>Practice Your Presentation:</strong> Time it and rehearse
+transitions</li>
+<li><strong>Use Simple Data:</strong> Don’t choose overly complex
+datasets</li>
+<li><strong>Ask for Help:</strong> Use office hours if you’re stuck</li>
+<li><strong>Be Honest:</strong> Show what didn’t work, not just
+successes</li>
+</ol>
+<hr />
+<h2 id="example-project-flow">Example Project Flow</h2>
+<h3 id="week-5-proposal-example">Week 5: Proposal Example</h3>
+<p><em>“Our team will investigate whether there is a relationship
+between daily screen time and sleep quality among college students using
+correlation analysis. We will collect or use existing survey data with
+variables for hours of screen time and self-reported sleep scores. We
+plan to use ChatGPT and Claude to help us understand correlation
+assumptions, generate R code, and interpret results. Team members: Alex
+(coordinator), Jordan (AI tools), Sam (data/code), Taylor
+(presentation), Morgan (documentation).”</em></p>
+<h3 id="week-6-7-what-youre-doing">Week 6-7: What You’re Doing</h3>
+<ul>
+<li>Finding or collecting your data</li>
+<li>Testing different AI prompts</li>
+<li>Learning about your statistical method from multiple sources</li>
+<li>Starting to code and analyze</li>
+</ul>
+<h3 id="week-10-what-youre-showing">Week 10: What You’re Showing</h3>
+<ul>
+<li>Side-by-side comparison of AI responses</li>
+<li>Your final analysis with interpretation</li>
+<li>Lessons learned about AI strengths and weaknesses</li>
+<li>Recommendations for your classmates</li>
+</ul>
+<hr />
+<h2 id="academic-integrity">Academic Integrity</h2>
+<p><strong>Important:</strong> - Using AI is required and encouraged for
+this project - You must be transparent about what AI generated vs what
+you created - All AI usage must be documented in your prompt log - You
+are responsible for verifying all AI outputs for accuracy - Each team
+member must contribute meaningfully - Data fabrication or plagiarism
+will result in project failure</p>
+<hr />
+<h2 id="resources">Resources</h2>
+<h3 id="getting-started-with-ai-tools">Getting Started with AI
+Tools</h3>
+<ul>
+<li>ChatGPT: https://chat.openai.com</li>
+<li>Claude: https://claude.ai</li>
+<li>Gemini: https://gemini.google.com</li>
+<li>Microsoft Copilot: https://copilot.microsoft.com</li>
+</ul>
+<h3 id="finding-data">Finding Data</h3>
+<p>See <code>dataset_suggestions.md</code> for curated list of
+accessible datasets.</p>
+<h3 id="r-resources">R Resources</h3>
+<ul>
+<li>Course materials on Canvas</li>
+<li>R Documentation: https://www.rdocumentation.org</li>
+<li>Quick-R: https://www.statmethods.net</li>
+</ul>
+<h3 id="statistical-concepts-review">Statistical Concepts Review</h3>
+<ul>
+<li>Course textbook chapters</li>
+<li>Khan Academy Statistics</li>
+<li>Course lecture slides and recordings</li>
+</ul>
+<hr />
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<p><strong>Q: Can we use a statistical method not listed?</strong><br />
+A: Check with the instructor first. It should be a core H524
+concept.</p>
+<p><strong>Q: What if the AIs give different answers?</strong><br />
+A: Perfect! That’s exactly what you should discuss in your
+presentation.</p>
+<p><strong>Q: How technical should the write-up be?</strong><br />
+A: Focus on the AI comparison and learning process, not just the
+statistics.</p>
+<p><strong>Q: Can we use our own data?</strong><br />
+A: Yes, as long as it’s appropriate and you have permission to use
+it.</p>
+<p><strong>Q: What if we can’t get the analysis to work?</strong><br />
+A: Document what went wrong and what you learned. Troubleshooting is
+valuable.</p>
+<p><strong>Q: Do we all present together?</strong><br />
+A: Yes, but divide the presentation so everyone speaks roughly
+equally.</p>
+<hr />
+<p><strong>Last Updated:</strong> Fall 2025</p>
+</body>
+</html>
