@@ -1,9 +1,0 @@
-\beamer@sectionintoc {1}{Review from Week 1}{3}{0}{1}
-\beamer@sectionintoc {2}{Basic Probability Concepts (Ch 6.1)}{4}{0}{2}
-\beamer@sectionintoc {3}{Conditional Probability (Ch 6.2)}{8}{0}{3}
-\beamer@sectionintoc {4}{Diagnostic Tests (Ch 6.3)}{12}{0}{4}
-\beamer@sectionintoc {5}{Random Variables and Expected Value (Ch 6.4)}{15}{0}{5}
-\beamer@sectionintoc {6}{Discrete Distributions (Ch 6.5)}{17}{0}{6}
-\beamer@sectionintoc {7}{Applications and Examples}{21}{0}{7}
-\beamer@sectionintoc {8}{AI as a Learning Tool for Probability}{22}{0}{8}
-\beamer@sectionintoc {9}{R Examples and Exercises}{28}{0}{9}

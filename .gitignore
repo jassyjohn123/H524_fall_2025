@@ -1,0 +1,62 @@
+# Student Data - NEVER commit these files
+*Report.csv
+*Student Analysis*.csv
+H524*Week*Report*.csv
+
+# Canvas exports with student data
+canvas_upload*.csv
+canvas_final_grades.csv
+**/grading/*.csv
+**/grading/import_export/*.csv
+**/assignments/*.csv
+**/assignments/**/*.csv
+week*_canvas_quiz.csv
+
+# Grading files that may contain student info
+graded_results*.json
+grading_interface*.html
+trap_phrases_report.json
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.dvi
+*.nav
+*.snm
+*.vrb
+
+# macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+venv/
+env/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.bak
