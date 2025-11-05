@@ -1,5 +1,23 @@
 # Claude Instructions
 
+## ⚠️ CRITICAL: Student Data Protection ⚠️
+
+**NEVER commit student data to GitHub!**
+
+This repository has multiple protection layers:
+1. **`.gitignore`** - Blocks all Canvas reports, grading files, and student CSVs
+2. **Pre-commit hook** - Scans every commit and blocks student data patterns
+3. **Documentation** - See `STUDENT_DATA_PROTECTION.md` for full details
+
+**Protected file types:**
+- `*Report.csv` - Canvas exports
+- `*Student Analysis*.csv` - Student reports
+- `graded_results*.json` - Grading results
+- `grading_interface*.html` - Grading interfaces
+- All CSV files in `assignments/` and `grading/` folders
+
+**Before any commit:** Verify no student data with `git status --ignored | grep Report`
+
 ## Course Design Instructions
 - Follow the course design principles outlined in instructions.txt
 - Refer to instructions.txt for guidance on creating 2025 course materials
