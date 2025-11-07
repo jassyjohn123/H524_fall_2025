@@ -1,3 +1,0 @@
-1) Look at Syllabus in current directory for 2024. We need to make one for 2025.
-2) See book for class in book subdirectory
-3) Create new Syllabus for 2025, Use LaTex, but make it with the same format as 2024.

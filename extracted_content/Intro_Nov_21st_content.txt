@@ -1,12 +1,0 @@
-Extracted from: /Users/molitorj/ms/OSU/classes/AI_H524/introduction-to-biostatistics-h-524-101-f2024-export/web_resources/Uploaded Media/Intro_Nov_21st.pptx
-==================================================
-
-
-=== SLIDE 1 ===
-H524 – November 21th, 2023
-Today we will:
-1. Learn about comparing proportions via
-Two sample tests of proportions
-Chi-square test
-M&M Example
-2. Introduce Regression

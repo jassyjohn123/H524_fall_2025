@@ -1,104 +1,0 @@
-Extracted from: /Users/molitorj/ms/OSU/classes/AI_H524/introduction-to-biostatistics-h-524-101-f2024-export/web_resources/Uploaded Media/Notes5_sampling_distributions.pptx
-==================================================
-
-
-=== SLIDE 1 ===
-Sampling Distributions
-If I take a sample of n=100 individuals from OSU and compute their average height, I will get an estimate    of the overall mean height for the population ,
-
-If you take a sample of n=100, you will get your own estimate. 
-
-If everyone in the class takes a sample, each one of us will get an estimate of the population mean.
-
-=== SLIDE 2 ===
-Sampling Distribution
-
-=== SLIDE 3 ===
-Central Limit Theorem
-Fuzzy definition: For a sample of size n with n large, the sample mean will be normally distributed, i.e.
-
-=== SLIDE 4 ===
-Unbiased Estimator
-If the expected value of the estimator is equal to the true value of the parameter then the estimator is unbiased.
-
-=== SLIDE 5 ===
-95% large sampleconfidence interval for μ
-
-=== SLIDE 6 ===
-95% large sampleconfidence interval for μ(known variance)
-So, a 95% C.I. for μ is:
-
-
-
-
-What about a 99% C.I.? (use z= 2.575).  Wider? Narrower?
-What about a 90% C.I.? (use z=1.645)
-
-=== SLIDE 7 ===
-Confidence interval
-If procedure is repeated over and over, on average 95% of intervals obtained will contain true parameter value.
-We CANNOT say that there is a 95% probability that the parameter is within the confidence limits.  Parameters are not random. (We can say this if we use Bayesian methods.)
-
-=== SLIDE 8 ===
-Large Sample Confidence Interval
-Example: IQ for sample of Los Angeles residents, known variance.
-
-
-95% Confidence Interval (known variance): 
-     105 +1.96(10/sqrt(90)) =  (102.934, 107.066)
-
-95% confident that the true population mean IQ is 
-     between   102.934 to 107.066
-
-=== SLIDE 9 ===
-Confidence Intervals, unknown variance
-Can we know the variance?
-Must use:
-
-This has a t-distribution with n-1 degrees of freedom.
-Must assume X is normally distributed.
-
-=== SLIDE 10 ===
-Student t distribution
-
-=== SLIDE 11 ===
-William Sealy Gosset
-English statistican, chemist, and brewer
-Head Brewer of Guinness
-Pioneered small sample experimental design and analysis with an exoncomic approach to the logic of uncertainty.
-Published under the pen name “Student”
-Developed the “Students t-distribution”
-https://en.wikipedia.org/wiki/William_Sealy_Gosset
-
-=== SLIDE 12 ===
-Confidence Interval, unknown variance, assume normal distribution
-
-=== SLIDE 13 ===
-Example
-We want to study the eﬀect of a particular drug on the growth of tumors. 20 patients with tumors are randomly assigned to a treatment group (T) and a control group (C). The tumor growth over a month is measured for each patient. The table gives the growth of their tumors (in mm). Assume that the growth in each group is normally distributed. 
-Estimate means and C.I.’s
-Are the treatment groups different with regards to tumor growth?
-Control | Treatment
-7 | 4
-10 | 6
-9 | 10
-8 | 8
-7 | 5
-6 | 3
-8 | 10
-9 | 8
-12 | 8
-13 | 10
-
-=== SLIDE 14 ===
-Example (Cont.)
-T0.975,9=2.263
-R: “qt(0.975,9)”
-
-Control: sd = 2.234, 8.9 ± 1.598 = (7.302, 10.498)
-Treatment: sd = 2.573, (5.359, 9.041)
-
-Could do joint C.I. for difference – more powerful.
-
-=== SLIDE 15 ===
-Carl Friedrich Gauss

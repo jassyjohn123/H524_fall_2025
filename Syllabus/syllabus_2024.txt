@@ -1,188 +1,0 @@
-Oregon State University
-College of Health
-H524 Introduction to Biostatistics
-Fall 2024
-
-Credit Hours: 04
-Room: online 
-Schedule: 
-
-Lecture: 	Monday, Wednesday 12:00-1:20pm
-Lab:  		Wednesday: 8:00 am – 9:50 am
-
-Course Instructor: Dr. John Molitor
-Office Location: 153 Milam
-Office Phone: 541-737-3834 
-E-Mail: john.molitor@oregonstate.edu 
-Office Hours: Wednesday, 10:00 am – 11:30 am
- Course Description: 
-Quantitative analysis and interpretation of health data including probability distributions, estimation of associations, and significance tests such as chi-squared, one-way ANOVA, and linear regression. 
-Academic Calendar 
-All students are subject to the registration and refund deadlines as stated in the Academic Calendar: https://registrar.oregonstate.edu/osu-academic-calendar  Instructor Communication 
-Please contact me privately Canvas inbox for matters of a personal nature.  
-Expectations for Time and Participation   This course combines approximately 120 total hours of instruction, online activities, and assignments for 4 credits.
-
-Prerequisites:
-
-H 524 assumes basic knowledge of statistical concepts and procedures equivalent to that of an undergraduate statistics course, and MTH 105 (Introduction to Contemporary Mathematics) or MTH 111 (College Algebra) or a higher mathematics course 
-
-Learning Resources:
-
-Resources include, but are not limited to:
-
-Lecture Notes
-Reading Assignments
-Discussions in class and on Canvas
-Problem Sets
-In-office help during office hours from both course instructor and lab instructors.
-
-Textbook: 
-Principles of Biostatistics, 2rd edition, 2022
-Marcello Pagano and Kimberlee Gauvreau
-
-Measurable Student Learning Outcomes:
- 
-	•	Select and generate graphical and numerical summaries of data.  
-	•	Use principles of statistical inference to make conclusions about populations from samples.  
-	•	Communicate statistical findings to others.  
-	•	Use computer software to conduct statistical analysis.  
-	•	Select and generate graphical and numerical summaries of data.  
-	•	Use principles of statistical inference to make conclusions about populations from samples.  
-	•	Communicate statistical findings to others.  
-	•	Use computer software to conduct statistical analysis.  
-
-
-Evaluation of Student Performance:
-
-Grading:  Tests will be graded according to the following scale.  It is possible, however, that adjustments will be made to this scale based on class performance.
-
-Range		Grade	
-94-100%	A 	
-89-93		A-  	
-84-88		B+	
-79-83		B	
-74-78		B-	
-69-73		C+	
-64-68		C	
-59-63		C-	
-54-58		D+	
-49-53		D	
-44-48		D-	
-Less than 44	F	
-
-Evaluation: 	30% homework, 30% midterm exam, 30% final exam, 10% class participation.
-
-Homework:
-
-Homework will be assigned regularly in class, approximately once a week. 
-
-Course Schedule:
-The proposed schedule is subject to change by the instructor. What follows is a general outline of the proposed topics for discussion as well as the proposed dates.  However, if we run out of time, get in a particularly lengthy discussion, or cover a topic more quickly than expected, there will likely be changes to the syllabus. 
-
-
-Topic
-
-
-Reading Assignment
-Week 0:
-
-Introduction to R 
-Data Presentation
-Numerical Summary Measures
-
-Pagano: Chapters 1, 2, 3
-
-Week 1:
-
-Introduction to R 
-Data Presentation
-Numerical Summary Measures
-Rates and Standardization
-Pagano: Chapters 1, 2, 3, 4
-
-Week 2:
-
-Probability
-Pagano: Chapter 6 (6.1-6.4.2, 6.5)
-
-Week 3:
-
-Theoretical Probability Distributions
-Sampling Distribution of the Mean 
-
-Pagano: Chapter 7 (7.1, 7.2, 7.4), and 8
-Week 4:
-
-Confidence Intervals 
-
-Pagano: Chapter 9
-
-Week 5:
-
-Hypothesis Testing
-Midterm exam  
-
-Pagano: Chapter 10
-
-Week 6
-
-Power
-Comparison of Two Means 
-Analysis of Variance 
-
-
-
-Pagano: Chapter 11, 12
-
-Week 7:
-
-Nonparametric Methods
-
-
-
-Pagano: Chapter 13 
-
-Week 8:
-
-Catch-up from Weeks 6 & 7
-Contingency Tables 
-Multiple Contingency Tables
-
-
-
-Pagano: Chapters 15, 16
-
-Week 9:
-
-Correlation 
-Simple Linear Regression 
-
-
-Pagano: Chapters 17, 18
-
-Week 10:
-
-Simple Linear Regression
-
-
-
-Pagano: Chapter 18
-
-Final Exam:  Available during finals week.  
-
-DIVERSITY STATEMENT
-The College of Public Health and Human Sciences strives to create an affirming climate for all students including underrepresented and marginalized individuals and groups. Diversity encompasses differences in age, color, ethnicity, national origin, gender, physical or mental ability, religion, socioeconomic background, veteran status, sexual orientation, and marginalized groups. We believe diversity is the synergy, connection, acceptance, and mutual learning fostered by the interaction of different human characteristics.
-
-EXPECTATIONS FOR STUDENT CONDUCT
-The Student Conduct Code establishes community standards and procedures necessary to maintain and protect an environment conducive to learning, in keeping with the educational objectives of Oregon State University. This code is based on the assumption that all persons must treat one another with dignity and respect in order for scholarship to thrive. For the full Student Conduct Code see  http://studentlife.oregonstate.edu/sites/studentlife.oregonstate.edu/files/code_of_student_conduct.pdf
-
-Academic or Scholarly Dishonesty is prohibited and considered a serious violation of the Student Conduct Code. It is defined as an act of deception in which a Student seeks to claim credit for the work or effort of another person, or uses unauthorized materials or fabricated information in any academic work or research, either through the Student's own efforts or the efforts of another. For specifics related to offenses proscribed by the University see: http://oregonstate.edu/studentconduct/offenses-0
-
-RELIGIOUS HOLIDAY STATEMENT
-Oregon State University strives to respect all religious practices.  If you have religious holidays that are in conflict with any of the requirements of this class, please see me immediately so that we can make alternative arrangements.  
-STUDENTS WITH DOCUMENTED DISABILITIES
-Accommodations for students with disabilities are determined and approved by Disability Access Services (DAS). If you, as a student, believe you are eligible for accommodations but have not obtained approval please contact DAS immediately at 541-737-4098 or at http://ds.oregonstate.edu. DAS notifies students and faculty members of approved academic accommodations and coordinates implementation of those accommodations. While not required, students and faculty members are encouraged to discuss details of the implementation of individual accommodations.
-
-
-
-
