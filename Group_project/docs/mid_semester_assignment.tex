@@ -1,0 +1,274 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{\textbf{H524 Introduction to Biostatistics\\
+\Large Mid-Semester Individual Assignment\\
+AI-Assisted Statistical Analysis\\
+Fall 2025}}
+\author{Dr. John Molitor}
+\date{Due: Week 6 (Friday by 11:59 PM)}
+
+\begin{document}
+\maketitle
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,boxrule=2pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\centering
+\textbf{\large Assignment Overview}\\[0.3em]
+This individual assignment replaces the traditional midterm exam and serves as preparation for your group project. You will conduct a focused statistical analysis using AI tools, demonstrating your understanding of descriptive statistics, hypothesis testing, and AI integration principles covered in the first half of the course.
+\end{tcolorbox}
+
+\section{Learning Objectives}
+
+By completing this assignment, you will demonstrate your ability to:
+\begin{itemize}[leftmargin=20pt]
+\item Apply descriptive statistical methods to real health data
+\item Conduct appropriate hypothesis tests and interpret results
+\item Effectively use AI tools for statistical analysis while maintaining scientific rigor
+\item Document and verify AI-generated outputs
+\item Communicate statistical findings clearly and accurately
+\end{itemize}
+
+\section{Assignment Components}
+
+\subsection{Dataset Selection}
+Choose \textbf{ONE} of the following simplified datasets:
+
+\subsubsection{Option 1: Heart Disease Risk Factors}
+\begin{itemize}
+\item \textbf{Data:} Framingham Heart Study subset (provided on Canvas)
+\item \textbf{Variables:} Age, gender, BMI, systolic BP, cholesterol, smoking status, diabetes status
+\item \textbf{Sample Size:} ~500 participants
+\item \textbf{Focus:} Cardiovascular risk factor analysis
+\end{itemize}
+
+\subsubsection{Option 2: COVID-19 Vaccination Outcomes}
+\begin{itemize}
+\item \textbf{Data:} Simulated vaccination study data (provided on Canvas)
+\item \textbf{Variables:} Age group, vaccination status, breakthrough infections, hospitalization
+\item \textbf{Sample Size:} ~1000 participants
+\item \textbf{Focus:} Vaccine effectiveness analysis
+\end{itemize}
+
+\subsubsection{Option 3: Mental Health and Exercise}
+\begin{itemize}
+\item \textbf{Data:} Depression screening study (provided on Canvas)
+\item \textbf{Variables:} Age, gender, exercise frequency, depression score, anxiety score
+\item \textbf{Sample Size:} ~400 participants
+\item \textbf{Focus:} Mental health and lifestyle factors
+\end{itemize}
+
+\section{Required Analysis Tasks}
+
+\subsection{Task 1: Descriptive Analysis (25 points)}
+\begin{enumerate}
+\item \textbf{Data Exploration:}
+   \begin{itemize}
+   \item Import and examine the dataset structure
+   \item Check for missing values and outliers
+   \item Create summary statistics for all variables
+   \end{itemize}
+
+\item \textbf{Descriptive Statistics:}
+   \begin{itemize}
+   \item Calculate measures of central tendency and variability for continuous variables
+   \item Create frequency tables for categorical variables
+   \item Generate appropriate summary tables
+   \end{itemize}
+
+\item \textbf{Data Visualization:}
+   \begin{itemize}
+   \item Create 3-4 appropriate graphs (histograms, box plots, bar charts)
+   \item Include proper titles, labels, and legends
+   \item Briefly interpret each visualization
+   \end{itemize}
+\end{enumerate}
+
+\subsection{Task 2: Hypothesis Testing (30 points)}
+\begin{enumerate}
+\item \textbf{Research Question:}
+   \begin{itemize}
+   \item Formulate one clear, testable research question based on your chosen dataset
+   \item State your null and alternative hypotheses
+   \end{itemize}
+
+\item \textbf{Statistical Test Selection:}
+   \begin{itemize}
+   \item Choose the appropriate statistical test (t-test, chi-square, ANOVA)
+   \item Justify your choice based on variable types and research question
+   \item Check test assumptions
+   \end{itemize}
+
+\item \textbf{Analysis and Interpretation:}
+   \begin{itemize}
+   \item Conduct the statistical test
+   \item Report test statistic, p-value, and confidence interval (if appropriate)
+   \item Interpret results in the context of your research question
+   \item Discuss practical significance vs. statistical significance
+   \end{itemize}
+\end{enumerate}
+
+\subsection{Task 3: Written Report (20 points)}
+\begin{enumerate}
+\item \textbf{Report Structure (3-4 pages):}
+   \begin{itemize}
+   \item Introduction with research question and dataset description
+   \item Methods section describing your analytical approach
+   \item Results section with tables, figures, and statistical findings
+   \item Brief discussion of findings and limitations
+   \item References (course materials and dataset sources)
+   \end{itemize}
+
+\item \textbf{Communication Quality:}
+   \begin{itemize}
+   \item Clear, professional writing appropriate for a public health audience
+   \item Proper statistical terminology and interpretation
+   \item Well-formatted tables and figures with informative captions
+   \end{itemize}
+\end{enumerate}
+
+\section{Deliverables}
+
+Submit the following files via Canvas by the deadline:
+
+\begin{enumerate}
+\item \textbf{R Script File (.R):}
+   \begin{itemize}
+   \item Well-commented R code for all analyses
+   \item Clear section headers for each task
+   \item Working code that reproduces all results
+   \end{itemize}
+
+\item \textbf{Written Report (.pdf):}
+   \begin{itemize}
+   \item 3-4 page report following the specified structure
+   \item Include all tables and figures within the report
+   \item Professional formatting and presentation
+   \end{itemize}
+
+\item \textbf{Data File (.csv):}
+   \begin{itemize}
+   \item Your cleaned dataset (if modifications were made)
+   \item Include variable labels and coding information
+   \end{itemize}
+\end{enumerate}
+
+\section{Grading Rubric}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Component} & \textbf{Points} & \textbf{Criteria} \\
+\midrule
+Descriptive Analysis & 35 & Comprehensive data exploration and visualization \\
+Hypothesis Testing & 40 & Appropriate test selection and correct interpretation \\
+Written Report & 25 & Clear communication and professional presentation \\
+\midrule
+\textbf{Total} & \textbf{100} & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Detailed Grading Criteria}
+
+\subsubsection{Excellent (90-100\%)}
+\begin{itemize}
+\item Comprehensive and accurate statistical analysis
+\item Clear, professional writing with correct interpretations
+\item Well-designed visualizations and properly formatted tables
+\end{itemize}
+
+\subsubsection{Good (80-89\%)}
+\begin{itemize}
+\item Mostly correct analysis with minor computational errors
+\item Generally clear writing with mostly correct interpretations
+\item Appropriate visualizations with minor formatting issues
+\end{itemize}
+
+\subsubsection{Satisfactory (70-79\%)}
+\begin{itemize}
+\item Basic analysis completed with some errors
+\item Unclear writing or some misinterpretations
+\item Basic visualizations that convey main findings
+\end{itemize}
+
+\subsubsection{Needs Improvement (<70\%)}
+\begin{itemize}
+\item Major errors in statistical analysis or interpretation
+\item Poor communication or significant misunderstandings
+\item Inadequate or missing visualizations
+\end{itemize}
+
+\section{Resources and Support}
+
+\subsection{Statistical Resources}
+\begin{itemize}
+\item Course lecture notes and textbook (Pagano \& Gauvreau)
+\item R documentation and help files
+\item Canvas discussion board for questions
+\item Office hours: Wednesday 10:00-11:30 AM
+\end{itemize}
+
+\subsection{AI Tool Access}
+\begin{itemize}
+\item GitHub Copilot (required - set up in RStudio)
+\item ChatGPT, Gemini, or similar AI assistant for consultation
+\item Course-provided AI prompt templates
+\end{itemize}
+
+\subsection{Technical Requirements}
+\begin{itemize}
+\item R and RStudio (latest versions)
+\item Required R packages: tidyverse, ggplot2, stats
+\item PDF generation capability for reports
+\end{itemize}
+
+\section{Academic Integrity}
+
+\begin{tcolorbox}[colback=red!5,colframe=red,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\textbf{Important Reminders:}
+\begin{itemize}
+\item This is an \textbf{individual assignment} - no collaboration with classmates
+\item All AI-generated content must be verified and properly documented
+\item You are responsible for the accuracy of all submitted work
+\item Failure to document AI usage constitutes academic dishonesty
+\item Submitting unverified AI output as your own work is plagiarism
+\end{itemize}
+\end{tcolorbox}
+
+\section{Tips for Success}
+
+\begin{enumerate}
+\item \textbf{Start Early:} Data analysis often takes longer than expected
+\item \textbf{Document Everything:} Keep detailed notes of your analysis decisions
+\item \textbf{Verify AI Output:} Always double-check AI-generated code and interpretations
+\item \textbf{Ask Questions:} Use office hours if you encounter difficulties
+\item \textbf{Focus on Understanding:} Ensure you can explain every step of your analysis
+\item \textbf{Practice Presentation:} You may be asked to briefly present your findings in class
+\end{enumerate}
+
+\section{Late Submission Policy}
+
+\begin{itemize}
+\item Late submissions will be penalized 10\% per day
+\item Extensions may be granted for documented emergencies
+\item Technical difficulties are not grounds for extensions - submit early to avoid issues
+\end{itemize}
+
+\end{document}

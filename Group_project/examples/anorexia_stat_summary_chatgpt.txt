@@ -1,0 +1,107 @@
+Anorexia Dataset — Statistical Analysis Summary
+
+Methods
+
+We analyzed weight change pre- to post-treatment across treatment groups
+in the anorexia dataset. Descriptive statistics were computed by group.
+Within-group effects were tested using paired t-tests (post vs. pre).
+Between-group differences were examined using Welch t-tests on change
+scores comparing each treatment to Control and reporting Hedges’ g.
+Assumptions were assessed via Shapiro–Wilk tests of normality on change
+scores and Levene’s test (median-centered) for homogeneity of variance.
+We additionally fit an ANCOVA model (Post weight ~ Pre weight +
+Treatment) with Control as the reference to estimate adjusted treatment
+effects and a Type II ANOVA to quantify the overall treatment effect;
+partial eta-squared is reported.
+
+Descriptive Statistics by Group
+
+  -------------------------------------------------------------------------------------
+  Treat    n        pre_mean   pre_sd   post_mean   post_sd   change_mean   change_sd
+  -------- -------- ---------- -------- ----------- --------- ------------- -----------
+  CBT      29       82.69      4.85     85.70       8.35      3.01          7.31
+
+  Cont     26       81.56      5.71     81.11       4.74      -0.45         7.99
+
+  FT       17       83.23      5.02     90.49       8.48      7.26          7.16
+  -------------------------------------------------------------------------------------
+
+Within-Group Paired t-tests (Post vs Pre)
+
+  ----------------------------------------------------------------------------
+  Treat    n        mean_change   t        df       p        ci_lo    ci_hi
+  -------- -------- ------------- -------- -------- -------- -------- --------
+  CBT      29       3.01          2.22     28       0.0350   0.23     5.79
+
+  Cont     26       -0.45         -0.29    25       0.7763   -3.68    2.78
+
+  FT       17       7.26          4.18     16       0.0007   3.58     10.94
+  ----------------------------------------------------------------------------
+
+Between-Group Comparisons vs Control (Change Scores, Welch t-tests)
+
+  ---------------------------------------------------------------------------------------
+  Comparison   diff_mean_change   t        df       p        ci_lo    ci_hi    Hedges_g
+  ------------ ------------------ -------- -------- -------- -------- -------- ----------
+  CBT vs Cont  3.46               1.67     51.0     0.1015   -0.70    7.62     0.45
+
+  FT vs Cont   7.71               3.30     37.0     0.0022   2.98     12.45    0.99
+  ---------------------------------------------------------------------------------------
+
+Assumption Checks
+
+Levene’s test for equality of variances on change scores across groups:
+stat = 0.52, p = 0.5964.
+
+Shapiro–Wilk tests for normality of change scores by group:
+
+  -----------------------------------------------------------------------
+  Treat                   W                       p
+  ----------------------- ----------------------- -----------------------
+  CBT                     0.90                    0.0079
+
+  Cont                    0.95                    0.2567
+
+  FT                      0.95                    0.5156
+  -----------------------------------------------------------------------
+
+ANCOVA (Post ~ Pre + Treatment)
+
+Type II ANOVA table:
+
+  ------------------------------------------------------------------------------------------
+  Effect                         sum_sq         df             F              p
+  ------------------------------ -------------- -------------- -------------- --------------
+  C(Treat,                       766.27         2              7.87           0.0008
+  Treatment(reference="Cont"))                                                
+
+  Prewt                          353.79         1              7.27           0.0089
+
+  Residual                       3311.26        68                            
+  ------------------------------------------------------------------------------------------
+
+Partial eta-squared for treatment effect: 0.188.
+
+Adjusted treatment effects (coefficients relative to Control,
+controlling for Pre weight):
+
+  --------------------------------------------------------------------------
+  Effect         Estimate       CI 95% lo      CI 95% hi      p
+                 (adjusted)                                   
+  -------------- -------------- -------------- -------------- --------------
+  CBT vs Cont    4.10           0.32           7.88           0.0340
+
+  FT vs Cont     8.66           4.28           13.04          0.0002
+  --------------------------------------------------------------------------
+
+Interpretation Notes
+
+• Positive mean change indicates weight gain post-treatment.
+Within-group paired t-tests evaluate whether each group’s average change
+differs from zero. Between-group Welch tests compare mean change in each
+treatment to Control, robust to unequal variances, and Hedges’ g
+quantifies standardized effect size.
+• ANCOVA adjusts post-treatment weight for baseline weight, estimating
+treatment effects as adjusted differences from Control. Partial
+eta-squared indicates the proportion of residual variance in post weight
+uniquely explained by treatment after accounting for baseline.

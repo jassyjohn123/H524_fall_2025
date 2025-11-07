@@ -1,0 +1,190 @@
+Anorexia Treatment Study
+
+Statistical Analysis Report
+
+Date: November 2, 2025
+
+Executive Summary
+
+This report presents a comprehensive statistical analysis of a clinical
+study comparing three treatment approaches for anorexia nervosa: Control
+(no treatment), Cognitive Behavioral Therapy (CBT), and Family Therapy
+(FT). The study examined weight changes in 72 participants across these
+three treatment groups.
+
+Key Findings
+
+- Family Therapy showed the strongest results with a mean weight gain of
+  7.26 lbs
+
+- CBT demonstrated moderate effectiveness with a mean weight gain of
+  3.01 lbs
+
+- Control group showed a slight mean weight loss of -0.45 lbs
+
+- Statistical analysis revealed significant differences between
+  treatment groups (p = 0.0065)
+
+- 76.5% of FT participants gained weight, compared to 62.1% in CBT and
+  42.3% in Control
+
+Dataset Overview
+
+The dataset comprises weight measurements from 72 participants with
+anorexia nervosa, distributed across three treatment groups. Each
+participant's weight was recorded before (pre-treatment) and after
+(post-treatment) the intervention period.
+
+Sample Composition
+
+  -----------------------------------------------------------------------
+  Treatment Group               Sample Size             Percentage
+  ----------------------- ----------------------- -----------------------
+  Control                           26                     36.1%
+
+  CBT                               29                     40.3%
+
+  Family Therapy                    17                     23.6%
+
+  Total                             72                     100%
+  -----------------------------------------------------------------------
+
+Descriptive Statistics
+
+Pre-Treatment Weights
+
+  -----------------------------------------------------------------------
+  Group                Mean (lbs)            SD               Range
+  ----------------- ----------------- ----------------- -----------------
+  Control                 81.56             5.71           70.5 - 91.8
+
+  CBT                     82.69             4.85           70.0 - 94.9
+
+  Family Therapy          83.23             5.02           73.4 - 94.2
+  -----------------------------------------------------------------------
+
+Weight Change Analysis
+
+  --------------------------------------------------------------------------
+  Group           Mean Change         SD           Range         % Gained
+                     (lbs)                                        Weight
+  -------------- -------------- -------------- -------------- --------------
+  Control            -0.45           7.99      -12.2 to 15.9      42.3%
+
+  CBT                 3.01           7.31       -9.1 to 20.9      62.1%
+
+  Family Therapy      7.26           7.16       -5.3 to 21.5      76.5%
+  --------------------------------------------------------------------------
+
+Statistical Analysis
+
+One-Way ANOVA
+
+A one-way analysis of variance (ANOVA) was conducted to compare weight
+changes across the three treatment groups. The results revealed a
+statistically significant difference between groups:
+
+- F-statistic: 5.4223
+
+- P-value: 0.0065 (p < 0.05)
+
+This indicates that there is a statistically significant difference in
+weight change between at least two of the treatment groups.
+
+Pairwise Comparisons
+
+Independent t-tests were conducted to identify which specific groups
+differed from each other:
+
+  -----------------------------------------------------------------------
+  Comparison                      P-value              Significance
+  ----------------------- ----------------------- -----------------------
+  Control vs CBT                  0.0996              Not Significant
+
+  Control vs Family               0.0025          Significant (p < 0.05)
+  Therapy                                         
+
+  CBT vs Family Therapy           0.0612              Not Significant
+  -----------------------------------------------------------------------
+
+Key Finding: Family Therapy produced significantly greater weight gain
+compared to the Control group (p = 0.0025). The differences between
+Control vs CBT and CBT vs Family Therapy did not reach statistical
+significance, although both showed trends in the expected direction.
+
+Visual Analysis
+
+The following visualizations illustrate the treatment outcomes across
+all three groups:
+
+[Treatment comparison visualizations]
+
+Figure 1: Comprehensive visual analysis of treatment outcomes
+
+The visualizations above show:
+
+- Top Left: Box plots demonstrating the distribution of weight changes,
+  with FT showing the highest median gain
+
+- Top Right: Pre vs post-treatment scatter plot with the diagonal line
+  representing no change
+
+- Bottom Left: Distribution of weight changes showing FT participants
+  clustering toward positive changes
+
+- Bottom Right: Mean weight changes with error bars, clearly showing
+  FT's superior performance
+
+Conclusions and Recommendations
+
+Summary of Findings
+
+This analysis of 72 participants across three treatment conditions
+reveals important insights into the effectiveness of different
+therapeutic approaches for anorexia nervosa:
+
+- Family Therapy emerged as the most effective treatment, producing an
+  average weight gain of 7.26 lbs with 76.5% of participants showing
+  improvement. This difference was statistically significant when
+  compared to the Control group (p = 0.0025).
+
+- Cognitive Behavioral Therapy showed moderate effectiveness, with a
+  mean weight gain of 3.01 lbs and 62.1% of participants gaining weight.
+  While not statistically different from either group, CBT represents a
+  middle ground between Control and FT.
+
+- The Control group showed minimal improvement, with a slight average
+  weight loss of -0.45 lbs, though with high variability (SD = 7.99).
+  Only 42.3% of control participants gained weight.
+
+Clinical Implications
+
+- Prioritize Family Therapy: Given its superior outcomes and statistical
+  significance, FT should be considered as a first-line treatment option
+  for anorexia nervosa, particularly for younger patients where family
+  involvement is feasible.
+
+- CBT as Alternative: For cases where family therapy is not appropriate
+  or available, CBT represents a viable alternative that produces
+  positive outcomes for the majority of patients.
+
+- Active Treatment Necessary: The Control group's poor outcomes
+  underscore the importance of active therapeutic intervention rather
+  than no treatment or monitoring alone.
+
+Study Limitations and Future Research
+
+- The Family Therapy group had a smaller sample size (n=17) compared to
+  CBT (n=29) and Control (n=26), which may affect statistical power.
+
+- Future studies should include longer follow-up periods to assess the
+  durability of treatment effects.
+
+- Investigation of moderating factors (e.g., age, illness duration,
+  family dynamics) could help identify which patients benefit most from
+  each treatment approach.
+
+- Cost-effectiveness analysis would be valuable for treatment selection
+  in resource-limited settings.
+
+End of Report
