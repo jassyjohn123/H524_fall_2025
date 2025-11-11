@@ -12,6 +12,11 @@ canvas_final_grades.csv
 **/assignments/**/*.csv
 week*_canvas_quiz.csv
 
+# Group project student rosters and assignments
+**/group_*_roster.csv
+group_assignments.csv
+random_group_assignment.R
+
 # Grading files that may contain student info
 graded_results*.json
 grading_interface*.html

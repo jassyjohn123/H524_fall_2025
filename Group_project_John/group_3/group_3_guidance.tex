@@ -1,0 +1,164 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{0,83,155}
+
+\title{\textbf{Group 3: Exercise \& Cholesterol Study}\\
+\large{Dataset Guidance}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Dataset Overview}
+
+\textbf{File:} \texttt{exercise\_cholesterol.csv}
+
+\textbf{Sample Size:} n = 50 adults
+
+\textbf{Research Context:} Study examining the relationship between weekly exercise hours and total cholesterol levels in adults.
+
+\subsection*{Variables}
+
+\begin{itemize}
+\item \texttt{id}: Participant identifier (1-50)
+\item \texttt{exercise}: Weekly exercise hours (continuous, 0-10 hours)
+\item \texttt{cholesterol}: Total cholesterol level (mg/dL)
+\item \texttt{age}: Age in years
+\item \texttt{sex}: Sex (M/F)
+\end{itemize}
+
+\subsection*{Loading the Data in R}
+
+\begin{lstlisting}[language=R, basicstyle=\small\ttfamily, breaklines=true]
+# Load the dataset
+data <- read.csv("exercise_cholesterol.csv")
+
+# View structure
+str(data)
+head(data)
+
+# Summary statistics
+summary(data)
+\end{lstlisting}
+
+\section*{Research Question to Consider}
+
+\textbf{``Is there a relationship between weekly exercise hours and cholesterol levels?''}
+
+Alternatively: ``Does exercise predict cholesterol?''
+
+\section*{Key Decision Point}
+
+\begin{tcolorbox}[colback=osaorange!10,colframe=osaorange,boxrule=1pt,arc=2pt]
+\textbf{The Challenge:} You have TWO continuous variables (exercise and cholesterol). How do you examine their relationship using methods covered in this course?
+
+\textbf{Questions to explore with AI:}
+\begin{itemize}
+\item What methods are appropriate for studying relationships between continuous variables?
+\item Should you consider other variables (age, sex)? Why or why not?
+\item What does it mean for two variables to be ``related''?
+\end{itemize}
+\end{tcolorbox}
+
+\section*{Things to Think About}
+
+\textbf{Exploratory Analysis:}
+\begin{itemize}
+\item Create a scatterplot to visualize the relationship
+\item Calculate summary statistics for both variables
+\item Consider: Does the relationship look linear? Curved? No pattern?
+\end{itemize}
+
+\textbf{Statistical Methods:}
+\begin{itemize}
+\item Review methods for analyzing relationships between variables
+\item Consider: How do you quantify the strength of a relationship?
+\item Consider: How do you test if a relationship is statistically significant?
+\item Consider: Can you predict one variable from another?
+\end{itemize}
+
+\textbf{Additional Variables:}
+\begin{itemize}
+\item You have age and sex in the dataset - should you use them?
+\item What's the difference between simple and multiple relationships?
+\item Which approaches are covered in this course?
+\end{itemize}
+
+\section*{AI Consultation Strategy}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,boxrule=1pt,arc=2pt]
+\textbf{Important:} When you ask AI about this dataset, it may suggest incorporating multiple variables simultaneously.
+
+\textbf{Prompts to try:}
+\begin{itemize}
+\item ``How should I analyze the relationship between exercise and cholesterol?''
+\item ``What statistical methods can I use for two continuous variables?''
+\item ``Should I include age and sex in my analysis? Why or why not?''
+\item ``What's the difference between simple and multiple regression?''
+\end{itemize}
+
+\textbf{Watch for:}
+\begin{itemize}
+\item Tools suggesting methods beyond simple linear regression
+\item Different approaches to handling additional variables
+\item Assumptions about the nature of the relationship (linear vs. non-linear)
+\end{itemize}
+
+\textbf{Document everything:} Save what each AI tool recommends for your AI comparison section!
+\end{tcolorbox}
+
+\section*{Questions for Your Analysis}
+
+As you work through this dataset, consider:
+
+\begin{enumerate}
+\item What research question are you answering?
+\item Which statistical method(s) from this course can address this question?
+\item What assumptions do you need to check?
+\item How will you interpret your results?
+\item If AI suggested including additional variables, why did you choose your approach?
+\end{enumerate}
+
+\section*{Interpretation Considerations}
+
+When examining relationships:
+\begin{itemize}
+\item What does correlation vs. causation mean?
+\item If you find a significant relationship, what does it tell you?
+\item What can you predict from your model?
+\item What are the limitations of examining exercise and cholesterol in isolation?
+\end{itemize}
+
+\section*{Resources}
+
+\begin{itemize}
+\item Week 9 drop-in session (Wed 12-1:20pm, 153 Milam)
+\item Textbook: Chapters 17-18 (Correlation and Simple Linear Regression)
+\item Your team!
+\item Canvas discussion board
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[colback=gray!10,colframe=gray!50,boxrule=1pt,arc=2pt]
+\textbf{Remember:} Starting simple is often the best approach. The goal is to:
+\begin{itemize}
+\item Answer your research question clearly
+\item Use methods you understand from this course
+\item Check assumptions and interpret results appropriately
+\item Critically evaluate what AI tools suggested
+\item Justify your analytical choices in your report
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}
