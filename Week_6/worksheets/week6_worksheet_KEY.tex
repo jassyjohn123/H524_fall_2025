@@ -1,0 +1,522 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{listings}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+% R code listing style
+\lstset{
+  language=R,
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green!60!black},
+  stringstyle=\color{red},
+  breaklines=true,
+  showstringspaces=false,
+  frame=single
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large Week 6 In-Class Worksheet}}\\
+\textcolor{white}{\textbf{\large Power, Two-Sample Tests, and ANOVA}}\\
+\textcolor{white}{\textbf{ANSWER KEY}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Statistical Power, Two-Sample Comparisons, and Analysis of Variance
+
+\vspace{8pt}
+
+\begin{tcolorbox}[colback=yellow!10,colframe=red,boxrule=1pt,arc=0pt]
+\textbf{NOTE:} All numerical answers verified using R (see \texttt{verify\_worksheet\_answers.R})\\
+No mental arithmetic was used in creating this answer key.
+\end{tcolorbox}
+
+\vspace{12pt}
+
+\section{Problem 1: Statistical Power}
+
+A pharmaceutical company is planning a clinical trial to test if a new drug reduces systolic blood pressure. Based on previous studies:
+\begin{itemize}
+\item Population mean blood pressure: 140 mmHg
+\item Standard deviation: 18 mmHg
+\item They want to detect a reduction to 135 mmHg (5 mmHg decrease)
+\item Significance level: $\alpha = 0.05$ (two-sided test)
+\end{itemize}
+
+\vspace{6pt}
+
+\textbf{Part A:} If they enroll 50 patients, what is the power of their study?
+
+\textbf{R code:}
+\begin{lstlisting}
+power.t.test(n = 50, delta = 5, sd = 18,
+             sig.level = 0.05, type = "one.sample")
+\end{lstlisting}
+
+\textbf{Power:} \textcolor{red}{\textbf{0.486}} (48.6\%)
+
+\vspace{0.3cm}
+
+\textbf{Part B:} What sample size is needed to achieve 80\% power?
+
+\textbf{R code:}
+\begin{lstlisting}
+power.t.test(delta = 5, sd = 18, sig.level = 0.05,
+             power = 0.80, type = "one.sample")
+\end{lstlisting}
+
+\textbf{Required n:} \textcolor{red}{\textbf{104 patients}} (103.66 rounded up)
+
+\vspace{0.3cm}
+
+\textbf{Part C:} What does ``80\% power'' mean in the context of this study?
+
+\textcolor{red}{\textbf{ANSWER:}} If the drug truly reduces blood pressure by 5 mmHg, we have an 80\% chance of detecting this effect (rejecting $H_0$) with our study. In other words, there's only a 20\% chance of a Type II error (false negative).
+
+\vspace{0.3cm}
+
+\textbf{Part D:} If the company can only afford to enroll 100 patients, what is the smallest effect (reduction in mmHg) they could detect with 80\% power?
+
+\textbf{R code:}
+\begin{lstlisting}
+power.t.test(n = 100, sd = 18, sig.level = 0.05,
+             power = 0.80, type = "one.sample")
+\end{lstlisting}
+
+\textbf{Minimum detectable effect:} \textcolor{red}{\textbf{5.09 mmHg}}
+
+\newpage
+
+\section{Problem 2: Two-Sample t-Test}
+
+A nutritionist compares the effectiveness of two weight-loss diets. She randomly assigns 12 participants to Diet A and 12 to Diet B. After 8 weeks, weight loss (in kg) is measured:
+
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tabular}{ll}
+\textbf{Diet A:} & 3.2, 4.5, 2.8, 5.1, 3.9, 4.2, 3.6, 4.8, 3.3, 4.0, 3.7, 4.4 \\
+\textbf{Diet B:} & 5.2, 6.1, 4.8, 5.9, 5.5, 6.3, 5.0, 5.7, 5.4, 6.0, 5.3, 5.8
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate summary statistics for each group.
+
+\textbf{R code:}
+\begin{lstlisting}
+diet_a <- c(3.2, 4.5, 2.8, 5.1, 3.9, 4.2, 3.6, 4.8, 3.3, 4.0, 3.7, 4.4)
+diet_b <- c(5.2, 6.1, 4.8, 5.9, 5.5, 6.3, 5.0, 5.7, 5.4, 6.0, 5.3, 5.8)
+mean(diet_a); sd(diet_a); length(diet_a)
+mean(diet_b); sd(diet_b); length(diet_b)
+\end{lstlisting}
+
+\textbf{Diet A:} $\bar{x}_A = $ \textcolor{red}{\textbf{3.96 kg}}, $s_A = $ \textcolor{red}{\textbf{0.68 kg}}, $n_A = $ \textcolor{red}{\textbf{12}}
+
+\textbf{Diet B:} $\bar{x}_B = $ \textcolor{red}{\textbf{5.58 kg}}, $s_B = $ \textcolor{red}{\textbf{0.46 kg}}, $n_B = $ \textcolor{red}{\textbf{12}}
+
+\vspace{0.3cm}
+
+\textbf{Part B:} State the null and alternative hypotheses for testing if Diet B results in greater weight loss than Diet A.
+
+$H_0$: \textcolor{red}{$\mu_A = \mu_B$ (or equivalently, $\mu_B - \mu_A = 0$)}
+
+$H_A$: \textcolor{red}{$\mu_B > \mu_A$ (Diet B results in greater weight loss than Diet A)}
+
+\vspace{0.5cm}
+
+\textbf{Part C:} Perform a two-sample t-test in R. Use \texttt{var.equal = TRUE} (assume equal variances). Use a one-sided test.
+
+\textbf{R code:}
+\begin{lstlisting}
+t.test(diet_b, diet_a, var.equal = TRUE, alternative = "greater")
+\end{lstlisting}
+
+\textbf{Test statistic:} $t = $ \textcolor{red}{\textbf{6.842}}
+
+\textbf{Degrees of freedom:} $df = $ \textcolor{red}{\textbf{22}}
+
+\textbf{p-value:} \textcolor{red}{\textbf{3.57 $\times$ 10$^{-7}$}} (highly significant!)
+
+\vspace{0.3cm}
+
+\textbf{Part D:} What is your conclusion at $\alpha = 0.05$? Write a complete sentence in context.
+
+\textcolor{red}{\textbf{CONCLUSION:}} Since p < 0.001 $\ll$ 0.05, we reject $H_0$. There is very strong evidence that Diet B results in significantly greater weight loss than Diet A. The mean difference is 1.62 kg (Diet B - Diet A).
+
+\vspace{0.5cm}
+
+\textbf{Part E:} Calculate and interpret a 95\% confidence interval for the difference in mean weight loss ($\mu_B - \mu_A$).
+
+\textbf{R code:}
+\begin{lstlisting}
+t.test(diet_b, diet_a, var.equal = TRUE, conf.level = 0.95)
+\end{lstlisting}
+
+\textbf{95\% CI:} \textcolor{red}{\textbf{(1.13, 2.12) kg}}
+
+\textbf{Interpretation:} We are 95\% confident that the true difference in mean weight loss (Diet B minus Diet A) is between 1.13 kg and 2.12 kg. Since the entire interval is positive and does not contain zero, Diet B is significantly more effective than Diet A.
+
+\newpage
+
+\section{Problem 3: Paired t-Test}
+
+A physical therapist measures knee flexibility (degrees of extension) in 10 patients before and after a 6-week treatment program:
+
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+Patient & Before & After \\
+\midrule
+1 & 115 & 125 \\
+2 & 110 & 120 \\
+3 & 120 & 128 \\
+4 & 105 & 115 \\
+5 & 118 & 130 \\
+6 & 112 & 122 \\
+7 & 108 & 118 \\
+8 & 122 & 135 \\
+9 & 114 & 124 \\
+10 & 116 & 126 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate the differences (After - Before) for each patient.
+
+\textbf{R code:}
+\begin{lstlisting}
+before <- c(115, 110, 120, 105, 118, 112, 108, 122, 114, 116)
+after <- c(125, 120, 128, 115, 130, 122, 118, 135, 124, 126)
+differences <- after - before
+differences
+\end{lstlisting}
+
+\textbf{Differences:} \textcolor{red}{\textbf{10, 10, 8, 10, 12, 10, 10, 13, 10, 10}}
+
+\vspace{0.5cm}
+
+\textbf{Part B:} Calculate the mean and standard deviation of the differences.
+
+\textbf{R code:}
+\begin{lstlisting}
+mean(differences)
+sd(differences)
+\end{lstlisting}
+
+$\bar{d} = $ \textcolor{red}{\textbf{10.3 degrees}} \hspace{2cm} $s_d = $ \textcolor{red}{\textbf{1.34 degrees}}
+
+\vspace{0.5cm}
+
+\textbf{Part C:} State the hypotheses for testing if flexibility improves after treatment.
+
+$H_0$: \textcolor{red}{$\mu_d = 0$ (no improvement in flexibility)}
+
+$H_A$: \textcolor{red}{$\mu_d > 0$ (flexibility improves after treatment)}
+
+\vspace{0.5cm}
+
+\textbf{Part D:} Perform a paired t-test in R.
+
+\textbf{R code:}
+\begin{lstlisting}
+t.test(differences, mu = 0, alternative = "greater")
+# OR equivalently:
+t.test(after, before, paired = TRUE, alternative = "greater")
+\end{lstlisting}
+
+\textbf{Test statistic:} $t = $ \textcolor{red}{\textbf{24.353}} \hspace{1cm} \textbf{df:} \textcolor{red}{\textbf{9}}
+
+\textbf{p-value:} \textcolor{red}{\textbf{7.95 $\times$ 10$^{-10}$}} (extremely significant!)
+
+\vspace{0.5cm}
+
+\textbf{Part E:} What is your conclusion? Does the treatment significantly improve flexibility?
+
+\textcolor{red}{\textbf{CONCLUSION:}} Since p < 0.001, there is extremely strong evidence that the treatment significantly improves knee flexibility. On average, flexibility increased by 10.3 degrees after the 6-week program.
+
+\vspace{0.5cm}
+
+\textbf{Part F:} Why would it be wrong to use an independent two-sample t-test for this data?
+
+\textcolor{red}{\textbf{ANSWER:}} Because the same patients are measured twice (before and after treatment), the observations are \textit{dependent}, not independent. Using an independent two-sample t-test would:
+\begin{itemize}
+\item Ignore the pairing structure
+\item Fail to control for between-subject variability
+\item Lose statistical power (larger SE, less ability to detect effect)
+\item Violate the independence assumption
+\end{itemize}
+
+The paired t-test is correct because it analyzes the \textit{differences} within each patient, removing between-subject variation and focusing on the treatment effect.
+
+\newpage
+
+\section{Problem 4: One-Way ANOVA}
+
+A researcher tests the effect of four different exercise programs on weight loss (kg) over 3 months. She randomly assigns participants to one of four programs:
+
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+Walking & Swimming & Cycling & Gym \\
+\midrule
+3.2 & 4.5 & 5.8 & 6.2 \\
+2.8 & 4.8 & 6.1 & 6.5 \\
+3.5 & 4.2 & 5.5 & 5.8 \\
+3.0 & 4.6 & 6.0 & 6.3 \\
+3.3 & 4.4 & 5.7 & 6.0 \\
+\midrule
+Mean: 3.16 & Mean: 4.50 & Mean: 5.82 & Mean: 6.16 \\
+SD: 0.27 & SD: 0.22 & SD: 0.24 & SD: 0.27 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part A:} State the null and alternative hypotheses for an ANOVA test.
+
+$H_0$: \textcolor{red}{$\mu_{\text{Walking}} = \mu_{\text{Swimming}} = \mu_{\text{Cycling}} = \mu_{\text{Gym}}$ (all means are equal)}
+
+$H_A$: \textcolor{red}{At least one mean differs from the others}
+
+\vspace{0.5cm}
+
+\textbf{Part B:} Why is it better to use ANOVA instead of multiple pairwise t-tests?
+
+\textcolor{red}{\textbf{ANSWER:}} Multiple pairwise t-tests inflate the Type I error rate (family-wise error). With 4 groups, we would need ${4 \choose 2} = 6$ pairwise comparisons. If we use $\alpha = 0.05$ for each test, the overall Type I error rate becomes approximately $1 - (1-0.05)^6 \approx 0.265$ (26.5\%) instead of the intended 5\%. ANOVA controls the family-wise error rate at the nominal $\alpha = 0.05$ level with a single omnibus test.
+
+\vspace{0.5cm}
+
+\textbf{Part C:} Perform a one-way ANOVA in R.
+
+\textbf{R code:}
+\begin{lstlisting}
+walking <- c(3.2, 2.8, 3.5, 3.0, 3.3)
+swimming <- c(4.5, 4.8, 4.2, 4.6, 4.4)
+cycling <- c(5.8, 6.1, 5.5, 6.0, 5.7)
+gym <- c(6.2, 6.5, 5.8, 6.3, 6.0)
+
+weight_loss <- c(walking, swimming, cycling, gym)
+program <- factor(rep(c("Walking", "Swimming", "Cycling", "Gym"), each=5))
+data <- data.frame(weight_loss, program)
+
+model <- aov(weight_loss ~ program, data=data)
+summary(model)
+\end{lstlisting}
+
+\textbf{F-statistic:} $F = $ \textcolor{red}{\textbf{148.12}}
+
+\textbf{Degrees of freedom:} $df_1 = $ \textcolor{red}{\textbf{3}} (between groups), $df_2 = $ \textcolor{red}{\textbf{16}} (within groups)
+
+\textbf{p-value:} \textcolor{red}{\textbf{7.00 $\times$ 10$^{-12}$}} (highly significant!)
+
+\vspace{0.5cm}
+
+\textbf{Part D:} What is your conclusion from the ANOVA?
+
+\textcolor{red}{\textbf{CONCLUSION:}} Since p < 0.001, we reject $H_0$. There is very strong evidence that the four exercise programs differ significantly in their effectiveness for weight loss. The large F-statistic (148.12) indicates substantial variation between group means relative to variation within groups.
+
+\vspace{0.5cm}
+
+\textbf{Part E:} If the ANOVA is significant, perform Tukey's HSD post-hoc test to determine which programs differ from each other.
+
+\textbf{R code:}
+\begin{lstlisting}
+TukeyHSD(model)
+\end{lstlisting}
+
+\textbf{Significant pairwise comparisons (p < 0.05):}
+\begin{itemize}
+\item \textcolor{red}{Swimming - Walking: diff = 1.34 kg, p = 1.55 $\times$ 10$^{-6}$}
+\item \textcolor{red}{Cycling - Walking: diff = 2.66 kg, p = 7.89 $\times$ 10$^{-11}$}
+\item \textcolor{red}{Gym - Walking: diff = 3.00 kg, p = 1.30 $\times$ 10$^{-11}$}
+\item \textcolor{red}{Cycling - Swimming: diff = 1.32 kg, p = 1.89 $\times$ 10$^{-6}$}
+\item \textcolor{red}{Gym - Swimming: diff = 1.66 kg, p = 8.41 $\times$ 10$^{-8}$}
+\item \textcolor{red}{Gym - Cycling: diff = 0.34 kg, p = 0.183 (NOT significant)}
+\end{itemize}
+
+\vspace{0.3cm}
+
+\textbf{Part F:} Based on your analysis, which exercise program would you recommend for weight loss?
+
+\textcolor{red}{\textbf{RECOMMENDATION:}} Based on the ANOVA and post-hoc tests:
+
+\begin{itemize}
+\item \textbf{Gym workouts} result in the highest mean weight loss (6.16 kg)
+\item \textbf{Cycling} is nearly as effective (5.82 kg) - not significantly different from Gym
+\item Both Gym and Cycling are significantly better than Swimming (4.50 kg)
+\item All three (Gym, Cycling, Swimming) are significantly better than Walking (3.16 kg)
+\end{itemize}
+
+\textbf{Recommendation:} For maximum weight loss, recommend Gym workouts or Cycling programs. Both produce approximately 6 kg of weight loss over 3 months, nearly double that of Walking alone.
+
+\newpage
+
+\section{Problem 5: Choosing the Right Test}
+
+For each scenario, identify which statistical test is most appropriate and explain why.
+
+\vspace{0.5cm}
+
+\textbf{Scenario A:} A doctor measures blood glucose in 15 diabetic patients before and after taking a new medication.
+
+\textbf{Test:} \textcolor{red}{\textbf{Paired t-test}}
+
+\textbf{Reason:} \textcolor{red}{Same patients are measured twice (before and after medication), so the data are \textit{dependent}. A paired t-test accounts for the within-subject correlation and is more powerful than an independent test.}
+
+\vspace{0.5cm}
+
+\textbf{Scenario B:} A researcher compares average IQ scores between children who attended preschool (n=25) and children who did not attend preschool (n=30).
+
+\textbf{Test:} \textcolor{red}{\textbf{Two-sample t-test (independent samples)}}
+
+\textbf{Reason:} \textcolor{red}{Two independent groups are being compared (preschool vs. no preschool). The children in each group are different individuals, so observations are independent.}
+
+\vspace{0.5cm}
+
+\textbf{Scenario C:} A study compares patient satisfaction scores across five different hospitals.
+
+\textbf{Test:} \textcolor{red}{\textbf{One-way ANOVA}}
+
+\textbf{Reason:} \textcolor{red}{Comparing means across more than two groups (5 hospitals). ANOVA is the appropriate test for comparing multiple group means simultaneously while controlling Type I error rate.}
+
+\vspace{0.5cm}
+
+\textbf{Scenario D:} An agronomist compares crop yield for two fertilizer brands, using 20 fields. Each field is split in half, with one fertilizer applied to each half.
+
+\textbf{Test:} \textcolor{red}{\textbf{Paired t-test}}
+
+\textbf{Reason:} \textcolor{red}{This is a \textit{matched pairs} design where each field serves as its own control. The two halves of each field are more similar to each other than to other fields (controlling for soil, sun, water, etc.). A paired test accounts for this within-field correlation.}
+
+\vspace{0.5cm}
+
+\textbf{Scenario E:} A pharmaceutical company wants to determine how many patients to enroll in a trial to detect a 15-point reduction in pain score with 85\% power.
+
+\textbf{Test/Analysis:} \textcolor{red}{\textbf{Power analysis using \texttt{power.t.test()}}}
+
+\textbf{Reason:} \textcolor{red}{This is a sample size calculation problem, not a hypothesis test. Use \texttt{power.t.test()} with specified effect size (delta=15), desired power (0.85), and significance level to determine required sample size.}
+
+\newpage
+
+\section*{Reflection Questions - ANSWERS}
+
+\textbf{1.} Explain the relationship between Type I error, Type II error, and power. How are they connected?
+
+\textcolor{red}{\textbf{ANSWER:}}
+\begin{itemize}
+\item \textbf{Type I error ($\alpha$):} Probability of rejecting $H_0$ when it's true (false positive)
+\item \textbf{Type II error ($\beta$):} Probability of failing to reject $H_0$ when it's false (false negative)
+\item \textbf{Power:} $1 - \beta$ = Probability of correctly rejecting $H_0$ when it's false (true positive)
+\end{itemize}
+
+\textbf{Connection:} Type I and Type II errors are inversely related. If we decrease $\alpha$ (make it harder to reject $H_0$), we increase $\beta$ (more likely to miss real effects). Power and Type II error are directly linked: Power = $1 - \beta$. Higher power means lower Type II error rate.
+
+\vspace{0.5cm}
+
+\textbf{2.} What are the three main factors that affect statistical power, and how does each one influence it?
+
+\textcolor{red}{\textbf{ANSWER:}}
+\begin{enumerate}
+\item \textbf{Sample size (n):} Larger samples $\Rightarrow$ higher power. More data gives more precise estimates and smaller standard errors.
+\item \textbf{Effect size ($|\mu_1 - \mu_0|$):} Larger effects $\Rightarrow$ higher power. Bigger differences are easier to detect.
+\item \textbf{Variability ($\sigma$):} Lower variability $\Rightarrow$ higher power. Less noise makes the signal (effect) clearer.
+\item \textit{(Bonus: Significance level $\alpha$):} Higher $\alpha$ $\Rightarrow$ higher power, but increases Type I error rate.
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\textbf{3.} When should you use a paired t-test instead of an independent two-sample t-test? Give an example.
+
+\textcolor{red}{\textbf{ANSWER:}} Use a paired t-test when:
+\begin{itemize}
+\item Same subjects measured twice (before/after, pre/post)
+\item Matched pairs (twins, siblings, matched controls)
+\item Split-unit designs (same experimental unit receives both treatments)
+\end{itemize}
+
+\textbf{Example:} Measuring blood pressure in 20 patients before and after medication. Use paired t-test because each person serves as their own control, and measurements within each person are correlated.
+
+\vspace{0.5cm}
+
+\textbf{4.} What information does an ANOVA F-test give you? What doesn't it tell you?
+
+\textcolor{red}{\textbf{ANSWER:}}
+
+\textbf{What ANOVA tells you:}
+\begin{itemize}
+\item Whether there is \textit{any} difference among the group means
+\item Whether the variation between groups is larger than expected by chance alone
+\end{itemize}
+
+\textbf{What ANOVA doesn't tell you:}
+\begin{itemize}
+\item \textit{Which} specific groups differ from each other
+\item \textit{How many} groups differ
+\item The \textit{direction} or \textit{magnitude} of differences
+\end{itemize}
+
+To answer these questions, you need post-hoc tests (e.g., Tukey's HSD, Bonferroni) or planned contrasts.
+
+\vspace{0.5cm}
+
+\textbf{5.} Why is it important to calculate power and sample size \textit{before} conducting a study rather than after?
+
+\textcolor{red}{\textbf{ANSWER:}} Calculating power \textit{before} the study:
+\begin{itemize}
+\item Ensures adequate sample size to detect meaningful effects
+\item Prevents wasting resources on underpowered studies that likely won't find anything
+\item Avoids ethical issues of enrolling subjects when study can't answer the question
+\item Required for grant proposals and institutional review boards (IRBs)
+\item Helps justify the study design and resource allocation
+\end{itemize}
+
+Calculating power \textit{after} the study is too late - if the study is underpowered and finds no effect, you can't tell if there truly is no effect or if you just missed it (Type II error).
+
+\vspace{1cm}
+
+\begin{tcolorbox}[colback=yellow!10,colframe=red,boxrule=1pt,arc=0pt]
+\textbf{COMPUTATIONAL INTEGRITY NOTE:}
+
+All numerical answers in this key were verified using R code (see \texttt{verify\_worksheet\_answers.R}).
+No mental arithmetic was used. This ensures accuracy and provides an audit trail for all calculations.
+
+Following best practices from CLAUDE.md course design guidelines.
+\end{tcolorbox}
+
+\end{document}

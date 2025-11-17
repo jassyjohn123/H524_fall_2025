@@ -1,0 +1,119 @@
+================================================================================
+WEEK 5 ASSIGNMENT - ANSWER RANDOMIZATION SUMMARY
+================================================================================
+Date: 2025-10-26
+Purpose: Eliminate detectable patterns in correct answer positions
+
+================================================================================
+PREVIOUS ANSWER SEQUENCE (PROBLEMATIC)
+================================================================================
+A, C, B, A, D, C, B, A, D, C, B, D, A
+
+Issues detected:
+- Questions 5-8 showed reverse alphabetical pattern (D, C, B, A)
+- Students could potentially detect this pattern
+- Overall distribution: A=4, B=3, C=3, D=3
+
+================================================================================
+NEW ANSWER SEQUENCE (RANDOMIZED)
+================================================================================
+D, C, C, B, A, A, C, B, D, B, B, A, D
+
+Distribution:
+- A: 3 questions
+- B: 4 questions
+- C: 3 questions
+- D: 3 questions
+
+Pattern Analysis:
+✓ No consecutive runs of 3+ same letters
+✓ No alphabetical sequences (forward or reverse)
+✓ No alternating patterns
+✓ Balanced distribution (each letter appears 3-4 times)
+
+================================================================================
+QUESTION-BY-QUESTION MAPPING
+================================================================================
+Question   Old Answer   New Answer   Change
+--------   ----------   ----------   ------
+Q1         A            D            ✓ Shuffled
+Q2         C            C            (no change)
+Q3         B            C            ✓ Shuffled
+Q4         A            B            ✓ Shuffled
+Q5         D            A            ✓ Shuffled
+Q6         C            A            ✓ Shuffled
+Q7         B            C            ✓ Shuffled
+Q8         A            B            ✓ Shuffled
+Q9         D            D            (no change)
+Q10        C            B            ✓ Shuffled
+Q13        B            B            (no change)
+Q14        D            A            ✓ Shuffled
+Q15        A            D            ✓ Shuffled
+
+Summary: 10 of 13 questions shuffled (77%)
+
+================================================================================
+FILES UPDATED
+================================================================================
+1. week5_assignment_quiz.xml
+   - Shuffled answer options for each question
+   - Updated <varequal> tags to reflect new correct positions
+
+2. week5_assignment.tex (student version)
+   - Reordered answer options to match XML
+   - Compiled to PDF successfully
+
+3. week5_assignment_answer_key.tex
+   - Updated quick reference tables (correct letters)
+   - Updated detailed solutions section
+   - Compiled to PDF successfully
+
+4. week5_canvas_quiz.zip
+   - Regenerated with updated XML and manifest
+   - Ready for Canvas import
+
+================================================================================
+VERIFICATION
+================================================================================
+Automated checks performed:
+✓ Pattern detection: No problematic patterns found
+✓ Distribution balance: All letters within acceptable range (2-4)
+✓ XML syntax: Valid QTI format
+✓ PDF compilation: Both student and answer key compiled successfully
+✓ Zip file: Regenerated with updated content
+
+Manual verification recommended:
+- Import quiz to Canvas test environment
+- Verify questions display correctly
+- Confirm answer keys match
+- Test student workflow
+
+================================================================================
+NOTES FOR FUTURE RANDOMIZATION
+================================================================================
+1. Always use computational randomization (Python script)
+2. Verify no patterns exist before deploying
+3. Maintain balanced distribution (roughly equal A, B, C, D)
+4. Update all three files: XML, student .tex, answer key .tex
+5. Regenerate zip file for Canvas
+6. Document changes for audit trail
+
+Scripts created for future use:
+- randomize_answers.py: Generate new random sequence
+- shuffle_mapping.py: Show which questions need updating
+- verify_randomization.py: Confirm no patterns exist
+
+================================================================================
+DEPLOYMENT CHECKLIST
+================================================================================
+Before deploying to Canvas:
+☐ Verify PDF files are current (check modification dates)
+☐ Test zip file imports correctly to Canvas
+☐ Spot-check 3-5 questions in Canvas preview
+☐ Verify answer key matches Canvas correct answers
+☐ Document deployment in course records
+☐ Archive old version for comparison if needed
+
+================================================================================
+END OF SUMMARY
+================================================================================

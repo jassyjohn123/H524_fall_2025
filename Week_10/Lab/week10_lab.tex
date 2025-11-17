@@ -1,0 +1,571 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Set up headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{osaorange}{H524 Introduction to Biostatistics}}
+\rhead{Week 10 Lab}
+\cfoot{\thepage}
+
+% R code formatting
+\lstnewenvironment{rcode}{
+  \lstset{
+    language=R,
+    basicstyle=\ttfamily\small,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    breaklines=true,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    showstringspaces=false
+  }
+}{}
+
+\title{\textcolor{osaorange}{\textbf{Week 10 Lab: Advanced Regression Diagnostics}}\\
+\large{H524 Introduction to Biostatistics}}
+\author{}
+\date{Fall 2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{Overview}
+This lab focuses on advanced regression diagnostics, checking model assumptions, identifying influential points, and applying transformations. You will learn to create and interpret diagnostic plots, handle outliers appropriately, and present regression results effectively.
+
+\textbf{Learning Objectives:}
+\begin{itemize}
+\item Create and interpret diagnostic plots in R
+\item Identify violations of regression assumptions
+\item Detect and investigate influential observations
+\item Apply appropriate transformations
+\item Conduct sensitivity analyses
+\item Present regression results clearly
+\end{itemize}
+
+\section{Setting Up}
+
+Load required packages and data:
+
+\begin{rcode}
+# Load packages
+library(MASS)  # For robust regression
+library(car)   # For diagnostic tests
+
+# Create example dataset: BMI and medical costs
+set.seed(524)
+n <- 100
+bmi <- rnorm(n, mean=27, sd=5)
+# Costs increase exponentially with BMI
+cost <- exp(4 + 0.08*bmi + rnorm(n, 0, 0.3))
+health <- data.frame(bmi, cost)
+
+# Add a few influential points
+health$cost[c(5, 23, 67)] <- c(15000, 18000, 22000)
+
+# Preview data
+head(health)
+summary(health)
+\end{rcode}
+
+\section{Part 1: Initial Model and Diagnostics}
+
+\subsection{Fit Initial Linear Model}
+
+\begin{rcode}
+# Fit simple linear regression
+model1 <- lm(cost ~ bmi, data=health)
+summary(model1)
+
+# Extract key information
+coef(model1)           # Coefficients
+confint(model1)        # 95% CIs
+summary(model1)$r.squared  # R-squared
+\end{rcode}
+
+\textbf{Question 1.1:} What is the estimated slope? Interpret it in context.
+
+\vspace{0.5cm}
+
+\textbf{Question 1.2:} What is the R-squared value? What does this tell you about model fit?
+
+\vspace{0.5cm}
+
+\subsection{Create Diagnostic Plots}
+
+\begin{rcode}
+# All four diagnostic plots
+par(mfrow=c(2,2))
+plot(model1)
+par(mfrow=c(1,1))
+\end{rcode}
+
+\textbf{Question 1.3:} Examine the Residuals vs Fitted plot. Do you see any patterns that suggest violations of assumptions?
+
+\vspace{0.5cm}
+
+\textbf{Question 1.4:} Look at the Q-Q plot. Are the residuals approximately normally distributed?
+
+\vspace{0.5cm}
+
+\textbf{Question 1.5:} Check the Scale-Location plot. Is the variance constant across fitted values?
+
+\vspace{0.5cm}
+
+\textbf{Question 1.6:} Examine the Residuals vs Leverage plot. Are there any influential observations?
+
+\vspace{0.5cm}
+
+\section{Part 2: Identifying Influential Points}
+
+\subsection{Calculate Influence Measures}
+
+\begin{rcode}
+# Cook's distance
+cooks_d <- cooks.distance(model1)
+
+# Plot Cook's distance
+plot(cooks_d, type="h", lwd=2, col="blue",
+     main="Cook's Distance",
+     ylab="Cook's D", xlab="Observation")
+abline(h=c(0.5, 1), lty=2, col=c("orange", "red"))
+
+# Identify influential points (Cook's D > 0.5)
+influential_idx <- which(cooks_d > 0.5)
+print(paste("Influential observations:",
+            paste(influential_idx, collapse=", ")))
+
+# Display influential observations
+health[influential_idx, ]
+\end{rcode}
+
+\textbf{Question 2.1:} Which observations are influential? What are their BMI and cost values?
+
+\vspace{0.5cm}
+
+\subsection{Sensitivity Analysis}
+
+\begin{rcode}
+# Fit model without influential points
+model1_reduced <- lm(cost ~ bmi,
+                     data=health[-influential_idx, ])
+
+# Compare models
+cat("Full model:\n")
+summary(model1)$coefficients
+
+cat("\nReduced model (without influential points):\n")
+summary(model1_reduced)$coefficients
+
+cat("\nR-squared comparison:\n")
+cat("Full:", summary(model1)$r.squared, "\n")
+cat("Reduced:", summary(model1_reduced)$r.squared, "\n")
+\end{rcode}
+
+\textbf{Question 2.2:} How do the slope estimates differ between the full and reduced models?
+
+\vspace{0.5cm}
+
+\textbf{Question 2.3:} How does removing influential points affect the R-squared?
+
+\vspace{0.5cm}
+
+\textbf{Question 2.4:} Based on this sensitivity analysis, what would you recommend doing with the influential points?
+
+\vspace{0.5cm}
+
+\section{Part 3: Transformations}
+
+\subsection{Log Transformation}
+
+Given the exponential relationship in our data, try a log transformation:
+
+\begin{rcode}
+# Create log-transformed cost
+health$log_cost <- log(health$cost)
+
+# Fit model with log-transformed response
+model_log <- lm(log_cost ~ bmi, data=health)
+summary(model_log)
+
+# Diagnostic plots for log model
+par(mfrow=c(2,2))
+plot(model_log)
+par(mfrow=c(1,1))
+\end{rcode}
+
+\textbf{Question 3.1:} Compare the diagnostic plots for the log-transformed model to the original model. Which assumptions are better satisfied?
+
+\vspace{0.5cm}
+
+\textbf{Question 3.2:} What is the R-squared for the log-transformed model? How does it compare to the original?
+
+\vspace{0.5cm}
+
+\subsection{Interpreting Log-Linear Model}
+
+\begin{rcode}
+# Extract slope from log model
+beta1 <- coef(model_log)[2]
+
+# Interpretation: 1-unit increase in BMI
+# -> (exp(beta1) - 1) * 100% change in cost
+pct_change <- (exp(beta1) - 1) * 100
+cat("1-unit increase in BMI ->",
+    round(pct_change, 2), "% change in cost\n")
+
+# Example: BMI 25 vs BMI 30
+cost_bmi25 <- exp(predict(model_log,
+                          newdata=data.frame(bmi=25)))
+cost_bmi30 <- exp(predict(model_log,
+                          newdata=data.frame(bmi=30)))
+
+cat("\nPredicted cost at BMI 25: $",
+    round(cost_bmi25, 2), "\n")
+cat("Predicted cost at BMI 30: $",
+    round(cost_bmi30, 2), "\n")
+cat("Ratio:", round(cost_bmi30/cost_bmi25, 2), "\n")
+\end{rcode}
+
+\textbf{Question 3.3:} Interpret the slope from the log-linear model in practical terms.
+
+\vspace{0.5cm}
+
+\subsection{Visualization: Comparing Models}
+
+\begin{rcode}
+# Create side-by-side plots
+par(mfrow=c(1,2))
+
+# Original scale
+plot(health$bmi, health$cost,
+     xlab="BMI", ylab="Cost ($)",
+     main="Original Scale",
+     pch=16, col=rgb(0,0,0,0.5))
+abline(model1, col="red", lwd=2)
+
+# Add predictions from log model (back-transformed)
+bmi_seq <- seq(min(health$bmi), max(health$bmi), 0.1)
+pred_log <- predict(model_log,
+                    newdata=data.frame(bmi=bmi_seq))
+pred_cost <- exp(pred_log)
+lines(bmi_seq, pred_cost, col="blue", lwd=2)
+
+legend("topleft",
+       c("Linear", "Log-linear (back-transformed)"),
+       col=c("red", "blue"), lwd=2)
+
+# Log scale
+plot(health$bmi, health$log_cost,
+     xlab="BMI", ylab="Log(Cost)",
+     main="Log Scale",
+     pch=16, col=rgb(0,0,0,0.5))
+abline(model_log, col="blue", lwd=2)
+
+par(mfrow=c(1,1))
+\end{rcode}
+
+\textbf{Question 3.4:} Which model appears to fit the data better? Explain your reasoning.
+
+\vspace{0.5cm}
+
+\section{Part 4: Formal Diagnostic Tests}
+
+\subsection{Tests for Assumptions}
+
+\begin{rcode}
+library(car)  # Contains diagnostic tests
+
+# 1. Test for non-constant variance (Breusch-Pagan test)
+cat("Breusch-Pagan test for heteroscedasticity:\n")
+ncvTest(model1)
+
+# 2. Test for normality (Shapiro-Wilk)
+cat("\nShapiro-Wilk test for normality of residuals:\n")
+shapiro.test(residuals(model1))
+
+# 3. Test for influential observations (Bonferroni p-value)
+cat("\nOutlier test:\n")
+outlierTest(model1)
+
+# 4. Variance Inflation Factor (for multicollinearity)
+# Not applicable for simple regression, but useful for multiple
+# vif(model1)  # Would use in multiple regression
+\end{rcode}
+
+\textbf{Question 4.1:} What does the Breusch-Pagan test tell you about the variance assumption?
+
+\vspace{0.5cm}
+
+\textbf{Question 4.2:} What does the Shapiro-Wilk test tell you about normality of residuals?
+
+\vspace{0.5cm}
+
+\textbf{Question 4.3:} Does the outlier test identify any significant outliers?
+
+\vspace{0.5cm}
+
+\section{Part 5: Confidence and Prediction Intervals}
+
+\subsection{Creating Intervals}
+
+\begin{rcode}
+# Choose a BMI value for prediction
+new_bmi <- data.frame(bmi=30)
+
+# Confidence interval for mean cost at BMI=30
+ci_mean <- predict(model_log, newdata=new_bmi,
+                   interval="confidence", level=0.95)
+cat("95% CI for mean log(cost) at BMI=30:\n")
+print(ci_mean)
+
+# Back-transform to original scale
+ci_mean_cost <- exp(ci_mean)
+cat("\n95% CI for mean cost at BMI=30 (back-transformed):\n")
+print(ci_mean_cost)
+
+# Prediction interval for individual at BMI=30
+pi_indiv <- predict(model_log, newdata=new_bmi,
+                    interval="prediction", level=0.95)
+cat("\n95% PI for individual cost at BMI=30:\n")
+print(exp(pi_indiv))
+\end{rcode}
+
+\textbf{Question 5.1:} What is the predicted mean cost for someone with BMI=30?
+
+\vspace{0.5cm}
+
+\textbf{Question 5.2:} What is the 95\% confidence interval for the mean cost?
+
+\vspace{0.5cm}
+
+\textbf{Question 5.3:} What is the 95\% prediction interval for an individual's cost?
+
+\vspace{0.5cm}
+
+\textbf{Question 5.4:} Why is the prediction interval wider than the confidence interval?
+
+\vspace{0.5cm}
+
+\subsection{Visualizing Intervals}
+
+\begin{rcode}
+# Create sequence of BMI values
+bmi_seq <- seq(min(health$bmi), max(health$bmi),
+               length=100)
+
+# Calculate confidence and prediction intervals
+pred_ci <- predict(model_log,
+                   newdata=data.frame(bmi=bmi_seq),
+                   interval="confidence")
+pred_pi <- predict(model_log,
+                   newdata=data.frame(bmi=bmi_seq),
+                   interval="prediction")
+
+# Back-transform to original scale
+pred_ci_cost <- exp(pred_ci)
+pred_pi_cost <- exp(pred_pi)
+
+# Plot
+plot(health$bmi, health$cost,
+     xlab="BMI", ylab="Cost ($)",
+     main="Regression with Confidence and Prediction Bands",
+     pch=16, col=rgb(0,0,0,0.3), cex=1.2)
+
+# Add fitted line
+lines(bmi_seq, pred_ci_cost[,"fit"], col="blue", lwd=2)
+
+# Add confidence band
+lines(bmi_seq, pred_ci_cost[,"lwr"], col="blue", lty=2)
+lines(bmi_seq, pred_ci_cost[,"upr"], col="blue", lty=2)
+
+# Add prediction band
+lines(bmi_seq, pred_pi_cost[,"lwr"], col="red", lty=2)
+lines(bmi_seq, pred_pi_cost[,"upr"], col="red", lty=2)
+
+# Legend
+legend("topleft",
+       c("Observed", "Fitted", "95% CI", "95% PI"),
+       col=c("black", "blue", "blue", "red"),
+       lty=c(NA, 1, 2, 2),
+       pch=c(16, NA, NA, NA))
+\end{rcode}
+
+\section{Part 6: Presenting Results}
+
+\subsection{Creating a Results Table}
+
+\begin{rcode}
+# Extract model summary
+model_summary <- summary(model_log)
+
+# Create results table
+results <- data.frame(
+  Term = c("Intercept", "BMI"),
+  Estimate = coef(model_log),
+  SE = model_summary$coefficients[, "Std. Error"],
+  CI_Lower = confint(model_log)[, 1],
+  CI_Upper = confint(model_log)[, 2],
+  t_value = model_summary$coefficients[, "t value"],
+  p_value = model_summary$coefficients[, "Pr(>|t|)"]
+)
+
+# Format nicely
+results$Estimate <- round(results$Estimate, 3)
+results$SE <- round(results$SE, 3)
+results$CI_Lower <- round(results$CI_Lower, 3)
+results$CI_Upper <- round(results$CI_Upper, 3)
+results$t_value <- round(results$t_value, 2)
+results$p_value <- format.pval(results$p_value, digits=3)
+
+print(results)
+
+# Model fit statistics
+cat("\nModel Fit Statistics:\n")
+cat("R-squared:", round(model_summary$r.squared, 3), "\n")
+cat("Adjusted R-squared:",
+    round(model_summary$adj.r.squared, 3), "\n")
+cat("Residual standard error:",
+    round(model_summary$sigma, 3), "\n")
+cat("F-statistic:", round(model_summary$fstatistic[1], 2),
+    "on", model_summary$fstatistic[2], "and",
+    model_summary$fstatistic[3], "DF\n")
+\end{rcode}
+
+\textbf{Question 6.1:} Write a brief paragraph summarizing the regression results, including:
+\begin{itemize}
+\item The research question
+\item Sample size
+\item Key findings (slope estimate and 95\% CI)
+\item Model fit (R-squared)
+\item Statistical significance
+\item Practical interpretation
+\end{itemize}
+
+\vspace{2cm}
+
+\section{Part 7: Advanced Exercise -- FEV Data}
+
+Now apply what you've learned to real data on lung function in children.
+
+\begin{rcode}
+# Create FEV dataset
+# FEV = Forced Expiratory Volume (liters)
+set.seed(524)
+n <- 200
+age <- runif(n, 3, 19)
+# FEV increases with age, but non-linearly
+fev <- 0.4 + 0.15*age + 0.008*age^2 + rnorm(n, 0, 0.3)
+fev_data <- data.frame(age, fev)
+
+# Preview
+summary(fev_data)
+\end{rcode}
+
+\textbf{Exercise 7.1:} Fit a simple linear regression of FEV on age. Create diagnostic plots and assess assumptions.
+
+\vspace{1cm}
+
+\textbf{Exercise 7.2:} Based on diagnostic plots, is there evidence of non-linearity? If so, what transformation might help?
+
+\vspace{1cm}
+
+\textbf{Exercise 7.3:} Fit a quadratic model: $\text{FEV} = \beta_0 + \beta_1 \times \text{age} + \beta_2 \times \text{age}^2 + \epsilon$
+
+\begin{rcode}
+# Your code here:
+# model_quad <- lm(fev ~ age + I(age^2), data=fev_data)
+\end{rcode}
+
+\vspace{1cm}
+
+\textbf{Exercise 7.4:} Compare the linear and quadratic models:
+\begin{itemize}
+\item Which has better R-squared?
+\item Which has better diagnostic plots?
+\item Interpret the quadratic term
+\end{itemize}
+
+\vspace{1.5cm}
+
+\textbf{Exercise 7.5:} Create a publication-quality plot showing:
+\begin{itemize}
+\item Scatterplot of FEV vs age
+\item Fitted quadratic curve
+\item 95\% confidence band
+\item Appropriate labels, title, legend
+\end{itemize}
+
+\vspace{1cm}
+
+\section{Bonus: Robust Regression}
+
+When outliers are present and cannot be removed, consider robust regression:
+
+\begin{rcode}
+library(MASS)
+
+# Fit robust regression (less sensitive to outliers)
+model_robust <- rlm(cost ~ bmi, data=health)
+summary(model_robust)
+
+# Compare to OLS
+cat("OLS estimates:\n")
+coef(model1)
+
+cat("\nRobust estimates:\n")
+coef(model_robust)
+
+# Plot both
+plot(health$bmi, health$cost,
+     xlab="BMI", ylab="Cost ($)",
+     main="OLS vs Robust Regression",
+     pch=16, col=rgb(0,0,0,0.5))
+abline(model1, col="red", lwd=2)
+abline(model_robust, col="blue", lwd=2)
+legend("topleft", c("OLS", "Robust"),
+       col=c("red", "blue"), lwd=2)
+\end{rcode}
+
+\section*{Summary}
+
+In this lab, you learned to:
+\begin{itemize}
+\item Create and interpret diagnostic plots for regression
+\item Identify and investigate influential observations
+\item Apply transformations to improve model fit
+\item Conduct formal tests of regression assumptions
+\item Calculate confidence and prediction intervals
+\item Present regression results effectively
+\item Consider robust alternatives when outliers are present
+\end{itemize}
+
+\section*{Key Takeaways}
+\begin{enumerate}
+\item \textbf{Always check assumptions} -- don't trust regression results blindly
+\item \textbf{Diagnostic plots are essential} -- look at all four plots
+\item \textbf{Investigate outliers} -- don't automatically remove them
+\item \textbf{Transformations can help} -- especially log for right-skewed data
+\item \textbf{Interpret in context} -- statistical significance $\neq$ practical importance
+\item \textbf{Report confidence intervals} -- not just p-values
+\item \textbf{Visualize your results} -- a good plot is worth a thousand words
+\end{enumerate}
+
+
+\begin{itemize}
+\end{itemize}
+
+
+\end{document}

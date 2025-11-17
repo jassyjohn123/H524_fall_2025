@@ -1,0 +1,17 @@
+# Satisfaction ratings (1-5 scale, ordinal)
+store_A <- c(3, 4, 3, 5, 4, 3, 4, 3, 4, 3)
+store_B <- c(4, 5, 4, 5, 5, 4, 5, 4, 5, 4)
+store_C <- c(2, 3, 2, 4, 3, 2, 3, 2, 3, 3)
+
+# Combine
+satisfaction <- c(store_A, store_B, store_C)
+store <- factor(rep(c("A", "B", "C"), each=10))
+
+# Kruskal-Wallis (appropriate for ordinal data!)
+kruskal.test(satisfaction ~ store)
+
+# Post-hoc
+pairwise.wilcox.test(satisfaction, store, p.adjust.method="bonferroni")
+
+# Medians
+tapply(satisfaction, store, median)

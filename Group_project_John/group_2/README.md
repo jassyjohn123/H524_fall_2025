@@ -1,58 +1,134 @@
-# Group 2: Tooth Growth Study
+# Group 2: Pima Diabetes Study
 
-## Your Dataset
-**File:** `toothgrowth.csv`
+## Dataset Overview
 
-## Quick Overview
-- **N = 60 guinea pigs**
-- **2×3 factorial design:** 2 supplements × 3 doses
-- **Balanced:** n=10 per cell
-- **Research Question:** Does vitamin C affect tooth growth? Does delivery method matter?
+**File:** `pima_diabetes.csv`
+
+**Sample Size:** n = 768 Pima Indian women
+
+**Research Context:** Cross-sectional study examining risk factors for diabetes in Pima Indian women. Multiple health measures collected to identify which factors are associated with diabetes diagnosis.
 
 ## Variables
-- `len`: Tooth length (mm)
-- `supp`: Supplement type (OJ = Orange Juice, VC = Vitamin C)
-- `dose`: Vitamin C dose (0.5, 1.0, 2.0 mg/day)
 
-## Loading Your Data in R
+- `glu`: Plasma glucose concentration (mg/dL)
+- `bmi`: Body mass index (kg/m²)
+- `age`: Age (years)
+- `type`: Diabetes diagnosis (No or Yes)
+- Additional variables may include: blood pressure, pregnancies, skin fold thickness, insulin levels
+
+## Loading the Data in R
 
 ```r
-# Method 1: From CSV
-toothgrowth <- read.csv("toothgrowth.csv")
+# Load the dataset
+pima <- read.csv("pima_diabetes.csv")
 
-# Method 2: From MedDataSets package
-library(MedDataSets)
-data("ToothGrowth_df")
+# View structure
+str(pima)
+head(pima)
+
+# Summary by diabetes status
+table(pima$type)
+tapply(pima$glu, pima$type, summary)
+tapply(pima$bmi, pima$type, summary)
 ```
 
-## What Makes This Dataset Interesting for AI Comparison?
+## Suggested Research Question
 
-**High divergence potential!** Different AI tools will likely suggest:
-- **Claude:** Separate analyses by supplement type
-- **ChatGPT:** Two-way ANOVA with interaction (advanced!)
-- **Copilot:** Might treat as 6 independent groups
+**"Which health factors are associated with diabetes? Do glucose levels, BMI, and age differ between women with and without diabetes?"**
 
-**Why they differ:**
-- Factorial design can be analyzed multiple ways
-- Dose is continuous but used as categorical (3 levels)
-- Interaction effect likely present
-- Some approaches appropriate for intro, others advanced
+## Methods to Use (From Course Material)
 
-## Suggested Statistical Methods
-- **Simple:** One-way ANOVA treating 6 groups independently
-- **Advanced:** Two-way ANOVA (supplement × dose + interaction)
-- **Alternative:** Separate one-way ANOVAs for each supplement
-- **Trend:** Linear regression using dose as continuous
+This dataset is designed for **Week 6 and Week 8 methods**:
 
-## Tips for Success
-1. Visualize the data first - look for interaction pattern
-2. Decide: treat dose as categorical or continuous?
-3. Two-way ANOVA is advanced - okay for intro class?
-4. Check whether AI suggests methods beyond course scope
-5. Interaction = "does the effect of dose depend on supplement type?"
+1. **Exploratory Analysis** (Week 1)
+   - Summary statistics by diabetes status
+   - Boxplots: `boxplot(glu ~ type, data=pima)`
+   - Histograms by group
 
-## For More Details
-See `docs/DATA_DICTIONARIES.md` for complete variable descriptions.
+2. **Two-Sample t-tests** (Week 6) - For continuous predictors
+   - Glucose: `t.test(glu ~ type, data=pima)`
+   - BMI: `t.test(bmi ~ type, data=pima)`
+   - Age: `t.test(age ~ type, data=pima)`
+   - Tests: Do these variables differ between diabetes groups?
 
----
-**Good luck with the factorial design!**
+3. **Chi-Square Tests** (Week 8) - If you categorize variables
+   - Create categories (e.g., high/normal glucose)
+   - Test association with diabetes
+   - `chisq.test(table(pima$glucose_cat, pima$type))`
+
+4. **Check Assumptions** (Weeks 6-7)
+   - Normality: Histograms, Q-Q plots, Shapiro-Wilk test
+   - Equal variances: Visual check with boxplots
+   - If assumptions violated: Use Wilcoxon rank-sum test (Week 7)
+
+## What AI Will Likely Suggest (Divergence!)
+
+When you ask AI tools about this dataset, they will likely suggest:
+
+- **Logistic regression** (analyzing all predictors together)
+  - NOT taught in this course
+  - Predicts binary outcome (diabetes yes/no) from multiple predictors
+  - More sophisticated but beyond intro scope
+  - AI will say "logistic regression is the right method for binary outcomes"
+
+- **Multiple regression** (if treating diabetes as continuous somehow)
+  - NOT taught in this course (Week 9 is simple regression only)
+
+- **ROC curves and classification metrics**
+  - NOT taught in this course
+  - Diagnostic test evaluation methods
+
+**Your Task:** Use simple two-sample t-tests and/or chi-square tests (Weeks 6 & 8) to examine ONE predictor at a time. In your AI comparison section, note that AI suggested logistic regression to analyze all predictors together, and explain why testing variables individually is appropriate for this course.
+
+## Expected AI Divergence
+
+- **Claude** might suggest logistic regression with multiple predictors (not taught)
+- **ChatGPT** will almost certainly suggest logistic regression (standard for binary outcomes)
+- **Copilot** might suggest either approach depending on your code context
+
+**Focus your report on:**
+- Why did ALL tools suggest logistic regression?
+- Is logistic regression "better"? (Yes, for multiple predictors, but we haven't learned it!)
+- Did individual t-tests answer the research question? (Yes! We found which factors differ!)
+- What's the limitation of one-at-a-time testing? (Doesn't account for relationships between predictors)
+
+## Tips
+
+- Test 2-3 main predictors (glucose, BMI, age) - don't try to test everything!
+- T-tests are straightforward: Does variable X differ between diabetes groups?
+- Each test answers: "Is this factor associated with diabetes?"
+- AI wants to combine all predictors - that's advanced!
+- Your approach is simpler but still scientifically valid
+
+## Interpretation Guide
+
+If you find significant differences:
+- **Glucose higher in diabetes group** → Glucose associated with diabetes
+- **BMI higher in diabetes group** → Obesity risk factor
+- **Age higher in diabetes group** → Age-related risk
+
+This identifies risk factors one at a time (univariate analysis), which is appropriate for intro biostatistics!
+
+## Optional: Compare What AI Suggests
+
+You don't need to run logistic regression, but you could explore:
+
+```r
+# Your approach (taught)
+t.test(glu ~ type, data=pima)
+t.test(bmi ~ type, data=pima)
+t.test(age ~ type, data=pima)
+
+# What AI might suggest (not taught, just to see)
+# model <- glm(type ~ glu + bmi + age, data=pima, family="binomial")
+# summary(model)
+```
+
+For your report: Note that AI suggested the second approach. Explain why the first approach (your approach) is appropriate for this course and answers the question!
+
+## Getting Help
+
+- Office hours (see syllabus)
+- Week 9 drop-in session (Wed 12-1:20pm)
+- Textbook: Chapter 11 (Two-Sample Tests), Chapter 15 (Chi-Square)
+- Your team!

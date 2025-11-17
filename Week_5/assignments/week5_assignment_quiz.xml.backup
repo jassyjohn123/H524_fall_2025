@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questestinterop xmlns="http://www.imsglobal.org/xsd/ims_qtiasiv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/ims_qtiasiv1p2 http://www.imsglobal.org/xsd/ims_qtiasiv1p2p1.xsd">
+  <assessment ident="week5_assignment" title="H524 Week 5: Hypothesis Testing">
+    <qtimetadata>
+      <qtimetadatafield>
+        <fieldlabel>cc_maxattempts</fieldlabel>
+        <fieldentry>1</fieldentry>
+      </qtimetadatafield>
+      <qtimetadatafield>
+        <fieldlabel>qmd_timelimit</fieldlabel>
+        <fieldentry>240</fieldentry>
+      </qtimetadatafield>
+    </qtimetadata>
+    <section ident="root_section">
+
+      <!-- PART 1: HYPOTHESIS TESTING FUNDAMENTALS -->
+
+      <!-- Question 1: Null Hypothesis (MC) -->
+      <item ident="q1" title="Question 1: Null Hypothesis Definition">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Null Hypothesis Definition (3 points)</strong></p>
+<p>Which statement BEST describes the null hypothesis (H₀) in hypothesis testing?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[H₀ represents the research hypothesis; it is what we hope to prove through our study]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[H₀ represents the alternative explanation; it is always what we want to reject]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[H₀ is the hypothesis with the larger p-value; it cannot be proven, only disproven]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[H₀ represents the status quo or no effect; it is the hypothesis we assume true until we have sufficient evidence to reject it]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">d</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 2: Alternative Hypothesis (MC) -->
+      <item ident="q2" title="Question 2: Alternative Hypothesis Forms">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Alternative Hypothesis Forms (3 points)</strong></p>
+<p>A researcher wants to test if a new drug LOWERS blood pressure compared to the current standard treatment (mean = 140 mmHg). Which alternative hypothesis is appropriate?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Hₐ: μ > 140 (one-sided, upper tail)]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Hₐ: μ ≠ 140 (two-sided)]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Hₐ: μ < 140 (one-sided, lower tail)]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[H₀: μ = 140 (null hypothesis)]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">c</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 3: P-value Interpretation (MC) -->
+      <item ident="q3" title="Question 3: P-value Interpretation">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>4</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>P-value Interpretation (4 points)</strong></p>
+<p>Which statement CORRECTLY interprets what a p-value represents?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The probability that the null hypothesis is true given our data]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The probability that the alternative hypothesis is false]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The probability of observing data as extreme as (or more extreme than) what we observed, assuming the null hypothesis is true]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The probability of making a Type I error in this specific test]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">c</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 4: Decision Rule (MC) -->
+      <item ident="q4" title="Question 4: Decision Rule">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>2</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Decision Rule (2 points)</strong></p>
+<p>A hypothesis test is conducted at significance level α = 0.05. The calculated p-value is 0.032. What is the correct decision?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Fail to reject H₀ because p-value > 0.01; evidence is not strong enough]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Reject H₀ because p-value < α; we have sufficient evidence against the null hypothesis]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Accept H₀ because p-value is close to α; null hypothesis is proven true]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Reject Hₐ because p-value is small; alternative hypothesis is false]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 5: T-statistic Calculation (MC) -->
+      <item ident="q5" title="Question 5: T-statistic Calculation">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>T-statistic Calculation (3 points)</strong></p>
+<p>A researcher tests H₀: μ = 50 vs Hₐ: μ ≠ 50. The sample statistics are: n = 25, x̄ = 52, s = 8. What is the t-statistic?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[1.25]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[2.50]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[6.25]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[0.25]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 6: P-value from t-statistic (MC) -->
+      <item ident="q6" title="Question 6: P-value from t-statistic">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>P-value from t-statistic (3 points)</strong></p>
+<p>For the scenario in Question 5 (t = 1.25, df = 24, two-sided test), what is the p-value?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[0.2234]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[0.0500]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[0.1117]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[0.8883]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- PART 2: TYPE I AND TYPE II ERRORS -->
+
+      <!-- Question 7: Type I Error (MC) -->
+      <item ident="q7" title="Question 7: Type I Error">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Type I Error (3 points)</strong></p>
+<p>What is a Type I error in hypothesis testing?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Failing to reject the null hypothesis when it is actually false (false negative)]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Accepting the alternative hypothesis when it is false]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Rejecting the null hypothesis when it is actually true (false positive)]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Making a calculation error in computing the test statistic]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">c</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 8: Type II Error (MC) -->
+      <item ident="q8" title="Question 8: Type II Error">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Type II Error (3 points)</strong></p>
+<p>A medical researcher tests a new drug that actually IS effective, but the hypothesis test fails to detect the effect. What type of error has occurred?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Type I error (α); rejected a true null hypothesis]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Type II error (β); failed to reject a false null hypothesis]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Power error; the test was not powerful enough]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[No error; the test correctly failed to reject H₀]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 9: Relationship between Type I and Type II Errors (MC) -->
+      <item ident="q9" title="Question 9: Error Trade-off">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Error Trade-off (3 points)</strong></p>
+<p>What happens to the probability of Type II error (β) when you DECREASE the significance level (α) from 0.05 to 0.01?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[β decreases; being more conservative reduces all types of errors]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[β stays the same; Type I and Type II errors are independent]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[β becomes undefined; we can only control one type of error at a time]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[β increases; making it harder to reject H₀ increases the chance of missing a true effect]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">d</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 10: Statistical Power (MC) -->
+      <item ident="q10" title="Question 10: Statistical Power">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>2</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Statistical Power (2 points)</strong></p>
+<p>What is statistical power, and why is it important?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Power = 1 - α; it's the probability of correctly accepting a true null hypothesis]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Power = 1 - β; it's the probability of correctly rejecting a false null hypothesis (detecting a true effect)]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Power = α + β; it measures the total probability of making any error]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Power = sample size / population size; larger samples have more power]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 11: Blood Pressure Test (FILL-IN) -->
+      <item ident="q11" title="Question 11: Blood Pressure Hypothesis Test">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>fill_in_multiple_blanks_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>10</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Blood Pressure Hypothesis Test (10 points)</strong></p>
+<p>A cardiologist wants to test if patients in a cardiac rehabilitation program have systolic blood pressure significantly <strong>higher</strong> than the normal threshold of 120 mmHg. She measures blood pressure for 20 patients:</p>
+<pre>
+bp_data <- c(118, 124, 130, 128, 122, 135, 119, 126, 132, 120,
+             125, 129, 121, 127, 123, 131, 120, 128, 124, 126)
+</pre>
+<p>Using R to perform a one-sample t-test:</p>
+<ol type="a">
+<li><strong>(5 points)</strong> What is the <strong>t-statistic</strong>? (Round to 2 decimal places) <br/>
+t = [t_stat]</li>
+<li><strong>(5 points)</strong> What is the <strong>p-value</strong>? (Round to 4 decimal places or use scientific notation) <br/>
+p-value = [p_value]</li>
+</ol>
+<p><em>Hint: Use <code>t.test(bp_data, mu = 120, alternative = "greater")</code></em></p>
+            ]]></mattext>
+          </material>
+          <response_str ident="t_stat" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+          <response_str ident="p_value" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="t_stat">5.18</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">50</setvar>
+          </respcondition>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="t_stat">5.181</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">50</setvar>
+          </respcondition>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="p_value">0.0001</varequal>
+            </conditionvar>
+            <setvar action="Add" varname="SCORE">50</setvar>
+          </respcondition>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="p_value">3.17e-05</varequal>
+            </conditionvar>
+            <setvar action="Add" varname="SCORE">50</setvar>
+          </respcondition>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="p_value">3.17e-5</varequal>
+            </conditionvar>
+            <setvar action="Add" varname="SCORE">50</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 12: Cholesterol Test (FILL-IN) -->
+      <item ident="q12" title="Question 12: Cholesterol Hypothesis Test">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>fill_in_multiple_blanks_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>10</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Cholesterol Hypothesis Test (10 points)</strong></p>
+<p>A pharmaceutical company claims their new statin drug reduces cholesterol to <strong>below 200 mg/dL</strong> on average. A clinical trial of 40 patients finds:</p>
+<ul>
+<li>Sample mean: x̄ = 185 mg/dL</li>
+<li>Sample standard deviation: s = 35 mg/dL</li>
+</ul>
+<p>Test the company's claim using a one-sample t-test at the 0.01 significance level:</p>
+<ol type="a">
+<li><strong>(5 points)</strong> What is the <strong>t-statistic</strong>? (Round to 2 decimal places) <br/>
+t = [t_stat]</li>
+<li><strong>(5 points)</strong> What is the <strong>p-value</strong>? (Round to 4 decimal places) <br/>
+p-value = [p_value]</li>
+</ol>
+<p><em>Hint: The claim is "below 200", so H₀: μ = 200 vs Hₐ: μ < 200</em></p>
+            ]]></mattext>
+          </material>
+          <response_str ident="t_stat" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+          <response_str ident="p_value" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="t_stat">-2.71</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">50</setvar>
+          </respcondition>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="t_stat">-2.7105</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">50</setvar>
+          </respcondition>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="p_value">0.0050</varequal>
+            </conditionvar>
+            <setvar action="Add" varname="SCORE">50</setvar>
+          </respcondition>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="p_value">0.004967</varequal>
+            </conditionvar>
+            <setvar action="Add" varname="SCORE">50</setvar>
+          </respcondition>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="p_value">0.0049</varequal>
+            </conditionvar>
+            <setvar action="Add" varname="SCORE">50</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- PART 3: TWO-SAMPLE TESTS -->
+
+      <!-- Question 13: When to use two-sample test (MC) -->
+      <item ident="q13" title="Question 13: Two-Sample Test Application">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Two-Sample Test Application (3 points)</strong></p>
+<p>Which research question requires a TWO-SAMPLE t-test rather than a one-sample t-test?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Testing if mean patient satisfaction score differs from the national average of 7.5]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Comparing mean recovery times between patients receiving Drug A versus Drug B]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Determining if mean BMI in a clinic exceeds 25]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Testing if mean blood glucose level equals 100 mg/dL]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 14: Two-sample t-test calculation (MC) -->
+      <item ident="q14" title="Question 14: Two-Sample T-test">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>4</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Two-Sample T-test (4 points)</strong></p>
+<p>Two groups of patients are compared:</p>
+<ul>
+<li>Treatment A: n₁ = 30, x̄₁ = 145, s₁ = 15</li>
+<li>Treatment B: n₂ = 35, x̄₂ = 138, s₂ = 18</li>
+</ul>
+<p>Testing H₀: μ₁ = μ₂ vs Hₐ: μ₁ ≠ μ₂, which statement is correct?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[t ≈ 1.71, p-value ≈ 0.0922; fail to reject H₀ at α = 0.05]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[t ≈ 3.21, p-value ≈ 0.0018; fail to reject H₀ at α = 0.05]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[t ≈ 1.71, p-value ≈ 0.0461; reject H₀ at α = 0.05]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[t ≈ 0.47, p-value ≈ 0.6401; reject H₀ at α = 0.05]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 15: R code for two-sample test (MC) -->
+      <item ident="q15" title="Question 15: R Code for Two-Sample Test">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>2</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>R Code for Two-Sample Test (2 points)</strong></p>
+<p>Given two vectors <code>group_a</code> and <code>group_b</code>, which R command correctly performs a two-sample t-test?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[t.test(group_a - group_b)]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[t.test(mean(group_a), mean(group_b))]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[two.sample.test(group_a, group_b)]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[t.test(group_a, group_b)]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">d</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- BONUS: AI VERIFICATION -->
+
+      <!-- Question 16: AI Verification (FILL-IN) -->
+      <item ident="q16" title="Question 16: AI Verification and Learning">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>AI Verification and Learning (5 bonus points)</strong></p>
+<p>Choose ONE hypothesis testing problem from this quiz (Questions 11, 12, or 14).</p>
+<ol type="a">
+<li>Ask an AI tool (Claude, ChatGPT, Gemini, etc.) to solve the problem. Include your exact prompt. (1 point)</li>
+<li>Verify the AI's answer by working through it yourself step-by-step. Did the AI get it correct? If not, identify and explain the error. (2 points)</li>
+<li>Ask the AI to explain when you should use a one-sided vs. two-sided hypothesis test. Evaluate the quality and clarity of the explanation. (2 points)</li>
+</ol>
+            ]]></mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+    </section>
+  </assessment>
+</questestinterop>

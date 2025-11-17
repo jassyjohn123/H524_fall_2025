@@ -2,29 +2,6 @@
 \usetheme{Madrid}
 \usecolortheme{default}
 
-% Define custom colors for AI slides
-\definecolor{AIBlue}{RGB}{30, 144, 255}
-\definecolor{AILightBlue}{RGB}{173, 216, 230}
-\definecolor{AINavy}{RGB}{25, 25, 112}
-
-% Commands to switch to AI color scheme
-\newcommand{\AIcolors}{%
-  \setbeamercolor{frametitle}{bg=AIBlue,fg=white}%
-  \setbeamercolor{title}{bg=AINavy,fg=white}%
-  \setbeamercolor{structure}{fg=AIBlue}%
-  \setbeamercolor{item}{fg=AINavy}%
-  \setbeamercolor{normal text}{fg=black}%
-}
-
-% Command to restore default colors
-\newcommand{\defaultcolors}{%
-  \setbeamercolor{frametitle}{bg=osaorange,fg=white}%
-  \setbeamercolor{title}{bg=osaorange,fg=white}%
-  \setbeamercolor{structure}{fg=osaorange}%
-  \setbeamercolor{item}{fg=black}%
-  \setbeamercolor{normal text}{fg=black}%
-}
-
 % Define OSU orange color
 \definecolor{osaorange}{RGB}{220,115,38}
 
@@ -43,7 +20,7 @@
 \title{H524 Introduction to Biostatistics}
 \subtitle{Week 2: Probability Concepts and Applications}
 \author{Dr. John Molitor}
-\institute{Oregon State University\\College of Health}
+\institute{}
 \date{Fall 2025}
 
 \begin{document}
@@ -487,167 +464,6 @@ $$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
 \end{itemize}
 \end{frame}
 
-\section{AI as a Learning Tool for Probability}
-
-\AIcolors
-\begin{frame}
-\frametitle{AI for Probability Calculations}
-\textbf{How AI can help with probability:}
-\begin{itemize}
-\item \textbf{Complex calculations:} Conditional probabilities, combinatorics
-\item \textbf{Simulation:} Generate random data, bootstrap samples
-\item \textbf{Visualization:} Create probability distributions
-\item \textbf{Problem solving:} Step-by-step solutions
-\item \textbf{Code generation:} R scripts for probability problems
-\end{itemize}
-
-\vspace{0.5cm}
-\textbf{Example prompts:}
-\begin{itemize}
-\item "Calculate the positive predictive value for a test with 95\% sensitivity, 90\% specificity, and 5\% prevalence"
-\item "Simulate 10,000 binomial trials with n=20, p=0.3 in R"
-\item "Explain the difference between relative risk and odds ratio with a medical example"
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{AI Demo: Diagnostic Test Calculations}
-\textbf{Prompt:} "Create R code to calculate diagnostic test metrics"
-
-\footnotesize
-\begin{verbatim}
-# Diagnostic Test Calculator
-diagnostic_metrics <- function(sens, spec, prev) {
-  # Calculate PPV and NPV
-  ppv <- (sens * prev) /
-         (sens * prev + (1-spec) * (1-prev))
-  npv <- (spec * (1-prev)) /
-         ((1-sens) * prev + spec * (1-prev))
-
-  # Display results
-  cat("PPV:", round(ppv*100, 1), "%\n")
-  cat("NPV:", round(npv*100, 1), "%\n")
-
-  return(list(PPV=ppv, NPV=npv))
-}
-
-# Example: COVID test
-diagnostic_metrics(sens=0.85, spec=0.97, prev=0.05)
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{AI Demo: Probability Simulations}
-\textbf{Prompt:} "Simulate coin flips to estimate probability"
-
-\footnotesize
-\begin{verbatim}
-# Simulate binomial trials
-simulate_treatment <- function(n_patients=100,
-                              p_success=0.7) {
-  outcomes <- rbinom(n_patients, 1, p_success)
-  success_rate <- mean(outcomes)
-
-  cat("Simulated success rate:",
-      round(success_rate*100, 1), "%\n")
-  cat("Expected success rate:", p_success*100, "%\n")
-
-  # Create visualization
-  barplot(table(outcomes),
-          names.arg=c("Failure", "Success"),
-          col=c("red", "green"),
-          main="Treatment Outcomes")
-}
-
-simulate_treatment()
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{AI Demo: Visualizing Distributions}
-\textbf{Prompt:} "Compare binomial and normal distributions in R"
-
-\footnotesize
-\begin{verbatim}
-# Compare Binomial to Normal
-n <- 100; p <- 0.3
-x <- 0:n
-
-# Binomial probabilities
-binom_probs <- dbinom(x, n, p)
-
-# Normal approximation
-mu <- n * p
-sigma <- sqrt(n * p * (1-p))
-
-# Plot comparison
-plot(x, binom_probs, type="h", col="blue",
-     main="Binomial vs Normal",
-     xlab="x", ylab="Probability")
-curve(dnorm(x, mu, sigma), add=TRUE, col="red")
-legend("topright", c("Binomial", "Normal"),
-       col=c("blue", "red"), lty=1)
-\end{verbatim}
-\end{frame}
-
-\begin{frame}
-\frametitle{AI Best Practices for Probability}
-\begin{columns}
-\begin{column}{0.5\textwidth}
-\textbf{DO:}
-\begin{itemize}
-\item Verify calculations manually
-\item Check assumptions are met
-\item Request step-by-step solutions
-\item Ask for multiple approaches
-\item Validate with simulations
-\item Cross-reference formulas
-\end{itemize}
-\end{column}
-
-\begin{column}{0.5\textwidth}
-\textbf{DON'T:}
-\begin{itemize}
-\item Accept complex calculations blindly
-\item Skip understanding the logic
-\item Ignore edge cases
-\item Misinterpret conditional probability
-\item Confuse probability types
-\item Trust without verification
-\end{itemize}
-\end{column}
-\end{columns}
-
-\vspace{0.5cm}
-\textbf{Remember:} AI can calculate quickly, but you need to understand the concepts!
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{AI Assignment: Probability Problem Solving}
-\textbf{This week's AI-integrated homework:}
-\begin{enumerate}
-\item Use AI to solve a diagnostic test problem, then verify manually
-\item Generate R code for simulating coin flips, then modify for medical scenario
-\item Ask AI to explain conditional probability three different ways
-\item Create visualizations of different probability distributions
-\item Identify and correct an AI error in probability calculation
-\end{enumerate}
-
-\vspace{0.5cm}
-\textbf{Sample Problem:}
-\small
-\begin{verbatim}
-"A new diagnostic test for Disease X has 92% sensitivity
-and 88% specificity. In a population where 3% have the
-disease, what is the probability that someone with a
-positive test actually has the disease? Create R code
-to calculate this and visualize how the answer changes
-as prevalence varies from 1% to 10%."
-\end{verbatim}
-\end{frame}
-
-\defaultcolors
-
 \section{R Examples and Exercises}
 
 \begin{frame}[fragile]
@@ -809,7 +625,6 @@ abline(v = c(mu, 140), col = c("blue", "red"))
 
 \vspace{1cm}
 
-\textbf{Office Hours:} Wednesday, 10:00 am -- 11:30 am\\
 \textbf{Email:} john.molitor@oregonstate.edu\\
 \textbf{Office:} 153 Milam
 

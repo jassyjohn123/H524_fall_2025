@@ -1,0 +1,290 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large Week 7 In-Class Worksheet}}\\
+\textcolor{white}{\textbf{\large Nonparametric Tests}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Name:} \rule{8cm}{0.4pt} \hfill \textbf{Date:} \rule{4cm}{0.4pt}\\[0.5ex]
+\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Sign Test, Wilcoxon Tests, Kruskal-Wallis, Normality Assessment
+
+\vspace{8pt}
+
+\section*{Instructions}
+Work with a partner to solve the following problems. Show all your work. Use R to perform tests and verify your calculations.
+
+\vspace{12pt}
+
+\section{Problem 1: Sign Test}
+
+A physical therapist wants to test if a new exercise program reduces recovery time. The therapist believes the median recovery time should be less than 14 days. Recovery times (days) for 10 patients were:
+
+\begin{center}
+12, 15, 10, 13, 16, 11, 14, 9, 12, 15
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part A:} State the null and alternative hypotheses.
+
+\vspace{2.5cm}
+
+\textbf{Part B:} Calculate the number of positive signs ($B^+$), negative signs ($B^-$), and the test statistic~$B$.
+
+\vspace{3cm}
+
+\textbf{Part C:} Use R to calculate the p-value for this one-sided test.
+
+\textbf{R code:}
+
+\vspace{2.5cm}
+
+\textbf{P-value:} \rule{3cm}{0.4pt}
+
+\vspace{0.3cm}
+
+\textbf{Part D:} What is your conclusion at $\alpha = 0.05$?
+
+\vspace{2cm}
+
+\newpage
+
+\section{Problem 2: Wilcoxon Signed-Rank Test}
+
+Using the same recovery time data from Problem 1, perform a Wilcoxon signed-rank test to determine if the median recovery time differs from 14 days.
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate the differences from 14 days and rank the absolute differences (excluding zeros).
+
+\vspace{2cm}
+
+\textbf{Part B:} Calculate the sum of positive ranks ($W^+$) and negative ranks~($W^-$).
+
+\vspace{2cm}
+
+\textbf{Part C:} Use R to perform the test and find the p-value.
+
+\textbf{R code:}
+
+\vspace{2.5cm}
+
+\textbf{P-value:} \rule{3cm}{0.4pt}
+
+\vspace{0.3cm}
+
+\textbf{Part D:} Compare the p-value to the sign test. Which test is more powerful here?
+
+\vspace{2cm}
+
+\newpage
+
+\section{Problem 3: Paired Data}
+
+A study measured systolic blood pressure (mmHg) before and after a stress reduction program for 8 participants:
+
+\begin{center}
+\begin{tabular}{lccccccccc}
+\toprule
+Participant & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+\midrule
+Before & 142 & 138 & 155 & 148 & 160 & 145 & 152 & 149 \\
+After  & 138 & 140 & 148 & 145 & 155 & 142 & 150 & 145 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate the differences (Before - After).
+
+\vspace{1.5cm}
+
+\textbf{Part B:} Perform a sign test. What is the p-value?
+
+\textbf{R code:}
+
+\vspace{2.5cm}
+
+\textbf{P-value:} \rule{3cm}{0.4pt}
+
+\vspace{0.3cm}
+
+\textbf{Part C:} Perform a Wilcoxon signed-rank test. What is the p-value?
+
+\textbf{R code:}
+
+\vspace{2.5cm}
+
+\textbf{P-value:} \rule{3cm}{0.4pt}
+
+\vspace{0.3cm}
+
+\textbf{Part D:} Which test would you recommend for these data? Why?
+
+\vspace{1.5cm}
+
+\newpage
+
+\section{Problem 4: Two-Sample Wilcoxon Rank-Sum Test}
+
+A researcher compares pain relief scores (0-10 scale) for two different medications:
+
+\begin{center}
+\textbf{Medication A:} 6, 7, 5, 8, 6, 7, 9\\
+\textbf{Medication B:} 4, 5, 6, 5, 7, 4, 6
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part A:} Use R to perform the Wilcoxon rank-sum test (Mann-Whitney U test).
+
+\textbf{R code:}
+
+\vspace{2.5cm}
+
+\textbf{W statistic:} \rule{3cm}{0.4pt} \quad \textbf{P-value:} \rule{3cm}{0.4pt}
+
+\vspace{0.3cm}
+
+\textbf{Part B:} What do you conclude at $\alpha = 0.05$?
+
+\vspace{1cm}
+
+\textbf{Part C:} Why might you choose this test instead of a two-sample t-test?
+
+\vspace{1.5cm}
+
+\newpage
+
+\section{Problem 5: Kruskal-Wallis Test}
+
+A clinical trial compares three different dosages of a sleep medication by measuring hours of sleep:
+
+\begin{center}
+\textbf{Low dose:} 5.2, 6.1, 5.8, 6.3, 5.5\\
+\textbf{Medium dose:} 6.8, 7.2, 7.5, 6.9, 7.1\\
+\textbf{High dose:} 7.8, 8.2, 8.5, 7.9, 8.1
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part A:} Use R to perform the Kruskal-Wallis test.
+
+\textbf{R code:}
+
+\vspace{3cm}
+
+\textbf{H statistic:} \rule{3cm}{0.4pt} \quad \textbf{P-value:} \rule{3cm}{0.4pt}
+
+\vspace{0.3cm}
+
+\textbf{Part B:} What do you conclude at $\alpha = 0.05$?
+
+\vspace{1cm}
+
+\textbf{Part C:} If significant, what follow-up test should you perform?
+
+\vspace{1.5cm}
+
+\newpage
+
+\section{Problem 6: Checking Normality Assumptions}
+
+For the high dose group from Problem 5:
+
+\vspace{6pt}
+
+\textbf{Part A:} Use the Shapiro-Wilk test to check normality.
+
+\textbf{R code:}
+
+\vspace{2.5cm}
+
+\textbf{W statistic:} \rule{3cm}{0.4pt} \quad \textbf{P-value:} \rule{3cm}{0.4pt}
+
+\vspace{0.3cm}
+
+\textbf{Part B:} Can you assume normality? Explain.
+
+\vspace{1.5cm}
+
+\textbf{Part C:} Create a Q-Q plot in R. What does it show?
+
+\textbf{R code:}
+
+\vspace{2.5cm}
+
+\textbf{Part D:} Based on this, was the Kruskal-Wallis test appropriate for Problem 5?
+
+\vspace{1.5cm}
+
+\newpage
+
+\section{Problem 7: Choosing the Right Test}
+
+For each scenario, state which test you would use and briefly explain why:
+
+\vspace{6pt}
+
+\textbf{Part A:} Comparing median survival times (highly skewed) between two treatment groups (n=15 each).
+
+\vspace{1.5cm}
+
+\textbf{Part B:} Testing if the median number of hospital readmissions differs from 3 in a sample of 20 patients.
+
+\vspace{1.5cm}
+
+\textbf{Part C:} Comparing average weight loss across four different diet programs (n=10 per group, data appears normal).
+
+\vspace{1.5cm}
+
+\textbf{Part D:} Comparing pre- and post-intervention depression scores for 12 patients (ordinal scale 1-10).
+
+\vspace{1.5cm}
+
+\vspace{12pt}
+
+\begin{tcolorbox}[colback=blue!5,colframe=blue,boxrule=1pt,arc=0pt]
+\textbf{R Code Reminders:}
+\begin{itemize}
+\item \textbf{Sign Test:} \texttt{binom.test(n\_positive, n\_total, p=0.5)}
+\item \textbf{Wilcoxon Signed-Rank:} \texttt{wilcox.test(data, mu=value)}
+\item \textbf{Wilcoxon Rank-Sum:} \texttt{wilcox.test(group1, group2)}
+\item \textbf{Kruskal-Wallis:} \texttt{kruskal.test(outcome \textasciitilde\ group)}
+\item \textbf{Shapiro-Wilk:} \texttt{shapiro.test(data)}
+\end{itemize}
+\end{tcolorbox}
+
+\end{document}

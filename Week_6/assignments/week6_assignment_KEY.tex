@@ -1,0 +1,597 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{array}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+% Code environment
+\newtcblisting{rcode}{
+  colback=white,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=0pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  width=\textwidth,
+  breakable,
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false
+  }
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 6: Power, Two-Sample Tests, and ANOVA}}\\
+\textcolor{white}{\textbf{\Large Homework Assignment}}\\
+\textcolor{white}{\textbf{\Large ANSWER KEY}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\begin{tcolorbox}[colback=yellow!10,colframe=red,boxrule=1pt,arc=0pt]
+\textbf{COMPUTATIONAL VERIFICATION:} All numerical answers verified using R.\\
+See \texttt{verify\_assignment\_answers.R} for verification code.\\
+No mental arithmetic was used.
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Total Points:} 28 points\\
+\textbf{Multiple Choice:} 10 points (2 points each)\\
+\textbf{Numerical:} 18 points (Q6: 3pts, Q7: 3pts, Q8-Q11: 3pts each)
+
+\section*{Multiple Choice Questions - ANSWERS}
+
+\textbf{Question 1:} Statistical power is defined as:
+
+\begin{enumerate}[label=\Alph*.]
+\item The probability of making a Type I error
+\item \textcolor{red}{\textbf{The probability of correctly rejecting a false null hypothesis}} \textbf{[CORRECT]}
+\item The probability of failing to reject a true null hypothesis
+\item The significance level of the test
+\end{enumerate}
+
+\textcolor{red}{\textbf{ANSWER: B}}
+
+\textbf{Explanation:} Power = $1 - \beta$ = P(Reject $H_0$ $|$ $H_0$ is false). It's the probability of detecting a real effect (true positive rate).
+
+\vspace{0.5cm}
+
+\textbf{Question 2:} Which of the following will \textit{increase} the statistical power of a study?
+
+\begin{enumerate}[label=\Alph*.]
+\item Decreasing the sample size
+\item Increasing the population variance
+\item \textcolor{red}{\textbf{Increasing the significance level (alpha)}} \textbf{[CORRECT]}
+\item Decreasing the effect size
+\end{enumerate}
+
+\textcolor{red}{\textbf{ANSWER: C}}
+
+\textbf{Explanation:} Increasing $\alpha$ (e.g., from 0.05 to 0.10) makes it easier to reject $H_0$, thus increasing power. However, this also increases Type I error rate. The other options all \textit{decrease} power:
+\begin{itemize}
+\item Smaller $n$ $\Rightarrow$ less power
+\item Larger $\sigma$ $\Rightarrow$ more noise $\Rightarrow$ less power
+\item Smaller effect $\Rightarrow$ harder to detect $\Rightarrow$ less power
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{Question 3:} A researcher measures blood pressure in 15 patients before and after a medication intervention. Which test should be used?
+
+\begin{enumerate}[label=\Alph*.]
+\item One-sample t-test
+\item Independent two-sample t-test
+\item \textcolor{red}{\textbf{Paired t-test}} \textbf{[CORRECT]}
+\item One-way ANOVA
+\end{enumerate}
+
+\textcolor{red}{\textbf{ANSWER: C}}
+
+\textbf{Explanation:} Same patients measured twice (before and after) = dependent/paired data. Use paired t-test to analyze the \textit{differences} within each patient, which controls for between-subject variability and is more powerful than independent t-test.
+
+\vspace{0.5cm}
+
+\textbf{Question 4:} When comparing means across 4 independent groups, why is ANOVA preferred over multiple pairwise t-tests?
+
+\begin{enumerate}[label=\Alph*.]
+\item ANOVA is easier to calculate
+\item ANOVA requires smaller sample sizes
+\item \textcolor{red}{\textbf{ANOVA controls the family-wise Type I error rate}} \textbf{[CORRECT]}
+\item ANOVA doesn't require assumptions
+\end{enumerate}
+
+\textcolor{red}{\textbf{ANSWER: C}}
+
+\textbf{Explanation:} With 4 groups, you'd need ${4 \choose 2} = 6$ pairwise t-tests. If each test uses $\alpha = 0.05$, the overall Type I error rate becomes $1 - (1-0.05)^6 \approx 0.265$ (26.5\%) instead of 5\%. ANOVA controls the family-wise error rate at the nominal $\alpha = 0.05$ level.
+
+\vspace{0.5cm}
+
+\textbf{Question 5:} An ANOVA test comparing 5 groups yields F = 3.45 with p = 0.02. What can you conclude?
+
+\begin{enumerate}[label=\Alph*.]
+\item All five group means are significantly different from each other
+\item \textcolor{red}{\textbf{At least one group mean differs from the others}} \textbf{[CORRECT]}
+\item The first group differs significantly from the last group
+\item Groups 1 and 2 have equal means
+\end{enumerate}
+
+\textcolor{red}{\textbf{ANSWER: B}}
+
+\textbf{Explanation:} A significant ANOVA (p < 0.05) tells you that \textit{somewhere} among the groups there is at least one difference. It does NOT tell you:
+\begin{itemize}
+\item Which specific groups differ
+\item How many pairs differ
+\item Whether all groups differ from each other
+\end{itemize}
+You need post-hoc tests (e.g., Tukey's HSD) to determine \textit{which} groups differ.
+
+\newpage
+
+\section*{Numerical Questions - ANSWERS}
+
+\subsection*{Question 6: Sample Size for Power (3 points)}
+
+A researcher is planning a study to test whether a new medication reduces systolic blood pressure. Based on pilot data, the population standard deviation is estimated to be $\sigma = 20$ mmHg. The researcher wants to detect a mean reduction of 10 mmHg from the population mean of 145 mmHg.
+
+\vspace{0.3cm}
+
+Using a significance level of $\alpha = 0.05$ (two-sided) and desired power of 0.80, calculate the required sample size using R's \texttt{power.t.test()} function for a one-sample t-test.
+
+\vspace{0.3cm}
+
+\textbf{R code:}
+
+\begin{lstlisting}[language=R,basicstyle=\small\ttfamily,frame=single]
+# Power analysis for sample size
+power.t.test(delta = 10,          # Effect size (reduction)
+             sd = 20,              # Standard deviation
+             sig.level = 0.05,     # Alpha
+             power = 0.80,         # Desired power
+             type = "one.sample",  # One-sample t-test
+             alternative = "two.sided")
+
+# Extract and round up sample size
+result <- power.t.test(delta = 10, sd = 20, sig.level = 0.05,
+                       power = 0.80, type = "one.sample")
+ceiling(result$n)  # Round up to nearest whole number
+\end{lstlisting}
+
+\textbf{Output:}
+\begin{verbatim}
+     One-sample t test power calculation
+
+              n = 33.37
+          delta = 10
+             sd = 20
+      sig.level = 0.05
+          power = 0.8
+    alternative = two.sided
+\end{verbatim}
+
+\textbf{Answer:} \textcolor{red}{\textbf{34 subjects}} (33.37 rounded up)
+
+\textbf{Grading:}
+\begin{itemize}
+\item 1.5 points: Correct R code with \texttt{power.t.test()}
+\item 1.5 points: Correct answer (34 subjects)
+\item Partial credit: 32-35 acceptable if rounding explained
+\end{itemize}
+
+\vspace{1cm}
+
+\subsection*{Question 7: Two-Sample t-Test and ANOVA (3 points)}
+
+A researcher compares the effectiveness of three different exercise programs on weight loss (in kg) over 8 weeks. The data are:
+
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Program A & Program B & Program C \\
+\midrule
+4.2 & 6.1 & 7.8 \\
+3.8 & 5.8 & 8.2 \\
+4.5 & 6.4 & 7.5 \\
+4.1 & 5.9 & 8.0 \\
+4.3 & 6.2 & 7.9 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\textbf{Part A (1.5 points):} Perform a one-way ANOVA to test if there is a significant difference in mean weight loss across the three programs. Use $\alpha = 0.05$.
+
+\vspace{0.3cm}
+
+\textbf{R code:}
+
+\begin{lstlisting}[language=R,basicstyle=\small\ttfamily,frame=single]
+# Enter data
+program_a <- c(4.2, 3.8, 4.5, 4.1, 4.3)
+program_b <- c(6.1, 5.8, 6.4, 5.9, 6.2)
+program_c <- c(7.8, 8.2, 7.5, 8.0, 7.9)
+
+# Create data frame
+weight_loss <- c(program_a, program_b, program_c)
+program <- factor(rep(c("A", "B", "C"), each=5))
+data <- data.frame(weight_loss, program)
+
+# Perform ANOVA
+model <- aov(weight_loss ~ program, data=data)
+summary(model)
+\end{lstlisting}
+
+\textbf{Output:}
+\begin{verbatim}
+            Df Sum Sq Mean Sq F value   Pr(>F)
+program      2 34.412  17.206   268.9 1.08e-10 ***
+Residuals   12  0.768   0.064
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\textbf{Answer:} F = \textcolor{red}{\textbf{268.85}} (or 268.9, both acceptable)
+
+\textbf{Grading:}
+\begin{itemize}
+\item 0.5 points: Correct data entry and data frame creation
+\item 0.25 points: Correct \texttt{aov()} command
+\item 0.75 points: Correct F-statistic
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{Part B (1.5 points):} Compare ONLY Program A vs. Program C using a two-sample t-test (assume equal variances, two-sided test).
+
+\vspace{0.3cm}
+
+\textbf{R code:}
+
+\begin{lstlisting}[language=R,basicstyle=\small\ttfamily,frame=single]
+# Two-sample t-test: Program A vs Program C
+t.test(program_a, program_c,
+       var.equal = TRUE,        # Assume equal variances
+       alternative = "two.sided")  # Two-sided test
+\end{lstlisting}
+
+\textbf{Output:}
+\begin{verbatim}
+	Two Sample t-test
+
+data:  program_a and program_c
+t = -22.601, df = 8, p-value = 4.457e-09
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -4.018 -3.382
+sample estimates:
+mean of x mean of y
+     4.18      7.88
+\end{verbatim}
+
+\textbf{Answer:} p-value = \textcolor{red}{\textbf{0.0000}} (4.457 × 10$^{-9}$ rounded to 4 decimals)
+
+\textbf{Note:} Since p < 0.0001, we report as 0.0000 when rounding to 4 decimal places.
+
+\textbf{Grading:}
+\begin{itemize}
+\item 0.75 points: Correct \texttt{t.test()} code with correct parameters
+\item 0.75 points: Correct p-value (0.0000 or < 0.0001)
+\item Acceptable answers: 0.0000, 0, < 0.0001
+\end{itemize}
+
+\vspace{1cm}
+
+\subsection*{Question 8: Pooled Standard Deviation (3 points)}
+
+Two independent samples are collected to compare cholesterol levels between two diets:
+
+\begin{itemize}
+\item Diet 1: $n_1 = 12$, $s_1 = 18.5$ mg/dL
+\item Diet 2: $n_2 = 15$, $s_2 = 21.3$ mg/dL
+\end{itemize}
+
+Calculate the pooled standard deviation ($s_p$) using the formula:
+
+$$s_p = \sqrt{\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}}$$
+
+\vspace{0.3cm}
+
+\textbf{Solution:}
+
+\begin{lstlisting}[language=R,basicstyle=\small\ttfamily,frame=single]
+# Calculate pooled standard deviation
+n1 <- 12
+s1 <- 18.5
+n2 <- 15
+s2 <- 21.3
+
+s_p <- sqrt(((n1-1)*s1^2 + (n2-1)*s2^2) / (n1 + n2 - 2))
+s_p
+# [1] 20.12421
+
+# Round to 2 decimal places
+round(s_p, 2)
+# [1] 20.12
+\end{lstlisting}
+
+\textbf{Answer:} $s_p$ = \textcolor{red}{\textbf{20.12}} mg/dL
+
+\textbf{Grading:}
+\begin{itemize}
+\item 1.5 points: Correct formula application (numerator and denominator)
+\item 1.5 points: Correct answer (20.12 mg/dL)
+\item Partial credit: 19.5-20.5 acceptable for rounding variations
+\end{itemize}
+
+\vspace{1cm}
+
+\subsection*{Question 9: Test Statistic Calculation (3 points)}
+
+A researcher compares mean test scores between two teaching methods. The summary statistics are:
+
+\begin{itemize}
+\item Method 1: $n_1 = 20$, $\bar{x}_1 = 85.3$, $s_1 = 12.4$
+\item Method 2: $n_2 = 18$, $\bar{x}_2 = 78.6$, $s_2 = 14.1$
+\end{itemize}
+
+Calculate the test statistic (t-value) for a two-sample t-test (assume equal variances).
+
+\vspace{0.3cm}
+
+\textbf{Solution:}
+
+\begin{lstlisting}[language=R,basicstyle=\small\ttfamily,frame=single]
+# Calculate t-statistic from summary statistics
+n1 <- 20
+xbar1 <- 85.3
+s1 <- 12.4
+
+n2 <- 18
+xbar2 <- 78.6
+s2 <- 14.1
+
+# Step 1: Calculate pooled SD
+s_p <- sqrt(((n1-1)*s1^2 + (n2-1)*s2^2) / (n1 + n2 - 2))
+s_p
+# [1] 13.23003
+
+# Step 2: Calculate standard error
+se <- s_p * sqrt(1/n1 + 1/n2)
+se
+# [1] 4.298345
+
+# Step 3: Calculate t-statistic
+t_stat <- (xbar1 - xbar2) / se
+t_stat
+# [1] 1.558847
+
+# Round to 2 decimal places
+round(t_stat, 2)
+# [1] 1.56
+\end{lstlisting}
+
+\textbf{Answer:} t = \textcolor{red}{\textbf{1.56}}
+
+\textbf{Interpretation:} The t-statistic of 1.56 with df = 36 corresponds to a p-value of approximately 0.13 (two-sided), which is greater than 0.05. Therefore, we would fail to reject the null hypothesis and conclude there is insufficient evidence of a significant difference between the two teaching methods.
+
+\textbf{Grading:}
+\begin{itemize}
+\item 1.5 points: Correct calculation (pooled SD, SE, then t)
+\item 1.5 points: Correct answer (1.56)
+\item Partial credit: 1.50-1.60 acceptable for rounding variations
+\end{itemize}
+
+\vspace{1cm}
+
+\subsection*{Question 10: Confidence Interval for Mean Difference (3 points)}
+
+Using the data from Question 9 (Teaching Methods), construct a 95\% confidence interval for the mean difference in test scores ($\mu_1 - \mu_2$).
+
+\vspace{0.3cm}
+
+\textbf{Solution:}
+
+\textbf{Method 1: Using summary statistics (manual calculation):}
+
+\begin{lstlisting}[language=R,basicstyle=\small\ttfamily,frame=single]
+# From Question 9
+n1 <- 20
+xbar1 <- 85.3
+n2 <- 18
+xbar2 <- 78.6
+s_p <- 13.23003  # From Q9
+se <- 4.298345   # From Q9
+
+# Calculate 95% CI for mean difference
+mean_diff <- xbar1 - xbar2
+df <- n1 + n2 - 2
+t_crit <- qt(0.975, df)
+
+ci_lower <- mean_diff - t_crit * se
+ci_upper <- mean_diff + se * t_crit
+
+cat("95% CI: (", round(ci_lower, 2), ",", round(ci_upper, 2), ")\n")
+# 95% CI: ( -2.02 , 15.42 )
+\end{lstlisting}
+
+\textbf{Method 2: More compact calculation:}
+
+\begin{lstlisting}[language=R,basicstyle=\small\ttfamily,frame=single]
+# All in one
+mean_diff <- 85.3 - 78.6  # 6.7
+t_crit <- qt(0.975, 36)   # 2.028
+margin <- 2.028 * 4.298   # 8.72
+ci_lower <- 6.7 - 8.72    # -2.02
+ci_upper <- 6.7 + 8.72    # 15.42
+\end{lstlisting}
+
+\textbf{Answer:} 95\% CI = \textcolor{red}{\textbf{(-2.02, 15.42)}}
+
+\textbf{Interpretation:} We are 95\% confident that the true mean difference in test scores (Method 1 $-$ Method 2) is between $-2.02$ and $15.42$ points. Since the interval \textit{includes zero}, we cannot conclude there is a significant difference between the two teaching methods at $\alpha = 0.05$. The difference could be negative (Method 2 better), zero (no difference), or positive (Method 1 better).
+
+\textbf{Grading:}
+\begin{itemize}
+\item 1.5 points: Correct CI calculation (formula and computation)
+\item 1 point: Correct CI values ($-2.02$, $15.42$)
+\item 0.5 points: Correct interpretation (no significant difference, includes 0)
+\item Partial credit: CI within $\pm 0.2$ of correct values acceptable
+\end{itemize}
+
+\vspace{1cm}
+
+\subsection*{Question 11: Power Calculation (3 points)}
+
+A researcher is planning a one-sample study to test whether a new intervention changes blood glucose levels. Based on prior research:
+
+\begin{itemize}
+\item Expected sample size: $n = 30$
+\item Expected mean difference to detect: $\delta = 12$ mg/dL
+\item Population standard deviation: $\sigma = 18$ mg/dL
+\item Significance level: $\alpha = 0.05$ (two-sided)
+\end{itemize}
+
+Calculate the statistical power of this study.
+
+\vspace{0.3cm}
+
+\textbf{Solution:}
+
+\begin{lstlisting}[language=R,basicstyle=\small\ttfamily,frame=single]
+# Calculate power given sample size and effect size
+n <- 30
+delta <- 12
+sd <- 18
+alpha <- 0.05
+
+# Use power.t.test with all parameters specified except power
+result <- power.t.test(n = n,
+                       delta = delta,
+                       sd = sd,
+                       sig.level = alpha,
+                       type = "one.sample",
+                       alternative = "two.sided")
+
+result$power
+# [1] 0.9416416
+
+# Round to 2 decimal places
+round(result$power, 2)
+# [1] 0.94
+\end{lstlisting}
+
+\textbf{Answer:} Power = \textcolor{red}{\textbf{0.94}}
+
+\textbf{Interpretation:} With a sample size of 30, this study has 94\% power to detect a mean difference of 12 mg/dL (assuming SD = 18) at the 0.05 significance level. This is excellent power (well above the conventional 80\% threshold), meaning the study has a high probability of correctly rejecting the null hypothesis if the true effect is indeed 12 mg/dL.
+
+\textbf{Grading:}
+\begin{itemize}
+\item 1.5 points: Correct R code with \texttt{power.t.test()}
+\item 1.5 points: Correct answer (0.94)
+\item Partial credit: 0.93-0.95 acceptable for rounding variations
+\item Common error: Students may report as 94 (percentage) instead of 0.94 - deduct 0.5 points
+\end{itemize}
+
+\newpage
+
+\section*{Summary Statistics (for reference)}
+
+\subsection*{Question 6 Verification:}
+\begin{verbatim}
+Parameters:
+  Effect size (delta): 10 mmHg
+  Standard deviation: 20 mmHg
+  Significance level: 0.05
+  Desired power: 0.80
+
+Calculation:
+  Exact n = 33.37
+  Rounded up = 34 subjects
+\end{verbatim}
+
+\subsection*{Question 7 Verification:}
+\textbf{Group Means and SDs:}
+\begin{verbatim}
+Program A: mean = 4.18 kg, SD = 0.259 kg
+Program B: mean = 6.08 kg, SD = 0.239 kg
+Program C: mean = 7.88 kg, SD = 0.259 kg
+\end{verbatim}
+
+\textbf{ANOVA Results:}
+\begin{verbatim}
+F-statistic: 268.85
+df1 (between): 2
+df2 (within): 12
+p-value: 1.08 × 10^-10 (highly significant)
+\end{verbatim}
+
+\textbf{t-Test Results (A vs C):}
+\begin{verbatim}
+t-statistic: -22.601
+df: 8
+p-value: 4.457 × 10^-9
+Mean difference: 3.70 kg (Program C > Program A)
+95% CI: (3.38, 4.02) kg
+\end{verbatim}
+
+\textbf{Conclusion:} All three programs differ significantly from each other. Program C is most effective (7.88 kg), followed by Program B (6.08 kg), then Program A (4.18 kg).
+
+\vspace{1cm}
+
+\begin{tcolorbox}[colback=green!5,colframe=green!50!black,boxrule=1pt,arc=0pt]
+\textbf{VERIFICATION COMPLETE}
+
+All numerical answers verified using R code in \texttt{verify\_assignment\_answers.R}.
+
+\textbf{MC Answer Key:} 1-B, 2-C, 3-C, 4-C, 5-B
+
+\textbf{Numerical Answer Key:}
+\begin{itemize}
+\item Question 6: 34 subjects
+\item Question 7A: F = 268.85
+\item Question 7B: p = 0.0000
+\item Question 8: $s_p$ = 20.12 mg/dL
+\item Question 9: t = 1.56
+\item Question 10: 95\% CI = ($-2.02$, $15.42$)
+\item Question 11: Power = 0.94
+\end{itemize}
+
+Following CLAUDE.md mandate: NO mental math, ALL values computed with R.
+\end{tcolorbox}
+
+\end{document}

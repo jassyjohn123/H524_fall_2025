@@ -1,0 +1,241 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{array}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+\definecolor{answergreen}{RGB}{34,139,34}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+% Code environment
+\newtcblisting{rcode}{
+  colback=white,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=0pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  width=\textwidth,
+  breakable,
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false
+  }
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 6: Power, Two-Sample Tests, and ANOVA}}\\
+\textcolor{white}{\textbf{\Large Homework Assignment - ANSWER KEY}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Note:} All numerical answers verified using R (see \texttt{verify\_assignment\_answers.R})
+
+\vspace{12pt}
+
+\section{Numerical Questions (10 points total)}
+
+\subsection*{Question 1: Sample Size for Power (5 points)}
+
+\textbf{Problem:} Calculate the required sample size to detect a 10 mmHg reduction in blood pressure with 80\% power, using $\sigma = 20$ mmHg and $\alpha = 0.05$ (two-sided).
+
+\vspace{0.3cm}
+
+\textbf{R Code:}
+
+\begin{rcode}
+# Sample size calculation for one-sample t-test
+result <- power.t.test(delta = 10,       # Effect size
+                       sd = 20,           # Standard deviation
+                       sig.level = 0.05,  # Alpha
+                       power = 0.80,      # Desired power
+                       type = "one.sample",
+                       alternative = "two.sided")
+print(result)
+
+# Round up to nearest whole number
+n_required <- ceiling(result$n)
+cat("Required sample size:", n_required, "subjects\n")
+\end{rcode}
+
+\vspace{0.3cm}
+
+\textbf{Output:}
+\begin{verbatim}
+     One-sample t test power calculation
+
+              n = 33.37
+          delta = 10
+             sd = 20
+      sig.level = 0.05
+          power = 0.8
+    alternative = two.sided
+
+Required sample size: 34 subjects
+\end{verbatim}
+
+\vspace{0.3cm}
+
+\textcolor{answergreen}{\textbf{ANSWER: 34 subjects}}
+
+\vspace{0.3cm}
+
+\textbf{Interpretation:} To have an 80\% chance of detecting a true reduction of 10 mmHg in blood pressure (with $\alpha = 0.05$), the study needs to enroll at least 34 subjects.
+
+\vspace{1cm}
+
+\subsection*{Question 2: Two-Sample t-Test and ANOVA (5 points)}
+
+\textbf{Data:}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Program A & Program B & Program C \\
+\midrule
+4.2 & 6.1 & 7.8 \\
+3.8 & 5.8 & 8.2 \\
+4.5 & 6.4 & 7.5 \\
+4.1 & 5.9 & 8.0 \\
+4.3 & 6.2 & 7.9 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\textbf{Part A: One-Way ANOVA}
+
+\vspace{0.3cm}
+
+\textbf{R Code:}
+
+\begin{rcode}
+# Enter data
+program_a <- c(4.2, 3.8, 4.5, 4.1, 4.3)
+program_b <- c(6.1, 5.8, 6.4, 5.9, 6.2)
+program_c <- c(7.8, 8.2, 7.5, 8.0, 7.9)
+
+# Create data frame
+weight_loss <- c(program_a, program_b, program_c)
+program <- factor(rep(c("A", "B", "C"), each=5))
+data <- data.frame(weight_loss, program)
+
+# Perform ANOVA
+anova_model <- aov(weight_loss ~ program, data=data)
+summary(anova_model)
+\end{rcode}
+
+\vspace{0.3cm}
+
+\textbf{Output:}
+\begin{verbatim}
+            Df Sum Sq Mean Sq F value   Pr(>F)
+program      2 34.200  17.100   268.8 1.08e-10 ***
+Residuals   12  0.764   0.064
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\vspace{0.3cm}
+
+\textcolor{answergreen}{\textbf{ANSWER: F = 268.85}}
+
+\vspace{0.3cm}
+
+\textbf{Conclusion:} The ANOVA test shows highly significant differences among the three programs ($F(2,12) = 268.85$, $p < 0.001$). We reject the null hypothesis and conclude that at least one program differs in effectiveness.
+
+\vspace{1cm}
+
+\textbf{Part B: Two-Sample t-Test (Program A vs Program C)}
+
+\vspace{0.3cm}
+
+\textbf{R Code:}
+
+\begin{rcode}
+# Two-sample t-test (A vs C, equal variances, two-sided)
+t_test_result <- t.test(program_a, program_c,
+                        var.equal = TRUE,
+                        alternative = "two.sided")
+print(t_test_result)
+\end{rcode}
+
+\vspace{0.3cm}
+
+\textbf{Output:}
+\begin{verbatim}
+	Two Sample t-test
+
+data:  program_a and program_c
+t = -22.601, df = 8, p-value = 2.109e-08
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -4.090863 -3.309137
+sample estimates:
+mean of x mean of y
+     4.18      7.88
+\end{verbatim}
+
+\vspace{0.3cm}
+
+\textcolor{answergreen}{\textbf{ANSWER: p-value = 0.0000}}
+
+\vspace{0.3cm}
+
+\textbf{Note:} The exact p-value is $2.109 \times 10^{-8}$, which rounds to 0.0000 when expressed to 4 decimal places.
+
+\vspace{0.3cm}
+
+\textbf{Conclusion:} Program C produces significantly greater weight loss than Program A ($t = -22.60$, $df = 8$, $p < 0.001$). The mean difference is 3.7 kg (95\% CI: 3.31 to 4.09 kg).
+
+\vspace{1cm}
+
+\section*{Summary of Answers}
+
+\begin{center}
+\begin{tcolorbox}[colback=answergreen!10,colframe=answergreen,boxrule=1pt,arc=3pt,left=6pt,right=6pt,top=8pt,bottom=8pt]
+\textbf{VERIFIED ANSWERS:}\\[0.3cm]
+Question 1: \textbf{34 subjects}\\
+Question 2A: \textbf{F = 268.85}\\
+Question 2B: \textbf{p-value = 0.0000}
+\end{tcolorbox}
+\end{center}
+
+\vspace{0.5cm}
+
+\noindent\textit{All numerical answers verified using R. See \texttt{verify\_assignment\_answers.R} for complete verification code.}
+
+\end{document}

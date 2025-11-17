@@ -1,0 +1,563 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{codebackground}{RGB}{248,248,248}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+% Configure listings for code display
+\lstset{
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  breakatwhitespace=true,
+  postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+
+% Code environment using tcolorbox with listings
+\newtcblisting{rcode}{
+  colback=white,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=0pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  width=\textwidth,
+  breakable,
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false
+  }
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 5 Lab: Hypothesis Testing}}\\
+\textcolor{white}{\textbf{\Large Answer Key}}
+\end{tcolorbox}
+
+\vspace{12pt}
+
+\noindent\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Hypothesis Testing (One-Sample t-Tests)\\
+\textbf{Date:} Fall 2025
+
+\vspace{12pt}
+
+\section*{Problem 1: Two-Sided t-Test (Body Temperature)}
+
+\textbf{Research Question:} Is the true mean body temperature different from the commonly cited value of 98.6°F?
+
+\textbf{Data:} Body temperatures from $n = 15$ healthy adults:
+\begin{rcode}
+temps <- c(98.4, 98.0, 98.2, 98.6, 98.5, 98.3, 98.1, 98.7,
+           98.2, 98.4, 98.3, 98.0, 98.5, 98.4, 98.2)
+\end{rcode}
+
+\subsection*{Part (a): State the hypotheses}
+
+\textbf{Null hypothesis:} $H_0: \mu = 98.6$ °F (mean body temperature equals 98.6°F)
+
+\textbf{Alternative hypothesis:} $H_A: \mu \neq 98.6$ °F (mean body temperature is different from 98.6°F)
+
+\textbf{Note:} This is a \textbf{two-sided test} because we're asking if the mean is ``different from'' (either higher or lower than) 98.6°F.
+
+\subsection*{Part (b): Calculate descriptive statistics}
+
+\textbf{R code:}
+\begin{rcode}
+n <- length(temps)
+xbar <- mean(temps)
+s <- sd(temps)
+
+n      # 15
+xbar   # 98.32
+s      # 0.2077
+\end{rcode}
+
+\textbf{Results:}
+\begin{itemize}
+\item Sample size: $n = 15$
+\item Sample mean: $\bar{x} = 98.32$ °F
+\item Sample standard deviation: $s = 0.2077$ °F
+\end{itemize}
+
+\subsection*{Part (c): Conduct the hypothesis test}
+
+\textbf{Step 1: Calculate the standard error}
+$$SE = \frac{s}{\sqrt{n}} = \frac{0.2077}{\sqrt{15}} = \frac{0.2077}{3.873} = 0.0536 \text{ °F}$$
+
+\textbf{Step 2: Calculate the t-statistic}
+$$t = \frac{\bar{x} - \mu_0}{SE} = \frac{98.32 - 98.6}{0.0536} = \frac{-0.28}{0.0536} = -5.22$$
+
+\textbf{Step 3: Determine degrees of freedom}
+$$df = n - 1 = 15 - 1 = 14$$
+
+\textbf{Step 4: Calculate the p-value}
+
+For a two-sided test, we calculate the probability in both tails:
+$$p\text{-value} = 2 \times P(T \leq -5.22) = 2 \times 0.00006 = 0.0001$$
+
+\textbf{R verification:}
+\begin{rcode}
+# Manual calculation
+SE <- s / sqrt(n)
+t_stat <- (xbar - 98.6) / SE
+p_value <- 2 * pt(abs(t_stat), df = n - 1, lower.tail = FALSE)
+
+SE        # 0.0536
+t_stat    # -5.22
+p_value   # 0.0001
+
+# Using t.test function
+result <- t.test(temps, mu = 98.6, alternative = "two.sided")
+result
+\end{rcode}
+
+\subsection*{Part (d): Make a decision and interpret}
+
+\textbf{Decision at $\alpha = 0.05$:} \textbf{REJECT $H_0$}
+
+Since $p = 0.0001 < 0.05$, we reject the null hypothesis.
+
+\textbf{Interpretation:}
+
+There is very strong evidence ($p = 0.0001$) that the true mean body temperature is different from 98.6°F. The sample mean of 98.32°F is significantly lower than the commonly cited value. The extremely small p-value indicates this difference is highly unlikely to have occurred by chance if the true mean were actually 98.6°F.
+
+\textbf{95\% Confidence Interval:} $(98.20, 98.43)$ °F
+
+This interval does not contain 98.6, which is consistent with rejecting $H_0$ at the $\alpha = 0.05$ level.
+
+\vspace{12pt}
+
+\section*{Problem 2: One-Sided t-Test (Blood Pressure)}
+
+\textbf{Research Question:} Does a new blood pressure medication lower mean systolic blood pressure below 140 mmHg?
+
+\textbf{Data:} Systolic blood pressure from $n = 20$ patients after treatment:
+\begin{rcode}
+bp <- c(138, 135, 142, 128, 145, 137, 132, 140, 136, 134,
+        139, 141, 133, 130, 143, 135, 138, 142, 136, 139)
+\end{rcode}
+
+\subsection*{Part (a): State the hypotheses}
+
+\textbf{Null hypothesis:} $H_0: \mu \geq 140$ mmHg (medication does not lower BP below 140)
+
+\textbf{Alternative hypothesis:} $H_A: \mu < 140$ mmHg (medication lowers BP below 140)
+
+\textbf{Note:} This is a \textbf{one-sided test} (lower tail) because we're specifically testing whether the medication \textit{lowers} blood pressure below 140 mmHg.
+
+\subsection*{Part (b): Calculate descriptive statistics}
+
+\textbf{R code:}
+\begin{rcode}
+n <- length(bp)
+xbar <- mean(bp)
+s <- sd(bp)
+
+n      # 20
+xbar   # 137.15
+s      # 4.44
+\end{rcode}
+
+\textbf{Results:}
+\begin{itemize}
+\item Sample size: $n = 20$
+\item Sample mean: $\bar{x} = 137.15$ mmHg
+\item Sample standard deviation: $s = 4.44$ mmHg
+\end{itemize}
+
+\subsection*{Part (c): Conduct the hypothesis test}
+
+\textbf{Step 1: Calculate the standard error}
+$$SE = \frac{s}{\sqrt{n}} = \frac{4.44}{\sqrt{20}} = \frac{4.44}{4.472} = 0.9930 \text{ mmHg}$$
+
+\textbf{Step 2: Calculate the t-statistic}
+$$t = \frac{\bar{x} - \mu_0}{SE} = \frac{137.15 - 140}{0.9930} = \frac{-2.85}{0.9930} = -2.87$$
+
+\textbf{Step 3: Determine degrees of freedom}
+$$df = n - 1 = 20 - 1 = 19$$
+
+\textbf{Step 4: Calculate the p-value (one-sided, lower tail)}
+$$p\text{-value} = P(T \leq -2.87) = 0.0049$$
+
+\textbf{R verification:}
+\begin{rcode}
+# Manual calculation
+SE <- s / sqrt(n)
+t_stat <- (xbar - 140) / SE
+p_value <- pt(t_stat, df = n - 1)
+
+SE        # 0.9930
+t_stat    # -2.87
+p_value   # 0.0049
+
+# Using t.test function (one-sided)
+result <- t.test(bp, mu = 140, alternative = "less")
+result
+\end{rcode}
+
+\subsection*{Part (d): Make a decision and interpret}
+
+\textbf{Decision at $\alpha = 0.05$:} \textbf{REJECT $H_0$}
+
+Since $p = 0.0049 < 0.05$, we reject the null hypothesis.
+
+\textbf{Interpretation:}
+
+There is strong evidence ($p = 0.0049$) that the medication successfully lowers mean systolic blood pressure below 140 mmHg. The observed mean of 137.15 mmHg is significantly lower than the threshold of 140 mmHg. This difference is unlikely to be due to chance alone.
+
+\textbf{Clinical significance:} Lowering blood pressure from 140 mmHg to approximately 137 mmHg may have important health benefits for patients with hypertension.
+
+\vspace{12pt}
+
+\section*{Problem 3: Type I and Type II Errors}
+
+Using the blood pressure example from Problem 2, explain the concepts of Type I and Type II errors.
+
+\subsection*{Type I Error ($\alpha$)}
+
+\textbf{Definition:} Rejecting $H_0$ when it is actually true
+
+\textbf{In this context:} Concluding that the medication lowers BP below 140 mmHg when it actually doesn't
+
+\textbf{Probability:} $\alpha = 0.05$ (our chosen significance level)
+
+\textbf{Consequence:}
+\begin{itemize}
+\item Approve a medication that doesn't actually work
+\item Waste resources on an ineffective treatment
+\item Potentially expose patients to side effects without benefit
+\end{itemize}
+
+\textbf{Control:} We control Type I error by setting $\alpha$ (typically 0.05)
+
+\subsection*{Type II Error ($\beta$)}
+
+\textbf{Definition:} Failing to reject $H_0$ when it is actually false
+
+\textbf{In this context:} Concluding the medication doesn't lower BP below 140 mmHg when it actually does
+
+\textbf{Probability:} $\beta$ (depends on sample size, effect size, and $\alpha$)
+
+\textbf{Consequence:}
+\begin{itemize}
+\item Reject a medication that actually works
+\item Miss an effective treatment
+\item Deny patients a potentially beneficial therapy
+\end{itemize}
+
+\textbf{Control:} We reduce Type II error by:
+\begin{itemize}
+\item Increasing sample size
+\item Using more precise measurements
+\item Studying stronger effects
+\end{itemize}
+
+\subsection*{Statistical Power}
+
+\textbf{Definition:} Power $= 1 - \beta$
+
+\textbf{Interpretation:} The probability of correctly rejecting $H_0$ when $H_A$ is true (detecting a real effect)
+
+\textbf{Typical goal:} Power $\geq 0.80$ (80\% chance of detecting a real effect)
+
+\subsection*{Trade-off}
+
+There is an inverse relationship between Type I and Type II errors:
+\begin{itemize}
+\item Decreasing $\alpha$ (making it harder to reject $H_0$) increases $\beta$
+\item Increasing $\alpha$ (making it easier to reject $H_0$) decreases $\beta$
+\item The only way to reduce BOTH is to increase sample size
+\end{itemize}
+
+\vspace{12pt}
+
+\section*{Problem 4: Power Analysis}
+
+Understanding statistical power and sample size determination.
+
+\subsection*{Part (a): Calculate power for a given sample size}
+
+\textbf{Scenario:} We want to detect a medium effect (Cohen's $d = 0.5$) with $n = 30$ subjects at $\alpha = 0.05$ (two-sided test).
+
+\textbf{R code:}
+\begin{rcode}
+library(pwr)
+
+power_result <- pwr.t.test(n = 30,
+                            d = 0.5,
+                            sig.level = 0.05,
+                            type = "one.sample",
+                            alternative = "two.sided")
+power_result
+\end{rcode}
+
+\textbf{Result:} Power $\approx 0.70$ (70\%)
+
+\textbf{Interpretation:} With $n = 30$ subjects, we have a 70\% chance of detecting a medium-sized effect (if it exists). This means there's a 30\% chance of Type II error (missing a real effect).
+
+\textbf{Assessment:} 70\% power is below the conventional 80\% standard. We might want a larger sample size.
+
+\subsection*{Part (b): Calculate sample size for desired power}
+
+\textbf{Question:} How many subjects do we need to achieve 80\% power for detecting a medium effect ($d = 0.5$)?
+
+\textbf{R code:}
+\begin{rcode}
+n_result <- pwr.t.test(d = 0.5,
+                        power = 0.80,
+                        sig.level = 0.05,
+                        type = "one.sample",
+                        alternative = "two.sided")
+n_result
+\end{rcode}
+
+\textbf{Result:} Required $n = 34$ subjects (rounded up)
+
+\textbf{Interpretation:} To have an 80\% chance of detecting a medium effect (Cohen's $d = 0.5$) at $\alpha = 0.05$, we need at least 34 subjects.
+
+\subsection*{Part (c): Factors affecting power}
+
+Power increases when:
+\begin{enumerate}
+\item \textbf{Sample size increases} --- More data = more precision
+\item \textbf{Effect size increases} --- Larger effects are easier to detect
+\item \textbf{Alpha increases} --- Less stringent criterion (but more Type I errors)
+\item \textbf{Variability decreases} --- More precise measurements
+\end{enumerate}
+
+\textbf{Key insight:} Sample size is the factor researchers have most control over when designing a study.
+
+\vspace{12pt}
+
+\section*{Problem 5: Relationship Between Confidence Intervals and Hypothesis Tests}
+
+There is a fundamental equivalence between confidence intervals and hypothesis tests.
+
+\subsection*{Equivalence Principle}
+
+For a two-sided test at significance level $\alpha$:
+
+\textbf{If the $(1-\alpha) \times 100\%$ confidence interval contains the null value $\mu_0$:}
+\begin{itemize}
+\item Then we FAIL TO REJECT $H_0$ at level $\alpha$
+\end{itemize}
+
+\textbf{If the $(1-\alpha) \times 100\%$ confidence interval does NOT contain $\mu_0$:}
+\begin{itemize}
+\item Then we REJECT $H_0$ at level $\alpha$
+\end{itemize}
+
+\subsection*{Demonstration with Body Temperature Data}
+
+Using the body temperature data from Problem 1:
+
+\textbf{95\% Confidence Interval:} $(98.20, 98.43)$ °F
+
+\textbf{Null value:} $\mu_0 = 98.6$ °F
+
+\textbf{Question:} Is 98.6 inside the interval $(98.20, 98.43)$?
+
+\textbf{Answer:} NO --- 98.6 is above the upper limit of 98.43
+
+\textbf{Conclusion from CI:} Since 98.6 is NOT in the 95\% CI, we REJECT $H_0: \mu = 98.6$ at $\alpha = 0.05$
+
+\textbf{Conclusion from hypothesis test:} We found $p = 0.0001 < 0.05$, so we REJECT $H_0$
+
+\textbf{Result:} \textcolor{blue}{\textbf{Both methods agree!}}
+
+\subsection*{Advantages of Confidence Intervals}
+
+Confidence intervals provide MORE information than hypothesis tests:
+\begin{enumerate}
+\item \textbf{Effect size} --- How big is the difference?
+\item \textbf{Precision} --- How certain are we? (width of interval)
+\item \textbf{Clinical significance} --- Is the effect large enough to matter?
+\item \textbf{Hypothesis test result} --- Contains null value or not?
+\end{enumerate}
+
+\textbf{Recommendation:} Always report confidence intervals, not just p-values!
+
+\vspace{12pt}
+
+\section*{Problem 6: Checking the Normality Assumption}
+
+The t-test assumes that the data come from a normally distributed population. We should check this assumption.
+
+\subsection*{Methods for Checking Normality}
+
+\textbf{1. Visual Methods:}
+\begin{itemize}
+\item Histogram
+\item Boxplot (check for symmetry and outliers)
+\item Q-Q plot (most important)
+\end{itemize}
+
+\textbf{2. Formal Test:}
+\begin{itemize}
+\item Shapiro-Wilk test
+\end{itemize}
+
+\subsection*{Applying to Body Temperature Data}
+
+\textbf{R code for diagnostic plots:}
+\begin{rcode}
+# Create diagnostic plots
+par(mfrow = c(1, 3))
+
+# Histogram
+hist(temps, breaks = 5, main = "Histogram of Body Temps",
+     xlab = "Temperature (F)", col = "lightblue", border = "white")
+
+# Boxplot
+boxplot(temps, main = "Boxplot", ylab = "Temperature (F)")
+
+# Q-Q plot (most important for normality)
+qqnorm(temps, main = "Q-Q Plot", pch = 19, col = "blue")
+qqline(temps, col = "red", lwd = 2)
+
+par(mfrow = c(1, 1))
+\end{rcode}
+
+\subsection*{Shapiro-Wilk Test}
+
+\textbf{R code:}
+\begin{rcode}
+shapiro.test(temps)
+\end{rcode}
+
+\textbf{Hypotheses:}
+\begin{itemize}
+\item $H_0$: Data come from a normal distribution
+\item $H_A$: Data do not come from a normal distribution
+\end{itemize}
+
+\textbf{Results:}
+\begin{itemize}
+\item Test statistic: $W = 0.9562$
+\item P-value: $p = 0.6228$
+\end{itemize}
+
+\textbf{Decision:} Since $p = 0.6228 > 0.05$, we FAIL TO REJECT $H_0$
+
+\textbf{Interpretation:} There is no evidence of departure from normality. The data appear to be approximately normally distributed.
+
+\subsection*{Assessment}
+
+\textbf{Visual assessment:}
+\begin{itemize}
+\item \textbf{Histogram:} Roughly symmetric, bell-shaped
+\item \textbf{Boxplot:} Symmetric, no extreme outliers
+\item \textbf{Q-Q plot:} Points fall close to the reference line
+\end{itemize}
+
+\textbf{Formal test:} Shapiro-Wilk test does not reject normality ($p = 0.6228$)
+
+\textbf{Conclusion:} \textcolor{blue}{\textbf{[PASS]}} The normality assumption is satisfied. The t-test is appropriate for these data.
+
+\subsection*{What if normality is violated?}
+
+If normality is violated:
+\begin{enumerate}
+\item \textbf{With large sample size ($n \geq 30$):} t-test is robust due to Central Limit Theorem
+\item \textbf{With small sample size:}
+   \begin{itemize}
+   \item Use nonparametric test (e.g., Wilcoxon signed-rank test)
+   \item Transform the data (e.g., log transformation)
+   \item Use bootstrap methods
+   \end{itemize}
+\item \textbf{Check for outliers:} A single extreme value can cause apparent non-normality
+\end{enumerate}
+
+\vspace{24pt}
+
+\section*{Summary of Key Concepts}
+
+\subsection*{Steps for Hypothesis Testing}
+
+\begin{enumerate}
+\item \textbf{State hypotheses} --- Define $H_0$ and $H_A$ clearly
+\item \textbf{Choose significance level} --- Typically $\alpha = 0.05$
+\item \textbf{Check assumptions} --- Normality, independence, etc.
+\item \textbf{Calculate test statistic} --- $t = \frac{\bar{x} - \mu_0}{SE}$
+\item \textbf{Find p-value} --- Probability of observing data this extreme
+\item \textbf{Make decision} --- Reject $H_0$ if $p < \alpha$
+\item \textbf{Interpret in context} --- What does this mean practically?
+\end{enumerate}
+
+\subsection*{One-Sample t-Test Formula}
+
+\textbf{Test statistic:}
+$$t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} \quad \text{with } df = n - 1$$
+
+\textbf{Two-sided p-value:}
+$$p = 2 \times P(T \geq |t|)$$
+
+\textbf{One-sided p-value (lower tail):}
+$$p = P(T \leq t)$$
+
+\textbf{One-sided p-value (upper tail):}
+$$p = P(T \geq t)$$
+
+\subsection*{Error Types}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+& \textbf{$H_0$ True} & \textbf{$H_0$ False} \\
+\midrule
+\textbf{Reject $H_0$} & Type I Error ($\alpha$) & Correct (Power = $1-\beta$) \\
+\textbf{Fail to Reject $H_0$} & Correct ($1-\alpha$) & Type II Error ($\beta$) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Important Relationships}
+
+\begin{itemize}
+\item \textbf{CI and hypothesis test:} If null value is not in $(1-\alpha)$ CI, reject at level $\alpha$
+\item \textbf{Sample size and power:} Larger $n \to$ higher power
+\item \textbf{Effect size and power:} Larger effect $\to$ higher power
+\item \textbf{Alpha and power:} Higher $\alpha \to$ higher power (but more Type I errors)
+\end{itemize}
+
+\end{document}

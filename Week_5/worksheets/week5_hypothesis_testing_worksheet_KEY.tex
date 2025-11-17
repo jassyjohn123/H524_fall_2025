@@ -1,0 +1,572 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{answergreen}{RGB}{0,128,0}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large Week 5 In-Class Worksheet}}\\
+\textcolor{white}{\textbf{\large Hypothesis Testing}}\\
+\textcolor{white}{\textbf{ANSWER KEY}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Hypothesis Testing for Population Means
+
+\vspace{12pt}
+
+\section{Problem 1: Two-Sided t-test}
+
+A researcher claims that the average body temperature is not 98.6°F. A sample of 25 healthy adults has a mean temperature of 98.4°F with a standard deviation of 0.8°F. Test the claim at the 0.05 significance level.
+
+\textbf{Given:} $n = 25$, $\bar{x} = 98.4$°F, $s = 0.8$°F, $\alpha = 0.05$
+
+\vspace{6pt}
+
+\textbf{Part A:} State the null and alternative hypotheses.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+$$H_0: \mu = 98.6 \text{ (population mean temperature is 98.6°F)}$$
+$$H_A: \mu \neq 98.6 \text{ (population mean temperature is NOT 98.6°F)}$$
+
+This is a \textbf{two-sided test} because we're testing whether the mean differs in either direction.
+
+\vspace{6pt}
+
+\textbf{Part B:} Calculate the standard error and t-statistic.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+Standard error:
+$$\text{SE} = \frac{s}{\sqrt{n}} = \frac{0.8}{\sqrt{25}} = \frac{0.8}{5} = 0.16$$
+
+t-statistic:
+$$t = \frac{\bar{x} - \mu_0}{\text{SE}} = \frac{98.4 - 98.6}{0.16} = \frac{-0.2}{0.16} = -1.25$$
+
+\vspace{6pt}
+
+\textbf{Part C:} Find the p-value.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+Degrees of freedom: $\text{df} = n - 1 = 25 - 1 = 24$
+
+For a two-sided test with $t = -1.25$ and df = 24:
+
+p-value = $2 \times P(T < -1.25) = 2 \times 0.1117 = 0.2234$
+
+(Using R: \texttt{2 * pt(-1.25, df=24)})
+
+\vspace{6pt}
+
+\textbf{Part D:} Make a decision and state your conclusion in context.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+\textbf{Decision:} Fail to reject $H_0$ (since p-value = 0.2234 $\geq$ 0.05)
+
+\textbf{Conclusion:} There is not sufficient evidence at the 0.05 significance level to conclude that the population mean body temperature differs from 98.6°F. The observed difference (98.4°F vs 98.6°F) could reasonably be due to sampling variability.
+
+\newpage
+
+\section{Problem 2: One-Sided t-test (Upper Tail)}
+
+A nutritionist claims that a new diet increases average daily caloric expenditure above the baseline of 260 calories. A study of 40 participants following the diet shows a mean expenditure of 285 calories with a standard deviation of 48 calories. Test this claim at the 0.05 level.
+
+\textbf{Given:} $n = 40$, $\bar{x} = 285$, $s = 48$, $\mu_0 = 260$, $\alpha = 0.05$
+
+\vspace{6pt}
+
+\textbf{Part A:} State the hypotheses and identify the type of test.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+$$H_0: \mu = 260 \text{ (diet does NOT increase expenditure)}$$
+$$H_A: \mu > 260 \text{ (diet DOES increase expenditure)}$$
+
+This is a \textbf{one-sided (upper tail) test} because we're only interested in whether the mean \textit{increased}.
+
+\vspace{6pt}
+
+\textbf{Part B:} Calculate the standard error and t-statistic.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+Standard error:
+$$\text{SE} = \frac{s}{\sqrt{n}} = \frac{48}{\sqrt{40}} = \frac{48}{6.325} = 7.5895$$
+
+t-statistic:
+$$t = \frac{\bar{x} - \mu_0}{\text{SE}} = \frac{285 - 260}{7.5895} = \frac{25}{7.5895} = 3.294$$
+
+\vspace{6pt}
+
+\textbf{Part C:} Find the p-value and make a decision.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+Degrees of freedom: $\text{df} = 40 - 1 = 39$
+
+For a one-sided (upper tail) test with $t = 3.294$ and df = 39:
+
+p-value = $P(T > 3.294) = 1 - P(T \leq 3.294) = 0.0011$
+
+(Using R: \texttt{1 - pt(3.294, df=39)})
+
+\textbf{Decision:} Reject $H_0$ (since p-value = 0.0011 $<$ 0.05)
+
+\vspace{6pt}
+
+\textbf{Part D:} Interpret the results in context. What does this tell you about the diet's effect?
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+There is strong evidence at the 0.05 significance level that the new diet increases mean daily caloric expenditure above 260 calories. The p-value of 0.0011 means that if the diet had no effect, we would observe a sample mean this large (or larger) only about 0.11\% of the time due to random chance. This provides compelling evidence that the diet is effective.
+
+\newpage
+
+\section{Problem 3: Critical Value Approach}
+
+Using the data from Problem 2, verify your conclusion using the critical value approach instead of the p-value approach.
+
+\textbf{Data:} $n=40$, $\bar{x}=285$, $s=48$, $t=3.294$, $\alpha=0.05$
+
+\vspace{6pt}
+
+\textbf{Part A:} Find the critical value for this one-sided test.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+For a one-sided (upper tail) test with $\alpha = 0.05$ and df = 39:
+
+$$t_{\text{critical}} = 1.6849$$
+
+(Using R: \texttt{qt(0.95, df=39)})
+
+Note: We use 0.95 (not 0.975) because this is a one-sided test.
+
+\vspace{6pt}
+
+\textbf{Part B:} Compare the t-statistic to the critical value and make a decision.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+\textbf{Comparison:}
+\begin{itemize}
+\item $t_{\text{statistic}} = 3.294$
+\item $t_{\text{critical}} = 1.6849$
+\item $t_{\text{statistic}} > t_{\text{critical}}$ (3.294 > 1.6849)
+\end{itemize}
+
+\textbf{Decision:} Reject $H_0$
+
+The test statistic falls in the rejection region (beyond the critical value), so we reject the null hypothesis.
+
+\vspace{6pt}
+
+\textbf{Part C:} Compare this conclusion to the p-value approach from Problem 2. Do they agree?
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+\textbf{Yes, both methods give the same conclusion!}
+
+\begin{itemize}
+\item \textbf{p-value approach:} Reject $H_0$ (p = 0.0011 $<$ 0.05)
+\item \textbf{Critical value approach:} Reject $H_0$ (t = 3.294 > 1.6849)
+\end{itemize}
+
+These two approaches are mathematically equivalent and will always lead to the same decision. The p-value approach provides more information (exact strength of evidence), while the critical value approach provides a clear cutoff point for decision-making.
+
+\newpage
+
+\section{Problem 4: Type I and Type II Errors}
+
+A pharmaceutical company is testing a new treatment that they hope is more effective than the standard treatment.
+
+\vspace{6pt}
+
+\textbf{Part A:} Define a Type I error in the context of this study. What would be the consequence?
+
+\vspace{6pt}
+\textcolor{answergreen}{\textbf{Answer:}}
+
+\vspace{4pt}
+\textbf{Definition:} A Type I error occurs when we reject $H_0$ when $H_0$ is actually true.
+
+\vspace{4pt}
+\textbf{In context:} We would conclude the new treatment is more effective than the standard when it actually is \textit{not} more effective.
+
+\vspace{4pt}
+\textbf{Consequence:}
+\begin{itemize}
+\item Approve and adopt an ineffective new treatment
+\item Waste resources on inferior or equivalent treatment
+\item Patients don't benefit from the change
+\item Opportunity cost of not pursuing better alternatives
+\item Potential harm if new treatment has worse side effects
+\end{itemize}
+
+\vspace{12pt}
+
+\textbf{Part B:} Define a Type II error in the context of this study. What would be the consequence?
+
+\vspace{6pt}
+\textcolor{answergreen}{\textbf{Answer:}}
+
+\vspace{4pt}
+\textbf{Definition:} A Type II error occurs when we fail to reject $H_0$ when $H_A$ is actually true.
+
+\vspace{4pt}
+\textbf{In context:} We would conclude the new treatment is \textit{not} more effective than the standard when it actually \textit{is} more effective.
+
+\vspace{4pt}
+\textbf{Consequence:}
+\begin{itemize}
+\item Fail to adopt a beneficial new treatment
+\item Patients continue with inferior treatment
+\item Miss opportunity to improve health outcomes
+\item Lose competitive advantage if competitors discover the treatment
+\item May abandon promising research direction
+\end{itemize}
+
+\vspace{12pt}
+
+\textbf{Part C:} Which type of error do you think is more serious in medical research? Explain your reasoning.
+
+\vspace{6pt}
+\textcolor{answergreen}{\textbf{Answer:}}
+
+\vspace{4pt}
+\textbf{Generally, Type II errors are considered more serious in medical research.}
+
+\vspace{6pt}
+\textbf{Reasoning:}
+\begin{itemize}
+\item \textbf{Type II error:} Patients are directly harmed by not receiving a better treatment. This violates the medical principle of beneficence (doing good).
+
+\vspace{2pt}
+\item \textbf{Type I error:} While wasteful, further studies and monitoring would likely detect the error. The scientific process is self-correcting through replication.
+
+\vspace{2pt}
+\item In medicine, missing an effective treatment (Type II) often has greater ethical consequences than temporarily adopting an ineffective one (Type I).
+\end{itemize}
+
+\vspace{6pt}
+\textbf{However}, the answer depends on context:
+\begin{itemize}
+\item If the new treatment is expensive or has serious side effects, Type I might be worse
+\item If the disease is life-threatening and current treatment is poor, Type II is definitely worse
+\item Risk tolerance varies by situation
+\end{itemize}
+
+\newpage
+
+\section{Problem 5: Statistical Power and Sample Size}
+
+Answer the following conceptual questions about statistical power.
+
+\vspace{6pt}
+
+\textbf{Part A:} How does increasing the significance level (e.g., from 0.05 to 0.10) affect the probability of Type I and Type II errors? What happens to statistical power?
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+\textbf{Effect of increasing} $\alpha$ \textbf{(e.g., 0.05 → 0.10):}
+
+\begin{itemize}
+\item \textbf{P(Type I Error) INCREASES}
+  \begin{itemize}
+  \item By definition: $P(\text{Type I}) = \alpha$
+  \item Larger $\alpha$ = more willing to reject $H_0$
+  \item More false positives
+  \end{itemize}
+
+\item \textbf{P(Type II Error) DECREASES}
+  \begin{itemize}
+  \item Less stringent threshold makes it easier to detect real effects
+  \item Fewer false negatives
+  \end{itemize}
+
+\item \textbf{Statistical Power INCREASES}
+  \begin{itemize}
+  \item Power = $1 - P(\text{Type II})$
+  \item Lower Type II error → Higher power
+  \item Better ability to detect true effects when they exist
+  \end{itemize}
+\end{itemize}
+
+\textbf{Trade-off:} Increasing $\alpha$ makes us more likely to detect real effects (good) but also more likely to falsely claim effects that don't exist (bad).
+
+\vspace{6pt}
+
+\textbf{Part B:} How does increasing sample size affect Type I error, Type II error, and statistical power? Explain the mechanism.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+\textbf{Effect of increasing sample size} $n$\textbf{:}
+
+\begin{itemize}
+\item \textbf{P(Type I Error) UNCHANGED}
+  \begin{itemize}
+  \item Always equals $\alpha$ regardless of sample size
+  \item We control Type I error by choosing $\alpha$
+  \end{itemize}
+
+\item \textbf{P(Type II Error) DECREASES}
+  \begin{itemize}
+  \item Larger samples give more precise estimates
+  \item Easier to detect real effects
+  \item Fewer false negatives
+  \end{itemize}
+
+\item \textbf{Statistical Power INCREASES}
+  \begin{itemize}
+  \item Power = $1 - P(\text{Type II})$
+  \item Better ability to detect true effects
+  \end{itemize}
+\end{itemize}
+
+\textbf{Mechanism:}
+
+$$\text{SE} = \frac{s}{\sqrt{n}} \quad \Rightarrow \quad \text{Larger } n \Rightarrow \text{Smaller SE}$$
+
+$$t = \frac{\bar{x} - \mu_0}{\text{SE}} \quad \Rightarrow \quad \text{Smaller SE} \Rightarrow \text{Larger } |t|$$
+
+$$\text{Larger } |t| \Rightarrow \text{Smaller p-values} \Rightarrow \text{Easier to reject } H_0 \text{ when } H_A \text{ is true}$$
+
+\textbf{Example:} With $s = 10$:
+\begin{itemize}
+\item $n = 20$ → SE = 2.2361
+\item $n = 80$ → SE = 1.1180
+\end{itemize}
+
+Quadrupling the sample size cuts the SE in half, making the t-statistic twice as large (for the same difference in means).
+
+\newpage
+
+\section{Problem 6: Comprehensive Integration Problem}
+
+A pharmaceutical company is testing whether a new sleep medication reduces the average sleep time below the standard 8 hours. They conduct a study with 50 patients and find a mean sleep time of 7.8 hours with a standard deviation of 1.2 hours. Test the hypothesis at the $\alpha = 0.01$ level.
+
+\textbf{Given:} $n = 50$, $\bar{x} = 7.8$ hours, $s = 1.2$ hours, $\alpha = 0.01$
+
+\vspace{6pt}
+
+\textbf{Part A:} State the null and alternative hypotheses. Is this a one-sided or two-sided test?
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+$$H_0: \mu = 8 \text{ hours (drug does NOT reduce sleep time)}$$
+$$H_A: \mu < 8 \text{ hours (drug DOES reduce sleep time)}$$
+
+This is a \textbf{one-sided (lower tail) test} because we're only interested in whether sleep time \textit{decreased}.
+
+\vspace{6pt}
+
+\textbf{Part B:} Calculate the standard error.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+$$\text{SE} = \frac{s}{\sqrt{n}} = \frac{1.2}{\sqrt{50}} = \frac{1.2}{7.071} = 0.1697$$
+
+\vspace{6pt}
+
+\textbf{Part C:} Calculate the t-statistic.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+$$t = \frac{\bar{x} - \mu_0}{\text{SE}} = \frac{7.8 - 8.0}{0.1697} = \frac{-0.2}{0.1697} = -1.1785$$
+
+\vspace{6pt}
+
+\textbf{Part D:} Find the p-value.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+Degrees of freedom: $\text{df} = 50 - 1 = 49$
+
+For a one-sided (lower tail) test with $t = -1.1785$ and df = 49:
+
+p-value = $P(T < -1.1785) = 0.1221$
+
+(Using R: \texttt{pt(-1.1785, df=49)})
+
+\vspace{6pt}
+
+\textbf{Part E:} Make a decision at the $\alpha = 0.01$ level.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+\textbf{Decision:} Fail to reject $H_0$
+
+\textbf{Reasoning:} p-value = 0.1221 $\geq$ 0.01 (not significant at the 0.01 level)
+
+\vspace{6pt}
+
+\textbf{Part F:} Write a complete interpretation of your results in the context of the sleep study.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+There is not sufficient evidence at the 0.01 significance level to conclude that the new sleep medication reduces mean sleep time below 8 hours. While the sample mean (7.8 hours) is below 8 hours, this difference is not statistically significant at the stringent 0.01 level. The observed difference could reasonably be attributed to random sampling variability rather than a true effect of the medication.
+
+\textbf{Note:} The p-value of 0.1221 means that if the drug had no effect (true mean = 8 hours), we would observe a sample mean this low (or lower) about 12\% of the time due to chance alone. This is not strong enough evidence to conclude the drug works.
+
+\vspace{6pt}
+
+\textbf{Part G:} Verify your conclusion using the critical value approach.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+For a one-sided (lower tail) test with $\alpha = 0.01$ and df = 49:
+
+$$t_{\text{critical}} = -2.4049$$
+
+(Using R: \texttt{qt(0.01, df=49)})
+
+\textbf{Comparison:}
+\begin{itemize}
+\item $t_{\text{statistic}} = -1.1785$
+\item $t_{\text{critical}} = -2.4049$
+\item $t_{\text{statistic}} > t_{\text{critical}}$ (i.e., $-1.1785 > -2.4049$)
+\end{itemize}
+
+The test statistic is NOT in the rejection region (it's not beyond the critical value), so we \textbf{fail to reject $H_0$}.
+
+This confirms our conclusion from the p-value approach. Both methods agree: there is insufficient evidence that the medication reduces sleep time.
+
+\newpage
+
+\section*{Reflection Questions - Sample Answers}
+
+\textbf{1.} Explain the difference between statistical significance and practical significance. Can a result be statistically significant but not practically important?
+
+\textcolor{answergreen}{\textbf{Sample Answer:}}
+
+\textbf{Statistical significance} means the observed effect is unlikely to be due to chance alone (p-value $<$ $\alpha$). It tells us the result is \textit{real} (not random), but not how \textit{large} or \textit{important} it is.
+
+\textbf{Practical significance} (or clinical significance) means the effect is large enough to matter in the real world. It addresses whether the difference is meaningful for decision-making.
+
+\textbf{Yes, a result can be statistically significant but not practically important!}
+
+\textbf{Example:} With a sample of 10,000 people, we find that a new diet reduces weight by 0.1 pounds on average (p $<$ 0.001). This is highly statistically significant, but the actual weight loss is so small it's practically meaningless. No one would adopt a restrictive diet to lose 1/10th of a pound.
+
+\textbf{Key insight:} Large samples can detect tiny, trivial differences as ``significant.'' Always consider effect size, not just p-values.
+
+\vspace{6pt}
+
+\textbf{2.} Why do we typically use $\alpha = 0.05$ as the significance level? What would happen if we used $\alpha = 0.10$ or $\alpha = 0.01$ instead?
+
+\textcolor{answergreen}{\textbf{Sample Answer:}}
+
+\textbf{Why 0.05?}
+\begin{itemize}
+\item Historical convention (R.A. Fisher's suggestion from the 1920s)
+\item Balances Type I and Type II errors reasonably well
+\item Widely accepted in most fields, making results comparable
+\item No deep mathematical reason - it's a social convention
+\end{itemize}
+
+\textbf{Using} $\alpha = 0.10$ \textbf{(more lenient):}
+\begin{itemize}
+\item \textbf{Pro:} Higher power, easier to detect real effects
+\item \textbf{Con:} More false positives (10\% vs 5\%)
+\item \textbf{Use when:} Exploratory research, preliminary screening, cost of Type II error is high
+\end{itemize}
+
+\textbf{Using} $\alpha = 0.01$ \textbf{(more stringent):}
+\begin{itemize}
+\item \textbf{Pro:} Fewer false positives (1\% vs 5\%), stronger evidence
+\item \textbf{Con:} Lower power, harder to detect real effects
+\item \textbf{Use when:} High stakes decisions, confirmatory research, cost of Type I error is high
+\end{itemize}
+
+\textbf{Bottom line:} Choice of $\alpha$ should match the consequences of errors in your specific context.
+
+\vspace{6pt}
+
+\textbf{3.} When would you use a one-sided test versus a two-sided test? Give an example of each.
+
+\textcolor{answergreen}{\textbf{Sample Answer:}}
+
+\textbf{Two-sided test (most common):}
+\begin{itemize}
+\item Use when you want to detect differences in \textit{either direction}
+\item Testing whether something is \textit{different}, not specifically higher or lower
+\item More conservative and generally preferred
+\item $H_A: \mu \neq \mu_0$
+\end{itemize}
+
+\textbf{Example:} Testing whether a new manufacturing process changes the average product weight. We care if it's heavier \textit{or} lighter than the target.
+
+\textbf{One-sided test (less common):}
+\begin{itemize}
+\item Use when you're only interested in one direction
+\item You have strong prior reason to expect a specific direction
+\item Differences in the opposite direction would be treated the same as no difference
+\item $H_A: \mu > \mu_0$ or $H_A: \mu < \mu_0$
+\end{itemize}
+
+\textbf{Example:} Testing whether a new safety feature \textit{reduces} injury rates. We only care about reduction - an increase would still mean we don't adopt the feature.
+
+\textbf{Important:} Choose one-sided vs two-sided \textit{before} seeing the data. Switching after seeing results inflates Type I error.
+
+\vspace{6pt}
+
+\textbf{4.} What is the relationship between confidence intervals and hypothesis testing?
+
+\textcolor{answergreen}{\textbf{Sample Answer:}}
+
+\textbf{Confidence intervals and hypothesis tests are closely related:}
+
+\textbf{For a two-sided test at level} $\alpha$\textbf{:}
+\begin{itemize}
+\item If the null value $\mu_0$ is \textit{outside} the $(1-\alpha)$100\% CI, reject $H_0$
+\item If the null value $\mu_0$ is \textit{inside} the $(1-\alpha)$100\% CI, fail to reject $H_0$
+\end{itemize}
+
+\textbf{Example:} Testing $H_0: \mu = 100$ at $\alpha = 0.05$
+\begin{itemize}
+\item Calculate 95\% CI: (105, 115)
+\item Since 100 is outside this interval, reject $H_0$ at the 0.05 level
+\item The CI gives the same conclusion as a formal hypothesis test
+\end{itemize}
+
+\textbf{Advantages of CIs over hypothesis tests:}
+\begin{itemize}
+\item Shows the \textit{magnitude} of the effect (effect size), not just significance
+\item Gives a range of plausible values
+\item Shows precision of the estimate
+\item More informative than just ``reject'' or ``fail to reject''
+\end{itemize}
+
+\textbf{Best practice:} Always report confidence intervals along with hypothesis test results!
+
+\end{document}

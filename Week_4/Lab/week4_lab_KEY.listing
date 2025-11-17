@@ -1,0 +1,20 @@
+# Create 3-panel diagnostic plot
+par(mfrow=c(1,3))
+
+# Panel 1: Histogram
+hist(reaction_times, breaks=5, main="Histogram",
+     xlab="Reaction Time (ms)", col="lightblue", border="white")
+
+# Panel 2: Boxplot
+boxplot(reaction_times, main="Boxplot", ylab="Reaction Time (ms)")
+
+# Panel 3: Q-Q plot (most important for normality)
+qqnorm(reaction_times, main="Q-Q Plot", pch=19, col="blue")
+qqline(reaction_times, col="red", lwd=2)
+
+par(mfrow=c(1,1))
+
+# Perform Shapiro-Wilk test
+shapiro_result <- shapiro.test(reaction_times)
+cat("Shapiro-Wilk Test Results:\n")
+print(shapiro_result)

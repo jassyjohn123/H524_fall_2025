@@ -1,0 +1,265 @@
+================================================================================
+NUMERICAL VERIFICATION REPORT FOR WEEK 3 SLIDES
+File: /Users/molitorj/ms/OSU/classes/AI_H524/H524_fall_2025/Week_3/slides/week3_slides.tex
+Date: 2025-10-15
+================================================================================
+
+EXECUTIVE SUMMARY:
+All numerical calculations in the Week 3 slides have been verified using R.
+NO ERRORS FOUND. All calculations are correct.
+
+================================================================================
+DETAILED VERIFICATION RESULTS
+================================================================================
+
+1. BINOMIAL CLINICAL TRIAL EXAMPLE (Lines 147-166)
+   Parameters: n=10, p=0.75
+
+   ✓ P(X = 8) = 0.282
+   ✓ Binomial coefficient C(10,8) = 45
+   ✓ (0.75)^8 = 0.1001
+   ✓ (0.25)^2 = 0.0625
+   ✓ P(X = 9) = 0.188
+   ✓ P(X = 10) = 0.056
+   ✓ P(X ≥ 8) = 0.526
+   ✓ Expected value = 7.5 patients
+
+   R code used: dbinom(8, 10, 0.75)
+
+--------------------------------------------------------------------------------
+
+2. CARCINOGEN EXPOSURE EXAMPLE (Lines 169-194)
+   Parameters: n=4, p=0.25
+
+   ✓ P(X = 0) = 0.316 = 81/256
+   ✓ P(X = 1) = 0.422 = 108/256
+   ✓ P(X = 2) = 0.211 = 54/256
+   ✓ P(X = 3) = 0.047 = 12/256
+   ✓ P(X = 4) = 0.004 = 1/256
+   ✓ Total probability = 1.000
+   ✓ P(at least one ill) = 0.684
+
+   R code used: dbinom(k, 4, 0.25) for k in 0:4
+
+--------------------------------------------------------------------------------
+
+3. BINOMIAL DISTRIBUTION IN R (Lines 197-216)
+   Parameters: n=10, p=0.75
+
+   ✓ dbinom(8, 10, 0.75) = 0.282
+   ✓ pbinom(7, 10, 0.75) = 0.474
+   ✓ pbinom(7, 10, 0.75, lower.tail=FALSE) = 0.526
+   ✓ 1 - pbinom(7, 10, 0.75) = 0.526
+
+--------------------------------------------------------------------------------
+
+4. STANDARD NORMAL DISTRIBUTION (Lines 315-335)
+
+   ✓ P(Z ≤ 0) = 0.5
+   ✓ P(Z < 1) = 0.8413
+   ✓ P(Z < -1) = 0.1587
+   ✓ P(Z > 1.96) = 0.025
+   ✓ P(-1.96 < Z < 1.96) = 0.95
+
+   R code used: pnorm(z), qnorm(p)
+
+--------------------------------------------------------------------------------
+
+5. EXAM SCORES EXAMPLE (Lines 338-361)
+   Parameters: μ=70, σ=10
+
+   ✓ Z-score for 85 = 1.5
+   ✓ P(Z < 1.5) = 0.9332
+   ✓ P(S > 85) = 0.0668 (6.7% of students)
+
+   R code used: pnorm(85, mean=70, sd=10, lower.tail=FALSE)
+
+--------------------------------------------------------------------------------
+
+6. EXAM SCORES: BETWEEN TWO VALUES (Lines 364-382)
+   Parameters: μ=70, σ=10
+
+   ✓ Z-score for 60 = -1.0
+   ✓ Z-score for 85 = 1.5
+   ✓ P(Z < 1.5) = 0.9332
+   ✓ P(Z < -1.0) = 0.1587
+   ✓ P(60 < S < 85) = 0.7745 (77.5%)
+
+   R code used: pnorm(85, 70, 10) - pnorm(60, 70, 10)
+
+--------------------------------------------------------------------------------
+
+7. FINDING 90TH PERCENTILE (Lines 385-403)
+   Parameters: μ=70, σ=10
+
+   ✓ Z-score for 90th percentile = 1.28
+   ✓ Score at 90th percentile = 82.8
+
+   R code used: qnorm(0.90, mean=70, sd=10)
+
+--------------------------------------------------------------------------------
+
+8. CHOLESTEROL EXAMPLE (Lines 406-429)
+   Parameters: μ=200 mg/dL, σ=40 mg/dL
+
+   ✓ Z-score for 240 = 1.0
+   ✓ P(X ≥ 240) = 0.1587 (16% need treatment)
+
+   R code used: pnorm(240, 200, 40, lower.tail=FALSE)
+
+--------------------------------------------------------------------------------
+
+9. t-DISTRIBUTION CRITICAL VALUES (Lines 478-484)
+
+   ✓ Z_{0.975} = 1.96
+   ✓ t_{0.975, df=5} = 2.571
+   ✓ t_{0.975, df=30} = 2.042
+   ✓ t_{0.975, df=∞} = 1.96
+
+   R code used: qt(0.975, df)
+
+--------------------------------------------------------------------------------
+
+10. IQ SCORES EXAMPLE (Lines 678-704)
+    Parameters: n=90, σ=10, μ=100, observed x̄=105
+
+    ✓ Standard error = 1.054
+    ✓ Z-score = 4.74
+    ✓ P(Z > 4.74) < 0.00001
+
+    R code used:
+    se <- 10/sqrt(90)
+    z <- (105-100)/se
+    pnorm(z, lower.tail=FALSE)
+
+--------------------------------------------------------------------------------
+
+11. 95% CONFIDENCE INTERVAL (σ known) (Lines 732-751)
+    Parameters: x̄=105, σ=10, n=90
+
+    ✓ Margin of error = 1.96 × 1.054 = 2.07
+    ✓ 95% CI = (102.93, 107.07)
+
+    R code used:
+    105 + c(-1,1) * 1.96 * (10/sqrt(90))
+
+--------------------------------------------------------------------------------
+
+12. t-DISTRIBUTION CI CRITICAL VALUES (Lines 772-777)
+
+    ✓ n=10, df=9:   t_{0.975,9} = 2.262
+    ✓ n=30, df=29:  t_{0.975,29} = 2.045
+    ✓ n=100, df=99: t_{0.975,99} = 1.984
+
+    R code used: qt(0.975, df)
+
+--------------------------------------------------------------------------------
+
+13. TUMOR GROWTH - CONTROL GROUP (Lines 781-807)
+    Data: 7, 10, 9, 8, 7, 6, 8, 9, 12, 13
+
+    ✓ Sample mean = 8.9 mm
+    ✓ Sample SD = 2.234 mm
+    ✓ n = 10
+    ✓ t_{0.975,9} = 2.262
+    ✓ Margin of error = 1.598
+    ✓ 95% CI = (7.30, 10.50) mm
+
+    R code used: t.test(control)$conf.int
+
+--------------------------------------------------------------------------------
+
+14. TUMOR GROWTH - TREATMENT GROUP (Lines 802-806)
+    Data: 4, 6, 10, 8, 5, 3, 10, 8, 8, 10
+
+    ✓ Sample mean = 7.2 mm
+    ✓ Sample SD = 2.573 mm
+    ✓ 95% CI = (5.36, 9.04) mm
+
+    R code used: t.test(treatment)$conf.int
+
+--------------------------------------------------------------------------------
+
+15. CRITICAL VALUES FOR DIFFERENT CONFIDENCE LEVELS (Lines 840-869)
+
+    ✓ 90% CI (α=0.10): Z = 1.645
+    ✓ 95% CI (α=0.05): Z = 1.96
+    ✓ 99% CI (α=0.01): Z = 2.576
+
+    R code used: qnorm(c(0.95, 0.975, 0.995))
+
+--------------------------------------------------------------------------------
+
+16. R CHOLESTEROL EXAMPLE (Lines 1132-1154)
+    Parameters: μ=200, σ=40
+
+    ✓ P(cholesterol > 240) = 0.159
+    ✓ P(180 < cholesterol < 220) = 0.383
+    ✓ 90th percentile = 251.3 mg/dL
+
+    R code used:
+    pnorm(240, 200, 40, lower.tail=FALSE)
+    pnorm(220, 200, 40) - pnorm(180, 200, 40)
+    qnorm(0.90, 200, 40)
+
+================================================================================
+ADDITIONAL VERIFICATION: STATISTICAL FORMULAS AND CONCEPTS
+================================================================================
+
+✓ Binomial mean: E(X) = np
+✓ Binomial variance: Var(X) = np(1-p)
+✓ Binomial SD: σ = √(np(1-p))
+
+✓ Standard error: SE = σ/√n
+✓ Z-score standardization: Z = (X - μ)/σ
+
+✓ 95% CI (σ known): x̄ ± 1.96 × (σ/√n)
+✓ 95% CI (σ unknown): x̄ ± t_{α/2,n-1} × (s/√n)
+
+✓ Central Limit Theorem: X̄ ~ N(μ, σ²/n) for large n
+✓ Standardized CLT: Z = (X̄ - μ)/(σ/√n) ~ N(0,1)
+
+✓ Empirical Rule (68-95-99.7):
+  - 68.27% within 1 SD
+  - 95.45% within 2 SDs
+  - 99.73% within 3 SDs
+
+✓ t-distribution: T = (X̄ - μ)/(s/√n) ~ t_{n-1}
+✓ Degrees of freedom: df = n - 1
+
+✓ Continuous distribution properties:
+  - Total area = 1
+  - P(X = c) = 0 for any single point
+  - P(a ≤ X ≤ b) = P(a < X < b)
+
+✓ Independence: P(A ∩ B) = P(A) × P(B)
+
+✓ R function descriptions:
+  - dbinom(k, n, p): P(X = k)
+  - pbinom(k, n, p): P(X ≤ k)
+  - pnorm(z): P(Z ≤ z)
+  - qnorm(p): inverse of pnorm
+  - dnorm(z): density at z
+
+================================================================================
+CONCLUSION
+================================================================================
+
+VERIFICATION COMPLETE: All numerical calculations verified correct.
+
+Total calculations checked: 50+
+Errors found: 0
+Warnings: 0
+
+All probabilities, percentiles, confidence intervals, critical values,
+means, standard deviations, standard errors, and statistical formulas
+have been verified using R computational tools.
+
+The slides are mathematically and statistically accurate.
+
+Verification performed using R version 4.x
+Tools used: dbinom(), pbinom(), pnorm(), qnorm(), qt(), mean(), sd(), t.test()
+
+================================================================================
+END OF REPORT
+================================================================================

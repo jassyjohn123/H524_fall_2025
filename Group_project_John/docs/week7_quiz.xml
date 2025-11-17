@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questestinterop xmlns="http://www.imsglobal.org/xsd/ims_qtiasiv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/ims_qtiasiv1p2 http://www.imsglobal.org/xsd/ims_qtiasiv1p2p1.xsd">
+  <assessment ident="week7_nonparametric" title="Week 7 Assignment - Part A: Multiple Choice">
+
+    <section ident="part_a" title="Part A: Multiple Choice (5 points)">
+      <!-- Question 1 -->
+      <item ident="q1" title="When to Use Nonparametric Tests (1 point)">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[<p>Which of the following is the BEST reason to use a nonparametric test instead of a parametric test?</p>]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext>Nonparametric tests are always more powerful than parametric tests</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext>The data do not meet the assumptions required for parametric tests (e.g., normality)</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext>Nonparametric tests require larger sample sizes</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext>Parametric tests cannot be used with continuous data</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="1" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">1</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 2 -->
+      <item ident="q2" title="Sign Test vs. t-test (1 point)">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[<p>A researcher wants to test whether a new medication reduces pain scores in patients. Pre- and post-treatment pain scores are measured for 15 patients. The pain score differences are highly skewed. Which test is most appropriate?</p>]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext>Paired t-test</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext>Sign test</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext>Independent samples t-test</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext>ANOVA</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="1" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">1</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 3 -->
+      <item ident="q3" title="Mann-Whitney U Test (1 point)">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[<p>The Mann-Whitney U test is the nonparametric alternative to which parametric test?</p>]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext>Paired t-test</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext>One-way ANOVA</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext>Independent samples t-test (two-sample t-test)</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext>Chi-square test</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="1" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">c</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">1</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 4 -->
+      <item ident="q4" title="Kruskal-Wallis Test (1 point)">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[<p>A study compares median recovery times across four different treatment groups. The recovery time data are highly right-skewed. Which test is most appropriate?</p>]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext>One-way ANOVA</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext>Kruskal-Wallis test</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext>Chi-square test</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext>Two-sample t-test</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="1" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">1</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 5 -->
+      <item ident="q5" title="Ranking Data (1 point)">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[<p>In the Wilcoxon rank-sum test (Mann-Whitney U), how are tied values handled?</p>]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext>Ties are broken randomly</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext>Tied values receive the average of the ranks they would have occupied</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext>Tied values are excluded from the analysis</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext>Ties are not allowed in nonparametric tests</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="1" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">1</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 6: Check-In - Team Plan -->
+      <item ident="q6_checkin" title="Team Plan Check-In (5 points)">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[<p><strong>Part B: Group Project Check-In - Team Plan (5 points)</strong></p>
+<p><strong>GROUP LEADER SUBMITS</strong> a team plan including:</p>
+<ol>
+<li><strong>Team Roster:</strong> Names and contact info of all group members</li>
+<li><strong>Communication Plan:</strong> How will you communicate? (email, text, Slack, etc.)</li>
+<li><strong>Meeting Schedule:</strong> At least 2-3 meeting times for Weeks 8-10 (dates and times)</li>
+<li><strong>Division of Responsibilities:</strong> Who handles data loading, AI consultations, analysis, slides, report writing?</li>
+<li><strong>Preliminary Timeline:</strong> When will you complete data analysis, AI comparison, presentation draft, and report?</li>
+</ol>
+<p><strong>Submit as:</strong> Text entry OR file upload (PDF/Word). Length: 1-2 pages.</p>
+<p><strong>Grading:</strong> Completion-based (5 points for reasonable plan).</p>
+<p><strong>Note:</strong> Only the group leader submits. All team members get the same grade.</p>]]></mattext>
+          </material>
+        </presentation>
+      </item>
+
+    </section>
+  </assessment>
+</questestinterop>

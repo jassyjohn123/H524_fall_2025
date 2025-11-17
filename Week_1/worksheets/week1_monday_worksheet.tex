@@ -10,9 +10,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 
-% Define OSU orange and AI blue colors
+% Define OSU orange color
 \definecolor{osaorange}{RGB}{220,115,38}
-\definecolor{aiblue}{RGB}{30,144,255}
 
 % Configure hyperref colors
 \hypersetup{
@@ -101,27 +100,6 @@ hist(high_dose, main="High Dose Group Survival", xlab="Days", col="lightcoral")
 \item Which group appears to have the best survival prospects?
 \item Why is it important to use the same x-axis scale when comparing groups?
 \end{enumerate}
-
-\subsection{Exercise 2.2: AI-Enhanced Histogram Creation}
-
-\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
-\textbf{\textcolor{aiblue}{AI Prompt:}} ``Help me create side-by-side histograms for comparing three groups of guinea pig survival data. The data should use the same scales and bin widths for fair comparison.''
-\end{tcolorbox}
-
-\textbf{AI Response (fill in):}
-\begin{lstlisting}
-# Paste AI-generated code here:
-
-
-\end{lstlisting}
-
-\textbf{Verification Checklist:}
-\begin{itemize}
-\item[$\square$] Same x-axis scale across all histograms?
-\item[$\square$] Same number of bins?
-\item[$\square$] Clear labels and titles?
-\item[$\square$] Different colors for each group?
-\end{itemize}
 
 \section{Part 3: Boxplots for Group Comparison}
 
@@ -214,51 +192,9 @@ control_subset <- subset(survival_data, group == "Control")
 \item High dose group mean: \rule{3cm}{0.4pt}
 \end{itemize}
 
-\section{Part 5: AI-Enhanced Analysis Challenge}
+\section{Part 5: Connecting to Biostatistics Concepts}
 
-\subsection{Exercise 5.1: Complete Statistical Summary}
-
-\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
-\textbf{\textcolor{aiblue}{AI Challenge:}} Use AI to help create a comprehensive analysis comparing the three treatment groups.
-
-\textbf{Your AI Prompt:}
-``I have guinea pig survival data for three groups: control, low dose, and high dose. Help me create a complete statistical comparison including descriptive statistics, appropriate visualizations, and interpretation of the results.''
-\end{tcolorbox}
-
-\textbf{AI Response Documentation:}
-\begin{enumerate}
-\item \textbf{Descriptive Statistics Code:}
-\begin{lstlisting}
-# Paste AI code here:
-
-
-\end{lstlisting}
-
-\item \textbf{Visualization Code:}
-\begin{lstlisting}
-# Paste AI code here:
-
-
-\end{lstlisting}
-
-\item \textbf{AI Interpretation:}
-(Write the AI's interpretation of the results)
-
-\vspace{3cm}
-
-\end{enumerate}
-
-\textbf{Your Verification:}
-\begin{itemize}
-\item[$\square$] Are the statistical calculations correct?
-\item[$\square$] Do the visualizations effectively show group differences?
-\item[$\square$] Is the interpretation scientifically sound?
-\item[$\square$] What would you add or modify?
-\end{itemize}
-
-\section{Part 6: Connecting to Biostatistics Concepts}
-
-\subsection{Exercise 6.1: Population vs. Sample Discussion}
+\subsection{Exercise 5.1: Population vs. Sample Discussion}
 
 \textbf{Questions for Discussion:}
 \begin{enumerate}
@@ -268,7 +204,7 @@ control_subset <- subset(survival_data, group == "Control")
 \item What are potential limitations of this study design?
 \end{enumerate}
 
-\subsection{Exercise 6.2: Setting Up for Statistical Inference}
+\subsection{Exercise 5.2: Setting Up for Statistical Inference}
 
 In upcoming classes we'll learn about probability. Based on today's data:
 
@@ -285,21 +221,9 @@ In upcoming classes we'll learn about probability. Based on today's data:
 \item Histograms show the shape and distribution of data
 \item Boxplots efficiently compare groups using five-number summaries
 \item R data frames organize different types of data together
-\item AI can accelerate analysis but requires human verification
+\item Careful verification is essential for accurate analysis
 \end{itemize}
 
 \textbf{Next Class:} We'll dive deeper into numerical summary measures, rates and standardization, and advanced R programming techniques.
-
-\section{AI Usage Documentation}
-\begin{tcolorbox}[colback=gray!10,colframe=gray,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
-\textbf{Document your AI interaction:}
-\begin{itemize}
-\item AI tools used: \rule{8cm}{0.4pt}
-\item Most helpful AI suggestion: \rule{8cm}{0.4pt}
-\item Code that needed correction: \rule{8cm}{0.4pt}
-\item Verification methods used: \rule{8cm}{0.4pt}
-\item Overall AI effectiveness (1-10): \rule{2cm}{0.4pt}
-\end{itemize}
-\end{tcolorbox}
 
 \end{document}

@@ -1,0 +1,240 @@
+\documentclass[9pt]{article}
+\usepackage[margin=0.45in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multicol}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+% Compact spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+\setlist{noitemsep,topsep=0pt,leftmargin=10pt}
+
+\begin{document}
+
+% Orange header
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\centering
+\textcolor{white}{\textbf{\large H524 GROUP PROJECT: AI COMPARISON IN BIOSTATISTICS}}\\
+\textcolor{white}{\textbf{Fall 2025 — Complete Project Guide}}
+\end{tcolorbox}
+
+\vspace{-4pt}
+
+\section*{Project Overview}
+
+Analyze a medical dataset using statistical methods from Weeks 1-9, while consulting three AI tools (\textbf{Claude}, \textbf{ChatGPT}, \textbf{Microsoft Copilot}). Critically compare their outputs: Which methods did each suggest? Did they agree? Which was most appropriate? Document findings in a written report and oral presentation.
+
+\textbf{Key Focus:} AI comparison. This project tests your ability to critically evaluate AI outputs, not just use them.
+
+\vspace{2pt}
+
+\section*{Group Assignments \& Datasets}
+
+\begin{center}
+\small
+\begin{tabular}{cl}
+\toprule
+\textbf{Group} & \textbf{Dataset} \\
+\midrule
+1 & Anorexia Treatment Study \\
+2 & Pima Diabetes Study \\
+3 & Exercise \& Cholesterol Study \\
+4 & Vitamin D Supplementation Study \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Check Canvas for your group assignment.} You'll see your group number and teammates posted.
+
+\vspace{2pt}
+
+\section*{Timeline \& Check-Ins}
+
+\begin{center}
+\small
+\begin{tabular}{>{\bfseries}p{1.8cm}p{10cm}}
+\toprule
+\textbf{Week} & \textbf{Activity \& Deliverable} \\
+\midrule
+Week 7 & \textbf{CHECK-IN:} Team Plan (5 pts, part of Week 7 assignment). Leader uploads: team roster, communication plan, meeting schedule, role assignments. Due Sunday 11:59pm.\\
+\midrule
+Week 8 & \textbf{CHECK-IN:} Progress Update (1 pt, part of Week 8 assignment). Leader uploads: brief update on progress (has group met? data loaded? AI consulted?). Due Sunday 11:59pm.\\
+\midrule
+Week 9 & \textbf{CHECK-IN:} Presentation Readiness (3 pts, part of Week 9 assignment). Leader uploads: presentation outline OR draft slides OR plan. Due Sunday 11:59pm.\\
+\midrule
+Week 10 & \textbf{PRESENTATIONS} (10\% of course grade): Mon 12-1:20pm (Groups 1\&2), Wed 12-1:20pm (Groups 3\&4). 15 min + 5 min Q\&A. All team members participate. Use slides.\\
+\midrule
+Finals Week & \textbf{FINAL REPORT} (15\% of course grade): Due Wednesday 11:59pm. Upload PDF to Canvas (one per team). 5-8 pages + R code appendix.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Note:} Check-ins count toward Weekly Assignments (60\%), not Group Project (25\%). Submit via Canvas assignment uploads.
+
+\vspace{2pt}
+
+\section*{Dataset Descriptions \& Variables}
+
+\textbf{Data Source:} All datasets available in the \texttt{MedDataSets} R package. See README files in your group folder for loading instructions and more details.
+
+\vspace{0.3cm}
+
+\textbf{Group 1: Anorexia Treatment Study} (n=72 patients)
+\begin{itemize}
+\item \texttt{Treat}: Treatment type (Cont=Control, CBT=Cognitive Behavioral Therapy, FT=Family Therapy)
+\item \texttt{Prewt}: Weight before treatment (lbs)
+\item \texttt{Postwt}: Weight after treatment (lbs)
+\end{itemize}
+
+\textbf{Group 2: Pima Diabetes Study} (n=768 women)
+\begin{itemize}
+\item \texttt{glu}: Glucose level (mg/dL)
+\item \texttt{bmi}: Body mass index
+\item \texttt{age}: Age (years)
+\item \texttt{type}: Diabetes diagnosis (Yes/No)
+\end{itemize}
+
+\textbf{Group 3: Exercise \& Cholesterol Study} (n=50 adults)
+\begin{itemize}
+\item \texttt{exercise}: Weekly exercise hours (continuous)
+\item \texttt{cholesterol}: Total cholesterol (mg/dL)
+\item \texttt{age}: Age (years)
+\item \texttt{sex}: Sex (M/F)
+\end{itemize}
+
+\textbf{Group 4: Vitamin D Supplementation Study} (n=45 adults)
+\begin{itemize}
+\item \texttt{group}: Supplement dose (Low, Medium, High)
+\item \texttt{vitamin\_d}: Vitamin D level after 8 weeks (ng/mL)
+\item \texttt{age}: Age (years)
+\item \texttt{baseline}: Baseline vitamin D level (ng/mL)
+\end{itemize}
+
+\vspace{2pt}
+
+\section*{AI Tools Overview}
+
+\textbf{1. Claude} (\url{claude.ai}) — Statistical reasoning, assumption checking
+
+\textbf{2. ChatGPT} (\url{chat.openai.com}) — Code generation, multiple approaches
+
+\textbf{3. Microsoft Copilot} (RStudio) — Code completion, inline suggestions
+
+\vspace{2pt}
+
+\section*{AI Comparison Methodology: Iterative Refinement}
+
+\textbf{Don't just ask once and compare.} Use this systematic process:
+
+\textbf{Step 1: Initial Consultation} — Ask Tools 1 \& 2 same question. Document both responses.
+
+\textbf{Step 2: Comparison} — Use Tool 3 as ``judge.'' Prompt: ``Tool 1 suggested [X]. Tool 2 suggested [Y]. Compare these. Which is more appropriate? Score each 0-10 and explain.''
+
+\textbf{Step 3: Refine} — If tools disagree, refine prompt to be more specific. Re-ask both tools. Use Tool 3 to compare again.
+
+\textbf{Step 4: Convergence} — Keep refining until: (a) tools give similar advice OR (b) you understand why they differ. Convergence = understanding trade-offs, not identical answers.
+
+\textbf{Step 5: Document} — Save ALL prompts/responses (not just final). Note iterations, what changed, when you converged. This becomes your report's AI Comparison section.
+
+\textbf{Example:} Round 1: Both suggest ANOVA. Round 2: Tool 1 lists normality + equal variance; Tool 2 misses equal variance. Round 3: Tool 3 judges Tool 1 more complete. \textit{Convergence reached: Tool 1 more thorough.}
+
+\vspace{2pt}
+
+\textbf{Suggested First Question (to get started):}
+
+\textit{``I have uploaded a dataset with [describe your variables]. What are some good research questions I could investigate with this data? For each research question you suggest, what statistical method would be appropriate and what assumptions would I need to check?''}
+
+\textit{Example for Group 1 (Anorexia):} ``I have uploaded a dataset with 3 treatment groups (Control, CBT, Family Therapy). Each patient has a pre-treatment weight and post-treatment weight. What are some good research questions I could investigate? For each question, what statistical method should I use and what assumptions need checking?''
+
+This exploratory approach gives you a starting point for your iterative comparison process.
+
+\newpage
+
+\section*{Report Requirements (15\% of course grade)}
+
+\textbf{Due:} Finals Week Wednesday 11:59pm \quad|\quad \textbf{Format:} PDF upload to Canvas
+
+\textbf{Required Sections:}
+
+\textbf{1. Introduction}
+
+\quad Dataset description, research questions
+
+\textbf{2. Methods}
+
+\quad Statistical approaches used, why appropriate, how you consulted AI tools
+
+\textbf{3. Results}
+
+\quad Key findings with tables/figures, test results, visualizations
+
+\quad \textbf{IMPORTANT:} Present your final analysis clearly first (as if for stakeholders), then discuss AI process in Section 4
+
+\textbf{4. AI Tool Comparison — MOST IMPORTANT}
+
+\quad What did each tool suggest? Where did they agree/disagree? Which was most appropriate? Any errors? Which was most helpful? What did this teach you?
+
+\quad \textit{Example:} ``Claude suggested paired t-tests for each treatment group, ChatGPT suggested ANOVA on change scores. Claude's approach simpler but multiple tests. We chose ANOVA to compare all groups simultaneously and verified assumptions.''
+
+\textbf{5. Discussion}
+
+\quad Interpretation of findings in context, limitations, conclusions
+
+\textbf{6. Appendix: R Code}
+
+\quad Complete, well-commented, reproducible code
+
+\vspace{2pt}
+
+\section*{Presentation (10\% of course grade)}
+
+\textbf{When:} Mon Week 10 12-1:20pm (Groups 1\&2), Wed Week 10 12-1:20pm (Groups 3\&4)
+
+\textbf{Format:} 15 min + 5 min Q\&A. All team members participate. Use slides.
+
+\textbf{Content:} Dataset overview (2-3 min), Statistical findings — your final answer to the research question (5-6 min), \textbf{AI comparison highlights — what the tools suggested and how you chose (5-6 min, 30-40\%)}, Conclusions (1-2 min)
+
+\textbf{Note:} Present your final results clearly first (as if for stakeholders), then show the AI comparison process that got you there.
+
+\textbf{Tips:} Practice timing. Divide speaking roles. Focus on AI comparison. Show examples (screenshots, code comparisons).
+
+\vspace{2pt}
+
+\section*{Grading}
+
+\textbf{Report (15\%):} Statistical analysis (5\%), AI comparison depth (7\%), Writing quality (3\%)
+
+\textbf{Presentation (10\%):} Content quality (5\%), AI comparison focus (3\%), Delivery/teamwork (2\%)
+
+All team members receive same grade unless participation issues documented.
+
+\vspace{2pt}
+
+\section*{Getting Help \& Tips}
+
+\textbf{Help Available:} \textbf{Week 9 Wed 12-1:20pm drop-in} (153 Milam)
+
+\textbf{Success Tips:} Start early. Use all 3 AI tools extensively. Document as you go (save AI chats, note errors). Verify everything — AI makes mistakes. Meet regularly (Weeks 7-10). Focus on AI comparison.
+
+\vspace{2pt}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt]
+\textbf{Remember:} The goal is not to find the "right" AI tool, but to learn how to \textbf{critically evaluate} AI outputs and \textbf{verify} their suggestions. All three tools have strengths and weaknesses — your job is to synthesize the best approach from multiple sources and understand when AI helps vs. when it misleads.
+\end{tcolorbox}
+
+\end{document}

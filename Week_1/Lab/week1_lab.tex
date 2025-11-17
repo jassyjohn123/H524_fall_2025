@@ -13,7 +13,6 @@
 
 % Define colors
 \definecolor{osaorange}{RGB}{220,115,38}
-\definecolor{aiblue}{RGB}{30,144,255}
 \definecolor{codebackground}{RGB}{248,248,248}
 
 % Configure hyperref
@@ -53,7 +52,7 @@
 
 \noindent\textbf{Lab Duration:} 110 minutes (8:00am -- 9:50am)\\
 \textbf{Format:} Online\\
-\textbf{Tools Required:} R, RStudio, GitHub account, GitHub Copilot (optional)
+\textbf{Tools Required:} R, RStudio
 
 \section{Learning Objectives}
 
@@ -63,8 +62,6 @@ By the end of this lab, you will be able to:
 \item Create and manipulate basic R data structures
 \item Generate descriptive statistics for health data
 \item Create publication-quality visualizations for different data types
-\item \textcolor{aiblue}{\textbf{Use GitHub Copilot to enhance R coding productivity}}
-\item \textcolor{aiblue}{\textbf{Critically evaluate and verify AI-generated code}}
 \end{enumerate}
 
 \section{Lab Setup}
@@ -73,8 +70,6 @@ By the end of this lab, you will be able to:
 \begin{enumerate}
 \item \textbf{R:} Download from \url{https://cran.r-project.org/}
 \item \textbf{RStudio:} Download from \url{https://posit.co/products/open-source/rstudio/}
-\item \textbf{GitHub Account:} Sign up at \url{https://github.com/}
-\item \textbf{GitHub Copilot:} Available free for students at \url{https://education.github.com/}
 \end{enumerate}
 
 \subsection{Verify Installation}
@@ -383,129 +378,6 @@ abline(lm(systolic_bp ~ diastolic_bp, data = health_data),
 \caption{Example scatter plot showing relationship between blood pressure variables}
 \end{figure}
 
-\section{Part 4: AI-Enhanced Coding with GitHub Copilot (20 minutes)}
-
-\begin{tcolorbox}[
-    colback=aiblue!10,
-    colframe=aiblue,
-    boxrule=1pt,
-    arc=2pt,
-    left=3pt,
-    right=3pt,
-    top=3pt,
-    bottom=3pt,
-    breakable,
-    boxsep=2pt
-]
-\textbf{AI Integration Component}
-
-This section introduces you to using AI tools (GitHub Copilot) to enhance your R programming productivity while maintaining statistical rigor.
-\end{tcolorbox}
-
-\subsection{Setting Up GitHub Copilot in RStudio}
-
-\textbf{Prerequisites:}
-\begin{itemize}
-\item GitHub account with active Copilot subscription (free for students)
-\item RStudio Desktop 2023.09.0 or later
-\end{itemize}
-
-\textbf{Exercise 4.1:} Configure GitHub Copilot in RStudio.
-
-\begin{enumerate}
-\item \textbf{Enable GitHub Copilot:}
-   \begin{itemize}
-   \item Navigate to \texttt{Tools > Global Options > Copilot}
-   \item Check the box to "Enable GitHub Copilot"
-   \end{itemize}
-
-\item \textbf{Install Copilot Agent:}
-   \begin{itemize}
-   \item Download and install the Copilot Agent components (automatic prompt)
-   \end{itemize}
-
-\item \textbf{Sign In Process:}
-   \begin{itemize}
-   \item Click the "Sign In" button in the Copilot options
-   \item Copy the Verification Code from the dialog
-   \item Navigate to \url{https://github.com/login/device}
-   \item Paste the code and click "Continue"
-   \end{itemize}
-
-\item \textbf{Authorize Permissions:}
-   \begin{itemize}
-   \item Click "Authorize GitHub Copilot Plugin" when prompted
-   \item RStudio will show your signed-in user status
-   \end{itemize}
-
-\item \textbf{Start Coding:}
-   \begin{itemize}
-   \item Close Global Options dialog
-   \item Open any R script (.R file)
-   \item Begin typing - Copilot suggestions appear in gray text
-   \item Press Tab to accept suggestions
-   \end{itemize}
-\end{enumerate}
-
-\begin{figure}[H]
-\centering
-\fbox{\parbox{0.8\textwidth}{
-\textbf{Note:} Screenshots of the GitHub Copilot setup process would be displayed here in a live demonstration. The setup involves navigating through RStudio's Tools menu, enabling Copilot in Global Options, and following the authentication workflow.
-}}
-\caption{GitHub Copilot Setup Process in RStudio}
-\end{figure}
-
-\subsection{AI-Assisted Code Generation}
-
-\textbf{Exercise 4.2:} Use AI to generate statistical code.
-
-\textcolor{aiblue}{\textbf{Prompt Example:}} Type a comment describing what you want to do:
-
-\begin{rcode}
-# Create a function to calculate age-adjusted rates for three age groups
-# Age groups: 0-30, 31-60, 61+
-# Input: cases vector, population vector, age_groups vector
-# Output: age-specific rates per 100,000
-
-# Let GitHub Copilot suggest the function
-\end{rcode}
-
-\textbf{Exercise 4.3:} Verify and test AI-generated code.
-
-\begin{rcode}
-# Test the AI-generated function with sample data
-test_cases <- c(10, 25, 40)
-test_population <- c(20000, 30000, 15000)
-test_ages <- c("0-30", "31-60", "61+")
-
-# Run the function and verify results manually
-# Calculate: (cases/population) * 100000
-manual_check <- (test_cases / test_population) * 100000
-print(manual_check)
-
-# Compare with AI function output
-# [Test the AI-generated function here]
-\end{rcode}
-
-\subsection{AI Best Practices for Biostatistics}
-
-\textbf{Exercise 4.4:} Critical evaluation checklist.
-
-\begin{enumerate}
-\item \textbf{Review AI suggestions:} Does the code make statistical sense?
-\item \textbf{Test with known data:} Verify results with manual calculations
-\item \textbf{Check assumptions:} Are statistical assumptions appropriate?
-\item \textbf{Validate output:} Do results align with domain knowledge?
-\end{enumerate}
-
-\textcolor{aiblue}{\textbf{AI Verification Task:}} For each AI-generated code snippet:
-\begin{itemize}
-\item Document the prompt used
-\item Test with sample data
-\item Verify one calculation manually
-\item Note any corrections needed
-\end{itemize}
-
 \section{Lab Assignment}
 
 \subsection{Data Analysis Task}
@@ -539,26 +411,12 @@ fev1_data <- data.frame(
    \item BMI-FEV1 correlation analysis with trend lines
    \item Risk factor visualization (smoking, age, gender effects)
    \end{itemize}
-\item \textcolor{aiblue}{\textbf{Enhanced AI Component:}} Use AI to help generate:
-   \begin{itemize}
-   \item Geographic mapping code for health outcomes by region
-   \item Advanced ggplot2 visualizations with professional formatting
-   \item Function to categorize FEV1 values and create summary tables
-   \item Interactive plot elements (if using plotly package)
-   \end{itemize}
-\item Apply 2024-style analysis approaches:
+\item Apply advanced analysis approaches:
    \begin{itemize}
    \item Risk ratio calculations where appropriate
    \item Correlation testing between variables
    \item Age-adjustment techniques for rate comparisons
    \item Professional publication-ready plot formatting
-   \end{itemize}
-\item Document your AI usage:
-   \begin{itemize}
-   \item What prompts did you use for complex visualizations?
-   \item How did you verify geographic mapping accuracy?
-   \item What statistical assumptions did you check?
-   \item What corrections were needed for publication quality?
    \end{itemize}
 \end{enumerate}
 
@@ -572,7 +430,6 @@ Submit the following files via Canvas:
    \begin{itemize}
    \item Summary statistics tables
    \item Key visualizations
-   \item AI usage documentation
    \item Brief interpretation of FEV1 findings
    \end{itemize}
 \end{enumerate}
@@ -582,34 +439,7 @@ Submit the following files via Canvas:
 \begin{itemize}
 \item \textbf{R Documentation:} \url{https://www.rdocumentation.org/}
 \item \textbf{RStudio Cheatsheets:} \url{https://posit.co/resources/cheatsheets/}
-\item \textbf{GitHub Copilot Documentation:} \url{https://docs.github.com/en/copilot}
 \item \textbf{Biostatistics with R:} \url{https://cran.r-project.org/web/views/MedicalImaging.html}
 \end{itemize}
-
-\section{Lab Reflection Questions}
-
-\begin{enumerate}
-\item How did using AI tools change your approach to coding in R?
-\item What were the main challenges in verifying AI-generated statistical code?
-\item When would you prefer to write code manually vs. using AI assistance?
-\item How can AI tools best support learning biostatistics concepts?
-\end{enumerate}
-
-\vspace{1cm}
-
-\begin{tcolorbox}[
-    colback=osaorange!10,
-    colframe=osaorange,
-    boxrule=1pt,
-    arc=2pt,
-    left=3pt,
-    right=3pt,
-    top=3pt,
-    bottom=3pt,
-    breakable,
-    boxsep=2pt
-]
-\textbf{Remember:} AI tools are powerful assistants, but you remain responsible for understanding the statistical methods and verifying all results. Always think critically about AI suggestions and test them thoroughly.
-\end{tcolorbox}
 
 \end{document}

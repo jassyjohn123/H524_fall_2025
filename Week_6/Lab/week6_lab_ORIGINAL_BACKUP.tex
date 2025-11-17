@@ -1,0 +1,882 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+\definecolor{codebackground}{RGB}{248,248,248}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+% Configure listings for code display
+\lstset{
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  breakatwhitespace=true,
+  postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+
+% Code environment using tcolorbox with listings
+\newtcblisting{rcode}{
+  colback=white,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=0pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  width=\textwidth,
+  breakable,
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false
+  }
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 6 Lab: Power, Two-Sample Tests, and ANOVA}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Format:} Online\\
+\textbf{Tools Required:} R, RStudio\\
+\textbf{Estimated Time:} 90 minutes
+
+\section{Learning Objectives}
+
+By the end of this lab, you will be able to:
+\begin{enumerate}
+\item Calculate statistical power and required sample sizes in R
+\item Perform independent two-sample t-tests (pooled and Welch's)
+\item Conduct paired t-tests for dependent data
+\item Run one-way ANOVA to compare multiple groups
+\item Perform post-hoc tests (Tukey's HSD) after significant ANOVA
+\item Check assumptions for t-tests and ANOVA
+\item Interpret output from hypothesis tests correctly
+\item \textcolor{aiblue}{\textbf{Use AI tools to help with power analysis and test selection}}
+\end{enumerate}
+
+\section{Part 1: Statistical Power and Sample Size}
+
+Statistical power is the probability of correctly rejecting the null hypothesis when it is false. Before conducting a study, we should calculate the required sample size to achieve adequate power (typically 0.80 or 80\%).
+
+\subsection{Exercise 1.1: Understanding Power}
+
+\textbf{Scenario:} We want to test if a new drug reduces cholesterol. Population mean is 200 mg/dL with SD = 30 mg/dL. We want to detect a reduction to 190 mg/dL.
+
+\begin{rcode}
+# Power calculation for one-sample t-test
+# Parameters
+mu0 <- 200          # Null hypothesis mean
+mu1 <- 190          # True mean (alternative)
+sigma <- 30         # Population SD
+n <- 25             # Sample size
+alpha <- 0.05       # Significance level
+
+# Manual calculation
+se <- sigma / sqrt(n)  # Standard error = 6
+
+# Critical values for two-sided test
+z_crit <- qnorm(1 - alpha/2)  # 1.96
+lower_crit <- mu0 - z_crit * se  # 188.24
+upper_crit <- mu0 + z_crit * se  # 211.76
+
+cat("Rejection region:", lower_crit, "to", upper_crit, "\n")
+
+# Power: P(reject H0 | mu = 190)
+# We reject if sample mean falls in rejection region
+power_lower <- pnorm(lower_crit, mean=mu1, sd=se)
+power_upper <- pnorm(upper_crit, mean=mu1, sd=se,
+                     lower.tail=FALSE)
+power <- power_lower + power_upper
+
+cat("Power:", round(power, 3), "\n")
+cat("Type II error (beta):", round(1-power, 3), "\n")
+
+# Interpretation: Only 34.5% chance of detecting the effect!
+\end{rcode}
+
+\textbf{Question:} What does power = 0.345 mean in plain English?
+
+\vspace{1.5cm}
+
+\subsection{Exercise 1.2: Using power.t.test()}
+
+R has built-in functions for power analysis. You specify any 4 of the 5 parameters, and R solves for the missing one.
+
+\begin{rcode}
+# Calculate power for given sample size
+result <- power.t.test(n = 25,           # Sample size
+                       delta = 10,       # Effect size |mu1 - mu0|
+                       sd = 30,          # Standard deviation
+                       sig.level = 0.05, # Alpha
+                       type = "one.sample",
+                       alternative = "two.sided")
+print(result)
+cat("\nPower:", round(result$power, 3), "\n")
+
+# Calculate required sample size for power = 0.80
+result2 <- power.t.test(delta = 10,
+                        sd = 30,
+                        sig.level = 0.05,
+                        power = 0.80,
+                        type = "one.sample")
+print(result2)
+cat("\nRequired n:", ceiling(result2$n), "\n")
+
+# Result: Need n = 143 subjects for 80% power
+\end{rcode}
+
+\textbf{Key insight:} Small samples have low power! Always do power analysis before collecting data.
+
+\vspace{1cm}
+
+\subsection{Exercise 1.3: Power Curves}
+
+Visualize how power changes with sample size.
+
+\begin{rcode}
+# Create power curve
+sample_sizes <- seq(10, 200, by=5)
+
+# Calculate power for each sample size
+powers <- sapply(sample_sizes, function(n) {
+  power.t.test(n = n, delta = 10, sd = 30,
+               sig.level = 0.05, type = "one.sample")$power
+})
+
+# Plot power curve
+plot(sample_sizes, powers, type="l", lwd=2, col="blue",
+     main="Power vs. Sample Size",
+     xlab="Sample Size (n)",
+     ylab="Power",
+     ylim=c(0, 1))
+
+# Add reference lines
+abline(h=0.80, col="red", lty=2, lwd=1.5)
+abline(v=143, col="red", lty=2, lwd=1.5)
+text(143, 0.5, "n = 143", pos=4, col="red")
+text(100, 0.83, "Power = 0.80", pos=4, col="red")
+grid()
+
+# Key observation: Power increases with n, but with diminishing returns
+\end{rcode}
+
+\textbf{Question:} Why does the power curve flatten out at large sample sizes?
+
+\vspace{1.5cm}
+
+\subsection{Exercise 1.4: Two-Sample Power}
+
+For comparing two groups, use \texttt{type = "two.sample"}.
+
+\begin{rcode}
+# Sample size for two-sample t-test
+# Want to detect 15 mmHg difference in blood pressure
+# Assume SD = 20 mmHg in both groups
+# Want 90% power
+
+power.t.test(delta = 15,          # Difference to detect
+             sd = 20,              # Pooled SD
+             sig.level = 0.05,
+             power = 0.90,
+             type = "two.sample",  # Two independent groups
+             alternative = "two.sided")
+
+# Result: Need n = 34 per group (68 total)
+
+# What if we only have n = 20 per group?
+power.t.test(n = 20, delta = 15, sd = 20,
+             sig.level = 0.05, type = "two.sample")
+# Power = 0.724 (72.4%) - a bit low!
+\end{rcode}
+
+\section{Part 2: Two-Sample t-Tests (Independent Samples)}
+
+Compare means of two independent groups.
+
+\subsection{Exercise 2.1: Pooled Two-Sample t-Test}
+
+\textbf{Study:} Compare tumor growth (mm) in control vs. treatment group.
+
+\begin{rcode}
+# Enter data
+control <- c(7, 10, 9, 8, 7, 6, 8, 9, 12, 13)
+treatment <- c(4, 6, 10, 8, 5, 3, 10, 8, 8, 10)
+
+# Summary statistics
+cat("Control group:\n")
+cat("  Mean:", mean(control), "\n")
+cat("  SD:", sd(control), "\n")
+cat("  n:", length(control), "\n\n")
+
+cat("Treatment group:\n")
+cat("  Mean:", mean(treatment), "\n")
+cat("  SD:", sd(treatment), "\n")
+cat("  n:", length(treatment), "\n\n")
+
+# Visualize data
+boxplot(control, treatment,
+        names=c("Control", "Treatment"),
+        ylab="Tumor Growth (mm)",
+        main="Tumor Growth: Control vs. Treatment",
+        col=c("lightcoral", "lightblue"))
+
+# Add points
+stripchart(list(Control=control, Treatment=treatment),
+           vertical=TRUE, method="jitter", add=TRUE,
+           pch=19, col="darkgray")
+\end{rcode}
+
+\textbf{Observation:} Treatment group appears to have slightly lower growth, but there's overlap.
+
+\newpage
+
+\begin{rcode}
+# Pooled two-sample t-test
+# Assumes equal variances
+t.test(control, treatment,
+       var.equal = TRUE,         # Use pooled variance
+       alternative = "two.sided")
+
+# Output interpretation:
+# t = 1.571
+# df = 18 (n1 + n2 - 2 = 10 + 10 - 2)
+# p-value = 0.134
+# 95% CI for difference: (-0.56, 3.96) mm
+
+# Conclusion: p = 0.134 > 0.05
+# Not enough evidence to conclude treatment reduces tumor growth
+\end{rcode}
+
+\textbf{Interpretation:} Write a complete conclusion in context:
+
+\vspace{2cm}
+
+\subsection{Exercise 2.2: Welch's t-Test (Unequal Variances)}
+
+Welch's test does not assume equal variances. It's the default in R.
+
+\begin{rcode}
+# Welch's two-sample t-test (default)
+t.test(control, treatment,
+       var.equal = FALSE)  # Or just omit this line
+
+# Slightly different results:
+# t = 1.571
+# df = 17.78 (adjusted for unequal variances)
+# p-value = 0.134
+
+# For this data, results are nearly identical because
+# variances are similar (2.234 vs 2.573)
+
+# Check variance equality with F-test
+var.test(control, treatment)
+# F = 0.754, p = 0.638
+# p > 0.05 so variances are not significantly different
+# Either pooled or Welch's test is appropriate
+\end{rcode}
+
+\textbf{Rule of thumb:} When in doubt, use Welch's test (safer, default in R).
+
+\vspace{1cm}
+
+\subsection{Exercise 2.3: One-Sided Tests}
+
+Sometimes we have a directional hypothesis.
+
+\begin{rcode}
+# One-sided test: Is control > treatment?
+# (Does treatment reduce growth?)
+t.test(control, treatment,
+       alternative = "greater")  # Test if control > treatment
+
+# p-value = 0.0671
+# One-sided p-value is half of two-sided when t > 0
+
+# Still not significant at alpha = 0.05,
+# but closer (p = 0.067 vs 0.134)
+\end{rcode}
+
+\textbf{Note:} Only use one-sided tests when you have strong prior reason to expect direction!
+
+\vspace{1cm}
+
+\subsection{Exercise 2.4: Confidence Intervals}
+
+The confidence interval tells us the plausible range for the true difference.
+
+\begin{rcode}
+# Extract confidence interval
+result <- t.test(control, treatment, var.equal=TRUE)
+
+# Access components
+cat("Difference in means:", result$estimate[1] - result$estimate[2], "\n")
+cat("95% CI:", result$conf.int[1], "to", result$conf.int[2], "\n")
+
+# Since CI includes 0, not significant at alpha = 0.05
+# If CI were (0.5, 4.0), would be significant
+
+# For one-sided test, get one-sided CI
+result_one <- t.test(control, treatment,
+                     var.equal=TRUE,
+                     alternative="greater")
+cat("One-sided 95% CI:", result_one$conf.int[1], "to Inf\n")
+\end{rcode}
+
+\section{Part 3: Paired t-Tests}
+
+Use paired tests when observations are matched or dependent.
+
+\subsection{Exercise 3.1: Before-After Study}
+
+\textbf{Study:} Blood pressure before and after medication in 10 patients.
+
+\begin{rcode}
+# Enter data
+before <- c(142, 138, 150, 148, 135, 160, 155, 145, 152, 158)
+after <- c(138, 132, 148, 140, 135, 152, 148, 142, 146, 150)
+
+# Calculate differences
+differences <- before - after
+
+cat("Summary of differences:\n")
+cat("  Mean:", mean(differences), "mmHg\n")
+cat("  SD:", sd(differences), "\n")
+cat("  n:", length(differences), "\n")
+
+# Visualize
+par(mfrow=c(1,2))
+
+# Before-after plot
+plot(before, after, pch=19, col="blue",
+     xlab="Before (mmHg)", ylab="After (mmHg)",
+     main="Blood Pressure: Before vs After")
+abline(0, 1, col="red", lty=2)  # Line of no change
+for(i in 1:10) {
+  segments(before[i], before[i], before[i], after[i], col="gray")
+}
+
+# Histogram of differences
+hist(differences, breaks=5, col="lightblue",
+     main="Distribution of Differences",
+     xlab="Change in BP (mmHg)")
+abline(v=mean(differences), col="red", lwd=2)
+
+par(mfrow=c(1,1))
+\end{rcode}
+
+\newpage
+
+\begin{rcode}
+# Paired t-test (Method 1: test differences)
+t.test(differences, mu=0, alternative="greater")
+
+# Output:
+# t = 5.916, df = 9
+# p-value = 0.0001236
+# mean of differences = 5.2 mmHg
+
+# Paired t-test (Method 2: paired argument)
+t.test(before, after, paired=TRUE, alternative="greater")
+
+# Conclusion: Strong evidence (p < 0.001) that medication
+# reduces blood pressure by an average of 5.2 mmHg
+\end{rcode}
+
+\textbf{Interpretation:} Write a conclusion in context:
+
+\vspace{2cm}
+
+\subsection{Exercise 3.2: Why Pairing Matters}
+
+Compare paired vs. independent analysis on the same data.
+
+\begin{rcode}
+# WRONG: Independent two-sample t-test
+independent_result <- t.test(before, after, paired=FALSE)
+cat("Independent t-test:\n")
+cat("  t =", independent_result$statistic, "\n")
+cat("  p-value =", independent_result$p.value, "\n\n")
+
+# CORRECT: Paired t-test
+paired_result <- t.test(before, after, paired=TRUE)
+cat("Paired t-test:\n")
+cat("  t =", paired_result$statistic, "\n")
+cat("  p-value =", paired_result$p.value, "\n\n")
+
+# Dramatic difference!
+# Independent: p = 0.115 (not significant)
+# Paired: p = 0.0002 (highly significant)
+
+# Why? Compare standard errors
+se_independent <- sqrt(var(before)/10 + var(after)/10)
+se_paired <- sd(differences)/sqrt(10)
+
+cat("SE (independent):", round(se_independent, 2), "\n")
+cat("SE (paired):", round(se_paired, 2), "\n")
+cat("Ratio:", round(se_independent/se_paired, 2), "\n")
+
+# SE for paired is nearly 4x smaller!
+# Pairing removes between-subject variability
+\end{rcode}
+
+\textbf{Lesson:} Always use paired test for paired data. Much more powerful!
+
+\vspace{1cm}
+
+\section{Part 4: One-Way ANOVA}
+
+Compare means across 3 or more groups.
+
+\subsection{Exercise 4.1: Drug Dose Study}
+
+\textbf{Study:} Compare cholesterol reduction (mg/dL) for 3 drug doses.
+
+\begin{rcode}
+# Enter data
+low <- c(10, 12, 8, 11, 9)
+medium <- c(15, 18, 16, 20, 17)
+high <- c(25, 28, 30, 26, 27)
+
+# Create data frame (long format)
+cholesterol <- c(low, medium, high)
+dose <- factor(rep(c("Low", "Medium", "High"), each=5),
+               levels=c("Low", "Medium", "High"))
+data <- data.frame(cholesterol, dose)
+
+# Summary statistics by group
+aggregate(cholesterol ~ dose, data=data, FUN=mean)
+aggregate(cholesterol ~ dose, data=data, FUN=sd)
+
+# Visualize
+boxplot(cholesterol ~ dose, data=data,
+        col=c("lightblue", "lightgreen", "lightcoral"),
+        main="Cholesterol Reduction by Dose",
+        xlab="Dose", ylab="Reduction (mg/dL)")
+
+# Add points
+stripchart(cholesterol ~ dose, data=data,
+           vertical=TRUE, method="jitter", add=TRUE,
+           pch=19, col="darkgray")
+\end{rcode}
+
+\newpage
+
+\subsection{Exercise 4.2: Check ANOVA Assumptions}
+
+Before running ANOVA, verify assumptions.
+
+\begin{rcode}
+# 1. Normality: Check within each group
+par(mfrow=c(1,3))
+hist(low, main="Low Dose", xlab="Reduction", col="lightblue")
+hist(medium, main="Medium Dose", xlab="Reduction", col="lightgreen")
+hist(high, main="High Dose", xlab="Reduction", col="lightcoral")
+par(mfrow=c(1,1))
+
+# With small samples, hard to assess normality
+# Q-Q plots are better
+par(mfrow=c(1,3))
+qqnorm(low, main="Low Dose"); qqline(low)
+qqnorm(medium, main="Medium Dose"); qqline(medium)
+qqnorm(high, main="High Dose"); qqline(high)
+par(mfrow=c(1,1))
+
+# 2. Equal variances (homogeneity)
+# Bartlett's test (sensitive to non-normality)
+bartlett.test(cholesterol ~ dose, data=data)
+
+# Levene's test (more robust)
+# install.packages("car")
+library(car)
+leveneTest(cholesterol ~ dose, data=data)
+
+# p > 0.05 means equal variances (good!)
+
+# Visual check: Boxplots should have similar spreads
+# Our boxplots look okay
+\end{rcode}
+
+\textbf{Assumption check:} Are the ANOVA assumptions reasonably met for this data?
+
+\vspace{2cm}
+
+\subsection{Exercise 4.3: Perform ANOVA}
+
+\begin{rcode}
+# One-way ANOVA
+model <- aov(cholesterol ~ dose, data=data)
+summary(model)
+
+# Output:
+#             Df Sum Sq Mean Sq F value   Pr(>F)
+# dose         2 985.73  492.87   149.4 7.77e-09 ***
+# Residuals   12  39.60    3.30
+# ---
+# Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+# Interpretation:
+# F(2, 12) = 149.4
+# p < 0.001 (highly significant)
+# Strong evidence that at least one dose differs
+
+# Effect size: How much of variance explained by dose?
+# R-squared (eta-squared)
+ss_between <- 985.73
+ss_total <- 985.73 + 39.60
+r_squared <- ss_between / ss_total
+cat("R-squared:", round(r_squared, 3), "\n")
+# 96% of variance explained by dose!
+\end{rcode}
+
+\textbf{ANOVA conclusion:} There is strong evidence that mean cholesterol reduction differs across dose levels (F(2,12) = 149.4, p $<$ 0.001).
+
+\vspace{1cm}
+
+\subsection{Exercise 4.4: Post-Hoc Tests}
+
+ANOVA tells us \textit{some} groups differ, but not \textit{which} ones. Use post-hoc tests.
+
+\begin{rcode}
+# Tukey's Honestly Significant Difference
+TukeyHSD(model, conf.level=0.95)
+
+# Output:
+#   Tukey multiple comparisons of means
+#     95% family-wise confidence level
+#
+# $dose
+#                    diff       lwr      upr     p adj
+# Medium-Low      7.2000   4.413   10.0870  0.000032
+# High-Low       17.2000  14.413   19.9870  0.000000
+# High-Medium    10.0000   7.213   12.7870  0.000001
+
+# All three pairwise comparisons are significant!
+# High > Medium > Low
+
+# Visualize Tukey results
+plot(TukeyHSD(model), las=1,
+     main="Tukey HSD 95% Confidence Intervals")
+abline(v=0, lty=2, col="red")
+
+# If CI doesn't include 0, difference is significant
+\end{rcode}
+
+\textbf{Conclusion:} All three doses produce significantly different reductions. High dose is most effective, followed by medium, then low.
+
+\vspace{1cm}
+
+\subsection{Exercise 4.5: Alternative Post-Hoc Methods}
+
+\begin{rcode}
+# Bonferroni correction: Adjust p-values
+pairwise.t.test(data$cholesterol, data$dose,
+                p.adjust.method = "bonferroni")
+
+# More conservative than Tukey for many comparisons
+# For 3 groups (3 comparisons), similar results
+
+# Holm's method (less conservative than Bonferroni)
+pairwise.t.test(data$cholesterol, data$dose,
+                p.adjust.method = "holm")
+
+# No adjustment (for comparison - DON'T DO THIS!)
+pairwise.t.test(data$cholesterol, data$dose,
+                p.adjust.method = "none")
+# Shows why we need correction!
+\end{rcode}
+
+\section{Part 5: Integrated Example}
+
+Let's work through a complete analysis from start to finish.
+
+\subsection{Exercise 5.1: Sleep Medication Study}
+
+\textbf{Study:} Compare 4 sleep medications (A, B, C) vs. placebo. Measure hours of sleep.
+
+\begin{rcode}
+# Generate realistic data
+set.seed(524)
+placebo <- round(rnorm(8, mean=5.5, sd=1.2), 1)
+med_a <- round(rnorm(8, mean=6.8, sd=1.1), 1)
+med_b <- round(rnorm(8, mean=7.2, sd=1.0), 1)
+med_c <- round(rnorm(8, mean=6.5, sd=1.3), 1)
+
+# Create data frame
+sleep_hours <- c(placebo, med_a, med_b, med_c)
+medication <- factor(rep(c("Placebo", "Med_A", "Med_B", "Med_C"),
+                         each=8))
+sleep_data <- data.frame(sleep_hours, medication)
+
+# View data
+head(sleep_data, 10)
+\end{rcode}
+
+\newpage
+
+\textbf{Step 1: Exploratory Analysis}
+
+\begin{rcode}
+# Summary statistics
+aggregate(sleep_hours ~ medication, data=sleep_data, FUN=mean)
+aggregate(sleep_hours ~ medication, data=sleep_data, FUN=sd)
+aggregate(sleep_hours ~ medication, data=sleep_data, FUN=length)
+
+# Visualizations
+par(mfrow=c(1,2))
+
+# Boxplots
+boxplot(sleep_hours ~ medication, data=sleep_data,
+        col=rainbow(4),
+        main="Sleep Hours by Medication",
+        xlab="Medication", ylab="Hours")
+
+# Dotplots with means
+stripchart(sleep_hours ~ medication, data=sleep_data,
+           vertical=TRUE, pch=19, method="jitter",
+           main="Individual Observations",
+           xlab="Medication", ylab="Hours")
+means <- tapply(sleep_data$sleep_hours,
+                sleep_data$medication, mean)
+points(1:4, means, pch=18, col="red", cex=2)
+legend("topleft", legend="Group Mean",
+       pch=18, col="red", pt.cex=2)
+
+par(mfrow=c(1,1))
+\end{rcode}
+
+\textbf{Initial observations:} Write what you see from the plots.
+
+\vspace{2cm}
+
+\textbf{Step 2: Check Assumptions}
+
+\begin{rcode}
+# Normality
+par(mfrow=c(2,2))
+for(med in levels(sleep_data$medication)) {
+  subset_data <- sleep_data$sleep_hours[sleep_data$medication == med]
+  qqnorm(subset_data, main=med)
+  qqline(subset_data)
+}
+par(mfrow=c(1,1))
+
+# Equal variances
+leveneTest(sleep_hours ~ medication, data=sleep_data)
+
+# If p > 0.05, assumptions met
+\end{rcode}
+
+\textbf{Step 3: Perform ANOVA}
+
+\begin{rcode}
+# Fit ANOVA model
+sleep_model <- aov(sleep_hours ~ medication, data=sleep_data)
+summary(sleep_model)
+
+# Extract key values
+anova_table <- summary(sleep_model)[[1]]
+f_stat <- anova_table$`F value`[1]
+p_value <- anova_table$`Pr(>F)`[1]
+df1 <- anova_table$Df[1]
+df2 <- anova_table$Df[2]
+
+cat("\nANOVA Results:\n")
+cat("F(", df1, ",", df2, ") = ", round(f_stat, 2), "\n", sep="")
+cat("p-value = ", round(p_value, 4), "\n", sep="")
+\end{rcode}
+
+\textbf{Step 4: Post-Hoc Tests (if significant)}
+
+\begin{rcode}
+# If ANOVA is significant (p < 0.05), do post-hoc
+if(p_value < 0.05) {
+  cat("\nANOVA is significant. Performing post-hoc tests...\n\n")
+
+  # Tukey HSD
+  tukey_results <- TukeyHSD(sleep_model)
+  print(tukey_results)
+
+  # Plot
+  plot(tukey_results, las=1)
+  abline(v=0, lty=2, col="red")
+} else {
+  cat("\nANOVA is not significant. No post-hoc tests needed.\n")
+}
+\end{rcode}
+
+\textbf{Step 5: Write Conclusions}
+
+Based on your analysis, write a complete conclusion answering:
+\begin{enumerate}
+\item Is there evidence that medications differ from placebo?
+\item Which medication(s) are significantly better than placebo?
+\item Which medication appears most effective?
+\end{enumerate}
+
+\vspace{3cm}
+
+\section{Practice Problems}
+
+\subsection{Problem 1: Power Analysis}
+
+A researcher wants to test if a new teaching method improves test scores. Based on pilot data, the standard deviation is 12 points. The researcher wants to detect an improvement of 5 points.
+
+\begin{enumerate}[label=\alph*)]
+\item Calculate the required sample size for 80\% power at $\alpha = 0.05$ (two-sided).
+\item What sample size would be needed for 90\% power?
+\item If only 50 students are available, what power would the study have?
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection{Problem 2: Two-Sample t-Test}
+
+Compare weight loss (kg) between two diet programs:
+
+Diet A: 3.2, 4.5, 2.8, 3.9, 4.1, 3.5, 4.3, 3.7
+
+Diet B: 5.1, 4.8, 5.5, 4.9, 5.3, 5.0, 4.7, 5.2
+
+\begin{enumerate}[label=\alph*)]
+\item Visualize the data with boxplots.
+\item Test if variances are equal using var.test().
+\item Perform an appropriate two-sample t-test.
+\item Calculate and interpret a 95\% CI for the difference.
+\item Write a conclusion in context.
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection{Problem 3: Paired t-Test}
+
+Pain scores (0-10 scale) before and after treatment:
+
+Before: 7, 8, 6, 9, 7, 8, 7, 6, 8, 7
+
+After: 5, 6, 4, 7, 5, 6, 5, 4, 6, 5
+
+\begin{enumerate}[label=\alph*)]
+\item Calculate the differences.
+\item Create a histogram of the differences.
+\item Perform a paired t-test.
+\item Compare to an independent two-sample t-test (incorrect!).
+\item Explain why pairing matters for this data.
+\end{enumerate}
+
+\vspace{2cm}
+
+\subsection{Problem 4: ANOVA}
+
+Compare exam scores across 4 study methods:
+
+Method 1: 75, 78, 72, 80, 76
+
+Method 2: 82, 85, 80, 88, 83
+
+Method 3: 70, 73, 68, 75, 71
+
+Method 4: 85, 88, 83, 90, 86
+
+\begin{enumerate}[label=\alph*)]
+\item Create a data frame in long format.
+\item Check ANOVA assumptions (normality, equal variances).
+\item Perform one-way ANOVA.
+\item If significant, perform Tukey's HSD.
+\item Which study methods differ significantly?
+\end{enumerate}
+
+\vspace{2cm}
+
+\section{\textcolor{aiblue}{AI-Enhanced Learning Tips}}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,title=Using AI Tools for Hypothesis Testing]
+
+\textbf{Good prompts for AI assistance:}
+\begin{itemize}
+\item ``Calculate required sample size to detect 10-point difference with power 0.80 and SD=15''
+\item ``Should I use paired or independent t-test for before/after measurements on same subjects?''
+\item ``Generate R code for one-way ANOVA with 4 groups and Tukey post-hoc tests''
+\item ``Explain the difference between Type I and Type II errors with a medical example''
+\item ``How do I check homogeneity of variance assumption for ANOVA in R?''
+\end{itemize}
+
+\textbf{AI can help with:}
+\begin{itemize}
+\item Choosing the appropriate test
+\item Power and sample size calculations
+\item Checking assumptions
+\item Interpreting output
+\item Creating visualizations
+\item Understanding when to use post-hoc tests
+\end{itemize}
+
+\textbf{Remember:}
+\begin{itemize}
+\item Always verify test assumptions before running
+\item Don't confuse paired and independent samples
+\item Check AI's test selection (paired vs. independent, one-sided vs. two-sided)
+\item Power analysis should be done BEFORE data collection
+\item Post-hoc tests only after significant ANOVA
+\end{itemize}
+\end{tcolorbox}
+
+\section{Key Takeaways}
+
+\begin{enumerate}
+\item \textbf{Power:} Always calculate before study. Need $\geq$ 0.80. Increases with larger n, larger effect, smaller $\sigma$.
+\item \textbf{Two-sample t-test:} Compare independent groups. Use pooled (equal var) or Welch's (unequal var).
+\item \textbf{Paired t-test:} Much more powerful for dependent data. Always use for before/after or matched pairs.
+\item \textbf{ANOVA:} Compare 3+ groups simultaneously. Controls Type I error better than multiple t-tests.
+\item \textbf{Post-hoc:} Use Tukey's HSD after significant ANOVA to find which groups differ.
+\item \textbf{Assumptions:} Independence, normality, equal variances. Check before testing!
+\item \textbf{R Functions:}
+  \begin{itemize}
+  \item \texttt{power.t.test()}: Power and sample size
+  \item \texttt{t.test()}: One-sample, two-sample, paired t-tests
+  \item \texttt{aov()}: ANOVA
+  \item \texttt{TukeyHSD()}: Post-hoc tests
+  \item \texttt{var.test()}, \texttt{leveneTest()}: Check equal variances
+  \end{itemize}
+\end{enumerate}
+
+\end{document}

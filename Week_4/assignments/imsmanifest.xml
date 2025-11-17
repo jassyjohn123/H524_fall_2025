@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="week4_qti_package" version="1.1"
+          xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
+          xmlns:imsmd="http://www.imsglobal.org/xsd/imsmd_v1p2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 http://www.imsglobal.org/xsd/imscp_v1p1p3.xsd">
+
+  <metadata>
+    <schema>IMS Content</schema>
+    <schemaversion>1.1</schemaversion>
+    <imsmd:lom>
+      <imsmd:general>
+        <imsmd:identifier>week4_confidence_intervals_assignment</imsmd:identifier>
+        <imsmd:title>
+          <imsmd:langstring xml:lang="en">Week 4: Confidence Intervals - Assignment</imsmd:langstring>
+        </imsmd:title>
+        <imsmd:description>
+          <imsmd:langstring xml:lang="en">H524 Introduction to Biostatistics - Week 4 Assignment covering confidence intervals for means and proportions, sample size determination, and checking assumptions</imsmd:langstring>
+        </imsmd:description>
+      </imsmd:general>
+    </imsmd:lom>
+  </metadata>
+
+  <organizations default="week4_organization">
+    <organization identifier="week4_organization">
+      <title>Week 4 Quiz Organization</title>
+      <item identifier="week4_quiz_item" identifierref="week4_quiz_resource">
+        <title>Week 4: Confidence Intervals</title>
+      </item>
+    </organization>
+  </organizations>
+
+  <resources>
+    <resource identifier="week4_quiz_resource" type="imsqti_xmlv1p2" href="week4_assignment_quiz.xml">
+      <file href="week4_assignment_quiz.xml"/>
+    </resource>
+  </resources>
+</manifest>

@@ -1,0 +1,1052 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questestinterop xmlns="http://www.imsglobal.org/xsd/ims_qtiasiv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/ims_qtiasiv1p2 http://www.imsglobal.org/xsd/ims_qtiasiv1p2p1.xsd">
+  <assessment ident="week4_assignment" title="H524 Week 4: Confidence Intervals">
+    <qtimetadata>
+      <qtimetadatafield>
+        <fieldlabel>cc_maxattempts</fieldlabel>
+        <fieldentry>1</fieldentry>
+      </qtimetadatafield>
+      <qtimetadatafield>
+        <fieldlabel>qmd_timelimit</fieldlabel>
+        <fieldentry>180</fieldentry>
+      </qtimetadatafield>
+    </qtimetadata>
+    <section ident="root_section">
+
+      <!-- PART 1: CI FUNDAMENTALS -->
+
+      <!-- Question 1: CI Interpretation (MC) -->
+      <item ident="q1" title="Question 1: CI Interpretation">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>CI Interpretation (5 points)</strong></p>
+<p>A study reports a 95% confidence interval for mean blood pressure reduction as (8.2, 14.6) mmHg. What is the CORRECT interpretation?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[We are 95% confident that the true population mean blood pressure reduction is between 8.2 and 14.6 mmHg]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[There is a 95% probability that the true mean is between 8.2 and 14.6 mmHg]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[95% of patients will have blood pressure reductions between 8.2 and 14.6 mmHg]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The sample mean has a 95% chance of being between 8.2 and 14.6 mmHg]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 2: Critical Value Selection (MC) -->
+      <item ident="q2" title="Question 2: Critical Value Selection">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Critical Value Selection (5 points)</strong></p>
+<p>You want to construct a 95% confidence interval for a population mean. The sample size is n = 15, and the population standard deviation is unknown. Which critical value should you use?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[z = 1.96]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[t(14) = 2.145]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[t(15) = 2.131]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[z = 2.576]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 3: Factors Affecting CI Width (MC) -->
+      <item ident="q3" title="Question 3: Factors Affecting CI Width">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Factors Affecting CI Width (5 points)</strong></p>
+<p>If you want a NARROWER confidence interval for a population mean, which of the following actions would achieve this?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Increase the confidence level from 95% to 99%]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Decrease the sample size]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Increase the sample size]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Use a larger standard deviation]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">c</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 4: Standard Error Understanding (MC) -->
+      <item ident="q4" title="Question 4: Standard Error">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Standard Error (5 points)</strong></p>
+<p>A study has a sample standard deviation s = 12 and sample size n = 36. What is the standard error of the mean?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[SE = 2]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[SE = 3]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[SE = 6]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[SE = 12]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- PART 2: CI FOR MEANS -->
+
+      <!-- Question 5: Manual CI Calculation (ESSAY/FILL-IN) -->
+      <item ident="q5" title="Question 5: Manual CI Calculation">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>15</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Manual CI Calculation (15 points)</strong></p>
+<p>A clinical trial measures pain reduction scores for 25 patients receiving a new treatment. The results are:</p>
+<ul>
+<li>Sample mean: x̄ = 7.8 points</li>
+<li>Sample standard deviation: s = 3.2 points</li>
+<li>Sample size: n = 25</li>
+</ul>
+<p>Calculate a 95% confidence interval for the true mean pain reduction. Show all work including:</p>
+<ol type="a">
+<li>Which distribution to use (z or t) and why (3 points)</li>
+<li>The appropriate critical value (3 points)</li>
+<li>The standard error calculation (3 points)</li>
+<li>The margin of error calculation (3 points)</li>
+<li>The final confidence interval with interpretation (3 points)</li>
+</ol>
+<p><em>Hint: For a 95% CI with df=24, the critical t-value is approximately 2.064</em></p>
+            ]]></mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer1" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 6: CI Confidence Level Comparison (MC) -->
+      <item ident="q6" title="Question 6: Confidence Level Comparison">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Confidence Level Comparison (5 points)</strong></p>
+<p>Using the same data from Question 5, if we constructed a 99% confidence interval instead of 95%, what would happen to the interval width?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The interval would be narrower because we are more confident]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The interval would be wider because higher confidence requires a larger margin of error]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The interval width would stay exactly the same]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The interval would be narrower because the critical value decreases]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- PART 3: CI FOR PROPORTIONS -->
+
+      <!-- Question 7: Proportion CI Conditions (MC) -->
+      <item ident="q7" title="Question 7: Proportion CI Conditions">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Proportion CI Conditions (5 points)</strong></p>
+<p>When constructing a confidence interval for a population proportion using the normal approximation (Wald method), which condition must be satisfied?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[n ≥ 30]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Both np ≥ 5 and n(1-p) ≥ 5]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The population must be normally distributed]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The sample proportion must be greater than 0.5]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 8: Proportion CI Calculation (MC) -->
+      <item ident="q8" title="Question 8: Proportion CI Calculation">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Proportion CI Calculation (5 points)</strong></p>
+<p>In a survey of 200 patients, 150 reported satisfaction with their treatment. What is the sample proportion (p̂)?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[p̂ = 0.50]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[p̂ = 0.67]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[p̂ = 0.75]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[p̂ = 0.80]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">c</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 9: Standard Error for Proportion (MC) -->
+      <item ident="q9" title="Question 9: Standard Error for Proportion">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Standard Error for Proportion (5 points)</strong></p>
+<p>Using the data from Question 8 (p̂ = 0.75, n = 200), what is the standard error for the proportion? Use SE = √[p̂(1-p̂)/n]</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[SE ≈ 0.031]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[SE ≈ 0.043]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[SE ≈ 0.075]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[SE ≈ 0.125]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 10: Vaccine Efficacy CI (MC) -->
+      <item ident="q10" title="Question 10: Vaccine Efficacy CI">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Vaccine Efficacy CI (5 points)</strong></p>
+<p>A vaccine trial reports a 95% CI for vaccine efficacy as (72%, 89%). What can we conclude?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[We are 95% confident the true efficacy is between 72% and 89%, suggesting the vaccine is effective since the entire interval is above 0%]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[72% of people are protected at minimum, 89% at maximum]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The vaccine has a 95% chance of working]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[We cannot determine effectiveness because the interval is too wide]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- PART 4: SAMPLE SIZE DETERMINATION -->
+
+      <!-- Question 11: Sample Size Concepts (MC) -->
+      <item ident="q11" title="Question 11: Sample Size Concepts">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Sample Size Concepts (5 points)</strong></p>
+<p>You want to estimate the mean cholesterol level in a population with a margin of error of 5 mg/dL at 95% confidence. If you quadruple the sample size, what happens to the margin of error?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The margin of error is cut in half]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The margin of error is cut to one-quarter]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The margin of error doubles]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[The margin of error stays the same]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 12: Sample Size Calculation (MC) -->
+      <item ident="q12" title="Question 12: Sample Size Calculation">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Sample Size Calculation (5 points)</strong></p>
+<p>A researcher wants to estimate a population proportion with a 95% CI and margin of error of 0.05. Using the conservative estimate (p̂ = 0.5), what sample size is needed?</p>
+<p><em>Formula: n = (z²·p̂(1-p̂))/E², where z = 1.96 for 95% CI</em></p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[n = 196]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[n = 271]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[n = 385]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[n = 577]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">c</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- PART 5: ASSUMPTIONS AND CHECKING -->
+
+      <!-- Question 13: Normality Assessment (MC) -->
+      <item ident="q13" title="Question 13: Normality Assessment">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Normality Assessment (5 points)</strong></p>
+<p>You have a sample of n = 12 observations and want to construct a t-based confidence interval for the mean. Which of the following is the BEST way to assess whether the normality assumption is reasonable?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Check that n ≥ 30, which automatically ensures normality]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Create a histogram and Q-Q plot to visually assess normality, and consider the Shapiro-Wilk test]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Calculate the mean and median; if they're close, the data is normal]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Normality is not required for t-based intervals]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 14: Large vs Small Sample (MC) -->
+      <item ident="q14" title="Question 14: Large vs Small Sample">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Large vs Small Sample (5 points)</strong></p>
+<p>When can you safely use a z-based confidence interval instead of a t-based confidence interval for a population mean?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[When the population standard deviation (σ) is known, regardless of sample size]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Only when n ≥ 30]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[When the sample size is less than 30]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Never; always use t-distribution for real-world data]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 15: CI for Hypothesis Testing (MC) -->
+      <item ident="q15" title="Question 15: CI for Hypothesis Testing">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>CI for Hypothesis Testing (5 points)</strong></p>
+<p>A 95% confidence interval for the difference in mean blood pressure between two treatments is (-2.3, 8.7) mmHg. What can you conclude at the α = 0.05 significance level?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[There is a significant difference between treatments because the interval is positive]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[There is NOT a significant difference between treatments because the interval contains 0]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Treatment 1 is better than Treatment 2]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[We need more data to make any conclusion]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- PART 6: R IMPLEMENTATION -->
+
+      <!-- Question 16: CI with R (ESSAY/FILL-IN) -->
+      <item ident="q16" title="Question 16: CI with R">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>15</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>CI with R (15 points)</strong></p>
+<p>A clinical trial measures vitamin D levels (ng/mL) for 30 patients after supplementation:</p>
+<pre>
+vitamin_d <- c(32, 38, 29, 35, 31, 40, 27, 34, 36, 30,
+               28, 37, 33, 35, 31, 34, 36, 29, 33, 37,
+               30, 35, 34, 31, 39, 33, 36, 29, 34, 35)
+</pre>
+<p>Using R, complete the following tasks and paste your code and results:</p>
+<ol type="a">
+<li>Calculate the sample mean, standard deviation, and sample size (3 points)</li>
+<li>Create a histogram to assess normality (2 points)</li>
+<li>Use <code>t.test()</code> to calculate a 95% confidence interval for the mean vitamin D level (5 points)</li>
+<li>Interpret the confidence interval in context (3 points)</li>
+<li>What would you conclude about whether the mean vitamin D level is above 30 ng/mL? (2 points)</li>
+</ol>
+            ]]></mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer1" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 17: Proportion in R (MC) -->
+      <item ident="q17" title="Question 17: Proportion CI in R">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Proportion CI in R (5 points)</strong></p>
+<p>Which R function would you use to calculate a confidence interval for a population proportion?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[prop.test(x, n)]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[t.test(x)]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[binom.test(x, n)]]></mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext texttype="text/plain"><![CDATA[Both a and c are appropriate]]></mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">d</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- BONUS QUESTION -->
+
+      <!-- Question 18: AI Verification (BONUS) -->
+      <item ident="q18" title="Bonus Question 18: AI Verification">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Bonus Question 18: AI Tool Usage (5 bonus points)</strong></p>
+<p>Choose ONE confidence interval question from this assignment.</p>
+<ol type="a">
+<li>Ask an AI tool (Claude, ChatGPT, etc.) to solve it. Include your exact prompt. (1 point)</li>
+<li>Verify the AI's answer by working through it yourself or using R. Did the AI get it correct? (2 points)</li>
+<li>Identify one strength and one limitation of using AI for confidence interval problems. (2 points)</li>
+</ol>
+            ]]></mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer1" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+    </section>
+  </assessment>
+</questestinterop>

@@ -1,0 +1,619 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{codebackground}{RGB}{248,248,248}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+% Configure listings for code display
+\lstset{
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  breakatwhitespace=true,
+  postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+
+% Code environment using tcolorbox with listings
+\newtcblisting{rcode}{
+  colback=white,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=0pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  width=\textwidth,
+  breakable,
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false
+  }
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 5 Lab: Hypothesis Testing}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Format:} Online\\
+\textbf{Tools Required:} R, RStudio\\
+\textbf{Estimated Time:} 90 minutes
+
+\section*{Problem 1: Two-Sided t-Test (Body Temperature)}
+
+\textbf{Research Question:} Is the true mean body temperature different from the commonly cited value of 98.6°F?
+
+\textbf{Data:} Body temperatures from $n = 15$ healthy adults:
+\begin{rcode}
+temps <- c(98.4, 98.0, 98.2, 98.6, 98.5, 98.3, 98.1, 98.7,
+           98.2, 98.4, 98.3, 98.0, 98.5, 98.4, 98.2)
+\end{rcode}
+
+\subsection*{Part (a): State the hypotheses}
+
+\textbf{Null hypothesis:}
+
+\vspace{1cm}
+
+\textbf{Alternative hypothesis:}
+
+\vspace{1cm}
+
+\textbf{Note:} Is this a one-sided or two-sided test? Why?
+
+\vspace{1cm}
+
+\subsection*{Part (b): Calculate descriptive statistics}
+
+\textbf{R code:}
+\begin{rcode}
+n <- length(temps)
+xbar <- mean(temps)
+s <- sd(temps)
+
+n
+xbar
+s
+\end{rcode}
+
+\textbf{Results:}
+\begin{itemize}
+\item Sample size: $n = $
+\item Sample mean: $\bar{x} = $
+\item Sample standard deviation: $s = $
+\end{itemize}
+
+\vspace{1cm}
+
+\subsection*{Part (c): Conduct the hypothesis test}
+
+\textbf{Step 1: Calculate the standard error}
+
+\vspace{2cm}
+
+\textbf{Step 2: Calculate the t-statistic}
+
+\vspace{2cm}
+
+\textbf{Step 3: Determine degrees of freedom}
+
+\vspace{1cm}
+
+\textbf{Step 4: Calculate the p-value}
+
+For a two-sided test, we calculate the probability in both tails:
+
+\vspace{1cm}
+
+\textbf{R verification:}
+\begin{rcode}
+# Manual calculation
+SE <- s / sqrt(n)
+t_stat <- (xbar - 98.6) / SE
+p_value <- 2 * pt(abs(t_stat), df = n - 1, lower.tail = FALSE)
+
+SE
+t_stat
+p_value
+
+# Using t.test function
+result <- t.test(temps, mu = 98.6, alternative = "two.sided")
+result
+\end{rcode}
+
+\vspace{1cm}
+
+\subsection*{Part (d): Make a decision and interpret}
+
+\textbf{Decision at $\alpha = 0.05$:}
+
+\vspace{1cm}
+
+\textbf{Interpretation:}
+
+\vspace{3cm}
+
+\textbf{95\% Confidence Interval:}
+
+\vspace{1cm}
+
+\pagebreak
+
+\section*{Problem 2: One-Sided t-Test (Blood Pressure)}
+
+\textbf{Research Question:} Does a new blood pressure medication lower mean systolic blood pressure below 140 mmHg?
+
+\textbf{Data:} Systolic blood pressure from $n = 20$ patients after treatment:
+\begin{rcode}
+bp <- c(138, 135, 142, 128, 145, 137, 132, 140, 136, 134,
+        139, 141, 133, 130, 143, 135, 138, 142, 136, 139)
+\end{rcode}
+
+\subsection*{Part (a): State the hypotheses}
+
+\textbf{Null hypothesis:}
+
+\vspace{1cm}
+
+\textbf{Alternative hypothesis:}
+
+\vspace{1cm}
+
+\textbf{Note:} Is this a one-sided or two-sided test? Why?
+
+\vspace{1cm}
+
+\subsection*{Part (b): Calculate descriptive statistics}
+
+\textbf{R code:}
+\begin{rcode}
+n <- length(bp)
+xbar <- mean(bp)
+s <- sd(bp)
+
+n
+xbar
+s
+\end{rcode}
+
+\textbf{Results:}
+\begin{itemize}
+\item Sample size: $n = $
+\item Sample mean: $\bar{x} = $
+\item Sample standard deviation: $s = $
+\end{itemize}
+
+\vspace{1cm}
+
+\subsection*{Part (c): Conduct the hypothesis test}
+
+\textbf{Step 1: Calculate the standard error}
+
+\vspace{2cm}
+
+\textbf{Step 2: Calculate the t-statistic}
+
+\vspace{2cm}
+
+\textbf{Step 3: Determine degrees of freedom}
+
+\vspace{1cm}
+
+\textbf{Step 4: Calculate the p-value (one-sided, lower tail)}
+
+\vspace{1cm}
+
+\textbf{R verification:}
+\begin{rcode}
+# Manual calculation
+SE <- s / sqrt(n)
+t_stat <- (xbar - 140) / SE
+p_value <- pt(t_stat, df = n - 1)
+
+SE
+t_stat
+p_value
+
+# Using t.test function (one-sided)
+result <- t.test(bp, mu = 140, alternative = "less")
+result
+\end{rcode}
+
+\vspace{1cm}
+
+\subsection*{Part (d): Make a decision and interpret}
+
+\textbf{Decision at $\alpha = 0.05$:}
+
+\vspace{1cm}
+
+\textbf{Interpretation:}
+
+\vspace{3cm}
+
+\textbf{Clinical significance:}
+
+\vspace{2cm}
+
+\pagebreak
+
+\section*{Problem 3: Type I and Type II Errors}
+
+Using the blood pressure example from Problem 2, explain the concepts of Type I and Type II errors.
+
+\subsection*{Type I Error ($\alpha$)}
+
+\textbf{Definition:}
+
+\vspace{1cm}
+
+\textbf{In this context:}
+
+\vspace{1cm}
+
+\textbf{Probability:}
+
+\vspace{1cm}
+
+\textbf{Consequence:}
+
+\vspace{3cm}
+
+\textbf{Control:}
+
+\vspace{1cm}
+
+\subsection*{Type II Error ($\beta$)}
+
+\textbf{Definition:}
+
+\vspace{1cm}
+
+\textbf{In this context:}
+
+\vspace{1cm}
+
+\textbf{Probability:}
+
+\vspace{1cm}
+
+\textbf{Consequence:}
+
+\vspace{3cm}
+
+\textbf{Control:}
+
+\vspace{2cm}
+
+\subsection*{Statistical Power}
+
+\textbf{Definition:}
+
+\vspace{1cm}
+
+\textbf{Interpretation:}
+
+\vspace{1cm}
+
+\textbf{Typical goal:}
+
+\vspace{1cm}
+
+\subsection*{Trade-off}
+
+There is an inverse relationship between Type I and Type II errors. Explain:
+
+\vspace{3cm}
+
+\pagebreak
+
+\section*{Problem 4: Power Analysis}
+
+Understanding statistical power and sample size determination.
+
+\subsection*{Part (a): Calculate power for a given sample size}
+
+\textbf{Scenario:} We want to detect a medium effect (Cohen's $d = 0.5$) with $n = 30$ subjects at $\alpha = 0.05$ (two-sided test).
+
+\textbf{R code:}
+\begin{rcode}
+library(pwr)
+
+power_result <- pwr.t.test(n = 30,
+                            d = 0.5,
+                            sig.level = 0.05,
+                            type = "one.sample",
+                            alternative = "two.sided")
+power_result
+\end{rcode}
+
+\textbf{Result:} Power $\approx$
+
+\vspace{1cm}
+
+\textbf{Interpretation:}
+
+\vspace{2cm}
+
+\textbf{Assessment:}
+
+\vspace{2cm}
+
+\subsection*{Part (b): Calculate sample size for desired power}
+
+\textbf{Question:} How many subjects do we need to achieve 80\% power for detecting a medium effect ($d = 0.5$)?
+
+\textbf{R code:}
+\begin{rcode}
+n_result <- pwr.t.test(d = 0.5,
+                        power = 0.80,
+                        sig.level = 0.05,
+                        type = "one.sample",
+                        alternative = "two.sided")
+n_result
+\end{rcode}
+
+\textbf{Result:} Required $n = $
+
+\vspace{1cm}
+
+\textbf{Interpretation:}
+
+\vspace{2cm}
+
+\subsection*{Part (c): Factors affecting power}
+
+Power increases when:
+
+\vspace{4cm}
+
+\textbf{Key insight:}
+
+\vspace{2cm}
+
+\pagebreak
+
+\section*{Problem 5: Relationship Between Confidence Intervals and Hypothesis Tests}
+
+There is a fundamental equivalence between confidence intervals and hypothesis tests.
+
+\subsection*{Equivalence Principle}
+
+For a two-sided test at significance level $\alpha$:
+
+\textbf{If the $(1-\alpha) \times 100\%$ confidence interval contains the null value $\mu_0$:}
+
+\vspace{2cm}
+
+\textbf{If the $(1-\alpha) \times 100\%$ confidence interval does NOT contain $\mu_0$:}
+
+\vspace{2cm}
+
+\subsection*{Demonstration with Body Temperature Data}
+
+Using the body temperature data from Problem 1:
+
+\textbf{95\% Confidence Interval:}
+
+\vspace{1cm}
+
+\textbf{Null value:} $\mu_0 = 98.6$ °F
+
+\textbf{Question:} Is 98.6 inside the interval?
+
+\vspace{1cm}
+
+\textbf{Answer:}
+
+\vspace{1cm}
+
+\textbf{Conclusion from CI:}
+
+\vspace{2cm}
+
+\textbf{Conclusion from hypothesis test:}
+
+\vspace{2cm}
+
+\textbf{Result:} Do both methods agree?
+
+\vspace{1cm}
+
+\subsection*{Advantages of Confidence Intervals}
+
+Confidence intervals provide MORE information than hypothesis tests:
+
+\vspace{5cm}
+
+\textbf{Recommendation:}
+
+\vspace{1cm}
+
+\pagebreak
+
+\section*{Problem 6: Checking the Normality Assumption}
+
+The t-test assumes that the data come from a normally distributed population. We should check this assumption.
+
+\subsection*{Methods for Checking Normality}
+
+\textbf{1. Visual Methods:}
+
+\vspace{3cm}
+
+\textbf{2. Formal Test:}
+
+\vspace{1cm}
+
+\subsection*{Applying to Body Temperature Data}
+
+\textbf{R code for diagnostic plots:}
+\begin{rcode}
+# Create diagnostic plots
+par(mfrow = c(1, 3))
+
+# Histogram
+hist(temps, breaks = 5, main = "Histogram of Body Temps",
+     xlab = "Temperature (F)", col = "lightblue", border = "white")
+
+# Boxplot
+boxplot(temps, main = "Boxplot", ylab = "Temperature (F)")
+
+# Q-Q plot (most important for normality)
+qqnorm(temps, main = "Q-Q Plot", pch = 19, col = "blue")
+qqline(temps, col = "red", lwd = 2)
+
+par(mfrow = c(1, 1))
+\end{rcode}
+
+\vspace{1cm}
+
+\subsection*{Shapiro-Wilk Test}
+
+\textbf{R code:}
+\begin{rcode}
+shapiro.test(temps)
+\end{rcode}
+
+\textbf{Hypotheses:}
+\begin{itemize}
+\item $H_0$:
+\item $H_A$:
+\end{itemize}
+
+\vspace{1cm}
+
+\textbf{Results:}
+\begin{itemize}
+\item Test statistic: $W = $
+\item P-value: $p = $
+\end{itemize}
+
+\vspace{1cm}
+
+\textbf{Decision:}
+
+\vspace{1cm}
+
+\textbf{Interpretation:}
+
+\vspace{2cm}
+
+\subsection*{Assessment}
+
+\textbf{Visual assessment:}
+
+\vspace{3cm}
+
+\textbf{Formal test:}
+
+\vspace{1cm}
+
+\textbf{Conclusion:}
+
+\vspace{2cm}
+
+\subsection*{What if normality is violated?}
+
+If normality is violated:
+
+\vspace{5cm}
+
+\pagebreak
+
+\section*{Summary of Key Concepts}
+
+\subsection*{Steps for Hypothesis Testing}
+
+\begin{enumerate}
+\item \textbf{State hypotheses} ---
+\item \textbf{Choose significance level} ---
+\item \textbf{Check assumptions} ---
+\item \textbf{Calculate test statistic} ---
+\item \textbf{Find p-value} ---
+\item \textbf{Make decision} ---
+\item \textbf{Interpret in context} ---
+\end{enumerate}
+
+\subsection*{One-Sample t-Test Formula}
+
+\textbf{Test statistic:}
+$$t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} \quad \text{with } df = n - 1$$
+
+\textbf{Two-sided p-value:}
+$$p = 2 \times P(T \geq |t|)$$
+
+\textbf{One-sided p-value (lower tail):}
+$$p = P(T \leq t)$$
+
+\textbf{One-sided p-value (upper tail):}
+$$p = P(T \geq t)$$
+
+\subsection*{Error Types}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+& \textbf{$H_0$ True} & \textbf{$H_0$ False} \\
+\midrule
+\textbf{Reject $H_0$} & & \\
+\textbf{Fail to Reject $H_0$} & & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Important Relationships}
+
+\begin{itemize}
+\item \textbf{CI and hypothesis test:}
+\item \textbf{Sample size and power:}
+\item \textbf{Effect size and power:}
+\item \textbf{Alpha and power:}
+\end{itemize}
+
+\vspace{2cm}
+
+\noindent\textit{Week 5 Lab: Hypothesis Testing}\\
+\noindent\textit{Fall 2025}
+
+\end{document}

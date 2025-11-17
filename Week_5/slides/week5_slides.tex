@@ -1,0 +1,1349 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Define custom colors for AI slides
+\definecolor{AIBlue}{RGB}{30, 144, 255}
+\definecolor{AILightBlue}{RGB}{173, 216, 230}
+\definecolor{AINavy}{RGB}{25, 25, 112}
+
+% Commands to switch to AI color scheme
+\newcommand{\AIcolors}{%
+  \setbeamercolor{frametitle}{bg=AIBlue,fg=white}%
+  \setbeamercolor{title}{bg=AINavy,fg=white}%
+  \setbeamercolor{structure}{fg=AIBlue}%
+  \setbeamercolor{item}{fg=AINavy}%
+  \setbeamercolor{normal text}{fg=black}%
+}
+
+% Command to restore default colors
+\newcommand{\defaultcolors}{%
+  \setbeamercolor{frametitle}{bg=osaorange,fg=white}%
+  \setbeamercolor{title}{bg=osaorange,fg=white}%
+  \setbeamercolor{structure}{fg=osaorange}%
+  \setbeamercolor{item}{fg=black}%
+  \setbeamercolor{normal text}{fg=black}%
+}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Set colors
+\setbeamercolor{structure}{fg=osaorange}
+\setbeamercolor{title}{fg=white,bg=osaorange}
+\setbeamercolor{frametitle}{fg=white,bg=osaorange}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\title{H524 Introduction to Biostatistics}
+\subtitle{Week 5: Hypothesis Testing}
+\author{Dr. John Molitor}
+\institute{}
+\date{Fall 2025}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Review from Week 4}
+
+\begin{frame}
+\frametitle{Quick Review: Confidence Intervals}
+\textbf{Last week we covered:}
+\begin{itemize}
+\item Point estimates vs interval estimates
+\item Confidence intervals for population mean
+\item General form: $\bar{x} \pm t_{\alpha/2, n-1} \times \frac{s}{\sqrt{n}}$
+\item Interpretation: 95\% of intervals will contain $\mu$
+\item Trade-off between confidence level and precision
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{This Week:} Hypothesis testing - making decisions about population parameters
+
+\vspace{0.3cm}
+\textbf{Reading:} Pagano \& Gauvreau Chapter 10
+\end{frame}
+
+\begin{frame}
+\frametitle{From Estimation to Testing}
+\textbf{Two approaches to statistical inference:}
+
+\vspace{0.5cm}
+\textbf{1. Estimation (Weeks 3-4):}
+\begin{itemize}
+\item What is the value of the parameter?
+\item Construct confidence interval
+\item Example: ``True mean cholesterol is between 195 and 205 mg/dL''
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{2. Hypothesis Testing (This week):}
+\begin{itemize}
+\item Is a specific claim about the parameter true?
+\item Make a decision: reject or fail to reject
+\item Example: ``Is the true mean cholesterol greater than 200 mg/dL?''
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Both use:} Sample data, sampling distributions, probability theory
+\end{frame}
+
+\section{Introduction to Hypothesis Testing (Ch 10.1)}
+
+\begin{frame}
+\frametitle{What is a Hypothesis Test?}
+\textbf{Definition:} A statistical procedure to assess evidence about a population parameter
+
+\vspace{0.5cm}
+\textbf{Basic idea:}
+\begin{enumerate}
+\item Make a claim about a population parameter
+\item Collect sample data
+\item Use probability to decide if data supports the claim
+\item Make a decision: reject or fail to reject the claim
+\end{enumerate}
+
+\vspace{0.5cm}
+\textbf{Medical example:}
+\begin{itemize}
+\item Claim: ``New drug lowers blood pressure by more than 10 mmHg on average''
+\item Collect data from clinical trial
+\item Calculate probability of observing this data if drug has no effect
+\item If probability is very small, reject ``no effect'' claim
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Logic of Hypothesis Testing}
+\textbf{Key principle:} \textit{Proof by contradiction}
+
+\vspace{0.5cm}
+\textbf{Analogy - Criminal trial:}
+\begin{itemize}
+\item \textbf{Null hypothesis:} Defendant is innocent (default assumption)
+\item \textbf{Alternative hypothesis:} Defendant is guilty (what we're trying to prove)
+\item \textbf{Evidence:} Trial data
+\item \textbf{Decision:} Guilty (reject null) or Not Guilty (fail to reject null)
+\item \textbf{Standard:} Beyond reasonable doubt (low probability threshold)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Important:} ``Not guilty'' $\neq$ ``innocent''
+
+Similarly: ``Fail to reject $H_0$'' $\neq$ ``$H_0$ is true''
+
+\vspace{0.3cm}
+We never ``accept'' the null hypothesis - we only fail to reject it!
+\end{frame}
+
+\begin{frame}
+\frametitle{Null and Alternative Hypotheses}
+\textbf{Null Hypothesis ($H_0$):}
+\begin{itemize}
+\item Statement of ``no effect'' or ``no difference''
+\item Status quo, default assumption
+\item What we assume is true unless proven otherwise
+\item Always contains equality: $=$, $\leq$, or $\geq$
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Alternative Hypothesis ($H_A$ or $H_1$):}
+\begin{itemize}
+\item Statement of ``effect exists'' or ``difference exists''
+\item What the researcher wants to demonstrate
+\item What we conclude if evidence is strong enough
+\item Contains inequality: $\neq$, $>$, or $<$
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Key rule:} $H_0$ and $H_A$ must be:
+\begin{itemize}
+\item Mutually exclusive (can't both be true)
+\item Exhaustive (one must be true)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Types of Hypotheses: Two-Sided vs One-Sided}
+\textbf{Two-sided (two-tailed) test:}
+$$H_0: \mu = \mu_0 \quad \text{vs} \quad H_A: \mu \neq \mu_0$$
+
+\begin{itemize}
+\item Testing if parameter differs from null value (either direction)
+\item Example: ``Is mean cholesterol different from 200 mg/dL?''
+\item Most common, more conservative
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{One-sided (one-tailed) test - Upper tail:}
+$$H_0: \mu \leq \mu_0 \quad \text{vs} \quad H_A: \mu > \mu_0$$
+
+\begin{itemize}
+\item Testing if parameter is greater than null value
+\item Example: ``Is mean blood pressure higher than 120 mmHg?''
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{One-sided test - Lower tail:}
+$$H_0: \mu \geq \mu_0 \quad \text{vs} \quad H_A: \mu < \mu_0$$
+
+\begin{itemize}
+\item Testing if parameter is less than null value
+\item Example: ``Does drug reduce cholesterol below 200 mg/dL?''
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Setting Up Hypotheses}
+\textbf{Scenario 1:} Normal body temperature is claimed to be 98.6°F. We want to test if this is accurate.
+
+\vspace{0.15cm}
+$$H_0: \mu = 98.6 \quad \text{vs} \quad H_A: \mu \neq 98.6$$
+
+\vspace{0.1cm}
+\textbf{Scenario 2:} A new drug claims to lower blood pressure. Current mean is 140 mmHg.
+
+\vspace{0.15cm}
+$$H_0: \mu \geq 140 \quad \text{vs} \quad H_A: \mu < 140$$
+
+\vspace{0.1cm}
+\textbf{Scenario 3:} We suspect exposure to a toxin increases cancer rate above baseline 5\%.
+
+\vspace{0.15cm}
+$$H_0: p \leq 0.05 \quad \text{vs} \quad H_A: p > 0.05$$
+
+\vspace{0.1cm}
+\textbf{Key decision:} Choose one-sided vs two-sided \textit{before} collecting data, based on research question!
+\end{frame}
+
+\section{Test Statistics and P-values (Ch 10.2)}
+
+\begin{frame}
+\frametitle{The Test Statistic}
+\textbf{Definition:} A value calculated from sample data that measures how far the sample is from the null hypothesis
+
+\vspace{0.4cm}
+\textbf{General form:}
+$$\text{Test Statistic} = \frac{\text{Estimate} - \text{Null Value}}{\text{Standard Error}}$$
+
+\vspace{0.4cm}
+\textbf{For testing mean (large sample or $\sigma$ known):}
+$$Z = \frac{\bar{x} - \mu_0}{\sigma/\sqrt{n}}$$
+
+\vspace{0.4cm}
+\textbf{For testing mean ($\sigma$ unknown, small sample):}
+$$t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}$$
+
+\vspace{0.3cm}
+where $\mu_0$ is the null hypothesis value
+\end{frame}
+
+\begin{frame}
+\frametitle{Interpreting the Test Statistic}
+\textbf{What does the test statistic tell us?}
+
+\vspace{0.3cm}
+\begin{itemize}
+\item Measures ``how many standard errors away'' the sample mean is from null value
+\item Large $|t|$ or $|Z|$: Sample mean far from null value
+\item Small $|t|$ or $|Z|$: Sample mean close to null value
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Examples:}
+\begin{itemize}
+\item $t = 0.5$: Sample mean is 0.5 SE from null (not unusual)
+\item $t = 2.5$: Sample mean is 2.5 SE from null (unusual!)
+\item $t = -3.8$: Sample mean is 3.8 SE below null (very unusual!)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Question:} How large does $|t|$ need to be for us to reject $H_0$?
+
+\vspace{0.1cm}
+\textbf{Answer:} Depends on:
+\begin{itemize}
+\item Degrees of freedom (sample size)
+\item Significance level (how much risk we'll accept)
+\item One-sided vs two-sided test
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The P-value}
+\textbf{Definition:} The probability of observing a test statistic as extreme as (or more extreme than) what we observed, \textit{assuming $H_0$ is true}
+
+\vspace{0.5cm}
+\textbf{For two-sided test:}
+$$p\text{-value} = \Pr(|T| \geq |t_{obs}| \mid H_0 \text{ true})$$
+
+\vspace{0.3cm}
+\textbf{For one-sided test (upper tail):}
+$$p\text{-value} = \Pr(T \geq t_{obs} \mid H_0 \text{ true})$$
+
+\vspace{0.3cm}
+\textbf{For one-sided test (lower tail):}
+$$p\text{-value} = \Pr(T \leq t_{obs} \mid H_0 \text{ true})$$
+
+\vspace{0.5cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item Small p-value: Observed data would be very unlikely if $H_0$ were true
+\item Large p-value: Observed data consistent with $H_0$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Understanding P-values}
+\textbf{Common misconceptions:}
+
+\vspace{0.3cm}
+\begin{itemize}
+\item $\times$ p-value is NOT $\Pr(H_0 \text{ is true})$
+\item $\times$ p-value is NOT $\Pr(\text{data due to chance})$
+\item $\times$ 1 - p-value is NOT $\Pr(H_A \text{ is true})$
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Correct interpretation:}
+
+\vspace{0.3cm}
+``If the null hypothesis were true, the probability of obtaining a test statistic as extreme as or more extreme than the one we observed is [p-value]''
+
+\vspace{0.5cm}
+\textbf{Rule of thumb for interpretation:}
+\begin{itemize}
+\item $p < 0.01$: Very strong evidence against $H_0$
+\item $0.01 \leq p < 0.05$: Strong evidence against $H_0$
+\item $0.05 \leq p < 0.10$: Weak evidence against $H_0$
+\item $p \geq 0.10$: Little or no evidence against $H_0$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Significance Level ($\alpha$)}
+\textbf{Definition:} The probability threshold for rejecting $H_0$
+
+\vspace{0.5cm}
+\textbf{Decision rule:}
+\begin{itemize}
+\item If $p\text{-value} < \alpha$: Reject $H_0$ (statistically significant)
+\item If $p\text{-value} \geq \alpha$: Fail to reject $H_0$ (not statistically significant)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Common choices:}
+\begin{itemize}
+\item $\alpha = 0.05$ (most common in biostatistics)
+\item $\alpha = 0.01$ (more stringent, reduces false positives)
+\item $\alpha = 0.10$ (more lenient, exploratory studies)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Important:} Choose $\alpha$ \textit{before} collecting data!
+
+\vspace{0.3cm}
+Changing $\alpha$ after seeing results is called ``p-hacking'' and invalidates the test
+\end{frame}
+
+\section{Type I and Type II Errors (Ch 10.3)}
+
+\begin{frame}
+\frametitle{Two Types of Errors}
+\textbf{Hypothesis testing is a decision with uncertainty}
+
+\vspace{0.5cm}
+\begin{center}
+\begin{tabular}{cc|cc}
+\toprule
+& & \multicolumn{2}{c}{\textbf{Reality (Unknown)}} \\
+& & $H_0$ True & $H_0$ False \\
+\midrule
+\multirow{2}{*}{\textbf{Decision}} & Reject $H_0$ & \textcolor{red}{Type I Error} & \textcolor{blue}{Correct} \\
+& & \textcolor{red}{($\alpha$)} & \textcolor{blue}{(Power)} \\
+& Fail to Reject & \textcolor{blue}{Correct} & \textcolor{red}{Type II Error} \\
+& & \textcolor{blue}{($1-\alpha$)} & \textcolor{red}{($\beta$)} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Type I Error:} Reject $H_0$ when it's actually true (false positive)
+\begin{itemize}
+\item Probability = $\alpha$ (significance level)
+\item Example: Conclude drug works when it doesn't
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{Type II Error:} Fail to reject $H_0$ when it's actually false (false negative)
+\begin{itemize}
+\item Probability = $\beta$
+\item Example: Miss a real drug effect
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Type I and Type II Errors: Medical Examples}
+\textbf{Example 1: Disease screening test}
+
+\vspace{0.15cm}
+$H_0$: Patient does not have disease\\
+$H_A$: Patient has disease
+
+\vspace{0.15cm}
+\begin{itemize}
+\item \textbf{Type I Error:} Diagnose disease when patient is healthy (false positive)
+  \begin{itemize}
+  \item Consequence: Unnecessary treatment, anxiety
+  \end{itemize}
+\item \textbf{Type II Error:} Miss disease when patient is sick (false negative)
+  \begin{itemize}
+  \item Consequence: Delayed treatment, disease progression
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example 2: Drug approval}
+
+\vspace{0.15cm}
+$H_0$: Drug has no effect\\
+$H_A$: Drug is effective
+
+\vspace{0.15cm}
+\begin{itemize}
+\item \textbf{Type I Error:} Approve ineffective drug
+  \begin{itemize}
+  \item Consequence: Patients receive useless treatment
+  \end{itemize}
+\item \textbf{Type II Error:} Reject effective drug
+  \begin{itemize}
+  \item Consequence: Beneficial treatment unavailable
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Controlling Type I Error}
+\textbf{Type I Error rate = $\alpha$ (significance level)}
+
+\vspace{0.5cm}
+We control Type I error by choosing $\alpha$:
+\begin{itemize}
+\item Set $\alpha = 0.05$: 5\% chance of false positive
+\item Set $\alpha = 0.01$: 1\% chance of false positive (more conservative)
+\item Set $\alpha = 0.10$: 10\% chance of false positive (more lenient)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Trade-off:}
+\begin{itemize}
+\item Decreasing $\alpha$ (stricter) reduces Type I errors
+\item But increases Type II errors ($\beta$) - harder to detect real effects
+\item Can't make both arbitrarily small without increasing sample size
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Convention in biostatistics:}
+\begin{itemize}
+\item Typically prioritize controlling Type I error
+\item $\alpha = 0.05$ is standard (sometimes 0.01 for critical decisions)
+\item Better to miss a real effect than falsely claim one exists
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Statistical Power}
+\textbf{Power} = Probability of correctly rejecting $H_0$ when $H_A$ is true
+
+$$\text{Power} = 1 - \beta$$
+
+\vspace{0.5cm}
+\textbf{What affects power?}
+\begin{enumerate}
+\item \textbf{Sample size ($n$):} Larger $n$ $\Rightarrow$ higher power
+\item \textbf{Effect size:} Larger true difference $\Rightarrow$ higher power
+\item \textbf{Significance level ($\alpha$):} Larger $\alpha$ $\Rightarrow$ higher power
+\item \textbf{Variability ($\sigma$):} Lower $\sigma$ $\Rightarrow$ higher power
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Typical goal:} Power $\geq 0.80$ (80\%)
+
+\vspace{0.1cm}
+Means 80\% chance of detecting the effect if it truly exists
+
+\vspace{0.3cm}
+\textbf{Power analysis:} Calculate required sample size to achieve desired power
+\begin{itemize}
+\item Done \textit{before} collecting data
+\item Ensures study is adequately sized to detect meaningful effects
+\end{itemize}
+\end{frame}
+
+\section{One-Sample t-Test (Ch 10.4)}
+
+\begin{frame}
+\frametitle{One-Sample t-Test}
+\textbf{Used when:}
+\begin{itemize}
+\item Testing hypothesis about a population mean $\mu$
+\item Population SD ($\sigma$) is unknown
+\item Sample is random and approximately normal (or $n$ large by CLT)
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{Hypotheses:}
+
+Two-sided: $H_0: \mu = \mu_0$ vs $H_A: \mu \neq \mu_0$
+
+One-sided: $H_0: \mu \leq \mu_0$ vs $H_A: \mu > \mu_0$ (or opposite)
+
+\vspace{0.1cm}
+\textbf{Test statistic:}
+$$t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}$$
+
+\vspace{0.1cm}
+Under $H_0$: $t \sim t_{n-1}$ (t-distribution with $n-1$ degrees of freedom)
+
+\vspace{0.1cm}
+\textbf{Decision:}
+\begin{itemize}
+\item Calculate p-value from t-distribution
+\item Reject $H_0$ if $p < \alpha$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Body Temperature}
+\textbf{Question:} Is mean body temperature really 98.6°F?
+
+\vspace{0.1cm}
+\textbf{Data:} Sample of $n = 130$ healthy adults
+\begin{itemize}
+\item Sample mean: $\bar{x} = 98.25$°F
+\item Sample SD: $s = 0.73$°F
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{Step 1: Set up hypotheses}
+$$H_0: \mu = 98.6 \quad \text{vs} \quad H_A: \mu \neq 98.6$$
+
+\vspace{0.1cm}
+\textbf{Step 2: Calculate test statistic}
+$$t = \frac{98.25 - 98.6}{0.73/\sqrt{130}} = \frac{-0.35}{0.064} = -5.47$$
+
+\vspace{0.1cm}
+\textbf{Step 3: Find p-value}
+
+From t-distribution with df = 129: $p < 0.0001$ (two-sided)
+
+\vspace{0.1cm}
+\textbf{Step 4: Conclusion}
+
+$p < 0.05$, so reject $H_0$. Strong evidence that mean body temperature is not 98.6°F.
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: Blood Pressure Drug}
+\textbf{Question:} Does new drug lower systolic BP below 140 mmHg?
+
+\vspace{0.1cm}
+\textbf{Data:} $n = 25$ patients after treatment
+\begin{itemize}
+\item Sample mean: $\bar{x} = 135$ mmHg
+\item Sample SD: $s = 12$ mmHg
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{Step 1: Set up hypotheses (one-sided)}
+$$H_0: \mu \geq 140 \quad \text{vs} \quad H_A: \mu < 140$$
+
+\vspace{0.1cm}
+\textbf{Step 2: Calculate test statistic}
+$$t = \frac{135 - 140}{12/\sqrt{25}} = \frac{-5}{2.4} = -2.08$$
+
+\vspace{0.1cm}
+\textbf{Step 3: Find p-value (one-sided, lower tail)}
+
+From $t_{24}$ distribution: $p = 0.024$
+
+\vspace{0.1cm}
+\textbf{Step 4: Conclusion}
+
+$p = 0.024 < 0.05$, reject $H_0$. Evidence that drug lowers BP below 140 mmHg.
+\end{frame}
+
+\begin{frame}
+\frametitle{Critical Values vs P-values}
+\textbf{Two equivalent approaches to hypothesis testing:}
+
+\vspace{0.2cm}
+\textbf{Method 1: P-value approach} (modern, preferred)
+\begin{enumerate}
+\item Calculate test statistic $t$
+\item Calculate p-value
+\item Compare p-value to $\alpha$
+\item Reject $H_0$ if $p < \alpha$
+\end{enumerate}
+
+\vspace{0.2cm}
+\textbf{Method 2: Critical value approach} (classical)
+\begin{enumerate}
+\item Calculate test statistic $t$
+\item Find critical value(s) from t-table for given $\alpha$
+\item Compare $|t|$ to critical value
+\item Reject $H_0$ if $|t| > t_{critical}$ (two-sided)
+\end{enumerate}
+
+\vspace{0.2cm}
+\textbf{Advantage of p-values:}
+\begin{itemize}
+\item Provides exact strength of evidence
+\item Can compare to any $\alpha$ level
+\item Software gives p-values automatically
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Critical Values for Two-Sided Tests}
+\textbf{For two-sided test at $\alpha = 0.05$:}
+
+\vspace{0.3cm}
+Reject $H_0$ if $|t| > t_{0.975, n-1}$
+
+\vspace{0.5cm}
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+df & $t_{0.975}$ & Interpretation \\
+\midrule
+5 & 2.571 & $|t| > 2.571$ is significant \\
+10 & 2.228 & $|t| > 2.228$ is significant \\
+20 & 2.086 & $|t| > 2.086$ is significant \\
+30 & 2.042 & $|t| > 2.042$ is significant \\
+100 & 1.984 & $|t| > 1.984$ is significant \\
+$\infty$ & 1.960 & $|t| > 1.960$ is significant \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Note:} As df increases, $t$ critical values approach $Z = 1.96$
+
+\vspace{0.3cm}
+For large samples ($n > 30$), can use normal approximation
+\end{frame}
+
+\section{One-Sample z-Test (Ch 10.5)}
+
+\begin{frame}
+\frametitle{One-Sample z-Test}
+\textbf{Used when:}
+\begin{itemize}
+\item Testing hypothesis about population mean $\mu$
+\item Population SD ($\sigma$) is \textbf{known} (rare in practice!)
+\item OR sample size is very large ($n > 100$)
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{Test statistic:}
+$$Z = \frac{\bar{x} - \mu_0}{\sigma/\sqrt{n}}$$
+
+\vspace{0.1cm}
+Under $H_0$: $Z \sim N(0, 1)$ (standard normal)
+
+\vspace{0.1cm}
+\textbf{Critical values for $\alpha = 0.05$:}
+\begin{itemize}
+\item Two-sided: $|Z| > 1.96$
+\item One-sided: $Z > 1.645$ (upper) or $Z < -1.645$ (lower)
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{In practice:} Almost always use t-test instead
+\begin{itemize}
+\item Rarely know $\sigma$ without knowing $\mu$
+\item For large $n$, t-test and z-test give nearly identical results
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example: IQ Test with Known SD}
+\textbf{Scenario:} IQ tests are designed to have $\sigma = 15$ (known). We want to test if a special program increases mean IQ above 100.
+
+\vspace{0.2cm}
+\textbf{Data:} $n = 64$ students in program
+\begin{itemize}
+\item Sample mean: $\bar{x} = 103$
+\item Known SD: $\sigma = 15$
+\end{itemize}
+
+\vspace{0.4cm}
+\textbf{Hypotheses:}
+$$H_0: \mu \leq 100 \quad \text{vs} \quad H_A: \mu > 100$$
+
+\vspace{0.2cm}
+\textbf{Test statistic:}
+$$Z = \frac{103 - 100}{15/\sqrt{64}} = \frac{3}{1.875} = 1.60$$
+
+\vspace{0.2cm}
+\textbf{P-value:} $\Pr(Z > 1.60) = 0.055$
+
+\vspace{0.2cm}
+\textbf{Conclusion:} $p = 0.055 > 0.05$, fail to reject $H_0$. Marginal evidence that program increases IQ.
+\end{frame}
+
+\section{Confidence Intervals and Hypothesis Tests}
+
+\begin{frame}
+\frametitle{Relationship Between CIs and Hypothesis Tests}
+\textbf{Key insight:} Confidence intervals and hypothesis tests are closely related!
+
+\vspace{0.5cm}
+\textbf{For two-sided test at level $\alpha$:}
+
+\vspace{0.3cm}
+Reject $H_0: \mu = \mu_0$ if and only if the $(1-\alpha) \times 100$\% CI does NOT contain $\mu_0$
+
+\vspace{0.5cm}
+\textbf{Example:} Blood pressure drug data
+\begin{itemize}
+\item $n = 25$, $\bar{x} = 135$ mmHg, $s = 12$ mmHg
+\item 95\% CI: $135 \pm 2.064 \times \frac{12}{\sqrt{25}} = (130.0, 140.0)$
+\item Test $H_0: \mu = 140$ vs $H_A: \mu \neq 140$
+\item Since 140 is \textit{in} the CI, we would \textit{fail to reject} $H_0$ (for two-sided test)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Note:} This equivalence only holds for two-sided tests!
+
+\vspace{0.3cm}
+For one-sided tests, use one-sided confidence bounds
+\end{frame}
+
+\begin{frame}
+\frametitle{Using CIs for Multiple Comparisons}
+\textbf{Advantage of confidence intervals:}
+
+\vspace{0.3cm}
+Can simultaneously test multiple null values!
+
+\vspace{0.5cm}
+\textbf{Example:} Cholesterol drug trial
+\begin{itemize}
+\item Sample: $n = 50$, $\bar{x} = 185$ mg/dL, $s = 30$ mg/dL
+\item 95\% CI: $(176.5, 193.5)$ mg/dL
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{We can immediately conclude:}
+\begin{itemize}
+\item $\mu = 200$? Not in CI, reject $H_0$ ($p < 0.05$)
+\item $\mu = 190$? In CI, fail to reject $H_0$ ($p > 0.05$)
+\item $\mu = 180$? In CI, fail to reject $H_0$ ($p > 0.05$)
+\item $\mu = 170$? Not in CI, reject $H_0$ ($p < 0.05$)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Interpretation:} Any value inside the CI is ``plausible'' given the data
+
+Any value outside is ``implausible'' at the $\alpha = 0.05$ level
+\end{frame}
+
+\section{Practical Considerations}
+
+\begin{frame}
+\frametitle{Statistical vs Clinical Significance}
+\textbf{Statistical significance:} $p < \alpha$
+
+\textbf{Clinical significance:} Meaningful in practice
+
+\vspace{0.3cm}
+\textbf{These are NOT the same!}
+
+\vspace{0.3cm}
+\textbf{Example 1: Large sample, small effect}
+\begin{itemize}
+\item Drug lowers BP by 2 mmHg on average
+\item With $n = 10000$: $p < 0.001$ (highly significant)
+\item But 2 mmHg reduction may not be clinically meaningful
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Example 2: Small sample, large effect}
+\begin{itemize}
+\item Drug lowers BP by 15 mmHg on average
+\item With $n = 10$: $p = 0.08$ (not significant at $\alpha = 0.05$)
+\item But 15 mmHg reduction is clinically important!
+\item Need larger sample to demonstrate statistical significance
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Always consider:} Effect size, confidence interval width, clinical context
+\end{frame}
+
+\begin{frame}
+\frametitle{Sample Size and Hypothesis Testing}
+\textbf{Effect of sample size on statistical tests:}
+
+\vspace{0.5cm}
+\textbf{Larger samples ($n \uparrow$):}
+\begin{itemize}
+\item Smaller standard error: $\text{SE} = s/\sqrt{n}$
+\item Larger test statistics: $t = \frac{\bar{x} - \mu_0}{\text{SE}}$
+\item Smaller p-values (easier to reject $H_0$)
+\item Higher power to detect small effects
+\item Narrower confidence intervals
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Implication:}
+\begin{itemize}
+\item With large enough $n$, even tiny effects become ``significant''
+\item Always report:
+  \begin{itemize}
+  \item Effect size (e.g., difference in means)
+  \item Confidence interval
+  \item Clinical/practical importance
+  \end{itemize}
+\item Don't just report ``$p < 0.05$''!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Common Mistakes in Hypothesis Testing}
+\textbf{1. Confusing ``fail to reject'' with ``accept''}
+\begin{itemize}
+\item $\times$ ``We accept the null hypothesis''
+\item \checkmark ``We fail to reject the null hypothesis''
+\item Absence of evidence $\neq$ evidence of absence
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{2. Choosing one-sided vs two-sided after seeing data}
+\begin{itemize}
+\item Must decide before collecting data based on research question
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{3. Changing $\alpha$ after seeing p-value}
+\begin{itemize}
+\item ``p = 0.06, let's use $\alpha = 0.10$'' is p-hacking!
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{4. Interpreting p-value as $\Pr(H_0 \text{ true})$}
+\begin{itemize}
+\item P-value is $\Pr(\text{data} \mid H_0)$, not $\Pr(H_0 \mid \text{data})$
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{5. Ignoring assumptions}
+\begin{itemize}
+\item t-test assumes approximate normality (or large $n$)
+\item Check with histogram, Q-Q plot, or normality tests
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{6. Confusing statistical and practical significance}
+\begin{itemize}
+\item Always consider effect size and clinical importance
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Checking Assumptions}
+\textbf{One-sample t-test assumes:}
+\begin{enumerate}
+\item Random sample from population
+\item Observations are independent
+\item Population is approximately normal (or $n$ large)
+\end{enumerate}
+
+\vspace{0.05cm}
+\textbf{How to check normality:}
+
+\vspace{0.03cm}
+\textbf{1. Visual methods:}
+\begin{itemize}
+\item Histogram: Should be roughly bell-shaped
+\item Q-Q plot: Points should follow straight line
+\item Boxplot: Should be roughly symmetric
+\end{itemize}
+
+\vspace{0.03cm}
+\textbf{2. Formal tests:}
+\begin{itemize}
+\item Shapiro-Wilk test: Tests $H_0$: data is normal
+\item Anderson-Darling test
+\item But: With large $n$, minor deviations become ``significant''
+\end{itemize}
+
+\vspace{0.03cm}
+\textbf{3. Central Limit Theorem:}
+\begin{itemize}
+\item For $n \geq 30$, t-test is robust to non-normality
+\item Exception: Extreme outliers or strong skewness
+\end{itemize}
+\end{frame}
+
+\section{R Examples and Practice}
+
+\begin{frame}[fragile]
+\frametitle{One-Sample t-Test in R}
+\textbf{Example: Body temperature data}
+
+\vspace{0.1cm}
+\small
+\begin{verbatim}
+# Body temperature data
+temps <- c(98.0, 98.2, 98.4, 98.6, 98.0, 97.8, 98.8,
+           98.0, 98.4, 98.6, 98.5, 98.3)
+
+# Descriptive statistics
+mean(temps)        # 98.30
+sd(temps)          # 0.311
+length(temps)      # 12
+
+# Two-sided test: H0: mu = 98.6 vs HA: mu != 98.6
+t.test(temps, mu = 98.6, alternative = "two.sided")
+
+# Output includes:
+#   t-statistic, degrees of freedom, p-value
+#   95% confidence interval, sample mean
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{One-Sided t-Test in R (Part 1 - Setup)}
+\small
+\begin{verbatim}
+# Blood pressure data (after treatment)
+bp <- c(138, 142, 135, 140, 132, 128, 145, 136,
+        139, 133, 141, 137, 134, 130, 143)
+
+# One-sided test: H0: mu >= 140 vs HA: mu < 140
+result <- t.test(bp, mu = 140, alternative = "less")
+
+# Extract components
+result$statistic    # t-statistic
+result$parameter    # degrees of freedom
+result$p.value      # p-value
+result$conf.int     # one-sided confidence bound
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{One-Sided t-Test in R (Part 2 - Manual Calculation)}
+\small
+\begin{verbatim}
+# Manual calculation
+xbar <- mean(bp)
+s <- sd(bp)
+n <- length(bp)
+t_stat <- (xbar - 140) / (s / sqrt(n))
+p_value <- pt(t_stat, df = n-1)
+
+cat("Sample mean:", round(xbar, 2), "\n")
+cat("t-statistic:", round(t_stat, 3), "\n")
+cat("p-value:", round(p_value, 4), "\n")
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Checking Normality in R (Part 1 - Visual Checks)}
+\small
+\begin{verbatim}
+# Generate some data
+set.seed(524)
+data <- rnorm(30, mean = 100, sd = 15)
+
+# Visual checks
+par(mfrow = c(1, 3))
+
+# 1. Histogram
+hist(data, breaks = 10, main = "Histogram",
+     xlab = "Value", col = "lightblue")
+
+# 2. Q-Q plot
+qqnorm(data, main = "Q-Q Plot")
+qqline(data, col = "red", lwd = 2)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Checking Normality in R (Part 2 - Tests)}
+\small
+\begin{verbatim}
+# 3. Boxplot
+boxplot(data, main = "Boxplot", ylab = "Value",
+        col = "lightgreen")
+
+par(mfrow = c(1, 1))
+
+# Shapiro-Wilk test
+shapiro.test(data)
+# p > 0.05: fail to reject normality (data looks normal)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Power and Sample Size in R}
+\footnotesize
+\begin{verbatim}
+# Calculate power for one-sample t-test
+library(pwr)  # install.packages("pwr")
+
+# Power for n = 30 (effect size d = 0.5)
+pwr.t.test(n = 30, d = 5/10, sig.level = 0.05,
+           type = "one.sample",
+           alternative = "two.sided")
+# Power approx 0.70
+
+# Sample size needed for 80% power
+pwr.t.test(d = 5/10, power = 0.80,
+           sig.level = 0.05,
+           type = "one.sample",
+           alternative = "two.sided")
+# n approx 34
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Complete Hypothesis Test Example (Part 1 - Setup)}
+\tiny
+\begin{verbatim}
+# Research question: Is mean cholesterol > 200 mg/dL?
+chol <- c(215, 198, 203, 225, 192, 210, 208, 195,
+          218, 202, 212, 205, 220, 198, 207, 213,
+          201, 209, 217, 204)
+
+# Step 1: Descriptive statistics
+cat("Sample size:", length(chol), "\n")
+cat("Sample mean:", round(mean(chol), 2), "\n")
+cat("Sample SD:", round(sd(chol), 2), "\n\n")
+
+# Step 2: Check assumptions
+shapiro.test(chol)  # Test normality
+
+# Step 3: Conduct test (one-sided, upper tail)
+result <- t.test(chol, mu = 200,
+                 alternative = "greater",
+                 conf.level = 0.95)
+print(result)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Complete Hypothesis Test Example (Part 2 - Interpret)}
+\small
+\begin{verbatim}
+# Step 4: Interpret
+if(result$p.value < 0.05) {
+  cat("\nReject H0. Evidence that mean cholesterol > 200.\n")
+} else {
+  cat("\nFail to reject H0. Insufficient evidence.\n")
+}
+
+# Step 5: Effect size
+effect_size <- (mean(chol) - 200) / sd(chol)
+cat("Cohen's d =", round(effect_size, 3), "\n")
+\end{verbatim}
+\end{frame}
+
+\section{AI as a Learning Tool for Hypothesis Testing}
+
+\AIcolors
+\begin{frame}
+\frametitle{AI for Hypothesis Testing}
+\textbf{How AI can help this week:}
+\begin{itemize}
+\item \textbf{Conceptual clarification:} Understanding p-values, Type I/II errors
+\item \textbf{Test selection:} Choosing appropriate test for your data
+\item \textbf{R code generation:} Conducting t-tests, checking assumptions
+\item \textbf{Interpretation:} Understanding output from \texttt{t.test()}
+\item \textbf{Power analysis:} Sample size calculations
+\item \textbf{Visualization:} Creating plots to check assumptions
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Example prompts:}
+\begin{itemize}
+\item ``Explain the difference between Type I and Type II errors with a medical example''
+\item ``Show R code to conduct one-sided t-test testing if mean > 100''
+\item ``How do I interpret a p-value of 0.03?''
+\item ``Create Q-Q plot in R to check normality assumption''
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Understanding P-values (Part 1)}
+\textbf{Prompt:} ``Explain what a p-value of 0.02 means in plain language''
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\small
+\begin{verbatim}
+A p-value of 0.02 means:
+
+"If the null hypothesis were actually true, we would
+expect to see a result as extreme as (or more extreme
+than) what we observed only 2% of the time by random
+chance alone."
+
+In practical terms:
+- This is considered statistically significant
+  (p < 0.05)
+- It provides evidence against the null hypothesis
+- There's only a 2% chance of getting this result if
+  the null hypothesis is true
+- We would typically reject the null hypothesis
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Understanding P-values (Part 2)}
+\small
+\begin{verbatim}
+Important: This does NOT mean:
+- There's a 2% chance the null hypothesis is true
+- There's a 98% chance our result is "real"
+- The effect is necessarily large or important
+
+Always consider the effect size and clinical
+significance in addition to the p-value.
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Test Selection}
+\textbf{Prompt:} ``I have data from 20 patients before and after treatment. What test should I use?''
+
+\vspace{0.2cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+For before-and-after data on the SAME patients, you should use a
+PAIRED t-test (not a one-sample t-test).
+
+Here's why:
+- You have two measurements per patient (before and after)
+- The measurements are dependent (same person)
+- You're interested in the change within individuals
+
+R code:
+before <- c(...)  # before measurements
+after <- c(...)   # after measurements
+
+# Method 1: Paired t-test directly
+t.test(after, before, paired = TRUE)
+
+# Method 2: Create difference variable
+difference <- after - before
+t.test(difference, mu = 0)  # Test if mean difference != 0
+
+Both methods give identical results. The paired t-test is more
+powerful than comparing groups independently because it accounts
+for individual variation.
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Checking Assumptions (Part 1 - Visual)}
+\textbf{Prompt:} ``How do I check if my data is normal enough for a t-test?''
+
+\vspace{0.1cm}
+\textbf{Claude AI Response:}
+\tiny
+\begin{verbatim}
+# Check normality for t-test
+data <- c(...)  # your data
+
+# Visual checks (most important!)
+par(mfrow = c(2, 2))
+
+# 1. Histogram
+hist(data, breaks = 10, main = "Histogram", prob = TRUE)
+curve(dnorm(x, mean = mean(data), sd = sd(data)),
+      add = TRUE, col = "red", lwd = 2)
+
+# 2. Q-Q plot (most useful!)
+qqnorm(data)
+qqline(data, col = "red")
+# Points should roughly follow the line
+
+# 3. Boxplot
+boxplot(data, main = "Boxplot")
+# Should be roughly symmetric, check for outliers
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{AI Demo: Checking Assumptions (Part 2 - Tests)}
+\tiny
+\begin{verbatim}
+# 4. Density plot
+plot(density(data), main = "Density Plot")
+
+# Formal test
+shapiro.test(data)
+# p > 0.05 suggests normality
+# But with large n, minor deviations become "significant"
+
+# Rule of thumb: t-test is robust for n >= 30 unless
+# extreme outliers or strong skewness
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{AI Best Practices for Hypothesis Testing}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{DO:}
+\begin{itemize}
+\item Ask AI to explain concepts
+\item Request code examples
+\item Verify calculations independently
+\item Check assumptions visually
+\item Ask for interpretation help
+\item Learn from AI explanations
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\textbf{DON'T:}
+\begin{itemize}
+\item Blindly trust AI p-values
+\item Skip checking assumptions
+\item Use AI without understanding
+\item Choose test based on desired result
+\item Ignore effect sizes
+\item Forget clinical context
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.3cm}
+\textbf{Critical thinking points:}
+\begin{enumerate}
+\item Does the test AI suggested match your research question?
+\item Are assumptions reasonable for your data?
+\item Does the interpretation make practical sense?
+\item Is statistical significance the same as clinical importance?
+\end{enumerate}
+\end{frame}
+
+\defaultcolors
+
+\section{Summary}
+
+\begin{frame}
+\frametitle{Summary: Hypothesis Testing Framework}
+\textbf{Complete hypothesis testing procedure:}
+
+\vspace{0.3cm}
+\begin{enumerate}
+\item \textbf{State hypotheses:} $H_0$ vs $H_A$ (before collecting data!)
+\item \textbf{Choose significance level:} Usually $\alpha = 0.05$
+\item \textbf{Check assumptions:} Normality, independence, random sampling
+\item \textbf{Calculate test statistic:} $t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}$
+\item \textbf{Find p-value:} From t-distribution with $n-1$ df
+\item \textbf{Make decision:} Reject $H_0$ if $p < \alpha$
+\item \textbf{State conclusion:} In context of research question
+\item \textbf{Report effect size:} Difference, confidence interval, practical importance
+\end{enumerate}
+
+\vspace{0.4cm}
+\textbf{Remember:}
+\begin{itemize}
+\item Statistical significance $\neq$ practical importance
+\item Fail to reject $\neq$ accept
+\item Always consider Type I and Type II error consequences
+\item Report confidence intervals alongside p-values
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Key Concepts to Remember}
+\textbf{Hypotheses:}
+\begin{itemize}
+\item $H_0$: null hypothesis (status quo, no effect)
+\item $H_A$: alternative hypothesis (what we want to show)
+\item Two-sided vs one-sided tests
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{Decision-making:}
+\begin{itemize}
+\item P-value: probability of data or more extreme, given $H_0$ true
+\item $\alpha$: significance level (Type I error rate)
+\item Reject $H_0$ if $p < \alpha$
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{Errors:}
+\begin{itemize}
+\item Type I ($\alpha$): False positive (reject true $H_0$)
+\item Type II ($\beta$): False negative (fail to reject false $H_0$)
+\item Power = $1 - \beta$: Probability of detecting true effect
+\end{itemize}
+
+\vspace{0.1cm}
+\textbf{Tests covered:}
+\begin{itemize}
+\item One-sample t-test: $t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}$
+\item One-sample z-test: $Z = \frac{\bar{x} - \mu_0}{\sigma/\sqrt{n}}$ (rare)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Next Week Preview}
+\textbf{Week 6: Two-Sample Tests}
+
+\vspace{0.5cm}
+We'll extend hypothesis testing to compare two groups:
+\begin{itemize}
+\item Two-sample t-test (independent groups)
+\item Paired t-test (dependent samples)
+\item Confidence intervals for difference in means
+\item Assumptions and diagnostics
+\item Effect sizes (Cohen's d)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Examples:}
+\begin{itemize}
+\item Treatment vs control groups
+\item Before vs after measurements
+\item Drug A vs Drug B comparison
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Reading:} Chapter 11
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions?}
+\begin{center}
+\Large{Thank you!}
+
+\vspace{1cm}
+
+\textbf{Email:} john.molitor@oregonstate.edu\\
+\textbf{Office:} 153 Milam
+\end{center}
+\end{frame}
+
+\end{document}

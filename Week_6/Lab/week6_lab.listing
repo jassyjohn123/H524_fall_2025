@@ -1,0 +1,15 @@
+# Bonferroni correction: Adjust p-values
+pairwise.t.test(data$cholesterol, data$dose,
+                p.adjust.method = "bonferroni")
+
+# More conservative than Tukey for many comparisons
+# For 3 groups (3 comparisons), similar results
+
+# Holm's method (less conservative than Bonferroni)
+pairwise.t.test(data$cholesterol, data$dose,
+                p.adjust.method = "holm")
+
+# No adjustment (for comparison - DON'T DO THIS!)
+pairwise.t.test(data$cholesterol, data$dose,
+                p.adjust.method = "none")
+# Shows why we need correction!

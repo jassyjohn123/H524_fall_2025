@@ -1,0 +1,431 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{array}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+% Code environment
+\newtcblisting{rcode}{
+  colback=white,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=0pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  width=\textwidth,
+  breakable,
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false
+  }
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 5: Hypothesis Testing}}\\
+\textcolor{white}{\textbf{\Large Homework Assignment}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Due Date:} End of Week 5\\
+\textbf{Total Points:} 65 (+ 5 bonus)\\
+\textbf{Format:} Submit through Canvas\\
+\textbf{Time Limit:} 240 minutes (4 hours)
+
+\section*{Instructions}
+
+\begin{itemize}
+\item Show all work for full credit
+\item Round probabilities to 4 decimal places unless otherwise specified
+\item Include R code where specified
+\item You may use R to check your work
+\end{itemize}
+
+\section{Part 1: Hypothesis Testing Fundamentals (18 points)}
+
+\subsection*{Question 1: Null Hypothesis Definition (3 points)}
+
+Which statement BEST describes the null hypothesis ($H_0$) in hypothesis testing?
+
+\begin{enumerate}[label=\Alph*)]
+\item $H_0$ represents the research hypothesis; it is what we hope to prove through our study
+\item $H_0$ represents the alternative explanation; it is always what we want to reject
+\item $H_0$ is the hypothesis with the larger p-value; it cannot be proven, only disproven
+\item $H_0$ represents the status quo or no effect; it is the hypothesis we assume true until we have sufficient evidence to reject it
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 2: Alternative Hypothesis Forms (3 points)}
+
+A researcher wants to test if a new drug LOWERS blood pressure compared to the current standard treatment (mean = 140 mmHg). Which alternative hypothesis is appropriate?
+
+\begin{enumerate}[label=\Alph*)]
+\item $H_a$: $\mu > 140$ (one-sided, upper tail)
+\item $H_a$: $\mu \neq 140$ (two-sided)
+\item $H_a$: $\mu < 140$ (one-sided, lower tail)
+\item $H_0$: $\mu = 140$ (null hypothesis)
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 3: P-value Interpretation (4 points)}
+
+Which statement CORRECTLY interprets what a p-value represents?
+
+\begin{enumerate}[label=\Alph*)]
+\item The probability that the null hypothesis is true given our data
+\item The probability that the alternative hypothesis is false
+\item The probability of observing data as extreme as (or more extreme than) what we observed, assuming the null hypothesis is true
+\item The probability of making a Type I error in this specific test
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 4: Decision Rule (2 points)}
+
+A hypothesis test is conducted at significance level $\alpha = 0.05$. The calculated p-value is 0.032. What is the correct decision?
+
+\begin{enumerate}[label=\Alph*)]
+\item Fail to reject $H_0$ because p-value $> 0.01$; evidence is not strong enough
+\item Reject $H_0$ because p-value $< \alpha$; we have sufficient evidence against the null hypothesis
+\item Accept $H_0$ because p-value is close to $\alpha$; null hypothesis is proven true
+\item Reject $H_a$ because p-value is small; alternative hypothesis is false
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 5: T-statistic Calculation (3 points)}
+
+A researcher tests $H_0$: $\mu = 50$ vs $H_a$: $\mu \neq 50$. The sample statistics are: $n = 25$, $\bar{x} = 52$, $s = 8$. What is the t-statistic?
+
+\begin{enumerate}[label=\Alph*)]
+\item 1.25
+\item 2.50
+\item 6.25
+\item 0.25
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 6: P-value from t-statistic (3 points)}
+
+For the scenario in Question 5 ($t = 1.25$, $df = 24$, two-sided test), what is the p-value?
+
+\begin{enumerate}[label=\Alph*)]
+\item 0.2234
+\item 0.0500
+\item 0.1117
+\item 0.8883
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\newpage
+
+\section{Part 2: Type I and Type II Errors (14 points)}
+
+\subsection*{Question 7: Type I Error (3 points)}
+
+What is a Type I error in hypothesis testing?
+
+\begin{enumerate}[label=\Alph*)]
+\item Failing to reject the null hypothesis when it is actually false (false negative)
+\item Accepting the alternative hypothesis when it is false
+\item Rejecting the null hypothesis when it is actually true (false positive)
+\item Making a calculation error in computing the test statistic
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 8: Type II Error (3 points)}
+
+A medical researcher tests a new drug that actually IS effective, but the hypothesis test fails to detect the effect. What type of error has occurred?
+
+\begin{enumerate}[label=\Alph*)]
+\item Type I error ($\alpha$); rejected a true null hypothesis
+\item Type II error ($\beta$); failed to reject a false null hypothesis
+\item Power error; the test was not powerful enough
+\item No error; the test correctly failed to reject $H_0$
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 9: Error Trade-off (3 points)}
+
+What happens to the probability of Type II error ($\beta$) when you DECREASE the significance level ($\alpha$) from 0.05 to 0.01?
+
+\begin{enumerate}[label=\Alph*)]
+\item $\beta$ decreases; being more conservative reduces all types of errors
+\item $\beta$ stays the same; Type I and Type II errors are independent
+\item $\beta$ becomes undefined; we can only control one type of error at a time
+\item $\beta$ increases; making it harder to reject $H_0$ increases the chance of missing a true effect
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 10: Statistical Power (2 points)}
+
+What is statistical power, and why is it important?
+
+\begin{enumerate}[label=\Alph*)]
+\item Power = $1 - \alpha$; it's the probability of correctly accepting a true null hypothesis
+\item Power = $1 - \beta$; it's the probability of correctly rejecting a false null hypothesis (detecting a true effect)
+\item Power = $\alpha + \beta$; it measures the total probability of making any error
+\item Power = sample size / population size; larger samples have more power
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 11: Blood Pressure Hypothesis Test (10 points)}
+
+A cardiologist wants to test if patients in a cardiac rehabilitation program have systolic blood pressure significantly \textbf{higher} than the normal threshold of 120 mmHg. She measures blood pressure for 20 patients:
+
+\begin{verbatim}
+bp_data <- c(118, 124, 130, 128, 122, 135, 119, 126, 132, 120,
+             125, 129, 121, 127, 123, 131, 120, 128, 124, 126)
+\end{verbatim}
+
+Using R to perform a one-sample t-test:
+
+\begin{enumerate}[label=\alph*)]
+\item \textbf{(5 points)} What is the \textbf{t-statistic}? (Round to 2 decimal places)\\[0.3cm]
+$t = $ [t\_stat]
+
+\item \textbf{(5 points)} What is the \textbf{p-value}? (Round to 4 decimal places or use scientific notation)\\[0.3cm]
+p-value = [p\_value]
+\end{enumerate}
+
+\textit{Hint: Use \texttt{t.test(bp\_data, mu = 120, alternative = "greater")}}
+
+\vspace{1cm}
+
+\newpage
+
+\section{Part 3: Hypothesis Testing with R (10 points)}
+
+\subsection*{Question 12: Cholesterol Hypothesis Test (10 points)}
+
+A pharmaceutical company claims their new statin drug reduces cholesterol to \textbf{below 200 mg/dL} on average. A clinical trial of 40 patients finds:
+
+\begin{itemize}
+\item Sample mean: $\bar{x} = 185$ mg/dL
+\item Sample standard deviation: $s = 35$ mg/dL
+\end{itemize}
+
+Test the company's claim using a one-sample t-test at the 0.01 significance level:
+
+\begin{enumerate}[label=\alph*)]
+\item \textbf{(5 points)} What is the \textbf{t-statistic}? (Round to 2 decimal places)\\[0.3cm]
+$t = $ [t\_stat]
+
+\item \textbf{(5 points)} What is the \textbf{p-value}? (Round to 4 decimal places)\\[0.3cm]
+p-value = [p\_value]
+\end{enumerate}
+
+\textit{Hint: The claim is ``below 200'', so $H_0$: $\mu = 200$ vs $H_a$: $\mu < 200$}
+
+\vspace{2cm}
+
+\section{Part 4: Two-Sample Tests (14 points)}
+
+\subsection*{Question 13: Two-Sample Test Application (3 points)}
+
+Which research question requires a TWO-SAMPLE t-test rather than a one-sample t-test?
+
+\begin{enumerate}[label=\Alph*)]
+\item Testing if mean patient satisfaction score differs from the national average of 7.5
+\item Comparing mean recovery times between patients receiving Drug A versus Drug B
+\item Determining if mean BMI in a clinic exceeds 25
+\item Testing if mean blood glucose level equals 100 mg/dL
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 14: Two-Sample T-test (4 points)}
+
+Two groups of patients are compared:
+
+\begin{itemize}
+\item Treatment A: $n_1 = 30$, $\bar{x}_1 = 145$, $s_1 = 15$
+\item Treatment B: $n_2 = 35$, $\bar{x}_2 = 138$, $s_2 = 18$
+\end{itemize}
+
+Testing $H_0$: $\mu_1 = \mu_2$ vs $H_a$: $\mu_1 \neq \mu_2$, which statement is correct?
+
+\begin{enumerate}[label=\Alph*)]
+\item $t \approx 1.71$, p-value $\approx 0.0922$; fail to reject $H_0$ at $\alpha = 0.05$
+\item $t \approx 3.21$, p-value $\approx 0.0018$; fail to reject $H_0$ at $\alpha = 0.05$
+\item $t \approx 1.71$, p-value $\approx 0.0461$; reject $H_0$ at $\alpha = 0.05$
+\item $t \approx 0.47$, p-value $\approx 0.6401$; reject $H_0$ at $\alpha = 0.05$
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\subsection*{Question 15: R Code for Two-Sample Test (2 points)}
+
+Given two vectors \texttt{group\_a} and \texttt{group\_b}, which R command correctly performs a two-sample t-test?
+
+\begin{enumerate}[label=\Alph*)]
+\item \texttt{t.test(group\_a - group\_b)}
+\item \texttt{t.test(mean(group\_a), mean(group\_b))}
+\item \texttt{two.sample.test(group\_a, group\_b)}
+\item \texttt{t.test(group\_a, group\_b)}
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\newpage
+
+\section*{Bonus: AI Verification and Learning (5 bonus points)}
+
+\subsection*{Question 16: AI Verification and Learning (5 bonus points)}
+
+Choose ONE hypothesis testing problem from this quiz (Questions 11, 12, or 14).
+
+\begin{enumerate}[label=\alph*)]
+\item Ask an AI tool (Claude, ChatGPT, Gemini, etc.) to solve the problem. Include your exact prompt. (1 point)
+\item Verify the AI's answer by working through it yourself step-by-step. Did the AI get it correct? If not, identify and explain the error. (2 points)
+\item Ask the AI to explain when you should use a one-sided vs. two-sided hypothesis test. Evaluate the quality and clarity of the explanation. (2 points)
+\end{enumerate}
+
+\vspace{2cm}
+
+\section*{Submission Requirements}
+
+\subsection*{Required Files:}
+\begin{enumerate}
+\item \textbf{PDF Document} with all written work, calculations, and interpretations
+\item \textbf{R Script File (.R)} with all R code properly commented (for Questions 11 and 12)
+\item \textbf{AI Usage Documentation} (if applicable for bonus):
+   \begin{itemize}
+   \item Prompts used
+   \item AI responses
+   \item Your verification and evaluation
+   \end{itemize}
+\end{enumerate}
+
+\subsection*{Formatting Guidelines:}
+\begin{itemize}
+\item Clearly label each question number
+\item Show all calculation steps for full credit
+\item Round consistently per instructions
+\item Include units where appropriate (mmHg, mg/dL, etc.)
+\end{itemize}
+
+\section*{Grading Rubric}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcp{8cm}}
+\toprule
+\textbf{Category} & \textbf{Points} & \textbf{Criteria} \\
+\midrule
+Conceptual Understanding & 24 & Correct interpretation of hypotheses, errors, power \\
+Calculations & 20 & Accurate computation of test statistics and p-values \\
+R Implementation & 11 & Working code, proper syntax, correct results \\
+Interpretation & 10 & Clear reasoning, appropriate conclusions \\
+Bonus & +5 & Thoughtful AI integration and evaluation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{Common Mistakes to Avoid}
+
+\begin{itemize}
+\item \textbf{Hypotheses:} Confusing $H_0$ and $H_a$; using wrong tail (one-sided vs. two-sided)
+\item \textbf{P-values:} Misinterpreting p-value as probability that $H_0$ is true
+\item \textbf{Decision Rule:} Rejecting when p-value $> \alpha$, or failing to reject when p-value $< \alpha$
+\item \textbf{Errors:} Confusing Type I ($\alpha$) and Type II ($\beta$) errors
+\item \textbf{R Code:} Using wrong \texttt{alternative} parameter (``greater'', ``less'', ``two.sided'')
+\end{itemize}
+
+\section*{Key Formulas}
+
+\textbf{One-sample t-statistic:}
+$$t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}}$$
+
+\textbf{Two-sample t-statistic (equal variances):}
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{s_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}$$
+
+\textbf{Decision Rule:}
+\begin{itemize}
+\item Reject $H_0$ if p-value $< \alpha$
+\item Fail to reject $H_0$ if p-value $\geq \alpha$
+\end{itemize}
+
+\textbf{Relationships:}
+\begin{itemize}
+\item Type I Error: $\Pr(\text{Reject } H_0 \mid H_0 \text{ true}) = \alpha$
+\item Type II Error: $\Pr(\text{Fail to reject } H_0 \mid H_0 \text{ false}) = \beta$
+\item Power: $1 - \beta = \Pr(\text{Reject } H_0 \mid H_0 \text{ false})$
+\end{itemize}
+
+\section*{Academic Integrity}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,title=AI Usage Guidelines]
+
+\textbf{You are encouraged to:}
+\begin{itemize}
+\item[+] Use AI tools to check your work
+\item[+] Ask AI to explain concepts you don't understand
+\item[+] Verify your calculations with AI
+\item[+] Use AI to help debug R code
+\end{itemize}
+
+\textbf{You must NOT:}
+\begin{itemize}
+\item[-] Submit AI-generated work without understanding it
+\item[-] Copy solutions without showing your own reasoning
+\item[-] Use AI as a substitute for learning the material
+\item[-] Rely on AI for exam preparation without independent practice
+\end{itemize}
+
+\textbf{Remember:} The goal is to develop YOUR ability to perform hypothesis testing and understand statistical inference. AI is a tool to enhance learning, not replace it.
+\end{tcolorbox}
+
+\section*{Resources}
+
+\begin{itemize}
+\item \textbf{Textbook:} Pagano \& Gauvreau, Chapter 9
+\item \textbf{Lecture Slides:} Week 5 slides with examples
+\item \textbf{Lab Materials:} Week 5 lab with step-by-step R code
+\item \textbf{R Documentation:} \texttt{?t.test}
+\item \textbf{Office Hours:} Wednesday 10:00-11:30am or by appointment
+\end{itemize}
+
+\end{document}

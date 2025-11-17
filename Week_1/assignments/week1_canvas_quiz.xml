@@ -590,7 +590,7 @@
         <presentation>
           <material>
             <mattext texttype="text/html"><![CDATA[
-<p><strong>Question 11 (10 points): Data Types Classification</strong></p>
+<p><strong>Data Types Classification (10 points)</strong></p>
 <p>For each variable below, identify whether it is quantitative or qualitative, and if quantitative, whether it's discrete or continuous. If qualitative, specify if it's nominal or ordinal. Provide a brief justification for each classification (2 points each):</p>
 <ol style="list-style-type: lower-alpha;">
 <li>FEV1 measurement in liters (from our class dataset)</li>
@@ -631,7 +631,7 @@
         <presentation>
           <material>
             <mattext texttype="text/html"><![CDATA[
-<p><strong>Question 12 (10 points): Descriptive Statistics Analysis</strong></p>
+<p><strong>Descriptive Statistics Analysis (10 points)</strong></p>
 <p>Using the actual FEV1 dataset from class (n=13), examine the histogram below and the descriptive statistics:</p>
 <p><em>Note: Histogram will be provided separately in Canvas - refer to FEV1 histogram from class materials</em></p>
 <p><strong>Descriptive Statistics:</strong></p>
@@ -678,7 +678,7 @@
         <presentation>
           <material>
             <mattext texttype="text/html"><![CDATA[
-<p><strong>Question 13 (10 points): Choosing Appropriate Visualizations</strong></p>
+<p><strong>Choosing Appropriate Visualizations (10 points)</strong></p>
 <p>Refer to the childhood injury bar chart below, then consider the researcher's different datasets:</p>
 <p><em>Note: Childhood injury bar chart will be provided separately in Canvas - refer to injury deaths by cause chart from class materials</em></p>
 <p>A researcher wants to present injury data to a public health conference. She has these datasets:</p>
@@ -724,7 +724,7 @@
         <presentation>
           <material>
             <mattext texttype="text/html"><![CDATA[
-<p><strong>Question 14 (15 points): R Data Analysis with FEV1 Dataset</strong></p>
+<p><strong>R Data Analysis with FEV1 Dataset (15 points)</strong></p>
 <p>Using the FEV1 dataset from class materials (available in week1_lecture_code.R):</p>
 <ol style="list-style-type: lower-alpha;">
 <li>Write R code to load the data and calculate the mean FEV1 by gender. Include the output. (5 points)</li>
@@ -821,7 +821,7 @@
         <presentation>
           <material>
             <mattext texttype="text/html"><![CDATA[
-<p><strong>Question 16: Critical Thinking About AI in Biostatistics (Bonus - 5 points)</strong></p>
+<p><strong>Critical Thinking About AI in Biostatistics (Bonus - 5 points)</strong></p>
 <p>A public health researcher wants to use AI to analyze a large dataset of electronic health records to identify risk factors for diabetes.</p>
 <ol style="list-style-type: lower-alpha;">
 <li>Describe two specific ways AI could be helpful in this analysis. (2 points)</li>

@@ -1,0 +1,196 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+% Compact spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlist{noitemsep,topsep=2pt}
+
+\begin{document}
+
+% Orange header
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=8pt,bottom=8pt]
+\centering
+\textcolor{white}{\textbf{\large WEEK 9 ASSIGNMENT}}\\
+\textcolor{white}{\textbf{H524 Introduction to Biostatistics - Fall 2025}}
+\end{tcolorbox}
+
+\vspace{4pt}
+
+\noindent\textbf{Total Points:} 10 \quad|\quad \textbf{Due:} Sunday 11:59 PM
+
+\vspace{6pt}
+
+\section*{Part A: Multiple Choice Questions (7 points)}
+
+Answer the following 7 questions on correlation and simple linear regression. Each question is worth 1 point.
+
+\subsection*{Question 1: Correlation Coefficient Range (1 point)}
+The Pearson correlation coefficient (r) ranges from:
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item 0 to 1
+\item -1 to 0
+\item -1 to 1
+\item -$\infty$ to +$\infty$
+\end{enumerate}
+
+\subsection*{Question 2: Interpreting Correlation (1 point)}
+A correlation coefficient of r = -0.85 indicates:
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item A weak positive linear relationship
+\item A strong positive linear relationship
+\item A weak negative linear relationship
+\item A strong negative linear relationship
+\end{enumerate}
+
+\subsection*{Question 3: Correlation vs. Causation (1 point)}
+If two variables have a strong positive correlation (r = 0.90), this means:
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item One variable causes changes in the other
+\item The variables tend to increase together, but this does not prove causation
+\item There is no relationship between the variables
+\item The regression line has a slope of 0.90
+\end{enumerate}
+
+\subsection*{Question 4: Simple Linear Regression Equation (1 point)}
+In the regression equation $\hat{y} = a + bx$, what does ``b'' represent?
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item The y-intercept
+\item The slope of the regression line
+\item The correlation coefficient
+\item The predicted value of y
+\end{enumerate}
+
+\subsection*{Question 5: Coefficient of Determination (1 point)}
+If the correlation coefficient r = 0.60, what is the coefficient of determination (R²)?
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item 0.36
+\item 0.60
+\item 0.77
+\item 1.67
+\end{enumerate}
+
+\subsection*{Question 6: Interpreting R² (1 point)}
+An R² value of 0.64 means:
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item 64\% of the variance in y is explained by x
+\item 64\% of the variance in x is explained by y
+\item The correlation is r = 0.64
+\item The slope of the regression line is 0.64
+\end{enumerate}
+
+\subsection*{Question 7: Regression Assumptions (1 point)}
+Which of the following is NOT an assumption of simple linear regression?
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item Linearity (relationship between x and y is linear)
+\item Independence of observations
+\item Normality of residuals
+\item The independent variable (x) must be normally distributed
+\end{enumerate}
+
+\newpage
+
+\section*{Part B: Group Project Check-In - Presentation Readiness (3 points)}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\textbf{GROUP PROJECT: FINAL CHECK BEFORE PRESENTATIONS}
+\end{tcolorbox}
+
+\vspace{4pt}
+
+\textbf{Reminder:} Presentations are NEXT WEEK (Week 10)!
+\begin{itemize}[leftmargin=20pt]
+\item \textbf{Monday 12-1:20pm:} Groups 1 \& 2
+\item \textbf{Wednesday 12-1:20pm:} Groups 3 \& 4
+\end{itemize}
+
+\subsection*{Your Assignment}
+
+\textbf{Group Leader submits} evidence that your presentation is ready:
+
+\textbf{Choose ONE of the following to submit:}
+
+\textbf{Option A: Presentation Outline} (preferred)
+\begin{itemize}[leftmargin=20pt]
+\item List of slides/sections (bullet points)
+\item Who will present each section
+\item Timing estimate for each part
+\end{itemize}
+
+\textbf{Option B: Draft Slide Deck}
+\begin{itemize}[leftmargin=20pt]
+\item PowerPoint, Google Slides, or PDF
+\item Doesn't need to be final, but should show structure
+\end{itemize}
+
+\textbf{Option C: Presentation Plan}
+\begin{itemize}[leftmargin=20pt]
+\item Written description of what you'll cover
+\item Division of speaking roles
+\item Confirmation that all members will participate
+\end{itemize}
+
+\subsection*{Submission Format}
+
+\textbf{Submit as:} File upload (PDF, PPT, DOCX) OR text entry
+
+\textbf{Length:}
+\begin{itemize}[leftmargin=20pt]
+\item Outline: 1 page
+\item Slides: Any number (draft is fine)
+\item Plan: 1-2 paragraphs
+\end{itemize}
+
+\textbf{Grading:} 3 points for demonstrating presentation preparation
+
+\subsection*{Presentation Reminders}
+
+\textbf{Your presentation should include:}
+\begin{itemize}[leftmargin=20pt]
+\item Brief dataset overview
+\item Key statistical findings
+\item \textbf{AI comparison highlights} (30-40\% of presentation!)
+\item Conclusions and what you learned
+\end{itemize}
+
+\textbf{Requirements:}
+\begin{itemize}[leftmargin=20pt]
+\item 15 minutes (+ 5 min Q\&A)
+\item All team members participate
+\item Use slides
+\item Attend your assigned day (Mon or Wed)
+\end{itemize}
+
+\textbf{Time to finalize:}
+\begin{itemize}[leftmargin=20pt]
+\item This week: Draft slides and practice
+\item Next week: Final touches and delivery
+\end{itemize}
+
+\subsection*{Notes}
+
+\begin{itemize}[leftmargin=20pt]
+\item \textbf{Only the group leader submits}
+\item This check-in ensures you're ready for Week 10
+\item If you submit an outline now, you can refine slides this week
+\item Don't wait until the day before to start your presentation!
+\item \textbf{Grading (10\% of course grade) is next week} - take this seriously!
+\end{itemize}
+
+\end{document}

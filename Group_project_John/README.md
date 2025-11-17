@@ -113,7 +113,7 @@ Students must document:
 
 **For Anorexia Dataset:**
 - **Claude:** ANOVA on change scores, no assumption checks, accessible language
-- **ChatGPT:** ANCOVA adjusting for baseline, full assumptions, effect sizes
+- **ChatGPT:** Multiple paired t-tests for each treatment group, full assumptions, effect sizes
 - **Copilot:** Paired t-tests, code-focused
 
 **Students learn:** How to critically evaluate AI outputs, not just accept them!

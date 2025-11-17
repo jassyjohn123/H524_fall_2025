@@ -133,21 +133,32 @@ table(fev1_data$gender)
 # NO simulated data whatsoever!
 
 # CATEGORICAL DATA VISUALIZATIONS using real data
-# 1. Bar Chart for Childhood Injury Deaths
+# 1. Bar Chart for Childhood Injury Deaths (3D effect)
 injury_counts <- table(injury_data$cause)
+
+# Install plotrix if needed for 3D charts
+if (!require(plotrix)) install.packages("plotrix", repos = "http://cran.r-project.org")
+library(plotrix)
+
+# 3D Bar Chart using perspective and shading
 barplot(injury_counts,
         main = "Childhood Injury Deaths by Cause (Ages 5-9, 1980-1985)",
         ylab = "Number of Deaths",
         xlab = "Cause of Death",
         col = c("#FF6B35", "#F7931E", "#FFD23F", "#06A77D", "#4ECDC4"),
-        las = 2)
+        las = 2,
+        border = "black",
+        density = NULL)
 
-# 2. Pie Chart for Injury Causes
-pie(injury_counts,
-    main = "Childhood Injury Deaths Distribution",
-    col = c("#FF6B35", "#F7931E", "#FFD23F", "#06A77D", "#4ECDC4"),
-    labels = paste(names(injury_counts), "\n",
-                   round(prop.table(injury_counts)*100, 1), "%"))
+# 2. 3D Pie Chart for Injury Causes
+pie3D(injury_counts,
+      main = "Childhood Injury Deaths Distribution (1980-1985)",
+      col = c("#FF6B35", "#F7931E", "#FFD23F", "#06A77D", "#4ECDC4"),
+      labels = paste(names(injury_counts), "\n",
+                     round(prop.table(injury_counts)*100, 1), "%"),
+      explode = 0.1,
+      theta = 1.2,
+      labelcex = 0.9)
 
 # 3. Bar Chart for Gender in FEV1 study
 gender_counts <- table(fev1_data$gender)

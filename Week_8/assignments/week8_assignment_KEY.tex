@@ -1,0 +1,238 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large Week 8 Assignment - ANSWER KEY}}\\\
+\textcolor{white}{\textbf{\large Contingency Tables and Chi-Square Tests}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Total Points:} 100 points
+
+\vspace{8pt}
+
+\section{Part A: Multiple Choice (70 points)}
+
+\subsection*{Contingency Table Basics (10 points)}
+A contingency table displays the relationship between:
+
+\textbf{ANSWER: C - Two categorical variables}
+
+\textit{Explanation:} Contingency tables are used to display the relationship between two categorical variables, showing the frequency distribution across categories.
+
+\vspace{0.5cm}
+
+\subsection*{Expected Frequencies (10 points)}
+In a chi-square test, the expected frequency for a cell is calculated as:
+
+\textbf{ANSWER: A - (Row total × Column total) / Grand total}
+
+\textit{Explanation:} Expected frequency formula: $E_{ij} = \frac{(\text{Row } i \text{ total}) \times (\text{Column } j \text{ total})}{\text{Grand total}}$
+
+\vspace{0.5cm}
+
+\subsection*{Chi-Square Test Assumptions (10 points)}
+Which of the following is a requirement for conducting a chi-square test?
+
+\textbf{ANSWER: B - All expected cell frequencies should be at least 5}
+
+\textit{Explanation:} The chi-square test assumes expected counts $\geq 5$ in all cells. If this is violated, use Fisher's exact test instead.
+
+\vspace{0.5cm}
+
+\subsection*{Degrees of Freedom (10 points)}
+For a 3×4 contingency table (3 rows, 4 columns), what are the degrees of freedom for the chi-square test?
+
+\textbf{ANSWER: B - 6}
+
+\textit{Explanation:} $df = (r-1)(c-1) = (3-1)(4-1) = 2 \times 3 = 6$
+
+\vspace{0.5cm}
+
+\subsection*{Interpreting Chi-Square Results (10 points)}
+A chi-square test yields $p = 0.032$. At $\alpha = 0.05$, what can we conclude?
+
+\textbf{ANSWER: B - There is a significant association between the variables}
+
+\textit{Explanation:} Since $p = 0.032 < 0.05$, we reject $H_0$ and conclude there is significant evidence of association.
+
+\vspace{0.5cm}
+
+\subsection*{2×2 Table Setup (10 points)}
+In a case-control study examining smoking and lung cancer, which variable should form the rows of a 2×2 table?
+
+\textbf{ANSWER: C - Either variable can form rows}
+
+\textit{Explanation:} The orientation of a 2×2 table (which variable forms rows vs columns) does not affect the statistical test results.
+
+\vspace{0.5cm}
+
+\subsection*{Fisher's Exact Test (10 points)}
+When should Fisher's exact test be used instead of the chi-square test?
+
+\textbf{ANSWER: B - When expected cell frequencies are small (less than 5 in one or more cells)}
+
+\textit{Explanation:} Fisher's exact test is appropriate when chi-square assumptions are violated (expected counts $< 5$).
+
+\newpage
+
+\section{Part B: R Computational Problems (30 points)}
+
+\textbf{Note:} Some problems require students to use R to compute the answer.
+
+\subsection*{Question 8: Fisher's Exact Test in R (15 points)}
+
+A small clinical trial tests a new treatment for a rare disease with the following results:
+
+\begin{center}
+\begin{tabular}{l|cc}
+& \textbf{Improved} & \textbf{Not Improved} \\
+\hline
+\textbf{Treatment} & 7 & 3 \\
+\textbf{Control} & 2 & 8 \\
+\end{tabular}
+\end{center}
+
+Use R to perform Fisher's exact test on this data. What is the two-sided p-value?
+
+\begin{enumerate}[label=\Alph*.]
+\item 0.0032
+\item 0.0698 \textbf{(CORRECT)}
+\item 0.1524
+\item 0.5000
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\textbf{Expected R code solution:}
+\begin{verbatim}
+data <- matrix(c(7, 3, 2, 8), nrow=2, byrow=TRUE)
+fisher.test(data)
+\end{verbatim}
+
+\textit{R output:}
+\begin{verbatim}
+	Fisher's Exact Test for Count Data
+
+data:  data
+p-value = 0.06978
+alternative hypothesis: true odds ratio is not equal to 1
+95 percent confidence interval:
+   0.8821175 127.0558418
+sample estimates:
+odds ratio
+  8.153063
+\end{verbatim}
+
+\textit{Explanation:} The two-sided p-value is 0.0698 (rounded to 0.0698). Since $p > 0.05$, we fail to reject $H_0$ at the 0.05 level. There is no statistically significant evidence of treatment effectiveness, though the p-value is close to 0.05 and the odds ratio suggests a strong effect. A larger study would be warranted.
+
+\vspace{1cm}
+
+\subsection*{Question 9: Chi-Square Test in R (15 points)}
+
+A cohort study follows 500 smokers and 500 non-smokers for 10 years to assess heart disease incidence:
+
+\begin{center}
+\begin{tabular}{l|cc}
+& \textbf{Heart Disease} & \textbf{No Heart Disease} \\
+\hline
+\textbf{Smoker} & 75 & 425 \\
+\textbf{Non-smoker} & 35 & 465 \\
+\end{tabular}
+\end{center}
+
+Use R to perform a chi-square test on this data (without continuity correction). What is the chi-square test statistic?
+
+\begin{enumerate}[label=\Alph*.]
+\item 8.234
+\item 12.156
+\item 16.343 \textbf{(CORRECT)}
+\item 21.450
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\textbf{Expected R code solution:}
+\begin{verbatim}
+data <- matrix(c(75, 425, 35, 465), nrow=2, byrow=TRUE)
+chisq.test(data, correct=FALSE)
+\end{verbatim}
+
+\textit{R output:}
+\begin{verbatim}
+	Pearson's Chi-squared test
+
+data:  data
+X-squared = 16.343, df = 1, p-value = 0.00005285
+\end{verbatim}
+
+\textit{Explanation:} The chi-square test statistic is $\chi^2 = 16.343$. With $df = 1$ and $p < 0.0001$, we reject $H_0$ and conclude there is very strong evidence of an association between smoking and heart disease.
+
+\newpage
+
+\section{Part C: Group Project Check-In (Completion Only, Ungraded)}
+
+\subsection*{Progress Update Check-In}
+
+\textbf{GRADING:} Completion only (any honest response receives credit)
+
+Group leaders should submit a brief update (3-5 sentences) addressing:
+\begin{enumerate}
+\item Has your group met at least once since Week 7?
+\item Have you loaded and explored your dataset in R?
+\item Have you consulted at least one AI tool about your data?
+\item Any blockers or questions?
+\end{enumerate}
+
+\vspace{12pt}
+
+\section*{Points Summary}
+
+\begin{itemize}
+\item Part A (Multiple Choice): 70 points (7 × 10 pts) - AUTO-GRADED
+\item Part B (R Computational): 30 points
+  \begin{itemize}
+  \item Question 8: Fisher's Exact Test (15 pts - AUTO-GRADED)
+    \begin{itemize}
+    \item Part A: R code submission (not graded - for reference only)
+    \item Part B: p-value multiple choice (15 pts - AUTO-GRADED)
+    \end{itemize}
+  \item Question 9: Chi-Square Test (15 pts - AUTO-GRADED)
+    \begin{itemize}
+    \item Part A: R code submission (not graded - for reference only)
+    \item Part B: test statistic multiple choice (15 pts - AUTO-GRADED)
+    \end{itemize}
+  \end{itemize}
+\item Part C (Group Check-In): Completion only (MANUALLY GRADED)
+\item \textbf{Total: 100 points (70 + 30 auto-graded, 0 manually graded except completion check)}
+\end{itemize}
+
+\end{document}

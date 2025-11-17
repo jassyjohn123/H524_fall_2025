@@ -1,0 +1,10 @@
+# At the top of your R script, add comments with your name and date:
+# Name: Your Name
+# Date: Today's Date
+# Lab: Week 2 - R Basics and Probability
+
+# Save your workspace (all objects you created)
+save.image("week2_lab.RData")
+
+# To load it later:
+# load("week2_lab.RData")

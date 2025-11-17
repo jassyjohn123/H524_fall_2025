@@ -1,63 +1,98 @@
-# Group 3: Low Birth Weight Study
+# Group 3: Exercise & Cholesterol Study
 
-## Your Dataset
-**File:** `birthwt.csv`
+## Dataset Overview
 
-## Quick Overview
-- **N = 189 births**
-- **Case-control design:** 59 low birth weight, 130 normal
-- **Multiple predictors:** Maternal age, weight, smoking, race, hypertension, etc.
-- **Research Question:** What factors are associated with low birth weight?
+**File:** `exercise_cholesterol.csv`
+
+**Sample Size:** n = 50 adults
+
+**Research Context:** Study examining the relationship between weekly exercise hours and total cholesterol levels in adults.
 
 ## Variables
-- `low`: Low birth weight indicator (0=no, 1=yes)
-- `age`: Mother's age (years)
-- `lwt`: Mother's weight at last menstrual period (lbs)
-- `race`: Mother's race (1=White, 2=Black, 3=Other)
-- `smoke`: Smoking status (0=no, 1=yes)
-- `ptl`: Previous premature labors (count)
-- `ht`: History of hypertension (0=no, 1=yes)
-- `ui`: Uterine irritability (0=no, 1=yes)
-- `ftv`: First trimester doctor visits (count)
-- `bwt`: Birth weight in grams (continuous alternative outcome)
 
-## Loading Your Data in R
+- `id`: Participant identifier (1-50)
+- `exercise`: Weekly exercise hours (continuous, 0-10 hours)
+- `cholesterol`: Total cholesterol level (mg/dL)
+- `age`: Age in years
+- `sex`: Sex (M/F)
+
+## Loading the Data in R
 
 ```r
-birthwt <- read.csv("birthwt.csv")
+# Load the dataset
+data <- read.csv("exercise_cholesterol.csv")
 
-# Or from package
-library(MedDataSets)
-data("birthwt_df")
+# View structure
+str(data)
+head(data)
+
+# Summary statistics
+summary(data)
 ```
 
-## What Makes This Dataset Interesting for AI Comparison?
+## Suggested Research Question
 
-**High divergence potential!** Different AI tools will likely:
-- **Claude:** Focus on major risk factors (smoking), chi-square tests
-- **ChatGPT:** Might jump to logistic regression (too advanced!)
-- **Copilot:** Might analyze continuous outcome (bwt) instead
+**"Is there a relationship between weekly exercise hours and cholesterol levels?"**
 
-**Why they differ:**
-- TWO possible outcomes: `low` (binary) vs `bwt` (continuous)
-- Many predictors - which to focus on?
-- Some AI might suggest multivariable models (beyond intro scope)
+## Methods to Use (From Course Material)
 
-## Suggested Statistical Methods
-- **For binary outcome (low):** Chi-square tests, risk ratios
-- **For continuous outcome (bwt):** T-tests, correlation
-- Compare means of predictors by low birth weight status
-- Stratified analysis (e.g., by smoking status)
+This dataset is designed for **Week 9 methods**:
 
-## Tips for Success
-1. Decide which outcome to use: binary `low` or continuous `bwt`
-2. Don't try to analyze all 9 predictors - focus on 2-3 main ones
-3. Watch if AI suggests logistic regression (too advanced for intro!)
-4. Consider confounding: smoking AND hypertension together?
-5. Risk ratios easier to interpret than odds ratios for intro class
+1. **Exploratory Analysis** (Week 1)
+   - Scatterplot: `plot(exercise, cholesterol)`
+   - Summary statistics for both variables
 
-## For More Details
-See `docs/DATA_DICTIONARIES.md` for complete variable descriptions.
+2. **Correlation Test** (Week 9)
+   - `cor.test(data$exercise, data$cholesterol)`
+   - Tests whether correlation is significantly different from 0
 
----
-**Multiple predictors = lots to explore!**
+3. **Simple Linear Regression** (Week 9)
+   - `lm(cholesterol ~ exercise, data=data)`
+   - `summary(model)`
+   - Check: Does exercise predict cholesterol?
+   - Interpret: For each additional hour of exercise per week, cholesterol changes by ___ mg/dL
+
+4. **Check Assumptions** (Week 9)
+   - Residual plots: `plot(model)`
+   - Normality of residuals
+   - Constant variance
+
+## What AI Will Likely Suggest (Divergence!)
+
+When you ask AI tools about this dataset, they may suggest:
+
+- **Multiple linear regression** (adding age, sex as predictors)
+  - NOT taught in this course (Week 9 is simple regression only)
+  - More complex but not necessary for basic research question
+
+- **Polynomial regression** (exercise^2 term)
+  - NOT taught in this course
+  - Tests for curved relationship
+
+- **Interaction terms** (exercise × sex)
+  - NOT taught in this course
+
+**Your Task:** Use the simple methods from Week 9 (correlation, simple regression). In your AI comparison section, note that AI suggested more complex methods but explain why simple regression is appropriate for your research question.
+
+## Expected AI Divergence
+
+- **Claude** might suggest checking assumptions thoroughly, recommend diagnostics
+- **ChatGPT** might jump to multiple regression with all variables
+- **Copilot** might suggest similar code but with different variable selection
+
+**Focus your report on:** Why did tools differ? Which suggestion was most appropriate given what you learned in Weeks 1-9? Did any tool make errors?
+
+## Tips
+
+- Start with a scatterplot (visualize the relationship first)
+- Correlation gives you strength and direction
+- Regression gives you prediction equation and tests significance
+- Don't let AI overcomplicate things - simple methods often answer the question!
+- Document what each AI tool suggested and WHY you chose your approach
+
+## Getting Help
+
+- Office hours (see syllabus)
+- Week 9 drop-in session (Wed 12-1:20pm)
+- Textbook: Chapters 17-18 (Correlation and Simple Linear Regression)
+- Your team!

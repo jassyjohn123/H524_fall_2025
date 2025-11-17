@@ -1,80 +1,115 @@
-# Group 4: Pima Indian Diabetes Study
+# Group 4: Vitamin D Supplementation Study
 
-## Your Dataset
-**File:** `pima_diabetes.csv`
+## Dataset Overview
 
-## Quick Overview
-- **N = 200 Pima Indian women**
-- **Cross-sectional study:** 68 with diabetes, 132 without
-- **Multiple predictors:** Glucose, BP, BMI, age, pregnancies
-- **Research Question:** What factors predict diabetes?
+**File:** `vitamin_d.csv`
+
+**Sample Size:** n = 45 adults (15 per dose group)
+
+**Research Context:** Randomized controlled trial comparing three vitamin D supplement doses (Low, Medium, High) on vitamin D blood levels after 8 weeks.
 
 ## Variables
-- `npreg`: Number of pregnancies
-- `glu`: Plasma glucose (mg/dL)
-- `bp`: Diastolic blood pressure (mm Hg)
-- `skin`: Triceps skin fold thickness (mm)
-- `bmi`: Body mass index
-- `ped`: Diabetes pedigree function (genetic)
+
+- `id`: Participant identifier (1-45)
+- `group`: Supplement dose group (Low, Medium, High)
+- `baseline`: Baseline vitamin D level before supplementation (ng/mL)
+- `vitamin_d`: Vitamin D level after 8 weeks of supplementation (ng/mL)
 - `age`: Age in years
-- `type`: Diabetes status ("No" or "Yes")
 
-## ⚠️ CRITICAL DATA QUALITY ISSUE!
-
-**Missing data coded as 0!** Some variables have 0 values that are biologically impossible:
-- Blood pressure = 0 (impossible!)
-- BMI = 0 (impossible!)
-- Glucose = 0 (impossible!)
-
-**These are MISSING values incorrectly coded as 0.**
-
-**This tests whether AI tools catch data quality issues!**
-
-## Loading Your Data in R
+## Loading the Data in R
 
 ```r
-pima <- read.csv("pima_diabetes.csv")
+# Load the dataset
+data <- read.csv("vitamin_d.csv")
 
-# Or from package
-library(MedDataSets)
-data("Pima_tr_df")
+# View structure
+str(data)
+head(data)
+
+# Summary by group
+tapply(data$vitamin_d, data$group, summary)
 ```
 
-## What Makes This Dataset Interesting for AI Comparison?
+## Suggested Research Question
 
-**High divergence - tests data cleaning!** Different AI tools might:
-- **ChatGPT:** MIGHT detect impossible 0 values (glucose=0?)
-- **Claude:** Might miss data quality issues entirely
-- **Copilot:** Depends on what code you've written before
+**"Do different vitamin D supplement doses lead to different vitamin D blood levels?"**
 
-**This is the ULTIMATE TEST of AI data awareness!**
+## Methods to Use (From Course Material)
 
-## Suggested Statistical Methods
-1. **FIRST:** Data cleaning!
-   ```r
-   # Check for 0 values
-   summary(pima)
-   
-   # Replace impossible 0s with NA
-   pima$bp[pima$bp == 0] <- NA
-   pima$bmi[pima$bmi == 0] <- NA
-   # etc.
-   ```
+This dataset is designed for **Week 6 methods**:
 
-2. **THEN:** Statistical analysis
-   - T-tests comparing predictors by diabetes status
-   - Chi-square if you categorize continuous variables
-   - Correlation between predictors
+1. **Exploratory Analysis** (Week 1)
+   - Boxplots by group: `boxplot(vitamin_d ~ group, data=data)`
+   - Summary statistics by group: `tapply(vitamin_d, group, mean)`
 
-## Tips for Success
-1. **Data cleaning is PART OF THE ASSIGNMENT!**
-2. Check every variable for plausible values
-3. Document which AI tool caught the data quality issues
-4. Decide how to handle missing data (exclude? impute?)
-5. This dataset specifically tests AI's data cleaning abilities
+2. **One-Way ANOVA** (Week 6)
+   - `model <- aov(vitamin_d ~ group, data=data)`
+   - `summary(model)`
+   - Tests: Are the three group means different?
 
-## For More Details
-See `docs/DATA_DICTIONARIES.md` - pay special attention to data quality notes!
+3. **Post-Hoc Testing** (Week 6)
+   - `TukeyHSD(model)`
+   - Which specific pairs differ? (Low vs Medium? Medium vs High?)
 
----
-**Data cleaning is statistics!** Don't skip this step.
+4. **Check Assumptions** (Week 6)
+   - Normality: `shapiro.test()` for each group or Q-Q plot
+   - Equal variances: `bartlett.test()` or visual check with boxplots
+   - Independence: Each participant measured once (built into design)
+
+## What AI Will Likely Suggest (Divergence!)
+
+When you ask AI tools about this dataset, they may suggest different approaches:
+
+- **Advanced methods** (like ANCOVA or repeated measures ANOVA)
+  - NOT taught in this course - redirect AI if it suggests these
+  - AI may say these are "statistically optimal" for designs with baseline measurements
+  - Tell AI you need methods from introductory biostatistics
+
+- **Change scores analysis** (vitamin_d - baseline)
+  - Similar to ANOVA but on the change
+  - This IS a valid alternative using taught methods!
+
+- **Linear regression with dose as continuous** (treating Low=1, Medium=2, High=3)
+  - NOT taught for categorical predictors in this course
+  - Tests for linear trend instead of group differences
+
+**Your Task:** Use one-way ANOVA on the `vitamin_d` outcome (Week 6 method). In your AI comparison section, note if AI suggested advanced methods, and explain how you redirected it to use appropriate introductory methods.
+
+## Expected AI Divergence
+
+- **Claude** might suggest advanced methods (statistically optimal but not taught)
+- **ChatGPT** might suggest different approaches depending on how you phrase the question
+- **Copilot** might generate code for multiple approaches
+
+**Focus your report on:**
+- Why did tools differ in their recommendations?
+- Did any tools suggest methods beyond this course? How did you redirect them?
+- Did simple ANOVA answer the research question? (Yes!)
+- What does this teach about AI suggesting methods beyond your training?
+
+## Tips
+
+- Start with boxplots (visualize group differences)
+- ANOVA tests overall difference (p-value tells you if ANY groups differ)
+- Tukey post-hoc tells you WHICH specific pairs differ
+- The `baseline` variable is interesting - some AI will want to use it!
+- Don't be intimidated if AI suggests advanced methods - explain why ANOVA is fine
+
+## Optional: Try Both Approaches
+
+If you're curious, you COULD also analyze change scores:
+
+```r
+data$change <- data$vitamin_d - data$baseline
+model2 <- aov(change ~ group, data=data)
+summary(model2)
+```
+
+This uses taught methods (ANOVA on change = paired thinking from Week 6). Compare results to ANOVA on vitamin_d - do you get similar conclusions?
+
+## Getting Help
+
+- Office hours (see syllabus)
+- Week 9 drop-in session (Wed 12-1:20pm)
+- Textbook: Chapter 12 (Analysis of Variance)
+- Your team!

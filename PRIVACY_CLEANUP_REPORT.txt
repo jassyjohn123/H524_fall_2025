@@ -1,0 +1,86 @@
+PRIVACY CLEANUP REPORT - GRADING FILES
+=====================================
+Date: 2025-11-05
+Reason: Remove all files created when Claude had access to student data
+Policy: Privacy-first grading - Claude should never see student names, IDs, or answers
+
+FILES DELETED:
+==============
+
+WEEK 2 (7 files):
+  ✓ graded_results_complete.json
+  ✓ grading_interface.html
+  ✓ student_submissions.json
+  ✓ question_id_mapping.json
+  ✓ import_export/graded_results_modified_2025-10-21.json
+  ✓ import_export/canvas_upload_2025-10-22.csv
+  ✓ import_export/canvas_final_grades.csv
+  ✓ import_export/feedback_report_2025-10-22.txt
+  ✓ __pycache__/ directory
+
+WEEK 3 (15 files):
+  ✓ graded_results_complete.json
+  ✓ graded_results_preliminary.json
+  ✓ grading_interface.html
+  ✓ extracted_student_answers.json
+  ✓ student_submissions.json
+  ✓ parse_csv.py
+  ✓ import_export/graded_results_modified_2025-10-22.json
+  ✓ import_export/canvas_upload_2025-10-22.csv
+  ✓ import_export/canvas_final_grades.csv
+  ✓ import_export/feedback_report_2025-10-22.txt
+  ✓ import_export/#feedback_report_2025-10-22.txt# (temp file)
+  ✓ graded_results_complete.json.backup
+  ✓ graded_results.json.backup
+  ✓ grading_interface.html.backup
+  ✓ FINAL_GRADING_REPORT.md
+  ✓ grading_summary_report.md
+  ✓ CANVAS_UPLOAD_SCORES.txt
+
+WEEK 4 (2 files):
+  ✓ graded_results_complete.json
+  ✓ grading_interface.html
+
+WEEK 5 (5 files):
+  ✓ graded_results_complete.json
+  ✓ grading_interface.html
+  ✓ grade_week5.py (OLD - created when Claude read CSV)
+  ✓ check_trap_phrases.py (old standalone version)
+  ✓ trap_phrases_report.json
+
+TOTAL: 29 files deleted
+
+FILES KEPT (Privacy-Compliant):
+================================
+
+WEEK 4:
+  ✓ H524 Week 4 Confidence Intervals Quiz Student Analysis Report.csv (original Canvas export - needed for grading)
+  ✓ verify_week4_answers.R (computational verification - no student data)
+
+WEEK 5:
+  ✓ H524 Week 5 Hypothesis Testing Quiz Student Analysis Report.csv (original Canvas export - needed for grading)
+  ✓ verify_week5_answers.R (computational verification - no student data)
+  ✓ grade_week5_updated.py (NEW privacy-compliant grading script)
+
+GOING FORWARD:
+==============
+
+NEW PRIVACY-COMPLIANT WORKFLOW:
+1. User downloads Canvas CSV (stays local)
+2. User asks: "Create grading script for Week X with [rubric info]"
+3. Claude creates grading script WITHOUT seeing student data
+4. User runs: python3 grade_weekX.py Canvas_Export.csv (runs locally)
+5. User reviews in HTML interface, exports to Canvas
+
+WHAT CLAUDE CAN SEE:
+  ✓ Assignment descriptions and rubrics
+  ✓ Verification scripts (R/Python with correct answers)
+  ✓ Question point values and grading criteria
+
+WHAT CLAUDE CANNOT SEE:
+  ✗ Canvas CSV exports (student names, IDs, answers)
+  ✗ Grading results JSON (student grades)
+  ✗ HTML interfaces (embedded student data)
+  ✗ Feedback reports (student comments)
+
+This ensures FERPA compliance and keeps student data on local machine only.

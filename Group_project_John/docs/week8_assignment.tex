@@ -1,0 +1,194 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{amssymb}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+% Compact spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlist{noitemsep,topsep=2pt}
+
+\begin{document}
+
+% Orange header
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=8pt,bottom=8pt]
+\centering
+\textcolor{white}{\textbf{\large WEEK 8 ASSIGNMENT}}\\
+\textcolor{white}{\textbf{H524 Introduction to Biostatistics - Fall 2025}}
+\end{tcolorbox}
+
+\vspace{4pt}
+
+\noindent\textbf{Total Points:} 10 \quad|\quad \textbf{Due:} Sunday 11:59 PM
+
+\vspace{6pt}
+
+\section*{Part A: Multiple Choice Questions (9 points)}
+
+Answer the following 9 questions on contingency tables and chi-square tests. Each question is worth 1 point.
+
+\subsection*{Question 1: Contingency Table Basics (1 point)}
+A contingency table displays the relationship between:
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item One categorical variable
+\item Two continuous variables
+\item Two categorical variables
+\item One categorical and one continuous variable
+\end{enumerate}
+
+\subsection*{Question 2: Expected Frequencies (1 point)}
+In a chi-square test, the expected frequency for a cell is calculated as:
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item (Row total × Column total) / Grand total
+\item (Row total + Column total) / 2
+\item Grand total / Number of cells
+\item Observed frequency / Total sample size
+\end{enumerate}
+
+\subsection*{Question 3: Chi-Square Test Assumptions (1 point)}
+Which of the following is a requirement for conducting a chi-square test?
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item All expected cell frequencies must be at least 10
+\item All expected cell frequencies should be at least 5
+\item The sample must be normally distributed
+\item Variables must be continuous
+\end{enumerate}
+
+\subsection*{Question 4: Degrees of Freedom (1 point)}
+For a 3×4 contingency table (3 rows, 4 columns), what are the degrees of freedom for the chi-square test?
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item 7
+\item 6
+\item 12
+\item 11
+\end{enumerate}
+
+\subsection*{Question 5: Interpreting Chi-Square Results (1 point)}
+A chi-square test yields p = 0.032. At $\alpha = 0.05$, what can we conclude?
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item There is no association between the variables
+\item There is a significant association between the variables
+\item The variables are normally distributed
+\item The test assumptions are violated
+\end{enumerate}
+
+\subsection*{Question 6: Relative Risk (1 point)}
+In a study of disease and exposure, the relative risk (RR) is:
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item The ratio of the odds of disease in exposed vs. unexposed groups
+\item The ratio of the risk of disease in exposed vs. unexposed groups
+\item The difference in risk between exposed and unexposed groups
+\item Always equal to 1 if there is no association
+\end{enumerate}
+
+\subsection*{Question 7: Odds Ratio (1 point)}
+An odds ratio of 2.5 means:
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item The exposed group has 2.5 times the risk of disease compared to unexposed
+\item The odds of disease in the exposed group are 2.5 times the odds in the unexposed group
+\item There is a 2.5\% difference in disease rates between groups
+\item The chi-square statistic is 2.5
+\end{enumerate}
+
+\subsection*{Question 8: 2×2 Table Setup (1 point)}
+In a case-control study examining smoking and lung cancer, which variable should form the rows of a 2×2 table?
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item Smoking status (exposed/unexposed)
+\item Lung cancer status (case/control)
+\item Either variable can form rows
+\item Neither - case-control studies cannot use 2×2 tables
+\end{enumerate}
+
+\subsection*{Question 9: Fisher's Exact Test (1 point)}
+When should Fisher's exact test be used instead of the chi-square test?
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item When sample size is very large (n $>$ 1000)
+\item When expected cell frequencies are small (less than 5 in one or more cells)
+\item When variables are continuous
+\item When there are more than two categories
+\end{enumerate}
+
+\newpage
+
+\section*{Part B: Group Project Check-In - Progress Update (1 point)}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\textbf{GROUP PROJECT PROGRESS CHECK}
+\end{tcolorbox}
+
+\vspace{4pt}
+
+\textbf{Reminder:} This Wednesday (12:00-1:20pm) is \textbf{Office Hours Day} - drop by classroom/office if your group needs help!
+
+\subsection*{Your Assignment}
+
+\textbf{Group Leader submits} a brief progress update:
+
+\textbf{Answer these questions:}
+
+\begin{enumerate}
+\item \textbf{Has your group met at least once since Week 7?}
+\begin{itemize}[label=$\square$]
+\item Yes
+\item No
+\end{itemize}
+
+\item \textbf{Have you loaded and explored your dataset in R?}
+\begin{itemize}[label=$\square$]
+\item Yes
+\item No
+\end{itemize}
+
+\item \textbf{Have you consulted at least one AI tool about your data?}
+\begin{itemize}[label=$\square$]
+\item Yes (which one(s)? \underline{\hspace{3cm}})
+\item No
+\end{itemize}
+
+\item \textbf{Any blockers or questions?} (optional)\\[4pt]
+\underline{\hspace{\textwidth}}\\[2pt]
+\underline{\hspace{\textwidth}}
+\end{enumerate}
+
+\vspace{6pt}
+
+\textbf{Note:} This week is Office Hours Day! If you answered "No" to any question above or have blockers, come to Wednesday's class time (12-1:20pm) for help.
+
+\subsection*{Submission Format}
+
+\textbf{Submit as:} Text entry (Canvas quiz-style) OR brief paragraph
+
+\textbf{Length:} 3-5 sentences
+
+\textbf{Grading:} 1 point for completion (just answer honestly!)
+
+\subsection*{Notes}
+
+\begin{itemize}[leftmargin=20pt]
+\item \textbf{Only the group leader submits}
+\item This is a quick check-in (1 point) - not a full report
+\item If you're stuck, \textbf{come to Office Hours Day Wednesday 12-1:20pm}
+\begin{itemize}[label=--]
+\item Location: CORD 1424 (classroom) 12:00-12:30, then 153 Milam (office) 12:30-1:20
+\item No appointment needed, just drop by
+\item Bring your laptop and dataset
+\end{itemize}
+\item Groups are expected to be working on analysis this week
+\end{itemize}
+
+\end{document}

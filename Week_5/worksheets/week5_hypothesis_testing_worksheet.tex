@@ -1,0 +1,289 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large Week 5 In-Class Worksheet}}\\
+\textcolor{white}{\textbf{\large Hypothesis Testing}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Name:} \rule{8cm}{0.4pt} \hfill \textbf{Date:} \rule{4cm}{0.4pt}\\[0.5ex]
+\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Hypothesis Testing for Population Means
+
+\vspace{8pt}
+
+\section*{Instructions}
+Work with a partner to solve the following problems. Show all your work, including formulas and calculations. You may use R to verify your answers, but demonstrate your understanding by showing the steps manually first.
+
+\vspace{12pt}
+
+\section{Problem 1: Two-Sided t-test}
+
+A researcher claims that the average body temperature is not 98.6°F. A sample of 25 healthy adults has a mean temperature of 98.4°F with a standard deviation of 0.8°F. Test the claim at the 0.05 significance level.
+
+\textbf{Given:} $n = 25$, $\bar{x} = 98.4$°F, $s = 0.8$°F, $\alpha = 0.05$
+
+\vspace{6pt}
+
+\textbf{Part A:} State the null and alternative hypotheses.
+
+\vspace{3cm}
+
+\textbf{Part B:} Calculate the standard error and t-statistic.
+
+\vspace{0.3cm}
+
+\textbf{Formula:} $\text{SE} = \frac{s}{\sqrt{n}}$
+
+\vspace{2cm}
+
+\textbf{Formula:} $t = \frac{\bar{x} - \mu_0}{\text{SE}}$
+
+\vspace{2cm}
+
+\textbf{Part C:} Find the p-value.
+
+\vspace{0.3cm}
+
+Degrees of freedom: $\text{df} = n - 1 = $
+
+\vspace{0.5cm}
+
+For a two-sided test, p-value = $2 \times P(T < t)$ where $t$ is your test statistic.
+
+(Use R: \texttt{2 * pt(t, df=24)})
+
+\vspace{2cm}
+
+\textbf{Part D:} Make a decision and state your conclusion in context.
+
+\vspace{3cm}
+
+\newpage
+
+\section{Problem 2: One-Sided t-test (Upper Tail)}
+
+A nutritionist claims that a new diet increases average daily caloric expenditure above the baseline of 260 calories. A study of 40 participants following the diet shows a mean expenditure of 285 calories with a standard deviation of 48 calories. Test this claim at the 0.05 level.
+
+\textbf{Given:} $n = 40$, $\bar{x} = 285$, $s = 48$, $\mu_0 = 260$, $\alpha = 0.05$
+
+\vspace{6pt}
+
+\textbf{Part A:} State the hypotheses and identify the type of test.
+
+\vspace{3cm}
+
+\textbf{Part B:} Calculate the standard error and t-statistic.
+
+\vspace{0.3cm}
+
+Standard error: $\text{SE} = \frac{s}{\sqrt{n}} = $
+
+\vspace{2cm}
+
+t-statistic: $t = \frac{\bar{x} - \mu_0}{\text{SE}} = $
+
+\vspace{2cm}
+
+\textbf{Part C:} Find the p-value and make a decision.
+
+\vspace{0.3cm}
+
+Degrees of freedom: $\text{df} = $
+
+\vspace{0.5cm}
+
+For a one-sided (upper tail) test: p-value = $P(T > t)$
+
+(Use R: \texttt{1 - pt(t, df)})
+
+\vspace{2cm}
+
+Decision:
+
+\vspace{1.5cm}
+
+\textbf{Part D:} Interpret the results in context. What does this tell you about the diet's effect?
+
+\vspace{3cm}
+
+\newpage
+
+\section{Problem 3: Critical Value Approach}
+
+Using the data from Problem 2, verify your conclusion using the critical value approach instead of the p-value approach.
+
+\textbf{Data:} $n=40$, $\bar{x}=285$, $s=48$, $t=$[your calculated value], $\alpha=0.05$
+
+\vspace{6pt}
+
+\textbf{Part A:} Find the critical value for this one-sided test.
+
+\vspace{0.3cm}
+
+For a one-sided (upper tail) test with $\alpha = 0.05$ and df = 39:
+
+(Use R: \texttt{qt(0.95, df=39)})
+
+\vspace{2cm}
+
+\textbf{Part B:} Compare the t-statistic to the critical value and make a decision.
+
+\vspace{3cm}
+
+\textbf{Part C:} Compare this conclusion to the p-value approach from Problem 2. Do they agree?
+
+\vspace{3cm}
+
+\newpage
+
+\section{Problem 4: Type I and Type II Errors}
+
+A pharmaceutical company is testing a new treatment that they hope is more effective than the standard treatment.
+
+\vspace{6pt}
+
+\textbf{Part A:} Define a Type I error in the context of this study. What would be the consequence?
+
+\vspace{4cm}
+
+\textbf{Part B:} Define a Type II error in the context of this study. What would be the consequence?
+
+\vspace{4cm}
+
+\textbf{Part C:} Which type of error do you think is more serious in medical research? Explain your reasoning.
+
+\vspace{4cm}
+
+\newpage
+
+\section{Problem 5: Statistical Power and Sample Size}
+
+Answer the following conceptual questions about statistical power.
+
+\vspace{6pt}
+
+\textbf{Part A:} How does increasing the significance level (e.g., from 0.05 to 0.10) affect the probability of Type I and Type II errors? What happens to statistical power?
+
+\vspace{5cm}
+
+\textbf{Part B:} How does increasing sample size affect Type I error, Type II error, and statistical power? Explain the mechanism.
+
+\vspace{5cm}
+
+\newpage
+
+\section{Problem 6: Comprehensive Integration Problem}
+
+A pharmaceutical company is testing whether a new sleep medication reduces the average sleep time below the standard 8 hours. They conduct a study with 50 patients and find a mean sleep time of 7.8 hours with a standard deviation of 1.2 hours. Test the hypothesis at the $\alpha = 0.01$ level.
+
+\textbf{Given:} $n = 50$, $\bar{x} = 7.8$ hours, $s = 1.2$ hours, $\alpha = 0.01$
+
+\vspace{6pt}
+
+\textbf{Part A:} State the null and alternative hypotheses. Is this a one-sided or two-sided test?
+
+\vspace{3cm}
+
+\textbf{Part B:} Calculate the standard error.
+
+\vspace{0.3cm}
+
+\textbf{Formula:} $\text{SE} = \frac{s}{\sqrt{n}}$
+
+\vspace{2cm}
+
+\textbf{Part C:} Calculate the t-statistic.
+
+\vspace{0.3cm}
+
+\textbf{Formula:} $t = \frac{\bar{x} - \mu_0}{\text{SE}}$
+
+\vspace{2cm}
+
+\textbf{Part D:} Find the p-value.
+
+\vspace{0.3cm}
+
+Degrees of freedom: $\text{df} = $
+
+\vspace{0.5cm}
+
+For a one-sided (lower tail) test: p-value = $P(T < t)$
+
+(Use R: \texttt{pt(t, df)})
+
+\vspace{2cm}
+
+\textbf{Part E:} Make a decision at the $\alpha = 0.01$ level.
+
+\vspace{2cm}
+
+\textbf{Part F:} Write a complete interpretation of your results in the context of the sleep study.
+
+\vspace{3cm}
+
+\textbf{Part G:} Verify your conclusion using the critical value approach.
+
+\vspace{0.3cm}
+
+For a one-sided (lower tail) test with $\alpha = 0.01$ and df = 49:
+
+(Use R: \texttt{qt(0.01, df=49)})
+
+\vspace{1cm}
+
+Compare your t-statistic to the critical value:
+
+\vspace{3cm}
+
+\newpage
+
+\section*{Reflection Questions}
+
+\textbf{1.} Explain the difference between statistical significance and practical significance. Can a result be statistically significant but not practically important?
+
+\vspace{4cm}
+
+\textbf{2.} Why do we typically use $\alpha = 0.05$ as the significance level? What would happen if we used $\alpha = 0.10$ or $\alpha = 0.01$ instead?
+
+\vspace{4cm}
+
+\textbf{3.} When would you use a one-sided test versus a two-sided test? Give an example of each.
+
+\vspace{4cm}
+
+\textbf{4.} What is the relationship between confidence intervals and hypothesis testing?
+
+\vspace{4cm}
+
+\end{document}

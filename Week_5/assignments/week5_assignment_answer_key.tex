@@ -1,0 +1,411 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{booktabs}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{correctgreen}{RGB}{34,139,34}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 5 Assignment - ANSWER KEY}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Total Points:} 65 (+ 5 bonus)\\
+\textbf{Instructor Use Only}
+
+\section*{Answer Key - Quick Reference}
+
+\subsection*{Part 1: Hypothesis Testing Fundamentals (18 points)}
+
+\begin{table}[h]
+\begin{tabular}{clcp{8cm}}
+\toprule
+\textbf{Q\#} & \textbf{Answer} & \textbf{Pts} & \textbf{Topic} \\
+\midrule
+1 & \textcolor{correctgreen}{D} & 3 & Null hypothesis definition \\
+2 & \textcolor{correctgreen}{C} & 3 & Alternative hypothesis (one-sided, lower) \\
+3 & \textcolor{correctgreen}{C} & 4 & P-value interpretation \\
+4 & \textcolor{correctgreen}{B} & 2 & Decision rule \\
+5 & \textcolor{correctgreen}{A} & 3 & T-statistic = 1.25 \\
+6 & \textcolor{correctgreen}{A} & 3 & P-value = 0.2234 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Part 2: Type I and Type II Errors (14 points)}
+
+\begin{table}[h]
+\begin{tabular}{clcp{8cm}}
+\toprule
+\textbf{Q\#} & \textbf{Answer} & \textbf{Pts} & \textbf{Topic} \\
+\midrule
+7 & \textcolor{correctgreen}{C} & 3 & Type I error (false positive) \\
+8 & \textcolor{correctgreen}{B} & 3 & Type II error (false negative) \\
+9 & \textcolor{correctgreen}{D} & 3 & Error trade-off \\
+10 & \textcolor{correctgreen}{B} & 2 & Statistical power \\
+11a & \textcolor{correctgreen}{5.18 or 5.181} & 5 & Blood pressure t-statistic \\
+11b & \textcolor{correctgreen}{0.0001 or 3.17e-05} & 5 & Blood pressure p-value \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Part 3: Hypothesis Testing with R (10 points)}
+
+\begin{table}[h]
+\begin{tabular}{clcp{8cm}}
+\toprule
+\textbf{Q\#} & \textbf{Answer} & \textbf{Pts} & \textbf{Topic} \\
+\midrule
+12a & \textcolor{correctgreen}{-2.71 or -2.7105} & 5 & Cholesterol t-statistic \\
+12b & \textcolor{correctgreen}{0.0050 or 0.004967} & 5 & Cholesterol p-value \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Part 4: Two-Sample Tests (14 points)}
+
+\begin{table}[h]
+\begin{tabular}{clcp{8cm}}
+\toprule
+\textbf{Q\#} & \textbf{Answer} & \textbf{Pts} & \textbf{Topic} \\
+\midrule
+13 & \textcolor{correctgreen}{B} & 3 & Two-sample application \\
+14 & \textcolor{correctgreen}{A} & 4 & Two-sample calculation \\
+15 & \textcolor{correctgreen}{D} & 2 & R code for two-sample test \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+\section*{Detailed Solutions}
+
+\subsection*{Part 1: Hypothesis Testing Fundamentals}
+
+\textbf{Question 1 (3 points):} Null Hypothesis Definition
+
+\textcolor{correctgreen}{\textbf{Answer: D}}
+
+$H_0$ represents the status quo or no effect; it is the hypothesis we assume true until we have sufficient evidence to reject it. This is the fundamental principle of hypothesis testing - we start by assuming no effect and require strong evidence to reject this assumption.
+
+\vspace{0.5cm}
+
+\textbf{Question 2 (3 points):} Alternative Hypothesis Forms
+
+\textcolor{correctgreen}{\textbf{Answer: C}}
+
+Since the researcher wants to test if the drug LOWERS blood pressure compared to 140 mmHg, the appropriate alternative hypothesis is $H_a$: $\mu < 140$ (one-sided, lower tail). This is a directional hypothesis testing for a decrease.
+
+\vspace{0.5cm}
+
+\textbf{Question 3 (4 points):} P-value Interpretation
+
+\textcolor{correctgreen}{\textbf{Answer: C}}
+
+The p-value is the probability of observing data as extreme as (or more extreme than) what we observed, assuming the null hypothesis is true. It is NOT the probability that $H_0$ is true given our data.
+
+\vspace{0.5cm}
+
+\textbf{Question 4 (2 points):} Decision Rule
+
+\textcolor{correctgreen}{\textbf{Answer: B}}
+
+Since p-value (0.032) $< \alpha$ (0.05), we reject $H_0$. We have sufficient evidence against the null hypothesis at the 5\% significance level.
+
+\vspace{0.5cm}
+
+\textbf{Question 5 (3 points):} T-statistic Calculation
+
+\textcolor{correctgreen}{\textbf{Answer: A (t = 1.25)}}
+
+\textbf{Solution:}
+$$t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}} = \frac{52 - 50}{8/\sqrt{25}} = \frac{2}{8/5} = \frac{2}{1.6} = 1.25$$
+
+\vspace{0.5cm}
+
+\textbf{Question 6 (3 points):} P-value from t-statistic
+
+\textcolor{correctgreen}{\textbf{Answer: A (p-value = 0.2234)}}
+
+\textbf{Solution:}
+For $t = 1.25$ with $df = 24$ (two-sided test):
+\begin{verbatim}
+2 * pt(1.25, df = 24, lower.tail = FALSE)
+# Result: 0.2234
+\end{verbatim}
+
+Since this is a two-sided test, we need to multiply the one-tail probability by 2.
+
+\newpage
+
+\subsection*{Part 2: Type I and Type II Errors}
+
+\textbf{Question 7 (3 points):} Type I Error
+
+\textcolor{correctgreen}{\textbf{Answer: C}}
+
+Type I error occurs when we reject the null hypothesis when it is actually true (false positive). The probability of Type I error is controlled by the significance level $\alpha$.
+
+\vspace{0.5cm}
+
+\textbf{Question 8 (3 points):} Type II Error
+
+\textcolor{correctgreen}{\textbf{Answer: B}}
+
+This is a Type II error ($\beta$) - failing to reject a false null hypothesis. The drug is actually effective (null is false), but the test failed to detect it (failed to reject the null).
+
+\vspace{0.5cm}
+
+\textbf{Question 9 (3 points):} Error Trade-off
+
+\textcolor{correctgreen}{\textbf{Answer: D}}
+
+When you decrease $\alpha$ (become more conservative about rejecting $H_0$), you increase $\beta$ (the probability of failing to reject when you should). Making it harder to reject $H_0$ increases the chance of missing a true effect.
+
+\vspace{0.5cm}
+
+\textbf{Question 10 (2 points):} Statistical Power
+
+\textcolor{correctgreen}{\textbf{Answer: B}}
+
+Power = $1 - \beta$; it's the probability of correctly rejecting a false null hypothesis (detecting a true effect when it exists). Higher power means better ability to detect true effects.
+
+\vspace{0.5cm}
+
+\textbf{Question 11 (10 points):} Blood Pressure Hypothesis Test
+
+\textbf{Data:}
+\begin{verbatim}
+bp_data <- c(118, 124, 130, 128, 122, 135, 119, 126, 132, 120,
+             125, 129, 121, 127, 123, 131, 120, 128, 124, 126)
+\end{verbatim}
+
+\textbf{R Code:}
+\begin{verbatim}
+result <- t.test(bp_data, mu = 120, alternative = "greater")
+result$statistic  # t-statistic
+result$p.value    # p-value
+\end{verbatim}
+
+\textcolor{correctgreen}{\textbf{Answers:}}
+\begin{enumerate}[label=\alph*)]
+\item \textbf{t-statistic:} \textcolor{correctgreen}{5.18} (or 5.181 for more precision)
+\item \textbf{p-value:} \textcolor{correctgreen}{0.0001} (or 3.17e-05 for exact value)
+\end{enumerate}
+
+\textbf{Interpretation:} With such a small p-value (much less than 0.05), we have very strong evidence that the mean blood pressure is significantly higher than 120 mmHg.
+
+\newpage
+
+\subsection*{Part 3: Hypothesis Testing with R}
+
+\textbf{Question 12 (10 points):} Cholesterol Hypothesis Test
+
+\textbf{Given:} $n = 40$, $\bar{x} = 185$ mg/dL, $s = 35$ mg/dL
+
+\textbf{Hypotheses:} $H_0$: $\mu = 200$ vs $H_a$: $\mu < 200$ (one-sided, lower tail)
+
+\textbf{Manual Calculation:}
+$$t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}} = \frac{185 - 200}{35/\sqrt{40}} = \frac{-15}{35/6.325} = \frac{-15}{5.534} = -2.71$$
+
+\textbf{R Code:}
+\begin{verbatim}
+# Manual calculation
+n <- 40
+xbar <- 185
+s <- 35
+mu0 <- 200
+
+t_stat <- (xbar - mu0) / (s / sqrt(n))
+p_value <- pt(t_stat, df = n - 1)
+
+# Or using t.test
+# Note: We don't have the actual data, so we use manual calculation
+# If we had data: t.test(chol_data, mu = 200, alternative = "less")
+\end{verbatim}
+
+\textcolor{correctgreen}{\textbf{Answers:}}
+\begin{enumerate}[label=\alph*)]
+\item \textbf{t-statistic:} \textcolor{correctgreen}{-2.71} (or -2.7105 for more precision)
+\item \textbf{p-value:} \textcolor{correctgreen}{0.0050} (or 0.004967 for more precision)
+\end{enumerate}
+
+\textbf{Interpretation:} At $\alpha = 0.01$, the p-value (0.0050) is less than 0.01, so we reject $H_0$. We have strong evidence that the drug reduces cholesterol to below 200 mg/dL on average. The company's claim is supported by the data.
+
+\newpage
+
+\subsection*{Part 4: Two-Sample Tests}
+
+\textbf{Question 13 (3 points):} Two-Sample Test Application
+
+\textcolor{correctgreen}{\textbf{Answer: B}}
+
+Comparing mean recovery times between patients receiving Drug A versus Drug B requires a two-sample t-test because we're comparing two independent groups. The other options all compare a sample mean to a known value (requiring one-sample tests).
+
+\vspace{0.5cm}
+
+\textbf{Question 14 (4 points):} Two-Sample T-test
+
+\textcolor{correctgreen}{\textbf{Answer: A}}
+
+\textbf{Given:}
+\begin{itemize}
+\item Treatment A: $n_1 = 30$, $\bar{x}_1 = 145$, $s_1 = 15$
+\item Treatment B: $n_2 = 35$, $\bar{x}_2 = 138$, $s_2 = 18$
+\end{itemize}
+
+\textbf{R Code:}
+\begin{verbatim}
+# Create data from summary statistics (approximation)
+group_a <- rnorm(30, mean = 145, sd = 15)
+group_b <- rnorm(35, mean = 138, sd = 18)
+
+# Two-sample t-test
+result <- t.test(group_a, group_b, var.equal = FALSE)
+result$statistic
+result$p.value
+\end{verbatim}
+
+\textbf{Result:} $t \approx 1.71$, p-value $\approx 0.0922$
+
+\textbf{Decision:} Since p-value (0.0922) $> \alpha$ (0.05), we fail to reject $H_0$. There is insufficient evidence to conclude that the two treatments have different mean values at the 5\% significance level.
+
+\vspace{0.5cm}
+
+\textbf{Question 15 (2 points):} R Code for Two-Sample Test
+
+\textcolor{correctgreen}{\textbf{Answer: D}}
+
+The correct syntax is \texttt{t.test(group\_a, group\_b)}. This performs a two-sample t-test comparing the means of the two groups.
+
+\newpage
+
+\section*{Bonus Question - Grading Guidelines}
+
+\subsection*{Question 16: AI Verification and Learning (5 bonus points)}
+
+\textcolor{correctgreen}{\textbf{Grading Notes:}}
+
+\textbf{Part a: (1 point)} Student should provide actual AI prompt and response
+\begin{itemize}
+\item Clear, specific prompt: 0.5 points
+\item AI response documented: 0.5 points
+\end{itemize}
+
+\textbf{Part b: (2 points)} Student should verify AI answer step-by-step
+\begin{itemize}
+\item Step-by-step verification with calculations: 1 point
+\item Correctly identifying accuracy/errors: 1 point
+\end{itemize}
+
+\textbf{Part c: (2 points)} Student should evaluate AI's explanation of one-sided vs. two-sided tests
+\begin{itemize}
+\item Providing AI's explanation: 0.5 points
+\item Thoughtful evaluation of quality and clarity: 1 point
+\item Discussion of strengths/weaknesses: 0.5 points
+\end{itemize}
+
+\textbf{Look for:}
+\begin{itemize}
+\item Clear documentation of AI interaction
+\item Critical thinking about AI responses
+\item Understanding of hypothesis testing concepts
+\item Ability to verify and evaluate AI output
+\item Recognition that AI can make mistakes
+\end{itemize}
+
+\section*{Grading Summary}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Section} & \textbf{Points} & \textbf{Score} \\
+\midrule
+Part 1: Fundamentals (Q1-Q6) & 18 & \\
+Part 2: Errors and Power (Q7-Q11) & 14 & \\
+Part 3: R Implementation (Q12) & 10 & \\
+Part 4: Two-Sample Tests (Q13-Q15) & 14 & \\
+\midrule
+\textbf{Subtotal} & \textbf{65} & \\
+Bonus: AI Learning (Q16) & +5 & \\
+\midrule
+\textbf{Total Possible} & \textbf{70} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{Common Student Errors}
+
+\begin{itemize}
+\item \textbf{Q5:} Forgetting to divide by $\sqrt{n}$ in the denominator
+\item \textbf{Q6:} Using one-tail p-value instead of two-tail (forgetting to multiply by 2)
+\item \textbf{Q11:} Using wrong alternative (``two.sided'' instead of ``greater'')
+\item \textbf{Q12:} Using wrong alternative (``greater'' instead of ``less'')
+\item \textbf{Q14:} Attempting to reject at $\alpha = 0.05$ when p-value is close (0.0922)
+\end{itemize}
+
+\section*{Note to Graders}
+
+\textbf{Computational Verification:}
+\begin{itemize}
+\item All numerical answers in this key have been verified using R (see \texttt{verify\_answers.R} in this directory)
+\item For Questions 11 and 12: Accept answers within reasonable rounding error
+\begin{itemize}
+\item Q11a: Accept 5.18, 5.181, or 5.2
+\item Q11b: Accept 0.0001, 3.17e-05, or $<$0.001
+\item Q12a: Accept -2.71, -2.7105, or -2.7
+\item Q12b: Accept 0.005, 0.00497, or 0.0050
+\end{itemize}
+\end{itemize}
+
+\textbf{Partial Credit Guidelines:}
+\begin{itemize}
+\item \textbf{Q11 \& Q12 (Computational):} Award partial credit for correct approach even if calculation is wrong
+\begin{itemize}
+\item Correct code structure with minor errors: 70\% credit
+\item Correct formula but computational mistake: 80\% credit
+\item Correct method but wrong R function arguments: 60\% credit
+\end{itemize}
+\item \textbf{Bonus Question (Q16):} Use detailed rubric on pages 5-6; look for critical thinking, not just AI copy-paste
+\end{itemize}
+
+\textbf{Academic Integrity:}
+\begin{itemize}
+\item Watch for identical code/answers across students (especially Q11-12)
+\item Bonus question should show student's OWN evaluation, not just AI output
+\item Flag suspicious patterns for instructor review
+\end{itemize}
+
+\textbf{Common Mistakes to Watch For:}
+\begin{itemize}
+\item Using \texttt{alternative = "two.sided"} when problem specifies one-sided test
+\item Confusing one-tail and two-tail p-values (Q6)
+\item Wrong direction for alternative hypothesis (Q11 should be "greater", Q12 should be "less")
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,342 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{listings}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+% R code listing style
+\lstset{
+  language=R,
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green!60!black},
+  stringstyle=\color{red},
+  breaklines=true,
+  showstringspaces=false,
+  frame=single
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large Week 7 In-Class Worksheet}}\\
+\textcolor{white}{\textbf{\large Nonparametric Tests}}\\
+\textcolor{white}{\textbf{ANSWER KEY}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Sign Test, Wilcoxon Tests, Kruskal-Wallis, Normality Assessment
+
+\vspace{12pt}
+
+\section{Problem 1: Sign Test}
+
+Recovery times: 12, 15, 10, 13, 16, 11, 14, 9, 12, 15
+
+\vspace{6pt}
+
+\textbf{Part A:} Hypotheses
+
+$H_0$: Median recovery time = 14 days
+
+$H_A$: Median recovery time < 14 days (one-sided)
+
+\vspace{6pt}
+
+\textbf{Part B:} Calculate signs
+
+Differences from 14: $-2, 1, -4, -1, 2, -3, 0, -5, -2, 1$
+
+After removing zero: $-2, 1, -4, -1, 2, -3, -5, -2, 1$
+
+$B^+ = 3$ (positive signs), $B^- = 6$ (negative signs), $B = \min(3, 6) = 3$
+
+\vspace{6pt}
+
+\textbf{Part C:} R code and p-value
+
+\begin{lstlisting}
+recovery <- c(12, 15, 10, 13, 16, 11, 14, 9, 12, 15)
+diff <- recovery - 14
+signs <- sign(diff[diff != 0])
+b_minus <- sum(signs < 0)  # Count negative (below 14)
+n <- length(signs)
+
+# One-sided test: testing if median < 14
+# We expect MORE negative signs if median < 14
+binom.test(b_minus, n, p=0.5, alternative="greater")
+\end{lstlisting}
+
+\textbf{P-value: 0.2539}
+
+\vspace{6pt}
+
+\textbf{Part D:} Conclusion
+
+Since $p = 0.2539 > 0.05$, we fail to reject $H_0$. There is no evidence that the median recovery time is less than 14 days.
+
+\newpage
+
+\section{Problem 2: Wilcoxon Signed-Rank Test}
+
+\textbf{Part A:} Differences and ranks
+
+Differences: $-2, 1, -4, -1, 2, -3, 0, -5, -2, 1$ (excluding zero: $-2, 1, -4, -1, 2, -3, -5, -2, 1$)
+
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+Difference & $|$Diff$|$ & Rank & Signed Rank \\
+\midrule
+$-2$ & 2 & 5 & $-5$ \\
+1 & 1 & 2 & 2 \\
+$-4$ & 4 & 8 & $-8$ \\
+$-1$ & 1 & 2 & $-2$ \\
+2 & 2 & 5 & 5 \\
+$-3$ & 3 & 7 & $-7$ \\
+$-5$ & 5 & 9 & $-9$ \\
+$-2$ & 2 & 5 & $-5$ \\
+1 & 1 & 2 & 2 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part B:} Sum of ranks
+
+$W^+ = 2 + 2 + 5 = 9$
+
+$W^- = |-5 - 8 - 2 - 7 - 9 - 5 - 2| = 36$
+
+\vspace{6pt}
+
+\textbf{Part C:} R code and p-value
+
+\begin{lstlisting}
+wilcox.test(recovery, mu=14, alternative="two.sided")
+\end{lstlisting}
+
+\textbf{P-value: 0.1209}
+
+\vspace{6pt}
+
+\textbf{Part D:} Comparison
+
+The Wilcoxon test is more powerful because it uses both direction AND magnitude of differences. The sign test only uses direction, while Wilcoxon is more sensitive to the pattern in the data.
+
+\newpage
+
+\section{Problem 3: Paired Data}
+
+\textbf{Part A:} Differences
+
+\begin{center}
+\begin{tabular}{lcccccccc}
+\toprule
+Participant & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+\midrule
+Difference & 4 & $-2$ & 7 & 3 & 5 & 3 & 2 & 4 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part B:} Sign test
+
+\begin{lstlisting}
+bp_before <- c(142, 138, 155, 148, 160, 145, 152, 149)
+bp_after <- c(138, 140, 148, 145, 155, 142, 150, 145)
+bp_diff <- bp_before - bp_after
+signs <- sign(bp_diff[bp_diff != 0])
+b_plus <- sum(signs > 0)
+binom.test(b_plus, length(signs), p=0.5,
+           alternative="two.sided")
+\end{lstlisting}
+
+$B^+ = 7$, $B^- = 1$, \textbf{p-value: 0.0703}
+
+\vspace{6pt}
+
+\textbf{Part C:} Wilcoxon signed-rank test
+
+\begin{lstlisting}
+wilcox.test(bp_before, bp_after, paired=TRUE)
+\end{lstlisting}
+
+\textbf{P-value: 0.0245}
+
+\vspace{6pt}
+
+\textbf{Part D:} Recommendation
+
+The Wilcoxon signed-rank test is recommended. It uses the magnitude of differences (which vary from 2 to 7 mmHg), making it more powerful. Wilcoxon p = 0.0245 (significant at $\alpha=0.05$), while sign test p = 0.0703 (not significant).
+
+\newpage
+
+\section{Problem 4: Two-Sample Wilcoxon Rank-Sum Test}
+
+\textbf{Part A:} R code
+
+\begin{lstlisting}
+med_A <- c(6, 7, 5, 8, 6, 7, 9)
+med_B <- c(4, 5, 6, 5, 7, 4, 6)
+wilcox.test(med_A, med_B, alternative="two.sided")
+\end{lstlisting}
+
+\textbf{W statistic: 40} \quad \textbf{P-value: 0.0502}
+
+\vspace{6pt}
+
+\textbf{Part B:} Conclusion
+
+Since $p = 0.0502 > 0.05$, we fail to reject $H_0$ at the 0.05 level. No significant difference between medications (though very close to significant).
+
+\vspace{6pt}
+
+\textbf{Part C:} Why use this test
+
+\begin{itemize}
+\item Pain scores are ordinal (0-10 scale), not truly continuous
+\item Small sample sizes (n=7 each) make normality hard to assess
+\item Nonparametric test doesn't assume normal distributions
+\end{itemize}
+
+\newpage
+
+\section{Problem 5: Kruskal-Wallis Test}
+
+\textbf{Part A:} R code
+
+\begin{lstlisting}
+low_dose <- c(5.2, 6.1, 5.8, 6.3, 5.5)
+med_dose <- c(6.8, 7.2, 7.5, 6.9, 7.1)
+high_dose <- c(7.8, 8.2, 8.5, 7.9, 8.1)
+
+sleep_hours <- c(low_dose, med_dose, high_dose)
+dose <- factor(rep(c("Low", "Medium", "High"), each=5))
+
+kruskal.test(sleep_hours ~ dose)
+\end{lstlisting}
+
+\textbf{H statistic: 12.50} \quad \textbf{P-value: 0.0019}
+
+\vspace{6pt}
+
+\textbf{Part B:} Conclusion
+
+Since $p = 0.0019 < 0.05$, we reject $H_0$. Strong evidence that at least one dosage level differs in effectiveness for sleep duration.
+
+\vspace{6pt}
+
+\textbf{Part C:} Follow-up test
+
+Perform pairwise Wilcoxon rank-sum tests with Bonferroni correction:
+
+\begin{lstlisting}
+pairwise.wilcox.test(sleep_hours, dose,
+                     p.adjust.method="bonferroni")
+\end{lstlisting}
+
+\newpage
+
+\section{Problem 6: Checking Normality Assumptions}
+
+\textbf{Part A:} Shapiro-Wilk test
+
+\begin{lstlisting}
+high_dose <- c(7.8, 8.2, 8.5, 7.9, 8.1)
+shapiro.test(high_dose)
+\end{lstlisting}
+
+\textbf{W statistic: 0.9636} \quad \textbf{P-value: 0.8327}
+
+\vspace{6pt}
+
+\textbf{Part B:} Can we assume normality?
+
+Yes, $p = 0.8327 > 0.05$, so we fail to reject the null hypothesis of normality. The data are consistent with a normal distribution.
+
+\vspace{6pt}
+
+\textbf{Part C:} Q-Q plot
+
+\begin{lstlisting}
+qqnorm(high_dose)
+qqline(high_dose, col="red")
+\end{lstlisting}
+
+Points should fall close to the red reference line, supporting the Shapiro-Wilk result that the data appear normally distributed.
+
+\vspace{6pt}
+
+\textbf{Part D:} Was Kruskal-Wallis appropriate?
+
+Yes, Kruskal-Wallis was still appropriate because:
+\begin{itemize}
+\item With only n=5 per group, normality is hard to assess reliably
+\item We would need to check normality for ALL three groups
+\item Kruskal-Wallis is conservative - minimal power loss if data are normal
+\end{itemize}
+
+\newpage
+
+\section{Problem 7: Choosing the Right Test}
+
+\textbf{Part A:} Survival times (highly skewed), two groups
+
+\textbf{Answer:} Wilcoxon rank-sum test (Mann-Whitney U test)
+
+\textit{Reason:} Two independent groups, highly skewed data violates normality assumption for t-test.
+
+\vspace{6pt}
+
+\textbf{Part B:} Median readmissions vs. 3, one sample
+
+\textbf{Answer:} Sign test or Wilcoxon signed-rank test
+
+\textit{Reason:} One-sample test for median. Wilcoxon more powerful if magnitude matters.
+
+\vspace{6pt}
+
+\textbf{Part C:} Average weight loss, four diets, normal data
+
+\textbf{Answer:} One-way ANOVA (parametric)
+
+\textit{Reason:} Four groups, data appear normal. ANOVA more powerful when assumptions met.
+
+\vspace{6pt}
+
+\textbf{Part D:} Pre/post depression scores, ordinal scale
+
+\textbf{Answer:} Wilcoxon signed-rank test
+
+\textit{Reason:} Paired data, ordinal scale (1-10 rating) makes ranks appropriate.
+
+\end{document}

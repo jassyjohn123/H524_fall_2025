@@ -2,29 +2,6 @@
 \usetheme{Madrid}
 \usecolortheme{default}
 
-% Define custom colors for AI slides
-\definecolor{AIBlue}{RGB}{30, 144, 255}
-\definecolor{AILightBlue}{RGB}{173, 216, 230}
-\definecolor{AINavy}{RGB}{25, 25, 112}
-
-% Commands to switch to AI color scheme
-\newcommand{\AIcolors}{%
-  \setbeamercolor{frametitle}{bg=AIBlue,fg=white}%
-  \setbeamercolor{title}{bg=AINavy,fg=white}%
-  \setbeamercolor{structure}{fg=AIBlue}%
-  \setbeamercolor{item}{fg=AINavy}%
-  \setbeamercolor{normal text}{fg=black}%
-}
-
-% Command to restore default colors
-\newcommand{\defaultcolors}{%
-  \setbeamercolor{frametitle}{bg=osaorange,fg=white}%
-  \setbeamercolor{title}{bg=osaorange,fg=white}%
-  \setbeamercolor{structure}{fg=osaorange}%
-  \setbeamercolor{item}{fg=black}%
-  \setbeamercolor{normal text}{fg=black}%
-}
-
 % Define OSU orange color
 \definecolor{osaorange}{RGB}{220,115,38}
 
@@ -41,7 +18,7 @@
 \title{H524 Introduction to Biostatistics}
 \subtitle{Week 1: Introduction to R, Data Presentation, and Summary Measures}
 \author{Dr. John Molitor}
-\institute{Oregon State University\\College of Health}
+\institute{}
 \date{Fall 2025}
 
 \begin{document}
@@ -67,6 +44,19 @@
   \end{itemize}
 \item \textbf{Textbook:} Principles of Biostatistics, 2nd edition (Pagano \& Gauvreau)
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Learning Outcomes}
+By the end of this course, you will be able to:
+{\color{black}
+\begin{enumerate}
+\item Select and generate graphical and numerical summaries of data
+\item Use principles of statistical inference to make conclusions about populations from samples
+\item Communicate statistical findings to others
+\item Use computer software to conduct statistical analysis
+\end{enumerate}
+}
 \end{frame}
 
 \begin{frame}
@@ -106,17 +96,6 @@
 
 \vspace{0.5cm}
 \textbf{Key Concept:} Statistical inference involves making assertions about population \textit{parameters} based on sample \textit{statistics}, subject to sampling error.
-\end{frame}
-
-\begin{frame}
-\frametitle{Learning Outcomes}
-By the end of this course, you will be able to:
-\begin{enumerate}
-\item Select and generate graphical and numerical summaries of data
-\item Use principles of statistical inference to make conclusions about populations from samples
-\item Communicate statistical findings to others
-\item Use computer software to conduct statistical analysis
-\end{enumerate}
 \end{frame}
 
 \begin{frame}
@@ -220,6 +199,7 @@ Data structures:
 
 \begin{frame}
 \frametitle{Types of Data: Quantitative}
+\large
 \begin{itemize}
 \item \textbf{Quantitative (Numerical Data)}
   \begin{itemize}
@@ -244,6 +224,7 @@ Data structures:
 
 \begin{frame}
 \frametitle{Types of Data: Qualitative}
+\large
 \begin{itemize}
 \item \textbf{Qualitative (Categorical Data)}
   \begin{itemize}
@@ -319,20 +300,6 @@ pie(insurance_counts, main = "Insurance Distribution")
 \end{verbatim}
 \end{frame}
 
-\begin{frame}
-\frametitle{Bar Chart Example}
-\begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/barplot_injuries.pdf}
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Pie Chart Example}
-\begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/piechart_injuries.pdf}
-\end{center}
-\end{frame}
-
 \begin{frame}[fragile]
 \frametitle{Graphical Displays: Continuous Data}
 \begin{itemize}
@@ -368,34 +335,6 @@ hist(health_data$bmi, main = "BMI Distribution",
 # Box plot for blood pressure
 boxplot(health_data$systolic_bp, main = "BP Distribution")
 \end{verbatim}
-\end{frame}
-
-\begin{frame}
-\frametitle{Histogram Example}
-\begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/histogram_fev1.pdf}
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Box Plot Example}
-\begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/boxplot_fev1_gender.pdf}
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Dot Plot Example}
-\begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/dotplot_fev1.pdf}
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Scatter Plot Example}
-\begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/scatter_fev1.pdf}
-\end{center}
 \end{frame}
 
 \section{Numerical Summary Measures}
@@ -598,255 +537,6 @@ $$\text{SMR} = \frac{\text{Observed events}}{\text{Expected events}} \times 100$
 \end{itemize}
 \end{frame}
 
-\section{AI as a Learning Tool}
-
-\AIcolors
-\begin{frame}
-\frametitle{AI in Biostatistics: A Modern Learning Tool}
-\begin{itemize}
-\item \textbf{AI tools can enhance learning} but cannot replace understanding
-\item \textbf{Use AI as a statistical tutor} that requires supervision
-\item \textbf{Critical evaluation} of AI output is essential
-\item \textbf{Maintain statistical rigor} while leveraging AI assistance
-\end{itemize}
-
-\vspace{0.5cm}
-\textbf{Today's Goal:} Learn to use AI effectively for biostatistics
-
-\vspace{0.5cm}
-\textbf{Popular AI Tools:}
-\begin{itemize}
-\item ChatGPT, Claude (used in today's demos), Copilot
-\item R-specific: GitHub Copilot for R
-\item Statistical help: Wolfram Alpha
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{AI Demo 1: Generating R Code}
-\textbf{Prompt:} ``Create R code to calculate descriptive statistics for blood pressure data''
-
-\vspace{0.3cm}
-\textbf{Claude AI Response:}
-\tiny
-\begin{verbatim}
-# First, load the real data from our Week 1 script
-source("week1_lecture_code.R")
-# This creates fev1_data with FEV1 measurements from real study
-
-# Calculate descriptive statistics for FEV1 data
-mean_fev1 <- mean(fev1_data$fev1_liters, na.rm = TRUE)
-median_fev1 <- median(fev1_data$fev1_liters, na.rm = TRUE)
-sd_fev1 <- sd(fev1_data$fev1_liters, na.rm = TRUE)
-min_fev1 <- min(fev1_data$fev1_liters, na.rm = TRUE)
-max_fev1 <- max(fev1_data$fev1_liters, na.rm = TRUE)
-
-# Display results
-cat("Mean FEV1:", round(mean_fev1, 2), "liters\n")
-cat("Median FEV1:", round(median_fev1, 2), "liters\n")
-cat("SD:", round(sd_fev1, 2), "liters\n")
-cat("Range:", min_fev1, "-", max_fev1, "liters\n")
-
-# Alternative: use summary function
-summary(fev1_data$fev1_liters)
-\end{verbatim}
-
-\vspace{0.2cm}
-\textbf{What to check:} Variable names, missing value handling, appropriate functions
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{AI Demo 2: Creating Visualizations}
-\textbf{Prompt:} ``Create a professional histogram of blood pressure data with normal curve overlay''
-
-\vspace{0.3cm}
-\textbf{Claude AI Response:}
-\tiny
-\begin{verbatim}
-# Assumes bp_data is already loaded (from week1_lecture_code.R)
-# Create histogram with normal curve overlay
-hist(bp_data$systolic_bp,
-     breaks = 15,
-     probability = TRUE,  # Use density instead of frequency
-     main = "Distribution of Systolic Blood Pressure",
-     xlab = "Systolic BP (mmHg)",
-     ylab = "Density",
-     col = "lightblue",
-     border = "white")
-
-# Add normal curve overlay
-x_vals <- seq(min(bp_data$systolic_bp), max(bp_data$systolic_bp), length = 100)
-mean_val <- mean(bp_data$systolic_bp)
-sd_val <- sd(bp_data$systolic_bp)
-y_vals <- dnorm(x_vals, mean = mean_val, sd = sd_val)
-lines(x_vals, y_vals, col = "red", lwd = 2)
-
-# Add vertical line for mean
-abline(v = mean_val, col = "darkred", lwd = 2, lty = 2)
-legend("topright", c("Normal Curve", "Mean"),
-       col = c("red", "darkred"), lwd = 2, lty = c(1, 2))
-\end{verbatim}
-\end{frame}
-
-\begin{frame}
-\frametitle{AI Demo 3: Explaining Statistical Concepts}
-\textbf{Student Question:} ``When should I use median instead of mean for blood pressure data?''
-
-\vspace{0.3cm}
-\textbf{Claude AI Response:}
-\begin{itemize}
-\item \textbf{Use median when:}
-  \begin{itemize}
-  \item Data has outliers (very high/low BP readings)
-  \item Distribution is skewed (not bell-shaped)
-  \item Want robust measure unaffected by extreme values
-  \end{itemize}
-\item \textbf{Use mean when:}
-  \begin{itemize}
-  \item Data is approximately normally distributed
-  \item No significant outliers present
-  \item Need measure that uses all data points
-  \end{itemize}
-\item \textbf{For blood pressure:} Often use median because BP can have extreme values due to measurement errors or acute conditions
-\end{itemize}
-
-\vspace{0.3cm}
-\textbf{Always verify:} Check your actual data distribution before deciding!
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{AI Demo 4: Interpreting Results}
-\textbf{Prompt:} ``Interpret these blood pressure analysis results for a health class''
-
-\tiny
-\begin{verbatim}
-Summary Statistics:
-Mean: 133.6 mmHg, SD: 18.6 mmHg
-Median: 131.0 mmHg, Range: 96-196 mmHg
-Males: Mean = 136.2 mmHg, Females: Mean = 130.8 mmHg
-\end{verbatim}
-
-\normalsize
-\textbf{Claude AI Interpretation:}
-\begin{itemize}
-\item \textbf{Central tendency:} Average BP (133.6) is in "high normal" range (AHA guidelines: <120 normal, 120-129 elevated, 130+ high)
-\item \textbf{Variability:} Large SD (18.6) indicates substantial individual differences
-\item \textbf{Distribution:} Mean > median suggests slight right skew (some high outliers)
-\item \textbf{Gender difference:} Males average 5.4 mmHg higher (typical pattern)
-\item \textbf{Range:} Wide range (96-196) includes both hypotensive and severely hypertensive readings
-\end{itemize}
-
-\textbf{Clinical relevance:} About 30\% of this population likely has hypertension requiring medical attention
-\end{frame}
-
-\begin{frame}
-\frametitle{AI Best Practices for Biostatistics}
-\small
-\begin{columns}
-\begin{column}{0.5\textwidth}
-\textbf{DO:}
-\begin{itemize}
-\item Start with specific, clear prompts
-\item Ask for explanations of code
-\item Request multiple approaches
-\item Verify results independently
-\item Ask for biological context
-\item Use AI to check your work
-\end{itemize}
-\end{column}
-
-\begin{column}{0.5\textwidth}
-\textbf{DON'T:}
-\begin{itemize}
-\item Blindly copy-paste code
-\item Skip understanding the logic
-\item Use without domain knowledge
-\item Ignore warning messages
-\item Accept first response
-\item Replace critical thinking
-\end{itemize}
-\end{column}
-\end{columns}
-
-\vspace{0.2cm}
-\textbf{Golden Rule:} AI should enhance your learning, not replace it
-\end{frame}
-
-\begin{frame}
-\frametitle{Common AI Pitfalls in Statistics}
-\small
-\begin{itemize}
-\item \textbf{Outdated Information:} AI training data may not include latest statistical methods
-\item \textbf{Context Confusion:} May suggest inappropriate tests for biomedical data
-\item \textbf{Assumption Violations:} Doesn't always check statistical assumptions
-\item \textbf{Missing Values:} May not handle missing data appropriately
-\item \textbf{Interpretation Errors:} Can confuse correlation with causation
-\item \textbf{Package Dependencies:} May suggest functions from packages you don't have
-\end{itemize}
-
-\vspace{0.1cm}
-\textbf{Always:}
-\begin{itemize}
-\item Check your data fits the suggested method
-\item Verify assumptions are met
-\item Cross-reference with textbooks/course materials
-\item Test code on small examples first
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Effective Prompting for Biostatistics}
-\textbf{Poor Prompt:}
-\texttt{``Help with statistics''}
-
-\vspace{0.3cm}
-\textbf{Better Prompt:}
-\texttt{``I have blood pressure data from 100 patients. Create R code to compare BP between males and females using appropriate statistical test.''}
-
-\vspace{0.3cm}
-\textbf{Best Prompt:}
-\small
-\begin{verbatim}
-``I have blood pressure data from 100 patients with variables:
-age, gender, systolic_bp, treatment_group. I want to:
-1. Compare systolic BP between males and females
-2. Check if data meets normality assumptions
-3. Choose appropriate statistical test
-4. Interpret results in clinical context
-5. Create publication-quality plot
-Please provide R code with explanations.''
-\end{verbatim}
-
-\normalsize
-\textbf{Key elements:} Context, sample size, variables, specific goals, level of explanation needed
-\end{frame}
-
-\begin{frame}
-\frametitle{AI Assignment Preview}
-\textbf{This week's homework will include:}
-\begin{enumerate}
-\item Using AI to generate R code for data analysis
-\item Comparing AI output with manual coding
-\item Identifying and correcting AI errors
-\item Writing effective statistical prompts
-\item Critical evaluation of AI explanations
-\end{enumerate}
-
-\vspace{0.5cm}
-\textbf{Learning Goals:}
-\begin{itemize}
-\item Develop AI literacy for biostatistics
-\item Maintain statistical rigor while using AI tools
-\item Build confidence in statistical computing
-\item Prepare for modern data science workflows
-\end{itemize}
-
-\vspace{0.5cm}
-\textbf{Remember:} AI is a powerful tool, but you are the biostatistician!
-\end{frame}
-
-\defaultcolors
-
 \section{R Examples}
 
 \begin{frame}[fragile]
@@ -877,7 +567,7 @@ summary(bp_data$systolic_bp)  # Five-number summary
 \frametitle{Data Visualization: Histogram}
 \vspace{-0.2cm}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/histogram_fev1.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/histogram_fev1.pdf}
 \end{center}
 \vspace{-0.1cm}
 \begin{itemize}
@@ -891,7 +581,7 @@ summary(bp_data$systolic_bp)  # Five-number summary
 \frametitle{Data Visualization: Box Plots}
 \vspace{-0.2cm}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/boxplot_fev1_gender.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/boxplot_fev1_gender.pdf}
 \end{center}
 \vspace{-0.1cm}
 \begin{itemize}
@@ -905,7 +595,7 @@ summary(bp_data$systolic_bp)  # Five-number summary
 \frametitle{Data Visualization: Bar Charts}
 \vspace{-0.2cm}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/barplot_gender_fev1.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/barplot_gender_fev1.pdf}
 \end{center}
 \vspace{-0.1cm}
 \begin{itemize}
@@ -919,7 +609,7 @@ summary(bp_data$systolic_bp)  # Five-number summary
 \frametitle{Data Visualization: Scatter Plots}
 \vspace{-0.2cm}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/scatter_fev1.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/scatter_fev1.pdf}
 \end{center}
 \vspace{-0.1cm}
 \begin{itemize}
@@ -931,7 +621,7 @@ summary(bp_data$systolic_bp)  # Five-number summary
 
 \begin{frame}[fragile]
 \frametitle{R Code: Creating Visualizations}
-\tiny
+\small
 \begin{verbatim}
 # Histogram
 hist(bp_data$systolic_bp,
@@ -978,7 +668,7 @@ age_specific_rates <- (cases_by_age / population_by_age) * 100000
 \frametitle{Age-Specific Rates Visualization}
 \vspace{-0.2cm}
 \begin{center}
-\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{../code/age_specific_rates.pdf}
+\includegraphics[width=0.8\textwidth, height=0.55\textheight, keepaspectratio]{code/age_specific_rates.pdf}
 \end{center}
 \vspace{-0.1cm}
 \begin{itemize}
@@ -1013,7 +703,6 @@ age_specific_rates <- (cases_by_age / population_by_age) * 100000
 
 \vspace{1cm}
 
-\textbf{Office Hours:} Wednesday, 10:00 am -- 11:30 am\\
 \textbf{Email:} john.molitor@oregonstate.edu\\
 \textbf{Office:} 153 Milam
 \end{center}

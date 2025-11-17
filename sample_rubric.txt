@@ -1,0 +1,114 @@
+GRADING RUBRIC - H524 Assignment
+
+═══════════════════════════════════════════════════════════════════
+GENERAL GRADING PRINCIPLES
+═══════════════════════════════════════════════════════════════════
+
+Overall Expectations:
+- Full credit requires: R code + correct output + interpretation
+- Deduct 30% if no R code shown (unless question doesn't require it)
+- Deduct 20% if missing interpretation or context
+- Give partial credit for showing work even if final answer is incorrect
+- Be encouraging - this is a learning process!
+
+Common Issues to Watch For:
+- Using wrong statistical test (major deduction)
+- Confusing population vs sample statistics
+- Not checking assumptions before applying methods
+- Misinterpreting p-values or confidence intervals
+- Missing units in numerical answers
+
+═══════════════════════════════════════════════════════════════════
+QUESTION-SPECIFIC CRITERIA
+═══════════════════════════════════════════════════════════════════
+
+Q1: Calculating Confidence Interval (10 points)
+──────────────────────────────────────────────
+Must show:
+- Standard error calculation (3 pts)
+- Correct critical value (t or z as appropriate) (2 pts)
+- Margin of error computation (2 pts)
+- Final confidence interval (2 pts)
+- Interpretation in context with units (1 pt)
+
+Common errors:
+- Using z when should use t: -2 points
+- Wrong degrees of freedom: -1 point
+- No interpretation: -1 point
+- Missing units: -0.5 points
+
+Full credit example:
+"SE = s/sqrt(n) = 12/sqrt(30) = 2.19
+t(0.975, 29) = 2.045
+ME = 2.045 × 2.19 = 4.48
+95% CI = 28 ± 4.48 = (23.52, 32.48) mg/dL
+We are 95% confident the true mean cholesterol reduction is between
+23.52 and 32.48 mg/dL."
+
+Q2: Sample Size Calculation (5 points)
+──────────────────────────────────────
+Must show:
+- Correct formula: n = (z×σ/ME)² (2 pts)
+- Correct computation (2 pts)
+- Rounds UP to next integer (1 pt)
+
+Watch for:
+- Forgetting to square the formula
+- Rounding down instead of up
+- Using wrong z-value for confidence level
+
+Q3: Checking Assumptions (5 points)
+───────────────────────────────────
+Must include:
+- Visual assessment (histogram, Q-Q plot, or boxplot) (2 pts)
+- Formal test (Shapiro-Wilk or similar) (2 pts)
+- Proper interpretation of both (1 pt)
+
+Deductions:
+- Only visual OR only formal test: -2 points
+- Wrong conclusion despite correct output: -1 point
+
+Q4: Hypothesis Test Interpretation (10 points)
+──────────────────────────────────────────────
+Must include:
+- Null and alternative hypotheses stated (2 pts)
+- Test statistic and p-value reported (3 pts)
+- Decision (reject or fail to reject) (2 pts)
+- Conclusion in context of problem (3 pts)
+
+Major issues:
+- "Accept the null" instead of "fail to reject": -1 point
+- Confusing statistical vs practical significance: -1 point
+- No context in conclusion: -2 points
+
+═══════════════════════════════════════════════════════════════════
+ESSAY/SHORT ANSWER QUESTIONS
+═══════════════════════════════════════════════════════════════════
+
+For conceptual questions:
+- Look for understanding, not memorization
+- Accept different valid explanations
+- Partial credit for partial understanding
+- Encourage showing examples
+
+Example: "Explain the difference between standard deviation and standard error"
+
+Full credit (5 pts): Explains SD measures spread of data, SE measures
+                    uncertainty in estimate of mean. Mentions SE = SD/√n
+
+Partial credit (3 pts): Shows some understanding but incomplete or
+                        slightly confused
+
+Low credit (1 pt): Very basic attempt, major misconceptions
+
+═══════════════════════════════════════════════════════════════════
+NOTES FOR GRADER (CLAUDE)
+═══════════════════════════════════════════════════════════════════
+
+- Be consistent across all students
+- Give specific feedback explaining deductions
+- Acknowledge what they did well
+- Suggest improvements for areas they struggled
+- Remember: this is a weekly assignment, not an exam
+- Err on the side of generosity for borderline cases
+- Watch for academic integrity issues (copying, trap phrases)

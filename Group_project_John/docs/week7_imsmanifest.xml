@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="week7_qti_package" version="1.1"
+          xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
+          xmlns:imsmd="http://www.imsglobal.org/xsd/imsmd_v1p2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 http://www.imsglobal.org/xsd/imscp_v1p1p3.xsd">
+
+  <metadata>
+    <schema>IMS Content</schema>
+    <schemaversion>1.1</schemaversion>
+    <imsmd:lom>
+      <imsmd:general>
+        <imsmd:identifier>week7_nonparametric_quiz</imsmd:identifier>
+        <imsmd:title>
+          <imsmd:langstring xml:lang="en">Week 7 Assignment - Part A: Multiple Choice</imsmd:langstring>
+        </imsmd:title>
+        <imsmd:description>
+          <imsmd:langstring xml:lang="en">H524 Introduction to Biostatistics - Week 7 Assignment Part A: 5 multiple choice questions on nonparametric methods</imsmd:langstring>
+        </imsmd:description>
+      </imsmd:general>
+    </imsmd:lom>
+  </metadata>
+
+  <organizations default="week7_organization">
+    <organization identifier="week7_organization">
+      <title>Week 7 Assignment Organization</title>
+      <item identifier="week7_quiz_item" identifierref="week7_quiz_resource">
+        <title>Week 7 Assignment - Part A</title>
+      </item>
+    </organization>
+  </organizations>
+
+  <resources>
+    <resource identifier="week7_quiz_resource" type="imsqti_xmlv1p2" href="week7_quiz.xml">
+      <file href="week7_quiz.xml"/>
+    </resource>
+  </resources>
+</manifest>

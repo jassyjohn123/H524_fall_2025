@@ -1,0 +1,540 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{codebackground}{RGB}{248,248,248}
+\definecolor{answergreen}{RGB}{0,128,0}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+% Configure listings for code display
+\lstset{
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  breakatwhitespace=true,
+  postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+
+% Code environment using tcolorbox with listings
+\newtcblisting{rcode}{
+  colback=white,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=0pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  width=\textwidth,
+  breakable,
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false
+  }
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 7 Lab: Nonparametric Methods - ANSWER KEY}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\section{Exercise 1: Shapiro-Wilk Test}
+
+\begin{rcode}
+# Generate example data
+set.seed(524)
+normal_data <- rnorm(30, mean=100, sd=15)
+skewed_data <- rexp(30, rate=0.02)
+
+# Check normality
+shapiro.test(normal_data)
+shapiro.test(skewed_data)
+\end{rcode}
+
+\textbf{Answers:}
+\begin{enumerate}
+\item \textcolor{answergreen}{P-value for \texttt{normal\_data}: 0.2371}
+\item \textcolor{answergreen}{P-value for \texttt{skewed\_data}: 0.0025}
+\item \textcolor{answergreen}{For \texttt{normal\_data}, use \textbf{parametric} tests (p = 0.2371 $\geq$ 0.05, normality assumption OK)}
+\item \textcolor{answergreen}{For \texttt{skewed\_data}, use \textbf{nonparametric} tests (p = 0.0025 < 0.05, data not normal)}
+\end{enumerate}
+
+\section{Exercise 2: Sign Test for One Sample}
+
+\textbf{Question:} Is median recovery time different from 7 days?
+
+\begin{rcode}
+# Recovery times (days)
+recovery <- c(8, 5, 7, 10, 4, 9, 3, 12, 6, 11, 7)
+
+# Hypothesized median
+med0 <- 7
+
+# Calculate differences
+diff <- recovery - med0
+
+# Count signs (ignoring zeros)
+n_positive <- sum(diff > 0)
+n_total <- sum(diff != 0)
+
+cat("Positive differences:", n_positive, "\n")
+cat("Total non-zero:", n_total, "\n")
+
+# Sign test
+binom.test(n_positive, n_total, p=0.5)
+\end{rcode}
+
+\textbf{Answers:}
+\begin{enumerate}
+\item \textcolor{answergreen}{Positive differences: 5}
+\item \textcolor{answergreen}{Total non-zero differences: 9}
+\item \textcolor{answergreen}{P-value: 1.0}
+\item \textcolor{answergreen}{Is median significantly different from 7 days? \textbf{NO} (p = 1.0 $\geq$ 0.05)}
+\end{enumerate}
+
+\section{Exercise 3: Sign Test for Paired Data}
+
+\textbf{Question:} Does treatment reduce pain scores?
+
+\begin{rcode}
+# Pain scores (1-10 scale)
+before <- c(7, 8, 6, 9, 5, 8, 7, 6)
+after <- c(5, 6, 4, 7, 4, 6, 5, 5)
+
+# Calculate differences
+diff <- before - after
+
+# Count signs
+n_improved <- sum(diff > 0)
+n_total <- sum(diff != 0)
+
+cat("Number improved:", n_improved, "\n")
+cat("Number total:", n_total, "\n")
+
+# Sign test
+binom.test(n_improved, n_total, p=0.5)
+
+# Summary
+mean(before)
+mean(after)
+mean(diff)
+\end{rcode}
+
+\textbf{Answers:}
+\begin{enumerate}
+\item \textcolor{answergreen}{Number improved: 8}
+\item \textcolor{answergreen}{P-value: 0.0078}
+\item \textcolor{answergreen}{Does treatment reduce pain? \textbf{YES} (p = 0.0078 < 0.05)}
+\item \textcolor{answergreen}{Average reduction in pain score: 1.75}
+\end{enumerate}
+
+\section{Exercise 4: Blood Pressure Study}
+
+\textbf{Research Question:} Does medication reduce blood pressure?
+
+\begin{rcode}
+# Blood pressure before and after medication
+bp_before <- c(145, 138, 150, 142, 156, 148, 140, 152)
+bp_after <- c(138, 135, 142, 140, 148, 145, 138, 146)
+
+# Check normality of differences
+diff <- bp_before - bp_after
+shapiro.test(diff)
+
+# Wilcoxon signed-rank test
+wilcox.test(bp_before, bp_after, paired=TRUE)
+
+# Summary statistics
+mean(bp_before)
+mean(bp_after)
+mean(diff)
+\end{rcode}
+
+\textbf{Answers:}
+\begin{enumerate}
+\item \textcolor{answergreen}{Shapiro-Wilk p-value for differences: 0.0711}
+
+\textcolor{answergreen}{Normality assumption OK? YES (p = 0.0711 $\geq$ 0.05, though borderline)}
+
+\item \textcolor{answergreen}{Wilcoxon test p-value: 0.0139}
+
+\item \textcolor{answergreen}{Significant at $\alpha = 0.05$? YES (p = 0.0139 < 0.05)}
+
+\item \textcolor{answergreen}{Does medication reduce BP? YES ($p < 0.05$, significant reduction)}
+
+\item \textcolor{answergreen}{Mean reduction in BP: 4.88 mmHg}
+\end{enumerate}
+
+\section{Exercise 5: Physical Therapy Study}
+
+\textbf{Question:} Does physical therapy reduce pain scores?
+
+\begin{rcode}
+# Pain scores (0-10 scale) before and after 8 weeks PT
+pain_before <- c(7, 8, 6, 9, 7, 8, 6, 7, 8, 9)
+pain_after <- c(5, 6, 5, 7, 6, 7, 4, 6, 7, 8)
+
+# Check normality
+diff <- pain_before - pain_after
+shapiro.test(diff)
+
+# Wilcoxon test
+wilcox.test(pain_before, pain_after, paired=TRUE)
+
+# Medians
+median(pain_before)
+median(pain_after)
+median(diff)
+\end{rcode}
+
+\textbf{Answers:}
+\begin{enumerate}
+\item \textcolor{answergreen}{Are differences normally distributed? \textbf{NO} (p = 0.0002 < 0.05)}
+\item \textcolor{answergreen}{Wilcoxon p-value: 0.0046}
+\item \textcolor{answergreen}{Does PT significantly reduce pain? \textbf{YES} ($p < 0.05$)}
+\item \textcolor{answergreen}{Median reduction in pain score: 1}
+\end{enumerate}
+
+\section{Exercise 6: Treatment Comparison}
+
+\textbf{Research Question:} Do two treatments differ in recovery time?
+
+\begin{rcode}
+# Recovery times (days)
+treatment_A <- c(23, 31, 25, 28, 30, 27, 29)
+treatment_B <- c(18, 22, 20, 24, 19, 21, 23)
+
+# Check normality
+shapiro.test(treatment_A)
+shapiro.test(treatment_B)
+
+# Wilcoxon rank-sum test
+wilcox.test(treatment_A, treatment_B)
+
+# Summary statistics
+median(treatment_A)
+median(treatment_B)
+\end{rcode}
+
+\textbf{Answers:}
+\begin{enumerate}
+\item \textcolor{answergreen}{Treatment A normal? YES (p = 0.8525 $\geq$ 0.05)}
+
+\textcolor{answergreen}{Treatment B normal? YES (p = 0.9493 $\geq$ 0.05)}
+
+\textcolor{answergreen}{Note: Both are normal, but we can still use Wilcoxon as a robust alternative}
+
+\item \textcolor{answergreen}{Wilcoxon rank-sum p-value: 0.004}
+
+\item \textcolor{answergreen}{Significant at $\alpha = 0.05$? YES (p = 0.004 < 0.05)}
+
+\item \textcolor{answergreen}{Which treatment has shorter recovery? \textbf{Treatment B} (median 21 days vs 28 days)}
+
+\item \textcolor{answergreen}{Median recovery times:}
+\begin{itemize}
+\item \textcolor{answergreen}{Treatment A: 28 days}
+\item \textcolor{answergreen}{Treatment B: 21 days}
+\end{itemize}
+\end{enumerate}
+
+\section{Exercise 7: Drug Effectiveness Study}
+
+\textbf{Question:} Do two drugs differ in effectiveness?
+
+\begin{rcode}
+# Symptom relief scores (higher = better)
+drug_X <- c(45, 52, 48, 55, 50, 47, 53)
+drug_Y <- c(38, 42, 40, 45, 39, 43, 41)
+
+# Wilcoxon test
+wilcox.test(drug_X, drug_Y)
+
+# Summary
+mean(drug_X)
+mean(drug_Y)
+median(drug_X)
+median(drug_Y)
+\end{rcode}
+
+\textbf{Answers:}
+\begin{enumerate}
+\item \textcolor{answergreen}{Wilcoxon p-value: 0.0026}
+\item \textcolor{answergreen}{Which drug is more effective? \textbf{Drug X} (higher scores)}
+\item \textcolor{answergreen}{Difference in average scores: 50 - 41.14 = 8.86 points}
+\end{enumerate}
+
+\section{Exercise 8: Pain Relief Comparison}
+
+\textbf{Research Question:} Do three pain medications differ in effectiveness?
+
+\begin{rcode}
+# Pain relief scores (0-10 scale, higher = better)
+drug_A <- c(3, 4, 5, 4, 3, 5, 4)
+drug_B <- c(5, 6, 7, 6, 5, 7, 6)
+drug_C <- c(7, 8, 9, 8, 7, 9, 8)
+
+# Combine data
+pain_scores <- c(drug_A, drug_B, drug_C)
+drug <- factor(rep(c("A", "B", "C"), each=7))
+
+# Kruskal-Wallis test
+kruskal.test(pain_scores ~ drug)
+
+# Post-hoc pairwise comparisons
+pairwise.wilcox.test(pain_scores, drug, p.adjust.method="bonferroni")
+
+# Summary statistics
+tapply(pain_scores, drug, median)
+\end{rcode}
+
+\textbf{Answers:}
+\begin{enumerate}
+\item \textcolor{answergreen}{Kruskal-Wallis p-value: 0.0002}
+
+\item \textcolor{answergreen}{Significant overall at $\alpha = 0.05$? YES (p = 0.0002 < 0.05)}
+
+\item \textcolor{answergreen}{Post-hoc tests (Bonferroni-adjusted):}
+\begin{itemize}
+\item \textcolor{answergreen}{A vs B: p = 0.0121 (SIGNIFICANT)}
+\item \textcolor{answergreen}{A vs C: p = 0.0057 (SIGNIFICANT)}
+\item \textcolor{answergreen}{B vs C: p = 0.0121 (SIGNIFICANT)}
+\item \textcolor{answergreen}{All three drugs differ significantly from each other}
+\end{itemize}
+
+\item \textcolor{answergreen}{Most effective drug: \textbf{Drug C} (median = 8)}
+
+\item \textcolor{answergreen}{Least effective drug: \textbf{Drug A} (median = 4)}
+\end{enumerate}
+
+\section{Exercise 9: Comparing Parametric vs Nonparametric}
+
+\textbf{Question:} Sometimes data are borderline normal. Let's compare both approaches.
+
+\begin{rcode}
+# Blood pressure data (from Exercise 4)
+bp_before <- c(145, 138, 150, 142, 156, 148, 140, 152)
+bp_after <- c(138, 135, 142, 140, 148, 145, 138, 146)
+
+# Check normality
+diff <- bp_before - bp_after
+shapiro.test(diff)
+
+# Parametric: Paired t-test
+t_result <- t.test(bp_before, bp_after, paired=TRUE)
+cat("Paired t-test p-value:", t_result$p.value, "\n")
+
+# Nonparametric: Wilcoxon
+w_result <- wilcox.test(bp_before, bp_after, paired=TRUE)
+cat("Wilcoxon p-value:", w_result$p.value, "\n")
+
+# Compare
+cat("\nBoth tests significant? Compare p-values to 0.05\n")
+\end{rcode}
+
+\textbf{Answers:}
+\begin{enumerate}
+\item \textcolor{answergreen}{Is normality assumption met ($p \geq 0.05$)? \textbf{YES} (borderline, p = 0.0711)}
+\item \textcolor{answergreen}{Which test gives smaller p-value? \textbf{t-test} (0.0012 vs 0.0139)}
+\item \textcolor{answergreen}{Do both reach same conclusion? \textbf{YES} (both significant, $p < 0.05$)}
+\item \textcolor{answergreen}{When borderline normal, which is safer? \textbf{Nonparametric} (more robust)}
+\end{enumerate}
+
+\section{Practice Problem 1: Hospital Stay Duration}
+
+\begin{rcode}
+# Hospital stay (days)
+procedure_1 <- c(3, 4, 5, 3, 6, 4, 7, 5, 4, 12)
+procedure_2 <- c(5, 6, 8, 7, 9, 6, 8, 10, 7, 15)
+
+# Check normality
+shapiro.test(procedure_1)
+shapiro.test(procedure_2)
+
+# Wilcoxon rank-sum test
+wilcox.test(procedure_1, procedure_2)
+
+# Summary statistics
+median(procedure_1)
+median(procedure_2)
+\end{rcode}
+
+\textbf{Answers:}
+\begin{enumerate}
+\item \textcolor{answergreen}{Procedure 1 normal? \textbf{NO} (p = 0.0083 < 0.05)}
+
+\textcolor{answergreen}{Procedure 2 normal? \textbf{YES} (p = 0.0538 $\geq$ 0.05, borderline)}
+
+\textcolor{answergreen}{Since Procedure 1 is not normal, use nonparametric test}
+
+\item \textcolor{answergreen}{Wilcoxon rank-sum p-value: 0.0108}
+
+\item \textcolor{answergreen}{Significant difference? \textbf{YES} (p = 0.0108 < 0.05)}
+
+\item \textcolor{answergreen}{Shorter stays: \textbf{Procedure 1} (median 4.5 days vs 7.5 days)}
+\begin{itemize}
+\item \textcolor{answergreen}{Median Procedure 1: 4.5 days}
+\item \textcolor{answergreen}{Median Procedure 2: 7.5 days}
+\end{itemize}
+
+\item \textcolor{answergreen}{Why is Wilcoxon appropriate? Data not normal + outliers present (12, 15 days)}
+\end{enumerate}
+
+\section{Practice Problem 2: Diet Program Comparison}
+
+\begin{rcode}
+# Weight loss (kg) after 3 months
+diet_A <- c(2.1, 3.2, 2.5, 3.0, 2.8, 2.6)
+diet_B <- c(3.5, 4.2, 3.8, 4.0, 3.9, 3.7)
+diet_C <- c(4.5, 5.1, 4.8, 5.3, 4.9, 5.0)
+diet_D <- c(2.8, 3.0, 2.9, 3.1, 2.7, 2.9)
+
+# Combine data
+weight_loss <- c(diet_A, diet_B, diet_C, diet_D)
+diet <- factor(rep(c("A", "B", "C", "D"), each=6))
+
+# Kruskal-Wallis test
+kruskal.test(weight_loss ~ diet)
+
+# Post-hoc tests
+pairwise.wilcox.test(weight_loss, diet, p.adjust.method="bonferroni")
+
+# Summary statistics
+tapply(weight_loss, diet, median)
+\end{rcode}
+
+\textbf{Answers:}
+\begin{enumerate}
+\item \textcolor{answergreen}{Kruskal-Wallis p-value: 0.000195}
+
+\item \textcolor{answergreen}{Significant overall? \textbf{YES} (p = 0.000195 < 0.05)}
+
+\item \textcolor{answergreen}{Post-hoc tests (Bonferroni-adjusted) - Significant pairs:}
+\begin{itemize}
+\item \textcolor{answergreen}{A vs B: p = 0.013 (SIGNIFICANT)}
+\item \textcolor{answergreen}{A vs C: p = 0.013 (SIGNIFICANT)}
+\item \textcolor{answergreen}{A vs D: p = 1.000 (NOT significant)}
+\item \textcolor{answergreen}{B vs C: p = 0.013 (SIGNIFICANT)}
+\item \textcolor{answergreen}{B vs D: p = 0.030 (SIGNIFICANT)}
+\item \textcolor{answergreen}{C vs D: p = 0.030 (SIGNIFICANT)}
+\end{itemize}
+
+\item \textcolor{answergreen}{Most effective diet: \textbf{Diet C} (median = 4.95 kg)}
+
+\item \textcolor{answergreen}{Median weight loss by diet:}
+\begin{itemize}
+\item \textcolor{answergreen}{Diet A: 2.7 kg}
+\item \textcolor{answergreen}{Diet B: 3.85 kg}
+\item \textcolor{answergreen}{Diet C: 4.95 kg}
+\item \textcolor{answergreen}{Diet D: 2.9 kg}
+\end{itemize}
+\end{enumerate}
+
+\section{Practice Problem 3: Satisfaction Ratings}
+
+\textbf{Question:} Compare customer satisfaction ratings across three stores.
+
+\begin{rcode}
+# Satisfaction ratings (1-5 scale, ordinal)
+store_A <- c(3, 4, 3, 5, 4, 3, 4, 3, 4, 3)
+store_B <- c(4, 5, 4, 5, 5, 4, 5, 4, 5, 4)
+store_C <- c(2, 3, 2, 4, 3, 2, 3, 2, 3, 3)
+
+# Combine
+satisfaction <- c(store_A, store_B, store_C)
+store <- factor(rep(c("A", "B", "C"), each=10))
+
+# Kruskal-Wallis (appropriate for ordinal data!)
+kruskal.test(satisfaction ~ store)
+
+# Post-hoc
+pairwise.wilcox.test(satisfaction, store, p.adjust.method="bonferroni")
+
+# Medians
+tapply(satisfaction, store, median)
+\end{rcode}
+
+\textbf{Answers:}
+\begin{enumerate}
+\item \textcolor{answergreen}{Why is nonparametric appropriate? Data is \textbf{ORDINAL} (1-5 rating scale)}
+\item \textcolor{answergreen}{Kruskal-Wallis p-value: 0.0002}
+\item \textcolor{answergreen}{Do stores differ in satisfaction? \textbf{YES} ($p < 0.05$)}
+\item \textcolor{answergreen}{Highest satisfaction: \textbf{Store B} (median = 4.5)}
+\item \textcolor{answergreen}{Significant pairs:}
+\begin{itemize}
+\item \textcolor{answergreen}{A vs B: p = 0.028 (SIGNIFICANT)}
+\item \textcolor{answergreen}{A vs C: p = 0.042 (SIGNIFICANT)}
+\item \textcolor{answergreen}{B vs C: p = 0.0007 (SIGNIFICANT)}
+\end{itemize}
+\end{enumerate}
+
+\section{Key Interpretations}
+
+\subsection{Normality Testing}
+\begin{itemize}
+\item If Shapiro-Wilk $p \geq 0.05$: Data consistent with normal distribution, can use parametric tests
+\item If Shapiro-Wilk $p < 0.05$: Data significantly non-normal, use nonparametric tests
+\item Borderline cases ($p \approx 0.05$): Use nonparametric for safety
+\end{itemize}
+
+\subsection{Wilcoxon Tests}
+\begin{itemize}
+\item \textbf{Paired:} Use when comparing before/after measurements on same subjects
+\item \textbf{Rank-sum:} Use when comparing two independent groups
+\item Interpret p-values same as t-tests: $p < 0.05$ = significant difference
+\end{itemize}
+
+\subsection{Kruskal-Wallis Test}
+\begin{itemize}
+\item Tests if at least one group differs from others
+\item If significant ($p < 0.05$), follow up with post-hoc pairwise comparisons
+\item Bonferroni correction adjusts for multiple comparisons (more conservative)
+\end{itemize}
+
+\subsection{Common Student Errors to Watch For}
+\begin{enumerate}
+\item \textbf{Forgetting to check normality first}
+\item \textbf{Using \texttt{paired=TRUE} for independent groups} (should only be for paired data)
+\item \textbf{Interpreting medians as means} (nonparametric tests focus on medians)
+\item \textbf{Not following up significant Kruskal-Wallis with post-hoc tests}
+\item \textbf{Comparing p-values to 0.01 instead of 0.05} (unless specified)
+\end{enumerate}
+
+\end{document}

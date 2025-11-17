@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questestinterop xmlns="http://www.imsglobal.org/xsd/ims_qtiasiv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/ims_qtiasiv1p2 http://www.imsglobal.org/xsd/ims_qtiasiv1p2p1.xsd">
+  <assessment ident="week9_correlation" title="Week 9 Assignment - Part A: Multiple Choice">
+
+    <section ident="part_a" title="Part A: Multiple Choice (7 points)">
+      <!-- Question 1 -->
+      <item ident="q1" title="Correlation Coefficient Range (1 point)">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[<p>The Pearson correlation coefficient (r) ranges from:</p>]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext>0 to 1</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext>-1 to 0</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext>-1 to 1</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext>-∞ to +∞</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="1" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">c</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">1</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 2 -->
+      <item ident="q2" title="Interpreting Correlation (1 point)">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[<p>A correlation coefficient of r = -0.85 indicates:</p>]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext>A weak positive linear relationship</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext>A strong positive linear relationship</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext>A weak negative linear relationship</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext>A strong negative linear relationship</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="1" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">d</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">1</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 3 -->
+      <item ident="q3" title="Correlation vs. Causation (1 point)">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[<p>If two variables have a strong positive correlation (r = 0.90), this means:</p>]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext>One variable causes changes in the other</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext>The variables tend to increase together, but this does not prove causation</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext>There is no relationship between the variables</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext>The regression line has a slope of 0.90</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="1" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">1</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 4 -->
+      <item ident="q4" title="Simple Linear Regression Equation (1 point)">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[<p>In the regression equation ŷ = a + bx, what does "b" represent?</p>]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext>The y-intercept</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext>The slope of the regression line</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext>The correlation coefficient</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext>The predicted value of y</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="1" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">1</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 5 -->
+      <item ident="q5" title="Coefficient of Determination (1 point)">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[<p>If the correlation coefficient r = 0.60, what is the coefficient of determination (R²)?</p>]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext>0.36</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext>0.60</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext>0.77</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext>1.67</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="1" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">1</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 6 -->
+      <item ident="q6" title="Interpreting R² (1 point)">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[<p>An R² value of 0.64 means:</p>]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext>64% of the variance in y is explained by x</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext>64% of the variance in x is explained by y</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext>The correlation is r = 0.64</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext>The slope of the regression line is 0.64</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="1" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">1</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 7 -->
+      <item ident="q7" title="Regression Assumptions (1 point)">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[<p>Which of the following is NOT an assumption of simple linear regression?</p>]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="a">
+                <material>
+                  <mattext>Linearity (relationship between x and y is linear)</mattext>
+                </material>
+              </response_label>
+              <response_label ident="b">
+                <material>
+                  <mattext>Independence of observations</mattext>
+                </material>
+              </response_label>
+              <response_label ident="c">
+                <material>
+                  <mattext>Normality of residuals</mattext>
+                </material>
+              </response_label>
+              <response_label ident="d">
+                <material>
+                  <mattext>The independent variable (x) must be normally distributed</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="1" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition>
+            <conditionvar>
+              <varequal respident="response1">d</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">1</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 8: Check-In - Presentation Readiness -->
+      <item ident="q8_checkin" title="Presentation Readiness Check-In (3 points)">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[<p><strong>Part B: Group Project Check-In - Presentation Readiness (3 points)</strong></p>
+<p><strong>GROUP LEADER SUBMITS</strong> evidence that your presentation is ready. Choose ONE of the following:</p>
+<p><strong>Option A: Presentation Outline</strong> (preferred)</p>
+<ul>
+<li>List of slides/sections (bullet points)</li>
+<li>Who will present each section</li>
+<li>Timing estimate for each part</li>
+</ul>
+<p><strong>Option B: Draft Slide Deck</strong></p>
+<ul>
+<li>PowerPoint, Google Slides, or PDF</li>
+<li>Doesn't need to be final, but should show structure</li>
+</ul>
+<p><strong>Option C: Presentation Plan</strong></p>
+<ul>
+<li>Written description of what you'll cover</li>
+<li>Division of speaking roles</li>
+<li>Confirmation that all members will participate</li>
+</ul>
+<p><strong>Reminder:</strong> Presentations are NEXT WEEK (Week 10)!</p>
+<ul>
+<li>Monday 12-1:20pm: Groups 1 &amp; 2</li>
+<li>Wednesday 12-1:20pm: Groups 3 &amp; 4</li>
+</ul>
+<p><strong>Submit as:</strong> File upload (PDF, PPT, DOCX) OR text entry.</p>
+<p><strong>Grading:</strong> 3 points for demonstrating presentation preparation.</p>]]></mattext>
+          </material>
+        </presentation>
+      </item>
+
+    </section>
+  </assessment>
+</questestinterop>

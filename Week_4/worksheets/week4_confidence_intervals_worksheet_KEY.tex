@@ -1,0 +1,464 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{answergreen}{RGB}{0,128,0}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large Week 4 In-Class Worksheet}}\\
+\textcolor{white}{\textbf{\large Confidence Intervals}}\\
+\textcolor{white}{\textbf{ANSWER KEY}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Confidence Intervals for Means and Proportions
+
+\vspace{8pt}
+
+\begin{tcolorbox}[colback=yellow!10,colframe=black,boxrule=1pt]
+\textbf{Note:} All numerical answers have been verified using R. See \texttt{verify\_answers.R} for computational verification.
+\end{tcolorbox}
+
+\vspace{12pt}
+
+\section{Problem 1: CI for Population Mean}
+
+\textbf{Given:} $n = 20$, $\bar{x} = 42.5$ points, $s = 8.6$ points
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate the standard error of the mean.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+$$\text{SE} = \frac{s}{\sqrt{n}} = \frac{8.6}{\sqrt{20}} = \frac{8.6}{4.472} = 1.923$$
+
+\vspace{6pt}
+
+\textbf{Part B:} Find the critical value for a 95\% confidence interval.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+Degrees of freedom: $\text{df} = n - 1 = 20 - 1 = 19$
+
+Critical value from t-distribution: $t_{0.975, 19} = 2.093$
+
+(Using R: \texttt{qt(0.975, 19)} = 2.093)
+
+\vspace{6pt}
+
+\textbf{Part C:} Calculate the margin of error.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+$$\text{ME} = t_{\text{critical}} \times \text{SE} = 2.093 \times 1.923 = 4.02$$
+
+\vspace{6pt}
+
+\textbf{Part D:} Construct the 95\% confidence interval.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+$$\text{CI} = \bar{x} \pm \text{ME} = 42.5 \pm 4.02 = (38.48, 46.52)$$
+
+\vspace{6pt}
+
+\textbf{Part E:} Write a complete interpretation of your confidence interval in context.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+We are 95\% confident that the true mean pain reduction score for all patients taking this medication is between 38.48 and 46.52 points. This means that if we were to repeat this study many times and calculate a 95\% CI each time, approximately 95\% of those intervals would contain the true population mean pain reduction.
+
+\newpage
+
+\section{Problem 2: Effect of Confidence Level}
+
+\textbf{Using the same data:} $n=20$, $\bar{x}=42.5$, $s=8.6$, $\text{SE}=1.923$
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate a 90\% confidence interval.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+Critical value: $t_{0.95, 19} = 1.729$ (Using R: \texttt{qt(0.95, 19)})
+
+Margin of error: $\text{ME} = 1.729 \times 1.923 = 3.33$
+
+90\% CI: $42.5 \pm 3.33 = (39.17, 45.83)$
+
+\vspace{6pt}
+
+\textbf{Part B:} Calculate a 99\% confidence interval.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+Critical value: $t_{0.995, 19} = 2.861$ (Using R: \texttt{qt(0.995, 19)})
+
+Margin of error: $\text{ME} = 2.861 \times 1.923 = 5.50$
+
+99\% CI: $42.5 \pm 5.50 = (37.00, 48.00)$
+
+\vspace{6pt}
+
+\textbf{Part C:} Compare the three intervals (90\%, 95\%, 99\%). What pattern do you observe? Explain why this makes sense.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+\begin{itemize}
+\item 90\% CI: (39.17, 45.83) - Width = 6.66
+\item 95\% CI: (38.48, 46.52) - Width = 8.04
+\item 99\% CI: (37.00, 48.00) - Width = 11.00
+\end{itemize}
+
+\textbf{Pattern:} As confidence level increases, the interval gets wider.
+
+\textbf{Explanation:} To be more confident that we've captured the true mean, we need a wider interval. Higher confidence requires casting a wider net. The trade-off is between confidence and precision.
+
+\vspace{6pt}
+
+\textbf{Part D:} If you needed to be very confident about your estimate (e.g., for a safety-critical decision), which confidence level would you choose? What is the trade-off?
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+For safety-critical decisions, I would choose a 99\% confidence level (or even higher) to minimize the risk of being wrong.
+
+\textbf{Trade-off:} Higher confidence = wider interval = less precision. We gain certainty that we've captured the true value, but lose precision about exactly what that value is.
+
+\newpage
+
+\section{Problem 3: CI for a Proportion}
+
+\textbf{Given:} $n = 250$ participants, $x = 218$ developed antibodies
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate the sample proportion $\hat{p}$.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+$$\hat{p} = \frac{x}{n} = \frac{218}{250} = 0.872$$
+
+\vspace{6pt}
+
+\textbf{Part B:} Check whether the normal approximation is appropriate.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+Condition 1: $n\hat{p} = 250 \times 0.872 = 218 \geq 10$ \checkmark
+
+Condition 2: $n(1-\hat{p}) = 250 \times 0.128 = 32 \geq 10$ \checkmark
+
+Both conditions are satisfied, so we can proceed with the normal approximation.
+
+\vspace{6pt}
+
+\textbf{Part C:} Calculate the standard error for the proportion.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+$$\text{SE} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} = \sqrt{\frac{0.872 \times 0.128}{250}} = \sqrt{\frac{0.1116}{250}} = \sqrt{0.0004464} = 0.0211$$
+
+\vspace{6pt}
+
+\textbf{Part D:} Calculate a 95\% confidence interval for the true proportion.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+Critical value: $z_{0.975} = 1.96$
+
+Margin of error: $\text{ME} = 1.96 \times 0.0211 = 0.0414$
+
+95\% CI: $0.872 \pm 0.0414 = (0.8306, 0.9134)$
+
+Express as a percentage: (83.06\%, 91.34\%)
+
+\vspace{6pt}
+
+\textbf{Part E:} Interpret this interval in the context of vaccine efficacy.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+We are 95\% confident that the true proportion of all people who would develop protective antibodies after receiving this vaccine is between 83.06\% and 91.34\%. This suggests the vaccine has high efficacy, as the entire confidence interval is above 80\%.
+
+\newpage
+
+\section{Problem 4: Sample Size Planning}
+
+\textbf{Given:} $\sigma \approx 40$ mg/dL, want 95\% CI with ME $\leq 6$ mg/dL
+
+\vspace{6pt}
+
+\textbf{Part A:} What critical value will you use for planning?
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+For 95\% confidence: $z_{0.975} = 1.96$
+
+(We use $z$ instead of $t$ for planning because we don't yet know the sample size)
+
+\vspace{6pt}
+
+\textbf{Part B:} Calculate the required sample size.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+$$n = \left(\frac{z \times \sigma}{\text{ME}}\right)^2 = \left(\frac{1.96 \times 40}{6}\right)^2 = \left(\frac{78.4}{6}\right)^2 = (13.07)^2 = 170.74$$
+
+Round UP to the next whole number: $n = 171$
+
+\vspace{6pt}
+
+\textbf{Part C:} What if you wanted a margin of error of only 4 mg/dL instead? Calculate the new required sample size.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+$$n = \left(\frac{1.96 \times 40}{4}\right)^2 = \left(\frac{78.4}{4}\right)^2 = (19.6)^2 = 384.16$$
+
+Round UP: $n = 385$
+
+\vspace{6pt}
+
+\textbf{Part D:} Compare your answers from Parts B and C. What happens to the required sample size when you reduce the margin of error from 6 to 4? Why?
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+When ME decreased from 6 to 4 (reduced by factor of 1.5), the required sample size increased from 171 to 385 (increased by factor of 2.25).
+
+\textbf{Why:} Sample size is inversely proportional to ME$^2$. When we cut the margin of error by a factor of 1.5, we need $(1.5)^2 = 2.25$ times as many observations. Smaller margins of error require substantially larger samples. This is the cost of increased precision.
+
+\newpage
+
+\section{Problem 5: Comparing Two CIs}
+
+\textbf{Sample A:} $n = 15$, $\bar{x} = 28.4$, $s = 6.2$
+
+\textbf{Sample B:} $n = 50$, $\bar{x} = 28.4$, $s = 6.2$
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate the standard error for each sample.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+Sample A: $\text{SE}_A = \frac{6.2}{\sqrt{15}} = \frac{6.2}{3.873} = 1.601$
+
+Sample B: $\text{SE}_B = \frac{6.2}{\sqrt{50}} = \frac{6.2}{7.071} = 0.877$
+
+\vspace{6pt}
+
+\textbf{Part B:} Find the critical values for 95\% CIs.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+Sample A ($\text{df} = 14$): $t_{0.975, 14} = 2.145$ (Using R: \texttt{qt(0.975, 14)})
+
+Sample B ($\text{df} = 49$): $t_{0.975, 49} = 2.010$ (Using R: \texttt{qt(0.975, 49)})
+
+Note: For large df, $t \approx 1.96$ (Sample B's critical value is close to this)
+
+\vspace{6pt}
+
+\textbf{Part C:} Calculate 95\% confidence intervals for both samples.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+Sample A (n=15):
+\begin{align*}
+\text{ME}_A &= 2.145 \times 1.601 = 3.43\\
+\text{CI}_A &= 28.4 \pm 3.43 = (24.97, 31.83)
+\end{align*}
+
+Sample B (n=50):
+\begin{align*}
+\text{ME}_B &= 2.010 \times 0.877 = 1.76\\
+\text{CI}_B &= 28.4 \pm 1.76 = (26.64, 30.16)
+\end{align*}
+
+\vspace{6pt}
+
+\textbf{Part D:} Which confidence interval is narrower? Explain why, relating your answer to the concept of standard error.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+Sample B's interval is narrower (width = 3.52) compared to Sample A (width = 6.87).
+
+\textbf{Explanation:} Sample B has a smaller standard error (0.877 vs. 1.601) because it has a larger sample size ($n=50$ vs. $n=15$). Since SE = $s/\sqrt{n}$, increasing sample size decreases SE. Smaller SE leads to smaller margin of error and thus a narrower, more precise confidence interval.
+
+\vspace{6pt}
+
+\textbf{Part E:} Both intervals are estimating the same population parameter. What does this tell you about the relationship between sample size and precision?
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+This demonstrates that larger sample sizes provide more precise estimates (narrower CIs). Both samples have the same mean and SD, but the larger sample (B) gives us a more precise estimate of the population mean. The relationship is: \textbf{larger sample size} $\rightarrow$ \textbf{smaller SE} $\rightarrow$ \textbf{narrower CI} $\rightarrow$ \textbf{more precision}.
+
+\newpage
+
+\section{Problem 6: Integration Problem - Blood Pressure Study}
+
+\textbf{Given:} $n = 36$, $\bar{x} = 12.8$ mmHg, $s = 5.4$ mmHg
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate a 95\% confidence interval for the true mean blood pressure reduction.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+\textbf{Step 1:} Standard error
+$$\text{SE} = \frac{s}{\sqrt{n}} = \frac{5.4}{\sqrt{36}} = \frac{5.4}{6} = 0.9$$
+
+\textbf{Step 2:} Critical value ($\text{df} = 35$)
+$$t_{0.975, 35} = 2.030 \text{ (Using R: \texttt{qt(0.975, 35)})}$$
+
+\textbf{Step 3:} Margin of error
+$$\text{ME} = 2.030 \times 0.9 = 1.83$$
+
+\textbf{Step 4:} Confidence interval
+$$\text{CI} = 12.8 \pm 1.83 = (10.97, 14.63)$$
+
+\vspace{6pt}
+
+\textbf{Part B:} The company wants to claim that the medication reduces blood pressure by more than 10 mmHg on average. Based on your confidence interval, can they make this claim with confidence? Explain.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+\textbf{Yes}, they can make this claim with confidence. The entire 95\% confidence interval (10.97, 14.63) lies above 10 mmHg. Even the lower bound of the interval (10.97 mmHg) is greater than 10 mmHg. This provides strong evidence that the true mean reduction is indeed greater than 10 mmHg.
+
+\vspace{6pt}
+
+\textbf{Part C:} If they wanted to estimate the mean reduction with a margin of error of only 1.5 mmHg (using the same confidence level), approximately how many patients would they need in the study? Use $\sigma \approx 5.4$ from this pilot study.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+$$n = \left(\frac{z \times \sigma}{\text{ME}}\right)^2 = \left(\frac{1.96 \times 5.4}{1.5}\right)^2 = \left(\frac{10.584}{1.5}\right)^2 = (7.056)^2 = 49.79$$
+
+Round UP: $n = 50$ patients
+
+\vspace{6pt}
+
+\textbf{Part D:} Suppose the company now wants to estimate the \textit{proportion} of patients who achieve at least a 15 mmHg reduction. In the pilot study, 20 out of 36 patients achieved this level of reduction. Calculate a 95\% CI for this proportion.
+
+\textcolor{answergreen}{\textbf{Answer:}}
+
+Check conditions:
+\begin{align*}
+\hat{p} &= \frac{20}{36} = 0.556\\
+n\hat{p} &= 36 \times 0.556 = 20 \geq 10 \text{ \checkmark}\\
+n(1-\hat{p}) &= 36 \times 0.444 = 16 \geq 10 \text{ \checkmark}
+\end{align*}
+
+Both conditions satisfied, proceed with normal approximation.
+
+Calculate CI:
+\begin{align*}
+\text{SE} &= \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} = \sqrt{\frac{0.556 \times 0.444}{36}} = \sqrt{\frac{0.247}{36}} = \sqrt{0.00686} = 0.0828\\
+\text{ME} &= 1.96 \times 0.0828 = 0.162\\
+\text{CI} &= 0.556 \pm 0.162 = (0.394, 0.718)
+\end{align*}
+
+As a percentage: (39.32\%, 71.79\%)
+
+\textbf{Interpretation:} We are 95\% confident that between 39\% and 72\% of all patients would achieve at least a 15 mmHg reduction with this medication.
+
+\newpage
+
+\section*{Reflection Questions - Sample Answers}
+
+\textbf{1.} In your own words, explain what a 95\% confidence interval means. What does the ``95\%'' refer to?
+
+\textcolor{answergreen}{\textbf{Sample Answer:}}
+
+A 95\% confidence interval is a range of values that we are 95\% confident contains the true population parameter. The ``95\%'' refers to the long-run success rate of the method: if we repeated the sampling process many times and calculated a 95\% CI each time, approximately 95\% of those intervals would contain the true population parameter. It does NOT mean there's a 95\% probability that the true parameter is in our specific interval (it either is or isn't).
+
+\vspace{6pt}
+
+\textbf{2.} Why do we use the t-distribution instead of the normal (Z) distribution when calculating confidence intervals for a mean? When would we use Z instead?
+
+\textcolor{answergreen}{\textbf{Sample Answer:}}
+
+We use the t-distribution when the population standard deviation ($\sigma$) is unknown and we must estimate it using the sample standard deviation ($s$). The t-distribution accounts for the additional uncertainty from estimating $\sigma$. We would use Z when: (1) $\sigma$ is known, or (2) sample size is very large ($n > 30$ or so), making the t-distribution approximately equal to Z.
+
+\vspace{6pt}
+
+\textbf{3.} A wider confidence interval is less precise. What are the three main factors that affect how wide a confidence interval is? For each factor, explain how it affects width.
+
+\textcolor{answergreen}{\textbf{Sample Answer:}}
+
+Three main factors:
+\begin{enumerate}
+\item \textbf{Sample size (n):} Larger $n$ $\rightarrow$ smaller SE $\rightarrow$ narrower CI. Quadrupling the sample size cuts the width in half.
+\item \textbf{Variability (s or $\sigma$):} Higher variability $\rightarrow$ larger SE $\rightarrow$ wider CI. More spread in the data means more uncertainty.
+\item \textbf{Confidence level:} Higher confidence $\rightarrow$ larger critical value $\rightarrow$ wider CI. Being more confident requires casting a wider net.
+\end{enumerate}
+
+\vspace{6pt}
+
+\textbf{4.} When planning a study, why is it important to determine sample size ahead of time? What information do you need to calculate required sample size?
+
+\textcolor{answergreen}{\textbf{Sample Answer:}}
+
+It's important to determine sample size ahead of time to ensure the study will have adequate precision (narrow enough CI) or power (for hypothesis testing) to answer the research question, while also being practical and cost-effective. Running a study that's too small wastes resources because it won't provide useful results; running one that's too large wastes resources on unnecessary data.
+
+Information needed:
+\begin{itemize}
+\item Desired margin of error (precision)
+\item Confidence level (typically 95\%)
+\item Estimated variability ($\sigma$ or $s$ from pilot study)
+\end{itemize}
+
+\vspace{6pt}
+
+\textbf{5.} Compare confidence intervals for means vs. proportions:
+
+\textcolor{answergreen}{\textbf{Sample Answer:}}
+
+\textbf{What's the same:}
+\begin{itemize}
+\item Both have the form: Estimate $\pm$ (Critical value) $\times$ SE
+\item Both use confidence level to determine critical value
+\item Interpretation is similar (range of plausible values)
+\end{itemize}
+
+\textbf{What's different:}
+\begin{itemize}
+\item Means use t-distribution; proportions use Z-distribution
+\item Different SE formulas: $s/\sqrt{n}$ vs. $\sqrt{\hat{p}(1-\hat{p})/n}$
+\item Proportions require checking conditions ($n\hat{p} \geq 10$ and $n(1-\hat{p}) \geq 10$)
+\end{itemize}
+
+\textbf{When to use each:}
+\begin{itemize}
+\item Use CI for mean when measuring a continuous quantitative variable (height, blood pressure, cholesterol)
+\item Use CI for proportion when measuring a categorical outcome (percent who respond, prevalence, success rate)
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,1416 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Set colors
+\setbeamercolor{structure}{fg=osaorange}
+\setbeamercolor{title}{fg=white,bg=osaorange}
+\setbeamercolor{frametitle}{fg=white,bg=osaorange}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\title{H524 Introduction to Biostatistics}
+\subtitle{Week 7: Nonparametric Methods}
+\author{Dr. John Molitor}
+\institute{}
+\date{Fall 2025}
+
+\begin{document}
+
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Review and Motivation}
+
+\begin{frame}
+\frametitle{What We've Learned So Far}
+\textbf{Parametric Methods (Weeks 1-6):}
+\begin{itemize}
+\item One-sample and two-sample t-tests
+\item Paired t-test
+\item ANOVA for comparing multiple groups
+\item All assume approximately normal data
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Key Assumptions:}
+\begin{itemize}
+\item Data approximately normally distributed
+\item Large enough sample size
+\item Equal variances (for some tests)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Question:} What if these assumptions are violated?
+\end{frame}
+
+\begin{frame}
+\frametitle{When Parametric Assumptions Fail}
+\textbf{Common situations:}
+\begin{itemize}
+\item \textbf{Skewed data:} Income, hospital stays, survival times
+\item \textbf{Outliers:} Extreme values that distort means
+\item \textbf{Ordinal data:} Pain scales (1-10), satisfaction ratings
+\item \textbf{Small samples:} $n < 20$, normality uncertain
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Example: Hospital Stay Data}
+
+5 patients: 2, 3, 4, 3, 45 days
+
+\begin{itemize}
+\item Mean = 11.4 days (distorted by outlier)
+\item Median = 3 days (more representative)
+\item t-test assumes normality (violated here)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solution:} Nonparametric tests
+\end{frame}
+
+\begin{frame}
+\frametitle{What Are Nonparametric Tests?}
+\textbf{Key idea:} Use \textbf{ranks} instead of actual values
+
+\vspace{0.5cm}
+\textbf{Advantages:}
+\begin{itemize}
+\item No normality assumption
+\item Robust to outliers
+\item Work with ordinal data
+\item Valid for small samples
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Trade-off:}
+\begin{itemize}
+\item Slightly less powerful than parametric when data ARE normal
+\item But safer when assumptions violated
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{When in doubt, use nonparametric!}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ranking Example}
+\textbf{Original data:} 3, 10, 5, 8, 2
+
+\vspace{0.3cm}
+\textbf{Ranks (smallest to largest):}
+\begin{itemize}
+\item 2 $\rightarrow$ Rank 1 (smallest)
+\item 3 $\rightarrow$ Rank 2
+\item 5 $\rightarrow$ Rank 3
+\item 8 $\rightarrow$ Rank 4
+\item 10 $\rightarrow$ Rank 5 (largest)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Why use ranks?}
+\begin{itemize}
+\item Outliers become just "highest rank"
+\item Ordinal data already in rank form
+\item No distribution assumptions needed
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tied Ranks: What If Values Are Equal?}
+\textbf{Problem:} What if two observations have the same value?
+
+\vspace{0.3cm}
+\textbf{Solution:} Assign average of the ranks they would occupy
+
+\vspace{0.5cm}
+\textbf{Example:} Pain scores: 2, 4, 4, 6, 7
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+Value & Position & Tied? & Final Rank \\
+\midrule
+2 & 1 & No & 1 \\
+4 & 2 \& 3 & Yes & $(2+3)/2 = 2.5$ \\
+4 & 2 \& 3 & Yes & $(2+3)/2 = 2.5$ \\
+6 & 4 & No & 4 \\
+7 & 5 & No & 5 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{R does this automatically!} No manual calculation needed.
+\end{frame}
+
+\begin{frame}
+\frametitle{Nonparametric Tests We'll Learn}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parametric Test} & \textbf{Nonparametric Alternative} \\
+\midrule
+One-sample t-test & Sign Test \\
+ & Wilcoxon Signed-Rank \\
+\midrule
+Paired t-test & Sign Test \\
+ & Wilcoxon Signed-Rank \\
+\midrule
+Two-sample t-test & Wilcoxon Rank-Sum \\
+ & (Mann-Whitney) \\
+\midrule
+One-way ANOVA & Kruskal-Wallis \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Focus today:} How to run each test in R and interpret results
+\end{frame}
+
+\section{Sign Test}
+
+\begin{frame}
+\frametitle{Sign Test: The Simplest Test}
+\textbf{When to use:}
+\begin{itemize}
+\item One sample (test median) OR
+\item Paired data (before/after)
+\item Data not normal OR ordinal scale
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{How it works:}
+\begin{enumerate}
+\item Calculate differences from hypothesized value
+\item Count positive (+) vs negative (-) signs
+\item If median = test value, expect 50/50 split
+\item Use binomial test for p-value
+\end{enumerate}
+
+\vspace{0.5cm}
+\textbf{Ignores:} Magnitude of differences (only direction)
+
+\textbf{Advantage:} Works with any data type
+
+\textbf{R function:} \texttt{binom.test()}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Sign Test Example 1: One Sample}
+\textbf{Question:} Is median recovery time different from 6 days?
+
+\vspace{0.2cm}
+\textbf{Data:} 8, 5, 7, 10, 4, 9, 3, 12, 6
+
+\vspace{0.2cm}
+\begin{footnotesize}
+\begin{verbatim}
+# Data
+recovery <- c(8, 5, 7, 10, 4, 9, 3, 12, 6)
+
+# Differences from 6
+diff <- recovery - 6
+
+# Count positive (ignoring zeros)
+n_positive <- sum(diff > 0)  # 5
+n_total <- sum(diff != 0)    # 8
+
+# Sign test
+binom.test(n_positive, n_total, p=0.5)
+\end{verbatim}
+\end{footnotesize}
+
+\textbf{Output:} p-value = 0.727
+
+\textbf{Interpretation:} No significant difference ($p > 0.05$)
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Sign Test Example 2: Paired Data}
+\textbf{Question:} Does treatment reduce pain scores?
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+# Pain scores (1-10 scale)
+before <- c(7, 8, 6, 9, 5, 8, 7, 6)
+after <- c(5, 6, 4, 7, 4, 6, 5, 5)
+
+# Differences
+diff <- before - after
+# All positive means pain decreased
+
+# Count signs
+n_improved <- sum(diff > 0)  # 8 improved
+n_total <- sum(diff != 0)    # 8 total
+
+# Sign test
+binom.test(n_improved, n_total, p=0.5)
+\end{verbatim}
+\end{small}
+
+\textbf{Output:} p-value = 0.008
+
+\textbf{Interpretation:} $p < 0.05$, treatment DOES reduce pain significantly
+\end{frame}
+
+\begin{frame}
+\frametitle{Sign Test: Interpretation}
+\textbf{Hypotheses:}
+\begin{itemize}
+\item $H_0$: Median = hypothesized value (or no difference)
+\item $H_A$: Median $\neq$ hypothesized value (two-sided)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Decision:}
+\begin{itemize}
+\item If $p < 0.05$: Reject $H_0$, significant difference
+\item If $p \geq 0.05$: Fail to reject $H_0$, no significant difference
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Limitations:}
+\begin{itemize}
+\item Only uses direction (+ or -), not magnitude
+\item Less powerful than tests that use magnitude
+\item But works with ANY type of data (even severe outliers)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Sign Test Example 3: One-Sided Test}
+\textbf{Question:} Does a new therapy reduce recovery time below 14 days?
+
+\vspace{0.3cm}
+\textbf{Data:} Recovery times for 10 patients
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+recovery <- c(12, 15, 10, 13, 16, 11, 14, 9, 12, 15)
+
+# Count how many are below 14
+below_14 <- sum(recovery < 14)
+total <- length(recovery)
+
+# One-sided test: H1: median < 14
+binom.test(below_14, total, p=0.5,
+           alternative="greater")
+\end{verbatim}
+\end{small}
+
+\textbf{Output:} p-value = 0.377
+
+\textbf{Interpretation:} p $\geq$ 0.05, NOT enough evidence that median < 14 days
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Sign Test Example 4: Comparing Proportions}
+\textbf{Question:} Do patients prefer treatment A over B?
+
+\vspace{0.3cm}
+\textbf{Data:} 20 patients tried both, 15 preferred A, 5 preferred B
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+# Test if preference differs from 50/50
+prefer_A <- 15
+total <- 20
+
+binom.test(prefer_A, total, p=0.5)
+\end{verbatim}
+\end{small}
+
+\textbf{Output:} p-value = 0.041
+
+\textbf{Interpretation:} $p < 0.05$, patients DO significantly prefer treatment A
+
+\vspace{0.3cm}
+\textbf{Note:} Sign test is flexible - works for preferences, ordinal ratings, any + /- data
+\end{frame}
+
+\section{Wilcoxon Signed-Rank Test}
+
+\begin{frame}
+\frametitle{Wilcoxon: More Powerful Than Sign Test}
+\textbf{When to use:}
+\begin{itemize}
+\item Same situations as sign test
+\item One sample OR paired data
+\item Data not normal
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Difference from sign test:}
+\begin{itemize}
+\item Sign test: Only counts direction (+ or -)
+\item Wilcoxon: Uses BOTH direction AND magnitude
+\item Ranks absolute differences, then applies signs
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Result:} More powerful (better at detecting differences)
+
+\vspace{0.3cm}
+\textbf{R function:} \texttt{wilcox.test()}
+\end{frame}
+
+\begin{frame}
+\frametitle{Wilcoxon: How Magnitude is Incorporated}
+\textbf{Simple example - Before/After treatment:}
+
+\vspace{0.3cm}
+\begin{small}
+\begin{tabular}{lccc}
+\textbf{Patient} & \textbf{Difference} & \textbf{Sign} & \textbf{Rank by Size} \\
+\hline
+A & $-1$ & $-$ & 1 (smallest) \\
+B & $+2$ & $+$ & 2 \\
+C & $+8$ & $+$ & 3 (largest) \\
+\end{tabular}
+\end{small}
+
+\vspace{0.3cm}
+\textbf{Sign test:} 1 negative, 2 positive (ignores that +8 is huge!)
+
+\textbf{Wilcoxon:}
+\begin{itemize}
+\item Rank by size: 1, 2, 8 $\rightarrow$ ranks 1, 2, 3
+\item Apply signs: $-1$, $+2$, $+3$
+\item Test statistic uses signed ranks
+\item Large differences get more weight!
+\end{itemize}
+
+\textbf{Key insight:} Wilcoxon gives more credit to larger changes
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Wilcoxon Example 1: One Sample}
+\textbf{Same question:} Is median recovery time different from 6 days?
+
+\vspace{0.3cm}
+\textbf{Same data:} 8, 5, 7, 10, 4, 9, 3, 12, 6
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+# Data
+recovery <- c(8, 5, 7, 10, 4, 9, 3, 12, 6)
+
+# Wilcoxon signed-rank test
+wilcox.test(recovery, mu=6)
+\end{verbatim}
+\end{small}
+
+\textbf{Output:} p-value = 0.325
+
+\vspace{0.3cm}
+\textbf{Compare:}
+\begin{itemize}
+\item Sign test: p = 0.727
+\item Wilcoxon: p = 0.325 (smaller, more powerful)
+\item Both say no significant difference ($p > 0.05$)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Wilcoxon Example 2: Paired Data}
+\textbf{Question:} Does medication reduce blood pressure?
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+# Blood pressure before and after medication
+bp_before <- c(145, 138, 150, 142, 156, 148)
+bp_after <- c(138, 135, 142, 140, 148, 145)
+
+# Wilcoxon paired test
+wilcox.test(bp_before, bp_after, paired=TRUE)
+
+# Summary statistics
+mean(bp_before)  # 146.5
+mean(bp_after)   # 141.3
+mean(bp_before - bp_after)  # 5.2 mmHg reduction
+\end{verbatim}
+\end{small}
+
+\textbf{Output:} p-value = 0.035
+
+\textbf{Interpretation:} $p < 0.05$, medication DOES reduce BP significantly
+
+Average reduction = 5.2 mmHg
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Wilcoxon Example 3: Pain Score Study}
+\textbf{Question:} Does physical therapy reduce pain?
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+# Pain scores (0-10 scale) before and after 8 weeks PT
+pain_before <- c(7, 8, 6, 9, 7, 8, 6, 7, 8, 9)
+pain_after <- c(5, 6, 5, 7, 6, 7, 4, 6, 7, 8)
+
+# Wilcoxon test
+wilcox.test(pain_before, pain_after, paired=TRUE)
+
+# Effect size
+median(pain_before)  # 7.5
+median(pain_after)   # 6
+# Median reduction = 1.5 points
+\end{verbatim}
+\end{small}
+
+\textbf{Output:} p-value = 0.011
+
+\textbf{Interpretation:} PT significantly reduces pain ($p < 0.05$)
+
+Median reduction = 1.5 points on pain scale
+\end{frame}
+
+\begin{frame}
+\frametitle{Sign Test vs Wilcoxon: When to Use Each?}
+
+\begin{center}
+\small
+\begin{tabular}{lp{4cm}p{4cm}}
+\toprule
+\textbf{Feature} & \textbf{Sign Test} & \textbf{Wilcoxon} \\
+\midrule
+Uses direction? & Yes & Yes \\
+Uses magnitude? & No & Yes \\
+Power & Lower & Higher \\
+Extreme outliers & Handles well & Handles well \\
+Ordinal data & Perfect & Good \\
+\midrule
+\textbf{Recommendation} & Very robust data & Most situations \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{In practice:} Use Wilcoxon (more powerful, R handles it easily)
+
+\textbf{Exception:} If data are truly ordinal with unequal intervals, sign test safer
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Wilcoxon Example 3: Power Advantage}
+\textbf{Question:} Weight loss after 8-week program
+
+\vspace{0.3cm}
+\textbf{Data:} Before-after differences (kg): 1.2, 0.8, 2.5, 0.3, 1.8, 0.5, 1.1
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+diff <- c(1.2, 0.8, 2.5, 0.3, 1.8, 0.5, 1.1)
+
+# Sign test
+binom.test(sum(diff > 0), length(diff), p=0.5)
+# p-value = 0.016
+
+# Wilcoxon test
+wilcox.test(diff, mu=0)
+# p-value = 0.016
+\end{verbatim}
+\end{small}
+
+\textbf{Result:} Both significant here. But Wilcoxon usually more powerful with larger differences.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Wilcoxon Example 4: Depression Scores}
+\textbf{Question:} Does therapy reduce depression (scale 0-50)?
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+before <- c(42, 38, 45, 40, 48, 35, 43)
+after  <- c(38, 36, 40, 35, 42, 32, 39)
+
+# Paired Wilcoxon test
+wilcox.test(before, after, paired=TRUE)
+
+# Summary statistics
+mean(before - after)  # 5.1 point reduction
+median(before - after)  # 5 point reduction
+\end{verbatim}
+\end{small}
+
+\textbf{Output:} p-value = 0.022
+
+\textbf{Interpretation:} $p < 0.05$, therapy DOES significantly reduce depression scores
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Wilcoxon Example 5: One-Sample with Outlier}
+\textbf{Question:} Is median cholesterol different from 200?
+
+\vspace{0.3cm}
+\textbf{Data:} 185, 195, 210, 198, 425 (outlier!), 192, 205
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+cholesterol <- c(185, 195, 210, 198, 425, 192, 205)
+
+# Wilcoxon handles outliers well
+wilcox.test(cholesterol, mu=200)
+
+# Compare to t-test (affected by outlier)
+t.test(cholesterol, mu=200)
+\end{verbatim}
+\end{small}
+
+\textbf{Wilcoxon:} p = 1.00, fail to reject $H_0$
+
+\textbf{t-test:} p = 0.39, also fail to reject but more affected by outlier
+
+\textbf{Advantage:} Wilcoxon robust to extreme values
+\end{frame}
+
+\section{Wilcoxon Rank-Sum Test}
+
+\begin{frame}
+\frametitle{Wilcoxon Rank-Sum: Two Independent Groups}
+\textbf{When to use:}
+\begin{itemize}
+\item Comparing TWO independent groups
+\item Data not normal OR small samples OR outliers
+\item Nonparametric version of two-sample t-test
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Also called:} Mann-Whitney U test (same test, different name)
+
+\vspace{0.5cm}
+\textbf{How it works:}
+\begin{itemize}
+\item Combine both groups and rank all values
+\item Sum ranks for each group
+\item If groups equal, rank sums should be similar
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{R function:} \texttt{wilcox.test()} (without \texttt{paired=TRUE})
+
+\textbf{Tests:} Do the two groups have different medians?
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Wilcoxon Rank-Sum Example 1: Treatment Comparison}
+\textbf{Question:} Do Treatment A and B differ in response time?
+
+\vspace{0.2cm}
+\begin{footnotesize}
+\begin{verbatim}
+# Response times (days)
+treatment_A <- c(23, 31, 25, 28, 30)
+treatment_B <- c(18, 22, 20, 24, 19)
+
+# Visualize
+boxplot(treatment_A, treatment_B,
+        names=c("Treatment A", "Treatment B"),
+        ylab="Response Time (days)")
+
+# Wilcoxon rank-sum test
+wilcox.test(treatment_A, treatment_B)
+
+# Medians
+median(treatment_A)  # 28
+median(treatment_B)  # 20
+\end{verbatim}
+\end{footnotesize}
+
+\textbf{Output:} p-value = 0.016
+
+\textbf{Interpretation:} Treatment B shorter (20 vs 28 days, $p < 0.05$)
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Wilcoxon Rank-Sum Example 2: Drug Study}
+\textbf{Question:} Do two drugs differ in effectiveness?
+
+\vspace{0.2cm}
+\begin{footnotesize}
+\begin{verbatim}
+# Symptom relief scores (higher = better)
+drug_X <- c(45, 52, 48, 55, 50, 47, 53)
+drug_Y <- c(38, 42, 40, 45, 39, 43, 41)
+
+# Wilcoxon test
+wilcox.test(drug_X, drug_Y)
+
+# Summary
+mean(drug_X); mean(drug_Y)    # 50 vs 41
+median(drug_X); median(drug_Y)  # 50 vs 41
+\end{verbatim}
+\end{footnotesize}
+
+\textbf{Output:} p-value = 0.003
+
+\textbf{Interpretation:} Drug X more effective ($p < 0.05$), 9 point improvement
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Wilcoxon Rank-Sum Example 3: Hospital Stays}
+\textbf{Question:} Do two procedures differ in hospital stay length?
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+# Hospital stay (days)
+procedure_1 <- c(3, 4, 5, 3, 6, 4, 7, 5, 4, 12)
+procedure_2 <- c(5, 6, 8, 7, 9, 6, 8, 10, 7, 15)
+
+# Check for outliers
+boxplot(procedure_1, procedure_2,
+        names=c("Procedure 1", "Procedure 2"))
+
+# Note: Outliers present (12, 15 days)
+# Use nonparametric!
+
+wilcox.test(procedure_1, procedure_2)
+\end{verbatim}
+\end{small}
+
+\textbf{Output:} p-value = 0.011
+
+\textbf{Interpretation:} Procedure 1 has shorter stays ($p < 0.05$)
+
+Median: 4.5 vs 7.5 days
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Rank-Sum vs. T-Test: When to Use Which}
+\textbf{Use Wilcoxon Rank-Sum when:}
+\begin{itemize}
+\item Small sample sizes ($n < 20$ per group)
+\item Skewed data or outliers present
+\item Ordinal data (ratings, scales)
+\item Can't verify normality
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Use Two-Sample T-Test when:}
+\begin{itemize}
+\item Large samples ($n \geq 30$ per group)
+\item Data approximately normal
+\item Want to compare means (not medians)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{When in doubt:} Use Wilcoxon (safer, minimal power loss)
+\end{frame}
+
+\section{Kruskal-Wallis Test}
+
+\begin{frame}
+\frametitle{Kruskal-Wallis: Three or More Groups}
+\textbf{When to use:}
+\begin{itemize}
+\item Comparing THREE OR MORE independent groups
+\item Data not normal OR small samples
+\item Nonparametric version of one-way ANOVA
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{How it works:}
+\begin{itemize}
+\item Rank all data across all groups
+\item Compare rank sums between groups
+\item If groups equal, rank sums should be similar
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{R function:} \texttt{kruskal.test()}
+
+\textbf{Tests:} Do the groups have different medians?
+
+\vspace{0.3cm}
+\textbf{Important:} If significant, need post-hoc tests to see WHICH groups differ
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Kruskal-Wallis Example 1: Three Drugs}
+\textbf{Question:} Do three drugs differ in pain relief?
+
+\vspace{0.2cm}
+\begin{footnotesize}
+\begin{verbatim}
+# Pain relief scores (0-10, higher = better)
+drug_A <- c(2, 3, 4, 3)
+drug_B <- c(4, 6, 5, 7)
+drug_C <- c(5, 8, 9, 10)
+
+# Combine data
+pain <- c(drug_A, drug_B, drug_C)
+drug <- factor(rep(c("A", "B", "C"), each=4))
+
+# Kruskal-Wallis test
+kruskal.test(pain ~ drug)
+
+# Medians
+tapply(pain, drug, median)
+# A: 3, B: 5.5, C: 8.5
+\end{verbatim}
+\end{footnotesize}
+
+\textbf{Output:} p-value = 0.016
+
+\textbf{Interpretation:} At least one drug differs ($p < 0.05$)
+\end{frame}
+
+\begin{frame}
+\frametitle{Why Do We Need Bonferroni Correction?}
+\textbf{The problem:} Multiple comparisons inflate Type I error
+
+\vspace{0.3cm}
+\textbf{Simple example - 3 groups:}
+\begin{itemize}
+\item Need 3 pairwise tests: A vs B, A vs C, B vs C
+\item Each test has 5\% false positive rate ($\alpha = 0.05$)
+\item Overall chance of at least one false positive: $\sim$14\%!
+\item With 4 groups (6 tests): $\sim$26\% false positive rate
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Bonferroni solution:} Make each test stricter
+\begin{itemize}
+\item Divides $\alpha$ by number of tests
+\item 3 tests: each uses $\alpha = 0.05/3 = 0.017$
+\item Keeps overall error rate at 5\%
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{In R:} \texttt{p.adjust.method="bonferroni"} does this automatically
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Post-Hoc Tests After Kruskal-Wallis}
+\textbf{Kruskal-Wallis tells us:} "At least one group differs"
+
+\textbf{Post-hoc tells us:} "Which specific pairs differ?"
+
+\vspace{0.2cm}
+\begin{footnotesize}
+\begin{verbatim}
+# Same data from previous slide
+# Pairwise comparisons with Bonferroni correction
+pairwise.wilcox.test(pain, drug,
+                     p.adjust.method="bonferroni")
+\end{verbatim}
+\end{footnotesize}
+
+\textbf{Output p-values:}
+\begin{itemize}\setlength\itemsep{-0.1em}
+\item A vs B: p = 0.050 (borderline)
+\item A vs C: p = 0.014 (significant)
+\item B vs C: p = 0.050 (borderline)
+\end{itemize}
+
+\textbf{Interpretation:} Drug C significantly better than Drug A
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Kruskal-Wallis Example 2: Four Diets}
+\textbf{Question:} Do four diets differ in weight loss?
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+# Weight loss (kg) after 3 months
+diet_A <- c(2.1, 3.2, 2.5, 3.0, 2.8)
+diet_B <- c(3.5, 4.2, 3.8, 4.0, 3.9)
+diet_C <- c(4.5, 5.1, 4.8, 5.3, 4.9)
+diet_D <- c(2.8, 3.0, 2.9, 3.1, 2.7)
+
+# Combine
+weight_loss <- c(diet_A, diet_B, diet_C, diet_D)
+diet <- factor(rep(c("A", "B", "C", "D"), each=5))
+
+# Test
+kruskal.test(weight_loss ~ diet)
+\end{verbatim}
+\end{small}
+
+\textbf{Output:} p-value $< 0.001$
+
+\textbf{Interpretation:} Diets differ significantly
+
+\textbf{Next step:} Post-hoc to see which pairs differ
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Kruskal-Wallis Example 3: Treatment Groups}
+\textbf{Question:} Do 5 treatments differ in recovery time?
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+# Recovery times (days) for 5 treatments
+# n = 6 per group
+recovery <- c(
+  12, 14, 13, 15, 11, 13,  # Treatment 1
+  10, 11, 9, 12, 10, 11,   # Treatment 2
+  15, 17, 16, 18, 16, 15,  # Treatment 3
+  8, 9, 7, 10, 8, 9,       # Treatment 4
+  13, 14, 12, 15, 13, 14   # Treatment 5
+)
+treatment <- factor(rep(1:5, each=6))
+
+kruskal.test(recovery ~ treatment)
+\end{verbatim}
+\end{small}
+
+\textbf{Output:} p-value $< 0.001$
+
+\textbf{Interpretation:} Treatments differ significantly
+
+Treatment 4 appears fastest (median ~8.5 days)
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Post-Hoc Comparisons After Kruskal-Wallis}
+\textbf{Problem:} Kruskal-Wallis tells us groups differ, but NOT which pairs
+
+\vspace{0.3cm}
+\textbf{Solution:} Pairwise Wilcoxon with Bonferroni correction
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+# Using sleep medication data from earlier
+sleep_hours <- c(5.2, 6.1, 5.8, 6.3, 5.5,   # Low
+                 6.8, 7.2, 7.5, 6.9, 7.1,   # Medium
+                 7.8, 8.2, 8.5, 7.9, 8.1)   # High
+dose <- factor(rep(c("Low","Med","High"), each=5))
+
+# Post-hoc test
+pairwise.wilcox.test(sleep_hours, dose,
+                     p.adjust.method="bonferroni")
+\end{verbatim}
+\end{small}
+
+\textbf{Result:} All three pairs differ significantly ($p < 0.05$ for each)
+
+\vspace{0.3cm}
+\textbf{Bonferroni:} Adjusts for multiple comparisons to control Type I error
+\end{frame}
+
+\begin{frame}
+\frametitle{Kruskal-Wallis vs. ANOVA: Comparison}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Feature} & \textbf{ANOVA} & \textbf{Kruskal-Wallis} \\
+\midrule
+Assumption & Normality & None \\
+Compares & Means & Medians \\
+Power (normal data) & Higher & Slightly lower \\
+Power (skewed data) & Lower & Higher \\
+Outliers & Sensitive & Robust \\
+Sample size & Need n $\geq$ 30 & Works with small n \\
+Post-hoc & Tukey HSD & Pairwise Wilcoxon \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Recommendation:}
+\begin{itemize}
+\item If data normal: Use ANOVA (more powerful)
+\item If data skewed/outliers/small n: Use Kruskal-Wallis (safer)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example: When Kruskal-Wallis Wins}
+\textbf{Data:} Pain scores (0-10) for 3 treatments, with outliers
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+pain <- c(3, 4, 3, 5, 15,    # Treatment A (outlier!)
+          6, 7, 6, 8, 7,     # Treatment B
+          2, 3, 2, 4, 3)     # Treatment C
+treatment <- factor(rep(c("A","B","C"), each=5))
+
+# ANOVA (affected by outlier)
+summary(aov(pain ~ treatment))
+# p = 0.13 (not significant)
+
+# Kruskal-Wallis (robust to outlier)
+kruskal.test(pain ~ treatment)
+# p = 0.01 (significant!)
+\end{verbatim}
+\end{small}
+
+\textbf{Lesson:} Outliers can hide real differences in ANOVA
+
+Kruskal-Wallis detects the pattern correctly
+\end{frame}
+
+\section{Choosing the Right Test}
+
+\begin{frame}
+\frametitle{Decision Guide: Step 1 - Check Normality}
+
+\textbf{Always check normality first!}
+
+\vspace{0.3cm}
+\textbf{Visual methods:}
+\begin{itemize}
+\item Histogram: Should look bell-shaped
+\item Q-Q plot: Points should follow the line
+\item Boxplot: Should be symmetric
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Statistical test:}
+\begin{itemize}
+\item Use \texttt{shapiro.test()}
+\item If $p \geq 0.05$: Normal OK $\rightarrow$ Use parametric
+\item If $p < 0.05$: Not normal $\rightarrow$ Use nonparametric
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Rule of thumb:} When in doubt, use nonparametric (safer!)
+\end{frame}
+
+\begin{frame}
+\frametitle{Decision Guide: Step 2 - Choose Your Test}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Scenario} & \textbf{Normal?} & \textbf{Test} \\
+\midrule
+One sample & Yes & t-test \\
+ & No & \textbf{Wilcoxon} \\
+\midrule
+Paired data & Yes & Paired t-test \\
+ & No & \textbf{Wilcoxon} \\
+\midrule
+Two groups & Yes & Two-sample t-test \\
+ & No & \textbf{Wilcoxon rank-sum} \\
+\midrule
+3+ groups & Yes & ANOVA \\
+ & No & \textbf{Kruskal-Wallis} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Remember:}
+\begin{itemize}
+\item Check normality FIRST
+\item If normal: More power with parametric
+\item If not normal: Use nonparametric (robust)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Checking Normality in R}
+\textbf{Always check normality first!}
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+# Visual check
+hist(data)
+qqnorm(data)
+qqline(data)
+boxplot(data)
+
+# Statistical test
+shapiro.test(data)
+
+# Interpretation:
+# p >= 0.05: Normality assumption reasonable
+#            -> Use parametric test
+# p < 0.05:  Not normal
+#            -> Use nonparametric test
+\end{verbatim}
+\end{small}
+
+\textbf{Example:} If shapiro.test gives p = 0.03, use Wilcoxon instead of t-test
+\end{frame}
+
+\begin{frame}
+\frametitle{When to Use Each Nonparametric Test}
+
+\textbf{Sign Test:}
+\begin{itemize}\setlength\itemsep{-0.2em}
+\item Ordinal data or extreme outliers
+\item Simplest possible test
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Wilcoxon Signed-Rank:}
+\begin{itemize}\setlength\itemsep{-0.2em}
+\item One sample or paired data
+\item Continuous but not normal
+\item More powerful than sign test
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Wilcoxon Rank-Sum:}
+\begin{itemize}\setlength\itemsep{-0.2em}
+\item Two independent groups
+\item Continuous but not normal
+\item Alternative to two-sample t-test
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Kruskal-Wallis:}
+\begin{itemize}\setlength\itemsep{-0.2em}
+\item 3+ independent groups
+\item Continuous but not normal
+\item Alternative to ANOVA, use post-hoc if significant
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Decision Flowchart}
+\textbf{Step 1:} Check normality (Shapiro-Wilk, Q-Q plot)
+
+\vspace{0.2cm}
+\textbf{If NORMAL:} Use parametric test
+\begin{itemize}\setlength\itemsep{-0.1em}
+\item One sample: One-sample t-test
+\item Paired: Paired t-test
+\item Two independent: Two-sample t-test
+\item 3+ independent: One-way ANOVA
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{If NOT NORMAL:} Use nonparametric test
+\begin{itemize}\setlength\itemsep{-0.1em}
+\item One sample: Sign test or Wilcoxon signed-rank
+\item Paired: Sign test or Wilcoxon signed-rank
+\item Two independent: Wilcoxon rank-sum
+\item 3+ independent: Kruskal-Wallis
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{When in doubt:} Use nonparametric (safer)
+\end{frame}
+
+\begin{frame}
+\frametitle{Quick Reference: R Functions}
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Test} & \textbf{R Function} \\
+\midrule
+Check normality & \texttt{shapiro.test(data)} \\
+ & \texttt{qqnorm(data); qqline(data)} \\
+\midrule
+Sign test & \texttt{binom.test(n+, n, 0.5)} \\
+\midrule
+Wilcoxon signed-rank & \texttt{wilcox.test(x, mu=...)} \\
+(one sample) & \texttt{wilcox.test(x, mu=0)} \\
+\midrule
+Wilcoxon signed-rank & \texttt{wilcox.test(before, after,} \\
+(paired) & \texttt{\ \ \ \ paired=TRUE)} \\
+\midrule
+Wilcoxon rank-sum & \texttt{wilcox.test(group1, group2)} \\
+\midrule
+Kruskal-Wallis & \texttt{kruskal.test(y \textasciitilde\ group)} \\
+\midrule
+Post-hoc & \texttt{pairwise.wilcox.test(y, group,} \\
+ & \texttt{\ \ \ \ p.adjust="bonferroni")} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+\section{Parametric vs Nonparametric}
+
+\begin{frame}[fragile]
+\frametitle{Comparing Parametric vs Nonparametric Results}
+\textbf{Example:} Blood pressure data
+
+\vspace{0.3cm}
+\begin{small}
+\begin{verbatim}
+bp_before <- c(145, 138, 150, 142, 156, 148)
+bp_after <- c(138, 135, 142, 140, 148, 145)
+
+# Check normality
+diff <- bp_before - bp_after
+shapiro.test(diff)  # p = 0.071 (borderline)
+
+# Parametric: Paired t-test
+t.test(bp_before, bp_after, paired=TRUE)
+# p-value = 0.006
+
+# Nonparametric: Wilcoxon
+wilcox.test(bp_before, bp_after, paired=TRUE)
+# p-value = 0.035
+\end{verbatim}
+\end{small}
+
+\textbf{Both significant!} t-test slightly more powerful (smaller p)
+\end{frame}
+
+\begin{frame}
+\frametitle{Power: Parametric vs Nonparametric}
+
+\textbf{When data ARE normal:}
+\begin{itemize}
+\item Parametric tests have MORE power
+\item More likely to detect real differences
+\item Smaller p-values for same effect size
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{When data NOT normal:}
+\begin{itemize}
+\item Parametric tests may give WRONG results
+\item Inflated Type I error rates
+\item Nonparametric tests give CORRECT results
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Trade-off:}
+\begin{itemize}
+\item Small power loss with nonparametric if data normal
+\item But correct results regardless of distribution
+\item \textbf{When in doubt, use nonparametric!}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Common Scenarios and Test Choice}
+
+\textbf{Scenario 1:} Small sample (n=8), unknown distribution
+\begin{itemize}
+\item \textbf{Use nonparametric} (can't verify normality)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Scenario 2:} Large sample (n=100), slightly skewed
+\begin{itemize}
+\item \textbf{Could use parametric} (CLT helps)
+\item Or use nonparametric to be safe
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Scenario 3:} Pain scale data (1-10 ordinal)
+\begin{itemize}
+\item \textbf{Use nonparametric} (ordinal scale)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Scenario 4:} Shapiro p = 0.60 (clearly normal)
+\begin{itemize}
+\item \textbf{Use parametric} (more power)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Scenario 5:} One extreme outlier present
+\begin{itemize}
+\item \textbf{Use nonparametric} (robust to outliers)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Power Loss: How Much Do We Sacrifice?}
+\textbf{Question:} If data ARE normal, how much power do we lose using nonparametric?
+
+\vspace{0.5cm}
+\textbf{Answer:} Very little!
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Test Comparison} & \textbf{Relative Efficiency} \\
+\midrule
+Wilcoxon vs. t-test & 95\% \\
+Sign test vs. t-test & 64\% \\
+Kruskal-Wallis vs. ANOVA & 95\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item Wilcoxon/Kruskal-Wallis lose only 5\% power vs parametric
+\item Sign test loses more (36\%), but still useful for robustness
+\item In practice: Use nonparametric when in doubt
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Bottom line:} Nonparametric tests are remarkably efficient!
+\end{frame}
+
+\section{Summary}
+
+\begin{frame}
+\frametitle{Quick Reference Card}
+
+\textbf{Nonparametric Tests in R:}
+
+\vspace{0.3cm}
+\begin{small}
+\begin{tabular}{ll}
+\toprule
+\textbf{Test} & \textbf{R Function} \\
+\midrule
+Sign test & \texttt{binom.test(n\_pos, n\_total, p=0.5)} \\
+Wilcoxon signed-rank & \texttt{wilcox.test(data, mu=value)} \\
+Wilcoxon paired & \texttt{wilcox.test(x, y, paired=TRUE)} \\
+Wilcoxon rank-sum & \texttt{wilcox.test(group1, group2)} \\
+Kruskal-Wallis & \texttt{kruskal.test(outcome \textasciitilde~ group)} \\
+Post-hoc tests & \texttt{pairwise.wilcox.test()} \\
+Check normality & \texttt{shapiro.test(data)} \\
+\bottomrule
+\end{tabular}
+\end{small}
+
+\vspace{0.5cm}
+\textbf{Interpretation:} Always the same
+\begin{itemize}
+\item If $p < 0.05$: Significant difference
+\item If $p \geq 0.05$: No significant difference
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{When to Use Nonparametric Tests}
+
+\textbf{Use nonparametric when:}
+\begin{itemize}
+\item Data significantly skewed (Shapiro $p < 0.05$)
+\item Extreme outliers present
+\item Small sample size ($n < 20$)
+\item Ordinal data (pain scales, ratings)
+\item Can't verify normality assumption
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Advantages:}
+\begin{itemize}
+\item Robust (not affected by outliers)
+\item No distribution assumptions
+\item Valid for small samples
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Trade-off:}
+\begin{itemize}
+\item Slightly less powerful when data IS normal
+\item But safer when unsure!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Key Takeaways}
+
+\begin{enumerate}
+\item \textbf{Always check normality first} (\texttt{shapiro.test()})
+
+\vspace{0.3cm}
+\item \textbf{Choose parametric when normal, nonparametric when not}
+
+\vspace{0.3cm}
+\item \textbf{Nonparametric tests are easy in R:}
+   \begin{itemize}
+   \item \texttt{wilcox.test()} for most situations
+   \item \texttt{kruskal.test()} for 3+ groups
+   \end{itemize}
+
+\vspace{0.3cm}
+\item \textbf{Interpretation same as always:}
+   \begin{itemize}
+   \item $p < 0.05$ = significant
+   \item $p \geq 0.05$ = not significant
+   \end{itemize}
+
+\vspace{0.3cm}
+\item \textbf{When in doubt, use nonparametric} (safer!)
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Common Mistakes to Avoid}
+
+\textbf{Mistake 1: Forgetting to check normality}
+\begin{itemize}
+\item Always run \texttt{shapiro.test()} before choosing test
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Mistake 2: Using parametric test with small n and non-normal data}
+\begin{itemize}
+\item CLT doesn't save you with $n < 20$ and skewed data
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Mistake 3: Forgetting paired=TRUE for paired data}
+\begin{itemize}
+\item \texttt{wilcox.test(before, after)} is WRONG for paired data
+\item \texttt{wilcox.test(before, after, paired=TRUE)} is CORRECT
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Mistake 4: Not doing post-hoc after Kruskal-Wallis}
+\begin{itemize}
+\item Kruskal-Wallis only says "groups differ"
+\item Need \texttt{pairwise.wilcox.test()} to see which pairs
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Mistake 5: Overthinking it}
+\begin{itemize}
+\item When in doubt, use nonparametric. It's almost always fine!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Next Steps}
+
+\textbf{Practice in Lab:}
+\begin{itemize}
+\item Check normality with visual and statistical methods
+\item Run each type of nonparametric test
+\item Compare parametric vs. nonparametric results
+\item Choose appropriate test for different scenarios
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Worksheet:}
+\begin{itemize}
+\item Apply these tests to real data
+\item Practice interpretation
+\item Understand when each test is appropriate
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Remember:} Focus on WHEN to use each test and HOW to interpret results!
+\end{frame}
+
+\end{document}

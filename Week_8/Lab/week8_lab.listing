@@ -1,0 +1,13 @@
+# At the top of your R script, add:
+# Name: Your Name
+# Date: Today's Date
+# Lab: Week 8 - Contingency Tables and Chi-Square Tests
+
+# Save your workspace
+save.image("week8_lab.RData")
+
+# To load it later:
+# load("week8_lab.RData")
+
+# Save specific objects
+# save(data, chi_result, fisher_result, file="week8_results.RData")

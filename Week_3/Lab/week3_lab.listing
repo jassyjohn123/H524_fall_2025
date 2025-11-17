@@ -1,0 +1,10 @@
+# At the top of your R script, add:
+# Name: Your Name
+# Date: Today's Date
+# Lab: Week 3 - Probability Distributions and Sampling
+
+# Save your workspace
+save.image("week3_lab.RData")
+
+# To load it later:
+# load("week3_lab.RData")

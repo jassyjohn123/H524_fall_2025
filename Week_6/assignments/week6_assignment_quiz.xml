@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questestinterop xmlns="http://www.imsglobal.org/xsd/ims_qtiasiv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/ims_qtiasiv1p2 http://www.imsglobal.org/xsd/ims_qtiasiv1p2p1.xsd">
+  <assessment ident="week6_assignment" title="H524 Week 6: Power, Two-Sample Tests, and ANOVA">
+    <qtimetadata>
+      <qtimetadatafield>
+        <fieldlabel>cc_maxattempts</fieldlabel>
+        <fieldentry>1</fieldentry>
+      </qtimetadatafield>
+      <qtimetadatafield>
+        <fieldlabel>qmd_timelimit</fieldlabel>
+        <fieldentry>60</fieldentry>
+      </qtimetadatafield>
+    </qtimetadata>
+    <section ident="root_section">
+
+      <!-- Question 1: Multiple Choice - Power Definition -->
+      <item ident="q1_mc" title="Question 1: Statistical Power">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>2</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Statistical Power (2 points)</strong></p>
+<p>Statistical power is defined as:</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="A">
+                <material>
+                  <mattext>The probability of making a Type I error</mattext>
+                </material>
+              </response_label>
+              <response_label ident="B">
+                <material>
+                  <mattext>The probability of correctly rejecting a false null hypothesis</mattext>
+                </material>
+              </response_label>
+              <response_label ident="C">
+                <material>
+                  <mattext>The probability of failing to reject a true null hypothesis</mattext>
+                </material>
+              </response_label>
+              <response_label ident="D">
+                <material>
+                  <mattext>The significance level of the test</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">B</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 2: Multiple Choice - Increasing Power -->
+      <item ident="q2_mc" title="Question 2: Increasing Power">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>2</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Increasing Statistical Power (2 points)</strong></p>
+<p>Which of the following will <em>increase</em> the statistical power of a study?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="A">
+                <material>
+                  <mattext>Decreasing the sample size</mattext>
+                </material>
+              </response_label>
+              <response_label ident="B">
+                <material>
+                  <mattext>Increasing the population variance</mattext>
+                </material>
+              </response_label>
+              <response_label ident="C">
+                <material>
+                  <mattext>Increasing the significance level (alpha)</mattext>
+                </material>
+              </response_label>
+              <response_label ident="D">
+                <material>
+                  <mattext>Decreasing the effect size</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">C</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 3: Multiple Choice - Paired Data -->
+      <item ident="q3_mc" title="Question 3: Test Selection">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>2</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Test Selection (2 points)</strong></p>
+<p>A researcher measures blood pressure in 15 patients before and after a medication intervention. Which test should be used?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="A">
+                <material>
+                  <mattext>One-sample t-test</mattext>
+                </material>
+              </response_label>
+              <response_label ident="B">
+                <material>
+                  <mattext>Independent two-sample t-test</mattext>
+                </material>
+              </response_label>
+              <response_label ident="C">
+                <material>
+                  <mattext>Paired t-test</mattext>
+                </material>
+              </response_label>
+              <response_label ident="D">
+                <material>
+                  <mattext>One-way ANOVA</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">C</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 4: Multiple Choice - ANOVA vs t-tests -->
+      <item ident="q4_mc" title="Question 4: ANOVA Purpose">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>2</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>ANOVA Purpose (2 points)</strong></p>
+<p>When comparing means across 4 independent groups, why is ANOVA preferred over multiple pairwise t-tests?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="A">
+                <material>
+                  <mattext>ANOVA is easier to calculate</mattext>
+                </material>
+              </response_label>
+              <response_label ident="B">
+                <material>
+                  <mattext>ANOVA requires smaller sample sizes</mattext>
+                </material>
+              </response_label>
+              <response_label ident="C">
+                <material>
+                  <mattext>ANOVA controls the family-wise Type I error rate</mattext>
+                </material>
+              </response_label>
+              <response_label ident="D">
+                <material>
+                  <mattext>ANOVA doesn't require assumptions</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">C</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 5: Multiple Choice - ANOVA Interpretation -->
+      <item ident="q5_mc" title="Question 5: ANOVA Interpretation">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>2</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>ANOVA Interpretation (2 points)</strong></p>
+<p>An ANOVA test comparing 5 groups yields F = 3.45 with p = 0.02. What can you conclude?</p>
+            ]]></mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="A">
+                <material>
+                  <mattext>All five group means are significantly different from each other</mattext>
+                </material>
+              </response_label>
+              <response_label ident="B">
+                <material>
+                  <mattext>At least one group mean differs from the others</mattext>
+                </material>
+              </response_label>
+              <response_label ident="C">
+                <material>
+                  <mattext>The first group differs significantly from the last group</mattext>
+                </material>
+              </response_label>
+              <response_label ident="D">
+                <material>
+                  <mattext>Groups 1 and 2 have equal means</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">B</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+
+      <!-- Question 6: Essay - Sample Size for Power -->
+      <item ident="q6_essay" title="Question 6: Sample Size for Power">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Sample Size for Power (3 points)</strong></p>
+<p>A researcher is planning a study to test whether a new medication reduces systolic blood pressure. Based on pilot data, the population standard deviation is estimated to be σ = 20 mmHg. The researcher wants to detect a mean reduction of 10 mmHg from the population mean of 145 mmHg.</p>
+<p>Using a significance level of α = 0.05 (two-sided) and desired power of 0.80, calculate the required sample size using R's <code>power.t.test()</code> function for a one-sample t-test.</p>
+<p><strong>Provide your answer in the following format:</strong></p>
+<ol>
+<li>Your R code</li>
+<li>The required sample size (rounded UP to the nearest whole number)</li>
+<li>Brief interpretation (1-2 sentences)</li>
+</ol>
+            ]]></mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer1" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 7A: Essay - ANOVA F-statistic -->
+      <item ident="q7a_essay" title="Question 7A: ANOVA F-statistic">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1.5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>ANOVA F-statistic (1.5 points)</strong></p>
+<p>A researcher compares the effectiveness of three different exercise programs on weight loss (in kg) over 8 weeks. The data are:</p>
+<table border="1" cellpadding="5">
+<tr><th>Program A</th><th>Program B</th><th>Program C</th></tr>
+<tr><td>4.2</td><td>6.1</td><td>7.8</td></tr>
+<tr><td>3.8</td><td>5.8</td><td>8.2</td></tr>
+<tr><td>4.5</td><td>6.4</td><td>7.5</td></tr>
+<tr><td>4.1</td><td>5.9</td><td>8.0</td></tr>
+<tr><td>4.3</td><td>6.2</td><td>7.9</td></tr>
+</table>
+<p>Perform a one-way ANOVA to test if there is a significant difference in mean weight loss across the three programs. Use α = 0.05.</p>
+<p><strong>Provide your answer in the following format:</strong></p>
+<ol>
+<li>Your R code to create the data and perform ANOVA</li>
+<li>The F-statistic (rounded to 2 decimal places)</li>
+<li>The p-value</li>
+<li>Your conclusion (1-2 sentences)</li>
+</ol>
+            ]]></mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer1" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 7B: Essay - Two-Sample t-Test p-value -->
+      <item ident="q7b_essay" title="Question 7B: Two-Sample t-Test p-value">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1.5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Two-Sample t-Test p-value (1.5 points)</strong></p>
+<p>Using the same data from Question 7A:</p>
+<p>Compare ONLY Program A vs. Program C using a two-sample t-test (assume equal variances, two-sided test).</p>
+<p><strong>Provide your answer in the following format:</strong></p>
+<ol>
+<li>Your R code</li>
+<li>The t-statistic</li>
+<li>The p-value (rounded to 4 decimal places, or 0.0000 if p &lt; 0.0001)</li>
+<li>Your conclusion (1-2 sentences)</li>
+</ol>
+            ]]></mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer1" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 8: Essay - Pooled Standard Deviation -->
+      <item ident="q8_essay" title="Question 8: Pooled Standard Deviation">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Pooled Standard Deviation (3 points)</strong></p>
+<p>Two independent samples are collected to compare cholesterol levels between two diets:</p>
+<ul>
+<li>Diet 1: n<sub>1</sub> = 12, s<sub>1</sub> = 18.5 mg/dL</li>
+<li>Diet 2: n<sub>2</sub> = 15, s<sub>2</sub> = 21.3 mg/dL</li>
+</ul>
+<p>Calculate the pooled standard deviation using the formula provided in class.</p>
+<p><strong>Provide your answer in the following format:</strong></p>
+<ol>
+<li>The formula you're using (in notation or R code)</li>
+<li>Your calculation (R code or by-hand steps)</li>
+<li>The pooled standard deviation (rounded to 2 decimal places)</li>
+</ol>
+            ]]></mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer1" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 9: Essay - Test Statistic Calculation -->
+      <item ident="q9_essay" title="Question 9: Test Statistic Calculation">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Test Statistic Calculation (3 points)</strong></p>
+<p>A researcher compares mean test scores between two teaching methods. The summary statistics are:</p>
+<ul>
+<li>Method 1: n<sub>1</sub> = 20, mean = 85.3, s<sub>1</sub> = 12.4</li>
+<li>Method 2: n<sub>2</sub> = 18, mean = 78.6, s<sub>2</sub> = 14.1</li>
+</ul>
+<p>Calculate the test statistic (t-value) for a two-sample t-test (assume equal variances) using the formula provided in class.</p>
+<p><strong>Provide your answer in the following format:</strong></p>
+<ol>
+<li>Calculate pooled standard deviation (show work)</li>
+<li>Calculate standard error (show work)</li>
+<li>Calculate t-statistic (show work)</li>
+<li>Final t-statistic value (rounded to 2 decimal places)</li>
+</ol>
+            ]]></mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer1" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 10A: Essay - CI Lower Bound -->
+      <item ident="q10a_essay" title="Question 10A: CI Lower Bound">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1.5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Confidence Interval - Lower Bound (1.5 points)</strong></p>
+<p>Using the Teaching Methods data from Question 9, construct a 95% confidence interval for the mean difference in test scores.</p>
+<p>Use R or manual calculation with the t-distribution.</p>
+<p><strong>Provide your answer in the following format:</strong></p>
+<ol>
+<li>Your R code or manual calculation</li>
+<li>The LOWER bound of the 95% CI (rounded to 2 decimal places, include sign if negative)</li>
+</ol>
+            ]]></mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer1" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 10B: Essay - CI Upper Bound -->
+      <item ident="q10b_essay" title="Question 10B: CI Upper Bound">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1.5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Confidence Interval - Upper Bound (1.5 points)</strong></p>
+<p>Using the same 95% confidence interval from Question 10A:</p>
+<p><strong>Provide your answer in the following format:</strong></p>
+<ol>
+<li>The UPPER bound of the 95% CI (rounded to 2 decimal places)</li>
+<li>Interpret the complete CI in context (2-3 sentences)</li>
+</ol>
+            ]]></mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer1" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+      <!-- Question 11: Essay - Power Calculation -->
+      <item ident="q11_essay" title="Question 11: Power Calculation">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>essay_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html"><![CDATA[
+<p><strong>Power Calculation (3 points)</strong></p>
+<p>A researcher is planning a one-sample study to test whether a new intervention changes blood glucose levels. Based on prior research:</p>
+<ul>
+<li>Expected sample size: n = 30</li>
+<li>Expected mean difference to detect: δ = 12 mg/dL</li>
+<li>Population standard deviation: σ = 18 mg/dL</li>
+<li>Significance level: α = 0.05 (two-sided)</li>
+</ul>
+<p>Calculate the statistical power of this study using R's <code>power.t.test()</code> function.</p>
+<p><strong>Provide your answer in the following format:</strong></p>
+<ol>
+<li>Your R code</li>
+<li>The power value (rounded to 2 decimal places, as a proportion not percentage)</li>
+<li>Interpret the power in context (2-3 sentences)</li>
+</ol>
+            ]]></mattext>
+          </material>
+          <response_str ident="response1" rcardinality="Single">
+            <render_fib>
+              <response_label ident="answer1" rshuffle="No"/>
+            </render_fib>
+          </response_str>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+        </resprocessing>
+      </item>
+
+    </section>
+  </assessment>
+</questestinterop>

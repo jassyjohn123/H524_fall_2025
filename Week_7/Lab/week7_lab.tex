@@ -1,0 +1,644 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{codebackground}{RGB}{248,248,248}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+% Configure listings for code display
+\lstset{
+  basicstyle=\small\ttfamily,
+  breaklines=true,
+  breakatwhitespace=true,
+  postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+  columns=flexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+
+% Code environment using tcolorbox with listings
+\newtcblisting{rcode}{
+  colback=white,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=0pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  width=\textwidth,
+  breakable,
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false
+  }
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 7 Lab: Nonparametric Methods}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Format:} Online\\
+\textbf{Tools Required:} R, RStudio\\
+\textbf{Estimated Time:} 90 minutes
+
+\section{Learning Objectives}
+
+By the end of this lab, you will be able to:
+\begin{enumerate}
+\item Check normality assumptions using Shapiro-Wilk test
+\item Choose between parametric and nonparametric tests
+\item Perform sign tests in R
+\item Use Wilcoxon signed-rank test for one-sample and paired data
+\item Conduct Wilcoxon rank-sum tests for two groups
+\item Perform Kruskal-Wallis tests for three or more groups
+\item Interpret nonparametric test output
+\item Compare parametric and nonparametric results
+\end{enumerate}
+
+\section{Introduction: When to Use Nonparametric Tests}
+
+Parametric tests (t-tests, ANOVA) assume data are normally distributed. When this assumption is violated, use nonparametric tests instead.
+
+\vspace{0.3cm}
+\textbf{Use nonparametric tests when:}
+\begin{itemize}
+\item Data are significantly skewed
+\item Extreme outliers are present
+\item Small sample size (n < 20)
+\item Ordinal data (pain scales, ratings)
+\item Shapiro-Wilk test p-value < 0.05
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Quick Reference:}
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Scenario} & \textbf{Normal Data} & \textbf{Not Normal} \\
+\midrule
+One sample & t-test & Sign or Wilcoxon \\
+Paired data & Paired t-test & Sign or Wilcoxon \\
+Two groups & Two-sample t-test & Wilcoxon rank-sum \\
+3+ groups & ANOVA & Kruskal-Wallis \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Part 1: Checking Normality}
+
+Always check normality before choosing your test.
+
+\subsection{Exercise 1: Shapiro-Wilk Test}
+
+The Shapiro-Wilk test checks if data are normally distributed.
+\begin{itemize}
+\item $H_0$: Data are normal
+\item If $p \geq 0.05$: Use parametric test
+\item If $p < 0.05$: Use nonparametric test
+\end{itemize}
+
+\begin{rcode}
+# Generate example data
+set.seed(524)
+normal_data <- rnorm(30, mean=100, sd=15)
+skewed_data <- rexp(30, rate=0.02)
+
+# Check normality
+shapiro.test(normal_data)
+shapiro.test(skewed_data)
+
+# Visual check (optional)
+hist(normal_data, main="Normal Data", col="lightblue")
+hist(skewed_data, main="Skewed Data", col="lightcoral")
+
+# Q-Q plots
+qqnorm(normal_data, main="Normal Data Q-Q Plot")
+qqline(normal_data, col="red")
+
+qqnorm(skewed_data, main="Skewed Data Q-Q Plot")
+qqline(skewed_data, col="red")
+\end{rcode}
+
+\textbf{Questions:}
+\begin{enumerate}
+\item What is the p-value for \texttt{normal\_data}?
+\item What is the p-value for \texttt{skewed\_data}?
+\item For \texttt{normal\_data}, should you use parametric or nonparametric tests?
+\item For \texttt{skewed\_data}, should you use parametric or nonparametric tests?
+\end{enumerate}
+
+\vspace{1cm}
+
+\section{Part 2: Sign Test}
+
+The sign test only uses the direction (+/-) of differences.
+
+\subsection{Exercise 2: Sign Test for One Sample}
+
+\textbf{Question:} Is median recovery time different from 7 days?
+
+\begin{rcode}
+# Recovery times (days)
+recovery <- c(8, 5, 7, 10, 4, 9, 3, 12, 6, 11, 7)
+
+# Hypothesized median
+med0 <- 7
+
+# Calculate differences
+diff <- recovery - med0
+
+# Count signs (ignoring zeros)
+n_positive <- sum(diff > 0)
+n_total <- sum(diff != 0)
+
+cat("Positive differences:", n_positive, "\n")
+cat("Total non-zero:", n_total, "\n")
+
+# Sign test
+binom.test(n_positive, n_total, p=0.5)
+\end{rcode}
+
+\textbf{Questions:}
+\begin{enumerate}
+\item How many positive differences are there?
+\item How many total non-zero differences?
+\item What is the p-value?
+\item Is the median significantly different from 7 days?
+\end{enumerate}
+
+\vspace{1cm}
+
+\subsection{Exercise 3: Sign Test for Paired Data}
+
+\textbf{Question:} Does treatment reduce pain scores?
+
+\begin{rcode}
+# Pain scores (1-10 scale)
+before <- c(7, 8, 6, 9, 5, 8, 7, 6)
+after <- c(5, 6, 4, 7, 4, 6, 5, 5)
+
+# Calculate differences
+diff <- before - after
+
+# Count signs
+n_improved <- sum(diff > 0)
+n_total <- sum(diff != 0)
+
+cat("Number improved:", n_improved, "\n")
+cat("Number total:", n_total, "\n")
+
+# Sign test
+binom.test(n_improved, n_total, p=0.5)
+
+# Summary
+mean(before)
+mean(after)
+mean(diff)
+\end{rcode}
+
+\textbf{Questions:}
+\begin{enumerate}
+\item How many patients improved?
+\item What is the p-value?
+\item Does the treatment reduce pain?
+\item What is the average reduction in pain score?
+\end{enumerate}
+
+\vspace{1cm}
+
+\section{Part 3: Wilcoxon Signed-Rank Test (Paired Data)}
+
+Use for paired data when normality assumption is violated.
+
+\subsection{Exercise 4: Blood Pressure Study}
+
+\textbf{Research Question:} Does medication reduce blood pressure?
+
+\begin{rcode}
+# Blood pressure before and after medication
+bp_before <- c(145, 138, 150, 142, 156, 148, 140, 152)
+bp_after <- c(138, 135, 142, 140, 148, 145, 138, 146)
+
+# Check normality of differences
+diff <- bp_before - bp_after
+shapiro.test(diff)
+
+# Wilcoxon signed-rank test
+wilcox.test(bp_before, bp_after, paired=TRUE)
+
+# Summary statistics
+cat("Mean BP before:", mean(bp_before), "\n")
+cat("Mean BP after:", mean(bp_after), "\n")
+cat("Mean reduction:", mean(diff), "\n")
+\end{rcode}
+
+\textbf{Questions:}
+\begin{enumerate}
+\item What is the Shapiro-Wilk p-value for the differences? Is normality OK?
+\item What is the Wilcoxon test p-value?
+\item Is the difference significant at $\alpha = 0.05$?
+\item Does the medication reduce blood pressure?
+\item What is the mean reduction in blood pressure?
+\end{enumerate}
+
+\vspace{1cm}
+
+\subsection{Exercise 5: Physical Therapy Study}
+
+\textbf{Question:} Does physical therapy reduce pain scores?
+
+\begin{rcode}
+# Pain scores (0-10 scale) before and after 8 weeks PT
+pain_before <- c(7, 8, 6, 9, 7, 8, 6, 7, 8, 9)
+pain_after <- c(5, 6, 5, 7, 6, 7, 4, 6, 7, 8)
+
+# Check normality
+diff <- pain_before - pain_after
+shapiro.test(diff)
+
+# Wilcoxon test
+wilcox.test(pain_before, pain_after, paired=TRUE)
+
+# Medians
+median(pain_before)
+median(pain_after)
+median(diff)
+\end{rcode}
+
+\textbf{Questions:}
+\begin{enumerate}
+\item Are the differences normally distributed?
+\item What is the Wilcoxon p-value?
+\item Does PT significantly reduce pain?
+\item What is the median reduction in pain score?
+\end{enumerate}
+
+\vspace{1cm}
+
+\section{Part 4: Wilcoxon Rank-Sum Test (Two Independent Groups)}
+
+Use for comparing two independent groups when normality is violated.
+
+\subsection{Exercise 6: Treatment Comparison}
+
+\textbf{Research Question:} Do two treatments differ in recovery time?
+
+\begin{rcode}
+# Recovery times (days)
+treatment_A <- c(23, 31, 25, 28, 30, 27, 29)
+treatment_B <- c(18, 22, 20, 24, 19, 21, 23)
+
+# Check normality
+shapiro.test(treatment_A)
+shapiro.test(treatment_B)
+
+# Visualize
+boxplot(treatment_A, treatment_B,
+        names=c("Treatment A", "Treatment B"),
+        ylab="Recovery Time (days)",
+        main="Recovery Time Comparison",
+        col=c("lightblue", "lightcoral"))
+
+# Wilcoxon rank-sum test
+wilcox.test(treatment_A, treatment_B)
+
+# Summary statistics
+cat("Median Treatment A:", median(treatment_A), "days\n")
+cat("Median Treatment B:", median(treatment_B), "days\n")
+\end{rcode}
+
+\textbf{Questions:}
+\begin{enumerate}
+\item Are the data normal for Treatment A? Treatment B?
+\item What is the Wilcoxon rank-sum p-value?
+\item Do the treatments differ significantly at $\alpha = 0.05$?
+\item Which treatment has shorter recovery times?
+\item What are the median recovery times for each treatment?
+\end{enumerate}
+
+\vspace{1cm}
+
+\subsection{Exercise 7: Drug Effectiveness Study}
+
+\textbf{Question:} Do two drugs differ in effectiveness?
+
+\begin{rcode}
+# Symptom relief scores (higher = better)
+drug_X <- c(45, 52, 48, 55, 50, 47, 53)
+drug_Y <- c(38, 42, 40, 45, 39, 43, 41)
+
+# Visualize
+boxplot(drug_X, drug_Y,
+        names=c("Drug X", "Drug Y"),
+        ylab="Symptom Relief Score",
+        col=c("lightgreen", "lightyellow"))
+
+# Wilcoxon test
+wilcox.test(drug_X, drug_Y)
+
+# Summary
+mean(drug_X)
+mean(drug_Y)
+median(drug_X)
+median(drug_Y)
+\end{rcode}
+
+\textbf{Questions:}
+\begin{enumerate}
+\item What is the Wilcoxon p-value?
+\item Which drug is more effective?
+\item What is the difference in average scores between the drugs?
+\end{enumerate}
+
+\vspace{1cm}
+
+\section{Part 5: Kruskal-Wallis Test (Three or More Groups)}
+
+Use for comparing 3+ independent groups when normality is violated.
+
+\subsection{Exercise 8: Pain Relief Comparison}
+
+\textbf{Research Question:} Do three pain medications differ in effectiveness?
+
+\begin{rcode}
+# Pain relief scores (0-10 scale, higher = better)
+drug_A <- c(3, 4, 5, 4, 3, 5, 4)
+drug_B <- c(5, 6, 7, 6, 5, 7, 6)
+drug_C <- c(7, 8, 9, 8, 7, 9, 8)
+
+# Combine data
+pain_scores <- c(drug_A, drug_B, drug_C)
+drug <- factor(rep(c("A", "B", "C"), each=7))
+
+# Check normality for each group
+shapiro.test(drug_A)
+shapiro.test(drug_B)
+shapiro.test(drug_C)
+
+# Visualize
+boxplot(pain_scores ~ drug,
+        xlab="Drug",
+        ylab="Pain Relief Score",
+        main="Pain Relief by Drug",
+        col=c("lightblue", "lightgreen", "lightyellow"))
+
+# Kruskal-Wallis test
+kruskal.test(pain_scores ~ drug)
+
+# Post-hoc pairwise comparisons
+pairwise.wilcox.test(pain_scores, drug, p.adjust.method="bonferroni")
+
+# Summary statistics
+tapply(pain_scores, drug, median)
+\end{rcode}
+
+\textbf{Questions:}
+\begin{enumerate}
+\item What is the Kruskal-Wallis p-value?
+\item Do the drugs differ significantly overall at $\alpha = 0.05$?
+\item According to the post-hoc tests, which specific pairs of drugs differ significantly?
+\item Which drug appears most effective based on median scores?
+\item Which drug appears least effective?
+\end{enumerate}
+
+\vspace{1cm}
+
+\section{Part 6: Comparing Parametric vs Nonparametric}
+
+\subsection{Exercise 9: When Both Tests Apply}
+
+Sometimes data are borderline normal. Let's compare both approaches.
+
+\begin{rcode}
+# Blood pressure data (from Exercise 4)
+bp_before <- c(145, 138, 150, 142, 156, 148, 140, 152)
+bp_after <- c(138, 135, 142, 140, 148, 145, 138, 146)
+
+# Check normality
+diff <- bp_before - bp_after
+shapiro.test(diff)
+
+# Parametric: Paired t-test
+t_result <- t.test(bp_before, bp_after, paired=TRUE)
+cat("Paired t-test p-value:", t_result$p.value, "\n")
+
+# Nonparametric: Wilcoxon
+w_result <- wilcox.test(bp_before, bp_after, paired=TRUE)
+cat("Wilcoxon p-value:", w_result$p.value, "\n")
+
+# Compare
+cat("\nBoth tests significant? Compare p-values to 0.05\n")
+\end{rcode}
+
+\textbf{Questions:}
+\begin{enumerate}
+\item Is the normality assumption met (p $\geq$ 0.05)?
+\item Which test gives a smaller p-value?
+\item Do both tests reach the same conclusion (significant or not)?
+\item When data are borderline normal, which test is safer to use?
+\end{enumerate}
+
+\vspace{1cm}
+
+\section{Practice Problems}
+
+\subsection{Problem 1: Hospital Stay Duration}
+
+Compare median hospital stay between two surgical procedures.
+
+\begin{rcode}
+# Hospital stay (days)
+procedure_1 <- c(3, 4, 5, 3, 6, 4, 7, 5, 4, 12)
+procedure_2 <- c(5, 6, 8, 7, 9, 6, 8, 10, 7, 15)
+
+# Step 1: Visualize
+boxplot(procedure_1, procedure_2,
+        names=c("Procedure 1", "Procedure 2"),
+        main="Hospital Stay Comparison",
+        ylab="Days",
+        col=c("lightblue", "lightcoral"))
+
+# Step 2: Check normality
+shapiro.test(procedure_1)
+shapiro.test(procedure_2)
+
+# Step 3: Wilcoxon rank-sum test
+wilcox.test(procedure_1, procedure_2)
+
+# Step 4: Summary statistics
+cat("Median Procedure 1:", median(procedure_1), "days\n")
+cat("Median Procedure 2:", median(procedure_2), "days\n")
+\end{rcode}
+
+\textbf{Questions:}
+\begin{enumerate}
+\item Are the data normal for each procedure?
+\item What is the Wilcoxon rank-sum p-value?
+\item Do the procedures differ significantly in hospital stay?
+\item Which procedure has shorter hospital stays?
+\item Why is Wilcoxon appropriate here? (Hint: check for outliers)
+\end{enumerate}
+
+\vspace{1cm}
+
+\subsection{Problem 2: Diet Program Comparison}
+
+Compare weight loss across four diet programs.
+
+\begin{rcode}
+# Weight loss (kg) after 3 months
+diet_A <- c(2.1, 3.2, 2.5, 3.0, 2.8, 2.6)
+diet_B <- c(3.5, 4.2, 3.8, 4.0, 3.9, 3.7)
+diet_C <- c(4.5, 5.1, 4.8, 5.3, 4.9, 5.0)
+diet_D <- c(2.8, 3.0, 2.9, 3.1, 2.7, 2.9)
+
+# Combine data
+weight_loss <- c(diet_A, diet_B, diet_C, diet_D)
+diet <- factor(rep(c("A", "B", "C", "D"), each=6))
+
+# Visualize
+boxplot(weight_loss ~ diet,
+        main="Weight Loss by Diet Program",
+        xlab="Diet",
+        ylab="Weight Loss (kg)",
+        col=c("lightblue", "lightgreen", "lightyellow", "lightcoral"))
+
+# Kruskal-Wallis test
+kruskal.test(weight_loss ~ diet)
+
+# Post-hoc tests
+pairwise.wilcox.test(weight_loss, diet, p.adjust.method="bonferroni")
+
+# Summary statistics
+tapply(weight_loss, diet, median)
+tapply(weight_loss, diet, mean)
+\end{rcode}
+
+\textbf{Questions:}
+\begin{enumerate}
+\item What is the Kruskal-Wallis p-value?
+\item Do the diets differ significantly overall?
+\item Which specific pairs of diets differ significantly? (Check post-hoc p-values < 0.05)
+\item Which diet appears most effective for weight loss?
+\item What is the median weight loss for each diet?
+\end{enumerate}
+
+\vspace{1cm}
+
+\subsection{Problem 3: Satisfaction Ratings (Ordinal Data)}
+
+Compare customer satisfaction ratings across three stores.
+
+\begin{rcode}
+# Satisfaction ratings (1-5 scale, ordinal)
+store_A <- c(3, 4, 3, 5, 4, 3, 4, 3, 4, 3)
+store_B <- c(4, 5, 4, 5, 5, 4, 5, 4, 5, 4)
+store_C <- c(2, 3, 2, 4, 3, 2, 3, 2, 3, 3)
+
+# Combine
+satisfaction <- c(store_A, store_B, store_C)
+store <- factor(rep(c("A", "B", "C"), each=10))
+
+# Visualize
+boxplot(satisfaction ~ store,
+        main="Satisfaction by Store",
+        xlab="Store",
+        ylab="Satisfaction Rating (1-5)",
+        col=c("lightblue", "lightgreen", "lightyellow"))
+
+# Kruskal-Wallis (appropriate for ordinal data!)
+kruskal.test(satisfaction ~ store)
+
+# Post-hoc
+pairwise.wilcox.test(satisfaction, store, p.adjust.method="bonferroni")
+
+# Medians
+tapply(satisfaction, store, median)
+\end{rcode}
+
+\textbf{Questions:}
+\begin{enumerate}
+\item Why is nonparametric appropriate here?
+\item What is the Kruskal-Wallis p-value?
+\item Do the stores differ in customer satisfaction?
+\item Which store has the highest satisfaction?
+\item Which pairs of stores differ significantly?
+\end{enumerate}
+
+\vspace{1cm}
+
+\section{Decision Guide Summary}
+
+\textbf{Step 1: Check normality}
+\begin{itemize}
+\item Use \texttt{shapiro.test()}
+\item If $p \geq 0.05$: Normal OK $\rightarrow$ Use parametric
+\item If $p < 0.05$: Not normal $\rightarrow$ Use nonparametric
+\end{itemize}
+
+\textbf{Step 2: Choose test}
+\begin{itemize}
+\item \textbf{One sample or paired:} Sign test or \texttt{wilcox.test()}
+\item \textbf{Two groups:} \texttt{wilcox.test(group1, group2)}
+\item \textbf{3+ groups:} \texttt{kruskal.test(outcome \textasciitilde{} group)}
+\item \textbf{Post-hoc:} \texttt{pairwise.wilcox.test()}
+\end{itemize}
+
+\textbf{Step 3: Interpret}
+\begin{itemize}
+\item $p < 0.05$: Significant difference
+\item $p \geq 0.05$: No significant difference
+\end{itemize}
+
+\section{Key Takeaways}
+
+\begin{enumerate}
+\item \textbf{Always check normality first} with Shapiro-Wilk test
+\item \textbf{Nonparametric tests are robust} to outliers and skewness
+\item \textbf{Wilcoxon tests} are the nonparametric versions of t-tests
+\item \textbf{Kruskal-Wallis} is the nonparametric version of ANOVA
+\item \textbf{When in doubt}, use nonparametric (safer choice)
+\item \textbf{For ordinal data}, ALWAYS use nonparametric
+\item \textbf{Follow up Kruskal-Wallis} with post-hoc tests if significant
+\end{enumerate}
+
+\end{document}

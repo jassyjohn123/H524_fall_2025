@@ -1,0 +1,172 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+\definecolor{aiblue}{RGB}{30,144,255}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+% Compact spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\begin{document}
+
+% Orange header
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=8pt,bottom=8pt]
+\centering
+\textcolor{white}{\textbf{\large WEEK 7 ASSIGNMENT}}\\
+\textcolor{white}{\textbf{H524 Introduction to Biostatistics - Fall 2025}}
+\end{tcolorbox}
+
+\vspace{4pt}
+
+\noindent\textbf{Total Points:} 10\\
+\textbf{Due:} Sunday 11:59 PM
+
+\vspace{8pt}
+
+\section*{Part A: Multiple Choice Questions (5 points)}
+
+Answer the following 5 questions on nonparametric methods. Each question is worth 1 point.
+
+\subsection*{Question 1: When to Use Nonparametric Tests (1 point)}
+
+Which of the following is the BEST reason to use a nonparametric test instead of a parametric test?
+
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item Nonparametric tests are always more powerful than parametric tests
+\item The data do not meet the assumptions required for parametric tests (e.g., normality)
+\item Nonparametric tests require larger sample sizes
+\item Parametric tests cannot be used with continuous data
+\end{enumerate}
+
+\subsection*{Question 2: Sign Test vs. t-test (1 point)}
+
+A researcher wants to test whether a new medication reduces pain scores in patients. Pre- and post-treatment pain scores are measured for 15 patients. The pain score differences are highly skewed. Which test is most appropriate?
+
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item Paired t-test
+\item Sign test
+\item Independent samples t-test
+\item ANOVA
+\end{enumerate}
+
+\subsection*{Question 3: Mann-Whitney U Test (1 point)}
+
+The Mann-Whitney U test is the nonparametric alternative to which parametric test?
+
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item Paired t-test
+\item One-way ANOVA
+\item Independent samples t-test (two-sample t-test)
+\item Chi-square test
+\end{enumerate}
+
+\subsection*{Question 4: Kruskal-Wallis Test (1 point)}
+
+A study compares median recovery times across four different treatment groups. The recovery time data are highly right-skewed. Which test is most appropriate?
+
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item One-way ANOVA
+\item Kruskal-Wallis test
+\item Chi-square test
+\item Two-sample t-test
+\end{enumerate}
+
+\subsection*{Question 5: Ranking Data (1 point)}
+
+In the Wilcoxon rank-sum test (Mann-Whitney U), how are tied values handled?
+
+\begin{enumerate}[label=\Alph*., leftmargin=20pt]
+\item Ties are broken randomly
+\item Tied values receive the average of the ranks they would have occupied
+\item Tied values are excluded from the analysis
+\item Ties are not allowed in nonparametric tests
+\end{enumerate}
+
+\newpage
+
+\section*{Part B: Group Project Check-In - Team Plan (5 points)}
+
+\begin{tcolorbox}[colback=aiblue!10,colframe=aiblue,boxrule=1pt,arc=2pt,left=6pt,right=6pt,top=6pt,bottom=6pt]
+\textbf{GROUP PROJECT BEGINS!}
+\end{tcolorbox}
+
+\vspace{4pt}
+
+\textbf{Read First:} See \texttt{Group\_Project\_Overview.pdf} posted on Canvas for complete project details.
+
+\subsection*{Your Assignment}
+
+\textbf{Group Leader submits} a team plan including:
+
+\textbf{1. Team Roster}
+\begin{itemize}[leftmargin=20pt]
+\item Names of all group members
+\item Contact information (email, phone)
+\end{itemize}
+
+\textbf{2. Communication Plan}
+\begin{itemize}[leftmargin=20pt]
+\item How will you communicate? (email, text, Slack, Discord, etc.)
+\item Preferred meeting format (in-person, Zoom, hybrid)
+\end{itemize}
+
+\textbf{3. Meeting Schedule}
+\begin{itemize}[leftmargin=20pt]
+\item At least 2-3 scheduled meeting times for Weeks 8-10
+\item Include dates and times
+\end{itemize}
+
+\textbf{4. Division of Responsibilities}
+\begin{itemize}[leftmargin=20pt]
+\item Who will handle initial tasks:
+\begin{itemize}[leftmargin=15pt]
+\item Read data dictionary
+\item Set up R and load dataset
+\item Contact AI tools (Claude, ChatGPT)
+\item Use Copilot in RStudio
+\item Draft presentation outline
+\item Write report sections
+\end{itemize}
+\end{itemize}
+
+\textbf{5. Preliminary Timeline}
+\begin{itemize}[leftmargin=20pt]
+\item When will you complete data analysis?
+\item When will you finish AI comparison?
+\item When will you draft presentation?
+\item When will you finalize report?
+\end{itemize}
+
+\subsection*{Submission Format}
+
+\textbf{Submit as:} Text entry OR file upload (PDF/Word)
+
+\textbf{Length:} 1-2 pages
+
+\textbf{Grading:} Completion-based (5 points for submitting reasonable plan)
+
+\subsection*{Notes}
+
+\begin{itemize}[leftmargin=20pt]
+\item \textbf{Only the group leader submits} - all team members get the same grade
+\item Check Canvas to see your group number and dataset assignment
+\item Download your dataset from: Canvas → Files → Group\_Project\_Data → \texttt{group\_X} folder
+\item See data dictionary in Canvas Files for variable descriptions
+\item This is just a PLAN - you can adjust as you go!
+\end{itemize}
+
+\end{document}

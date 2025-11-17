@@ -1,0 +1,1041 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Set colors
+\setbeamercolor{structure}{fg=osaorange}
+\setbeamercolor{title}{fg=white,bg=osaorange}
+\setbeamercolor{frametitle}{fg=white,bg=osaorange}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\title{H524 Introduction to Biostatistics}
+\subtitle{Week 3: Theoretical Probability Distributions and Sampling Distributions}
+\author{Dr. John Molitor}
+\institute{}
+\date{Fall 2025}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Review from Week 2}
+
+\begin{frame}
+\frametitle{Quick Review: Probability Concepts}
+\textbf{Last week we covered:}
+\begin{itemize}
+\item Basic probability rules and calculations
+\item Conditional probability: $\Pr(A \mid B)$
+\item Independence: $\Pr(A \cap B) = \Pr(A) \times \Pr(B)$
+\item Diagnostic testing: sensitivity, specificity, PPV, NPV
+\item Relative risk and odds ratios
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{This Week:} Theoretical probability distributions and their role in statistical inference
+
+\vspace{0.3cm}
+\textbf{Reading:} Pagano \& Gauvreau Chapter 7 (7.1, 7.2, 7.4) and Chapter 8
+\end{frame}
+
+\section{Binomial Distribution (Ch 7.1)}
+
+\begin{frame}
+\frametitle{Why Probability Distributions?}
+\textbf{From Week 2:} We calculated probabilities for specific events
+
+\vspace{0.5cm}
+\textbf{This Week:} Use theoretical models to describe entire families of outcomes
+
+\vspace{0.5cm}
+\textbf{Advantages of theoretical distributions:}
+\begin{itemize}
+\item Predict probabilities without collecting all possible data
+\item Foundation for statistical inference (hypothesis testing, confidence intervals)
+\item Standardized models applicable across many scenarios
+\item Enable calculation of complex probabilities efficiently
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Two main types:}
+\begin{itemize}
+\item \textbf{Discrete distributions:} Countable outcomes (binomial, Poisson)
+\item \textbf{Continuous distributions:} Uncountable outcomes (normal, t, chi-square)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Binomial Distribution: Conditions}
+\textbf{A binomial experiment must satisfy:}
+
+\begin{enumerate}
+\item \textbf{Fixed number of trials:} $n$ is predetermined
+\item \textbf{Two possible outcomes:} Success or failure
+\item \textbf{Constant probability:} $p$ remains the same for all trials
+\item \textbf{Independent trials:} Outcome of one trial doesn't affect others
+\item \textbf{Random variable:} $X$ = number of successes in $n$ trials
+\end{enumerate}
+
+\vspace{0.5cm}
+\textbf{Notation:} $X \sim \text{Binomial}(n, p)$ or $X \sim B(n, p)$
+
+\vspace{0.5cm}
+\textbf{Medical Example:}
+\begin{itemize}
+\item $n = 20$ patients receive a vaccine
+\item $p = 0.90$ probability vaccine protects (efficacy)
+\item $X$ = number of patients protected
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Binomial Probability Mass Function}
+\textbf{Probability of exactly $k$ successes:}
+
+$$\Pr(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
+
+where $\binom{n}{k} = \frac{n!}{k!(n-k)!}$ is the binomial coefficient
+
+\vspace{0.5cm}
+\textbf{Parameters and Properties:}
+\begin{itemize}
+\item Expected value (mean): $\mu = E(X) = np$
+\item Variance: $\sigma^2 = \text{Var}(X) = np(1-p)$
+\item Standard deviation: $\sigma = \sqrt{np(1-p)}$
+\item Range: $X \in \{0, 1, 2, \ldots, n\}$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Binomial Example: Clinical Trial}
+\textbf{Scenario:} A new treatment has 75\% success rate. We treat 10 patients.
+
+\vspace{0.3cm}
+\textbf{Question 1:} What's the probability exactly 8 patients respond?
+
+\vspace{0.2cm}
+$$\Pr(X = 8) = \binom{10}{8} (0.75)^8 (0.25)^2$$
+$$= 45 \times 0.1001 \times 0.0625 = 0.282$$
+
+\vspace{0.3cm}
+\textbf{Question 2:} What's the probability at least 8 respond?
+
+\vspace{0.2cm}
+$$\Pr(X \geq 8) = \Pr(X=8) + \Pr(X=9) + \Pr(X=10)$$
+$$= 0.282 + 0.188 + 0.056 = 0.526$$
+
+\vspace{0.3cm}
+\textbf{Expected number of successes:} $\mu = 10 \times 0.75 = 7.5$ patients
+\end{frame}
+
+\begin{frame}
+\frametitle{Carcinogen Exposure Example}
+\textbf{From Pagano \& Gauvreau:} 25\% of people exposed to a carcinogen become ill. Among 4 people with equal exposure:
+
+\vspace{0.3cm}
+\textbf{Calculate probabilities for 0, 1, 2, 3, 4 people becoming ill:}
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+$k$ & Calculation & Probability & Fraction \\
+\midrule
+0 & $\displaystyle\binom{4}{0}(0.25)^0(0.75)^4$ & 0.316 & 81/256 \\[0.4cm]
+1 & $\displaystyle\binom{4}{1}(0.25)^1(0.75)^3$ & 0.422 & 108/256 \\[0.4cm]
+2 & $\displaystyle\binom{4}{2}(0.25)^2(0.75)^2$ & 0.211 & 54/256 \\[0.4cm]
+3 & $\displaystyle\binom{4}{3}(0.25)^3(0.75)^1$ & 0.047 & 12/256 \\[0.4cm]
+4 & $\displaystyle\binom{4}{4}(0.25)^4(0.75)^0$ & 0.004 & 1/256 \\[0.4cm]
+\midrule
+ & Total & 1.000 & 256/256 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.2cm}
+\textbf{Probability at least one becomes ill:}\\
+$1 - \Pr(X=0) = 1 - 0.316 = 0.684$
+\end{frame}
+
+\begin{frame}
+\frametitle{Binomial Distribution in R}
+\textbf{Four key functions:}
+
+\vspace{0.3cm}
+\begin{itemize}
+\item \texttt{dbinom(k, n, p)} -- probability of exactly $k$ successes
+\item \texttt{pbinom(k, n, p)} -- cumulative probability $\Pr(X \leq k)$
+\item \texttt{qbinom(q, n, p)} -- quantile function (inverse of pbinom)
+\item \texttt{rbinom(m, n, p)} -- generate $m$ random binomial values
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Example: Treatment with $n=10$, $p=0.75$}
+\begin{itemize}
+\item \texttt{dbinom(8, 10, 0.75)} returns 0.282
+\item \texttt{pbinom(7, 10, 0.75)} returns $\Pr(X \leq 7) = 0.474$
+\item \texttt{pbinom(7, 10, 0.75, lower.tail=FALSE)} returns $\Pr(X > 7) = 0.526$
+\item \texttt{1 - pbinom(7, 10, 0.75)} also returns 0.526
+\end{itemize}
+\end{frame}
+
+\section{Normal Distribution (Ch 7.2)}
+
+\begin{frame}
+\frametitle{From Discrete to Continuous}
+\textbf{Continuous Random Variables:}
+\begin{itemize}
+\item Can take any value in an interval
+\item Examples: height, weight, blood pressure, cholesterol
+\item Probability described by a \textit{density curve}
+\item $\Pr(a \leq X \leq b)$ = area under curve between $a$ and $b$
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Key properties of density curves:}
+\begin{itemize}
+\item Curve never goes below the x-axis
+\item Total area under curve equals 1
+\item $\Pr(X = c) = 0$ for any single point $c$
+  \begin{itemize}
+  \item Therefore $\Pr(a \leq X \leq b) = \Pr(a < X < b)$
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Normal Distribution}
+\textbf{Most important continuous distribution in statistics}
+
+\vspace{0.3cm}
+\textbf{Characteristics:}
+\begin{itemize}
+\item Bell-shaped, symmetric curve
+\item Completely determined by mean $\mu$ and standard deviation $\sigma$
+\item Notation: $X \sim N(\mu, \sigma^2)$
+\item Theoretical range: $-\infty$ to $+\infty$
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Important:} Not all bell-shaped curves are normal!
+\begin{itemize}
+\item t-distribution: similar shape but heavier tails
+\item Chi-square: right-skewed for small df
+\item Many biological variables are approximately normal
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Empirical Rule (68-95-99.7)}
+\textbf{For any normal distribution:}
+
+\vspace{0.5cm}
+\begin{itemize}
+\item Approximately \textbf{68\%} of observations lie within \textbf{1 SD} of the mean
+  $$\Pr(\mu - \sigma \leq X \leq \mu + \sigma) \approx 0.68$$
+
+\item Approximately \textbf{95\%} lie within \textbf{2 SDs} of the mean
+  $$\Pr(\mu - 2\sigma \leq X \leq \mu + 2\sigma) \approx 0.95$$
+
+\item Approximately \textbf{99.7\%} lie within \textbf{3 SDs} of the mean
+  $$\Pr(\mu - 3\sigma \leq X \leq \mu + 3\sigma) \approx 0.997$$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Application:} Quick assessment of unusual observations
+\begin{itemize}
+\item Values beyond 2 SDs: unusual (only 5\% of data)
+\item Values beyond 3 SDs: very unusual (only 0.3\% of data)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Standard Normal Distribution}
+\textbf{Special case:} $Z \sim N(0, 1)$ (mean = 0, SD = 1)
+
+\vspace{0.3cm}
+\textbf{Why is this useful?}
+\begin{itemize}
+\item We can standardize ANY normal distribution to $N(0,1)$
+\item Only need one table (Table A.3) for all normal probabilities
+\item Foundation for hypothesis testing and confidence intervals
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Standardization (Z-score transformation):}
+$$Z = \frac{X - \mu}{\sigma}$$
+
+\textbf{If $X \sim N(\mu, \sigma^2)$, then $Z \sim N(0, 1)$}
+
+\vspace{0.3cm}
+\textbf{Interpretation:} Z-score tells you how many SDs $X$ is from the mean
+\begin{itemize}
+\item $Z = 1.5$ means $X$ is 1.5 SDs above the mean
+\item $Z = -2.0$ means $X$ is 2 SDs below the mean
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Working with the Standard Normal}
+\textbf{Using Table A.3 (or R):}
+
+\vspace{0.3cm}
+If $Z \sim N(0, 1)$:
+\begin{itemize}
+\item $\Pr(Z \leq 0) = 0.5$ (symmetry)
+\item $\Pr(Z < 1) = 0.8413$
+\item $\Pr(Z < -1) = 0.1587$
+\item $\Pr(Z > 1.96) = 1 - 0.975 = 0.025$
+\item $\Pr(-1.96 < Z < 1.96) = 0.95$ (important for CIs!)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{R Functions:}
+\begin{itemize}
+\item \texttt{pnorm(z)} returns $\Pr(Z \leq z)$
+\item \texttt{qnorm(p)} returns $z$ such that $\Pr(Z \leq z) = p$
+\item \texttt{dnorm(z)} returns the density at $z$ (for plotting)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Normal Distribution: Exam Scores Example}
+\textbf{Biostatistics final exam scores:} $\mu = 70$, $\sigma = 10$
+
+\vspace{0.3cm}
+So $S \sim N(70, 10^2)$
+
+\vspace{0.5cm}
+\textbf{Question 1:} What proportion of students score above 85?
+
+\vspace{0.2cm}
+\textbf{Solution:}
+\begin{enumerate}
+\item Standardize: $Z = \frac{85 - 70}{10} = 1.5$
+\item Find probability: $\Pr(S > 85) = \Pr(Z > 1.5)$
+\item From table: $\Pr(Z < 1.5) = 0.9332$
+\item Therefore: $\Pr(Z > 1.5) = 1 - 0.9332 = 0.0668$
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Answer:} About 6.7\% of students score above 85
+
+\vspace{0.3cm}
+\textbf{R code:} \texttt{pnorm(85, mean=70, sd=10, lower.tail=FALSE)}
+\end{frame}
+
+\begin{frame}
+\frametitle{Normal Distribution: Between Two Values}
+\textbf{Same exam:} What proportion score between 60 and 85?
+
+\vspace{0.3cm}
+\textbf{Solution:}
+\begin{enumerate}
+\item Standardize lower bound: $Z_1 = \frac{60-70}{10} = -1.0$
+\item Standardize upper bound: $Z_2 = \frac{85-70}{10} = 1.5$
+\item $\Pr(60 < S < 85) = \Pr(-1 < Z < 1.5)$
+\item $= \Pr(Z < 1.5) - \Pr(Z < -1.0)$
+\item $= 0.9332 - 0.1587 = 0.7745$
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Answer:} About 77.5\% score between 60 and 85
+
+\vspace{0.3cm}
+\textbf{R code:} \texttt{pnorm(85, 70, 10) - pnorm(60, 70, 10)}
+\end{frame}
+
+\begin{frame}
+\frametitle{Finding Percentiles}
+\textbf{Question:} What score is at the 90th percentile? (Top 10\%)
+
+\vspace{0.2cm}
+\textbf{Solution - Working backwards:}
+\begin{enumerate}
+\item We want $S_{90}$ such that $\Pr(S < S_{90}) = 0.90$
+\item Standardize: $\Pr\left[Z < \frac{S_{90} - 70}{10}\right] = 0.90$
+\item From table: $\Pr(Z < 1.28) = 0.90$
+\item Therefore: $\frac{S_{90} - 70}{10} = 1.28$
+\item Solve: $S_{90} = 70 + 1.28(10) = 82.8$
+\end{enumerate}
+
+\vspace{0.2cm}
+\textbf{Answer:} Score of 82.8 is the 90th percentile
+
+\vspace{0.2cm}
+\textbf{R code:} \texttt{qnorm(0.90, mean=70, sd=10)} returns 82.8
+\end{frame}
+
+\begin{frame}
+\frametitle{Medical Example: Cholesterol Levels}
+\textbf{Adult cholesterol:} $\mu = 200$ mg/dL, $\sigma = 40$ mg/dL
+
+\vspace{0.5cm}
+\textbf{Clinical thresholds:}
+\begin{itemize}
+\item $< 200$ mg/dL: Desirable
+\item $200-239$ mg/dL: Borderline high
+\item $\geq 240$ mg/dL: High (treatment recommended)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Question:} What proportion need treatment (cholesterol $\geq 240$)?
+
+\vspace{0.3cm}
+\textbf{Solution:}
+\begin{itemize}
+\item $Z = \frac{240 - 200}{40} = 1.0$
+\item $\Pr(X \geq 240) = \Pr(Z > 1.0) = 1 - 0.8413 = 0.1587$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Answer:} About 16\% of adults have high cholesterol requiring treatment
+\end{frame}
+
+\section{Other Important Distributions (Ch 7.4)}
+
+\begin{frame}
+\frametitle{Student's t-Distribution}
+\textbf{Named after ``Student'' (William Sealy Gosset)}
+\begin{itemize}
+\item Brewer and statistician at Guinness
+\item Published under pseudonym ``Student'' (1908)
+\item Developed for small sample inference
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Properties:}
+\begin{itemize}
+\item Bell-shaped like normal, but heavier tails
+\item Determined by degrees of freedom (df = n - 1)
+\item As df increases, approaches standard normal
+\item Used when $\sigma$ is unknown (estimated by $s$)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{When to use:}
+$$T = \frac{\bar{X} - \mu}{s/\sqrt{n}} \sim t_{n-1}$$
+
+\textbf{We'll use this extensively for confidence intervals and hypothesis tests!}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparing Normal and t-Distributions}
+\textbf{Key differences:}
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Feature & Normal $N(0,1)$ & t-distribution \\
+\midrule
+Shape & Bell-shaped & Bell-shaped \\
+Tails & Thinner & Heavier \\
+Parameters & None (standard) & Degrees of freedom \\
+Use & $\sigma$ known & $\sigma$ unknown \\
+Critical value (95\%) & 1.96 & Depends on df \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textbf{Example critical values for 95\% confidence:}
+\begin{itemize}
+\item $Z_{0.975} = 1.96$ (always)
+\item $t_{0.975, df=5} = 2.571$ (small sample)
+\item $t_{0.975, df=30} = 2.042$ (moderate sample)
+\item $t_{0.975, df=\infty} = 1.96$ (same as Z)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Other Distributions (Brief Preview)}
+\textbf{Chi-Square ($\chi^2$) Distribution:}
+\begin{itemize}
+\item Right-skewed, non-negative values
+\item Used for: goodness-of-fit tests, contingency tables, variance testing
+\item Parameters: degrees of freedom
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{F-Distribution:}
+\begin{itemize}
+\item Ratio of two chi-square distributions
+\item Used for: ANOVA, comparing variances
+\item Parameters: two degrees of freedom (numerator and denominator)
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Poisson Distribution:}
+\begin{itemize}
+\item Discrete, for rare events
+\item Used for: disease counts, rare adverse events
+\item Parameter: rate $\lambda$ (mean = variance)
+\end{itemize}
+
+\vspace{0.3cm}
+\textit{We'll encounter these in later weeks!}
+\end{frame}
+
+\section{Sampling Distributions (Ch 8)}
+
+\begin{frame}
+\frametitle{From Populations to Samples}
+\textbf{Fundamental Statistical Problem:}
+\begin{itemize}
+\item \textbf{Population:} All subjects of interest (usually unknown)
+  \begin{itemize}
+  \item Has parameters: $\mu$ (mean), $\sigma$ (SD)
+  \end{itemize}
+\item \textbf{Sample:} Subset we actually observe
+  \begin{itemize}
+  \item Has statistics: $\bar{x}$ (sample mean), $s$ (sample SD)
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Statistical Inference:}
+\begin{itemize}
+\item Use sample statistics to learn about population parameters
+\item Account for sampling variability (uncertainty)
+\item Quantify our confidence in conclusions
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Key Insight:} Different samples give different results. How much variation should we expect?
+\end{frame}
+
+\begin{frame}
+\frametitle{Thought Experiment: OSU Student Heights}
+\textbf{Imagine:}
+\begin{itemize}
+\item I take a sample of $n=100$ OSU students, measure heights
+\item Compute sample mean: $\bar{x}_1 = 66.2$ inches
+\item \textbf{You} take a different sample of $n=100$ students
+\item Compute sample mean: $\bar{x}_2 = 65.8$ inches
+\item \textbf{Everyone in class} takes a sample of $n=100$
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Questions:}
+\begin{enumerate}
+\item Will all sample means be the same? \textbf{No!}
+\item Will they be close to each other? \textbf{Probably}
+\item What's the distribution of all possible $\bar{x}$ values?
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Answer:} The distribution of $\bar{x}$ is called the \textit{sampling distribution of the mean}
+\end{frame}
+
+\begin{frame}
+\frametitle{Sampling Distribution of the Mean}
+\textbf{Definition:} The probability distribution of all possible sample means from samples of size $n$
+
+\vspace{0.5cm}
+\textbf{Key Properties (for samples from ANY population):}
+\begin{enumerate}
+\item \textbf{Center:} $E(\bar{X}) = \mu$ (unbiased estimator)
+  \begin{itemize}
+  \item Sample mean centers on population mean
+  \end{itemize}
+
+\item \textbf{Spread:} $\text{SD}(\bar{X}) = \frac{\sigma}{\sqrt{n}}$ (standard error)
+  \begin{itemize}
+  \item Variability decreases as sample size increases
+  \end{itemize}
+
+\item \textbf{Shape:} Approximately normal for large $n$ (Central Limit Theorem)
+  \begin{itemize}
+  \item Even if population is NOT normal!
+  \end{itemize}
+\end{enumerate}
+
+\vspace{0.5cm}
+\textbf{Notation:} $\bar{X} \sim N\left(\mu, \frac{\sigma^2}{n}\right)$ for large $n$
+\end{frame}
+
+\begin{frame}
+\frametitle{Standard Error vs Standard Deviation}
+\textbf{CRITICAL DISTINCTION:}
+
+\vspace{0.3cm}
+\textbf{Standard Deviation ($\sigma$):}
+\begin{itemize}
+\item Variability of \textit{individual observations}
+\item Describes spread in the population
+\item Does NOT decrease with sample size
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Standard Error ($\text{SE} = \sigma/\sqrt{n}$):}
+\begin{itemize}
+\item Variability of \textit{sample means}
+\item Describes precision of our estimate
+\item Decreases as sample size increases
+\item Smaller SE = more precise estimate
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Example:} Blood pressure with $\sigma = 20$ mmHg
+\begin{itemize}
+\item Individual SD: $\sigma = 20$ mmHg (always)
+\item SE for $n=25$: $20/\sqrt{25} = 4$ mmHg
+\item SE for $n=100$: $20/\sqrt{100} = 2$ mmHg
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Central Limit Theorem (CLT)}
+\textbf{Most Important Theorem in Statistics!}
+
+\vspace{0.5cm}
+\textbf{Statement:}
+For a random sample of size $n$ from ANY population with mean $\mu$ and finite variance $\sigma^2$:
+
+$$\bar{X} \xrightarrow{d} N\left(\mu, \frac{\sigma^2}{n}\right) \text{ as } n \to \infty$$
+
+Or equivalently:
+$$Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \xrightarrow{d} N(0, 1)$$
+
+\vspace{0.5cm}
+\textbf{In plain English:}
+\begin{itemize}
+\item Sample means are approximately normally distributed
+\item Works for \textbf{ANY} population distribution (skewed, bimodal, etc.)
+\item Approximation improves as $n$ increases
+\item Rule of thumb: $n \geq 30$ often sufficient
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Why CLT Matters}
+\textbf{The CLT enables statistical inference!}
+
+\vspace{0.5cm}
+\textbf{Applications:}
+\begin{enumerate}
+\item \textbf{Confidence Intervals:}
+  \begin{itemize}
+  \item We can use normal distribution to quantify uncertainty
+  \item Even when population is not normal
+  \end{itemize}
+
+\item \textbf{Hypothesis Testing:}
+  \begin{itemize}
+  \item Calculate p-values using normal probabilities
+  \item Test claims about population means
+  \end{itemize}
+
+\item \textbf{Sample Size Determination:}
+  \begin{itemize}
+  \item Predict precision of estimates before collecting data
+  \item Plan studies efficiently
+  \end{itemize}
+\end{enumerate}
+
+\vspace{0.5cm}
+\textbf{Key Insight:} We don't need to know the population distribution to make inferences about the mean!
+\end{frame}
+
+\begin{frame}
+\frametitle{CLT Example: IQ Scores}
+\textbf{Population:} Los Angeles residents, IQ $\sim N(100, 15^2)$
+
+Actually normal, but CLT still applies!
+
+\vspace{0.3cm}
+\textbf{Sample:} $n = 90$ residents, known variance $\sigma^2 = 100$ (so $\sigma = 10$)
+
+\vspace{0.3cm}
+\textbf{Observed:} Sample mean $\bar{x} = 105$
+
+\vspace{0.5cm}
+\textbf{Sampling distribution of $\bar{X}$:}
+\begin{itemize}
+\item Mean: $E(\bar{X}) = \mu = 100$
+\item Standard error: $\text{SE} = \frac{10}{\sqrt{90}} = 1.054$
+\item Distribution: $\bar{X} \sim N(100, 1.054^2)$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Question:} How unusual is $\bar{x} = 105$?
+\begin{itemize}
+\item $Z = \frac{105 - 100}{1.054} = 4.74$ (!!)
+\item $\Pr(Z > 4.74) < 0.00001$
+\item Very strong evidence that LA mean IQ $> 100$
+\end{itemize}
+\end{frame}
+
+\section{Confidence Intervals (Introduction)}
+
+\begin{frame}
+\frametitle{From Point Estimates to Intervals}
+\textbf{Problem with point estimates:}
+\begin{itemize}
+\item Sample mean $\bar{x} = 105$ is our best guess for $\mu$
+\item But we know $\bar{x}$ has sampling variability
+\item How confident are we? What's the range of plausible values?
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Solution: Confidence Intervals}
+\begin{itemize}
+\item Provide a range of plausible values for $\mu$
+\item Quantify our uncertainty
+\item Account for sampling variability
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{General Form:}
+$$\text{Estimate} \pm \text{Margin of Error}$$
+$$\bar{x} \pm (\text{critical value}) \times \text{SE}$$
+\end{frame}
+
+\begin{frame}
+\frametitle{95\% Confidence Interval ($\sigma$ known)}
+\textbf{When population SD ($\sigma$) is known:}
+
+$$95\% \text{ CI for } \mu: \quad \bar{x} \pm 1.96 \times \frac{\sigma}{\sqrt{n}}$$
+
+\vspace{0.5cm}
+\textbf{Why 1.96?}
+\begin{itemize}
+\item For $Z \sim N(0,1)$: $\Pr(-1.96 < Z < 1.96) = 0.95$
+\item Middle 95\% of standard normal distribution
+\item Comes from $\bar{X} \sim N(\mu, \sigma^2/n)$ by CLT
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{IQ Example:} $\bar{x} = 105$, $\sigma = 10$, $n = 90$
+$$\text{95\% CI} = 105 \pm 1.96 \times \frac{10}{\sqrt{90}}$$
+$$= 105 \pm 2.07 = (102.93, 107.07)$$
+
+\textbf{Interpretation:} We are 95\% confident the true mean LA IQ is between 102.93 and 107.07
+\end{frame}
+
+\begin{frame}
+\frametitle{95\% Confidence Interval ($\sigma$ unknown)}
+\textbf{Reality:} We usually don't know $\sigma$!
+
+\vspace{0.3cm}
+\textbf{Solution:} Use sample SD ($s$) and t-distribution
+
+$$95\% \text{ CI for } \mu: \quad \bar{x} \pm t_{0.975, n-1} \times \frac{s}{\sqrt{n}}$$
+
+\vspace{0.5cm}
+\textbf{Key differences:}
+\begin{itemize}
+\item Use $s$ instead of $\sigma$ (estimate from data)
+\item Use $t_{n-1}$ critical value instead of 1.96
+\item Accounts for extra uncertainty from estimating $\sigma$
+\item \textbf{Assumes:} Population is approximately normal
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Example critical values:}
+\begin{itemize}
+\item $n = 10$: $t_{0.975, 9} = 2.262$ (wider than 1.96)
+\item $n = 30$: $t_{0.975, 29} = 2.045$
+\item $n = 100$: $t_{0.975, 99} = 1.984$ (close to 1.96)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tumor Growth Example}
+\textbf{Clinical Trial:} 20 patients, 10 treatment, 10 control
+
+\vspace{0.3cm}
+\textbf{Control group tumor growth (mm):}\\
+7, 10, 9, 8, 7, 6, 8, 9, 12, 13
+
+\vspace{0.3cm}
+\textbf{Treatment group tumor growth (mm):}\\
+4, 6, 10, 8, 5, 3, 10, 8, 8, 10
+
+\vspace{0.5cm}
+\textbf{Control group:}
+\begin{itemize}
+\item $\bar{x}_C = 8.9$ mm, $s_C = 2.234$ mm, $n_C = 10$
+\item $t_{0.975, 9} = 2.262$
+\item 95\% CI: $8.9 \pm 2.262 \times \frac{2.234}{\sqrt{10}} = 8.9 \pm 1.598$
+\item \textbf{95\% CI: (7.30, 10.50) mm}
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Treatment group:}
+\begin{itemize}
+\item $\bar{x}_T = 7.2$ mm, $s_T = 2.573$ mm
+\item 95\% CI: \textbf{(5.36, 9.04) mm}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Interpreting Confidence Intervals}
+\textbf{Correct interpretation:}
+\begin{itemize}
+\item ``We are 95\% confident that the true population mean is between 7.30 and 10.50 mm''
+\item The interval (7.30, 10.50) either contains $\mu$ or it doesn't
+\item If we repeated this procedure many times, 95\% of intervals would contain $\mu$
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Common misinterpretations (WRONG):}
+\begin{itemize}
+\item $\times$ ``There's a 95\% probability $\mu$ is in (7.30, 10.50)''
+  \begin{itemize}
+  \item $\mu$ is fixed, not random; it's either in or out
+  \end{itemize}
+\item $\times$ ``95\% of the data is between 7.30 and 10.50''
+  \begin{itemize}
+  \item This is about the population mean, not individual observations
+  \end{itemize}
+\item $\times$ ``The sample mean has 95\% probability of being in (7.30, 10.50)''
+  \begin{itemize}
+  \item We already observed $\bar{x} = 8.9$; no probability involved
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Bayesian methods} allow probability statements about parameters, but that's beyond this course.
+\end{frame}
+
+\begin{frame}
+\frametitle{Other Confidence Levels}
+\textbf{Not always 95\%!}
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+Confidence & $\alpha$ & Z critical & Interpretation \\
+\midrule
+90\% & 0.10 & 1.645 & Narrower, less confident \\
+95\% & 0.05 & 1.96 & Standard choice \\
+99\% & 0.01 & 2.576 & Wider, more confident \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Trade-off:}
+\begin{itemize}
+\item Higher confidence $\Rightarrow$ wider interval (less precise)
+\item Lower confidence $\Rightarrow$ narrower interval (more precise)
+\item Choice depends on context and consequences of error
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{General formula:}
+$$\text{CI} = \bar{x} \pm z_{\alpha/2} \times \frac{\sigma}{\sqrt{n}}$$
+
+where $z_{\alpha/2}$ leaves area $\alpha/2$ in each tail
+\end{frame}
+
+\section{R Examples and Practice}
+
+\begin{frame}[fragile]
+\frametitle{R Example: Binomial Distribution}
+\small
+\begin{verbatim}
+# Vaccine efficacy: n=20, p=0.90
+n <- 20
+p <- 0.90
+
+# Probability exactly 18 protected
+dbinom(18, n, p)  # 0.2852
+
+# Probability at least 18 protected
+pbinom(17, n, p, lower.tail=FALSE)  # 0.6769
+# or: 1 - pbinom(17, n, p)
+
+# Expected value and variance
+expected <- n * p           # 18
+variance <- n * p * (1-p)   # 1.8
+sd <- sqrt(variance)        # 1.34
+
+# Visualize
+x <- 0:n
+probs <- dbinom(x, n, p)
+barplot(probs, names.arg=x,
+        main="Binomial(20, 0.90)",
+        xlab="Number Protected", ylab="Probability",
+        col="lightblue")
+abline(v=expected+0.5, col="red", lty=2, lwd=2)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{R Example: Normal Distribution}
+\small
+\begin{verbatim}
+# Cholesterol: mean=200, SD=40
+mu <- 200
+sigma <- 40
+
+# Probability cholesterol > 240
+pnorm(240, mu, sigma, lower.tail=FALSE)  # 0.159
+
+# Probability between 180 and 220
+pnorm(220, mu, sigma) - pnorm(180, mu, sigma)  # 0.383
+
+# 90th percentile
+qnorm(0.90, mu, sigma)  # 251.3 mg/dL
+
+# Visualize with shaded regions
+x <- seq(100, 300, length=200)
+y <- dnorm(x, mu, sigma)
+plot(x, y, type="l", lwd=2,
+     main="Adult Cholesterol Distribution",
+     xlab="Cholesterol (mg/dL)", ylab="Density")
+abline(v=c(200, 240), col=c("blue", "red"), lty=2)
+legend("topright", c("Mean", "High (>=240)"),
+       col=c("blue", "red"), lty=2)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{R Example: Sampling Distribution Simulation}
+\footnotesize
+\begin{verbatim}
+# Simulate CLT
+set.seed(524)
+pop_mean <- 120    # Population mean BP
+pop_sd <- 20       # Population SD
+
+# Different sample sizes
+sample_sizes <- c(5, 10, 30, 100)
+
+par(mfrow=c(2,2))
+for(n in sample_sizes) {
+  # Draw 1000 samples, compute means
+  sample_means <- replicate(1000, {
+    sample <- rnorm(n, pop_mean, pop_sd)
+    mean(sample)
+  })
+
+  # Plot sampling distribution
+  hist(sample_means, breaks=30, prob=TRUE,
+       main=paste("n =", n),
+       xlab="Sample Mean", col="lightblue")
+
+  # Overlay theoretical normal
+  se <- pop_sd/sqrt(n)
+  curve(dnorm(x, pop_mean, se), add=TRUE, col="red", lwd=2)
+}
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{R Example: Confidence Intervals}
+\small
+\begin{verbatim}
+# Tumor growth data (control group)
+control <- c(7, 10, 9, 8, 7, 6, 8, 9, 12, 13)
+
+# Method 1: Manual calculation
+xbar <- mean(control)                    # 8.9
+s <- sd(control)                         # 2.234
+n <- length(control)                     # 10
+se <- s/sqrt(n)                          # 0.707
+t_crit <- qt(0.975, df=n-1)             # 2.262
+margin <- t_crit * se                    # 1.598
+
+ci_lower <- xbar - margin                # 7.30
+ci_upper <- xbar + margin                # 10.50
+
+cat("95% CI:", round(ci_lower, 2), "to",
+    round(ci_upper, 2), "\n")
+
+# Method 2: Using t.test() function
+result <- t.test(control, conf.level=0.95)
+result$conf.int  # (7.30, 10.50)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{R Example: Comparing Z and t CIs}
+\footnotesize
+\begin{verbatim}
+# Sample data
+data <- rnorm(15, mean=100, sd=15)
+xbar <- mean(data)
+s <- sd(data)
+n <- length(data)
+se <- s/sqrt(n)
+
+# Z-based CI (assumes sigma known = 15)
+z_crit <- qnorm(0.975)
+z_ci <- xbar + c(-1, 1) * z_crit * 15/sqrt(n)
+
+# t-based CI (sigma unknown, use s)
+t_crit <- qt(0.975, df=n-1)
+t_ci <- xbar + c(-1, 1) * t_crit * se
+
+# Compare
+cat("Z-based CI:", round(z_ci, 2), "\n")
+cat("t-based CI:", round(t_ci, 2), "\n")
+cat("t CI is", round((t_ci[2]-t_ci[1])/(z_ci[2]-z_ci[1]), 3),
+    "times wider\n")
+
+# Note: Difference decreases as n increases
+# For n=100, they're nearly identical
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{Summary}
+\textbf{Today we covered:}
+\begin{itemize}
+\item \textbf{Chapter 7.1:} Binomial distribution
+  \begin{itemize}
+  \item Conditions, probability formula, mean and variance
+  \item R functions: dbinom(), pbinom()
+  \end{itemize}
+\item \textbf{Chapter 7.2:} Normal distribution
+  \begin{itemize}
+  \item Properties, standardization, empirical rule
+  \item R functions: dnorm(), pnorm(), qnorm()
+  \end{itemize}
+\item \textbf{Chapter 7.4:} Other distributions (t, chi-square, F)
+\item \textbf{Chapter 8:} Sampling distributions
+  \begin{itemize}
+  \item Central Limit Theorem
+  \item Standard error vs standard deviation
+  \item Confidence intervals (introduction)
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.5cm}
+\textbf{Next Week:} Chapter 9 - More on Confidence Intervals
+
+\vspace{0.3cm}
+\textbf{Reading:} Complete all of Chapter 9
+\end{frame}
+
+\begin{frame}
+\frametitle{Questions?}
+\begin{center}
+\Large{Thank you!}
+
+\vspace{1cm}
+
+\textbf{Email:} john.molitor@oregonstate.edu\\
+\textbf{Office:} 153 Milam
+\end{center}
+\end{frame}
+
+\end{document}

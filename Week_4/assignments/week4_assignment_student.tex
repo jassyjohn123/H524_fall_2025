@@ -1,0 +1,317 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+
+% Define OSU orange and AI blue
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{H524 Introduction to Biostatistics}
+\rhead{Week 4 Assignment}
+\cfoot{\thepage}
+
+% Answer box styling
+\newcommand{\answer}[1]{\par\vspace{0.3em}\colorbox{green!10}{\parbox{\dimexpr\textwidth-2\fboxsep}{\textbf{ANSWER:} #1}}\vspace{0.3em}\par}
+
+\title{\textbf{\Large H524 Week 4 Assignment: Confidence Intervals}\\
+\large Student Version}
+\author{Introduction to Biostatistics}
+\date{Fall 2025}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+\textbf{Assignment Information:}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Total Points:} 110 points
+\item \textbf{Time Limit:} 180 minutes (3 hours)
+\item \textbf{Attempts:} 1
+\item \textbf{Question Types:} 16 Multiple Choice (80 pts), 2 Essay/Fill-in (30 pts)
+\end{itemize}
+}}
+\end{center}
+
+\vspace{1em}
+
+\section*{Part 1: CI Fundamentals}
+
+\subsection*{Question 1: CI Interpretation (5 points)}
+
+A study reports a 95\% confidence interval for mean blood pressure reduction as (8.2, 14.6) mmHg. What is the CORRECT interpretation?
+
+\begin{enumerate}[label=\alph*)]
+\item We are 95\% confident that the true population mean blood pressure reduction is between 8.2 and 14.6 mmHg
+\item There is a 95\% probability that the true mean is between 8.2 and 14.6 mmHg
+\item 95\% of patients will have blood pressure reductions between 8.2 and 14.6 mmHg
+\item The sample mean has a 95\% chance of being between 8.2 and 14.6 mmHg
+\end{enumerate}
+
+\subsection*{Question 2: Critical Value Selection (5 points)}
+
+You want to construct a 95\% confidence interval for a population mean. The sample size is $n = 15$, and the population standard deviation is unknown. Which critical value should you use?
+
+\begin{enumerate}[label=\alph*)]
+\item $z = 1.96$
+\item $t(14) = 2.145$
+\item $t(15) = 2.131$
+\item $z = 2.576$
+\end{enumerate}
+
+\subsection*{Question 3: Factors Affecting CI Width (5 points)}
+
+If you want a NARROWER confidence interval for a population mean, which of the following actions would achieve this?
+
+\begin{enumerate}[label=\alph*)]
+\item Increase the confidence level from 95\% to 99\%
+\item Decrease the sample size
+\item Increase the sample size
+\item Use a larger standard deviation
+\end{enumerate}
+
+\subsection*{Question 4: Standard Error (5 points)}
+
+A study has a sample standard deviation $s = 12$ and sample size $n = 36$. What is the standard error of the mean?
+
+\begin{enumerate}[label=\alph*)]
+\item $SE = 2$
+\item $SE = 3$
+\item $SE = 6$
+\item $SE = 12$
+\end{enumerate}
+
+\section*{Part 2: CI for Means}
+
+\subsection*{Question 5: Manual CI Calculation (15 points)}
+
+A clinical trial measures pain reduction scores for 25 patients receiving a new treatment. The results are:
+\begin{itemize}
+\item Sample mean: $\bar{x} = 7.8$ points
+\item Sample standard deviation: $s = 3.2$ points
+\item Sample size: $n = 25$
+\end{itemize}
+
+Calculate a 95\% confidence interval for the true mean pain reduction. Show all work including:
+\begin{enumerate}[label=\alph*)]
+\item Which distribution to use ($z$ or $t$) and why (3 points)
+\item The appropriate critical value (3 points)
+\item The standard error calculation (3 points)
+\item The margin of error calculation (3 points)
+\item The final confidence interval with interpretation (3 points)
+\end{enumerate}
+
+\textit{Hint: For a 95\% CI with df=24, the critical $t$-value is approximately 2.064}
+
+\subsection*{Question 6: Confidence Level Comparison (5 points)}
+
+Using the same data from the Manual CI question above, if we constructed a 99\% confidence interval instead of 95\%, what would happen to the interval width?
+
+\begin{enumerate}[label=\alph*)]
+\item The interval would be narrower because we are more confident
+\item The interval would be wider because higher confidence requires a larger margin of error
+\item The interval width would stay exactly the same
+\item The interval would be narrower because the critical value decreases
+\end{enumerate}
+
+\section*{Part 3: CI for Proportions}
+
+\subsection*{Question 7: Proportion CI Conditions (5 points)}
+
+When constructing a confidence interval for a population proportion using the normal approximation (Wald method), which condition must be satisfied?
+
+\begin{enumerate}[label=\alph*)]
+\item $n \geq 30$
+\item Both $np \geq 5$ and $n(1-p) \geq 5$
+\item The population must be normally distributed
+\item The sample proportion must be greater than 0.5
+\end{enumerate}
+
+\subsection*{Question 8: Proportion CI Calculation (5 points)}
+
+In a survey of 200 patients, 150 reported satisfaction with their treatment. What is the sample proportion ($\hat{p}$)?
+
+\begin{enumerate}[label=\alph*)]
+\item $\hat{p} = 0.50$
+\item $\hat{p} = 0.67$
+\item $\hat{p} = 0.75$
+\item $\hat{p} = 0.80$
+\end{enumerate}
+
+\subsection*{Question 9: Standard Error for Proportion (5 points)}
+
+Using the data from the proportion calculation question ($\hat{p} = 0.75$, $n = 200$), what is the standard error for the proportion? Use $SE = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$
+
+\begin{enumerate}[label=\alph*)]
+\item $SE \approx 0.031$
+\item $SE \approx 0.043$
+\item $SE \approx 0.075$
+\item $SE \approx 0.125$
+\end{enumerate}
+
+\subsection*{Question 10: Vaccine Efficacy CI (5 points)}
+
+A vaccine trial reports a 95\% CI for vaccine efficacy as (72\%, 89\%). What can we conclude?
+
+\begin{enumerate}[label=\alph*)]
+\item We are 95\% confident the true efficacy is between 72\% and 89\%, suggesting the vaccine is effective since the entire interval is above 0\%
+\item 72\% of people are protected at minimum, 89\% at maximum
+\item The vaccine has a 95\% chance of working
+\item We cannot determine effectiveness because the interval is too wide
+\end{enumerate}
+
+\section*{Part 4: Sample Size Determination}
+
+\subsection*{Question 11: Sample Size Concepts (5 points)}
+
+You want to estimate the mean cholesterol level in a population with a margin of error of 5 mg/dL at 95\% confidence. If you quadruple the sample size, what happens to the margin of error?
+
+\begin{enumerate}[label=\alph*)]
+\item The margin of error is cut in half
+\item The margin of error is cut to one-quarter
+\item The margin of error doubles
+\item The margin of error stays the same
+\end{enumerate}
+
+\subsection*{Question 12: Sample Size Calculation (5 points)}
+
+A researcher wants to estimate a population proportion with a 95\% CI and margin of error of 0.05. Using the conservative estimate ($\hat{p} = 0.5$), what sample size is needed?
+
+Formula: $n = \frac{z^2 \cdot \hat{p}(1-\hat{p})}{E^2}$, where $z = 1.96$ for 95\% CI
+
+\begin{enumerate}[label=\alph*)]
+\item $n = 196$
+\item $n = 271$
+\item $n = 385$
+\item $n = 577$
+\end{enumerate}
+
+\section*{Part 5: Assumptions and Checking}
+
+\subsection*{Question 13: Normality Assessment (5 points)}
+
+You have a sample of $n = 12$ observations and want to construct a $t$-based confidence interval for the mean. Which of the following is the BEST way to assess whether the normality assumption is reasonable?
+
+\begin{enumerate}[label=\alph*)]
+\item Check that $n \geq 30$, which automatically ensures normality
+\item Create a histogram and Q-Q plot to visually assess normality, and consider the Shapiro-Wilk test
+\item Calculate the mean and median; if they're close, the data is normal
+\item Normality is not required for $t$-based intervals
+\end{enumerate}
+
+\subsection*{Question 14: Large vs Small Sample (5 points)}
+
+When can you safely use a $z$-based confidence interval instead of a $t$-based confidence interval for a population mean?
+
+\begin{enumerate}[label=\alph*)]
+\item When the population standard deviation ($\sigma$) is known, regardless of sample size
+\item Only when $n \geq 30$
+\item When the sample size is less than 30
+\item Never; always use $t$-distribution for real-world data
+\end{enumerate}
+
+\subsection*{Question 15: CI for Hypothesis Testing (5 points)}
+
+A 95\% confidence interval for the difference in mean blood pressure between two treatments is $(-2.3, 8.7)$ mmHg. What can you conclude at the $\alpha = 0.05$ significance level?
+
+\begin{enumerate}[label=\alph*)]
+\item There is a significant difference between treatments because the interval is positive
+\item There is NOT a significant difference between treatments because the interval contains 0
+\item Treatment 1 is better than Treatment 2
+\item We need more data to make any conclusion
+\end{enumerate}
+
+\section*{Part 6: R Implementation}
+
+\subsection*{Question 16: CI with R (15 points)}
+
+A clinical trial measures vitamin D levels (ng/mL) for 30 patients after supplementation:
+
+\begin{lstlisting}[language=R, basicstyle=\small\ttfamily]
+vitamin_d <- c(32, 38, 29, 35, 31, 40, 27, 34, 36, 30,
+               28, 37, 33, 35, 31, 34, 36, 29, 33, 37,
+               30, 35, 34, 31, 39, 33, 36, 29, 34, 35)
+\end{lstlisting}
+
+Using R, complete the following tasks and paste your code and results:
+\begin{enumerate}[label=\alph*)]
+\item Calculate the sample mean, standard deviation, and sample size (3 points)
+\item Create a histogram to assess normality (2 points)
+\item Use \texttt{t.test()} to calculate a 95\% confidence interval for the mean vitamin D level (5 points)
+\item Interpret the confidence interval in context (3 points)
+\item What would you conclude about whether the mean vitamin D level is above 30 ng/mL? (2 points)
+\end{enumerate}
+
+\textbf{a) Descriptive statistics (3 points):}
+\begin{lstlisting}[language=R, basicstyle=\small\ttfamily]
+vitamin_d <- c(32, 38, 29, 35, 31, 40, 27, 34, 36, 30,
+               28, 37, 33, 35, 31, 34, 36, 29, 33, 37,
+               30, 35, 34, 31, 39, 33, 36, 29, 34, 35)
+
+# Sample statistics
+mean(vitamin_d)
+# [1] 33.37
+
+sd(vitamin_d)
+# [1] 3.35
+
+length(vitamin_d)
+# [1] 30
+\end{lstlisting}
+
+\textbf{b) Histogram for normality (2 points):}
+\begin{lstlisting}[language=R, basicstyle=\small\ttfamily]
+hist(vitamin_d,
+     main = "Histogram of Vitamin D Levels",
+     xlab = "Vitamin D (ng/mL)",
+     col = "lightblue",
+     breaks = 10)
+\end{lstlisting}
+The histogram should show approximately normal distribution.
+
+\textbf{c) 95\% CI using t.test() (5 points):}
+\begin{lstlisting}[language=R, basicstyle=\small\ttfamily]
+t.test(vitamin_d, conf.level = 0.95)
+
+# Output:
+# One Sample t-test
+#
+# data:  vitamin_d
+# t = 54.595, df = 29, p-value < 2.2e-16
+# alternative hypothesis: true mean is not equal to 0
+# 95 percent confidence interval:
+#  32.11669 34.61664
+# sample estimates:
+# mean of x
+#    33.36667
+\end{lstlisting}
+
+\textbf{d) Interpretation (3 points):}
+
+We are 95\% confident that the true mean vitamin D level for all patients receiving this supplementation is between 32.12 and 34.62 ng/mL.
+
+\textbf{e) Conclusion about 30 ng/mL (2 points):}
+
+Since the entire 95\% confidence interval (32.12, 34.62) is above 30 ng/mL, we can conclude with 95\% confidence that the true mean vitamin D level is greater than 30 ng/mL. This suggests the supplementation successfully raises vitamin D levels above the 30 ng/mL threshold.
+
+\subsection*{Question 17: Proportion CI in R (5 points)}
+
+Which R function would you use to calculate a confidence interval for a population proportion?
+
+\begin{enumerate}[label=\alph*)]
+\item \texttt{prop.test(x, n)}
+\item \texttt{t.test(x)}
+\item \texttt{binom.test(x, n)}
+\item Both a and c are appropriate
+\end{enumerate}
+
+\end{document}

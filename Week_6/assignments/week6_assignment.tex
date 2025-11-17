@@ -1,0 +1,310 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage[breakable,listings]{tcolorbox}
+\tcbuselibrary{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{array}
+
+% Define colors
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+% Code environment
+\newtcblisting{rcode}{
+  colback=white,
+  colframe=gray!50,
+  boxrule=0.5pt,
+  arc=0pt,
+  left=3pt,
+  right=3pt,
+  top=3pt,
+  bottom=3pt,
+  width=\textwidth,
+  breakable,
+  listing only,
+  listing options={
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    breakatwhitespace=true,
+    columns=flexible,
+    keepspaces=true,
+    showstringspaces=false
+  }
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Header box
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=3pt,right=3pt,top=6pt,bottom=6pt,boxsep=2pt]
+\centering
+\textcolor{white}{\textbf{\Large H524 Introduction to Biostatistics}}\\
+\textcolor{white}{\textbf{\Large Week 6: Power, Two-Sample Tests, and ANOVA}}\\
+\textcolor{white}{\textbf{\Large Homework Assignment}}\\
+\textcolor{white}{\textbf{\Large Fall 2025}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Due Date:} End of Week 6\\
+\textbf{Total Points:} 28 points\\
+\textbf{Format:} Submit through Canvas\\
+\textbf{Time Limit:} 60 minutes
+
+\section*{Instructions}
+
+\begin{itemize}
+\item Show all work for full credit on numerical questions
+\item Round numerical answers to 2 decimal places unless otherwise specified
+\item Include R code where specified
+\item You may use R to perform calculations
+\item For multiple choice, select the BEST answer
+\end{itemize}
+
+\section*{Multiple Choice Questions (10 points total, 2 points each)}
+
+\textbf{Question 1:} Statistical power is defined as:
+
+\begin{enumerate}[label=\Alph*.]
+\item The probability of making a Type I error
+\item The probability of correctly rejecting a false null hypothesis
+\item The probability of failing to reject a true null hypothesis
+\item The significance level of the test
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\textbf{Question 2:} Which of the following will \textit{increase} the statistical power of a study?
+
+\begin{enumerate}[label=\Alph*.]
+\item Decreasing the sample size
+\item Increasing the population variance
+\item Increasing the significance level (alpha)
+\item Decreasing the effect size
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\textbf{Question 3:} A researcher measures blood pressure in 15 patients before and after a medication intervention. Which test should be used?
+
+\begin{enumerate}[label=\Alph*.]
+\item One-sample t-test
+\item Independent two-sample t-test
+\item Paired t-test
+\item One-way ANOVA
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\textbf{Question 4:} When comparing means across 4 independent groups, why is ANOVA preferred over multiple pairwise t-tests?
+
+\begin{enumerate}[label=\Alph*.]
+\item ANOVA is easier to calculate
+\item ANOVA requires smaller sample sizes
+\item ANOVA controls the family-wise Type I error rate
+\item ANOVA doesn't require assumptions
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\textbf{Question 5:} An ANOVA test comparing 5 groups yields F = 3.45 with p = 0.02. What can you conclude?
+
+\begin{enumerate}[label=\Alph*.]
+\item All five group means are significantly different from each other
+\item At least one group mean differs from the others
+\item The first group differs significantly from the last group
+\item Groups 1 and 2 have equal means
+\end{enumerate}
+
+\newpage
+
+\section*{Numerical Questions (15 points total)}
+
+\subsection*{Question 6: Sample Size for Power (3 points)}
+
+A researcher is planning a study to test whether a new medication reduces systolic blood pressure. Based on pilot data, the population standard deviation is estimated to be $\sigma = 20$ mmHg. The researcher wants to detect a mean reduction of 10 mmHg from the population mean of 145 mmHg.
+
+\vspace{0.3cm}
+
+Using a significance level of $\alpha = 0.05$ (two-sided) and desired power of 0.80, calculate the required sample size using R's \texttt{power.t.test()} function for a one-sample t-test.
+
+\vspace{0.3cm}
+
+\textbf{Show your R code:}
+
+\vspace{3cm}
+
+\textbf{What is the required sample size (round UP to the nearest whole number)?}
+
+\vspace{0.3cm}
+
+\textbf{Answer:} \underline{\hspace{3cm}} subjects
+
+\vspace{1cm}
+
+\subsection*{Question 7: Two-Sample t-Test and ANOVA (3 points)}
+
+A researcher compares the effectiveness of three different exercise programs on weight loss (in kg) over 8 weeks. The data are:
+
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Program A & Program B & Program C \\
+\midrule
+4.2 & 6.1 & 7.8 \\
+3.8 & 5.8 & 8.2 \\
+4.5 & 6.4 & 7.5 \\
+4.1 & 5.9 & 8.0 \\
+4.3 & 6.2 & 7.9 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+\textbf{Part A (1.5 points):} Perform a one-way ANOVA to test if there is a significant difference in mean weight loss across the three programs. Use $\alpha = 0.05$.
+
+\vspace{0.3cm}
+
+\textbf{Show your R code to create the data and perform ANOVA:}
+
+\vspace{5cm}
+
+\textbf{What is the F-statistic (round to 2 decimal places)?}
+
+\vspace{0.3cm}
+
+\textbf{Answer:} F = \underline{\hspace{3cm}}
+
+\vspace{0.5cm}
+
+\textbf{Part B (1.5 points):} Compare ONLY Program A vs. Program C using a two-sample t-test (assume equal variances, two-sided test).
+
+\vspace{0.3cm}
+
+\textbf{Show your R code:}
+
+\vspace{4cm}
+
+\textbf{What is the p-value (round to 4 decimal places)?}
+
+\vspace{0.3cm}
+
+\textbf{Answer:} p-value = \underline{\hspace{3cm}}
+
+\vspace{1cm}
+
+\subsection*{Question 8: Pooled Standard Deviation (3 points)}
+
+Two independent samples are collected to compare cholesterol levels between two diets:
+
+\begin{itemize}
+\item Diet 1: $n_1 = 12$, $s_1 = 18.5$ mg/dL
+\item Diet 2: $n_2 = 15$, $s_2 = 21.3$ mg/dL
+\end{itemize}
+
+Calculate the pooled standard deviation ($s_p$) using the formula:
+
+$$s_p = \sqrt{\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}}$$
+
+\vspace{0.3cm}
+
+\textbf{Show your calculation (R code or by hand):}
+
+\vspace{3cm}
+
+\textbf{Answer:} $s_p$ = \underline{\hspace{3cm}} mg/dL (round to 2 decimal places)
+
+\vspace{1cm}
+
+\subsection*{Question 9: Test Statistic Calculation (3 points)}
+
+A researcher compares mean test scores between two teaching methods. The summary statistics are:
+
+\begin{itemize}
+\item Method 1: $n_1 = 20$, $\bar{x}_1 = 85.3$, $s_1 = 12.4$
+\item Method 2: $n_2 = 18$, $\bar{x}_2 = 78.6$, $s_2 = 14.1$
+\end{itemize}
+
+Calculate the test statistic (t-value) for a two-sample t-test (assume equal variances) using the formula:
+
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}$$
+
+where $s_p = \sqrt{\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}}$
+
+\vspace{0.3cm}
+
+\textbf{Show your calculation (R code or by hand):}
+
+\vspace{4cm}
+
+\textbf{Answer:} t = \underline{\hspace{3cm}} (round to 2 decimal places)
+
+\vspace{1cm}
+
+\subsection*{Question 10: Confidence Interval for Mean Difference (3 points)}
+
+Using the data from Question 9 (Teaching Methods), construct a 95\% confidence interval for the mean difference in test scores ($\mu_1 - \mu_2$).
+
+Use the formula:
+
+$$\text{CI} = (\bar{x}_1 - \bar{x}_2) \pm t_{\alpha/2, df} \times SE$$
+
+where $SE = s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}$ and $df = n_1 + n_2 - 2$
+
+\textbf{Or} use R to calculate (show your work either way):
+
+\vspace{4cm}
+
+\textbf{Answer:} 95\% CI = (\underline{\hspace{2cm}}, \underline{\hspace{2cm}}) (round to 2 decimal places)
+
+\vspace{0.5cm}
+
+\textbf{Interpretation:} Based on this confidence interval, is there evidence of a significant difference between the two teaching methods at $\alpha = 0.05$? Explain briefly.
+
+\vspace{2cm}
+
+\subsection*{Question 11: Power Calculation (3 points)}
+
+A researcher is planning a one-sample study to test whether a new intervention changes blood glucose levels. Based on prior research:
+
+\begin{itemize}
+\item Expected sample size: $n = 30$
+\item Expected mean difference to detect: $\delta = 12$ mg/dL
+\item Population standard deviation: $\sigma = 18$ mg/dL
+\item Significance level: $\alpha = 0.05$ (two-sided)
+\end{itemize}
+
+Calculate the statistical power of this study using R's \texttt{power.t.test()} function.
+
+\vspace{0.3cm}
+
+\textbf{Show your R code:}
+
+\vspace{4cm}
+
+\textbf{Answer:} Power = \underline{\hspace{3cm}} (round to 2 decimal places)
+
+\vspace{0.5cm}
+
+\textbf{Note:} Express your answer as a proportion (e.g., 0.85), not as a percentage.
+
+\vspace{1cm}
+
+\end{document}

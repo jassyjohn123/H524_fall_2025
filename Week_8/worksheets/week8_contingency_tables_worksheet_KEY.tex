@@ -1,0 +1,367 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep,topsep=0pt}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+
+% Define OSU orange color
+\definecolor{osaorange}{RGB}{220,115,38}
+
+% Configure hyperref colors
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+% Orange header box with black outline
+\begin{tcolorbox}[colback=osaorange,colframe=black,boxrule=2pt,arc=0pt,left=6pt,right=6pt,top=10pt,bottom=10pt]
+\centering
+\textcolor{white}{\textbf{\Large Week 8 In-Class Worksheet - ANSWER KEY}}\\
+\textcolor{white}{\textbf{\large Contingency Tables and Chi-Square Tests}}
+\end{tcolorbox}
+
+\vspace{8pt}
+
+\noindent\textbf{Course:} H524 Introduction to Biostatistics\\
+\textbf{Topic:} Chi-Square Tests, Fisher's Exact Test, Effect Sizes
+
+\vspace{8pt}
+
+\section{Problem 1: Fisher's Exact Test}
+
+A small clinical trial tests a new treatment for a rare disease. Results:
+
+\begin{center}
+\begin{tabular}{l|cc|c}
+& \textbf{Improved} & \textbf{Not Improved} & \textbf{Total} \\
+\hline
+\textbf{Treatment} & 7 & 3 & 10 \\
+\textbf{Control} & 2 & 8 & 10 \\
+\hline
+\textbf{Total} & 9 & 11 & 20 \\
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate the expected counts for a chi-square test.
+
+\vspace{0.3cm}
+
+\textbf{Answer:}
+
+\begin{tabular}{l|cc}
+& \textbf{Improved} & \textbf{Not Improved} \\
+\hline
+\textbf{Treatment} & $\frac{10 \times 9}{20} = 4.5$ & $\frac{10 \times 11}{20} = 5.5$ \\[0.3cm]
+\textbf{Control} & $\frac{10 \times 9}{20} = 4.5$ & $\frac{10 \times 11}{20} = 5.5$ \\
+\end{tabular}
+
+\vspace{1cm}
+
+\textbf{Part B:} Are the chi-square test assumptions satisfied? Explain.
+
+\vspace{0.3cm}
+
+\textbf{Answer:}
+
+Rule: All expected counts should be $\geq 5$
+
+The smallest expected count is 4.5, which is less than 5. Therefore, the chi-square test assumptions are \textbf{violated}. We should use Fisher's exact test instead.
+
+\vspace{0.5cm}
+
+\textbf{Part C:} Based on your answer to Part B, which test should be used?
+
+\vspace{0.3cm}
+
+\textbf{Answer:}
+
+Fisher's exact test should be used because one or more expected cell counts are less than 5.
+
+\vspace{0.5cm}
+
+\textbf{Part D:} Use R to perform Fisher's exact test and report the p-value and odds ratio.
+
+\vspace{0.3cm}
+
+\textbf{Answer:}
+
+\textbf{R code:}
+\begin{verbatim}
+data <- matrix(c(7, 3, 2, 8), nrow=2, byrow=TRUE)
+fisher.test(data)
+\end{verbatim}
+
+\vspace{0.3cm}
+
+P-value (two-sided) = 0.0698
+
+\vspace{0.3cm}
+
+Odds Ratio = 8.1531
+
+\vspace{0.3cm}
+
+95\% CI for OR = (0.8821, 127.0558)
+
+\vspace{0.5cm}
+
+\textbf{Part E:} State your conclusion about treatment effectiveness.
+
+\vspace{0.3cm}
+
+\textbf{Answer:}
+
+Since $p = 0.0698 > 0.05$, we fail to reject $H_0$. There is no statistically significant evidence that the treatment is effective at the $\alpha = 0.05$ level. However, the p-value is relatively close to 0.05, and the odds ratio suggests a strong effect (8.15), indicating that a larger study might be warranted. The wide confidence interval reflects the small sample size.
+
+\newpage
+
+\section{Problem 2: Chi-Square Test of Independence}
+
+A cohort study follows 500 smokers and 500 non-smokers for 10 years to assess heart disease incidence.
+
+\begin{center}
+\begin{tabular}{l|cc|c}
+& \textbf{Heart Disease} & \textbf{No Heart Disease} & \textbf{Total} \\
+\hline
+\textbf{Smoker} & 75 & 425 & 500 \\
+\textbf{Non-smoker} & 35 & 465 & 500 \\
+\hline
+\textbf{Total} & 110 & 890 & 1000 \\
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part A:} State the hypotheses for a chi-square test of independence.
+
+\vspace{0.3cm}
+
+\textbf{Answer:}
+\begin{itemize}
+\item $H_0$: Smoking status and heart disease are independent (no association)
+\item $H_A$: Smoking status and heart disease are not independent (there is an association)
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{Part B:} Calculate the expected counts for each cell.
+
+\vspace{0.3cm}
+
+\textbf{Answer:}
+
+Formula: $E_{ij} = \frac{(\text{Row } i \text{ total}) \times (\text{Column } j \text{ total})}{\text{Grand total}}$
+
+\vspace{0.3cm}
+
+\begin{tabular}{l|cc}
+& \textbf{Heart Disease} & \textbf{No Heart Disease} \\
+\hline
+\textbf{Smoker} & $\frac{500 \times 110}{1000} = 55$ & $\frac{500 \times 890}{1000} = 445$ \\[0.3cm]
+\textbf{Non-smoker} & $\frac{500 \times 110}{1000} = 55$ & $\frac{500 \times 890}{1000} = 445$ \\
+\end{tabular}
+
+\vspace{1cm}
+
+\textbf{Part C:} Calculate the chi-square test statistic.
+
+\vspace{0.3cm}
+
+\textbf{Answer:}
+
+\begin{align*}
+\chi^2 &= \sum_{i,j} \frac{(O_{ij} - E_{ij})^2}{E_{ij}} \\
+&= \frac{(75-55)^2}{55} + \frac{(425-445)^2}{445} + \frac{(35-55)^2}{55} + \frac{(465-445)^2}{445} \\
+&= \frac{400}{55} + \frac{400}{445} + \frac{400}{55} + \frac{400}{445} \\
+&= 7.2727 + 0.8989 + 7.2727 + 0.8989 \\
+&= 16.3432
+\end{align*}
+
+\vspace{0.5cm}
+
+\textbf{Part D:} Find the p-value and state your conclusion. ($df = (r-1)(c-1)$)
+
+\vspace{0.3cm}
+
+\textbf{Answer:}
+
+$df = (2-1)(2-1) = 1$
+
+\vspace{0.3cm}
+
+P-value = $5.285 \times 10^{-5}$ (or 0.00005285)
+
+\vspace{0.3cm}
+
+\textbf{R code:}
+\begin{verbatim}
+pchisq(16.3432, df=1, lower.tail=FALSE)
+\end{verbatim}
+
+\vspace{0.3cm}
+
+\textbf{Conclusion:}
+
+Since $p < 0.05$, we reject $H_0$. There is strong evidence of an association between smoking status and heart disease. Smokers have a significantly higher rate of heart disease compared to non-smokers.
+
+\newpage
+
+\section{Problem 3: Effect Sizes - Relative Risk and Odds Ratio (OPTIONAL - Week 9 Preview)}
+
+\textbf{Note:} This problem previews next week's content on effect sizes. Solutions are provided for students who want to try this optional problem.
+
+\vspace{0.3cm}
+
+A cohort study follows 500 individuals exposed to a chemical and 500 unexposed individuals for 5 years to assess disease incidence.
+
+\begin{center}
+\begin{tabular}{l|cc|c}
+& \textbf{Disease} & \textbf{No Disease} & \textbf{Total} \\
+\hline
+\textbf{Exposed} & 80 & 420 & 500 \\
+\textbf{Unexposed} & 40 & 460 & 500 \\
+\hline
+\textbf{Total} & 120 & 880 & 1000 \\
+\end{tabular}
+\end{center}
+
+\vspace{6pt}
+
+\textbf{Part A:} Calculate the relative risk (RR).
+
+\vspace{0.3cm}
+
+\textbf{Answer:}
+
+\textbf{Formula:} $RR = \frac{\text{Risk in exposed}}{\text{Risk in unexposed}} = \frac{a/(a+b)}{c/(c+d)}$
+
+\vspace{0.3cm}
+
+Risk in exposed group = $\frac{80}{80+420} = \frac{80}{500} = 0.16$
+
+\vspace{0.3cm}
+
+Risk in unexposed group = $\frac{40}{40+460} = \frac{40}{500} = 0.08$
+
+\vspace{0.3cm}
+
+Relative Risk (RR) = $\frac{0.16}{0.08} = 2.0$
+
+\vspace{0.5cm}
+
+\textbf{Part B:} Interpret the relative risk. What does this value tell us?
+
+\vspace{0.3cm}
+
+\textbf{Answer:}
+
+The exposed group has 2.0 times the risk of disease compared to the unexposed group. In other words, individuals exposed to the chemical are twice as likely to develop the disease as those who were not exposed.
+
+\vspace{0.5cm}
+
+\textbf{Part C:} Calculate the odds ratio (OR).
+
+\vspace{0.3cm}
+
+\textbf{Answer:}
+
+\textbf{Formula:} $OR = \frac{a \times d}{b \times c}$ (cross-product ratio)
+
+\vspace{0.3cm}
+
+$$OR = \frac{80 \times 460}{420 \times 40} = \frac{36800}{16800} = 2.1905$$
+
+\vspace{0.5cm}
+
+\textbf{Part D:} Compare RR and OR. Are they similar or different? Why?
+
+\vspace{0.3cm}
+
+\textbf{Answer:}
+
+RR = 2.0 and OR = 2.1905 are quite similar (differ by less than 10\%). They are close because the disease is relatively rare in this study. Overall disease prevalence is $\frac{120}{1000} = 0.12$ or 12\%.
+
+\vspace{0.3cm}
+
+\textbf{Key principle:} When the outcome is rare (typically $< 10\%$ or $< 15\%$), the odds ratio approximates the relative risk. Since this disease affects 12\% of the cohort, the approximation holds reasonably well.
+
+\vspace{0.5cm}
+
+\textbf{Part E:} Using R, verify your calculations and obtain a 95\% confidence interval for the odds ratio.
+
+\vspace{0.3cm}
+
+\textbf{Answer:}
+
+\textbf{R code:}
+\begin{verbatim}
+data <- matrix(c(80, 420, 40, 460), nrow=2, byrow=TRUE)
+fisher.test(data)
+\end{verbatim}
+
+\vspace{0.3cm}
+
+OR from R = 2.1888 (matches our manual calculation of 2.1905)
+
+\vspace{0.3cm}
+
+95\% CI for OR = (1.4432, 3.3628)
+
+\vspace{0.5cm}
+
+\textbf{Part F:} Based on the confidence interval, is there significant evidence of an association between exposure and disease? Explain.
+
+\vspace{0.3cm}
+
+\textbf{Answer:}
+
+Yes, there is significant evidence of an association. The 95\% confidence interval for the odds ratio is (1.4432, 3.3628), which does \textbf{not} include 1.0. Since an OR of 1.0 would indicate no association, and our entire confidence interval lies above 1.0, we can conclude with 95\% confidence that exposure to the chemical is associated with increased odds of disease (equivalent to $p < 0.05$).
+
+\vspace{0.3cm}
+
+The exposed group has significantly higher odds of developing the disease, with the true odds ratio likely between 1.44 and 3.36 times that of the unexposed group.
+
+\newpage
+
+\section*{R Code Reference}
+
+\textbf{Fisher's exact test:}
+\begin{verbatim}
+data <- matrix(c(7, 3, 2, 8), nrow=2, byrow=TRUE)
+fisher.test(data)
+\end{verbatim}
+
+\textbf{Chi-square test of independence:}
+\begin{verbatim}
+data <- matrix(c(75, 425, 35, 465), nrow=2, byrow=TRUE)
+chisq.test(data)
+\end{verbatim}
+
+\textbf{Effect sizes (Week 9 Preview):}
+\begin{verbatim}
+# Relative Risk
+risk_exposed <- 80/500
+risk_unexposed <- 40/500
+RR <- risk_exposed / risk_unexposed
+
+# Odds Ratio with CI
+data <- matrix(c(80, 420, 40, 460), nrow=2, byrow=TRUE)
+fisher.test(data)
+\end{verbatim}
+
+\end{document}
